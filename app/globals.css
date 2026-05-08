@@ -1,0 +1,507 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark base — feed / tech minimal */
+  --background: #080a09;
+  --foreground: #eef2ef;
+  /* Teal (leggibile su scuro) */
+  --primary: #0f766e;
+  --primary-dark: #042f2c;
+  --primary-mid: #2dd4bf;
+  /* Superfici & bordi (base → card → elevated, feed-like) */
+  --card: #0f1412;
+  --muted: #0c100e;
+  --elevated: #121916;
+  --green-soft: var(--muted);
+  --green-border: #243530;
+  --green-border-muted: #1a2320;
+  --green-ink-muted: #8a9a93;
+  /* Header */
+  --header-surface: rgba(8, 10, 9, 0.82);
+  --header-surface-scrolled: rgba(8, 10, 9, 0.94);
+  --header-border: #1e2a26;
+  /* Accento caldo — CTA */
+  --accent-warm: #ea580c;
+  --accent-soft: rgba(234, 88, 12, 0.14);
+  --copy-body: #b4bdb8;
+  --section-space-y: clamp(4.5rem, 7vw, 6.2rem);
+  --section-space-y-mobile: 4rem;
+  --content-gap: clamp(1.1rem, 1.8vw, 1.5rem);
+  /* Footer */
+  --footer-bg: #050807;
+  --footer-bg-sub: #030504;
+  --footer-edge: #1a2822;
+  --footer-text: #e4ebe8;
+  --footer-muted: #8fa39a;
+  --footer-faint: #5c6f66;
+  --footer-link: #9ecab8;
+  --footer-link-hover: #f4faf7;
+  --footer-highlight: #5eead4;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans), system-ui, sans-serif;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Scroll verticale: niente barra sul bordo destro su mobile (lo scroll resta; c’è la barra lettura in header) */
+@media (max-width: 767px) {
+  html,
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  z-index: -1;
+  background:
+    radial-gradient(900px 520px at 10% -6%, rgba(45, 212, 191, 0.06), transparent 55%),
+    radial-gradient(720px 440px at 88% 12%, rgba(15, 118, 110, 0.05), transparent 52%),
+    radial-gradient(640px 380px at 50% 100%, rgba(8, 12, 10, 0.9), transparent 55%),
+    repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 6px);
+  opacity: 1;
+}
+
+::selection {
+  background: rgba(45, 212, 191, 0.28);
+  color: #04100e;
+}
+
+/* skip link */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  z-index: 10001;
+  padding: 0.5rem 1rem;
+  background: var(--primary);
+  color: #fff;
+  font-weight: 600;
+}
+.skip-link:focus {
+  left: 0.5rem;
+  top: 0.5rem;
+}
+
+/* screen-reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+.section-shell {
+  position: relative;
+  padding-top: var(--section-space-y);
+  padding-bottom: var(--section-space-y);
+}
+
+.section-shell::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 0;
+  width: min(1100px, calc(100% - 2.5rem));
+  height: 1px;
+  transform: translateX(-50%);
+  background: var(--green-border-muted);
+}
+
+/* Card feed — superficie scura, bordo sottile */
+.frost-card {
+  border: 1px solid var(--green-border-muted);
+  background: var(--card);
+  border-radius: 0.5rem;
+  box-shadow: none;
+  backdrop-filter: blur(8px);
+}
+
+.frost-card:hover {
+  border-color: var(--green-border);
+  background: var(--elevated);
+}
+
+/* microtypography rhythm system */
+.reading-measure {
+  max-width: 68ch;
+}
+
+.reading-measure-tight {
+  max-width: 56ch;
+}
+
+.copy-rhythm {
+  line-height: 1.78;
+  letter-spacing: 0.002em;
+}
+
+.eyebrow {
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.section-title {
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* ═══ Home: split legacy (alcune pagine interne possono ancora usarlo) ═══ */
+.home-split-header {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.home-split-header__left {
+  flex-shrink: 0;
+}
+
+.home-split-header__right {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  letter-spacing: 0.008em;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-split-header__right {
+    font-size: 1.05rem;
+    line-height: 1.78;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-split-header {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1.15fr);
+    column-gap: clamp(2rem, 4vw, 3.5rem);
+    align-items: start;
+  }
+}
+
+/* Titolo senza descrizione affiancata (Chi siamo, Statistiche) */
+.home-section-head {
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.home-section-title {
+  font-size: clamp(1.85rem, 1.2rem + 1.6vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  text-wrap: balance;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+/* Linea verticale accento (alternativa alla pillola sotto il titolo) */
+.home-section-accent {
+  display: none;
+}
+
+.home-section-rule {
+  width: 3rem;
+  height: 2px;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, var(--primary-mid), rgba(20, 135, 125, 0.45));
+}
+
+.home-section-rule--on-dark {
+  width: 4rem;
+  background: linear-gradient(90deg, var(--primary-mid), rgba(180, 220, 200, 0.55));
+}
+
+.section-kicker {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--green-ink-muted);
+}
+
+.home-section-accent--light {
+  display: none;
+}
+
+/* Intro sezione: colonna unica (titolo + regola + lede), niente split tipo “agency” */
+.home-section-intro {
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.home-section-intro__lede {
+  margin-top: clamp(1rem, 2vw, 1.35rem);
+  max-width: 62ch;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  letter-spacing: 0.006em;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-section-intro__lede {
+    font-size: 1.05rem;
+    line-height: 1.78;
+  }
+}
+
+.home-section-body {
+  color: var(--copy-body);
+}
+
+.home-section-prose {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  letter-spacing: 0.008em;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-section-prose {
+    font-size: 1.05rem;
+    line-height: 1.78;
+  }
+}
+
+.home-section-subtitle {
+  font-size: clamp(1.12rem, 0.95rem + 0.55vw, 1.45rem);
+  line-height: 1.22;
+  letter-spacing: 0.038em;
+  color: var(--primary-mid);
+  margin-bottom: 0.65rem;
+}
+
+.home-section-title--inverted {
+  color: #f8fafc;
+}
+
+.home-section-muted {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--green-ink-muted);
+}
+
+@media (min-width: 640px) {
+  .home-section-muted {
+    font-size: 0.9rem;
+  }
+}
+
+.fine-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.12), transparent);
+}
+
+.image-unify-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.12), rgba(0, 0, 0, 0.35));
+  mix-blend-mode: normal;
+}
+
+/* ─── touch-target: WCAG 2.2 minimum 44×44px ─── */
+.touch-target {
+  position: relative;
+}
+.touch-target::after {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@media (max-width: 768px) {
+  .section-shell {
+    padding-top: var(--section-space-y-mobile);
+    padding-bottom: var(--section-space-y-mobile);
+  }
+
+  .copy-rhythm {
+    line-height: 1.68;
+  }
+
+  .section-title {
+    letter-spacing: -0.018em;
+  }
+
+  .home-section-title {
+    letter-spacing: -0.022em;
+  }
+}
+
+/* ─── 430px and below: tighter rhythm ─── */
+@media (max-width: 430px) {
+  :root {
+    --section-space-y-mobile: 3.25rem;
+  }
+
+  .section-shell::after {
+    width: calc(100% - 2rem);
+  }
+
+  .frost-card {
+    box-shadow: none;
+  }
+}
+
+/* ─── 360px: ultra-compact ─── */
+@media (max-width: 360px) {
+  :root {
+    --section-space-y-mobile: 2.75rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+  }
+}
+
+/* ─── View Transitions (navigazione interna; bridge JS + browser support) ─── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (view-transition-name: none) {
+    ::view-transition-old(root) {
+      animation: vt-root-out 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    ::view-transition-new(root) {
+      animation: vt-root-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+}
+
+@keyframes vt-root-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.86;
+  }
+}
+
+@keyframes vt-root-in {
+  from {
+    opacity: 0.88;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ─── Sezioni sotto la piega: meno lavoro di layout durante lo scroll ─── */
+.lazy-section {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 520px;
+}
+
+/* ─── Reveal leggeri (Scroll-driven dove supportato) ─── */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .reveal-title {
+      animation: reveal-soft linear both;
+      animation-timeline: view();
+      animation-range: entry 5% cover 32%;
+    }
+
+    .reveal-block {
+      animation: reveal-soft linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 38%;
+    }
+
+    .reveal-faint {
+      animation: reveal-faint linear both;
+      animation-timeline: view();
+      animation-range: entry 0% cover 28%;
+    }
+  }
+}
+
+@keyframes reveal-soft {
+  from {
+    opacity: 0.65;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes reveal-faint {
+  from {
+    opacity: 0.82;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-title,
+  .reveal-block,
+  .reveal-faint {
+    animation: none !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Browser senza scroll-driven: niente animazione, contenuto già leggibile */
+@supports not (animation-timeline: view()) {
+  .reveal-title,
+  .reveal-block,
+  .reveal-faint {
+    opacity: 1;
+    transform: none;
+  }
+}

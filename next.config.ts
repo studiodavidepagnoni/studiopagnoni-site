@@ -1,0 +1,94 @@
+import type { NextConfig } from "next";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = path.dirname(fileURLToPath(import.meta.url));
+
+const isStaticExport = process.env.STATIC_EXPORT === "1";
+const isDev = process.env.NODE_ENV !== "production";
+
+const imageRemotePatterns = [
+  { protocol: "https" as const, hostname: "images.unsplash.com", pathname: "/**" },
+];
+
+const nextConfig: NextConfig = {
+  turbopack: {
+    root: __dirname,
+  },
+  experimental: {
+    // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
+    devtoolSegmentExplorer: false,
+  },
+  images: {
+    remotePatterns: imageRemotePatterns,
+    // In dev, avoid Next image optimizer flakiness with remote hosts on Windows networks.
+    ...(isDev ? { unoptimized: true } : {}),
+    ...(isStaticExport ? { unoptimized: true } : {}),
+  },
+};
+
+if (isStaticExport) {
+  nextConfig.output = "export";
+  nextConfig.trailingSlash = true;
+  const raw = process.env.NEXT_PUBLIC_BASE_PATH?.trim() ?? "";
+  if (raw && raw !== "/") {
+    nextConfig.basePath = raw.startsWith("/") ? raw : `/${raw}`;
+  }
+} else {
+  nextConfig.headers = async () => [
+    {
+      source: "/:path*",
+      headers: [
+        { key: "X-Content-Type-Options", value: "nosniff" },
+        { key: "X-Frame-Options", value: "SAMEORIGIN" },
+        { key: "Referrer-Policy", value: "strict-origin-when-cross-origin" },
+        {
+          key: "Permissions-Policy",
+          value:
+            "camera=(), microphone=(), geolocation=(), payment=(), usb=(), browsing-topics=(), interest-cohort=()",
+        },
+        { key: "Cross-Origin-Opener-Policy", value: "same-origin-allow-popups" },
+        { key: "Cross-Origin-Resource-Policy", value: "same-site" },
+        {
+          key: "Content-Security-Policy",
+          value: [
+            "default-src 'self'",
+            "base-uri 'self'",
+            "frame-ancestors 'self'",
+            "form-action 'self' https://formspree.io",
+            "img-src 'self' data: https://images.unsplash.com https://*.googleapis.com https://*.gstatic.com",
+            "media-src 'self' https://videos.pexels.com",
+            "font-src 'self' data: https://fonts.gstatic.com",
+            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+            "script-src 'self' 'unsafe-inline'",
+            "connect-src 'self' https://formspree.io",
+            "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com",
+            "upgrade-insecure-requests",
+          ].join("; "),
+        },
+      ],
+    },
+    {
+      source: "/:path*",
+      headers: [{ key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" }],
+    },
+  ];
+
+  nextConfig.redirects = async () => [
+    { source: "/index.html", destination: "/", permanent: true },
+    { source: "/chi-siamo.html", destination: "/chi-siamo", permanent: true },
+    { source: "/servizi-studio-progettazione.html", destination: "/servizi", permanent: true },
+    {
+      source: "/progettazione-strutture-brescia-contatti.html",
+      destination: "/contatti",
+      permanent: true,
+    },
+    { source: "/privacy-policy.html", destination: "/privacy-policy", permanent: true },
+    { source: "/villa-acciaio-veneto.html", destination: "/progetti", permanent: true },
+    { source: "/capannone-erbusco.html", destination: "/progetti", permanent: true },
+    { source: "/superstudio-village.html", destination: "/progetti", permanent: true },
+    { source: "/superstudio-maxi.html", destination: "/progetti", permanent: true },
+  ];
+}
+
+export default nextConfig;
