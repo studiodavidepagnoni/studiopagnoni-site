@@ -60,8 +60,15 @@ if (isStaticExport) {
             "media-src 'self' https://videos.pexels.com",
             "font-src 'self' data: https://fonts.gstatic.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-            "script-src 'self' 'unsafe-inline'",
-            "connect-src 'self' https://formspree.io",
+            // In dev Next.js (React Refresh / HMR) richiede 'unsafe-eval' per ricompilare i moduli al volo.
+            // In produzione resta rigido a 'self' + 'unsafe-inline'.
+            isDev
+              ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
+              : "script-src 'self' 'unsafe-inline'",
+            // In dev consentiamo il websocket HMR di Next.
+            isDev
+              ? "connect-src 'self' ws: wss: https://formspree.io"
+              : "connect-src 'self' https://formspree.io",
             "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com",
             "upgrade-insecure-requests",
           ].join("; "),

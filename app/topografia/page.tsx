@@ -32,7 +32,7 @@ export default function TopografiaPage() {
 
             <p className={ui.body}>
               La <strong>topografia applicata</strong> è la base per progettare in sicurezza, definire confini e volumi e allineare il progetto al
-              terreno reale. Lo Studio Tecnico Pagnoni opera dalla sede di <strong>Bornato</strong> (Cazzago San Martino, Brescia) con strumentazione da
+              terreno reale. Lo Studio Tecnico Pagnoni opera a <strong>Bornato</strong> (Cazzago San Martino, Brescia) con strumentazione da
               mercato professionale: <strong>GNSS/GPS</strong>, <strong>stazione totale</strong> e integrazione con i flussi di lavoro CAD.
             </p>
 

@@ -16,7 +16,7 @@ export const heroSlides = [
   {
     src: a("survey-site.jpg"),
     alt: "Progettazione del verde — vigneti e territorio, Franciacorta",
-    line1: "Progettazione del verde",
+    line1: "Progettazione\u00A0del\u00A0verde",
     line2: "vigneti · parchi · territorio",
     body: "Vigneti in Franciacorta, parchi, sentieri e strade di montagna: progettazione integrata con supporto agronomico e attenzione al paesaggio colturale.",
     ctaHref: "/servizi#verde-paesaggio",
