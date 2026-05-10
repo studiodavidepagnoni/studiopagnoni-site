@@ -5,11 +5,12 @@ import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { ui } from "@/lib/ui";
-import { heroSlides } from "@/lib/images";
+import { HERO_POSTER_DEFAULT, HERO_VIDEO_DEFAULT, heroSlides } from "@/lib/images";
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
-  const [videoOk, setVideoOk] = useState(true);
+  // Tracciamo gli URL video che hanno fallito così non li ritentiamo a ogni slide change.
+  const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
@@ -28,8 +29,19 @@ export function HeroHome() {
   }, []);
 
   const slide = heroSlides[idx];
-  const showVideo = videoOk && !isMobile;
+  const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;
+  const posterSrc = slide.poster ?? HERO_POSTER_DEFAULT;
+  const showVideo = !isMobile && !failedVideos.has(videoSrc);
   const line2Parts = slide.line2.split(" · ").map((p) => p.trim()).filter(Boolean);
+
+  const handleVideoError = () => {
+    setFailedVideos((prev) => {
+      if (prev.has(videoSrc)) return prev;
+      const next = new Set(prev);
+      next.add(videoSrc);
+      return next;
+    });
+  };
 
   return (
     <section
@@ -45,16 +57,19 @@ export function HeroHome() {
       {/* Media background */}
       <div className="pointer-events-none absolute inset-0 z-[-10]">
         {showVideo ? (
+          // `key={videoSrc}` forza il remount quando una slide definisce un video proprio:
+          // così il browser carica la nuova sorgente in modo pulito (con il poster come transizione).
           <video
+            key={videoSrc}
             className="absolute inset-0 h-full w-full object-cover opacity-[0.38] brightness-[1.05] saturate-[1.02]"
-            src="/assets/rs10-hero.mp4"
-            poster="/assets/rs10-hero-poster.jpg"
+            src={videoSrc}
+            poster={posterSrc}
             muted
             playsInline
             autoPlay
             loop
             preload="metadata"
-            onError={() => setVideoOk(false)}
+            onError={handleVideoError}
             aria-hidden
           />
         ) : (
@@ -83,7 +98,7 @@ export function HeroHome() {
           <p
             className={`${fontSans.className} mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#fbbf99] drop-shadow-[0_2px_18px_rgba(0,0,0,0.65)] sm:mb-4 sm:text-[0.72rem]`}
           >
-            Bornato · Franciacorta, Brescia
+            Dal 1988 · Cazzago San Martino, Brescia
           </p>
 
           <h1

@@ -50,7 +50,9 @@ function StatBlock({ stat, reduced, active }: { stat: HomeStat; reduced: boolean
     return (
       <>
         <Counter target={stat.value} suffix={stat.suffix} reduced={reduced} active={active} />
-        <p className={`${fontSans.className} mt-3 text-[0.72rem] font-medium uppercase tracking-[0.18em] text-[var(--green-ink-muted)] sm:text-sm`}>
+        <p
+          className={`${fontSans.className} mt-3 whitespace-pre-line text-[0.72rem] font-medium uppercase tracking-[0.18em] text-[var(--green-ink-muted)] sm:text-sm`}
+        >
           {stat.label}
         </p>
       </>
@@ -85,9 +87,9 @@ export function StatsSection() {
           </h2>
           <div className="home-section-rule mt-4" aria-hidden />
         </div>
-        <div className="grid grid-cols-1 divide-y divide-[var(--green-border-muted)] overflow-hidden rounded-lg border border-[var(--green-border-muted)] sm:grid-cols-3 sm:divide-x sm:divide-y-0">
+        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-2 lg:grid-cols-4">
           {homeStats.map((stat, idx) => (
-            <div key={idx} className="reveal-block px-4 py-8 text-center sm:px-6 sm:py-10">
+            <div key={idx} className="reveal-block bg-[var(--card)] px-4 py-8 text-center sm:px-6 sm:py-10">
               <StatBlock stat={stat} reduced={reduced} active={inView} />
             </div>
           ))}

@@ -21,11 +21,24 @@ export function SiteFooter() {
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
             <div>
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-[var(--footer-faint)]`}>Studio</p>
-              <p className={`${fontDisplay.className} mt-2 text-3xl font-medium tracking-tight text-[var(--footer-link-hover)] sm:text-4xl`}>
-                {site.name}
-              </p>
-              <p className={`${fontSans.className} mt-3 max-w-md text-sm leading-relaxed text-[var(--footer-muted)]`}>{site.tagline}</p>
+              <div className="flex items-start gap-3 sm:gap-4">
+                {/* brightness-[1.75] coerente con l'header su sfondo scuro. */}
+                {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
+                <img
+                  src="/logo-mark.svg?v=15"
+                  alt=""
+                  width={616}
+                  height={616}
+                  className="h-12 w-12 shrink-0 opacity-90 brightness-[1.75] sm:h-14 sm:w-14"
+                  aria-hidden
+                />
+                <div className="min-w-0">
+                  <p className={`${fontDisplay.className} text-3xl font-medium tracking-tight text-[var(--footer-link-hover)] sm:text-4xl`}>
+                    {site.name}
+                  </p>
+                  <p className={`${fontSans.className} mt-2 max-w-md text-sm leading-relaxed text-[var(--footer-muted)] sm:mt-3`}>{site.tagline}</p>
+                </div>
+              </div>
               <Link href="/contatti" className={`${fontSans.className} ${ui.btnPrimary} mt-8 inline-flex min-h-[44px] items-center justify-center`}>
                 Contattaci
               </Link>
@@ -55,6 +68,11 @@ export function SiteFooter() {
                   <li>
                     <Link className={feedLink} href="/laser-scanner-slam">
                       Laser SLAM
+                    </Link>
+                  </li>
+                  <li>
+                    <Link className={feedLink} href="/#strumentazione">
+                      Strumentazione
                     </Link>
                   </li>
                   <li>
@@ -106,7 +124,7 @@ export function SiteFooter() {
               &copy; {new Date().getFullYear()} {site.legalName}
               {site.piva ? ` · P.IVA ${site.piva}` : null}
             </p>
-            <p className={`${fontSans.className} text-[var(--footer-muted)]`}>SLAM · GNSS · territorio</p>
+            <p className={`${fontSans.className} text-[var(--footer-muted)]`}>Topografia · Architettura · SLAM</p>
           </div>
         </div>
       </div>

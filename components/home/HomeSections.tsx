@@ -10,6 +10,7 @@ import {
   homeChiSiamo,
   homeProgettiIntro,
   homeServiziIntro,
+  homeStrumentazione,
   homeServiceCards,
   zoneContent,
   zoneDescription,
@@ -57,9 +58,23 @@ export function HomeSections() {
           <div className="reveal-block mt-8 grid items-stretch gap-8 sm:mt-10 sm:gap-10 lg:mt-10 lg:grid-cols-12 lg:gap-14">
             {/* ── Testo (sinistra) ── */}
             <div className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-6">
-              <p className="text-balance text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]">
-                {homeChiSiamo.short}
-              </p>
+              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
+                <div className="mx-auto box-border flex aspect-square w-[5.35rem] shrink-0 items-center justify-center sm:mx-0 sm:w-[6rem] md:w-[6.75rem]">
+                  {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
+                  <img
+                    src="/logo-mark.svg?v=15"
+                    alt=""
+                    width={616}
+                    height={616}
+                    className="h-full w-full object-contain"
+                    aria-hidden
+                  />
+                </div>
+                <p className="min-w-0 text-balance text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]">
+                  <span className="sr-only">Studio Tecnico Pagnoni. </span>
+                  {homeChiSiamo.short}
+                </p>
+              </div>
 
               <ul className="mt-7 space-y-3 sm:mt-8" aria-label="Ambiti principali">
                 {homeChiSiamo.highlights.map((h) => (
@@ -100,12 +115,13 @@ export function HomeSections() {
                   sizes="(min-width:1024px) 56vw, (min-width:640px) 90vw, 100vw"
                   priority={false}
                 />
-                <div className="image-unify-overlay" aria-hidden />
+                {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
+                <div className="image-unify-overlay opacity-50" aria-hidden />
                 {/* Caption badge */}
                 <div className="absolute bottom-4 left-4">
                   <div className="rounded-md bg-[#070908]/72 px-3 py-1.5 backdrop-blur-sm">
                     <p
-                      className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-[var(--primary-mid)]`}
+                      className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white`}
                     >
                       Bornato · Franciacorta, Brescia
                     </p>
@@ -126,6 +142,35 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{homeServiziIntro}</p>
           </div>
+
+          <div
+            id="strumentazione"
+            aria-labelledby="strumentazione-heading"
+            className="reveal-block mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:mb-10 sm:p-6"
+          >
+            <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Campo</p>
+            <h3 id="strumentazione-heading" className={`${fontDisplay.className} mt-2 text-xl font-semibold text-[var(--foreground)] sm:text-2xl`}>
+              {homeStrumentazione.title}
+            </h3>
+            <p className="mt-3 max-w-[60ch] text-[0.92rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.98rem]">{homeStrumentazione.lede}</p>
+            <ul className="mt-6 grid list-none gap-4 sm:grid-cols-3 sm:gap-5">
+              {homeStrumentazione.items.map((item) => (
+                <li key={item.label} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-4 sm:p-5">
+                  <p className={`${fontSans.className} text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--primary-mid)]`}>{item.label}</p>
+                  <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{item.text}</p>
+                </li>
+              ))}
+            </ul>
+            <p className={`${fontSans.className} mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold`}>
+              <Link href="/topografia" className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]">
+                Topografia e rilievi
+              </Link>
+              <Link href="/laser-scanner-slam" className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]">
+                Laser scanner SLAM
+              </Link>
+            </p>
+          </div>
+
           <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
             {homeServiceCards.map((card, idx) => (
               <article
@@ -299,8 +344,8 @@ export function HomeSections() {
             <p className="home-section-intro__lede max-w-[52ch]">{contattiIntro}</p>
           </div>
           <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-3">
-            <article className="reveal-block bg-[var(--card)] p-5 sm:p-6">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
+            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <rect x="2" y="4" width="20" height="16" rx="2" stroke="currentColor" strokeWidth="1.5" />
                   <path d="M2 7l10 6 10-6" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round" />
@@ -309,13 +354,13 @@ export function HomeSections() {
               <h3 className={`${fontDisplay.className} mb-1.5 text-base font-medium text-[var(--foreground)]`}>Email</h3>
               <a
                 href={`mailto:${site.email}`}
-                className="text-[0.88rem] text-[var(--copy-body)] underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline sm:text-[0.92rem]"
+                className="inline-block max-w-full break-words text-[0.88rem] text-[var(--copy-body)] underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline sm:text-[0.92rem]"
               >
                 {site.email}
               </a>
             </article>
-            <article className="reveal-block bg-[var(--card)] p-5 sm:p-6">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
+            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6 19.79 19.79 0 01-3.07-8.67A2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.362 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.338 1.85.573 2.81.7A2 2 0 0122 16.92z"
@@ -325,7 +370,7 @@ export function HomeSections() {
                 </svg>
               </div>
               <h3 className={`${fontDisplay.className} mb-2 text-base font-medium text-[var(--foreground)]`}>Telefono</h3>
-              <ul className="space-y-2.5 text-[0.88rem] text-[var(--copy-body)] sm:text-[0.92rem]">
+              <ul className="mx-auto max-w-[22rem] space-y-2.5 text-[0.88rem] text-[var(--copy-body)] sm:text-[0.92rem]">
                 {site.phones.map((phone) => (
                   <li key={phone.tel}>
                     <span className="block text-[0.72rem] text-[var(--green-ink-muted)]">{phone.label}</span>
@@ -339,8 +384,8 @@ export function HomeSections() {
                 ))}
               </ul>
             </article>
-            <article className="reveal-block bg-[var(--card)] p-5 sm:p-6">
-              <div className="mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
+            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" aria-hidden>
                   <path
                     d="M21 10C21 17 12 23 12 23C12 23 3 17 3 10C3 7.61305 3.94821 5.32387 5.63604 3.63604C7.32387 1.94821 9.61305 1 12 1C14.3869 1 16.6761 1.94821 18.364 3.63604C20.0518 5.32387 21 7.61305 21 10Z"
@@ -355,7 +400,9 @@ export function HomeSections() {
                 </svg>
               </div>
               <h3 className={`${fontDisplay.className} mb-1.5 text-base font-medium text-[var(--foreground)]`}>Sede</h3>
-              <p className="text-[0.88rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.92rem]">{site.addressLine}</p>
+              <p className="mx-auto max-w-[28ch] text-pretty text-[0.88rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.92rem]">
+                {site.addressLine}
+              </p>
             </article>
           </div>
           <p className="mt-8 sm:mt-10">

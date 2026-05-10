@@ -14,6 +14,7 @@ export function ContactForm() {
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
   const [privacy, setPrivacy] = useState(false);
+  const [gotcha, setGotcha] = useState(""); // honeypot: i bot lo riempiono, gli umani no
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -40,11 +41,18 @@ export function ContactForm() {
       setTouched({ name: true, email: true, message: true, privacy: true });
       if (!valid) return;
 
+      // Honeypot pieno → silenziosamente "successo" senza inviare nulla.
+      if (gotcha.trim().length > 0) {
+        setStatus("success");
+        return;
+      }
+
       setStatus("submitting");
+      const subjectLine = subject?.trim() || "Richiesta da sito web";
       try {
         const id = site.formspreeId?.trim();
         if (!id) {
-          const sj = encodeURIComponent(subject || "Richiesta da sito web");
+          const sj = encodeURIComponent(subjectLine);
           const body = encodeURIComponent(
             `Nome: ${name}\nEmail: ${email}\nZona: ${city || "-"}\n\n${message}`
           );
@@ -59,6 +67,7 @@ export function ContactForm() {
           setTouched({});
           return;
         }
+        // _subject pilota la subject line nelle notifiche Formspree, _replyto imposta il Reply-To.
         const res = await fetch(`https://formspree.io/f/${id}`, {
           method: "POST",
           headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -66,7 +75,8 @@ export function ContactForm() {
             name,
             _replyto: email,
             email,
-            subject: subject || "(nessun oggetto)",
+            _subject: `[Sito] ${subjectLine}`,
+            subject: subjectLine,
             city: city || "",
             message,
           }),
@@ -85,7 +95,7 @@ export function ContactForm() {
         setStatus("error");
       }
     },
-    [valid, name, email, subject, city, message]
+    [valid, gotcha, name, email, subject, city, message]
   );
 
   if (status === "success") {
@@ -101,6 +111,19 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="grid w-full gap-3 sm:gap-4 md:grid-cols-2" noValidate>
+      {/* Honeypot: nascosto agli utenti via CSS, visibile ai bot. Va fuori dal flusso visivo e dal tab order. */}
+      <div aria-hidden className="hidden" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
+        <label htmlFor="_gotcha">Non compilare se sei umano</label>
+        <input
+          id="_gotcha"
+          name="_gotcha"
+          type="text"
+          tabIndex={-1}
+          autoComplete="off"
+          value={gotcha}
+          onChange={(e) => setGotcha(e.target.value)}
+        />
+      </div>
       <div>
         <label htmlFor="name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
           Nome e cognome <span className="text-red-700">*</span>

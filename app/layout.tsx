@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       // Cache-bust to avoid "old favicon" in aggressive browser caches.
-      { url: "/icon.svg?v=3", type: "image/svg+xml" },
-      { url: "/favicon.ico?v=3", type: "image/x-icon" },
+      { url: "/icon.svg?v=14", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=14", type: "image/x-icon" },
     ],
-    shortcut: [{ url: "/icon.svg?v=3", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg?v=3", type: "image/svg+xml" }],
+    shortcut: [{ url: "/icon.svg?v=14", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg?v=14", type: "image/svg+xml" }],
   },
   title: {
     default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Bornato (BS)",
@@ -83,7 +83,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased`}>
+      <body className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-light`}>
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <AppProviders>
           <a href="#main-content" className="skip-link">

@@ -2,8 +2,31 @@
 
 const a = (name: string) => `/assets/stock/${name}`;
 
-/** Slide hero: testo ciclico su video fisso. `src` usato solo come fallback mobile. */
-export const heroSlides = [
+/**
+ * Video di sfondo di default per l'hero.
+ * Le singole slide possono sovrascriverlo con `video`/`poster` propri:
+ * vedi `HeroSlide` e `HeroHome.tsx`.
+ */
+export const HERO_VIDEO_DEFAULT = "/assets/rs10-hero.mp4";
+export const HERO_POSTER_DEFAULT = "/assets/rs10-hero-poster.jpg";
+
+export type HeroSlide = {
+  /** Immagine fallback (mobile e quando il video non parte). */
+  src: string;
+  alt: string;
+  line1: string;
+  line2: string;
+  body: string;
+  ctaHref: string;
+  ctaLabel: string;
+  /** Override video per la singola slide. Se omesso, usa `HERO_VIDEO_DEFAULT`. */
+  video?: string;
+  /** Poster del video per la singola slide. Se omesso, usa `HERO_POSTER_DEFAULT`. */
+  poster?: string;
+};
+
+/** Slide hero: testo ciclico. Ogni slide può avere un proprio `video`; se manca, si usa il default. */
+export const heroSlides: readonly HeroSlide[] = [
   {
     src: a("gnss-rtk-quarry.jpg"),
     alt: "GNSS RTK sul campo — rilievi geodetici, Studio Tecnico Pagnoni",
@@ -26,8 +49,8 @@ export const heroSlides = [
     src: a("technical-docs.jpg"),
     alt: "Pratiche edilizie e urbanistica — geometra Cazzago San Martino",
     line1: "Edilizia e urbanistica",
-    line2: "pratiche · sanatorie · cantiere",
-    body: "Piani regolatori, sanatorie, iter edilizi e coordinamento sicurezza in cantiere (CSP/CSE): un riferimento unico per committenti privati e aziende.",
+    line2: "pratiche · sanatorie · CSP/CSE · perizie",
+    body: "Piani regolatori, sanatorie, iter edilizi, coordinamento sicurezza in cantiere (CSP/CSE) e assistenza immobiliare con perizie: un riferimento per privati e aziende.",
     ctaHref: "/servizi#urbanistica-pratiche",
     ctaLabel: "Pratiche edilizie",
   },
@@ -49,7 +72,7 @@ export const heroSlides = [
     ctaHref: "/servizi#architettura",
     ctaLabel: "Architettura",
   },
-] as const;
+];
 
 export const homeChiSiamoImages = {
   team: {

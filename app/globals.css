@@ -16,10 +16,13 @@
   --green-border: #243530;
   --green-border-muted: #1a2320;
   --green-ink-muted: #8a9a93;
-  /* Header */
+  /* Header — token dedicati (NON ridefiniti in .theme-light) così l'header resta dark con testo light in entrambi i temi. */
   --header-surface: rgba(8, 10, 9, 0.82);
   --header-surface-scrolled: rgba(8, 10, 9, 0.94);
   --header-border: #1e2a26;
+  --header-text: #eef2ef;
+  --header-text-muted: #8a9a93;
+  --header-accent: #2dd4bf;
   /* Accento caldo — CTA */
   --accent-warm: #ea580c;
   --accent-soft: rgba(234, 88, 12, 0.14);
@@ -441,6 +444,59 @@ body::before {
 .lazy-section {
   content-visibility: auto;
   contain-intrinsic-size: auto 520px;
+}
+
+/* ─── Variante chiara (anteprima) — flippa i token, header/footer restano scuri ─── */
+.theme-light {
+  --background: #f7f6f1;
+  --foreground: #0c100e;
+  --primary: #0f766e;
+  --primary-dark: #042f2c;
+  --primary-mid: #0d635c;
+  --card: #ffffff;
+  --muted: #ecebe5;
+  --elevated: #ffffff;
+  --green-soft: var(--muted);
+  --green-border: #b8c2bc;
+  --green-border-muted: #dfe3de;
+  --green-ink-muted: #5d6962;
+  --accent-warm: #ea580c;
+  --accent-soft: rgba(234, 88, 12, 0.1);
+  --copy-body: #3a4540;
+  /* Header sempre opaco su light theme: il default rgba(8,10,9,0.82) lasciava trasparire il cream → header grigiastro a inizio scroll. */
+  --header-surface: #080a09;
+  --header-surface-scrolled: #080a09;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.theme-light ::selection {
+  background: rgba(15, 118, 110, 0.22);
+  color: #04100e;
+}
+
+/* Neutralizza il backdrop a gradienti scuri pensato per il :root dark */
+.theme-light::before {
+  background: none;
+}
+
+/* Isole scure dentro la variante chiara — sezioni con focus tecnico/3D */
+.theme-light .theme-dark-island,
+.theme-light #strumentazione,
+.theme-light #processo,
+.theme-light [aria-labelledby="stats-heading"] {
+  --background: #080a09;
+  --foreground: #eef2ef;
+  --card: #0f1412;
+  --muted: #0c100e;
+  --elevated: #121916;
+  --green-border: #243530;
+  --green-border-muted: #1a2320;
+  --green-ink-muted: #8a9a93;
+  --copy-body: #b4bdb8;
+  --primary-mid: #2dd4bf;
+  background: var(--background);
+  color: var(--foreground);
 }
 
 /* ─── Reveal leggeri (Scroll-driven dove supportato) ─── */
