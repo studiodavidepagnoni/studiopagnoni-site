@@ -21,22 +21,28 @@ export function SiteFooter() {
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
             <div>
-              <div className="flex items-start gap-3 sm:gap-4">
-                {/* brightness-[1.75] coerente con l'header su sfondo scuro. */}
+              <div className="group flex items-start gap-3 sm:gap-4">
+                {/* Stessi filtri dell’header (marchio su chrome scuro). */}
                 {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
                 <img
                   src="/logo-mark.svg?v=15"
                   alt=""
                   width={616}
                   height={616}
-                  className="h-12 w-12 shrink-0 opacity-90 brightness-[1.75] sm:h-14 sm:w-14"
+                  className="h-12 w-12 shrink-0 object-contain opacity-100 brightness-[2.55] saturate-[1.22] contrast-[1.08] drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] transition-[filter] duration-200 group-hover:brightness-[2.85] group-hover:saturate-[1.28] group-hover:drop-shadow-[0_0_18px_color-mix(in_srgb,var(--header-accent)_48%,transparent)] sm:h-14 sm:w-14"
                   aria-hidden
                 />
                 <div className="min-w-0">
-                  <p className={`${fontDisplay.className} text-3xl font-medium tracking-tight text-[var(--footer-link-hover)] sm:text-4xl`}>
+                  <p
+                    className={`${fontDisplay.className} text-3xl font-medium tracking-tight text-[var(--footer-link-hover)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] group-hover:contrast-105 sm:text-4xl`}
+                  >
                     {site.name}
                   </p>
-                  <p className={`${fontSans.className} mt-2 max-w-md text-sm leading-relaxed text-[var(--footer-muted)] sm:mt-3`}>{site.tagline}</p>
+                  <p
+                    className={`${fontSans.className} mt-2 max-w-md text-sm leading-relaxed text-[var(--footer-muted)] transition-[filter,color] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:text-[var(--footer-link)] group-hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--header-accent)_32%,transparent)] sm:mt-3`}
+                  >
+                    {site.tagline}
+                  </p>
                 </div>
               </div>
               <Link href="/contatti" className={`${fontSans.className} ${ui.btnFooterCta} mt-8 inline-flex min-h-[44px] items-center justify-center`}>

@@ -167,13 +167,13 @@ export function SiteHeader() {
               <div ref={brandTextRef} className="flex min-w-0 flex-col items-start gap-y-1.5 sm:gap-y-2">
                 <span
                   ref={brandLineRef}
-                  className={`${fontDisplay.className} text-[1.1rem] font-bold uppercase leading-none text-[var(--header-text)] sm:text-[1.35rem] md:text-[1.6rem]`}
+                  className={`${fontDisplay.className} text-[1.1rem] font-bold uppercase leading-none text-[var(--header-text)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:contrast-105 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] sm:text-[1.35rem] md:text-[1.6rem]`}
                 >
                   Studio Pagnoni
                 </span>
                 <span
                   ref={taglineRef}
-                  className={`${fontDisplay.className} text-[0.55rem] font-normal uppercase leading-snug tracking-[0.18em] text-[var(--header-text-muted)] sm:text-[0.6rem] sm:tracking-[0.2em] md:text-[0.65rem]`}
+                  className={`${fontDisplay.className} text-[0.55rem] font-normal uppercase leading-snug tracking-[0.18em] text-[var(--header-text-muted)] transition-[filter,color] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:text-[color-mix(in_srgb,var(--header-text)_78%,var(--header-text-muted))] group-hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--header-accent)_32%,transparent)] sm:text-[0.6rem] sm:tracking-[0.2em] md:text-[0.65rem]`}
                 >
                   Topografia · Architettura · SLAM
                 </span>

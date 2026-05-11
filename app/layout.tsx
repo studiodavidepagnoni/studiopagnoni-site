@@ -21,7 +21,7 @@ export const metadata: Metadata = {
     apple: [{ url: "/icon.svg?v=16", type: "image/svg+xml" }],
   },
   title: {
-    default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Bornato (BS)",
+    default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Cazzago San Martino (BS)",
     template: `%s — ${site.name}`,
   },
   description:
