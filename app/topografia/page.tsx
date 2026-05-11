@@ -38,7 +38,7 @@ export default function TopografiaPage() {
               mercato professionale: <strong>GNSS/GPS</strong>, <strong>stazione totale</strong> e integrazione con i flussi di lavoro CAD.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Cosa intendiamo per rilievo topografico
             </h2>
             <p className={ui.body}>
@@ -48,7 +48,7 @@ export default function TopografiaPage() {
               sezioni, curve di livello, volumi e tracciamenti per impianti.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Strumenti: GNSS e stazione totale
             </h2>
             <p className={ui.body}>
@@ -58,7 +58,7 @@ export default function TopografiaPage() {
               di commessa e la precisione richiesta.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Territorio e zone di intervento
             </h2>
             <p className={ui.body}>
@@ -68,7 +68,7 @@ export default function TopografiaPage() {
               (es. frazionamento, cantiere, aggiornamento planimetrico): ti rispondiamo dai recapiti in home e nella pagina contatti.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Passaggio al laser scanner SLAM
             </h2>
             <p className={`${ui.body} mb-6`}>

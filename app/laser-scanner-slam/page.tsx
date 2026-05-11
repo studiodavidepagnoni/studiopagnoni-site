@@ -37,7 +37,7 @@ export default function LaserSlamPage() {
               impianti industriali e contesti in cui serve rapidità di acquisizione rispetto ai rilievi puntuali tradizionali.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               A cosa serve nella pratica professionale
             </h2>
             <ul className="list-none space-y-3 pl-0">
@@ -52,7 +52,7 @@ export default function LaserSlamPage() {
               </li>
             </ul>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Integrazione con topografia classica
             </h2>
             <p className={ui.body}>
@@ -61,7 +61,7 @@ export default function LaserSlamPage() {
               valuta il mix migliore in base a obiettivi, precisione richiesta e tempi.
             </p>
 
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mt-12 scroll-mt-[120px]`}>
+            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} mt-12 scroll-mt-[120px]`}>
               Integrazione con il rilievo sul territorio
             </h2>
             <p className={`${ui.body} mb-6`}>

@@ -34,6 +34,9 @@ export const ui = {
   gallerySectionTitle: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
   cardHeading: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
 
+  /** Sotto titoli `.section-title` (line-height 1.08) prima di copy / liste: evita che il corpo “tocchi” il titolo. */
+  headingBodyGap: "mb-4 sm:mb-5",
+
   btnPrimary: `${btnBase} bg-[var(--primary)] text-[var(--on-primary)] shadow-sm hover:bg-[var(--primary-mid)] hover:text-[var(--on-primary-hover)] hover:shadow-md focus-visible:outline-[var(--primary-mid)]/50`,
 
   /** CTA su chrome footer scuro: fill chiaro (mint), non `--primary` che fonde con `--footer-bg`. */
