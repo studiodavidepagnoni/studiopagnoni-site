@@ -1,28 +1,54 @@
 @import "tailwindcss";
 
 :root {
-  /* Dark base — feed / tech minimal */
-  --background: #080a09;
+  /* Tono cromatico unico — riferimento footer (verde scuro). */
+  --surface-chrome: #051e1b;
+  --surface-chrome-deep: #031512;
+  --surface-chrome-mid: #041c19;
+  --surface-chrome-raised: #072622;
+  --surface-chrome-high: #083028;
+
+  --background: var(--surface-chrome-mid);
   --foreground: #eef2ef;
-  /* Teal (leggibile su scuro) */
-  --primary: #0f766e;
-  --primary-dark: #042f2c;
+  /* Primario: stessa famiglia del chrome, leggermente più chiaro per pulsanti su sfondo scuro. */
+  --primary: #0e3f37;
+  --primary-dark: var(--surface-chrome-deep);
   --primary-mid: #2dd4bf;
-  /* Superfici & bordi (base → card → elevated, feed-like) */
-  --card: #0f1412;
-  --muted: #0c100e;
-  --elevated: #121916;
+  /* Superfici & bordi */
+  --card: var(--surface-chrome-raised);
+  --muted: var(--surface-chrome);
+  --elevated: var(--surface-chrome-high);
   --green-soft: var(--muted);
-  --green-border: #243530;
-  --green-border-muted: #1a2320;
+  --green-border: #1e3f38;
+  --green-border-muted: #152e29;
   --green-ink-muted: #8a9a93;
-  /* Header — token dedicati (NON ridefiniti in .theme-light) così l'header resta dark con testo light in entrambi i temi. */
-  --header-surface: rgba(8, 10, 9, 0.82);
-  --header-surface-scrolled: rgba(8, 10, 9, 0.94);
-  --header-border: #1e2a26;
+  /* Header / menu = stesso tono del footer (opaco, no teal diverso). */
+  --header-surface: var(--surface-chrome);
+  --header-surface-scrolled: var(--surface-chrome-deep);
   --header-text: #eef2ef;
   --header-text-muted: #8a9a93;
   --header-accent: #2dd4bf;
+  --header-border: color-mix(in srgb, var(--header-accent) 18%, var(--surface-chrome));
+  --header-menu-surface: var(--surface-chrome-deep);
+  --header-control-bg: color-mix(in srgb, var(--header-accent) 10%, var(--surface-chrome));
+  /* Barra lettura sotto nav: traccia discreta + fill caldo (stacca dal verde chrome). */
+  --header-progress-track: color-mix(in srgb, var(--header-text) 12%, transparent);
+  --header-progress-fill-via: #fb923c;
+  /* Glow e mesh: sempre da --header-accent + --primary (un solo tono visivo). */
+  --accent-glow-6: color-mix(in srgb, var(--header-accent) 6%, transparent);
+  --accent-glow-8: color-mix(in srgb, var(--header-accent) 8%, transparent);
+  --accent-glow-12: color-mix(in srgb, var(--header-accent) 12%, transparent);
+  --accent-glow-14: color-mix(in srgb, var(--header-accent) 14%, transparent);
+  --accent-glow-16: color-mix(in srgb, var(--header-accent) 16%, transparent);
+  --accent-glow-25: color-mix(in srgb, var(--header-accent) 25%, transparent);
+  --accent-glow-28: color-mix(in srgb, var(--header-accent) 28%, transparent);
+  --accent-glow-35: color-mix(in srgb, var(--header-accent) 35%, transparent);
+  --primary-soft-10: color-mix(in srgb, var(--primary) 10%, transparent);
+  --primary-soft-22: color-mix(in srgb, var(--primary) 22%, transparent);
+  --primary-soft-45: color-mix(in srgb, var(--primary) 45%, transparent);
+  --hero-gradient-from: var(--primary-dark);
+  --hero-gradient-via: color-mix(in srgb, var(--primary) 54%, var(--primary-dark));
+  --hero-gradient-to: var(--primary);
   /* Accento caldo — CTA */
   --accent-warm: #ea580c;
   --accent-soft: rgba(234, 88, 12, 0.14);
@@ -30,16 +56,19 @@
   --section-space-y: clamp(4.5rem, 7vw, 6.2rem);
   --section-space-y-mobile: 4rem;
   --content-gap: clamp(1.1rem, 1.8vw, 1.5rem);
-  /* Footer */
-  --footer-bg: #050807;
-  --footer-bg-sub: #030504;
-  --footer-edge: #1a2822;
+  /* Footer — alias sui token chrome (unico verde scuro). */
+  --footer-bg: var(--surface-chrome);
+  --footer-bg-sub: var(--surface-chrome-deep);
+  --footer-edge: var(--green-border);
   --footer-text: #e4ebe8;
   --footer-muted: #8fa39a;
   --footer-faint: #5c6f66;
   --footer-link: #9ecab8;
   --footer-link-hover: #f4faf7;
-  --footer-highlight: #5eead4;
+  --footer-highlight: var(--header-accent);
+  /* Etichette su pulsanti a tinta --primary (sfondo scuro → testo chiaro; hover su mint → testo scuro). */
+  --on-primary: #f4faf7;
+  --on-primary-hover: #04100e;
 }
 
 @theme inline {
@@ -86,15 +115,15 @@ body::before {
   pointer-events: none;
   z-index: -1;
   background:
-    radial-gradient(900px 520px at 10% -6%, rgba(45, 212, 191, 0.06), transparent 55%),
-    radial-gradient(720px 440px at 88% 12%, rgba(15, 118, 110, 0.05), transparent 52%),
-    radial-gradient(640px 380px at 50% 100%, rgba(8, 12, 10, 0.9), transparent 55%),
+    radial-gradient(900px 520px at 10% -6%, var(--accent-glow-6), transparent 55%),
+    radial-gradient(720px 440px at 88% 12%, var(--primary-soft-10), transparent 52%),
+    radial-gradient(640px 380px at 50% 100%, color-mix(in srgb, var(--background) 88%, #000), transparent 55%),
     repeating-linear-gradient(0deg, rgba(255, 255, 255, 0.02) 0 1px, transparent 1px 6px);
   opacity: 1;
 }
 
 ::selection {
-  background: rgba(45, 212, 191, 0.28);
+  background: var(--accent-glow-28);
   color: #04100e;
 }
 
@@ -244,12 +273,16 @@ body::before {
   width: 3rem;
   height: 2px;
   margin-top: 1rem;
-  background: linear-gradient(90deg, var(--primary-mid), rgba(20, 135, 125, 0.45));
+  background: linear-gradient(90deg, var(--header-accent), var(--primary-soft-45));
 }
 
 .home-section-rule--on-dark {
   width: 4rem;
-  background: linear-gradient(90deg, var(--primary-mid), rgba(180, 220, 200, 0.55));
+  background: linear-gradient(
+    90deg,
+    var(--header-accent),
+    color-mix(in srgb, var(--header-accent) 52%, #f4faf7)
+  );
 }
 
 .section-kicker {
@@ -332,7 +365,7 @@ body::before {
 
 .fine-divider {
   height: 1px;
-  background: linear-gradient(90deg, transparent, rgba(45, 212, 191, 0.12), transparent);
+  background: linear-gradient(90deg, transparent, var(--accent-glow-12), transparent);
 }
 
 .image-unify-overlay {
@@ -450,8 +483,14 @@ body::before {
 .theme-light {
   --background: #f7f6f1;
   --foreground: #0c100e;
-  --primary: #0f766e;
-  --primary-dark: #042f2c;
+  /* Chrome scuro = stesso tono footer (non teal più chiaro). */
+  --header-surface: var(--surface-chrome);
+  --header-surface-scrolled: var(--surface-chrome-deep);
+  --header-border: #1a3d36;
+  --header-menu-surface: var(--surface-chrome-deep);
+  --header-control-bg: color-mix(in srgb, var(--header-accent) 12%, var(--surface-chrome));
+  --primary: var(--header-surface);
+  --primary-dark: var(--surface-chrome-deep);
   --primary-mid: #0d635c;
   --card: #ffffff;
   --muted: #ecebe5;
@@ -463,15 +502,14 @@ body::before {
   --accent-warm: #ea580c;
   --accent-soft: rgba(234, 88, 12, 0.1);
   --copy-body: #3a4540;
-  /* Header sempre opaco su light theme: il default rgba(8,10,9,0.82) lasciava trasparire il cream → header grigiastro a inizio scroll. */
-  --header-surface: #080a09;
-  --header-surface-scrolled: #080a09;
+  --on-primary: #f4faf7;
+  --on-primary-hover: #f4faf7;
   background: var(--background);
   color: var(--foreground);
 }
 
 .theme-light ::selection {
-  background: rgba(15, 118, 110, 0.22);
+  background: var(--primary-soft-22);
   color: #04100e;
 }
 
@@ -485,16 +523,19 @@ body::before {
 .theme-light #strumentazione,
 .theme-light #processo,
 .theme-light [aria-labelledby="stats-heading"] {
-  --background: #080a09;
+  --background: var(--surface-chrome-mid);
   --foreground: #eef2ef;
-  --card: #0f1412;
-  --muted: #0c100e;
-  --elevated: #121916;
-  --green-border: #243530;
-  --green-border-muted: #1a2320;
+  --card: var(--surface-chrome-raised);
+  --muted: var(--surface-chrome);
+  --elevated: var(--surface-chrome-high);
+  --green-border: #1e3f38;
+  --green-border-muted: #152e29;
   --green-ink-muted: #8a9a93;
   --copy-body: #b4bdb8;
+  --primary: #0e3f37;
   --primary-mid: #2dd4bf;
+  --on-primary: #f4faf7;
+  --on-primary-hover: #04100e;
   background: var(--background);
   color: var(--foreground);
 }
@@ -519,6 +560,22 @@ body::before {
       animation-timeline: view();
       animation-range: entry 0% cover 28%;
     }
+
+    /* Solo movimento: niente fade di opacità (su isole scure su fondo chiaro il fade mescola i colori). */
+    .reveal-block-solid {
+      animation: reveal-lift linear both;
+      animation-timeline: view();
+      animation-range: entry 8% cover 38%;
+    }
+  }
+}
+
+@keyframes reveal-lift {
+  from {
+    transform: translateY(12px);
+  }
+  to {
+    transform: translateY(0);
   }
 }
 
@@ -545,7 +602,8 @@ body::before {
 @media (prefers-reduced-motion: reduce) {
   .reveal-title,
   .reveal-block,
-  .reveal-faint {
+  .reveal-faint,
+  .reveal-block-solid {
     animation: none !important;
     opacity: 1 !important;
     transform: none !important;
@@ -556,7 +614,8 @@ body::before {
 @supports not (animation-timeline: view()) {
   .reveal-title,
   .reveal-block,
-  .reveal-faint {
+  .reveal-faint,
+  .reveal-block-solid {
     opacity: 1;
     transform: none;
   }

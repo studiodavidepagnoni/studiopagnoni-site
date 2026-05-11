@@ -45,7 +45,7 @@ export default function PrivacyPolicyPage() {
     <main id="main-content" className={`section-shell min-h-[70vh] ${ui.pageBg}`}>
       <div className={`relative overflow-hidden border-b border-[var(--green-border-muted)] bg-[var(--muted)] ${layoutGutterXClass}`}>
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_20%_-20%,rgba(45,212,191,0.16),transparent_55%),radial-gradient(ellipse_80%_60%_at_100%_0%,rgba(234,88,12,0.06),transparent_50%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_20%_-20%,var(--accent-glow-16),transparent_55%),radial-gradient(ellipse_80%_60%_at_100%_0%,rgba(234,88,12,0.06),transparent_50%)]"
           aria-hidden
         />
         <div className={`relative py-14 sm:py-16 md:py-20 ${layoutContentMaxClass}`}>

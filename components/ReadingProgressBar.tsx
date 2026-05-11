@@ -12,8 +12,7 @@ function computeProgress(): number {
 
 /**
  * Barra di avanzamento lettura (scroll verticale documento).
- * Da collocare sotto la riga logo/menu nell’header; larghezza piena.
- * Aggiornamento throttled con requestAnimationFrame.
+ * Sotto logo/menu: traccia chiara su chrome; fill gradiente pesca→arancio (stesso linguaggio CTA del sito).
  */
 export function ReadingProgressBar() {
   const [progress, setProgress] = useState(0);
@@ -52,10 +51,10 @@ export function ReadingProgressBar() {
 
   return (
     <div className="pointer-events-none w-full shrink-0" aria-hidden>
-      <div className="relative h-px w-full overflow-hidden">
-        <div className="absolute inset-0 bg-[var(--green-border-muted)]" />
+      <div className="relative h-[2px] w-full overflow-hidden sm:h-px">
+        <div className="absolute inset-0 bg-[var(--header-progress-track)]" />
         <div
-          className="absolute inset-0 origin-left bg-gradient-to-r from-[var(--primary)] via-[var(--primary-mid)] to-[var(--primary)] transition-[transform] duration-150 ease-out will-change-transform motion-reduce:transition-none"
+          className="absolute inset-0 origin-left bg-gradient-to-r from-[color-mix(in_srgb,var(--header-text)_42%,#fde4d2)] via-[var(--header-progress-fill-via)] to-[var(--accent-warm)] shadow-[0_0_12px_color-mix(in_srgb,var(--accent-warm)_35%,transparent)] transition-[transform] duration-150 ease-out will-change-transform motion-reduce:shadow-none motion-reduce:transition-none"
           style={{ transform: `scaleX(${progress})` }}
         />
       </div>

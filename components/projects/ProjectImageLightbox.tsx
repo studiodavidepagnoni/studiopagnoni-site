@@ -184,7 +184,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
           <motion.div
             ref={dialogRef}
             id="project-lightbox-dialog"
-            className="fixed inset-0 z-[10050] flex h-dvh w-screen cursor-zoom-out flex-col overflow-hidden bg-[rgba(4,8,6,0.94)] backdrop-blur-xl"
+            className="fixed inset-0 z-[10050] flex h-dvh w-screen cursor-zoom-out flex-col overflow-hidden bg-[color-mix(in_srgb,var(--surface-chrome)_94%,transparent)] backdrop-blur-xl"
             role="dialog"
             aria-modal="true"
             aria-label="Galleria a schermo intero"
@@ -290,7 +290,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
               >
                 <div
                   ref={filmstripRef}
-                  className="flex cursor-grab gap-2 overflow-x-auto overscroll-x-contain pb-1 active:cursor-grabbing [scrollbar-width:thin] [scrollbar-color:rgba(45,212,191,0.35)_transparent]"
+                  className="flex cursor-grab gap-2 overflow-x-auto overscroll-x-contain pb-1 active:cursor-grabbing [scrollbar-width:thin] [scrollbar-color:var(--accent-glow-35)_transparent]"
                   style={{ WebkitOverflowScrolling: "touch" }}
                 >
                   {images.map((img, i) => (
@@ -321,7 +321,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
 
       <div className="md:hidden">
         <div
-          className="-mx-1 flex gap-3 overflow-x-auto overscroll-x-contain px-1 pb-3 pt-1 [scrollbar-width:thin] [scrollbar-color:rgba(45,212,191,0.35)_transparent] snap-x snap-mandatory"
+          className="-mx-1 flex gap-3 overflow-x-auto overscroll-x-contain px-1 pb-3 pt-1 [scrollbar-width:thin] [scrollbar-color:var(--accent-glow-35)_transparent] snap-x snap-mandatory"
           style={{ WebkitOverflowScrolling: "touch" }}
         >
           {images.map((img, i) => (

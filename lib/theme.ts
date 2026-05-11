@@ -1,15 +1,16 @@
 /**
- * Palette dark — teal + accento caldo, allineata a `app/globals.css`.
+ * Palette brand — stessi valori di `app/globals.css` (--primary, --primary-mid / --header-accent).
  */
 export const brand = {
-  primary: "#2dd4bf",
-  primaryDark: "#0f766e",
-  primaryMid: "#5eead4",
+  accentBright: "#2dd4bf",
+  primary: "#0e3f37",
+  primaryDark: "#031512",
+  primaryMid: "#2dd4bf",
   accent: "#fb923c",
   ink: "#eef2ef",
-  paper: "#080a09",
-  paperDeep: "#0e1311",
-  borderSoft: "#1e2a26",
-  footerSurface: "#050807",
-  footerSurfaceSub: "#030504",
+  paper: "#041c19",
+  paperDeep: "#031512",
+  borderSoft: "#243530",
+  footerSurface: "#051e1b",
+  footerSurfaceSub: "#031512",
 } as const;

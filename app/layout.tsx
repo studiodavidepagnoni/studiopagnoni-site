@@ -14,11 +14,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       // Cache-bust to avoid "old favicon" in aggressive browser caches.
-      { url: "/icon.svg?v=14", type: "image/svg+xml" },
+      { url: "/icon.svg?v=16", type: "image/svg+xml" },
       { url: "/favicon.ico?v=14", type: "image/x-icon" },
     ],
-    shortcut: [{ url: "/icon.svg?v=14", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg?v=14", type: "image/svg+xml" }],
+    shortcut: [{ url: "/icon.svg?v=16", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg?v=16", type: "image/svg+xml" }],
   },
   title: {
     default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Bornato (BS)",
@@ -49,7 +49,7 @@ export const metadata: Metadata = {
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
-  other: { "theme-color": "#080a09" },
+  other: { "theme-color": "#051e1b" },
 };
 
 const jsonLd = {

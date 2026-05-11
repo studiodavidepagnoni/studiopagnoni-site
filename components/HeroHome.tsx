@@ -50,7 +50,7 @@ export function HeroHome() {
     >
       {/* Sfondo gradiente */}
       <div
-        className="absolute inset-0 z-[-20] bg-gradient-to-br from-[#042a27] via-[#0a4a44] to-[#134e40]"
+        className="absolute inset-0 z-[-20] bg-gradient-to-br from-[var(--hero-gradient-from)] via-[var(--hero-gradient-via)] to-[var(--hero-gradient-to)]"
         aria-hidden
       />
 
@@ -87,7 +87,7 @@ export function HeroHome() {
           aria-hidden
         />
         <div
-          className="absolute inset-0 z-10 bg-[linear-gradient(165deg,rgba(234,88,12,0.14)_0%,transparent_42%,rgba(45,212,191,0.12)_100%)]"
+          className="absolute inset-0 z-10 bg-[linear-gradient(165deg,rgba(234,88,12,0.14)_0%,transparent_42%,var(--accent-glow-12)_100%)]"
           aria-hidden
         />
       </div>

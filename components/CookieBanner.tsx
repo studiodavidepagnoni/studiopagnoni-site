@@ -12,7 +12,7 @@ const btnOutline =
   "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full border border-white/25 bg-white/5 px-5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] sm:w-auto sm:min-w-[9.5rem]";
 
 const btnPrimary =
-  "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-6 text-sm font-semibold text-[#04100e] shadow-[0_8px_28px_rgba(45,212,191,0.25)] transition hover:bg-[var(--primary-mid)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/55 sm:w-auto sm:min-w-[11rem]";
+  "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-6 text-sm font-semibold text-[var(--on-primary)] shadow-[0_8px_28px_var(--accent-glow-25)] transition hover:bg-[var(--primary-mid)] hover:text-[var(--on-primary-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/55 sm:w-auto sm:min-w-[11rem]";
 
 const btnAccent =
   "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full bg-[var(--accent-warm)] px-6 text-sm font-semibold text-[#0a0a0a] shadow-[0_8px_28px_rgba(234,88,12,0.2)] transition hover:bg-[#ea7a3a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-warm)]/50 sm:w-auto sm:min-w-[10rem]";
@@ -56,10 +56,10 @@ export function CookieBanner() {
       className="fixed inset-x-0 bottom-0 z-[10000] px-3 pb-3 pt-2 sm:px-4 sm:pb-5 sm:pt-3"
     >
       <div
-        className={`pointer-events-auto mx-auto max-w-[960px] overflow-hidden rounded-2xl border border-white/[0.12] bg-[#0a0e0d]/92 shadow-[0_-24px_80px_rgba(0,0,0,0.55),0_0_0_1px_rgba(45,212,191,0.08)_inset] backdrop-blur-2xl sm:rounded-3xl`}
+        className={`pointer-events-auto mx-auto max-w-[960px] overflow-hidden rounded-2xl border border-white/[0.12] bg-[color-mix(in_srgb,var(--surface-chrome)_92%,transparent)] shadow-[0_-24px_80px_rgba(0,0,0,0.55),0_0_0_1px_var(--accent-glow-8)_inset] backdrop-blur-2xl sm:rounded-3xl`}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,rgba(45,212,191,0.14),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_100%,rgba(234,88,12,0.08),transparent_50%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,var(--accent-glow-14),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_100%,rgba(234,88,12,0.08),transparent_50%)]"
           aria-hidden
         />
         <div className={`relative ${layoutGutterXClass} py-5 sm:py-6`}>

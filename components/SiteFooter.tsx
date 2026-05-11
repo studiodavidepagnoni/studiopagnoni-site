@@ -9,7 +9,7 @@ export function SiteFooter() {
   return (
     <footer className="relative mt-16 overflow-hidden border-t border-[var(--footer-edge)] bg-[var(--footer-bg)] text-[var(--footer-text)]">
       <div
-        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(45,212,191,0.08),transparent_55%)]"
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,var(--accent-glow-8),transparent_55%)]"
         aria-hidden
       />
       <div
@@ -39,7 +39,7 @@ export function SiteFooter() {
                   <p className={`${fontSans.className} mt-2 max-w-md text-sm leading-relaxed text-[var(--footer-muted)] sm:mt-3`}>{site.tagline}</p>
                 </div>
               </div>
-              <Link href="/contatti" className={`${fontSans.className} ${ui.btnPrimary} mt-8 inline-flex min-h-[44px] items-center justify-center`}>
+              <Link href="/contatti" className={`${fontSans.className} ${ui.btnFooterCta} mt-8 inline-flex min-h-[44px] items-center justify-center`}>
                 Contattaci
               </Link>
             </div>

@@ -32,8 +32,8 @@ export const homeChiSiamo: {
       SLAM), <strong>progettazione</strong> del verde e architettonica, <strong>urbanistica</strong> e <strong>pratiche edilizie</strong>. Sede nella{" "}
       <strong>frazione Bornato</strong> di <strong>Cazzago San Martino</strong> (provincia di <strong>Brescia</strong>). Il{" "}
       <strong>Geometra Sergio Pagnoni</strong> e l&apos;<strong>Architetto Davide Pagnoni</strong> seguono ogni commessa con continuità — dalla campagna
-      agli elaborati finiti. Sul versante edilizia: <strong>coordinamento della sicurezza in cantiere</strong> (CSP/CSE),{" "}
-      <strong>assistenza immobiliare</strong> e <strong>perizie</strong>.
+      agli elaborati finiti. <strong>In ambito edilizio e urbanistico</strong>:{" "}
+      <strong>coordinamento della sicurezza in cantiere</strong> (CSP/CSE), <strong>assistenza immobiliare</strong> e <strong>perizie</strong>.
     </>
   ),
   highlights: [
@@ -75,7 +75,7 @@ export const homeServiziIntro =
 /** Blocco compatto in home (anchor #strumentazione): linea strumentale senza claim commerciali */
 export const homeStrumentazione = {
   title: "Strumentazione",
-  lede: "Strumentazione da campo aggiornata: misure planoaltimetriche affidabili e acquisizioni laser 3D quando il tipo di commessa lo richiede.",
+  lede: "Strumentazione da campo aggiornata: misure planoaltimetriche affidabili e acquisizioni laser 3D quando è previsto per la riuscita del progetto.",
   items: [
     {
       label: "GNSS RTK",
@@ -227,7 +227,7 @@ export const chiSiamoPage = {
       grafica.
     </>,
     <>
-      Sul versante del <strong>verde</strong> collaboriamo con agronomi di fiducia per interventi su vigneti, parchi e percorsi, inclusi progetti in
+      Nel settore del <strong>verde</strong> collaboriamo con agronomi di fiducia per interventi su vigneti, parchi e percorsi, inclusi progetti in
       ambito viticolo di eccellenza (ad esempio collaborazioni con realtà prestigiose come <strong>Ca&apos; del Bosco</strong> nella Franciacorta), nel rispetto delle
       esigenze paesaggistiche e produttive.
     </>,

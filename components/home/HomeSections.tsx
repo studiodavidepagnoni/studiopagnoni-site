@@ -146,7 +146,7 @@ export function HomeSections() {
           <div
             id="strumentazione"
             aria-labelledby="strumentazione-heading"
-            className="reveal-block mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:mb-10 sm:p-6"
+            className="reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:mb-10 sm:p-6"
           >
             <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Campo</p>
             <h3 id="strumentazione-heading" className={`${fontDisplay.className} mt-2 text-xl font-semibold text-[var(--foreground)] sm:text-2xl`}>

@@ -13,6 +13,7 @@ export function SiteHeader() {
   const brandMarkRef = useRef<HTMLDivElement>(null);
   const brandLineRef = useRef<HTMLSpanElement>(null);
   const taglineRef = useRef<HTMLSpanElement>(null);
+  const headerRootRef = useRef<HTMLElement | null>(null);
   const [brandMarkPx, setBrandMarkPx] = useState<number>(56);
 
   /** Lato del quadrato (border-box): altezza testo + padding/bordo, così il disegno interno non resta più piccolo delle scritte. */
@@ -29,32 +30,47 @@ export function SiteHeader() {
   }, []);
 
   /**
-   * Calibra il letter-spacing del wordmark "Studio Pagnoni" per portarne la
-   * larghezza ≈ alla tagline sotto, così bordi sx (Studio↔Topografia) e dx
-   * (Pagnoni↔SLAM) coincidono pixel-perfect.
-   *
-   * Approccio iterativo: i browser possono aggiungere letter-spacing anche dopo
-   * l'ultimo glyph (e/o gestire kerning + subpixel diversi), quindi una formula
-   * chiusa "naïf" può lasciare 1-2px di errore. Misuriamo, applichiamo, poi
-   * correggiamo il delta. Converge in 1-2 cicli.
+   * Calibra il letter-spacing del wordmark visivo «Studio Pagnoni» (maiuscole via CSS)
+   * alla larghezza della tagline: non deve MAI superarla (evita overflow a destra).
+   * Ricerca binaria su letter-spacing — il modello lineare (delta/gaps) sovrastimava.
    */
   const calibrateBrandTracking = useCallback(() => {
     const brand = brandLineRef.current;
     const tagline = taglineRef.current;
     if (!brand || !tagline) return;
-    brand.style.letterSpacing = "0px";
+
     const taglineW = tagline.getBoundingClientRect().width;
     if (taglineW <= 1) return;
-    const text = brand.textContent ?? "";
-    const gaps = Math.max(text.length - 1, 1);
-    let spacing = 0;
-    for (let i = 0; i < 4; i++) {
-      const w = brand.getBoundingClientRect().width;
-      const delta = taglineW - w;
-      if (Math.abs(delta) < 0.5) break;
-      spacing = Math.max(0, spacing + delta / gaps);
-      brand.style.letterSpacing = `${spacing}px`;
+
+    const measureBrand = () => brand.getBoundingClientRect().width;
+
+    brand.style.letterSpacing = "0px";
+    const w0 = measureBrand();
+    if (w0 >= taglineW - 0.35) {
+      brand.style.letterSpacing = "0px";
+      return;
     }
+
+    let lo = 0;
+    let hi = 1;
+    brand.style.letterSpacing = `${hi}px`;
+    while (measureBrand() < taglineW && hi < 32) {
+      lo = hi;
+      hi = Math.min(32, hi * 2);
+      brand.style.letterSpacing = `${hi}px`;
+    }
+    if (measureBrand() <= taglineW) {
+      brand.style.letterSpacing = `${hi}px`;
+      return;
+    }
+
+    for (let i = 0; i < 28; i++) {
+      const mid = (lo + hi) / 2;
+      brand.style.letterSpacing = `${mid}px`;
+      if (measureBrand() <= taglineW) lo = mid;
+      else hi = mid;
+    }
+    brand.style.letterSpacing = `${lo}px`;
   }, []);
 
   useLayoutEffect(() => {
@@ -62,23 +78,22 @@ export function SiteHeader() {
     const textEl = brandTextRef.current;
     const markEl = brandMarkRef.current;
     if (!textEl) return;
-    const ro = new ResizeObserver(() => syncBrandMark());
+    const apply = () => {
+      syncBrandMark();
+      calibrateBrandTracking();
+    };
+    const ro = new ResizeObserver(apply);
     ro.observe(textEl);
     if (markEl) ro.observe(markEl);
-    syncBrandMark();
-    void document.fonts.ready.then(syncBrandMark);
-    return () => ro.disconnect();
-  }, [syncBrandMark]);
-
-  useLayoutEffect(() => {
-    calibrateBrandTracking();
-    // I Google Font (Sora) caricano async → ricalibriamo a font ready.
-    void document.fonts?.ready.then(calibrateBrandTracking);
-    // Su resize cambiano i breakpoint Tailwind del wordmark/tagline → ricalibra.
-    const onResize = () => calibrateBrandTracking();
+    apply();
+    void document.fonts.ready.then(apply);
+    const onResize = () => apply();
     window.addEventListener("resize", onResize);
-    return () => window.removeEventListener("resize", onResize);
-  }, [calibrateBrandTracking]);
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", onResize);
+    };
+  }, [syncBrandMark, calibrateBrandTracking]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -92,14 +107,38 @@ export function SiteHeader() {
     return () => document.body.classList.remove("overflow-hidden");
   }, [open]);
 
+  /** Altezza sticky header (logo/nav + barra progresso) → drawer mobile sotto la barra intera. */
+  useLayoutEffect(() => {
+    const root = document.documentElement;
+    const el = headerRootRef.current;
+    if (!el || typeof ResizeObserver === "undefined") {
+      root.style.setProperty("--site-header-offset", "5rem");
+      return;
+    }
+    const apply = () => {
+      const h = el.getBoundingClientRect().height;
+      if (h > 0) root.style.setProperty("--site-header-offset", `${Math.round(h)}px`);
+    };
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    window.addEventListener("resize", apply, { passive: true });
+    return () => {
+      ro.disconnect();
+      window.removeEventListener("resize", apply);
+      root.style.removeProperty("--site-header-offset");
+    };
+  }, []);
+
   const headerSurface = scrolled ? "bg-[var(--header-surface-scrolled)]" : "bg-[var(--header-surface)]";
 
   return (
     <>
       <header
-        className={`sticky top-0 z-[1000] border-b border-[var(--header-border)] transition-colors duration-200 ${headerSurface} shadow-[0_1px_0_rgba(0,0,0,0.35)] backdrop-blur-xl`}
+        ref={headerRootRef}
+        className={`sticky top-0 z-[1000] flex flex-col border-b border-[var(--header-border)] transition-colors duration-200 ${headerSurface} backdrop-blur-xl`}
       >
-        <div className={layoutGutterXClass}>
+        <div className={`shrink-0 shadow-[0_1px_0_var(--accent-glow-14)] ${layoutGutterXClass}`}>
           <div className={`flex min-h-[68px] items-center justify-between gap-3 py-2 sm:min-h-[76px] md:min-h-[80px] ${layoutContentMaxClass}`}>
             <Link
               href="/"
@@ -113,22 +152,22 @@ export function SiteHeader() {
                 className="box-border flex shrink-0 items-center justify-center"
                 style={{ width: brandMarkPx, height: brandMarkPx }}
               >
-                {/* brightness-[1.75] schiarisce il teal #0f766e → ~#1acfc1 sull'header dark, senza alterare l'hue. Stesso trattamento nel footer (sfondo scuro), chi-siamo resta col color naturale (sfondo chiaro). */}
+                {/* Filtri schiariti sul chrome scuro; hover leggermente più luminoso. */}
                 {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
                 <img
                   src="/logo-mark.svg?v=15"
                   alt=""
                   width={616}
                   height={616}
-                  className="h-full w-full object-contain opacity-[0.96] brightness-[1.75] transition-opacity group-hover:opacity-100"
+                  className="h-full w-full object-contain opacity-100 brightness-[2.55] saturate-[1.22] contrast-[1.08] drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] transition-[filter] duration-200 group-hover:brightness-[2.85] group-hover:saturate-[1.28] group-hover:drop-shadow-[0_0_18px_color-mix(in_srgb,var(--header-accent)_48%,transparent)]"
                   aria-hidden
                 />
               </div>
-              {/* Brand "Studio Pagnoni" mixed case font-medium come l'hero. Il letter-spacing è calibrato a runtime via calibrateBrandTracking() per portare la width ≈ tagline; items-end mantiene il bordo destro allineato. */}
-              <div ref={brandTextRef} className="flex min-w-0 flex-col items-end gap-y-1.5 sm:gap-y-2">
+              {/* Wordmark in maiuscolo (CSS); letter-spacing impostato da calibrateBrandTracking ≈ larghezza tagline. */}
+              <div ref={brandTextRef} className="flex min-w-0 flex-col items-start gap-y-1.5 sm:gap-y-2">
                 <span
                   ref={brandLineRef}
-                  className={`${fontDisplay.className} text-[1.1rem] font-medium leading-none text-[var(--header-text)] sm:text-[1.35rem] md:text-[1.6rem]`}
+                  className={`${fontDisplay.className} text-[1.1rem] font-bold uppercase leading-none text-[var(--header-text)] sm:text-[1.35rem] md:text-[1.6rem]`}
                 >
                   Studio Pagnoni
                 </span>
@@ -158,41 +197,43 @@ export function SiteHeader() {
 
             <button
               type="button"
-              className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--green-border-muted)] bg-[var(--card)] md:hidden"
+              className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--header-border)] bg-[var(--header-control-bg)] md:hidden"
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Chiudi menu" : "Apri menu"}
               onClick={() => setOpen((v) => !v)}
             >
               <span
-                className={`block h-0.5 w-6 bg-[var(--foreground)] transition ${open ? "translate-y-2 rotate-45" : ""}`}
+                className={`block h-0.5 w-6 bg-[var(--header-text)] transition ${open ? "translate-y-2 rotate-45" : ""}`}
               />
-              <span className={`block h-0.5 w-6 bg-[var(--foreground)] transition ${open ? "opacity-0" : ""}`} />
+              <span className={`block h-0.5 w-6 bg-[var(--header-text)] transition ${open ? "opacity-0" : ""}`} />
               <span
-                className={`block h-0.5 w-6 bg-[var(--foreground)] transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
+                className={`block h-0.5 w-6 bg-[var(--header-text)] transition ${open ? "-translate-y-2 -rotate-45" : ""}`}
               />
             </button>
           </div>
         </div>
-        <ReadingProgressBar />
+        <div className="w-full shrink-0 border-t border-[var(--header-border)]/55">
+          <ReadingProgressBar />
+        </div>
       </header>
 
       <div
         id="mobile-nav"
-        className={`fixed bottom-0 right-0 top-[4.75rem] z-[999] flex w-[min(100%,22rem)] flex-col border-l border-[var(--green-border-muted)] bg-[var(--card)] shadow-[-12px_0_40px_rgba(0,0,0,0.45)] transition-transform duration-300 ease-out md:hidden ${
+        className={`fixed bottom-0 right-0 top-[var(--site-header-offset,5rem)] z-[999] flex w-[min(100%,22rem)] flex-col border-l border-[var(--header-border)] bg-[var(--header-menu-surface)] shadow-[-12px_0_40px_color-mix(in_srgb,var(--surface-chrome)_58%,transparent)] transition-transform duration-300 ease-out md:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
         aria-hidden={!open}
       >
         <div className={`flex flex-1 flex-col overflow-y-auto pt-4 ${layoutGutterXClass}`}>
-          <p className={`${fontDisplay.className} text-base font-medium text-[var(--foreground)]`}>{site.name}</p>
-          <p className={`${fontSans.className} mb-4 mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--green-ink-muted)]`}>Menu</p>
+          <p className={`${fontDisplay.className} text-base font-medium text-[var(--header-text)]`}>{site.name}</p>
+          <p className={`${fontSans.className} mb-4 mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--header-text-muted)]`}>Menu</p>
           <ul className="flex flex-col gap-0.5 pb-10">
             {navItems.map((item) => (
               <li key={item.href}>
                 <Link
                   href={item.href}
-                  className={`${fontSans.className} block border-b border-[var(--green-border-muted)] py-4 text-lg font-medium text-[var(--foreground)] transition hover:text-[var(--primary-mid)]`}
+                  className={`${fontSans.className} block border-b border-[var(--header-border)] py-4 text-lg font-medium text-[var(--header-text)] transition hover:text-[var(--header-accent)]`}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -206,7 +247,7 @@ export function SiteHeader() {
       <button
         type="button"
         aria-label="Chiudi menu"
-        className={`fixed inset-0 z-[998] bg-[#0c0a09]/40 transition-opacity md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        className={`fixed inset-0 z-[998] bg-[color-mix(in_srgb,var(--surface-chrome)_52%,transparent)] transition-opacity md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
         onClick={() => setOpen(false)}
       />
     </>

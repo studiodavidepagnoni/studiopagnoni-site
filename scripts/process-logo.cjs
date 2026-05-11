@@ -25,8 +25,10 @@ async function main() {
   const outMarkSvg = path.join(root, "public", "logo-mark.svg");
   const outIconSvg = path.join(root, "public", "icon.svg");
 
-  // Site primary teal (vedi app/globals.css :root)
-  const SITE_TEAL = { r: 15, g: 118, b: 110 }; // #0f766e
+  // Marchio recolor (vedi app/globals.css --primary)
+  const SITE_TEAL = { r: 14, g: 63, b: 55 }; // #0e3f37
+  // Sfondo favicon: nettamente più chiaro del tratto (#0e3f37) così il wireframe resta leggibile in tab 16px.
+  const ICON_BG = "#3db89e";
 
   if (!fs.existsSync(inputPath)) {
     if (!fs.existsSync(outMarkPng)) {
@@ -40,7 +42,7 @@ async function main() {
     await processSource({ sharp, inputPath, outMarkPng, SITE_TEAL });
   }
 
-  await writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root });
+  await writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg: ICON_BG });
 }
 
 async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
@@ -157,7 +159,7 @@ async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
   console.log(`[process-logo] Wrote ${path.relative(path.dirname(outMarkPng), outMarkPng)} (${meta.width}x${meta.height})`);
 }
 
-async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root }) {
+async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg }) {
   const markBuffer = await sharp(outMarkPng).toBuffer();
   const markMeta = await sharp(outMarkPng).metadata();
   const base64 = markBuffer.toString("base64");
@@ -189,7 +191,7 @@ async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, roo
   const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${CANVAS}" height="${CANVAS}" viewBox="0 0 ${CANVAS} ${CANVAS}" fill="none">
   <title>Studio Tecnico Pagnoni</title>
   <desc>Logo Studio Pagnoni — point cloud / wireframe.</desc>
-  <rect width="${CANVAS}" height="${CANVAS}" rx="112" fill="#080a09"/>
+  <rect width="${CANVAS}" height="${CANVAS}" rx="112" fill="${iconBg}"/>
   <image href="data:image/png;base64,${base64}" x="${x}" y="${y}" width="${w}" height="${h}"/>
 </svg>
 `;

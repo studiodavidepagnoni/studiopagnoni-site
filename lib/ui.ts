@@ -34,7 +34,10 @@ export const ui = {
   gallerySectionTitle: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
   cardHeading: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
 
-  btnPrimary: `${btnBase} bg-[var(--primary)] text-[#04100e] shadow-sm hover:bg-[var(--primary-mid)] hover:shadow-md focus-visible:outline-[var(--primary-mid)]/50`,
+  btnPrimary: `${btnBase} bg-[var(--primary)] text-[var(--on-primary)] shadow-sm hover:bg-[var(--primary-mid)] hover:text-[var(--on-primary-hover)] hover:shadow-md focus-visible:outline-[var(--primary-mid)]/50`,
+
+  /** CTA su chrome footer scuro: fill chiaro (mint), non `--primary` che fonde con `--footer-bg`. */
+  btnFooterCta: `${btnBase} bg-[var(--primary-mid)] text-[#04100e] shadow-lg shadow-black/25 hover:brightness-[1.08] hover:shadow-xl focus-visible:outline-[var(--primary-mid)]/55`,
 
   btnOutline: `${btnBase} border border-[var(--green-border)] bg-transparent text-[var(--foreground)] hover:border-[var(--primary-mid)] hover:bg-[var(--muted)] focus-visible:outline-[var(--primary)]/45`,
 
@@ -48,7 +51,7 @@ export const ui = {
 
   btnOnDark: `${btnBase} bg-white text-[#0a0a0a] hover:bg-stone-200 focus-visible:outline-white/50`,
 
-  cookieAccept: `${btnBase} min-h-[48px] flex-1 bg-[var(--primary)] px-6 text-[#04100e] hover:bg-[var(--primary-mid)] focus-visible:outline-[var(--primary-mid)]/50 sm:flex-none sm:px-8`,
+  cookieAccept: `${btnBase} min-h-[48px] flex-1 bg-[var(--primary)] px-6 text-[var(--on-primary)] hover:bg-[var(--primary-mid)] hover:text-[var(--on-primary-hover)] focus-visible:outline-[var(--primary-mid)]/50 sm:flex-none sm:px-8`,
 
   cookieReject: `${btnBase} min-h-[48px] flex-1 border border-white/25 bg-transparent px-5 text-white hover:bg-white/10 focus-visible:outline-white/35 sm:flex-none`,
 
