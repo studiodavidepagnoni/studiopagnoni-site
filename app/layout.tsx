@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/AppProviders";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SiteFooter } from "@/components/SiteFooter";
@@ -8,6 +8,13 @@ import { site } from "@/lib/site";
 import "./globals.css";
 
 const ogImage = "/assets/stock/pointcloud-data.jpg";
+
+/** Notch / home indicator: `viewport-fit=cover` + safe-area in CSS (header, drawer, cookie bar). */
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
@@ -25,17 +32,17 @@ export const metadata: Metadata = {
     template: `%s — ${site.name}`,
   },
   description:
-    "Geometra e architetto a Bornato (Cazzago San Martino, Brescia): topografia e rilievi GNSS, laser scanner SLAM, progettazione del verde, urbanistica e pratiche edilizie. Franciacorta, Brescia, Lombardia e Nord Italia.",
+    "Geometra e architetto a Cazzago San Martino (BS), Franciacorta e provincia di Brescia: topografia e rilievi GNSS, laser scanner SLAM, progettazione del verde, urbanistica e pratiche edilizie. Lombardia e Nord Italia.",
   keywords: [
     "topografo Brescia",
-    "rilievo topografico Bornato",
+    "rilievo topografico Franciacorta",
     "rilievo topografico Cazzago San Martino",
-    "geometra topografo Franciacorta",
+    "geometra topografo provincia di Brescia",
     "laser scanner SLAM Lombardia",
-    "rilievo laser scanner 3D",
+    "rilievo laser scanner 3D Nord Italia",
     "nuvola di punti edifici",
     "GNSS RTK rilievo",
-    "progettazione verde vigneti",
+    "progettazione verde vigneti Franciacorta",
     "studio tecnico geometra architetto BS",
   ],
   openGraph: {
@@ -45,7 +52,7 @@ export const metadata: Metadata = {
     siteName: site.name,
     title: `${site.name} — ${site.tagline}`,
     description:
-      "Topografia professionale, laser scanner SLAM e progettazione del territorio dalla sede di Bornato (Cazzago San Martino, Brescia).",
+      "Topografia professionale, laser scanner SLAM e progettazione del territorio da Cazzago San Martino (BS): Franciacorta, provincia di Brescia e Nord Italia.",
     images: [{ url: ogImage, width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
@@ -57,7 +64,7 @@ const jsonLd = {
   "@type": "ProfessionalService",
   name: site.name,
   description:
-    "Servizi di topografia, laser scanner SLAM, progettazione del verde, urbanistica e pratiche edilizie. Sede a Cazzago San Martino (BS), frazione Bornato.",
+    "Servizi di topografia, laser scanner SLAM, progettazione del verde, urbanistica e pratiche edilizie. Sede a Cazzago San Martino (BS), frazione Bornato — raggio operativo Franciacorta, provincia di Brescia e Nord Italia.",
   url: site.url,
   email: site.email,
   telephone: site.phones.map((p) => p.tel),
@@ -72,6 +79,8 @@ const jsonLd = {
   areaServed: [
     { "@type": "AdministrativeArea", name: "Lombardia" },
     { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+    { "@type": "Place", name: "Franciacorta" },
+    { "@type": "AdministrativeArea", name: "Nord Italia" },
   ],
   priceRange: "$$",
 };

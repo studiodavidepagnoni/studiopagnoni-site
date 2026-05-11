@@ -14,7 +14,33 @@ export function SiteHeader() {
   const brandLineRef = useRef<HTMLSpanElement>(null);
   const taglineRef = useRef<HTMLSpanElement>(null);
   const headerRootRef = useRef<HTMLElement | null>(null);
+  const menuButtonRef = useRef<HTMLButtonElement>(null);
+  const firstMobileNavRef = useRef<HTMLAnchorElement>(null);
+  const mobileNavRef = useRef<HTMLElement | null>(null);
+  const menuTouchStartRef = useRef<{ x: number; y: number } | null>(null);
+  const wasMenuOpenRef = useRef(false);
   const [brandMarkPx, setBrandMarkPx] = useState<number>(56);
+
+  /** Swipe verso destra sul drawer (pannello da destra) → chiudi. */
+  const onMobileNavTouchStart = useCallback((e: React.TouchEvent) => {
+    if (!open) return;
+    const t = e.touches[0];
+    menuTouchStartRef.current = { x: t.clientX, y: t.clientY };
+  }, [open]);
+
+  const onMobileNavTouchEnd = useCallback(
+    (e: React.TouchEvent) => {
+      const start = menuTouchStartRef.current;
+      menuTouchStartRef.current = null;
+      if (!open || !start) return;
+      const t = e.changedTouches[0];
+      const dx = t.clientX - start.x;
+      const dy = t.clientY - start.y;
+      const minDx = 72;
+      if (dx > minDx && dx > Math.abs(dy) * 1.2) setOpen(false);
+    },
+    [open],
+  );
 
   /** Lato del quadrato (border-box): altezza testo + padding/bordo, così il disegno interno non resta più piccolo delle scritte. */
   const syncBrandMark = useCallback(() => {
@@ -107,6 +133,59 @@ export function SiteHeader() {
     return () => document.body.classList.remove("overflow-hidden");
   }, [open]);
 
+  useEffect(() => {
+    if (!open) return;
+    const id = window.requestAnimationFrame(() => firstMobileNavRef.current?.focus());
+    return () => window.cancelAnimationFrame(id);
+  }, [open]);
+
+  useEffect(() => {
+    if (!open) return;
+    const nav = mobileNavRef.current;
+    const focusableSelector =
+      'a[href]:not([tabindex="-1"]), button:not([disabled]):not([tabindex="-1"]), [tabindex]:not([tabindex="-1"])';
+
+    const listFocusables = () => {
+      if (!nav) return [] as HTMLElement[];
+      return Array.from(nav.querySelectorAll<HTMLElement>(focusableSelector)).filter(
+        (el) => !el.hasAttribute("disabled") && el.offsetWidth > 0 && el.offsetHeight > 0,
+      );
+    };
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        e.preventDefault();
+        setOpen(false);
+        return;
+      }
+      if (e.key !== "Tab") return;
+      const list = listFocusables();
+      if (list.length === 0) return;
+      const first = list[0];
+      const last = list[list.length - 1];
+      const active = document.activeElement as HTMLElement | undefined;
+      if (e.shiftKey) {
+        if (active === first) {
+          e.preventDefault();
+          last.focus();
+        }
+      } else if (active === last) {
+        e.preventDefault();
+        first.focus();
+      }
+    };
+
+    window.addEventListener("keydown", onKey);
+    return () => window.removeEventListener("keydown", onKey);
+  }, [open]);
+
+  useEffect(() => {
+    if (wasMenuOpenRef.current && !open) {
+      menuButtonRef.current?.focus({ preventScroll: true });
+    }
+    wasMenuOpenRef.current = open;
+  }, [open]);
+
   /** Altezza sticky header (logo/nav + barra progresso) → drawer mobile sotto la barra intera. */
   useLayoutEffect(() => {
     const root = document.documentElement;
@@ -136,9 +215,11 @@ export function SiteHeader() {
     <>
       <header
         ref={headerRootRef}
-        className={`sticky top-0 z-[1000] flex flex-col border-b border-[var(--header-border)] transition-colors duration-200 ${headerSurface} backdrop-blur-xl`}
+        className={`sticky top-0 z-[1000] flex flex-col border-b border-[var(--header-border)] pt-[env(safe-area-inset-top,0px)] transition-colors duration-200 ${headerSurface} backdrop-blur-xl`}
       >
-        <div className={`shrink-0 shadow-[0_1px_0_var(--accent-glow-14)] ${layoutGutterXClass}`}>
+        <div
+          className={`shrink-0 shadow-[0_1px_0_var(--accent-glow-14)] ${layoutGutterXClass} max-md:ps-[max(1rem,env(safe-area-inset-left,0px))] max-md:pe-[max(1rem,env(safe-area-inset-right,0px))]`}
+        >
           <div className={`flex min-h-[68px] items-center justify-between gap-3 py-2 sm:min-h-[76px] md:min-h-[80px] ${layoutContentMaxClass}`}>
             <Link
               href="/"
@@ -196,8 +277,9 @@ export function SiteHeader() {
             </nav>
 
             <button
+              ref={menuButtonRef}
               type="button"
-              className="flex h-11 w-11 shrink-0 flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--header-border)] bg-[var(--header-control-bg)] md:hidden"
+              className="flex h-11 w-11 shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--header-border)] bg-[var(--header-control-bg)] md:hidden"
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Chiudi menu" : "Apri menu"}
@@ -218,22 +300,30 @@ export function SiteHeader() {
         </div>
       </header>
 
-      <div
+      <nav
+        ref={mobileNavRef}
         id="mobile-nav"
-        className={`fixed bottom-0 right-0 top-[var(--site-header-offset,5rem)] z-[999] flex w-[min(100%,22rem)] flex-col border-l border-[var(--header-border)] bg-[var(--header-menu-surface)] shadow-[-12px_0_40px_color-mix(in_srgb,var(--surface-chrome)_58%,transparent)] transition-transform duration-300 ease-out md:hidden ${
+        aria-label="Menu principale"
+        aria-hidden={!open}
+        inert={!open}
+        onTouchStart={onMobileNavTouchStart}
+        onTouchEnd={onMobileNavTouchEnd}
+        className={`fixed bottom-0 right-0 top-[var(--site-header-offset,5rem)] z-[999] flex w-[min(100%,22rem)] flex-col border-l border-[var(--header-border)] bg-[var(--header-menu-surface)] shadow-[-12px_0_40px_color-mix(in_srgb,var(--surface-chrome)_58%,transparent)] ease-out motion-safe:transition-transform motion-safe:duration-300 motion-reduce:transition-none md:hidden ${
           open ? "translate-x-0" : "translate-x-full"
         }`}
-        aria-hidden={!open}
       >
-        <div className={`flex flex-1 flex-col overflow-y-auto pt-4 ${layoutGutterXClass}`}>
+        <div
+          className={`flex flex-1 flex-col overflow-y-auto overscroll-y-contain pt-4 ps-[max(1rem,env(safe-area-inset-left,0px))] pe-[max(1rem,env(safe-area-inset-right,0px))] pb-[max(2.5rem,env(safe-area-inset-bottom,0px))]`}
+        >
           <p className={`${fontDisplay.className} text-base font-medium text-[var(--header-text)]`}>{site.name}</p>
           <p className={`${fontSans.className} mb-4 mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--header-text-muted)]`}>Menu</p>
-          <ul className="flex flex-col gap-0.5 pb-10">
-            {navItems.map((item) => (
+          <ul className="flex flex-col gap-0.5">
+            {navItems.map((item, index) => (
               <li key={item.href}>
                 <Link
+                  ref={index === 0 ? firstMobileNavRef : undefined}
                   href={item.href}
-                  className={`${fontSans.className} block border-b border-[var(--header-border)] py-4 text-lg font-medium text-[var(--header-text)] transition hover:text-[var(--header-accent)]`}
+                  className={`${fontSans.className} flex min-h-[48px] items-center border-b border-[var(--header-border)] py-2 text-lg font-medium text-[var(--header-text)] transition hover:text-[var(--header-accent)] touch-manipulation`}
                   onClick={() => setOpen(false)}
                 >
                   {item.label}
@@ -242,12 +332,13 @@ export function SiteHeader() {
             ))}
           </ul>
         </div>
-      </div>
+      </nav>
 
       <button
         type="button"
         aria-label="Chiudi menu"
-        className={`fixed inset-0 z-[998] bg-[color-mix(in_srgb,var(--surface-chrome)_52%,transparent)] transition-opacity md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
+        tabIndex={-1}
+        className={`fixed inset-0 z-[998] touch-manipulation bg-[color-mix(in_srgb,var(--surface-chrome)_52%,transparent)] motion-safe:transition-opacity motion-safe:duration-200 motion-reduce:transition-none md:hidden ${open ? "opacity-100" : "pointer-events-none opacity-0"}`}
         onClick={() => setOpen(false)}
       />
     </>

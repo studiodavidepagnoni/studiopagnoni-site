@@ -16,21 +16,10 @@ function Counter({
   reduced: boolean;
   active: boolean;
 }) {
-  if (reduced) {
-    return (
-      <span className={`${fontDisplay.className} text-3xl font-medium text-[var(--foreground)] sm:text-4xl md:text-5xl`}>
-        {target}
-        {suffix}
-      </span>
-    );
-  }
-
-  /** Fuori viewport non animiamo: mostriamo il valore finale (evita “0+” fintanto che `active` è false). */
-  const frozen = !active;
   const [v, setV] = useState(0);
 
   useEffect(() => {
-    if (!active) return;
+    if (reduced || !active) return;
     const duration = 1800;
     const t0 = performance.now();
     let raf = 0;
@@ -42,8 +31,19 @@ function Counter({
     };
     raf = requestAnimationFrame(tick);
     return () => cancelAnimationFrame(raf);
-  }, [active, target]);
+  }, [active, target, reduced]);
 
+  if (reduced) {
+    return (
+      <span className={`${fontDisplay.className} text-3xl font-medium text-[var(--foreground)] sm:text-4xl md:text-5xl`}>
+        {target}
+        {suffix}
+      </span>
+    );
+  }
+
+  /** Fuori viewport non animiamo: mostriamo il valore finale (evita “0+” fintanto che `active` è false). */
+  const frozen = !active;
   const shown = frozen ? target : target <= 0 ? v : Math.max(1, v);
 
   return (

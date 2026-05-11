@@ -8,6 +8,9 @@ export const fontSans = Manrope({
   variable: "--font-sans",
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  /** Corpo: carica dopo il primo paint — LCP guidato da Sora (hero). */
+  preload: false,
+  adjustFontFallback: true,
 });
 
 /**
@@ -18,4 +21,6 @@ export const fontDisplay = Sora({
   variable: "--font-display",
   display: "swap",
   weight: ["400", "500", "600", "700"],
+  preload: true,
+  adjustFontFallback: true,
 });

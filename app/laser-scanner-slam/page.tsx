@@ -7,7 +7,7 @@ import { ui } from "@/lib/ui";
 export const metadata: Metadata = {
   title: "Laser scanner SLAM — rilievo 3D e nuvola di punti (Lombardia)",
   description:
-    "Servizi di rilievo con laser scanner SLAM: documentazione 3D, nuvole di punti, as-built per edifici e siti industriali. Studio Tecnico Pagnoni, Bornato (BS).",
+    "Servizi di rilievo con laser scanner SLAM: documentazione 3D, nuvole di punti, as-built per edifici e siti industriali. Studio Tecnico Pagnoni, Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Nord Italia.",
   alternates: { canonical: `${site.url}/laser-scanner-slam` },
   keywords: [
     "laser scanner SLAM",

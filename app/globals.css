@@ -78,6 +78,9 @@
 
 html {
   scroll-behavior: smooth;
+  /* Anchor + focus: compensa header sticky (valorizzato da SiteHeader). */
+  scroll-padding-top: var(--site-header-offset, 5.5rem);
+  -webkit-tap-highlight-color: color-mix(in srgb, var(--header-accent) 22%, transparent);
 }
 
 @media (prefers-reduced-motion: reduce) {

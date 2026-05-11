@@ -267,7 +267,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
                       alt={images[open].alt}
                       fill
                       className="cursor-zoom-out object-contain"
-                      sizes="(max-width: 768px) 96vw, 1200px"
+                      sizes="(min-width:768px) min(1100px, 92vw), 96vw"
                       priority
                     />
                   </div>
@@ -337,7 +337,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
                 alt=""
                 fill
                 className="object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
-                sizes="78vw"
+                sizes="min(320px, 78vw)"
               />
             </button>
           ))}
@@ -358,7 +358,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
                 alt=""
                 fill
                 className="object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
-                sizes="(min-width:1024px) 33vw, 50vw"
+                sizes="(min-width:1024px) min(360px, 28vw), (min-width:768px) min(50vw, 480px), 100vw"
               />
               <div
                 className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--primary)]/25 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"

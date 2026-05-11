@@ -8,7 +8,7 @@ import { ui } from "@/lib/ui";
 export const metadata: Metadata = {
   title: "Contatti",
   description:
-    "Recapiti dello Studio Tecnico Pagnoni: Via Vittorio Emanuele III 16, Bornato — Cazzago San Martino (BS). Email studio@pagnoni-s.com, telefoni Davide e Sergio Pagnoni.",
+    "Recapiti dello Studio Tecnico Pagnoni: Via Vittorio Emanuele III 16, Cazzago San Martino (BS), frazione Bornato. Franciacorta e provincia di Brescia. Email studio@pagnoni-s.com, telefoni Davide e Sergio Pagnoni.",
   alternates: { canonical: `${site.url}/contatti` },
 };
 

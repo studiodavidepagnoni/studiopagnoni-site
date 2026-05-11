@@ -17,7 +17,9 @@ export function SiteFooter() {
         aria-hidden
       />
 
-      <div className={`relative z-10 ${layoutGutterXClass} py-12 sm:py-16`}>
+      <div
+        className={`relative z-10 ${layoutGutterXClass} pt-12 pb-[max(3rem,env(safe-area-inset-bottom,0px))] sm:pt-16 sm:pb-[max(4rem,env(safe-area-inset-bottom,0px))]`}
+      >
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-2 lg:gap-16 lg:items-start">
             <div>

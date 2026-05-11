@@ -112,7 +112,7 @@ export function HomeSections() {
                   alt={homeChiSiamoImages.team.alt}
                   fill
                   className="object-cover object-center"
-                  sizes="(min-width:1024px) 56vw, (min-width:640px) 90vw, 100vw"
+                  sizes="(min-width:1024px) min(580px, 50vw), (min-width:640px) min(90vw, 720px), 100vw"
                   priority={false}
                 />
                 {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
@@ -123,7 +123,7 @@ export function HomeSections() {
                     <p
                       className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white`}
                     >
-                      Bornato · Franciacorta, Brescia
+                      Franciacorta · Provincia di Brescia
                     </p>
                   </div>
                 </div>
@@ -230,7 +230,7 @@ export function HomeSections() {
                     alt={p.alt}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.04]"
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                   />
                   <div className="image-unify-overlay opacity-80 group-hover:opacity-60" aria-hidden />
                 </div>

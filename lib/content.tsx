@@ -7,7 +7,7 @@ export const homeAiSummary = {
   title: "Studio Tecnico Pagnoni — Topografia, laser SLAM, progettazione",
   paragraphs: [
     "Studio tecnico a Cazzago San Martino (BS), frazione Bornato: geometra e architetto. Servizi di topografia e rilievi planoaltimetrici con GPS GNSS e stazione totale, laser scanner SLAM e nuvole di punti, progettazione e modellazione del verde (vigneti, parchi, percorsi), urbanistica, progettazione architettonica completa, sanatorie e pratiche edilizie, coordinamento sicurezza cantieri CSP e CSE, assistenza immobiliare e perizie. Copertura Lombardia, Franciacorta, provincia di Brescia e Nord Italia.",
-    "Parole chiave: rilievo topografico Brescia, geometra topografo Bornato, laser scanner 3D Lombardia, SLAM rilievo architettonico, progettazione verde vigneti Franciacorta, pratiche edilizie Cazzago San Martino.",
+    "Parole chiave: rilievo topografico Brescia, geometra topografo Franciacorta, laser scanner 3D Lombardia, SLAM rilievo architettonico Nord Italia, progettazione verde vigneti Franciacorta, pratiche edilizie Cazzago San Martino.",
     "Contatti: studio@pagnoni-s.com, Via Vittorio Emanuele III 16, Cazzago San Martino (BS).",
   ],
 } as const;
@@ -46,7 +46,8 @@ export const homeChiSiamo: {
     {
       text: (
         <>
-          Lo <strong>Studio Tecnico Pagnoni</strong> è uno studio di ingegneria con sede a <strong>Bornato</strong> (Cazzago San Martino, Brescia):{" "}
+          Lo <strong>Studio Tecnico Pagnoni</strong> è uno studio di ingegneria con sede a <strong>Cazzago San Martino</strong> (provincia di{" "}
+          <strong>Brescia</strong>, <strong>Franciacorta</strong> e raggio su <strong>Lombardia</strong> e <strong>Nord Italia</strong>):{" "}
           <strong>Geometra Sergio Pagnoni</strong> e <strong>Architetto Davide Pagnoni</strong> lavorano in sinergia su progetti di territorio, edilizia e
           rilievi ad alta precisione. Non svolgiamo <strong>progettazione strutturale</strong>: quando necessario ci avvaliamo di collaboratori esterni,
           in analogia a quanto avviene negli studi di ingegneria strutturale di riferimento, mantenendo il focus su topografia, laser scanner, verde e
@@ -205,7 +206,7 @@ export const homeStats: HomeStat[] = [
   },
   { mode: "t", title: "Team multidisciplinare", subtitle: "Topografia · Architettura · CSP/CSE · perizie" },
   { mode: "t", title: "GNSS · Stazione totale · SLAM", subtitle: "Linea strumentale per rilievi professionali" },
-  { mode: "t", title: "Bornato · Franciacorta", subtitle: "Radicamento locale e commesse nel Nord Italia" },
+  { mode: "t", title: "Franciacorta · Brescia", subtitle: "Radicamento locale e commesse nel Nord Italia" },
 ];
 
 export const chiSiamoPage = {

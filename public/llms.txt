@@ -1,7 +1,7 @@
 # llms.txt for https://www.studiotecnicopagnoni.it
 
 # About
-Studio Tecnico Pagnoni è uno studio tecnico con sede a Bornato, frazione di Cazzago San Martino (provincia di Brescia, Lombardia). Il team è composto da Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Core business: topografia e rilievi planoaltimetrici con GNSS e stazione totale, laser scanner SLAM e nuvole di punti, progettazione e modellazione del verde (vigneti, parchi, percorsi), urbanistica e pratiche edilizie (incl. sanatorie), progettazione architettonica completa, coordinamento sicurezza cantieri (CSP/CSE), assistenza immobiliare e perizie. Non si svolge progettazione strutturale in proprio; collaboratori esterni per la parte strutturale.
+Studio Tecnico Pagnoni è uno studio tecnico con sede a Cazzago San Martino (BS), frazione Bornato — Franciacorta e provincia di Brescia, con commesse in Lombardia e Nord Italia. Il team è composto da Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Core business: topografia e rilievi planoaltimetrici con GNSS e stazione totale, laser scanner SLAM e nuvole di punti, progettazione e modellazione del verde (vigneti, parchi, percorsi), urbanistica e pratiche edilizie (incl. sanatorie), progettazione architettonica completa, coordinamento sicurezza cantieri (CSP/CSE), assistenza immobiliare e perizie. Non si svolge progettazione strutturale in proprio; collaboratori esterni per la parte strutturale.
 
 # Contact
 Address: Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato
@@ -19,7 +19,7 @@ Website: https://www.studiotecnicopagnoni.it
 - Assistenza immobiliare, perizie, consulenze tecniche
 
 # Ambiti e ricerche frequenti
-- Topografia e rilievi (Brescia, Franciacorta, Bornato / Cazzago San Martino)
+- Topografia e rilievi (Franciacorta, provincia di Brescia, Cazzago San Martino / fraz. Bornato, Nord Italia)
 - Laser scanner SLAM, nuvole di punti, documentazione 3D
 - Progettazione verde, vigneti, territorio agricolo e paesaggistico
 

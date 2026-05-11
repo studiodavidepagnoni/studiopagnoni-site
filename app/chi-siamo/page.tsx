@@ -9,7 +9,7 @@ import { ui } from "@/lib/ui";
 export const metadata: Metadata = {
   title: "Chi siamo",
   description:
-    "Geometra e architetto a Bornato (Cazzago San Martino, Brescia): Studio Tecnico Pagnoni, topografia, laser SLAM e progettazione del territorio.",
+    "Geometra e architetto a Cazzago San Martino (BS), Franciacorta e provincia di Brescia: Studio Tecnico Pagnoni, topografia, laser SLAM e progettazione del territorio. Operatività in Lombardia e Nord Italia.",
   alternates: { canonical: `${site.url}/chi-siamo` },
 };
 
@@ -37,7 +37,7 @@ export default function ChiSiamoPage() {
                   alt={chiSiamoPageImage.alt}
                   fill
                   className="object-cover"
-                  sizes="(min-width:768px) 38vw, 100vw"
+                  sizes="(min-width:768px) min(440px, 40vw), min(100vw, 720px)"
                   priority
                 />
                 <div className="image-unify-overlay" aria-hidden />

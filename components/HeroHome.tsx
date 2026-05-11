@@ -80,6 +80,7 @@ export function HeroHome() {
             className="object-cover brightness-[1.08] saturate-[1.04]"
             sizes="100vw"
             priority
+            fetchPriority="high"
           />
         )}
         <div
@@ -138,17 +139,22 @@ export function HeroHome() {
           </div>
 
           {/* Indicatori slide */}
-          <div className="mt-8 flex gap-2" aria-hidden>
+          <div className="mt-8 flex flex-wrap items-center gap-1" aria-hidden>
             {heroSlides.map((_, i) => (
               <button
                 key={i}
+                type="button"
                 onClick={() => setIdx(i)}
-                className={`h-1 rounded-full transition-all duration-300 ${
-                  i === idx
-                    ? "w-8 bg-[#fbbf99]"
-                    : "w-2 bg-white/30 hover:bg-white/50"
+                className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-full transition-colors motion-reduce:transition-none ${
+                  i === idx ? "text-[#fbbf99]" : "text-white/35 hover:text-white/55"
                 }`}
-              />
+              >
+                <span
+                  className={`block h-1 rounded-full transition-all duration-300 motion-reduce:transition-none ${
+                    i === idx ? "w-8 bg-current" : "w-2 bg-current"
+                  }`}
+                />
+              </button>
             ))}
           </div>
         </div>

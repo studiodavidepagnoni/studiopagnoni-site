@@ -42,7 +42,7 @@ export const projectCategories: Record<
   "territorio-verde": {
     metaTitle: "Progetti territorio, verde e paesaggio viticolo",
     metaDescription:
-      "Progettazione del verde, vigneti e percorsi in Franciacorta e Lombardia — Studio Tecnico Pagnoni, Bornato (BS).",
+      "Progettazione del verde, vigneti e percorsi in Franciacorta e Lombardia — Studio Tecnico Pagnoni, Cazzago San Martino (BS). Provincia di Brescia e Nord Italia.",
     heading: "Territorio e paesaggio",
     intro: (
       <>
@@ -241,7 +241,7 @@ export const projectCaseStudies: Record<
   "rilievi-digitalizzazione/rilievi-gnss-e-slam": {
     metaTitle: "Rilievi GNSS e laser scanner SLAM",
     metaDescription:
-      "Servizi di topografia professionale e rilievo laser SLAM per nuvole di punti e documentazione 3D — Bornato, Brescia, Lombardia.",
+      "Servizi di topografia professionale e rilievo laser SLAM per nuvole di punti e documentazione 3D — Cazzago San Martino (BS), Franciacorta, provincia di Brescia e Nord Italia.",
     heading: "Rilievi geomatici e laser scanner SLAM",
     body: (
       <>

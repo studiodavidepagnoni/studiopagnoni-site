@@ -189,7 +189,7 @@ export function ContactForm() {
         <input
           id="city"
           name="city"
-          placeholder="Es. Bornato, Brescia, Franciacorta"
+          placeholder="Es. Franciacorta, Brescia, Nord Italia"
           value={city}
           onChange={(e) => setCity(e.target.value)}
           className={ui.inputField}

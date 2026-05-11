@@ -3,7 +3,7 @@
  */
 
 const btnBase =
-  "inline-flex min-h-[44px] items-center justify-center gap-2 whitespace-nowrap px-7 text-sm font-medium transition-all duration-200 ease-out rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:active:scale-100";
+  "inline-flex min-h-[44px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap px-7 text-sm font-medium transition-all duration-200 ease-out rounded-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 active:scale-[0.98] disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:active:scale-100";
 
 export const ui = {
   pageBg: "bg-[var(--background)]",

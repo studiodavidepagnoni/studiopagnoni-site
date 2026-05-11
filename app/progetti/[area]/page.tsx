@@ -70,7 +70,7 @@ export default async function ProjectAreaPage({ params }: Props) {
                     alt={p.alt}
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.03]"
-                    sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
+                    sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                   />
                   <div className="image-unify-overlay" aria-hidden />
                 </div>

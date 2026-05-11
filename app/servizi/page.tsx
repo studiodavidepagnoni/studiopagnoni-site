@@ -7,7 +7,7 @@ import { ui } from "@/lib/ui";
 export const metadata: Metadata = {
   title: "Servizi di topografia, laser SLAM e progettazione",
   description:
-    "Topografia e rilievi GNSS, laser scanner SLAM, progettazione del verde, urbanistica, architettura, pratiche edilizie, CSP/CSE e assistenza immobiliare — Studio Tecnico Pagnoni, Bornato (BS).",
+    "Topografia e rilievi GNSS, laser scanner SLAM, progettazione del verde, urbanistica, architettura, pratiche edilizie, CSP/CSE e assistenza immobiliare — Studio Tecnico Pagnoni, Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Nord Italia.",
   alternates: { canonical: `${site.url}/servizi` },
   keywords: [
     "servizi topografici Brescia",
