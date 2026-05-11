@@ -7,6 +7,10 @@ import { fontDisplay, fontSans } from "@/lib/fonts";
 import { ui } from "@/lib/ui";
 import { HERO_POSTER_DEFAULT, HERO_VIDEO_DEFAULT, heroSlides } from "@/lib/images";
 
+/** Prima slide: tempo di lettura + video; le altre ruotano più spesso. */
+const HERO_FIRST_SLIDE_MS = 16_000;
+const HERO_OTHER_SLIDES_MS = 5_000;
+
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
   // Tracciamo gli URL video che hanno fallito così non li ritentiamo a ogni slide change.
@@ -22,11 +26,12 @@ export function HeroHome() {
   }, []);
 
   useEffect(() => {
-    const timer = setInterval(() => {
+    const delayMs = idx === 0 ? HERO_FIRST_SLIDE_MS : HERO_OTHER_SLIDES_MS;
+    const t = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
-    }, 4500);
-    return () => clearInterval(timer);
-  }, []);
+    }, delayMs);
+    return () => window.clearTimeout(t);
+  }, [idx]);
 
   const slide = heroSlides[idx];
   const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;

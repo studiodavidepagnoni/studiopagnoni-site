@@ -21,11 +21,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       // Cache-bust to avoid "old favicon" in aggressive browser caches.
-      { url: "/icon.svg?v=16", type: "image/svg+xml" },
-      { url: "/favicon.ico?v=14", type: "image/x-icon" },
+      { url: "/icon.svg?v=18", type: "image/svg+xml" },
+      { url: "/favicon.ico?v=18", type: "image/x-icon" },
     ],
-    shortcut: [{ url: "/icon.svg?v=16", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg?v=16", type: "image/svg+xml" }],
+    shortcut: [{ url: "/icon.svg?v=18", type: "image/svg+xml" }],
+    apple: [{ url: "/icon.svg?v=18", type: "image/svg+xml" }],
   },
   title: {
     default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Cazzago San Martino (BS)",

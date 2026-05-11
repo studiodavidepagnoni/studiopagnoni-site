@@ -27,8 +27,10 @@ async function main() {
 
   // Marchio recolor (vedi app/globals.css --primary)
   const SITE_TEAL = { r: 14, g: 63, b: 55 }; // #0e3f37
-  // Sfondo favicon: nettamente più chiaro del tratto (#0e3f37) così il wireframe resta leggibile in tab 16px.
-  const ICON_BG = "#3db89e";
+  /** Sfondo favicon chiaro (come reference grafica); inchiostro verdone/nero leggibile a 16px. */
+  const ICON_BG = "#ebeae4";
+  /** Chrome profondo del sito (`globals.css` --surface-chrome): massimo contrasto su sfondo chiaro. */
+  const ICON_INK = { r: 5, g: 30, b: 27 }; // #051e1b
 
   if (!fs.existsSync(inputPath)) {
     if (!fs.existsSync(outMarkPng)) {
@@ -42,7 +44,15 @@ async function main() {
     await processSource({ sharp, inputPath, outMarkPng, SITE_TEAL });
   }
 
-  await writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg: ICON_BG });
+  await writeSvgWrappers({
+    sharp,
+    outMarkPng,
+    outMarkSvg,
+    outIconSvg,
+    root,
+    iconBg: ICON_BG,
+    iconInk: ICON_INK,
+  });
 }
 
 async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
@@ -159,10 +169,32 @@ async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
   console.log(`[process-logo] Wrote ${path.relative(path.dirname(outMarkPng), outMarkPng)} (${meta.width}x${meta.height})`);
 }
 
-async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg }) {
+/**
+ * Marchio per favicon: ogni pixel “inchiostro” (alpha sopra soglia) → stesso RGB verdone/nero.
+ * Così anche l’antialias non resta su tonalità chiare (il vecchio match sul solo teal puro lasciava bordi grigi).
+ */
+async function recolorMarkInkForFavicon({ sharp, markBuffer, toRgb }) {
+  const { data, info } = await sharp(markBuffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+  if (channels !== 4) throw new Error("Expected RGBA");
+  const aMin = 28;
+  for (let i = 0; i < data.length; i += 4) {
+    const a = data[i + 3];
+    if (a < aMin) continue;
+    data[i] = toRgb.r;
+    data[i + 1] = toRgb.g;
+    data[i + 2] = toRgb.b;
+  }
+  return sharp(data, { raw: { width, height, channels: 4 } }).png({ compressionLevel: 9, adaptiveFiltering: true }).toBuffer();
+}
+
+async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg, iconInk }) {
   const markBuffer = await sharp(outMarkPng).toBuffer();
   const markMeta = await sharp(outMarkPng).metadata();
   const base64 = markBuffer.toString("base64");
+
+  const iconMarkBuffer = await recolorMarkInkForFavicon({ sharp, markBuffer, toRgb: iconInk });
+  const iconMarkB64 = iconMarkBuffer.toString("base64");
 
   // logo-mark.svg: viewBox QUADRATO, immagine centrata.
   // Side = max(w,h) → l'asset è perfettamente square e l'icona resta centrata
@@ -192,7 +224,7 @@ async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, roo
   <title>Studio Tecnico Pagnoni</title>
   <desc>Logo Studio Pagnoni — point cloud / wireframe.</desc>
   <rect width="${CANVAS}" height="${CANVAS}" rx="112" fill="${iconBg}"/>
-  <image href="data:image/png;base64,${base64}" x="${x}" y="${y}" width="${w}" height="${h}"/>
+  <image href="data:image/png;base64,${iconMarkB64}" x="${x}" y="${y}" width="${w}" height="${h}"/>
 </svg>
 `;
   fs.writeFileSync(outIconSvg, iconSvg);
