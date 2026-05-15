@@ -55,45 +55,29 @@ export function SiteHeader() {
     setBrandMarkPx(Math.round(height + padY + borderY));
   }, []);
 
-  const calibrateBrandTracking = useCallback(() => {
-    const brand = brandLineRef.current;
-    const tagline = taglineRef.current;
-    if (!brand || !tagline) return;
+  const syncTaglineWidth = useCallback(() => {
+    const brandEl = brandLineRef.current;
+    const taglineEl = taglineRef.current;
+    if (!brandEl || !taglineEl) return;
 
-    const taglineWidth = tagline.getBoundingClientRect().width;
-    if (taglineWidth <= 1) return;
+    const brandWidth = brandEl.getBoundingClientRect().width;
+    if (brandWidth <= 1) return;
+    const targetWidth = Math.max(brandWidth - 2, 0);
 
-    const measureBrand = () => brand.getBoundingClientRect().width;
+    taglineEl.style.letterSpacing = "0em";
+    if (taglineEl.getBoundingClientRect().width <= targetWidth) return;
 
-    brand.style.letterSpacing = "0px";
-    const baseWidth = measureBrand();
-    if (baseWidth >= taglineWidth - 0.35) {
-      brand.style.letterSpacing = "0px";
-      return;
-    }
+    let low = -0.12;
+    let high = 0;
 
-    let low = 0;
-    let high = 1;
-    brand.style.letterSpacing = `${high}px`;
-    while (measureBrand() < taglineWidth && high < 32) {
-      low = high;
-      high = Math.min(32, high * 2);
-      brand.style.letterSpacing = `${high}px`;
-    }
-
-    if (measureBrand() <= taglineWidth) {
-      brand.style.letterSpacing = `${high}px`;
-      return;
-    }
-
-    for (let i = 0; i < 28; i += 1) {
+    for (let i = 0; i < 24; i += 1) {
       const mid = (low + high) / 2;
-      brand.style.letterSpacing = `${mid}px`;
-      if (measureBrand() <= taglineWidth) low = mid;
-      else high = mid;
+      taglineEl.style.letterSpacing = `${mid}em`;
+      if (taglineEl.getBoundingClientRect().width > targetWidth) high = mid;
+      else low = mid;
     }
 
-    brand.style.letterSpacing = `${low}px`;
+    taglineEl.style.letterSpacing = `${low}em`;
   }, []);
 
   useLayoutEffect(() => {
@@ -104,7 +88,7 @@ export function SiteHeader() {
 
     const apply = () => {
       syncBrandMark();
-      calibrateBrandTracking();
+      syncTaglineWidth();
     };
 
     const observer = new ResizeObserver(apply);
@@ -118,7 +102,7 @@ export function SiteHeader() {
       observer.disconnect();
       window.removeEventListener("resize", apply);
     };
-  }, [calibrateBrandTracking, syncBrandMark]);
+  }, [syncBrandMark, syncTaglineWidth]);
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 12);
@@ -247,13 +231,13 @@ export function SiteHeader() {
               <div ref={brandTextRef} className="flex min-w-0 flex-col items-start gap-y-1.5 sm:gap-y-2">
                 <span
                   ref={brandLineRef}
-                  className={`${fontDisplay.className} text-[1.1rem] font-bold uppercase leading-none text-[var(--header-text)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:contrast-105 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] sm:text-[1.35rem] md:text-[1.6rem]`}
+                  className={`${fontDisplay.className} text-[1.1rem] font-medium tracking-tight leading-none text-[var(--header-text)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:contrast-105 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] sm:text-[1.35rem] md:text-[1.6rem]`}
                 >
                   Studio Pagnoni
                 </span>
                 <span
                   ref={taglineRef}
-                  className={`${fontDisplay.className} text-[0.55rem] font-normal uppercase leading-snug tracking-[0.18em] text-[var(--header-text-muted)] transition-[filter,color] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:text-[color-mix(in_srgb,var(--header-text)_78%,var(--header-text-muted))] group-hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--header-accent)_32%,transparent)] sm:text-[0.6rem] sm:tracking-[0.2em] md:text-[0.65rem]`}
+                  className={`${fontDisplay.className} text-[0.55rem] font-normal uppercase leading-snug text-[var(--header-text-muted)] transition-[filter,color] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:text-[color-mix(in_srgb,var(--header-text)_78%,var(--header-text-muted))] group-hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--header-accent)_32%,transparent)] sm:text-[0.6rem] md:text-[0.65rem]`}
                 >
                   Topografia · Architettura · SLAM
                 </span>
