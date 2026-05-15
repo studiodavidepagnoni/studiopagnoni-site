@@ -48,11 +48,11 @@ export function HeroHome() {
 
   return (
     <section
-      className="relative isolate min-h-[96svh] overflow-hidden border-b border-[var(--green-border-muted)] sm:min-h-[92vh] md:min-h-[620px]"
+      className="relative isolate h-[100svh] overflow-hidden border-b border-[var(--green-border-muted)] sm:h-[96vh] md:h-[760px]"
       aria-label="Introduzione"
     >
       <div
-        className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,#071613_0%,#071a17_38%,#08201c_100%)]"
+        className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,#081512_0%,#081916_38%,#09211d_100%)]"
         aria-hidden
       />
 
@@ -60,7 +60,7 @@ export function HeroHome() {
         {showVideo ? (
           <video
             key={videoSrc}
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.5] brightness-[1] saturate-[0.96]"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.68] brightness-[1.04] saturate-[1.02]"
             src={videoSrc}
             poster={posterSrc}
             muted
@@ -82,10 +82,10 @@ export function HeroHome() {
             fetchPriority="high"
           />
         )}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,9,0.72)_0%,rgba(4,10,9,0.54)_42%,rgba(4,10,9,0.3)_100%)]" aria-hidden />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,9,0.56)_0%,rgba(4,10,9,0.38)_42%,rgba(4,10,9,0.18)_100%)]" aria-hidden />
       </div>
 
-      <div className="relative z-20 mx-auto flex min-h-[96svh] max-w-[1200px] flex-col justify-center px-4 pb-14 pt-24 sm:min-h-[92vh] sm:px-6 sm:pb-16 sm:pt-28 md:min-h-[620px] md:pb-20 md:pt-32">
+      <div className="relative z-20 mx-auto flex h-full max-w-[1200px] flex-col justify-center px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
         <div className="max-w-[min(100%,43rem)] text-left">
           <p
             className={`${fontSans.className} mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--header-text-muted)] sm:text-[0.74rem]`}
