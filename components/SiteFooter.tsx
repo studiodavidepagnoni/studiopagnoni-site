@@ -7,7 +7,7 @@ const linkClass = `${fontSans.className} block text-sm text-[var(--footer-muted)
 
 export function SiteFooter() {
   return (
-    <footer className="mt-16 border-t border-[var(--footer-edge)] bg-[var(--footer-bg)] text-[var(--footer-text)]">
+    <footer className="border-t border-[var(--footer-edge)] bg-[var(--footer-bg)] text-[var(--footer-text)]">
       <div className={`${layoutGutterXClass} py-12 sm:py-16`}>
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
