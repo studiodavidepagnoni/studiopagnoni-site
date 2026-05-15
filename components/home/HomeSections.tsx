@@ -17,6 +17,7 @@ import {
   zoneFooter,
 } from "@/lib/content";
 import { homeChiSiamoImages } from "@/lib/images";
+import { withBasePath } from "@/lib/basePath";
 import { featuredProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
@@ -62,7 +63,7 @@ export function HomeSections() {
                 <div className="mx-auto box-border flex aspect-square w-[5.35rem] shrink-0 items-center justify-center sm:mx-0 sm:w-[6rem] md:w-[6.75rem]">
                   {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
                   <img
-                    src="/logo-mark.svg?v=15"
+                    src={`${withBasePath("/logo-mark.svg")}?v=15`}
                     alt=""
                     width={616}
                     height={616}
@@ -106,7 +107,7 @@ export function HomeSections() {
 
             {/* ── Media (destra): immagine proporzionata al testo ── */}
             <div className="order-1 lg:order-2 lg:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] ring-1 ring-[var(--primary)]/12 sm:aspect-[16/10] lg:aspect-[16/10]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] sm:aspect-[16/10] lg:aspect-[16/10]">
                 <Image
                   src={homeChiSiamoImages.team.src}
                   alt={homeChiSiamoImages.team.alt}
@@ -116,7 +117,7 @@ export function HomeSections() {
                   priority={false}
                 />
                 {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
-                <div className="image-unify-overlay opacity-50" aria-hidden />
+                <div className="image-unify-overlay opacity-35" aria-hidden />
                 {/* Caption badge */}
                 <div className="absolute bottom-4 left-4">
                   <div className="rounded-md bg-[#070908]/72 px-3 py-1.5 backdrop-blur-sm">
@@ -146,13 +147,23 @@ export function HomeSections() {
           <div
             id="strumentazione"
             aria-labelledby="strumentazione-heading"
-            className="reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:mb-10 sm:p-6"
+            className="reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:mb-10 sm:p-6"
           >
-            <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Campo</p>
-            <h3 id="strumentazione-heading" className={`${fontDisplay.className} mt-2 text-xl font-semibold text-[var(--foreground)] sm:text-2xl`}>
-              {homeStrumentazione.title}
-            </h3>
-            <p className="mt-3 max-w-[60ch] text-[0.92rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.98rem]">{homeStrumentazione.lede}</p>
+            {/* Stessa misura per kicker + titolo + lede (evita “colonna stretta” sotto titolo largo). */}
+            <div className="max-w-[min(62ch,100%)]">
+              <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>SLAM e geomatica</p>
+              <h3
+                id="strumentazione-heading"
+                className={`${fontDisplay.className} mt-2 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl`}
+              >
+                {homeStrumentazione.title}
+              </h3>
+              <div
+                className={`${fontSans.className} mt-4 text-[0.95rem] leading-[1.65] text-[var(--copy-body)] text-pretty sm:mt-5 sm:text-[1.02rem]`}
+              >
+                {homeStrumentazione.lede}
+              </div>
+            </div>
             <ul className="mt-6 grid list-none gap-4 sm:grid-cols-3 sm:gap-5">
               {homeStrumentazione.items.map((item) => (
                 <li key={item.label} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-4 sm:p-5">
@@ -161,29 +172,39 @@ export function HomeSections() {
                 </li>
               ))}
             </ul>
-            <p className={`${fontSans.className} mt-6 flex flex-wrap gap-x-4 gap-y-2 text-sm font-semibold`}>
-              <Link href="/topografia" className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]">
-                Topografia e rilievi
-              </Link>
-              <Link href="/laser-scanner-slam" className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]">
-                Laser scanner SLAM
-              </Link>
-            </p>
+            <nav
+              aria-label="Approfondimenti su strumentazione e servizi"
+              className={`${fontSans.className} mt-6 border-t border-[var(--green-border-muted)] pt-5 sm:mt-7 sm:pt-6`}
+            >
+              <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--green-ink-muted)]">Schede servizio</p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
+                <Link
+                  href="/topografia"
+                  className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]"
+                >
+                  Topografia e rilievi
+                </Link>
+                <Link
+                  href="/laser-scanner-slam"
+                  className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]"
+                >
+                  Laser scanner SLAM
+                </Link>
+              </div>
+            </nav>
           </div>
 
           <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
             {homeServiceCards.map((card, idx) => (
               <article
                 key={card.title}
-                className={`reveal-block frost-card flex flex-col border-t-2 border-t-[var(--primary-mid)] p-5 sm:p-6 ${
-                  idx % 2 === 1 ? "lg:translate-y-4" : ""
-                }`}
+                className="reveal-block frost-card flex flex-col border-t border-t-[var(--green-border)] p-5 sm:p-6"
               >
                 <div className="mb-4 flex items-start justify-between gap-3">
                   <span className={`${fontSans.className} text-[0.68rem] font-bold tabular-nums text-[var(--primary-mid)]`}>
                     {String(idx + 1).padStart(2, "0")}
                   </span>
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
+                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--background)] text-[var(--primary-mid)]">
                     <ServiceIcon index={idx} className="h-6 w-6" />
                   </div>
                 </div>
@@ -222,17 +243,17 @@ export function HomeSections() {
               <Link
                 key={p.href}
                 href={p.href}
-                className={`group block ${ui.cardMedia} hover:ring-1 hover:ring-[var(--primary-mid)]/20`}
+                className={`group block ${ui.cardMedia}`}
               >
                 <div className="relative aspect-[4/3]">
                   <Image
                     src={p.cover}
                     alt={p.alt}
                     fill
-                    className="object-cover transition duration-500 group-hover:scale-[1.04]"
+                    className="object-cover transition duration-500 group-hover:scale-[1.015]"
                     sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                   />
-                  <div className="image-unify-overlay opacity-80 group-hover:opacity-60" aria-hidden />
+                  <div className="image-unify-overlay opacity-56 group-hover:opacity-42" aria-hidden />
                 </div>
                 <div className="border-t border-[var(--green-border-muted)] p-4 sm:p-4">
                   <span className={`${fontSans.className} text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>

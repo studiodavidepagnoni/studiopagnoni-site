@@ -31,7 +31,7 @@ export default function ChiSiamoPage() {
               ))}
             </div>
             <div className="relative md:col-span-5">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] shadow-[0_20px_50px_rgba(0,0,0,0.35)] ring-1 ring-[var(--primary-mid)]/10 md:aspect-[3/4]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] md:aspect-[3/4]">
                 <Image
                   src={chiSiamoPageImage.src}
                   alt={chiSiamoPageImage.alt}

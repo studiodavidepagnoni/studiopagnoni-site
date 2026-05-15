@@ -1,4 +1,5 @@
 import type { ReactNode } from "react";
+import Link from "next/link";
 
 /** Anno di fondazione dello studio. Cambiare qui se mai dovesse variare la data ufficiale. */
 export const STUDIO_FOUNDED_YEAR = 1988;
@@ -73,11 +74,25 @@ export const homeChiSiamo: {
 export const homeServiziIntro =
   "Dal rilievo geomatico alla pratica edilizia: strumenti da uso professionale, competenze su piani regolatori e verde, coordinamento sicurezza cantieri (CSP/CSE), assistenza immobiliare e perizie.";
 
-/** Blocco compatto in home (anchor #strumentazione): linea strumentale senza claim commerciali */
-export const homeStrumentazione = {
+/** Blocco compatto in home (anchor #strumentazione): SLAM come perno operativo, RTK e stazione a supporto */
+export const homeStrumentazione: {
+  title: string;
+  lede: ReactNode;
+  items: readonly { label: string; text: string }[];
+} = {
   title: "Strumentazione",
-  lede: "Strumentazione da campo aggiornata: misure planoaltimetriche affidabili e acquisizioni laser 3D quando è previsto per la riuscita del progetto.",
+  lede: (
+    <>
+      Il <strong>laser scanner SLAM</strong> mobile è oggi il perno dei nostri rilievi in campo: strumentazione di nuova acquisizione per{" "}
+      <strong>nuvole di punti</strong> e <strong>documentazione 3D</strong> rapida su edifici e siti complessi. A supporto restano{" "}
+      <strong>GNSS RTK</strong> e <strong>stazione totale</strong> quando la commessa lo richiede.
+    </>
+  ),
   items: [
+    {
+      label: "Laser scanner SLAM",
+      text: "Acquisizione mobile: percorsi continui, nuvole di punti dense e tracciabilità per restituzioni e modelli 3D.",
+    },
     {
       label: "GNSS RTK",
       text: "Coordinate planoaltimetriche per grandi estensioni e punti di dettaglio.",
@@ -86,12 +101,8 @@ export const homeStrumentazione = {
       label: "Stazione totale",
       text: "Rilievi di dettaglio e cantieri, anche dove il segnale satellitare è critico.",
     },
-    {
-      label: "Laser scanner SLAM",
-      text: "Nuvole di punti e documentazione 3D in movimento per edifici e siti complessi.",
-    },
   ],
-} as const;
+};
 
 export const homeServiceCards = [
   {
@@ -177,12 +188,12 @@ export const zoneDescription = (
 export const zoneFooter = (
   <>
     Per verificare tempi e disponibilità sul vostro territorio{" "}
-    <a
+    <Link
       href="/contatti"
       className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--accent-warm)]/35 underline-offset-2 transition hover:text-[var(--accent-warm)]"
     >
       contattateci
-    </a>
+    </Link>
     : il servizio di topografia e laser scanner può essere programmato anche fuori provincia.
   </>
 );

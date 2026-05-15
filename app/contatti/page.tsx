@@ -45,20 +45,14 @@ export default function ContattiPage() {
                 {site.phones.map((p) => (
                   <li key={p.tel}>
                     <strong className="text-[var(--foreground)]">{p.label}:</strong>{" "}
-                    <a
-                      href={`tel:${p.tel}`}
-                      className="inline-block min-h-[44px] py-1 text-[var(--foreground)] underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
-                    >
+                    <a href={`tel:${p.tel}`} className={`${ui.proseLink} inline-block min-h-[44px] py-1`}>
                       {p.display}
                     </a>
                   </li>
                 ))}
                 <li>
                   <strong className="text-[var(--foreground)]">Email:</strong>{" "}
-                  <a
-                    href={`mailto:${site.email}`}
-                    className="inline-block min-h-[44px] py-1 text-[var(--foreground)] underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
-                  >
+                  <a href={`mailto:${site.email}`} className={`${ui.proseLink} inline-block min-h-[44px] py-1`}>
                     {site.email}
                   </a>
                 </li>

@@ -4,16 +4,14 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { ui } from "@/lib/ui";
 import { HERO_POSTER_DEFAULT, HERO_VIDEO_DEFAULT, heroSlides } from "@/lib/images";
+import { ui } from "@/lib/ui";
 
-/** Prima slide: tempo di lettura + video; le altre ruotano più spesso. */
 const HERO_FIRST_SLIDE_MS = 16_000;
 const HERO_OTHER_SLIDES_MS = 5_000;
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
-  // Tracciamo gli URL video che hanno fallito così non li ritentiamo a ogni slide change.
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
 
@@ -27,17 +25,17 @@ export function HeroHome() {
 
   useEffect(() => {
     const delayMs = idx === 0 ? HERO_FIRST_SLIDE_MS : HERO_OTHER_SLIDES_MS;
-    const t = window.setTimeout(() => {
+    const timeoutId = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
     }, delayMs);
-    return () => window.clearTimeout(t);
+    return () => window.clearTimeout(timeoutId);
   }, [idx]);
 
   const slide = heroSlides[idx];
   const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;
   const posterSrc = slide.poster ?? HERO_POSTER_DEFAULT;
   const showVideo = !isMobile && !failedVideos.has(videoSrc);
-  const line2Parts = slide.line2.split(" · ").map((p) => p.trim()).filter(Boolean);
+  const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
 
   const handleVideoError = () => {
     setFailedVideos((prev) => {
@@ -50,23 +48,19 @@ export function HeroHome() {
 
   return (
     <section
-      className="relative isolate min-h-[96svh] overflow-hidden sm:min-h-[92vh] md:min-h-[620px]"
+      className="relative isolate min-h-[96svh] overflow-hidden border-b border-[var(--green-border-muted)] sm:min-h-[92vh] md:min-h-[620px]"
       aria-label="Introduzione"
     >
-      {/* Sfondo gradiente */}
       <div
-        className="absolute inset-0 z-[-20] bg-gradient-to-br from-[var(--hero-gradient-from)] via-[var(--hero-gradient-via)] to-[var(--hero-gradient-to)]"
+        className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,#071613_0%,#071a17_38%,#08201c_100%)]"
         aria-hidden
       />
 
-      {/* Media background */}
       <div className="pointer-events-none absolute inset-0 z-[-10]">
         {showVideo ? (
-          // `key={videoSrc}` forza il remount quando una slide definisce un video proprio:
-          // così il browser carica la nuova sorgente in modo pulito (con il poster come transizione).
           <video
             key={videoSrc}
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.38] brightness-[1.05] saturate-[1.02]"
+            className="absolute inset-0 h-full w-full object-cover opacity-[0.5] brightness-[1] saturate-[0.96]"
             src={videoSrc}
             poster={posterSrc}
             muted
@@ -79,62 +73,58 @@ export function HeroHome() {
           />
         ) : (
           <Image
-            src={heroSlides[0].src}
+            src={slide.src}
             alt=""
             fill
-            className="object-cover brightness-[1.08] saturate-[1.04]"
+            className="object-cover brightness-[0.94] saturate-[0.94]"
             sizes="100vw"
             priority
             fetchPriority="high"
           />
         )}
-        <div
-          className="absolute inset-0 z-10 bg-gradient-to-r from-black/72 via-black/35 to-black/15"
-          aria-hidden
-        />
-        <div
-          className="absolute inset-0 z-10 bg-[linear-gradient(165deg,rgba(234,88,12,0.14)_0%,transparent_42%,var(--accent-glow-12)_100%)]"
-          aria-hidden
-        />
+        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,9,0.72)_0%,rgba(4,10,9,0.54)_42%,rgba(4,10,9,0.3)_100%)]" aria-hidden />
       </div>
 
-      {/* Contenuto */}
-      <div className="relative z-20 mx-auto flex min-h-[96svh] max-w-[1200px] flex-col justify-center gap-6 px-4 pb-14 pt-24 sm:min-h-[92vh] sm:gap-8 sm:px-6 sm:pb-16 sm:pt-28 md:min-h-[620px] md:pb-20 md:pt-32">
-        <div className="max-w-[min(100%,40rem)] text-left">
+      <div className="relative z-20 mx-auto flex min-h-[96svh] max-w-[1200px] flex-col justify-center px-4 pb-14 pt-24 sm:min-h-[92vh] sm:px-6 sm:pb-16 sm:pt-28 md:min-h-[620px] md:pb-20 md:pt-32">
+        <div className="max-w-[min(100%,43rem)] text-left">
           <p
-            className={`${fontSans.className} mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.32em] text-[#fbbf99] drop-shadow-[0_2px_18px_rgba(0,0,0,0.65)] sm:mb-4 sm:text-[0.72rem]`}
+            className={`${fontSans.className} mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--header-text-muted)] sm:text-[0.74rem]`}
           >
             Dal 1988 · Cazzago San Martino, Brescia
           </p>
 
-          <h1
-            className={`${fontDisplay.className} section-title text-[clamp(2.1rem,5.2vw,3.85rem)] font-medium leading-[1.08] text-[#faf8f5] drop-shadow-[0_2px_24px_rgba(0,0,0,0.7)]`}
-          >
-            <span key={idx} className="block">
-              {slide.line1}
-            </span>
-          </h1>
-
-          <p
-            className={`${fontDisplay.className} mt-4 text-[clamp(1.55rem,3.8vw,2.6rem)] font-medium leading-[1.08] text-white/72 drop-shadow-[0_2px_24px_rgba(0,0,0,0.65)] md:whitespace-nowrap`}
-          >
-            {line2Parts.map((part, i) => (
-              <span key={`${part}-${i}`}>
-                <span className="whitespace-nowrap">{part}</span>
-                {i < line2Parts.length - 1 ? (
-                  <span className="mx-2 text-white/40">·</span>
-                ) : null}
+          <div className="min-h-[2.35em] sm:min-h-[2.2em]">
+            <h1
+              className={`${fontDisplay.className} section-title text-[clamp(2.25rem,5.1vw,4.4rem)] font-medium leading-[1.02] text-[#f6f4ef]`}
+            >
+              <span key={idx} className="block">
+                {slide.line1}
               </span>
-            ))}
-          </p>
+            </h1>
+          </div>
 
-          <div className="home-section-rule home-section-rule--on-dark mt-5 max-w-[5rem] sm:mt-6" aria-hidden />
+          <div className="mt-4 min-h-[2.2em] sm:min-h-[2.05em] md:min-h-0">
+            <p
+              className={`${fontDisplay.className} text-[clamp(1.32rem,3.1vw,2.1rem)] font-medium leading-[1.08] text-white/66 md:whitespace-nowrap`}
+            >
+              {line2Parts.map((part, i) => (
+                <span key={`${part}-${i}`}>
+                  <span className="whitespace-nowrap">{part}</span>
+                  {i < line2Parts.length - 1 ? <span className="mx-2 text-white/28">·</span> : null}
+                </span>
+              ))}
+            </p>
+          </div>
 
-          <p className="copy-rhythm reading-measure-tight mt-5 text-pretty text-[0.94rem] text-white/90 drop-shadow-[0_2px_18px_rgba(0,0,0,0.7)] sm:mt-6 sm:text-[1.02rem] md:text-lg">
-            {slide.body}
-          </p>
+          <div className="mt-6 h-px max-w-[5.5rem] bg-[color-mix(in_srgb,var(--header-text-muted)_45%,transparent)]" aria-hidden />
 
-          <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
+          <div className="mt-6 min-h-[5.4em] sm:min-h-[4.9em] md:min-h-[5.2rem]">
+            <p className="reading-measure-tight text-[0.98rem] leading-[1.8] text-white/84 sm:text-[1.04rem] md:text-[1.1rem]">
+              {slide.body}
+            </p>
+          </div>
+
+          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link href="/contatti" className={ui.btnHeroPrimary}>
               Richiedi un sopralluogo
             </Link>
@@ -143,24 +133,28 @@ export function HeroHome() {
             </Link>
           </div>
 
-          {/* Indicatori slide */}
-          <div className="mt-8 flex flex-wrap items-center gap-1" aria-hidden>
-            {heroSlides.map((_, i) => (
-              <button
-                key={i}
-                type="button"
-                onClick={() => setIdx(i)}
-                className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-full transition-colors motion-reduce:transition-none ${
-                  i === idx ? "text-[#fbbf99]" : "text-white/35 hover:text-white/55"
-                }`}
-              >
-                <span
-                  className={`block h-1 rounded-full transition-all duration-300 motion-reduce:transition-none ${
-                    i === idx ? "w-8 bg-current" : "w-2 bg-current"
+          <div className="mt-9 flex flex-wrap items-center gap-2" aria-label="Seleziona slide hero">
+            {heroSlides.map((heroSlide, i) => {
+              const isActive = i === idx;
+              return (
+                <button
+                  key={heroSlide.ctaHref}
+                  type="button"
+                  onClick={() => setIdx(i)}
+                  aria-pressed={isActive}
+                  aria-label={`Vai alla slide ${i + 1}: ${heroSlide.line1}`}
+                  className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-full transition-colors motion-reduce:transition-none ${
+                    isActive ? "text-[var(--foreground)]" : "text-white/28 hover:text-white/48"
                   }`}
-                />
-              </button>
-            ))}
+                >
+                  <span
+                    className={`block h-[3px] rounded-full transition-all duration-300 motion-reduce:transition-none ${
+                      isActive ? "w-8 bg-current" : "w-2 bg-current"
+                    }`}
+                  />
+                </button>
+              );
+            })}
           </div>
         </div>
       </div>

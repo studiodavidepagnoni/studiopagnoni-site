@@ -43,19 +43,13 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
 export default function PrivacyPolicyPage() {
   return (
     <main id="main-content" className={`section-shell min-h-[70vh] ${ui.pageBg}`}>
-      <div className={`relative overflow-hidden border-b border-[var(--green-border-muted)] bg-[var(--muted)] ${layoutGutterXClass}`}>
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_100%_80%_at_20%_-20%,var(--accent-glow-16),transparent_55%),radial-gradient(ellipse_80%_60%_at_100%_0%,rgba(234,88,12,0.06),transparent_50%)]"
-          aria-hidden
-        />
-        <div className={`relative py-14 sm:py-16 md:py-20 ${layoutContentMaxClass}`}>
-          <div className="max-w-[720px]">
-            <p className={`${fontSans.className} section-kicker mb-3 text-[var(--primary-mid)]`}>GDPR · Italia · 2026</p>
-            <h1 className={`${fontDisplay.className} section-title text-[clamp(1.85rem,4vw,2.75rem)] font-medium leading-[1.08] text-[var(--foreground)]`}>
-              Privacy policy e cookie
-            </h1>
-            <div className="home-section-rule mt-5 max-w-[4rem]" aria-hidden />
-            <p className={`${fontSans.className} mt-6 text-[0.95rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`}>
+      <div className={layoutGutterXClass}>
+        <div className={`${layoutContentMaxClass} py-10 sm:py-14`}>
+          <header className="mb-10 max-w-[72ch] sm:mb-12">
+            <p className={ui.pageEyebrow}>GDPR · Italia · 2026</p>
+            <h1 className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>Privacy policy e cookie</h1>
+            <div className={ui.pageTitleRule} aria-hidden />
+            <p className={`${fontSans.className} ${ui.body} mt-6`}>
               Informativa resa ai sensi degli{" "}
               <strong className="font-semibold text-[var(--foreground)]">artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR)</strong> e degli artt.{" "}
               <strong className="font-semibold text-[var(--foreground)]">13–14 del D.Lgs. 196/2003</strong> (Codice Privacy), come modificato dal D.Lgs.{" "}
@@ -64,13 +58,9 @@ export default function PrivacyPolicyPage() {
             <p className={`${fontSans.className} mt-4 text-sm text-[var(--green-ink-muted)]`}>
               Ultimo aggiornamento: <time dateTime="2026-05-09">{LAST_UPDATED}</time>
             </p>
-          </div>
-        </div>
-      </div>
+          </header>
 
-      <div className={layoutGutterXClass}>
-        <div className={`${layoutContentMaxClass} py-10 sm:py-14`}>
-          <div className="mx-auto flex max-w-[900px] flex-col gap-12 lg:flex-row lg:gap-14 xl:gap-20">
+          <div className="flex flex-col gap-12 lg:flex-row lg:gap-14 xl:gap-20">
             <nav
               aria-label="Indice della privacy policy"
               className={`${fontSans.className} lg:sticky lg:top-28 lg:h-fit lg:w-[min(100%,14rem)] lg:shrink-0`}

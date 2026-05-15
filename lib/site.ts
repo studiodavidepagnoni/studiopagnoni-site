@@ -7,7 +7,12 @@ export const layoutGutterXClass = "px-4 sm:px-5 md:px-10";
  */
 export const layoutContentMaxClass = "mx-auto w-full max-w-[1140px]";
 
-/** URL pubblico (canonical, OG). In CI per GitHub Pages impostare NEXT_PUBLIC_SITE_URL al dominio reale del deploy. */
+/**
+ * URL pubblico (canonical, OG, sitemap).
+ * GitHub Actions (`.github/workflows/deploy-github-pages.yml`) imposta `NEXT_PUBLIC_SITE_URL` in automatico.
+ * Build locale in sottocartella: es. `NEXT_PUBLIC_SITE_URL=https://tuouser.github.io/nome-repo` e
+ * `NEXT_PUBLIC_BASE_PATH=/nome-repo` (stesso nome del repo, con slash iniziale).
+ */
 const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.studiotecnicopagnoni.it";
 
 export const site = {

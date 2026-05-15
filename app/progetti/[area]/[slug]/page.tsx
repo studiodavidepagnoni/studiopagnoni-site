@@ -52,34 +52,34 @@ export default async function ProjectCasePage({ params }: Props) {
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
-          <div className="mx-auto w-full max-w-[900px]">
-            <nav className="reveal-faint mb-8 text-[0.82rem] text-[var(--green-ink-muted)] sm:text-sm" aria-label="Percorso di navigazione">
-              <Link href="/progetti" className="font-medium text-[var(--primary-mid)] hover:underline">
-                Progetti
-              </Link>
-              <span className="mx-2 text-[var(--green-border)]" aria-hidden>
-                /
-              </span>
-              <Link href={`/progetti/${area}`} className="font-medium text-[var(--primary-mid)] hover:underline">
-                {cat.heading}
-              </Link>
-              <span className="mx-2 text-[var(--green-border)]" aria-hidden>
-                /
-              </span>
-              <span className="text-[var(--foreground)]/80">{cs.metaTitle}</span>
-            </nav>
+          <nav className="reveal-faint mb-8 text-[0.82rem] text-[var(--green-ink-muted)] sm:text-sm" aria-label="Percorso di navigazione">
+            <Link href="/progetti" className="font-medium text-[var(--primary-mid)] hover:underline">
+              Progetti
+            </Link>
+            <span className="mx-2 text-[var(--green-border)]" aria-hidden>
+              /
+            </span>
+            <Link href={`/progetti/${area}`} className="font-medium text-[var(--primary-mid)] hover:underline">
+              {cat.heading}
+            </Link>
+            <span className="mx-2 text-[var(--green-border)]" aria-hidden>
+              /
+            </span>
+            <span className="text-[var(--foreground)]/80">{cs.metaTitle}</span>
+          </nav>
 
-            <p className={ui.pageEyebrow}>Progetto</p>
-            <h1 className={`${fontDisplay.className} reveal-title ${ui.caseStudyTitle} mb-4 sm:mb-5`}>{cs.heading}</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
+          <p className={ui.pageEyebrow}>Progetto</p>
+          <h1 className={`${fontDisplay.className} reveal-title ${ui.caseStudyTitle} mb-4 sm:mb-5`}>{cs.heading}</h1>
+          <div className={ui.pageTitleRule} aria-hidden />
 
-            <div className="lazy-section">
-              <article className={ui.innerCard}>
+          <div className="lazy-section">
+            <article className={ui.innerCard}>
+              <div className="reading-measure mx-auto">
                 <div className={ui.body}>{cs.body}</div>
-              </article>
+              </div>
+            </article>
 
-              <ProjectImageLightbox images={cs.gallery} className="mt-10" />
-            </div>
+            <ProjectImageLightbox images={cs.gallery} className="mt-10" />
           </div>
         </div>
       </div>

@@ -3,11 +3,12 @@ import { AppProviders } from "@/components/AppProviders";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SiteFooter } from "@/components/SiteFooter";
 import { SiteHeader } from "@/components/SiteHeader";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { withBasePath } from "@/lib/basePath";
+import { fontBrand, fontDisplay, fontSans } from "@/lib/fonts";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const ogImage = "/assets/stock/pointcloud-data.jpg";
+const ogImageAbs = new URL("assets/stock/pointcloud-data.jpg", `${site.url.replace(/\/$/, "")}/`).href;
 
 /** Notch / home indicator: `viewport-fit=cover` + safe-area in CSS (header, drawer, cookie bar). */
 export const viewport: Viewport = {
@@ -21,11 +22,11 @@ export const metadata: Metadata = {
   icons: {
     icon: [
       // Cache-bust to avoid "old favicon" in aggressive browser caches.
-      { url: "/icon.svg?v=18", type: "image/svg+xml" },
-      { url: "/favicon.ico?v=18", type: "image/x-icon" },
+      { url: `${withBasePath("/icon.svg")}?v=18`, type: "image/svg+xml" },
+      { url: `${withBasePath("/favicon.ico")}?v=18`, type: "image/x-icon" },
     ],
-    shortcut: [{ url: "/icon.svg?v=18", type: "image/svg+xml" }],
-    apple: [{ url: "/icon.svg?v=18", type: "image/svg+xml" }],
+    shortcut: [{ url: `${withBasePath("/icon.svg")}?v=18`, type: "image/svg+xml" }],
+    apple: [{ url: `${withBasePath("/icon.svg")}?v=18`, type: "image/svg+xml" }],
   },
   title: {
     default: "Studio Tecnico Pagnoni — Topografia, laser SLAM, Cazzago San Martino (BS)",
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     title: `${site.name} — ${site.tagline}`,
     description:
       "Topografia professionale, laser scanner SLAM e progettazione del territorio da Cazzago San Martino (BS): Franciacorta, provincia di Brescia e Nord Italia.",
-    images: [{ url: ogImage, width: 1200, height: 630 }],
+    images: [{ url: ogImageAbs, width: 1200, height: 630 }],
   },
   robots: { index: true, follow: true },
   other: { "theme-color": "#051e1b" },
@@ -92,7 +93,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
-      <body className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-light`}>
+      <body
+        className={`${fontSans.variable} ${fontDisplay.variable} ${fontBrand.variable} ${fontSans.className} antialiased theme-light`}
+      >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <AppProviders>
           <a href="#main-content" className="skip-link">

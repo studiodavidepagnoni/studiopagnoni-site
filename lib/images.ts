@@ -1,14 +1,16 @@
 /** Path pubblici: cartella `assets/` → `public/assets/` (sync-static). */
 
-const a = (name: string) => `/assets/stock/${name}`;
+import { withBasePath } from "@/lib/basePath";
+
+const a = (name: string) => withBasePath(`/assets/stock/${name}`);
 
 /**
  * Video di sfondo di default per l'hero.
  * Le singole slide possono sovrascriverlo con `video`/`poster` propri:
  * vedi `HeroSlide` e `HeroHome.tsx`.
  */
-export const HERO_VIDEO_DEFAULT = "/assets/rs10-hero.mp4";
-export const HERO_POSTER_DEFAULT = "/assets/rs10-hero-poster.jpg";
+export const HERO_VIDEO_DEFAULT = withBasePath("/assets/rs10-hero.mp4");
+export const HERO_POSTER_DEFAULT = withBasePath("/assets/rs10-hero-poster.jpg");
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */

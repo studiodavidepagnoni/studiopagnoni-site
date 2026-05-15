@@ -1,7 +1,8 @@
 import type { ReactNode } from "react";
+import { withBasePath } from "@/lib/basePath";
 import { ui } from "@/lib/ui";
 
-const a = (name: string) => `/assets/stock/${name}`;
+const a = (name: string) => withBasePath(`/assets/stock/${name}`);
 
 export const projectAreas = ["territorio-verde", "rilievi-digitalizzazione", "edilizia-urbanistica"] as const;
 export type ProjectArea = (typeof projectAreas)[number];

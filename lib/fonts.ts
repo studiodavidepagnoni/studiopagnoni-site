@@ -1,4 +1,4 @@
-import { Manrope, Sora } from "next/font/google";
+import { Manrope, Plus_Jakarta_Sans, Sora } from "next/font/google";
 
 /**
  * Corpo: Manrope — sans contemporanea, pulita e leggibile su UI dense.
@@ -22,5 +22,18 @@ export const fontDisplay = Sora({
   display: "swap",
   weight: ["400", "500", "600", "700"],
   preload: true,
+  adjustFontFallback: true,
+});
+
+/**
+ * Marchio header/footer: Plus Jakarta Sans — più morbida e “studio” rispetto a Sora,
+ * resta contemporanea con Manrope e i titoli geometrici.
+ */
+export const fontBrand = Plus_Jakarta_Sans({
+  subsets: ["latin"],
+  variable: "--font-brand",
+  display: "swap",
+  weight: ["500", "600", "700"],
+  preload: false,
   adjustFontFallback: true,
 });
