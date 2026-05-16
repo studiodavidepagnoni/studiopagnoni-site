@@ -20,6 +20,9 @@
 **/*.opt.mp4
 **/.rs10-hero.mp4.opt.mp4
 
+# lighthouse audit locale
+.lighthouse/
+
 # misc
 .DS_Store
 *.pem

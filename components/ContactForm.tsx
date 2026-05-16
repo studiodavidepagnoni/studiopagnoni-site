@@ -329,12 +329,20 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           className="mt-1.5 h-5 w-5 min-h-[20px] min-w-[20px] shrink-0 accent-[var(--primary-mid)]"
           aria-invalid={!!errors.privacy}
         />
-        <label htmlFor="privacy" className="flex min-h-[48px] flex-1 items-center py-2 text-base text-[var(--copy-body)] sm:text-sm">
-          Ho letto e accetto la{" "}
-          <Link href="/privacy-policy" className="font-semibold text-[var(--primary-mid)] underline underline-offset-2 hover:text-[var(--primary)]">
-            privacy policy
-          </Link>
-          . <span className="text-red-700">*</span>
+        <label
+          htmlFor="privacy"
+          className="min-h-[48px] flex-1 cursor-pointer py-2 text-base leading-relaxed text-[var(--copy-body)] sm:text-sm"
+        >
+          <span className="inline">
+            Ho letto e accetto la{" "}
+            <Link
+              href="/privacy-policy"
+              className="font-semibold text-[var(--primary-mid)] underline underline-offset-2 hover:text-[var(--primary)]"
+            >
+              privacy policy
+            </Link>
+            . <span className="text-red-700">*</span>
+          </span>
         </label>
       </div>
 

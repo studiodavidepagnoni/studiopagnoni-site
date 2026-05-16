@@ -33,7 +33,7 @@ export function heroMotionVariants(reduced: boolean) {
     container: {
       hidden: {},
       show: {
-        transition: { staggerChildren: 0.14, delayChildren: 0.1 },
+        transition: { staggerChildren: 0.1, delayChildren: 0.06 },
       },
       exit: {
         transition: { staggerChildren: 0.05, staggerDirection: -1, when: "afterChildren" },
@@ -44,7 +44,7 @@ export function heroMotionVariants(reduced: boolean) {
       show: {
         opacity: 1,
         y: 0,
-        transition: { duration: 1.05, ease: HERO_EASE_OUT },
+        transition: { duration: 0.75, ease: HERO_EASE_OUT },
       },
       exit: {
         opacity: 0,
@@ -53,16 +53,14 @@ export function heroMotionVariants(reduced: boolean) {
       },
     },
     line: {
-      hidden: { opacity: 0, scaleX: 0 },
+      hidden: { opacity: 0 },
       show: {
         opacity: 1,
-        scaleX: 1,
-        transition: { duration: 0.9, ease: HERO_EASE_OUT },
+        transition: { duration: 0.55, ease: HERO_EASE_OUT },
       },
       exit: {
         opacity: 0,
-        scaleX: 0.6,
-        transition: { duration: 0.28, ease: HERO_EASE_IN },
+        transition: { duration: 0.25, ease: HERO_EASE_IN },
       },
     },
     media: {

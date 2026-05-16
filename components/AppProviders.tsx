@@ -1,9 +1,14 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import { MotionConfig } from "framer-motion";
 import type { ReactNode } from "react";
 import { ScrollReveal } from "@/components/ScrollReveal";
-import { ViewTransitionBridge } from "@/components/ViewTransitionBridge";
+
+const ViewTransitionBridge = dynamic(
+  () => import("@/components/ViewTransitionBridge").then((m) => ({ default: m.ViewTransitionBridge })),
+  { ssr: false },
+);
 
 export function AppProviders({ children }: { children: ReactNode }) {
   return (

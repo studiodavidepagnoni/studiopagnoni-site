@@ -36,15 +36,16 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/laser-scanner-slam": {
     eyebrow: laserSlamLanding.eyebrow,
     title: laserSlamLanding.h1,
-    image: a("chi-siamo-slam-hero.jpg"),
-    alt: imageAlt("Rilievo laser scanner SLAM mobile CHCNAV RS10", { service: "slam" }),
-    lede: laserSlamLanding.subtitle,
+    image: a("gnss-rover-worker.jpg"),
+    alt: imageAlt("Rilievo geodetico GNSS RTK in cantiere per georeferenziazione del modello SLAM", { service: "slam" }),
   },
   "/progetti": {
     eyebrow: "Portfolio",
-    title: "Progetti e ambiti",
-    image: a("pointcloud-data.jpg"),
-    alt: imageAlt("Schermata di nuvola di punti e dati 3D da rilievo digitale", { service: "slam" }),
+    title: "Progetti",
+    image: a("topographic-plan.jpg"),
+    alt: imageAlt("Carta topografica con curve di livello e quotature da rilievo planoaltimetrico", {
+      service: "topografia",
+    }),
   },
   "/contatti": {
     eyebrow: "Contatto",

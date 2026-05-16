@@ -1,17 +1,22 @@
-"use client";
+import { Suspense } from "react";
+import { PageHeroFromPath } from "@/components/PageHeroFromPath";
+import { PageHeroRouterClient } from "@/components/PageHeroRouterClient";
 
-import { usePathname } from "next/navigation";
-import { PageHero } from "@/components/PageHero";
-import { isHomePath } from "@/lib/isHomePath";
-import { resolveStaticPageHero } from "@/lib/pageHeroConfig";
+const isStaticExport = process.env.STATIC_EXPORT === "1";
 
-/** Hero immagine per le pagine statiche (le route dinamiche usano `<PageHero />` in pagina). */
+/**
+ * Hero bandiera pagine interne.
+ * - Dev / Node: SSR via `PageHeroFromPath` (immagine nel HTML, menu overlay subito).
+ * - Export statico: client (`usePathname`).
+ */
 export function PageHeroRouter() {
-  const pathname = usePathname();
-  if (isHomePath(pathname)) return null;
+  if (isStaticExport) {
+    return <PageHeroRouterClient />;
+  }
 
-  const config = resolveStaticPageHero(pathname);
-  if (!config) return null;
-
-  return <PageHero {...config} />;
+  return (
+    <Suspense fallback={null}>
+      <PageHeroFromPath />
+    </Suspense>
+  );
 }

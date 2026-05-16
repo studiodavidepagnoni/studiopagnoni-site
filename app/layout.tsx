@@ -39,12 +39,12 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-light max-md:overflow-x-clip`}
       >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }} />
+        <SiteHeader />
+        <PageHeroRouter />
         <AppProviders>
           <a href="#main-content" className="skip-link">
             Vai al contenuto principale
           </a>
-          <SiteHeader />
-          <PageHeroRouter />
           <CookieBanner />
           {children}
           <SiteFooter />

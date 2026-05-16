@@ -75,11 +75,11 @@
   --hero-fallback-via: color-mix(in srgb, var(--surface-chrome) 88%, var(--surface-chrome-mid));
   --hero-fallback-to: var(--surface-chrome-mid);
   /* Hero video — ombre tipo Revolution Slider / dronesurveying.co.uk */
-  --hero-media-shadow-l: rgba(4, 10, 9, 0.58);
-  --hero-media-shadow-m: rgba(4, 10, 9, 0.34);
-  --hero-media-shadow-r: rgba(4, 10, 9, 0.12);
-  --hero-media-vignette: rgba(2, 8, 7, 0.4);
-  --hero-media-veil: color-mix(in srgb, var(--surface-chrome-deep) 26%, transparent);
+  --hero-media-shadow-l: rgba(4, 10, 9, 0.44);
+  --hero-media-shadow-m: rgba(4, 10, 9, 0.22);
+  --hero-media-shadow-r: rgba(4, 10, 9, 0.06);
+  --hero-media-vignette: rgba(2, 8, 7, 0.28);
+  --hero-media-veil: color-mix(in srgb, var(--surface-chrome-deep) 14%, transparent);
   /* Accent unico brand (mint) — link, CTA, hover */
   --accent-brand: var(--primary-mid);
   --accent-brand-strong: var(--primary-mid-strong);
@@ -87,23 +87,22 @@
   --accent-warm: var(--accent-brand);
   --accent-warm-strong: var(--accent-brand-strong);
   --accent-soft: color-mix(in srgb, var(--accent-brand) 12%, transparent);
-  /* CTA primaria — gradiente mint */
-  --cta-primary-from: var(--primary-mid-strong);
-  --cta-primary-mid: var(--primary-mid);
-  --cta-primary-to: color-mix(in srgb, var(--primary-mid) 78%, var(--primary));
-  --cta-primary-text: var(--on-primary-hover);
-  --cta-primary-border: color-mix(in srgb, var(--primary-mid) 68%, white);
-  --cta-primary-glow: var(--accent-glow-25);
-  --cta-primary-glow-strong: var(--accent-glow-35);
-  --cta-primary-bg: var(--primary-mid);
-  --cta-primary-bg-hover: var(--primary-mid-strong);
-  --cta-hero-from: var(--cta-primary-from);
-  --cta-hero-to: var(--cta-primary-mid);
-  --cta-hero-to-deep: var(--cta-primary-to);
+  /* CTA primaria — segnale mint (nav/hero), flat + ombra editoriale */
+  --cta-primary-fill: var(--header-nav-hover);
+  --cta-primary-fill-hover: var(--header-nav-active);
+  --cta-primary-text: #04110f;
+  --cta-primary-border: color-mix(in srgb, var(--header-nav-hover) 38%, var(--green-border));
+  --cta-primary-shadow:
+    0 1px 0 color-mix(in srgb, white 14%, transparent) inset,
+    0 2px 10px rgba(0, 0, 0, 0.28);
+  --cta-primary-shadow-hover:
+    0 1px 0 color-mix(in srgb, white 18%, transparent) inset,
+    0 10px 28px var(--accent-glow-14),
+    0 0 0 1px color-mix(in srgb, var(--header-nav-hover) 24%, transparent);
+  --cta-primary-bg: var(--cta-primary-fill);
+  --cta-primary-bg-hover: var(--cta-primary-fill-hover);
   --cta-hero-text: var(--cta-primary-text);
   --cta-hero-edge: var(--cta-primary-border);
-  --cta-hero-glow: var(--cta-primary-glow);
-  --cta-hero-glow-strong: var(--cta-primary-glow-strong);
   --interactive-hover-border: var(--primary-mid);
   --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 6%, var(--card));
   --interactive-hover-shadow: 0 12px 32px var(--accent-glow-12);
@@ -409,7 +408,71 @@ body::before {
     box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
+/* CTA primario — segnale mint on-brand (stesso filo di nav accent + service-card) */
+.btn-cta-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--cta-primary-border);
+  background-color: var(--cta-primary-fill);
+  color: var(--cta-primary-text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: var(--cta-primary-shadow);
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease;
+}
+
+.btn-cta-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--header-nav-active) 88%, transparent) 0%,
+    color-mix(in srgb, var(--primary-mid) 42%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.btn-cta-primary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--header-nav-hover) 62%, transparent);
+  outline-offset: 3px;
+}
+
+.btn-cta-primary:active {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-cta-primary:hover {
+    border-color: color-mix(in srgb, var(--header-nav-active) 48%, var(--green-border));
+    background-color: var(--cta-primary-fill-hover);
+    box-shadow: var(--cta-primary-shadow-hover);
+  }
+}
+
+.btn-cta-primary--hero {
+  min-height: 3.25rem;
+  padding-inline: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
 /* Bandiera titolo pagina (immagine + menu overlay come home / Drone Surveying) */
+.page-hero {
+  position: relative;
+  isolation: isolate;
+}
+
 .page-hero__kicker {
   font-size: 0.68rem;
   font-weight: 600;
@@ -460,7 +523,10 @@ body::before {
 
 .hero-media__video {
   opacity: 1;
-  filter: brightness(0.9) contrast(1.06) saturate(0.96);
+  filter: brightness(0.94) contrast(1.02) saturate(0.98);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
 }
 
 .hero-media__image {
@@ -500,9 +566,19 @@ body::before {
   background: var(--hero-media-veil);
 }
 
+/* Sezioni home sotto la piega: rendering differito (mai su page-hero) */
+.lazy-section:not(.page-hero) {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 720px;
+}
+
+#chi-siamo.lazy-section {
+  contain-intrinsic-size: auto 880px;
+}
+
 /* Hero home — testi animati solo con framer-motion (no ScrollReveal / reveal-faint) */
 .hero-copy {
-  will-change: opacity, transform;
+  contain: layout style;
 }
 
 [data-hero-intro] .reveal-faint.is-revealed {
@@ -554,6 +630,12 @@ body::before {
   color: var(--brand-mark-tint);
   text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
   transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+/* Etichette ambiti — stesso mint della tagline logo (Topografia · Architettura · SLAM) */
+.progetti-area-label {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
 }
 
 .site-brand-tagline__sep {
@@ -854,6 +936,16 @@ a:focus-visible .site-brand-mark {
 
   .home-section-title {
     letter-spacing: -0.022em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .hero-title {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    -webkit-hyphens: auto;
   }
 }
 
@@ -1052,7 +1144,8 @@ a:focus-visible .site-brand-mark {
   }
 
   .home-section-title {
-    font-size: clamp(1.5rem, 6.5vw, 2rem);
+    font-size: clamp(1.45rem, 6.2vw, 1.95rem);
+    line-height: 1.1;
   }
 
   .section-kicker,
@@ -1062,8 +1155,8 @@ a:focus-visible .site-brand-mark {
   }
 
   .hero-title {
-    font-size: clamp(1.65rem, 7.8vw, 2.35rem) !important;
-    line-height: 1.06;
+    font-size: clamp(1.55rem, 7.2vw, 2.3rem) !important;
+    line-height: 1.08;
     text-wrap: balance;
   }
 
@@ -1126,13 +1219,19 @@ a:focus-visible .site-brand-mark {
 }
 
 /* ─── Sezioni sotto la piega: meno lavoro di layout durante lo scroll ─── */
-.lazy-section {
+.lazy-section:not(.page-hero) {
   content-visibility: auto;
   contain-intrinsic-size: auto 520px;
 }
 
+@media (min-width: 768px) {
+  .lazy-section:not(.page-hero) {
+    contain-intrinsic-size: auto 580px;
+  }
+}
+
 @media (max-width: 767px) {
-  .lazy-section {
+  .lazy-section:not(.page-hero) {
     contain-intrinsic-size: auto 420px;
   }
 }
@@ -1161,20 +1260,21 @@ a:focus-visible .site-brand-mark {
   --accent-warm: var(--accent-brand);
   --accent-warm-strong: var(--primary-mid-strong);
   --accent-soft: color-mix(in srgb, var(--accent-brand) 10%, transparent);
-  --cta-primary-from: #d4ebe4;
-  --cta-primary-mid: var(--primary-mid);
-  --cta-primary-to: #0a524c;
-  --cta-primary-text: #04100e;
-  --cta-primary-border: color-mix(in srgb, var(--primary-mid) 55%, white);
-  --cta-primary-bg: var(--primary-mid);
-  --cta-primary-bg-hover: #0f756c;
-  --cta-hero-from: var(--cta-primary-from);
-  --cta-hero-to: var(--cta-primary-mid);
-  --cta-hero-to-deep: var(--cta-primary-to);
+  --cta-primary-fill: var(--primary-mid);
+  --cta-primary-fill-hover: #0f756c;
+  --cta-primary-text: var(--on-primary);
+  --cta-primary-border: color-mix(in srgb, var(--primary-mid) 45%, var(--green-border));
+  --cta-primary-shadow:
+    0 1px 0 color-mix(in srgb, white 22%, transparent) inset,
+    0 4px 14px color-mix(in srgb, var(--primary-mid) 22%, transparent);
+  --cta-primary-shadow-hover:
+    0 1px 0 color-mix(in srgb, white 26%, transparent) inset,
+    0 10px 26px color-mix(in srgb, var(--primary-mid) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary-mid) 18%, transparent);
+  --cta-primary-bg: var(--cta-primary-fill);
+  --cta-primary-bg-hover: var(--cta-primary-fill-hover);
   --cta-hero-text: var(--cta-primary-text);
   --cta-hero-edge: var(--cta-primary-border);
-  --cta-hero-glow: var(--cta-primary-glow);
-  --cta-hero-glow-strong: var(--cta-primary-glow-strong);
   --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 5%, var(--card));
   --copy-body: #3a4540;
   --on-primary: #f4faf7;
@@ -1210,12 +1310,12 @@ a:focus-visible .site-brand-mark {
   --accent-brand: var(--primary-mid);
   --accent-warm: var(--accent-brand);
   --accent-warm-strong: var(--accent-brand-strong);
-  --cta-primary-from: var(--primary-mid-strong);
-  --cta-primary-mid: var(--primary-mid);
-  --cta-primary-to: color-mix(in srgb, var(--primary-mid) 75%, var(--primary));
-  --cta-primary-text: var(--on-primary-hover);
-  --cta-primary-bg: var(--primary-mid);
-  --cta-primary-bg-hover: var(--primary-mid-strong);
+  --cta-primary-fill: var(--header-nav-hover);
+  --cta-primary-fill-hover: var(--header-nav-active);
+  --cta-primary-text: #04110f;
+  --cta-primary-border: color-mix(in srgb, var(--header-nav-hover) 36%, var(--green-border));
+  --cta-primary-bg: var(--cta-primary-fill);
+  --cta-primary-bg-hover: var(--cta-primary-fill-hover);
   --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 8%, var(--card));
   --on-primary: #f4faf7;
   --on-primary-hover: #04100e;
@@ -1231,26 +1331,37 @@ a:focus-visible .site-brand-mark {
   background: color-mix(in srgb, var(--primary-mid) 48%, transparent);
 }
 
-/* ─── Reveal al scroll (una volta — ScrollReveal + IntersectionObserver) ─── */
+.theme-light .btn-cta-primary::before {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, white 38%, transparent) 0%,
+    color-mix(in srgb, white 12%, transparent) 68%,
+    transparent 100%
+  );
+}
+
+/* ─── Reveal al scroll (stato solo su section + is-revealed sui figli post-hydration) ─── */
 @media (prefers-reduced-motion: no-preference) {
-  .reveal-title.reveal-pending:not(.is-revealed),
-  .reveal-block.reveal-pending:not(.is-revealed) {
+  html.reveal-ready section.lazy-section:not(.is-revealed) :is(.reveal-title, .reveal-block):not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) :is(.reveal-title, .reveal-block):not(.is-revealed) {
     opacity: 0;
     transform: translateY(12px);
   }
 
-  .reveal-faint.reveal-pending:not(.is-revealed) {
+  html.reveal-ready section.lazy-section:not(.is-revealed) .reveal-faint:not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) .reveal-faint:not(.is-revealed) {
     opacity: 0.82;
     transform: none;
   }
 
   /* Solo movimento: niente fade di opacità (su isole scure su fondo chiaro il fade mescola i colori). */
-  .reveal-block-solid.reveal-pending:not(.is-revealed) {
+  html.reveal-ready section.lazy-section:not(.is-revealed) .reveal-block-solid:not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) .reveal-block-solid:not(.is-revealed) {
     opacity: 1;
     transform: translateY(12px);
   }
 
-  :is(.reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid).is-revealed {
+  html.reveal-ready :is(.reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid).is-revealed {
     opacity: 1;
     transform: none;
     transition:

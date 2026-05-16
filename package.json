@@ -19,7 +19,8 @@
     "rebuild": "npm run clean && npm run build",
     "prestart": "node scripts/check-next-build.cjs",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lighthouse": "node scripts/lighthouse-audit.cjs"
   },
   "dependencies": {
     "framer-motion": "^12.23.24",

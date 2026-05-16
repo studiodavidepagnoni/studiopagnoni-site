@@ -1,24 +1,30 @@
 /** Path pubblici: cartella `assets/` → `public/assets/` (sync-static). */
 
-import { withBasePath } from "@/lib/basePath";
+import type { HeroVideoSources } from "@/lib/heroVideos";
+import {
+  HERO_POSTER_DEFAULT,
+  HERO_POSTER_INDOOR,
+  HERO_POSTER_POINTCLOUD,
+  HERO_VIDEO_DEFAULT,
+  HERO_VIDEO_DEFAULT_SOURCES,
+  HERO_VIDEO_INDOOR,
+  HERO_VIDEO_INDOOR_SOURCES,
+  HERO_VIDEO_POINTCLOUD,
+  HERO_VIDEO_POINTCLOUD_SOURCES,
+} from "@/lib/heroVideos";
 import { stockImage } from "@/lib/mediaPath";
 import { imageAlt } from "@/lib/seo";
 
-const a = (name: string) => stockImage(name);
+export {
+  HERO_POSTER_DEFAULT,
+  HERO_POSTER_INDOOR,
+  HERO_POSTER_POINTCLOUD,
+  HERO_VIDEO_DEFAULT,
+  HERO_VIDEO_INDOOR,
+  HERO_VIDEO_POINTCLOUD,
+} from "@/lib/heroVideos";
 
-/**
- * Video di sfondo di default per l'hero.
- * Le singole slide possono sovrascriverlo con `video`/`poster` propri:
- * vedi `HeroSlide` e `HeroHome.tsx`.
- */
-export const HERO_VIDEO_DEFAULT = withBasePath("/assets/rs10-hero.mp4");
-export const HERO_POSTER_DEFAULT = withBasePath("/assets/rs10-hero-poster.jpg");
-/** Elaborati da documentazione/grezza/video2.mp4 (point cloud 3D). */
-export const HERO_VIDEO_POINTCLOUD = withBasePath("/assets/hero-video-2.mp4");
-export const HERO_POSTER_POINTCLOUD = withBasePath("/assets/hero-video-2-poster.jpg");
-/** Elaborati da documentazione/grezza/video3.mp4 (SLAM indoor, rotazione EXIF applicata). */
-export const HERO_VIDEO_INDOOR = withBasePath("/assets/hero-video-3.mp4");
-export const HERO_POSTER_INDOOR = withBasePath("/assets/hero-video-3-poster.jpg");
+const a = (name: string) => stockImage(name);
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */
@@ -29,14 +35,10 @@ export type HeroSlide = {
   body: string;
   ctaHref: string;
   ctaLabel: string;
-  /** CTA principale (default: contatti). */
   primaryCtaHref?: string;
   primaryCtaLabel?: string;
-  /** Override video per la singola slide. Se omesso, usa `HERO_VIDEO_DEFAULT`. */
-  video?: string;
-  /** Poster del video per la singola slide. Se omesso, usa `HERO_POSTER_DEFAULT`. */
+  video?: HeroVideoSources;
   poster?: string;
-  /** Allineamento crop CSS (`object-position`) dopo export 1920×1294. */
   videoObjectPosition?: string;
 };
 
@@ -47,12 +49,12 @@ export const heroSlides: readonly HeroSlide[] = [
     alt: imageAlt("Operatore con laser scanner SLAM mobile CHCNAV RS10 sul campo", { service: "slam" }),
     line1: "Rilievi 3D con laser SLAM",
     line2: "CHCNAV RS10 · indoor e outdoor",
-    body: "Capannoni, edifici, impianti e terreni: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto e BIM.",
+    body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto e BIM.",
     primaryCtaHref: "/laser-scanner-slam",
     primaryCtaLabel: "Scopri il servizio SLAM",
     ctaHref: "/contatti?oggetto=slam",
     ctaLabel: "Richiedi preventivo",
-    video: HERO_VIDEO_INDOOR,
+    video: HERO_VIDEO_INDOOR_SOURCES,
     poster: HERO_POSTER_INDOOR,
     videoObjectPosition: "center center",
   },
@@ -64,7 +66,7 @@ export const heroSlides: readonly HeroSlide[] = [
     body: "Restituzione in formati operativi: nuvole dense, sezioni, CAD e modelli BIM. Controlli in campo sulla copertura prima di chiudere il rilievo.",
     ctaHref: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
     ctaLabel: "Esempio di progetto",
-    video: HERO_VIDEO_POINTCLOUD,
+    video: HERO_VIDEO_POINTCLOUD_SOURCES,
     poster: HERO_POSTER_POINTCLOUD,
     videoObjectPosition: "68% center",
   },
@@ -76,7 +78,7 @@ export const heroSlides: readonly HeroSlide[] = [
     body: "Rilievi planoaltimetrici integrati al laser SLAM: coordinate affidabili per frazionamenti, cantieri e allineamento del modello 3D.",
     ctaHref: "/topografia",
     ctaLabel: "Topografia",
-    video: HERO_VIDEO_DEFAULT,
+    video: HERO_VIDEO_DEFAULT_SOURCES,
     poster: HERO_POSTER_DEFAULT,
   },
 ];

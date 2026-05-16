@@ -1,13 +1,20 @@
 "use client";
 
-import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroMotionVariants } from "@/lib/heroMotion";
-import { HERO_POSTER_DEFAULT, HERO_VIDEO_DEFAULT, heroSlides } from "@/lib/images";
+import { heroSlides } from "@/lib/images";
+import { HERO_VIDEO_DEFAULT_SOURCES, type HeroVideoSources } from "@/lib/heroVideos";
 import { ui } from "@/lib/ui";
+
+const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
+
+function videoKey(sources: HeroVideoSources) {
+  return sources.mp4;
+}
 
 /** Prima slide: più tempo per lettura + video RS10. */
 const HERO_FIRST_SLIDE_MS = 24_000;
@@ -22,8 +29,8 @@ function slideDurationMs(
   failedVideos: ReadonlySet<string>,
 ): number {
   const slide = heroSlides[slideIndex];
-  const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;
-  const hasVideo = !isMobile && !failedVideos.has(videoSrc);
+  const sources = slide.video ?? DEFAULT_VIDEO;
+  const hasVideo = !isMobile && !failedVideos.has(sources.mp4);
   if (slideIndex === 0) return hasVideo ? HERO_FIRST_SLIDE_MS : HERO_FIRST_SLIDE_NO_VIDEO_MS;
   return hasVideo ? HERO_VIDEO_SLIDE_MS : HERO_IMAGE_SLIDE_MS;
 }
@@ -72,9 +79,10 @@ export function HeroHome() {
     }
 
     heroSlides.forEach((slide, slideIndex) => {
-      const src = slide.video ?? HERO_VIDEO_DEFAULT;
-      if (failedVideos.has(src)) return;
-      const video = videoRefs.current.get(src);
+      const sources = slide.video ?? DEFAULT_VIDEO;
+      const key = videoKey(sources);
+      if (failedVideos.has(key)) return;
+      const video = videoRefs.current.get(key);
       if (!video) return;
 
       if (slideIndex === idx) {
@@ -128,10 +136,11 @@ export function HeroHome() {
 
       <div className="pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
         {heroSlides.map((slideItem, slideIndex) => {
-          const videoSrc = slideItem.video ?? HERO_VIDEO_DEFAULT;
-          const posterSrc = slideItem.poster ?? HERO_POSTER_DEFAULT;
-          const videoFailed = failedVideos.has(videoSrc);
-          const showVideo = !isMobile && !videoFailed;
+          const sources = slideItem.video ?? DEFAULT_VIDEO;
+          const key = videoKey(sources);
+          const posterSrc = slideItem.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp");
+          const videoFailed = failedVideos.has(key);
+          const showVideo = !isMobile && !videoFailed && !reducedMotion;
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
 
@@ -143,22 +152,28 @@ export function HeroHome() {
             >
               {showVideo ? (
                 <video
-                  ref={registerVideo(videoSrc)}
+                  ref={registerVideo(key)}
                   className="hero-media__video absolute inset-0 h-full w-full"
                   style={
                     slideItem.videoObjectPosition
                       ? { objectPosition: slideItem.videoObjectPosition }
                       : undefined
                   }
-                  src={videoSrc}
                   poster={posterSrc}
                   muted
                   playsInline
                   loop
-                  preload={isActive ? "auto" : isNext ? "metadata" : "none"}
-                  onError={() => handleVideoError(videoSrc)}
+                  preload={isActive ? "metadata" : "none"}
+                  onError={() => handleVideoError(key)}
                   aria-hidden
-                />
+                >
+                  {(isActive || isNext) && (
+                    <>
+                      <source src={sources.mp4} type="video/mp4" />
+                      <source src={sources.webm} type="video/webm" />
+                    </>
+                  )}
+                </video>
               ) : (
                 <Image
                   src={slideItem.src}
@@ -176,10 +191,10 @@ export function HeroHome() {
         })}
         <div className="hero-media__overlay hero-media__overlay--shade" aria-hidden />
         <div className="hero-media__overlay hero-media__overlay--vignette" aria-hidden />
-        <div className="hero-media__overlay hero-media__overlay--veil" aria-hidden />
       </div>
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
+        <LazyMotion features={domAnimation} strict>
         <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left" data-hero-motion>
           <p
             className={`${fontSans.className} hero-eyebrow mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
@@ -188,7 +203,7 @@ export function HeroHome() {
           </p>
 
           <AnimatePresence mode="wait">
-            <motion.div
+            <m.div
               key={idx}
               variants={motionVariants.container}
               initial="hidden"
@@ -196,15 +211,15 @@ export function HeroHome() {
               exit="exit"
             >
               <div className="min-h-[2.35em] overflow-hidden sm:min-h-[2.2em]">
-                <motion.h1
+                <m.h1
                   variants={motionVariants.item}
                   className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}
                 >
                   {slide.line1}
-                </motion.h1>
+                </m.h1>
               </div>
 
-              <motion.div
+              <m.div
                 variants={motionVariants.item}
                 className="mt-3 min-h-0 overflow-hidden sm:mt-3.5 sm:min-h-[2.05em] md:min-h-0"
               >
@@ -222,15 +237,15 @@ export function HeroHome() {
                     </span>
                   ))}
                 </p>
-              </motion.div>
+              </m.div>
 
-              <motion.div
+              <m.div
                 variants={motionVariants.line}
                 className="hero-rule mt-6 h-px max-w-[5.5rem] origin-left"
                 aria-hidden
               />
 
-              <motion.div
+              <m.div
                 variants={motionVariants.item}
                 className="mt-6 min-h-[5.4em] overflow-hidden sm:min-h-[4.9em] md:min-h-[5.2rem]"
               >
@@ -239,9 +254,9 @@ export function HeroHome() {
                 >
                   {slide.body}
                 </p>
-              </motion.div>
+              </m.div>
 
-              <motion.div
+              <m.div
                 variants={motionVariants.item}
                 className="mt-8 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:mt-9 md:gap-4"
               >
@@ -251,10 +266,11 @@ export function HeroHome() {
                 <Link href={slide.ctaHref} className={ui.btnHeroGhost}>
                   {slide.ctaLabel}
                 </Link>
-              </motion.div>
-            </motion.div>
+              </m.div>
+            </m.div>
           </AnimatePresence>
         </div>
+        </LazyMotion>
       </div>
 
       <button

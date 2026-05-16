@@ -1,5 +1,6 @@
 "use client";
 
+import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
@@ -20,8 +21,12 @@ import { featuredProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/SiteBrandMark";
-import { HomeServiceCards } from "./HomeServiceCards";
 import { StatsSection } from "./StatsSection";
+
+const HomeServiceCards = dynamic(
+  () => import("./HomeServiceCards").then((m) => ({ default: m.HomeServiceCards })),
+  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-[var(--muted)]/50" aria-hidden /> },
+);
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
 
@@ -102,7 +107,8 @@ export function HomeSections() {
                   fill
                   className="object-cover object-center"
                   sizes="(min-width:1024px) min(580px, 50vw), (min-width:640px) min(90vw, 720px), 100vw"
-                  priority={false}
+                  loading="lazy"
+                  decoding="async"
                 />
                 {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
                 <div className="image-unify-overlay opacity-35" aria-hidden />
@@ -215,6 +221,8 @@ export function HomeSections() {
                     fill
                     className="object-cover transition duration-500 group-hover:scale-[1.015]"
                     sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
+                    loading="lazy"
+                    decoding="async"
                   />
                   <div className="image-unify-overlay opacity-56 group-hover:opacity-42" aria-hidden />
                 </div>

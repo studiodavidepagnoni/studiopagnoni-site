@@ -23,17 +23,17 @@ export default function ProgettiPage() {
 
           <div className="reveal-block mb-12 mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:mt-12 sm:grid-cols-3">
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Territorio</p>
+              <p className={`${fontSans.className} progetti-area-label text-[0.65rem] font-semibold uppercase tracking-[0.2em]`}>Territorio</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">
                 Verde, vigneti e paesaggio agricolo. In Franciacorta, importanti collaborazioni di progettazione paesaggistica con realtà vinicole.
               </p>
             </div>
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Rilievi</p>
+              <p className={`${fontSans.className} progetti-area-label text-[0.65rem] font-semibold uppercase tracking-[0.2em]`}>Rilievi</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">GNSS, stazione totale e laser scanner SLAM per documentazione digitale.</p>
             </div>
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Edilizia</p>
+              <p className={`${fontSans.className} progetti-area-label text-[0.65rem] font-semibold uppercase tracking-[0.2em]`}>Edilizia</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">Urbanistica, pratiche, architettura e sicurezza di cantiere.</p>
             </div>
           </div>

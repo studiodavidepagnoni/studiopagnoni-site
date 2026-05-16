@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
-const REVEAL_SELECTOR = ".reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid";
+const REVEAL_CHILD_SELECTOR = ".reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid";
 /** Esclude hero home (`data-hero-motion`) — animato da framer-motion, non da ScrollReveal. */
 const SECTION_ROOT_SELECTOR = "section.lazy-section, [data-hero-intro]:not([data-hero-motion])";
 
@@ -18,21 +18,39 @@ function isBelowFold(el: Element) {
   return el.getBoundingClientRect().top > window.innerHeight * 0.94;
 }
 
-function markPending(el: HTMLElement) {
-  if (!el.classList.contains("is-revealed")) el.classList.add("reveal-pending");
-}
+function revealSection(section: HTMLElement) {
+  if (section.classList.contains("is-revealed")) return;
+  section.classList.add("is-revealed");
 
-function revealItems(root: ParentNode) {
-  const items = root.querySelectorAll<HTMLElement>(REVEAL_SELECTOR);
+  const items = section.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR);
   items.forEach((el, index) => {
     if (el.classList.contains("is-revealed")) return;
-    el.classList.remove("reveal-pending");
     el.style.setProperty("--reveal-delay", `${Math.min(index * STAGGER_MS, STAGGER_CAP_MS)}ms`);
-    requestAnimationFrame(() => {
-      el.classList.add("is-revealed");
-    });
+    requestAnimationFrame(() => el.classList.add("is-revealed"));
   });
-  if (root instanceof HTMLElement) root.classList.add("is-revealed");
+}
+
+function resetRevealClasses() {
+  document.documentElement.classList.remove("reveal-ready");
+  document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach((section) => {
+    section.classList.remove("is-revealed");
+  });
+  document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
+    el.classList.remove("is-revealed");
+    el.style.removeProperty("--reveal-delay");
+  });
+}
+
+/** Dopo hydration completa — non toccare il DOM prima. */
+function afterFullHydration(cb: () => void) {
+  const run = () => window.setTimeout(cb, 120);
+  if (typeof requestIdleCallback === "function") {
+    requestIdleCallback(() => run(), { timeout: 600 });
+  } else if (document.readyState === "complete") {
+    run();
+  } else {
+    window.addEventListener("load", run, { once: true });
+  }
 }
 
 export function ScrollReveal() {
@@ -45,53 +63,69 @@ export function ScrollReveal() {
 
   useEffect(() => {
     if (!hydrated) return;
-    if (prefersReducedMotion()) return;
 
-    const sectionObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          revealItems(entry.target);
-          sectionObserver.unobserve(entry.target);
-        }
-      },
-      { rootMargin: "0px 0px -6% 0px", threshold: 0.1 },
-    );
+    let cancelled = false;
+    let sectionObserver: IntersectionObserver | null = null;
+    let itemObserver: IntersectionObserver | null = null;
 
-    const itemObserver = new IntersectionObserver(
-      (entries) => {
-        for (const entry of entries) {
-          if (!entry.isIntersecting) continue;
-          const el = entry.target as HTMLElement;
-          if (!el.classList.contains("is-revealed")) {
-            el.classList.remove("reveal-pending");
-            el.style.setProperty("--reveal-delay", "0ms");
-            requestAnimationFrame(() => el.classList.add("is-revealed"));
+    const start = () => {
+      if (cancelled) return;
+
+      resetRevealClasses();
+
+      if (prefersReducedMotion()) {
+        document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
+          el.classList.add("is-revealed");
+        });
+        document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach((section) => {
+          section.classList.add("is-revealed");
+        });
+        return;
+      }
+
+      document.documentElement.classList.add("reveal-ready");
+
+      sectionObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            revealSection(entry.target as HTMLElement);
+            sectionObserver?.unobserve(entry.target);
           }
-          itemObserver.unobserve(el);
-        }
-      },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
-    );
+        },
+        { rootMargin: "0px 0px -6% 0px", threshold: 0.1 },
+      );
 
-    const bind = () => {
+      itemObserver = new IntersectionObserver(
+        (entries) => {
+          for (const entry of entries) {
+            if (!entry.isIntersecting) continue;
+            const el = entry.target as HTMLElement;
+            if (!el.classList.contains("is-revealed")) {
+              el.style.setProperty("--reveal-delay", "0ms");
+              requestAnimationFrame(() => el.classList.add("is-revealed"));
+            }
+            itemObserver?.unobserve(el);
+          }
+        },
+        { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
+      );
+
       document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach((section) => {
         if (section.classList.contains("is-revealed")) return;
         if (isBelowFold(section)) {
-          section.querySelectorAll<HTMLElement>(REVEAL_SELECTOR).forEach(markPending);
-          sectionObserver.observe(section);
+          sectionObserver?.observe(section);
           return;
         }
-        revealItems(section);
+        revealSection(section);
       });
 
-      document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR).forEach((el) => {
+      document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
         if (el.classList.contains("is-revealed")) return;
         if (el.closest("[data-hero-motion]")) return;
         if (el.closest(SECTION_ROOT_SELECTOR)) return;
         if (isBelowFold(el)) {
-          markPending(el);
-          itemObserver.observe(el);
+          itemObserver?.observe(el);
           return;
         }
         el.style.setProperty("--reveal-delay", "0ms");
@@ -99,23 +133,25 @@ export function ScrollReveal() {
       });
     };
 
-    bind();
+    afterFullHydration(start);
 
     const reducedMq = window.matchMedia("(prefers-reduced-motion: reduce)");
     const onReduced = () => {
       if (!reducedMq.matches) return;
-      sectionObserver.disconnect();
-      itemObserver.disconnect();
-      document.querySelectorAll<HTMLElement>(REVEAL_SELECTOR).forEach((el) => {
+      sectionObserver?.disconnect();
+      itemObserver?.disconnect();
+      document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
         el.classList.add("is-revealed");
       });
     };
     reducedMq.addEventListener("change", onReduced);
 
     return () => {
-      sectionObserver.disconnect();
-      itemObserver.disconnect();
+      cancelled = true;
+      sectionObserver?.disconnect();
+      itemObserver?.disconnect();
       reducedMq.removeEventListener("change", onReduced);
+      resetRevealClasses();
     };
   }, [pathname, hydrated]);
 

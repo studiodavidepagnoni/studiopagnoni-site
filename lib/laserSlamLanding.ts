@@ -2,8 +2,8 @@
 
 export const laserSlamLanding = {
   eyebrow: "Laser scanner mobile",
-  h1: "Rilievi 3D con laser scanner SLAM mobile (CHCNAV RS10)",
-  subtitle:
+  h1: "Rilievi laser SLAM",
+  introLead:
     "Documentazione rapida indoor e outdoor, nuvole di punti georiferite e as-built per edifici, capannoni, impianti e terreni — meno passaggi in cantiere, base metrica pronta per progetto e BIM.",
   instrumentNote:
     "Piattaforma mobile CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale integrati per continuità tra esterni, interni e zone senza segnale satellitare.",

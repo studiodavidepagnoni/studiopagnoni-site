@@ -7,12 +7,15 @@ import { withBasePath } from "@/lib/basePath";
 import { fontDisplay, fontNav, fontSans } from "@/lib/fonts";
 import { isHomePath } from "@/lib/isHomePath";
 import { isNavItemActive } from "@/lib/navActive";
+import { resolveStaticPageHero } from "@/lib/pageHeroConfig";
 import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/site";
 
 /** Scroll: menu principale si nasconde con slide progressivo (home e pagine interne). */
 const HEADER_HIDE_RANGE_PX = 140;
 const HEADER_HIDE_START_PX = 8;
 const PAGE_HERO_OVERLAY_TAIL_PX = 72;
+/** Fallback finché non misuriamo `[data-page-hero]` (evita header opaco al primo paint). */
+const PAGE_HERO_OVERLAY_FALLBACK_PX = 360;
 
 function clamp01(n: number) {
   return Math.min(1, Math.max(0, n));
@@ -113,7 +116,15 @@ export function SiteHeader() {
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
+  const staticPageHero = !isHome ? resolveStaticPageHero(pathname) : null;
+  const hasPageHero = Boolean(staticPageHero);
+
   useLayoutEffect(() => {
+    if (!hasPageHero) {
+      setPageHeroOverlayEnd(0);
+      return;
+    }
+
     const measure = () => {
       const el = document.querySelector("[data-page-hero]");
       if (!el) {
@@ -126,19 +137,21 @@ export function SiteHeader() {
 
     measure();
     const delayed = window.setTimeout(measure, 150);
+    const delayed2 = window.setTimeout(measure, 500);
     window.addEventListener("resize", measure, { passive: true });
 
     return () => {
       window.clearTimeout(delayed);
+      window.clearTimeout(delayed2);
       window.removeEventListener("resize", measure);
     };
-  }, [pathname]);
+  }, [pathname, hasPageHero]);
 
   const hideProgress = clamp01((scrollY - HEADER_HIDE_START_PX) / HEADER_HIDE_RANGE_PX);
-  const hasPageHero = !isHome && pageHeroOverlayEnd > 0;
+  const overlayScrollEnd =
+    pageHeroOverlayEnd > 0 ? pageHeroOverlayEnd : hasPageHero ? PAGE_HERO_OVERLAY_FALLBACK_PX : 0;
   const isOverlay =
-    hideProgress < 1 &&
-    (isHome || (hasPageHero && scrollY < pageHeroOverlayEnd));
+    hideProgress < 1 && (isHome || (hasPageHero && scrollY < overlayScrollEnd));
   const headerHidden = hideProgress >= 1;
 
   useEffect(() => {

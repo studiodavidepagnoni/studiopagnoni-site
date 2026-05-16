@@ -1,10 +1,8 @@
 const btnBase =
   "touch-no-hover-lift inline-flex min-h-[48px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap rounded-full px-7 text-base font-semibold tracking-[0.01em] transition-[color,background-color,border-color,box-shadow,transform,filter] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:transform-none sm:min-h-[44px] sm:text-sm";
 
-const ctaPrimaryFill =
-  "border border-[color-mix(in_srgb,var(--cta-primary-border)_72%,transparent)] bg-[linear-gradient(135deg,var(--cta-primary-from)_0%,var(--cta-primary-mid)_50%,var(--cta-primary-to)_100%)] text-[var(--cta-primary-text)] shadow-[0_1px_0_rgba(255,255,255,0.2)_inset,0_10px_28px_var(--cta-primary-glow),0_3px_10px_rgba(0,0,0,0.22)] [@media(hover:hover)]:hover:brightness-[1.05] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.28)_inset,0_14px_36px_var(--cta-primary-glow-strong),0_5px_12px_rgba(0,0,0,0.26)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-[var(--cta-primary-mid)]/50";
-
-const btnPrimaryMint = `${btnBase} bg-[var(--cta-primary-bg)] text-[var(--cta-primary-text)] shadow-[0_8px_24px_var(--accent-glow-16)] hover:bg-[var(--cta-primary-bg-hover)] [@media(hover:hover)]:hover:shadow-[0_12px_32px_var(--accent-glow-25)] focus-visible:outline-[var(--cta-primary-mid)]/55`;
+/** CTA primario — .btn-cta-primary in globals.css (segnale mint on-brand). */
+const btnPrimaryFill = `${btnBase} btn-cta-primary focus-visible:outline-none`;
 
 export const ui = {
   pageBg: "bg-[var(--background)]",
@@ -32,18 +30,19 @@ export const ui = {
   cardHeading: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
   headingBodyGap: "mb-4 sm:mb-5",
 
-  btnPrimary: btnPrimaryMint,
+  btnPrimary: btnPrimaryFill,
 
-  /** @deprecated Usa btnPrimary — stesso stile mint */
-  btnFooterCta: btnPrimaryMint,
+  /** @deprecated Usa btnPrimary */
+  btnFooterCta: btnPrimaryFill,
 
   btnOutline:
     `${btnBase} border border-[var(--green-border)] bg-transparent text-[var(--foreground)] hover:border-[var(--primary-mid)] hover:bg-[var(--card)] focus-visible:outline-[var(--primary)]/45`,
 
   /** @deprecated Usa btnPrimary */
-  btnAccent: btnPrimaryMint,
+  btnAccent: btnPrimaryFill,
 
-  btnHeroPrimary: `${btnBase} min-h-[52px] w-full px-9 text-[0.9375rem] font-bold sm:w-auto ${ctaPrimaryFill}`,
+  /** Hero home: stesso CTA, variante hero */
+  btnHeroPrimary: `${btnPrimaryFill} btn-cta-primary--hero w-full text-[0.9375rem] sm:w-auto`,
 
   btnHeroGhost: `${btnBase} min-h-[52px] w-full border border-[var(--cta-ghost-border)] bg-[linear-gradient(180deg,var(--cta-ghost-bg-top)_0%,var(--cta-ghost-bg-bottom)_100%)] px-9 text-[0.9375rem] text-white shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-md [@media(hover:hover)]:hover:border-[color-mix(in_srgb,white_58%,transparent)] [@media(hover:hover)]:hover:bg-[linear-gradient(180deg,color-mix(in_srgb,white_22%,transparent)_0%,color-mix(in_srgb,white_11%,transparent)_100%)] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_14px_32px_rgba(0,0,0,0.34)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-white/50 sm:w-auto`,
 
@@ -52,7 +51,7 @@ export const ui = {
 
   btnOnDark: `${btnBase} bg-white text-[var(--on-primary-hover)] hover:bg-[color-mix(in_srgb,white_88%,var(--primary-mid))] focus-visible:outline-white/50`,
 
-  cookieAccept: `${btnPrimaryMint} min-h-[48px] flex-1 px-6 sm:flex-none sm:px-8`,
+  cookieAccept: `${btnPrimaryFill} min-h-[48px] flex-1 px-6 sm:flex-none sm:px-8`,
 
   cookieReject:
     `${btnBase} min-h-[48px] flex-1 border border-white/18 bg-transparent px-5 text-white hover:bg-white/[0.08] focus-visible:outline-white/35 sm:flex-none`,

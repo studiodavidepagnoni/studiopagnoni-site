@@ -2,7 +2,6 @@ import Image from "next/image";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { laserSlamLanding } from "@/lib/laserSlamLanding";
-import { HERO_POSTER_DEFAULT } from "@/lib/images";
 import { stockImage } from "@/lib/mediaPath";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
 import { imageAlt } from "@/lib/seo";
@@ -10,10 +9,14 @@ import { ui } from "@/lib/ui";
 
 const L = laserSlamLanding;
 
+const slamIntroImage = stockImage("handheld-slam-road.jpg");
+
 const caseImages = [
   {
-    src: stockImage("chi-siamo-slam-hero.jpg"),
-    alt: imageAlt("Acquisizione SLAM in capannone logistico con scanner mobile", { service: "slam" }),
+    src: stockImage("survey-instrument-field.jpg"),
+    alt: imageAlt("Strumentazione geodetica in campo per rilievo planoaltimetrico di supporto al SLAM", {
+      service: "topografia",
+    }),
     step: L.caseStudyTeaser.steps[0],
   },
   {
@@ -28,13 +31,18 @@ const caseImages = [
   },
 ] as const;
 
+const introCopyClass = `${fontSans.className} text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`;
+
 function CtaButtons({ className = "" }: { className?: string }) {
   return (
-    <div className={`flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center ${className}`}>
-      <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnPrimary}>
+    <div className={`flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4 ${className}`}>
+      <Link
+        href="/contatti?oggetto=slam#form-contatti"
+        className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}
+      >
         Richiedi preventivo SLAM
       </Link>
-      <Link href="/contatti#form-contatti" className={ui.btnOutline}>
+      <Link href="/contatti#form-contatti" className={`${ui.btnOutline} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
         Contatti generali
       </Link>
     </div>
@@ -47,23 +55,26 @@ export function LaserSlamLanding() {
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
           {/* Hero */}
-          <header className="grid gap-8 lg:grid-cols-2 lg:items-center lg:gap-12">
-            <div className="max-w-[52ch]">
-              <p className={`${fontSans.className} text-[0.92rem] leading-relaxed text-[var(--green-ink-muted)] sm:text-[0.98rem]`}>
-                {L.instrumentNote}
-              </p>
+          <header className="grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-10 xl:gap-12">
+            <div className="flex flex-col justify-center lg:col-span-7">
+              <div className="max-w-[52ch] space-y-4">
+                <p className={introCopyClass}>{L.introLead}</p>
+                <p className={introCopyClass}>{L.instrumentNote}</p>
+              </div>
               <CtaButtons className="mt-8" />
             </div>
-            <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] lg:aspect-[16/11]">
-              <Image
-                src={HERO_POSTER_DEFAULT}
-                alt="Laser scanner mobile CHCNAV RS10 — rilievo SLAM indoor e outdoor"
-                fill
-                className="object-cover object-center"
-                sizes="(min-width: 1024px) 520px, 100vw"
-                priority
-              />
-              <div className="image-unify-overlay opacity-30" aria-hidden />
+            <div className="lg:col-span-5">
+              <div className="relative mx-auto aspect-[4/3] max-w-md overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] sm:max-w-lg sm:aspect-[16/10] lg:mx-0 lg:max-w-none lg:aspect-[16/10]">
+                <Image
+                  src={slamIntroImage}
+                  alt={imageAlt("Operatore con laser scanner mobile SLAM in acquisizione outdoor", { service: "slam" })}
+                  fill
+                  className="object-cover object-[72%_center]"
+                  sizes="(min-width: 1024px) min(420px, 42vw), (min-width: 640px) min(90vw, 480px), 100vw"
+                  priority
+                />
+                <div className="image-unify-overlay opacity-30" aria-hidden />
+              </div>
             </div>
           </header>
 
@@ -248,16 +259,26 @@ export function LaserSlamLanding() {
 
           {/* CTA finale */}
           <section
-            className="rounded-2xl border border-[var(--green-border)] bg-[linear-gradient(135deg,var(--surface-chrome-raised)_0%,var(--surface-chrome-high)_100%)] p-6 sm:p-10"
+            className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 sm:p-10"
             aria-labelledby="slam-cta"
           >
             <h2 id="slam-cta" className={`${fontDisplay.className} text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
               Pianifichiamo il tuo rilievo SLAM
             </h2>
-            <p className={`${ui.body} mt-4 max-w-[52ch]`}>
+            <p className={`${ui.body} mt-4 max-w-[52ch] text-[var(--copy-body)]`}>
               Indica zona, superficie indicativa e cosa ti serve in consegna: ti rispondiamo con tempi e preventivo su misura.
             </p>
-            <CtaButtons className="mt-8" />
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <Link
+                href="/contatti?oggetto=slam#form-contatti"
+                className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}
+              >
+                Richiedi preventivo SLAM
+              </Link>
+              <Link href="/contatti#form-contatti" className={ui.btnGhostOnDark}>
+                Contatti generali
+              </Link>
+            </div>
           </section>
         </div>
       </div>
