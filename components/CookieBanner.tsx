@@ -5,17 +5,14 @@ import { useCallback, useEffect, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { clearCookiePrefs, loadCookiePrefs, saveCookiePrefs, type CookiePrefs } from "@/lib/cookieConsent";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
+import { ui } from "@/lib/ui";
 
 export type { CookiePrefs };
 
-const btnOutline =
+const btnCookieOutline =
   "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full border border-white/25 bg-white/5 px-5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] sm:w-auto sm:min-w-[9.5rem]";
 
-const btnPrimary =
-  "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full bg-[var(--primary)] px-6 text-sm font-semibold text-[var(--on-primary)] shadow-[0_8px_28px_var(--accent-glow-25)] transition hover:bg-[var(--primary-mid)] hover:text-[var(--on-primary-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/55 sm:w-auto sm:min-w-[11rem]";
-
-const btnAccent =
-  "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full bg-[var(--accent-warm)] px-6 text-sm font-semibold text-[#0a0a0a] shadow-[0_8px_28px_rgba(234,88,12,0.2)] transition hover:bg-[#ea7a3a] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--accent-warm)]/50 sm:w-auto sm:min-w-[10rem]";
+const btnCookiePrimary = `${ui.cookieAccept} text-sm`;
 
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
@@ -133,14 +130,14 @@ export function CookieBanner() {
               </div>
 
               <div className={`${fontSans.className} flex w-full shrink-0 flex-col gap-2.5 lg:w-[min(100%,20rem)]`}>
-                <button type="button" className={btnPrimary} onClick={handleSaveChoices}>
+                <button type="button" className={btnCookieOutline} onClick={handleNecessaryOnly}>
+                  Solo necessari
+                </button>
+                <button type="button" className={btnCookieOutline} onClick={handleSaveChoices}>
                   Salva preferenze
                 </button>
-                <button type="button" className={btnAccent} onClick={handleAcceptAll}>
+                <button type="button" className={btnCookiePrimary} onClick={handleAcceptAll}>
                   Accetta tutto
-                </button>
-                <button type="button" className={btnOutline} onClick={handleNecessaryOnly}>
-                  Solo necessari
                 </button>
               </div>
             </div>

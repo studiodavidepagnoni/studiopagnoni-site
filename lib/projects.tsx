@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import { withBasePath } from "@/lib/basePath";
+import { franciacortaPaesaggioViticole } from "@/lib/content";
 import { ui } from "@/lib/ui";
 
 const a = (name: string) => withBasePath(`/assets/stock/${name}`);
@@ -52,10 +53,7 @@ export const projectCategories: Record<
           <strong>strade di montagna</strong>, <strong>sentieri</strong> e interventi di riqualificazione forestale, con il supporto di agronomi di
           fiducia quando il progetto richiede competenze specifiche.
         </p>
-        <p className={ui.body}>
-          In Franciacorta abbiamo collaborato con realtà viticole di eccellenza (tra cui <strong>Ca&apos; del Bosco</strong>) su percorsi di
-          progettazione e valorizzazione del paesaggio colturale.
-        </p>
+        <p className={ui.body}>{franciacortaPaesaggioViticole}</p>
       </>
     ),
     cases: [
@@ -88,6 +86,14 @@ export const projectCategories: Record<
       </>
     ),
     cases: [
+      {
+        slug: "capannone-logistico-slam-rs10",
+        title: "Capannone logistico — as-built SLAM RS10",
+        caption: "Capannone logistico · SLAM",
+        cover: a("chi-siamo-slam-hero.jpg"),
+        alt: "Rilievo laser SLAM in capannone logistico — acquisizione con CHCNAV RS10",
+        href: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
+      },
       {
         slug: "rilievi-gnss-e-slam",
         title: "Rilievi GNSS, stazione totale e SLAM",
@@ -156,6 +162,15 @@ export const projectCategories: Record<
  * Progetti in evidenza per HOME: stile “feed” pulito, pochi testi.
  */
 export const featuredProjects: FeaturedProject[] = [
+  {
+    area: "rilievi-digitalizzazione",
+    slug: "capannone-logistico-slam-rs10",
+    caption: "Capannone logistico — as-built SLAM",
+    cover: a("chi-siamo-slam-hero.jpg"),
+    alt: "Rilievo laser SLAM RS10 in capannone — acquisizione sul campo",
+    href: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
+    label: "Laser SLAM · RS10",
+  },
   {
     area: "rilievi-digitalizzazione",
     slug: "rilievi-gnss-e-slam",
@@ -227,16 +242,57 @@ export const projectCaseStudies: Record<
           <strong>paesaggio</strong> e <strong>normativa</strong>: filari, parchi, viabilità rurale e percorsi escursionistici, anche in coordinamento
           con figure agronomiche per le scelte tecniche e vegetazionali.
         </p>
-        <p className={ui.body}>
-          In <strong>Franciacorta</strong> abbiamo collaborato con cantine e realtà viticole (tra cui <strong>Ca&apos; del Bosco</strong>) su iniziative
-          di progettazione e valorizzazione del contesto colturale, in linea con l&apos;identità del territorio.
-        </p>
+        <p className={ui.body}>{franciacortaPaesaggioViticole}</p>
       </>
     ),
     gallery: [
       { src: a("survey-site.jpg"), alt: "Rilievi sul territorio — operazioni sul campo" },
       { src: a("topography-tool.jpg"), alt: "Strumentazione e rilievi topografici" },
       { src: a("analysis-dashboard.jpg"), alt: "Sintesi e restituzione dati — elaborati" },
+    ],
+  },
+  "rilievi-digitalizzazione/capannone-logistico-slam-rs10": {
+    metaTitle: "Capannone logistico — rilievo as-built SLAM RS10",
+    metaDescription:
+      "Caso studio: documentazione as-built di capannone logistico con laser scanner SLAM mobile CHCNAV RS10 — nuvola di punti, piante e sezioni. Commessa anonimizzata, hinterland bresciano.",
+    heading: "Capannone logistico — documentazione as-built con RS10",
+    body: (
+      <>
+        <p className={`${ui.body} mb-4`}>
+          <strong>Commessa anonimizzata</strong> — hinterland bresciano, 2025. Un&apos;impresa di logistica doveva aggiornare la documentazione metrica
+          di un <strong>capannone di circa 8.200 m²</strong> su due livelli (area operativa e uffici tecnici) prima di interventi su impianti e layout
+          interno. Obiettivo: base 3D affidabile per progettisti e direzione lavori, senza fermare l&apos;attività oltre le finestre concordate.
+        </p>
+        <p className={`${ui.body} mb-4`}>
+          In <strong>una giornata di acquisizione</strong> con <strong>CHCNAV RS10</strong> abbiamo coperto percorsi continui tra area esterna di
+          manovra, corpo capannone e zone ufficio, con controllo in tempo reale sulla copertura della nuvola. Il rilievo topografico di supporto con{" "}
+          <strong>GNSS RTK</strong> ha ancorato il modello al sistema di riferimento del committente.
+        </p>
+        <p className={`${ui.body} mb-4`}>
+          In elaborazione: allineamento, pulizia della nuvola e estrazione di <strong>piante quote</strong> e <strong>sezioni</strong> sui livelli
+          principali. Consegna in <strong>E57</strong> per archivio interno, <strong>DWG</strong> per lo studio di progettazione e sintesi PDF per la
+          direzione impianti.
+        </p>
+        <p className={ui.body}>
+          <strong>Esito:</strong> riduzione dei rilievi manuali in quota, individuazione anticipata di interferenze tra passerelle e nuovi percorsi
+          previsti, e un unico riferimento geometrico condiviso tra impresa, progettista e facility. I materiali fotografici di questa pagina sono
+          placeholder: verranno sostituiti con immagini reali della commessa.
+        </p>
+      </>
+    ),
+    gallery: [
+      {
+        src: a("chi-siamo-slam-hero.jpg"),
+        alt: "Fase 1 — Acquisizione SLAM in capannone: operatore con scanner mobile RS10",
+      },
+      {
+        src: a("pointcloud-data.jpg"),
+        alt: "Fase 2 — Nuvola di punti georiferita del capannone logistico",
+      },
+      {
+        src: a("design-drawings.jpg"),
+        alt: "Fase 3 — Piante e sezioni da nuvola di punti per progetto impianti",
+      },
     ],
   },
   "rilievi-digitalizzazione/rilievi-gnss-e-slam": {

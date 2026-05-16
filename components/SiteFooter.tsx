@@ -1,9 +1,10 @@
-import Link from "next/link";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+﻿import Link from "next/link";
+import { SiteBrandLockup } from "@/components/SiteBrandLockup";
+import { fontNav, fontSans } from "@/lib/fonts";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
-const linkClass = `${fontSans.className} block text-sm text-[var(--footer-muted)] transition-colors hover:text-[var(--footer-link-hover)]`;
+const footerNavLinkClass = `${fontNav.className} site-footer-nav-link flex min-h-[48px] touch-manipulation items-center text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--header-nav-hover)]/55 sm:min-h-0 sm:py-1`;
 
 export function SiteFooter() {
   return (
@@ -12,27 +13,12 @@ export function SiteFooter() {
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
-              <div className="group flex items-start gap-3 sm:gap-4">
-                {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
-                <img
-                  src="/logo-mark.svg?v=15"
-                  alt=""
-                  width={616}
-                  height={616}
-                  className="h-12 w-12 shrink-0 object-contain opacity-100 brightness-[2.55] saturate-[1.22] contrast-[1.08] drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] transition-[filter] duration-200 group-hover:brightness-[2.85] group-hover:saturate-[1.28] group-hover:drop-shadow-[0_0_18px_color-mix(in_srgb,var(--header-accent)_48%,transparent)] sm:h-14 sm:w-14"
-                  aria-hidden
-                />
-                <div className="min-w-0">
-                  <p
-                    className={`${fontDisplay.className} text-3xl font-medium tracking-tight text-[var(--footer-link-hover)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] group-hover:contrast-105 sm:text-4xl`}
-                  >
-                    {site.name}
-                  </p>
-                  <p className={`${fontSans.className} mt-3 max-w-xl text-sm leading-relaxed text-[var(--footer-muted)] sm:text-[0.97rem]`}>
-                    {site.tagline}
-                  </p>
-                </div>
-              </div>
+              <SiteBrandLockup
+                tone="chrome"
+                title={site.brandName}
+                markSize="h-12 w-12 sm:h-14 sm:w-14"
+                className="max-w-full"
+              />
 
               <p className={`${fontSans.className} mt-6 max-w-[56ch] text-sm leading-relaxed text-[var(--footer-muted)] sm:text-[0.97rem]`}>
                 Studio tecnico attivo tra Franciacorta, provincia di Brescia e Nord Italia per topografia, laser scanner SLAM,
@@ -46,45 +32,44 @@ export function SiteFooter() {
 
             <div className="grid gap-10 sm:grid-cols-2">
               <div>
-                <h3 className={`${fontSans.className} mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--footer-faint)]`}>
-                  Navigazione
-                </h3>
-                <ul className="space-y-2.5">
+                <nav aria-label="Link del sito">
+                <ul className="space-y-0.5">
                   <li>
-                    <Link className={linkClass} href="/chi-siamo">
+                    <Link className={footerNavLinkClass} href="/chi-siamo">
                       Chi siamo
                     </Link>
                   </li>
                   <li>
-                    <Link className={linkClass} href="/servizi">
+                    <Link className={footerNavLinkClass} href="/servizi">
                       Servizi
                     </Link>
                   </li>
                   <li>
-                    <Link className={linkClass} href="/topografia">
+                    <Link className={footerNavLinkClass} href="/topografia">
                       Topografia
                     </Link>
                   </li>
                   <li>
-                    <Link className={linkClass} href="/laser-scanner-slam">
+                    <Link className={footerNavLinkClass} href="/laser-scanner-slam">
                       Laser SLAM
                     </Link>
                   </li>
                   <li>
-                    <Link className={linkClass} href="/progetti">
+                    <Link className={footerNavLinkClass} href="/progetti">
                       Progetti
                     </Link>
                   </li>
                   <li>
-                    <Link className={linkClass} href="/privacy-policy">
+                    <Link className={footerNavLinkClass} href="/privacy-policy">
                       Privacy
                     </Link>
                   </li>
                 </ul>
+                </nav>
               </div>
 
               <div>
-                <h3 className={`${fontSans.className} mb-4 text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--footer-faint)]`}>
+                <h3 className={`${fontNav.className} mb-4 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`}>
                   Contatti
                 </h3>
                 <p className={`${fontSans.className} text-sm leading-relaxed text-[var(--footer-muted)]`}>{site.addressLine}</p>
@@ -125,7 +110,19 @@ export function SiteFooter() {
               &copy; {new Date().getFullYear()} {site.legalName}
               {site.piva ? ` · P.IVA ${site.piva}` : null}
             </p>
-            <p className={`${fontSans.className} text-[var(--footer-muted)]`}>Topografia · Architettura · SLAM</p>
+            <p
+              className={`${fontNav.className} site-brand-tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 text-[0.55rem] font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2 sm:text-[0.6rem]`}
+            >
+              <span>Topografia</span>
+              <span className="site-brand-tagline__sep" aria-hidden>
+                ·
+              </span>
+              <span>Architettura</span>
+              <span className="site-brand-tagline__sep" aria-hidden>
+                ·
+              </span>
+              <span>SLAM</span>
+            </p>
           </div>
         </div>
       </div>

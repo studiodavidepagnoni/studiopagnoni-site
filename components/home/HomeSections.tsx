@@ -11,17 +11,16 @@ import {
   homeProgettiIntro,
   homeServiziIntro,
   homeStrumentazione,
-  homeServiceCards,
   zoneContent,
   zoneDescription,
   zoneFooter,
 } from "@/lib/content";
 import { homeChiSiamoImages } from "@/lib/images";
-import { withBasePath } from "@/lib/basePath";
 import { featuredProjects } from "@/lib/projects";
 import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
-import { ServiceIcon } from "./ServiceIcons";
+import { SiteBrandMark } from "@/components/SiteBrandMark";
+import { HomeServiceCards } from "./HomeServiceCards";
 import { StatsSection } from "./StatsSection";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
@@ -60,23 +59,12 @@ export function HomeSections() {
             {/* ── Testo (sinistra) ── */}
             <div className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-6">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
-                <div className="mx-auto box-border flex aspect-square w-[5.35rem] shrink-0 items-center justify-center sm:mx-0 sm:w-[6rem] md:w-[6.75rem]">
-                  {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
-                  <img
-                    src={`${withBasePath("/logo-mark.svg")}?v=15`}
-                    alt=""
-                    width={616}
-                    height={616}
-                    className="h-full w-full object-contain"
-                    aria-hidden
-                  />
-                </div>
+                <SiteBrandMark className="mx-auto shrink-0 sm:mx-0" />
                 <p className="min-w-0 text-balance text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]">
                   <span className="sr-only">Studio Tecnico Pagnoni. </span>
                   {homeChiSiamo.short}
                 </p>
               </div>
-
               <ul className="mt-7 space-y-3 sm:mt-8" aria-label="Ambiti principali">
                 {homeChiSiamo.highlights.map((h) => (
                   <li key={h.label} className="flex items-start gap-3">
@@ -96,10 +84,10 @@ export function HomeSections() {
               </ul>
 
               <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-                <Link href="/chi-siamo" className={`${ui.btnOutline} inline-flex w-full justify-center sm:w-auto`}>
+                <Link href="/chi-siamo" className={`${ui.btnOutline} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
                   Chi siamo
                 </Link>
-                <Link href="/contatti" className={`${ui.btnPrimary} inline-flex w-full justify-center sm:w-auto`}>
+                <Link href="/contatti" className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
                   Contatti
                 </Link>
               </div>
@@ -120,7 +108,7 @@ export function HomeSections() {
                 <div className="image-unify-overlay opacity-35" aria-hidden />
                 {/* Caption badge */}
                 <div className="absolute bottom-4 left-4">
-                  <div className="rounded-md bg-[#070908]/72 px-3 py-1.5 backdrop-blur-sm">
+                  <div className="rounded-md bg-[color-mix(in_srgb,var(--surface-chrome-deep)_72%,transparent)] px-3 py-1.5 backdrop-blur-sm">
                     <p
                       className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white`}
                     >
@@ -131,11 +119,12 @@ export function HomeSections() {
               </div>
             </div>
           </div>
+
         </div>
       </section>
 
       {/* ── Servizi ── */}
-      <section id="servizi" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section id="servizi" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Ambiti</p>
@@ -147,11 +136,11 @@ export function HomeSections() {
           <div
             id="strumentazione"
             aria-labelledby="strumentazione-heading"
-            className="reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:mb-10 sm:p-6"
+            className="surface-inverted reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] p-5 sm:mb-10 sm:p-6"
           >
             {/* Stessa misura per kicker + titolo + lede (evita “colonna stretta” sotto titolo largo). */}
             <div className="max-w-[min(62ch,100%)]">
-              <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>SLAM e geomatica</p>
+              <p className={`${fontSans.className} section-kicker`}>SLAM e geomatica</p>
               <h3
                 id="strumentazione-heading"
                 className={`${fontDisplay.className} mt-2 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl`}
@@ -167,7 +156,7 @@ export function HomeSections() {
             <ul className="mt-6 grid list-none gap-4 sm:grid-cols-3 sm:gap-5">
               {homeStrumentazione.items.map((item) => (
                 <li key={item.label} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-4 sm:p-5">
-                  <p className={`${fontSans.className} text-[0.68rem] font-bold uppercase tracking-[0.14em] text-[var(--primary-mid)]`}>{item.label}</p>
+                  <p className={`${fontSans.className} section-kicker`}>{item.label}</p>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{item.text}</p>
                 </li>
               ))}
@@ -194,33 +183,7 @@ export function HomeSections() {
             </nav>
           </div>
 
-          <div className="grid gap-4 sm:gap-5 lg:grid-cols-2">
-            {homeServiceCards.map((card, idx) => (
-              <article
-                key={card.title}
-                className="reveal-block frost-card flex flex-col border-t border-t-[var(--green-border)] p-5 sm:p-6"
-              >
-                <div className="mb-4 flex items-start justify-between gap-3">
-                  <span className={`${fontSans.className} text-[0.68rem] font-bold tabular-nums text-[var(--primary-mid)]`}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </span>
-                  <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--background)] text-[var(--primary-mid)]">
-                    <ServiceIcon index={idx} className="h-6 w-6" />
-                  </div>
-                </div>
-                <h3 className={`${fontDisplay.className} mb-2 text-[1.2rem] font-semibold leading-snug text-[var(--foreground)] sm:text-xl`}>
-                  {card.title}
-                </h3>
-                <p className="copy-rhythm mb-5 flex-1 text-[0.92rem] text-[var(--copy-body)] sm:text-[0.98rem]">{card.description}</p>
-                <Link
-                  href={card.href}
-                  className={`${fontSans.className} mt-auto inline-flex min-h-[44px] items-center text-sm font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 transition hover:decoration-[var(--primary-mid)]`}
-                >
-                  Approfondisci
-                </Link>
-              </article>
-            ))}
-          </div>
+          <HomeServiceCards />
           <p className="mt-8 sm:mt-10">
             <Link href="/servizi" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
               Elenco completo dei servizi
@@ -230,7 +193,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Progetti (feed) ── */}
-      <section id="progetti" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="progetti" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Lavori</p>
@@ -276,7 +239,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Processo ── */}
-      <section id="processo" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section id="processo" className="surface-inverted lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Metodo</p>
@@ -302,7 +265,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Abilitazioni professionali ── */}
-      <section id="certificazioni" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="certificazioni" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Titoli</p>
@@ -322,7 +285,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Dove operiamo ── */}
-      <section id="zone-servite" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section id="zone-servite" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Territorio</p>
@@ -356,7 +319,7 @@ export function HomeSections() {
       <StatsSection />
 
       {/* ── Contatti ── */}
-      <section id="contatti" className="lazy-section section-shell scroll-mt-[100px] bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="contatti" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Contatto</p>

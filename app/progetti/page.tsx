@@ -1,42 +1,39 @@
 import Image from "next/image";
 import Link from "next/link";
-import type { Metadata } from "next";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { progettiIndexIntro } from "@/lib/content";
 import { projectPreview } from "@/lib/images";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { buildPageMetadata } from "@/lib/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Progetti",
+export const metadata = buildPageMetadata({
+  title: "Progetti — rilievi SLAM, topografia e territorio",
   description:
-    "Territorio e paesaggio, rilievi geomatici e laser SLAM, edilizia e urbanistica — Studio Tecnico Pagnoni, Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Commesse in Lombardia e Nord Italia.",
-  alternates: { canonical: `${site.url}/progetti` },
-};
+    "Esempi di commesse: rilievi laser SLAM e nuvole di punti, topografia, paesaggio viticolo, edilizia. Studio Tecnico Pagnoni — Franciacorta e provincia di Brescia.",
+  path: "/progetti",
+});
 
 export default function ProgettiPage() {
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
-          <header className="mb-10 max-w-[72ch] sm:mb-12">
-            <p className={ui.pageEyebrow}>Portfolio</p>
-            <h1 className={`${fontDisplay.className} reveal-title ${ui.pageTitle} mb-4 sm:mb-5`}>Progetti e ambiti</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
-            <p className={`reveal-block ${ui.bodyMuted} text-pretty`}>{progettiIndexIntro}</p>
-          </header>
+          <p className={`reveal-block ${ui.bodyMuted} max-w-[72ch] text-pretty`}>{progettiIndexIntro}</p>
 
-          <div className="reveal-block mb-12 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-3">
+          <div className="reveal-block mb-12 mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:mt-12 sm:grid-cols-3">
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent-warm)]`}>Territorio</p>
-              <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">Verde, vigneti, paesaggio agricolo e collaborazioni in Franciacorta.</p>
+              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Territorio</p>
+              <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">
+                Verde, vigneti e paesaggio agricolo. In Franciacorta, importanti collaborazioni di progettazione paesaggistica con realtà vinicole.
+              </p>
             </div>
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent-warm)]`}>Rilievi</p>
+              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Rilievi</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">GNSS, stazione totale e laser scanner SLAM per documentazione digitale.</p>
             </div>
             <div className="bg-[var(--card)] p-6 sm:p-7">
-              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--accent-warm)]`}>Edilizia</p>
+              <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Edilizia</p>
               <p className="mt-3 text-sm leading-relaxed text-[var(--copy-body)]">Urbanistica, pratiche, architettura e sicurezza di cantiere.</p>
             </div>
           </div>

@@ -1,32 +1,45 @@
-import type { Metadata } from "next";
 import { ContactForm } from "@/components/ContactForm";
 import { MapEmbed } from "@/components/MapEmbed";
 import { fontDisplay } from "@/lib/fonts";
+import { buildPageMetadata, seoKeywords } from "@/lib/seo";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Contatti",
+export const metadata = buildPageMetadata({
+  title: "Contatti e preventivo rilievo SLAM",
   description:
-    "Recapiti dello Studio Tecnico Pagnoni: Via Vittorio Emanuele III 16, Cazzago San Martino (BS), frazione Bornato. Franciacorta e provincia di Brescia. Email studio@pagnoni-s.com, telefoni Davide e Sergio Pagnoni.",
-  alternates: { canonical: `${site.url}/contatti` },
+    "Richiedi un sopralluogo o preventivo per rilievi laser scanner SLAM e topografia. Sede a Cazzago San Martino (BS), Franciacorta. Email studio@pagnoni-s.com — Geom. Sergio e Arch. Davide Pagnoni.",
+  path: "/contatti",
+  keywords: ["preventivo rilievo laser scanner", "sopralluogo rilievo 3D Brescia", ...seoKeywords.primary.slice(0, 3)],
+  priority: "high",
+});
+
+type ContattiPageProps = {
+  searchParams: Promise<{ oggetto?: string }>;
 };
 
-export default function ContattiPage() {
+export default async function ContattiPage({ searchParams }: ContattiPageProps) {
+  const { oggetto } = await searchParams;
+  const isSlamLead = oggetto === "slam";
+
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
           <div className="mb-10 max-w-[780px] sm:mb-12">
-            <p className={ui.pageEyebrow}>Contatto</p>
-            <h1 id="recapiti-heading" className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>
-              Contatti
-            </h1>
-            <div className={ui.pageTitleRule} aria-hidden />
             <p className={ui.body}>
-              Siamo disponibili per preventivi su <strong>rilievi topografici</strong>, <strong>laser scanner SLAM</strong>,{" "}
-              <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e <strong>coordinamento sicurezza</strong>. Indica la
-              località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
+              {isSlamLead ? (
+                <>
+                  Stai richiedendo informazioni su un <strong>rilievo laser scanner SLAM</strong>. Compila il modulo con superficie indicativa e
+                  formato di consegna desiderato: ti risponderemo con tempi e preventivo su misura.
+                </>
+              ) : (
+                <>
+                  Siamo disponibili per preventivi su <strong>rilievi topografici</strong>, <strong>laser scanner SLAM</strong>,{" "}
+                  <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e <strong>coordinamento sicurezza</strong>. Indica la
+                  località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
+                </>
+              )}
             </p>
           </div>
 
@@ -70,7 +83,10 @@ export default function ContattiPage() {
           <section id="form-contatti" className="mt-12 scroll-mt-[120px] sm:mt-16">
             <div className={ui.innerCard}>
               <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
-              <ContactForm />
+              <ContactForm
+                defaultSubject={isSlamLead ? "Preventivo rilievo laser SLAM" : ""}
+                defaultInquiryType={isSlamLead ? "slam" : ""}
+              />
             </div>
           </section>
         </div>

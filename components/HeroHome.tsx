@@ -1,19 +1,48 @@
 "use client";
 
+import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
+import { heroMotionVariants } from "@/lib/heroMotion";
 import { HERO_POSTER_DEFAULT, HERO_VIDEO_DEFAULT, heroSlides } from "@/lib/images";
 import { ui } from "@/lib/ui";
 
-const HERO_FIRST_SLIDE_MS = 16_000;
-const HERO_OTHER_SLIDES_MS = 5_000;
+/** Prima slide: più tempo per lettura + video RS10. */
+const HERO_FIRST_SLIDE_MS = 24_000;
+const HERO_FIRST_SLIDE_NO_VIDEO_MS = 18_000;
+/** Slide con video: proseguono da dove erano (non remount). */
+const HERO_VIDEO_SLIDE_MS = 20_000;
+const HERO_IMAGE_SLIDE_MS = 14_000;
+
+function slideDurationMs(
+  slideIndex: number,
+  isMobile: boolean,
+  failedVideos: ReadonlySet<string>,
+): number {
+  const slide = heroSlides[slideIndex];
+  const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;
+  const hasVideo = !isMobile && !failedVideos.has(videoSrc);
+  if (slideIndex === 0) return hasVideo ? HERO_FIRST_SLIDE_MS : HERO_FIRST_SLIDE_NO_VIDEO_MS;
+  return hasVideo ? HERO_VIDEO_SLIDE_MS : HERO_IMAGE_SLIDE_MS;
+}
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
+  const reducedMotion = useReducedMotion();
+  const motionVariants = heroMotionVariants(!!reducedMotion);
+  const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
+
+  const registerVideo = useCallback(
+    (src: string) => (el: HTMLVideoElement | null) => {
+      if (el) videoRefs.current.set(src, el);
+      else videoRefs.current.delete(src);
+    },
+    [],
+  );
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -24,140 +53,218 @@ export function HeroHome() {
   }, []);
 
   useEffect(() => {
-    const delayMs = idx === 0 ? HERO_FIRST_SLIDE_MS : HERO_OTHER_SLIDES_MS;
+    const delayMs = slideDurationMs(idx, isMobile, failedVideos);
     const timeoutId = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
     }, delayMs);
     return () => window.clearTimeout(timeoutId);
-  }, [idx]);
+  }, [idx, isMobile, failedVideos]);
+
+  /** Play solo la slide attiva; le altre restano in pausa (playback riprende al ritorno). */
+  useEffect(() => {
+    if (isMobile) {
+      videoRefs.current.forEach((video) => video.pause());
+      return;
+    }
+
+    heroSlides.forEach((slide, slideIndex) => {
+      const src = slide.video ?? HERO_VIDEO_DEFAULT;
+      if (failedVideos.has(src)) return;
+      const video = videoRefs.current.get(src);
+      if (!video) return;
+
+      if (slideIndex === idx) {
+        void video.play().catch(() => {});
+      } else {
+        video.pause();
+      }
+    });
+  }, [idx, isMobile, failedVideos]);
 
   const slide = heroSlides[idx];
-  const videoSrc = slide.video ?? HERO_VIDEO_DEFAULT;
-  const posterSrc = slide.poster ?? HERO_POSTER_DEFAULT;
-  const showVideo = !isMobile && !failedVideos.has(videoSrc);
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
+  const primaryHref = slide.primaryCtaHref ?? "/contatti";
+  const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
 
-  const handleVideoError = () => {
+  const goToSlide = (index: number) => {
+    setIdx(((index % heroSlides.length) + heroSlides.length) % heroSlides.length);
+  };
+
+  const handleVideoError = (src: string) => {
     setFailedVideos((prev) => {
-      if (prev.has(videoSrc)) return prev;
+      if (prev.has(src)) return prev;
       const next = new Set(prev);
-      next.add(videoSrc);
+      next.add(src);
       return next;
     });
   };
 
+  const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
+    <svg className="h-8 w-8 sm:h-9 sm:w-9" viewBox="0 0 24 24" fill="none" aria-hidden>
+      <path
+        d={direction === "left" ? "M14 6L8 12l6 6" : "M10 6l6 6-6 6"}
+        stroke="currentColor"
+        strokeWidth="1.75"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
   return (
     <section
-      className="relative isolate h-[100svh] overflow-hidden border-b border-[var(--green-border-muted)] sm:h-[96vh] md:h-[760px]"
+      className="relative isolate h-[100dvh] min-h-[100svh] max-w-full overflow-x-hidden overflow-y-hidden border-b border-[var(--green-border-muted)]"
       aria-label="Introduzione"
     >
       <div
-        className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,#081512_0%,#081916_38%,#09211d_100%)]"
+        className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]"
         aria-hidden
       />
 
-      <div className="pointer-events-none absolute inset-0 z-[-10]">
-        {showVideo ? (
-          <video
-            key={videoSrc}
-            className="absolute inset-0 h-full w-full object-cover opacity-[0.68] brightness-[1.04] saturate-[1.02]"
-            src={videoSrc}
-            poster={posterSrc}
-            muted
-            playsInline
-            autoPlay
-            loop
-            preload="metadata"
-            onError={handleVideoError}
-            aria-hidden
-          />
-        ) : (
-          <Image
-            src={slide.src}
-            alt=""
-            fill
-            className="object-cover brightness-[0.94] saturate-[0.94]"
-            sizes="100vw"
-            priority
-            fetchPriority="high"
-          />
-        )}
-        <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(4,10,9,0.56)_0%,rgba(4,10,9,0.38)_42%,rgba(4,10,9,0.18)_100%)]" aria-hidden />
+      <div className="pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
+        {heroSlides.map((slideItem, slideIndex) => {
+          const videoSrc = slideItem.video ?? HERO_VIDEO_DEFAULT;
+          const posterSrc = slideItem.poster ?? HERO_POSTER_DEFAULT;
+          const showVideo = !isMobile && !failedVideos.has(videoSrc);
+          const isActive = slideIndex === idx;
+
+          return (
+            <div
+              key={slideIndex}
+              className={`hero-media__layer${isActive ? " hero-media__layer--active" : ""}`}
+              aria-hidden={!isActive}
+            >
+              {showVideo ? (
+                <video
+                  ref={registerVideo(videoSrc)}
+                  className="hero-media__video absolute inset-0 h-full w-full"
+                  style={
+                    slideItem.videoObjectPosition
+                      ? { objectPosition: slideItem.videoObjectPosition }
+                      : undefined
+                  }
+                  src={videoSrc}
+                  poster={posterSrc}
+                  muted
+                  playsInline
+                  loop
+                  preload="auto"
+                  onError={() => handleVideoError(videoSrc)}
+                  aria-hidden
+                />
+              ) : (
+                <Image
+                  src={slideItem.src}
+                  alt=""
+                  fill
+                  className="hero-media__image object-cover"
+                  sizes="100vw"
+                  priority={slideIndex === 0}
+                  fetchPriority={slideIndex === 0 ? "high" : "auto"}
+                />
+              )}
+            </div>
+          );
+        })}
+        <div className="hero-media__overlay hero-media__overlay--shade" aria-hidden />
+        <div className="hero-media__overlay hero-media__overlay--vignette" aria-hidden />
+        <div className="hero-media__overlay hero-media__overlay--veil" aria-hidden />
       </div>
 
-      <div className="relative z-20 mx-auto flex h-full max-w-[1200px] flex-col justify-center px-4 pb-16 pt-24 sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
-        <div className="max-w-[min(100%,43rem)] text-left">
+      <motion.div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
+        <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left" data-hero-intro>
           <p
-            className={`${fontSans.className} mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] text-[var(--header-text-muted)] sm:text-[0.74rem]`}
+            className={`${fontSans.className} hero-eyebrow reveal-faint mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
           >
             Dal 1988 · Cazzago San Martino, Brescia
           </p>
 
-          <div className="min-h-[2.35em] sm:min-h-[2.2em]">
-            <h1
-              className={`${fontDisplay.className} section-title text-[clamp(2.25rem,5.1vw,4.4rem)] font-medium leading-[1.02] text-[#f6f4ef]`}
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={idx}
+              variants={motionVariants.container}
+              initial="hidden"
+              animate="show"
+              exit="exit"
             >
-              <span key={idx} className="block">
-                {slide.line1}
-              </span>
-            </h1>
-          </div>
-
-          <div className="mt-4 min-h-[2.2em] sm:min-h-[2.05em] md:min-h-0">
-            <p
-              className={`${fontDisplay.className} text-[clamp(1.32rem,3.1vw,2.1rem)] font-medium leading-[1.08] text-white/66 md:whitespace-nowrap`}
-            >
-              {line2Parts.map((part, i) => (
-                <span key={`${part}-${i}`}>
-                  <span className="whitespace-nowrap">{part}</span>
-                  {i < line2Parts.length - 1 ? <span className="mx-2 text-white/28">·</span> : null}
-                </span>
-              ))}
-            </p>
-          </div>
-
-          <div className="mt-6 h-px max-w-[5.5rem] bg-[color-mix(in_srgb,var(--header-text-muted)_45%,transparent)]" aria-hidden />
-
-          <div className="mt-6 min-h-[5.4em] sm:min-h-[4.9em] md:min-h-[5.2rem]">
-            <p className="reading-measure-tight text-[0.98rem] leading-[1.8] text-white/84 sm:text-[1.04rem] md:text-[1.1rem]">
-              {slide.body}
-            </p>
-          </div>
-
-          <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
-            <Link href="/contatti" className={ui.btnHeroPrimary}>
-              Richiedi un sopralluogo
-            </Link>
-            <Link href={slide.ctaHref} className={ui.btnHeroGhost}>
-              {slide.ctaLabel}
-            </Link>
-          </div>
-
-          <div className="mt-9 flex flex-wrap items-center gap-2" aria-label="Seleziona slide hero">
-            {heroSlides.map((heroSlide, i) => {
-              const isActive = i === idx;
-              return (
-                <button
-                  key={heroSlide.ctaHref}
-                  type="button"
-                  onClick={() => setIdx(i)}
-                  aria-pressed={isActive}
-                  aria-label={`Vai alla slide ${i + 1}: ${heroSlide.line1}`}
-                  className={`flex min-h-[44px] min-w-[44px] touch-manipulation items-center justify-center rounded-full transition-colors motion-reduce:transition-none ${
-                    isActive ? "text-[var(--foreground)]" : "text-white/28 hover:text-white/48"
-                  }`}
+              <div className="min-h-[2.35em] overflow-hidden sm:min-h-[2.2em]">
+                <motion.h1
+                  variants={motionVariants.item}
+                  className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}
                 >
-                  <span
-                    className={`block h-[3px] rounded-full transition-all duration-300 motion-reduce:transition-none ${
-                      isActive ? "w-8 bg-current" : "w-2 bg-current"
-                    }`}
-                  />
-                </button>
-              );
-            })}
-          </div>
+                  {slide.line1}
+                </motion.h1>
+              </div>
+
+              <motion.div
+                variants={motionVariants.item}
+                className="mt-3 min-h-0 overflow-hidden sm:mt-3.5 sm:min-h-[2.05em] md:min-h-0"
+              >
+                <p
+                  className={`${fontDisplay.className} hero-line2 flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(1.05rem,4.6vw,2.05rem)] font-medium leading-[1.2] tracking-[0.02em] md:flex-nowrap md:gap-x-0 md:whitespace-nowrap`}
+                >
+                  {line2Parts.map((part, i) => (
+                    <span key={`${part}-${i}`} className="inline-flex items-baseline">
+                      <span className="max-md:whitespace-normal md:whitespace-nowrap">{part}</span>
+                      {i < line2Parts.length - 1 ? (
+                        <span className="hero-line2__sep mx-2" aria-hidden>
+                          ·
+                        </span>
+                      ) : null}
+                    </span>
+                  ))}
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={motionVariants.line}
+                className="hero-rule mt-6 h-px max-w-[5.5rem] origin-left"
+                aria-hidden
+              />
+
+              <motion.div
+                variants={motionVariants.item}
+                className="mt-6 min-h-[5.4em] overflow-hidden sm:min-h-[4.9em] md:min-h-[5.2rem]"
+              >
+                <p
+                  className={`${fontSans.className} hero-body reading-measure-tight text-[0.98rem] leading-[1.8] sm:text-[1.04rem] md:text-[1.1rem]`}
+                >
+                  {slide.body}
+                </p>
+              </motion.div>
+
+              <motion.div
+                variants={motionVariants.item}
+                className="mt-8 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:mt-9 md:gap-4"
+              >
+                <Link href={primaryHref} className={ui.btnHeroPrimary}>
+                  {primaryLabel}
+                </Link>
+                <Link href={slide.ctaHref} className={ui.btnHeroGhost}>
+                  {slide.ctaLabel}
+                </Link>
+              </motion.div>
+            </motion.div>
+          </AnimatePresence>
         </div>
-      </div>
+      </motion.div>
+
+      <button
+        type="button"
+        onClick={() => goToSlide(idx - 1)}
+        className={`${fontSans.className} absolute left-2 top-1/2 z-30 flex min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:left-4 md:left-6`}
+        aria-label="Slide precedente"
+      >
+        <ChevronIcon direction="left" />
+      </button>
+      <button
+        type="button"
+        onClick={() => goToSlide(idx + 1)}
+        className={`${fontSans.className} absolute right-2 top-1/2 z-30 flex min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:right-4 md:right-6`}
+        aria-label="Slide successiva"
+      >
+        <ChevronIcon direction="right" />
+      </button>
     </section>
   );
 }

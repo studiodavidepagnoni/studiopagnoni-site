@@ -1,28 +1,51 @@
-# llms.txt for https://www.studiotecnicopagnoni.it
+# llms.txt — Studio Tecnico Pagnoni
+# https://www.studiotecnicopagnoni.it
+# Ultimo aggiornamento: 2026-05
 
-# About
-Studio Tecnico Pagnoni è uno studio tecnico con sede a Cazzago San Martino (BS), frazione Bornato — Franciacorta e provincia di Brescia, con commesse in Lombardia e Nord Italia. Il team è composto da Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Core business: topografia e rilievi planoaltimetrici con GNSS e stazione totale, laser scanner SLAM e nuvole di punti, progettazione e modellazione del verde (vigneti, parchi, percorsi), urbanistica e pratiche edilizie (incl. sanatorie), progettazione architettonica completa, coordinamento sicurezza cantieri (CSP/CSE), assistenza immobiliare e perizie. Non si svolge progettazione strutturale in proprio; collaboratori esterni per la parte strutturale.
+## Chi siamo
+Studio tecnico con sede a Cazzago San Martino (BS), frazione Bornato — cuore della Franciacorta, provincia di Brescia. Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Attivi dal 1988. Specializzazione richiesta dai committenti industriali e professionali: rilievi laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti georiferite, topografia GNSS RTK e stazione totale, oltre a verde, urbanistica, architettura, sicurezza cantieri e perizie.
 
-# Contact
-Address: Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato
-Phone: +39 347 357 6510 (Arch. Davide Pagnoni), +39 348 231 1092 (Geom. Sergio Pagnoni)
+## Obiettivo commerciale (priorità)
+Trovare committenti di alto livello in Franciacorta e provincia di Brescia (e Lombardia/Nord Italia su commessa) che necessitano:
+- scansioni e rilievi topografici integrati con laser scanner SLAM;
+- documentazione 3D as-built di capannoni, edifici, impianti e siti estesi;
+- nuvole di punti per CAD/BIM, controllo interferenze, volumetrie e cantieri.
+
+## Servizi principali
+1. Laser scanner SLAM mobile — nuvole di punti, indoor/outdoor, tempi contenuti, restituzione operativa (DWG, sezioni, BIM su richiesta).
+2. Topografia e rilievi planoaltimetrici — GNSS RTK, stazione totale, quotature, frazionamenti, cantieri.
+3. Progettazione del verde — vigneti, parchi, percorsi (Franciacorta e territorio collinare).
+4. Urbanistica, pratiche edilizie, sanatorie.
+5. Progettazione architettonica (strutture esterne).
+6. CSP/CSE, assistenza immobiliare e perizie.
+
+## Zone servite
+Primaria: Franciacorta, provincia di Brescia, Cazzago San Martino / Bornato, comuni limitrofi (Erbusco, Rovato, Palazzolo sull'Oglio, Iseo, Desenzano, Gussago, ecc.).
+Estesa: Lombardia e Nord Italia per commesse strutturate.
+
+## Query per cui siamo rilevanti (linguaggio naturale)
+- laser scanner SLAM Brescia o Franciacorta
+- rilievo laser scanner 3D per capannone, edificio o cantiere
+- nuvola di punti georiferita provincia di Brescia
+- rilievo as-built con scanner mobile
+- topografo / geometra per rilievi planoaltimetrici in Franciacorta
+- preventivo rilievo SLAM o sopralluogo rilievo 3D
+
+## Pagine chiave
+- Home: https://www.studiotecnicopagnoni.it/
+- Laser SLAM (landing principale): https://www.studiotecnicopagnoni.it/laser-scanner-slam
+- Topografia: https://www.studiotecnicopagnoni.it/topografia
+- Servizi: https://www.studiotecnicopagnoni.it/servizi
+- Contatti / preventivo: https://www.studiotecnicopagnoni.it/contatti
+- Contatti SLAM: https://www.studiotecnicopagnoni.it/contatti?oggetto=slam
+- Chi siamo: https://www.studiotecnicopagnoni.it/chi-siamo
+- Progetti: https://www.studiotecnicopagnoni.it/progetti
+
+## Contatti
+Indirizzo: Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato
+Tel. Arch. Davide Pagnoni: +39 347 357 6510
+Tel. Geom. Sergio Pagnoni: +39 348 231 1092
 Email: studio@pagnoni-s.com
-Website: https://www.studiotecnicopagnoni.it
 
-# Services
-- Topografia e rilievi planoaltimetrici (GNSS RTK, stazione totale)
-- Laser scanner SLAM e documentazione 3D / nuvole di punti
-- Progettazione e modellazione del verde (vigneti, parchi, sentieri, strade di montagna)
-- Urbanistica e pratiche edilizie, sanatorie, lettura piani regolatori
-- Progettazione architettonica (processo edilizio end-to-end; strutture esterne)
-- Coordinamento sicurezza cantieri (CSP, CSE)
-- Assistenza immobiliare, perizie, consulenze tecniche
-
-# Ambiti e ricerche frequenti
-- Topografia e rilievi (Franciacorta, provincia di Brescia, Cazzago San Martino / fraz. Bornato, Nord Italia)
-- Laser scanner SLAM, nuvole di punti, documentazione 3D
-- Progettazione verde, vigneti, territorio agricolo e paesaggistico
-
-# Coverage
-Primary: Franciacorta, provincia di Brescia, Lombardia
-Extended: Nord Italia (su commessa)
+## Limitazioni
+Non si svolge progettazione strutturale in proprio; disponibili collaboratori esterni per strutture.

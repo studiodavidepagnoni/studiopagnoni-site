@@ -2,19 +2,36 @@
 
 import { useCallback, useMemo, useState } from "react";
 import Link from "next/link";
+import {
+  desiredOutputOptions,
+  inquiryTypeOptions,
+  labelForDesiredOutput,
+  labelForInquiryType,
+  labelForSurfaceArea,
+  surfaceAreaOptions,
+  type InquiryType,
+} from "@/lib/contactFormOptions";
 import { site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
 type FieldErrors = Partial<Record<"name" | "email" | "message" | "privacy", string>>;
 
-export function ContactForm() {
+export type ContactFormProps = {
+  defaultSubject?: string;
+  defaultInquiryType?: InquiryType | "";
+};
+
+export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: ContactFormProps) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
-  const [subject, setSubject] = useState("");
+  const [subject, setSubject] = useState(defaultSubject);
+  const [inquiryType, setInquiryType] = useState(defaultInquiryType);
+  const [surfaceArea, setSurfaceArea] = useState("");
+  const [desiredOutput, setDesiredOutput] = useState("");
   const [city, setCity] = useState("");
   const [message, setMessage] = useState("");
   const [privacy, setPrivacy] = useState(false);
-  const [gotcha, setGotcha] = useState(""); // honeypot: i bot lo riempiono, gli umani no
+  const [gotcha, setGotcha] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
 
@@ -35,39 +52,52 @@ export function ContactForm() {
 
   const onBlur = (field: string) => () => setTouched((t) => ({ ...t, [field]: true }));
 
+  const buildExtraFieldsText = useCallback(() => {
+    const lines: string[] = [];
+    if (inquiryType) lines.push(`Tipo richiesta: ${labelForInquiryType(inquiryType)}`);
+    if (surfaceArea) lines.push(`Superficie indicativa: ${labelForSurfaceArea(surfaceArea)}`);
+    if (desiredOutput) lines.push(`Output desiderato: ${labelForDesiredOutput(desiredOutput)}`);
+    return lines.length ? `${lines.join("\n")}\n\n` : "";
+  }, [inquiryType, surfaceArea, desiredOutput]);
+
   const onSubmit = useCallback(
     async (ev: React.FormEvent) => {
       ev.preventDefault();
       setTouched({ name: true, email: true, message: true, privacy: true });
       if (!valid) return;
 
-      // Honeypot pieno → silenziosamente "successo" senza inviare nulla.
       if (gotcha.trim().length > 0) {
         setStatus("success");
         return;
       }
 
       setStatus("submitting");
-      const subjectLine = subject?.trim() || "Richiesta da sito web";
+      const subjectLine =
+        subject?.trim() ||
+        (inquiryType === "slam" ? "Preventivo rilievo laser SLAM" : "Richiesta da sito web");
+      const extra = buildExtraFieldsText();
+
       try {
         const id = site.formspreeId?.trim();
         if (!id) {
           const sj = encodeURIComponent(subjectLine);
           const body = encodeURIComponent(
-            `Nome: ${name}\nEmail: ${email}\nZona: ${city || "-"}\n\n${message}`
+            `Nome: ${name}\nEmail: ${email}\nZona: ${city || "-"}\n\n${extra}${message}`
           );
           window.location.href = `mailto:${site.email}?subject=${sj}&body=${body}`;
           setStatus("success");
           setName("");
           setEmail("");
           setSubject("");
+          setInquiryType("");
+          setSurfaceArea("");
+          setDesiredOutput("");
           setCity("");
           setMessage("");
           setPrivacy(false);
           setTouched({});
           return;
         }
-        // _subject pilota la subject line nelle notifiche Formspree, _replyto imposta il Reply-To.
         const res = await fetch(`https://formspree.io/f/${id}`, {
           method: "POST",
           headers: { Accept: "application/json", "Content-Type": "application/json" },
@@ -77,8 +107,11 @@ export function ContactForm() {
             email,
             _subject: `[Sito] ${subjectLine}`,
             subject: subjectLine,
+            inquiryType: inquiryType ? labelForInquiryType(inquiryType) : "",
+            surfaceArea: surfaceArea ? labelForSurfaceArea(surfaceArea) : "",
+            desiredOutput: desiredOutput ? labelForDesiredOutput(desiredOutput) : "",
             city: city || "",
-            message,
+            message: `${extra}${message}`,
           }),
         });
         if (res.ok) {
@@ -86,6 +119,9 @@ export function ContactForm() {
           setName("");
           setEmail("");
           setSubject("");
+          setInquiryType("");
+          setSurfaceArea("");
+          setDesiredOutput("");
           setCity("");
           setMessage("");
           setPrivacy(false);
@@ -95,7 +131,7 @@ export function ContactForm() {
         setStatus("error");
       }
     },
-    [valid, gotcha, name, email, subject, city, message]
+    [valid, gotcha, name, email, subject, inquiryType, city, message, buildExtraFieldsText, surfaceArea, desiredOutput]
   );
 
   if (status === "success") {
@@ -111,7 +147,6 @@ export function ContactForm() {
 
   return (
     <form onSubmit={onSubmit} className="grid w-full gap-3 sm:gap-4 md:grid-cols-2" noValidate>
-      {/* Honeypot: nascosto agli utenti via CSS, visibile ai bot. Va fuori dal flusso visivo e dal tab order. */}
       <div aria-hidden className="hidden" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
         <label htmlFor="_gotcha">Non compilare se sei umano</label>
         <input
@@ -124,6 +159,27 @@ export function ContactForm() {
           onChange={(e) => setGotcha(e.target.value)}
         />
       </div>
+
+      <div className="md:col-span-2">
+        <label htmlFor="inquiryType" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+          Tipo di richiesta
+        </label>
+        <select
+          id="inquiryType"
+          name="inquiryType"
+          value={inquiryType}
+          onChange={(e) => setInquiryType(e.target.value as InquiryType | "")}
+          className={ui.inputField}
+        >
+          <option value="">Seleziona</option>
+          {inquiryTypeOptions.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
       <div>
         <label htmlFor="name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
           Nome e cognome <span className="text-red-700">*</span>
@@ -170,6 +226,44 @@ export function ContactForm() {
       </div>
 
       <div>
+        <label htmlFor="surfaceArea" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+          Superficie indicativa
+        </label>
+        <select
+          id="surfaceArea"
+          name="surfaceArea"
+          value={surfaceArea}
+          onChange={(e) => setSurfaceArea(e.target.value)}
+          className={ui.inputField}
+        >
+          {surfaceAreaOptions.map((o) => (
+            <option key={o.value || "empty"} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
+        <label htmlFor="desiredOutput" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+          Output desiderato
+        </label>
+        <select
+          id="desiredOutput"
+          name="desiredOutput"
+          value={desiredOutput}
+          onChange={(e) => setDesiredOutput(e.target.value)}
+          className={ui.inputField}
+        >
+          {desiredOutputOptions.map((o) => (
+            <option key={o.value || "empty"} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div>
         <label htmlFor="subject" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
           Oggetto
         </label>
@@ -207,6 +301,7 @@ export function ContactForm() {
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           onBlur={onBlur("message")}
+          placeholder="Descrivi immobile, finalità del rilievo e tempistiche desiderate."
           className={ui.inputField}
           aria-invalid={!!errors.message}
           aria-describedby={errors.message ? "err-msg" : undefined}
@@ -218,7 +313,7 @@ export function ContactForm() {
         ) : null}
       </div>
 
-      <div className="flex items-start gap-3 md:col-span-2">
+      <div className="flex min-h-[48px] items-start gap-3 md:col-span-2">
         <input
           id="privacy"
           name="privacy"
@@ -226,10 +321,10 @@ export function ContactForm() {
           checked={privacy}
           onChange={(e) => setPrivacy(e.target.checked)}
           onBlur={onBlur("privacy")}
-          className="mt-0.5 h-5 w-5 shrink-0 accent-[var(--primary-mid)] sm:mt-1"
+          className="mt-1.5 h-5 w-5 min-h-[20px] min-w-[20px] shrink-0 accent-[var(--primary-mid)]"
           aria-invalid={!!errors.privacy}
         />
-        <label htmlFor="privacy" className="text-[0.82rem] text-[var(--copy-body)] sm:text-sm">
+        <label htmlFor="privacy" className="flex min-h-[48px] flex-1 items-center py-2 text-base text-[var(--copy-body)] sm:text-sm">
           Ho letto e accetto la{" "}
           <Link href="/privacy-policy" className="font-semibold text-[var(--primary-mid)] underline underline-offset-2 hover:text-[var(--primary)]">
             privacy policy
@@ -237,6 +332,7 @@ export function ContactForm() {
           . <span className="text-red-700">*</span>
         </label>
       </div>
+
       {errors.privacy ? <p className="text-sm text-red-700 md:col-span-2">{errors.privacy}</p> : null}
 
       {status === "error" ? (

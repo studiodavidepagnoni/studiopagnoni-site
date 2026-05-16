@@ -1,20 +1,20 @@
-import type { Metadata } from "next";
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
 import { COOKIE_MIRROR_NAME, COOKIE_PREFS_STORAGE_KEY } from "@/lib/cookieConsent";
 import { fontDisplay, fontSans } from "@/lib/fonts";
+import { buildPageMetadata } from "@/lib/seo";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
 const LAST_UPDATED = "9 maggio 2026";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Privacy policy e cookie",
   description:
-    "Informativa privacy GDPR (Reg. UE 2016/679), cookie e diritti degli interessati — Studio Tecnico Pagnoni, Italia.",
-  alternates: { canonical: `${site.url}/privacy-policy` },
-};
+    "Informativa privacy GDPR (Reg. UE 2016/679), cookie e diritti degli interessati — Studio Tecnico Pagnoni, Cazzago San Martino (BS).",
+  path: "/privacy-policy",
+});
 
 const toc = [
   { href: "#titolare", label: "Titolare" },
@@ -46,10 +46,7 @@ export default function PrivacyPolicyPage() {
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} py-10 sm:py-14`}>
           <header className="mb-10 max-w-[72ch] sm:mb-12">
-            <p className={ui.pageEyebrow}>GDPR · Italia · 2026</p>
-            <h1 className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>Privacy policy e cookie</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
-            <p className={`${fontSans.className} ${ui.body} mt-6`}>
+            <p className={`${fontSans.className} ${ui.body}`}>
               Informativa resa ai sensi degli{" "}
               <strong className="font-semibold text-[var(--foreground)]">artt. 13 e 14 del Regolamento (UE) 2016/679 (GDPR)</strong> e degli artt.{" "}
               <strong className="font-semibold text-[var(--foreground)]">13–14 del D.Lgs. 196/2003</strong> (Codice Privacy), come modificato dal D.Lgs.{" "}
@@ -161,7 +158,7 @@ export default function PrivacyPolicyPage() {
                     <p className={`${ui.body} mt-1`}>Art. 6, comma 1, lett. <strong>f</strong> GDPR (legittimo interesse del Titolare a garantire sicurezza e continuità del sito), salvo diversa disciplina per i cookie (vedi sezione Cookie).</p>
                   </div>
                   <div className={`${ui.innerCard} border-[var(--green-border-muted)] sm:col-span-2`}>
-                    <p className={`${fontSans.className} text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--accent-warm)]`}>Facoltativo</p>
+                    <p className={`${fontSans.className} section-kicker`}>Facoltativo</p>
                     <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>Google Maps (incorporamento)</h3>
                     <p className={`${ui.body} mt-3`}>
                       Visualizzazione della mappa sulla pagina Contatti. Il caricamento dell&apos;iframe comporta potenziali trattamenti da parte di Google LLC / Google Ireland Limited secondo le proprie informative.
@@ -321,8 +318,8 @@ export default function PrivacyPolicyPage() {
                   </p>
                 </div>
 
-                <div className="overflow-x-auto rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)]">
-                  <table className={`${fontSans.className} w-full min-w-[560px] text-left text-[0.85rem] sm:text-[0.9rem]`}>
+                <div className="overflow-table overflow-x-auto rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)]">
+                  <table className={`${fontSans.className} w-full min-w-0 text-left text-[0.85rem] max-md:min-w-[min(100%,560px)] sm:min-w-[560px] sm:text-[0.9rem]`}>
                     <caption className="sr-only">Elenco cookie e tecnologie di memorizzazione locale</caption>
                     <thead>
                       <tr className="border-b border-[var(--green-border-muted)] bg-[var(--muted)] text-[0.65rem] font-bold uppercase tracking-[0.14em] text-[var(--green-ink-muted)]">

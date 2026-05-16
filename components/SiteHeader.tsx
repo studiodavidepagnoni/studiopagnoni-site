@@ -1,14 +1,28 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from "react";
-import { ReadingProgressBar } from "@/components/ReadingProgressBar";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { usePathname } from "next/navigation";
+import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { withBasePath } from "@/lib/basePath";
+import { fontDisplay, fontNav, fontSans } from "@/lib/fonts";
+import { isHomePath } from "@/lib/isHomePath";
+import { isNavItemActive } from "@/lib/navActive";
 import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/site";
 
+/** Scroll: menu principale si nasconde con slide progressivo (home e pagine interne). */
+const HEADER_HIDE_RANGE_PX = 140;
+const HEADER_HIDE_START_PX = 8;
+const PAGE_HERO_OVERLAY_TAIL_PX = 72;
+
+function clamp01(n: number) {
+  return Math.min(1, Math.max(0, n));
+}
+
 export function SiteHeader() {
+  const pathname = usePathname();
+  const isHome = isHomePath(pathname);
   const [open, setOpen] = useState(false);
-  const [scrolled, setScrolled] = useState(false);
+  const [scrollY, setScrollY] = useState(0);
   const brandTextRef = useRef<HTMLDivElement>(null);
   const brandMarkRef = useRef<HTMLDivElement>(null);
   const brandLineRef = useRef<HTMLSpanElement>(null);
@@ -20,6 +34,7 @@ export function SiteHeader() {
   const menuTouchStartRef = useRef<{ x: number; y: number } | null>(null);
   const wasMenuOpenRef = useRef(false);
   const [brandMarkPx, setBrandMarkPx] = useState<number>(56);
+  const [pageHeroOverlayEnd, setPageHeroOverlayEnd] = useState(0);
 
   const onMobileNavTouchStart = useCallback(
     (e: React.TouchEvent) => {
@@ -62,22 +77,9 @@ export function SiteHeader() {
 
     const brandWidth = brandEl.getBoundingClientRect().width;
     if (brandWidth <= 1) return;
-    const targetWidth = Math.max(brandWidth - 2, 0);
 
+    taglineEl.style.width = `${Math.round(brandWidth)}px`;
     taglineEl.style.letterSpacing = "0em";
-    if (taglineEl.getBoundingClientRect().width <= targetWidth) return;
-
-    let low = -0.12;
-    let high = 0;
-
-    for (let i = 0; i < 24; i += 1) {
-      const mid = (low + high) / 2;
-      taglineEl.style.letterSpacing = `${mid}em`;
-      if (taglineEl.getBoundingClientRect().width > targetWidth) high = mid;
-      else low = mid;
-    }
-
-    taglineEl.style.letterSpacing = `${low}em`;
   }, []);
 
   useLayoutEffect(() => {
@@ -105,11 +107,56 @@ export function SiteHeader() {
   }, [syncBrandMark, syncTaglineWidth]);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 12);
+    const onScroll = () => setScrollY(window.scrollY);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
   }, []);
+
+  useLayoutEffect(() => {
+    const measure = () => {
+      const el = document.querySelector("[data-page-hero]");
+      if (!el) {
+        setPageHeroOverlayEnd(0);
+        return;
+      }
+      const height = el.getBoundingClientRect().height;
+      setPageHeroOverlayEnd(Math.max(0, Math.round(height - PAGE_HERO_OVERLAY_TAIL_PX)));
+    };
+
+    measure();
+    const delayed = window.setTimeout(measure, 150);
+    window.addEventListener("resize", measure, { passive: true });
+
+    return () => {
+      window.clearTimeout(delayed);
+      window.removeEventListener("resize", measure);
+    };
+  }, [pathname]);
+
+  const hideProgress = clamp01((scrollY - HEADER_HIDE_START_PX) / HEADER_HIDE_RANGE_PX);
+  const hasPageHero = !isHome && pageHeroOverlayEnd > 0;
+  const isOverlay =
+    hideProgress < 1 &&
+    (isHome || (hasPageHero && scrollY < pageHeroOverlayEnd));
+  const headerHidden = hideProgress >= 1;
+
+  useEffect(() => {
+    if (hideProgress > 0.12 && open) setOpen(false);
+  }, [hideProgress, open]);
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (headerHidden) {
+      root.setAttribute("data-header-mode", "hidden");
+      return () => root.removeAttribute("data-header-mode");
+    }
+    if (isOverlay) {
+      root.setAttribute("data-header-mode", "overlay");
+      return () => root.removeAttribute("data-header-mode");
+    }
+    root.removeAttribute("data-header-mode");
+  }, [headerHidden, isOverlay]);
 
   useEffect(() => {
     document.body.classList.toggle("overflow-hidden", open);
@@ -179,7 +226,9 @@ export function SiteHeader() {
 
     const apply = () => {
       const height = headerEl.getBoundingClientRect().height;
-      if (height > 0) root.style.setProperty("--site-header-offset", `${Math.round(height)}px`);
+      if (height <= 0) return;
+      const visible = height * (1 - hideProgress);
+      root.style.setProperty("--site-header-offset", `${Math.max(20, Math.round(visible))}px`);
     };
 
     apply();
@@ -192,15 +241,36 @@ export function SiteHeader() {
       window.removeEventListener("resize", apply);
       root.style.removeProperty("--site-header-offset");
     };
-  }, []);
+  }, [hideProgress]);
 
-  const headerSurface = scrolled ? "bg-[var(--header-surface-scrolled)]" : "bg-[var(--header-surface)]";
+  const headerSurface = "bg-[var(--header-surface-scrolled)]";
+  const headerPosition = "fixed inset-x-0 top-0";
+  const headerChrome = isOverlay
+    ? "border-0 bg-[linear-gradient(180deg,rgba(4,10,9,0.62)_0%,rgba(4,10,9,0.2)_40%,rgba(4,10,9,0)_88%)] shadow-none"
+    : `border-b border-[var(--header-border)] ${headerSurface} shadow-[0_10px_32px_rgba(0,0,0,0.14)]`;
+
+  const headerHideStyle: CSSProperties = {
+    transform: `translate3d(0, ${-hideProgress * 100}%, 0)`,
+    opacity: 1 - hideProgress * 0.92,
+    pointerEvents: hideProgress >= 1 ? "none" : "auto",
+    visibility: hideProgress >= 1 ? "hidden" : "visible",
+  };
+
+  const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header block px-3 py-2 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`;
+  const mobileNavLinkClass = `${fontNav.className} site-nav-link site-nav-link--mobile flex min-h-[48px] items-center border-b border-[var(--header-border)] py-2 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] touch-manipulation`;
+
+  const menuButtonClass = isOverlay
+    ? "border-white/22 bg-white/[0.06] hover:bg-white/[0.1]"
+    : "border-[var(--header-border)] bg-[var(--header-control-bg)]";
 
   return (
     <>
       <header
         ref={headerRootRef}
-        className={`sticky top-0 z-[1000] flex flex-col border-b border-[var(--header-border)] pt-[env(safe-area-inset-top,0px)] transition-colors duration-200 ${headerSurface}`}
+        data-header-overlay={isOverlay ? "true" : undefined}
+        aria-hidden={headerHidden}
+        style={headerHideStyle}
+        className={`${headerPosition} z-[1000] flex flex-col pt-[env(safe-area-inset-top,0px)] will-change-transform transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none ${headerChrome}`}
       >
         <div
           className={`${layoutGutterXClass} max-md:ps-[max(1rem,env(safe-area-inset-left,0px))] max-md:pe-[max(1rem,env(safe-area-inset-right,0px))]`}
@@ -219,11 +289,11 @@ export function SiteHeader() {
               >
                 {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
                 <img
-                  src="/logo-mark.svg?v=15"
+                  src={`${withBasePath("/logo-mark.svg")}?v=15`}
                   alt=""
                   width={616}
                   height={616}
-                  className="h-full w-full object-contain opacity-100 brightness-[2.55] saturate-[1.22] contrast-[1.08] drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] transition-[filter] duration-200 group-hover:brightness-[2.85] group-hover:saturate-[1.28] group-hover:drop-shadow-[0_0_18px_color-mix(in_srgb,var(--header-accent)_48%,transparent)]"
+                  className="site-brand-mark h-full w-full object-contain"
                   aria-hidden
                 />
               </div>
@@ -231,38 +301,51 @@ export function SiteHeader() {
               <div ref={brandTextRef} className="flex min-w-0 flex-col items-start gap-y-1.5 sm:gap-y-2">
                 <span
                   ref={brandLineRef}
-                  className={`${fontDisplay.className} text-[1.1rem] font-medium tracking-tight leading-none text-[var(--header-text)] transition-[filter] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:contrast-105 group-hover:drop-shadow-[0_0_14px_color-mix(in_srgb,var(--header-accent)_38%,transparent)] sm:text-[1.35rem] md:text-[1.6rem]`}
+                  className={`${fontNav.className} site-brand-title whitespace-nowrap text-[1.05rem] font-bold uppercase leading-none tracking-normal sm:text-[1.25rem] md:text-[1.45rem]`}
                 >
-                  Studio Pagnoni
+                  {site.brandName}
                 </span>
                 <span
                   ref={taglineRef}
-                  className={`${fontDisplay.className} text-[0.55rem] font-normal uppercase leading-snug text-[var(--header-text-muted)] transition-[filter,color] duration-200 group-hover:brightness-110 group-hover:saturate-110 group-hover:text-[color-mix(in_srgb,var(--header-text)_78%,var(--header-text-muted))] group-hover:drop-shadow-[0_0_12px_color-mix(in_srgb,var(--header-accent)_32%,transparent)] sm:text-[0.6rem] md:text-[0.65rem]`}
+                  className={`${fontNav.className} site-brand-tagline flex items-baseline justify-between text-[0.55rem] font-bold uppercase leading-snug sm:text-[0.6rem] md:text-[0.65rem]`}
                 >
-                  Topografia · Architettura · SLAM
+                  <span>Topografia</span>
+                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
+                    ·
+                  </span>
+                  <span>Architettura</span>
+                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
+                    ·
+                  </span>
+                  <span>SLAM</span>
                 </span>
               </div>
             </Link>
 
-            <nav className="hidden shrink-0 md:block" aria-label="Menu principale">
-              <ul className="flex flex-wrap items-center justify-end gap-x-1 gap-y-2 lg:gap-x-2">
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`${fontSans.className} relative px-3 py-2 text-[0.9rem] font-medium text-[var(--header-text)]/90 transition after:absolute after:inset-x-3 after:bottom-1 after:h-px after:origin-left after:scale-x-0 after:bg-[var(--header-accent)] after:transition after:content-[''] hover:text-[var(--header-accent)] hover:after:scale-x-100`}
-                    >
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
+            <nav className="site-header-nav hidden shrink-0 md:block" aria-label="Menu principale">
+              <ul className="site-header-nav__list flex flex-wrap items-center justify-end gap-y-2">
+                {navItems.map((item, index) => {
+                  const active = isNavItemActive(pathname, item.href);
+                  const isLast = index === navItems.length - 1;
+                  return (
+                    <li key={item.href}>
+                      <Link
+                        href={item.href}
+                        className={`${navLinkClass}${isLast ? " site-nav-link--last" : ""}${active ? " site-nav-link--active" : ""}`}
+                        aria-current={active ? "page" : undefined}
+                      >
+                        {item.label}
+                      </Link>
+                    </li>
+                  );
+                })}
               </ul>
             </nav>
 
             <button
               ref={menuButtonRef}
               type="button"
-              className="flex h-11 w-11 shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border border-[var(--header-border)] bg-[var(--header-control-bg)] md:hidden"
+              className={`flex min-h-[48px] min-w-[48px] shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border md:hidden ${menuButtonClass}`}
               aria-expanded={open}
               aria-controls="mobile-nav"
               aria-label={open ? "Chiudi menu" : "Apri menu"}
@@ -275,9 +358,6 @@ export function SiteHeader() {
           </div>
         </div>
 
-        <div className="w-full shrink-0 border-t border-[var(--header-border)]/55">
-          <ReadingProgressBar />
-        </div>
       </header>
 
       <nav
@@ -298,18 +378,22 @@ export function SiteHeader() {
             Menu
           </p>
           <ul className="flex flex-col gap-1">
-            {navItems.map((item, index) => (
-              <li key={item.href}>
-                <Link
-                  ref={index === 0 ? firstMobileNavRef : undefined}
-                  href={item.href}
-                  className={`${fontSans.className} flex min-h-[48px] items-center border-b border-[var(--header-border)] py-2 text-lg font-medium text-[var(--header-text)] transition hover:text-[var(--header-accent)] touch-manipulation`}
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
+            {navItems.map((item, index) => {
+              const active = isNavItemActive(pathname, item.href);
+              return (
+                <li key={item.href}>
+                  <Link
+                    ref={index === 0 ? firstMobileNavRef : undefined}
+                    href={item.href}
+                    className={`${mobileNavLinkClass}${active ? " site-nav-link--active" : ""}`}
+                    aria-current={active ? "page" : undefined}
+                    onClick={() => setOpen(false)}
+                  >
+                    {item.label}
+                  </Link>
+                </li>
+              );
+            })}
           </ul>
         </div>
       </nav>

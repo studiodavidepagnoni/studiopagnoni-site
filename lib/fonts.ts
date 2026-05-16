@@ -1,4 +1,4 @@
-import { Manrope, Plus_Jakarta_Sans, Sora } from "next/font/google";
+import { Manrope, Montserrat, Plus_Jakarta_Sans, Sora } from "next/font/google";
 
 /**
  * Corpo: Manrope — sans contemporanea, pulita e leggibile su UI dense.
@@ -29,6 +29,18 @@ export const fontDisplay = Sora({
  * Marchio header/footer: Plus Jakarta Sans — più morbida e “studio” rispetto a Sora,
  * resta contemporanea con Manrope e i titoli geometrici.
  */
+/**
+ * Menu principale: Montserrat 700 — come TheGem / Drone Surveying (14px, uppercase, bianco).
+ */
+export const fontNav = Montserrat({
+  subsets: ["latin"],
+  variable: "--font-nav",
+  display: "swap",
+  weight: ["700"],
+  preload: false,
+  adjustFontFallback: true,
+});
+
 export const fontBrand = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-brand",

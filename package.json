@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "node scripts/clean-next.cjs",
     "sync:static": "node scripts/sync-static.cjs",
+    "process:hero-videos": "node scripts/process-hero-videos.cjs",
     "gen:favicon": "node scripts/gen-favicon.cjs",
     "predev": "node scripts/sync-static.cjs",
     "prebuild": "node scripts/sync-static.cjs",

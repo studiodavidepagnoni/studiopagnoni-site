@@ -1,41 +1,30 @@
-import type { Metadata } from "next";
 import Link from "next/link";
 import { fontDisplay } from "@/lib/fonts";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { buildPageMetadata, seoKeywords } from "@/lib/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Servizi di topografia, laser SLAM e progettazione",
+export const metadata = buildPageMetadata({
+  title: "Servizi — laser SLAM, topografia e progettazione",
   description:
-    "Topografia e rilievi GNSS, laser scanner SLAM, progettazione del verde, urbanistica, architettura, pratiche edilizie, CSP/CSE e assistenza immobiliare — Studio Tecnico Pagnoni, Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Nord Italia.",
-  alternates: { canonical: `${site.url}/servizi` },
-  keywords: [
-    "servizi topografici Brescia",
-    "rilievo planoaltimetrico Lombardia",
-    "laser scanner edifici",
-    "coordinamento sicurezza cantieri CSP CSE",
-    "pratiche edilizie Cazzago San Martino",
-  ],
-};
+    "Laser scanner SLAM e nuvole di punti, topografia GNSS, verde, urbanistica, architettura, sicurezza cantieri e perizie. Studio tecnico in Franciacorta e provincia di Brescia dal 1988.",
+  path: "/servizi",
+  keywords: [...seoKeywords.primary.slice(0, 4), ...seoKeywords.supporting],
+});
 
 export default function ServiziPage() {
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
-          <header className="w-full">
-            <p className={ui.pageEyebrow}>Cosa facciamo</p>
-            <h1 className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>Servizi</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
-            <p className={`${ui.body} max-w-5xl`}>
+          <p className={`${ui.body} max-w-5xl`}>
               Lo <strong>Studio Tecnico Pagnoni</strong> è in attività <strong>dal 1988</strong> e affianca privati, imprese e professionisti su{" "}
               <strong>misura del territorio</strong>, <strong>digitalizzazione laser</strong> e <strong>iter edilizio</strong>. La progettazione
               strutturale non è svolta in proprio: quando serve, si integrano <strong>collaboratori esterni</strong> (ingegneri strutturisti), con un
               referente unico se la commessa lo richiede.
-            </p>
-          </header>
+          </p>
 
-          <section aria-labelledby="intro-topografia-slam">
+          <section className="mt-10 sm:mt-12" aria-labelledby="intro-topografia-slam">
             <h2 id="intro-topografia-slam" className={`${fontDisplay.className} ${ui.cardHeading} mb-3 sm:mb-4`}>
               Cos&apos;è la topografia · Cos&apos;è il laser SLAM
             </h2>
@@ -46,7 +35,7 @@ export default function ServiziPage() {
             <div className="grid gap-6 md:grid-cols-2 md:gap-8">
               <Link
                 href="/topografia"
-                className="group flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 transition hover:border-[var(--green-border)] hover:border-t-[var(--accent-warm)] sm:p-8"
+                className="interactive-card group flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 sm:p-8"
               >
                 <span className={`${fontDisplay.className} text-xl font-semibold text-[var(--foreground)] group-hover:text-[var(--primary-mid)]`}>
                   Topografia e rilievi
@@ -57,11 +46,11 @@ export default function ServiziPage() {
                   confini, volumi e tracciamenti. In studio si usano ricevitori <strong>GPS/GNSS</strong> (anche in modalità di alta precisione) e{" "}
                   <strong>stazione totale</strong> per allineare la documentazione a catasto, progetto e cantieristica.
                 </p>
-                <span className="mt-6 text-sm font-semibold text-[var(--accent-warm)] group-hover:underline">Approfondisci la topografia →</span>
+                <span className="mt-6 text-sm font-semibold text-[var(--primary-mid)] group-hover:underline">Approfondisci la topografia →</span>
               </Link>
               <Link
                 href="/laser-scanner-slam"
-                className="group flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary)] bg-[var(--card)] p-6 transition hover:border-[var(--green-border)] hover:border-t-[var(--accent-warm)] sm:p-8"
+                className="interactive-card group flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 sm:p-8"
               >
                 <span className={`${fontDisplay.className} text-xl font-semibold text-[var(--foreground)] group-hover:text-[var(--primary-mid)]`}>
                   Laser scanner SLAM
@@ -72,7 +61,7 @@ export default function ServiziPage() {
                   percorre l&apos;ambiente, senza dover piantare la strumentazione come negli scanner statici: è utile per edifici complessi, impianti e
                   grandi volumi da documentare in tempi contenuti, spesso integrando il rilievo topografico classico.
                 </p>
-                <span className="mt-6 text-sm font-semibold text-[var(--accent-warm)] group-hover:underline">Approfondisci il laser SLAM →</span>
+                <span className="mt-6 text-sm font-semibold text-[var(--primary-mid)] group-hover:underline">Approfondisci il laser SLAM →</span>
               </Link>
             </div>
           </section>
@@ -125,8 +114,7 @@ export default function ServiziPage() {
                 <strong>Vigneti, parchi, strade di montagna, sentieri</strong> e interventi di riqualificazione del verde, anche con supporto agronomico.
               </li>
               <li className="relative pl-5 before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]">
-                Collaborazioni con realtà viticole in <strong>Franciacorta</strong> (es. <strong>Ca&apos; del Bosco</strong>) su percorsi di progettazione
-                paesaggistica.
+                In <strong>Franciacorta</strong>, importanti collaborazioni di progettazione paesaggistica con realtà vinicole.
               </li>
             </ul>
 

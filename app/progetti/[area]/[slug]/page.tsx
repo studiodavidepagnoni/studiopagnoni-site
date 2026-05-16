@@ -1,8 +1,8 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PageHero } from "@/components/PageHero";
 import { ProjectImageLightbox } from "@/components/projects/ProjectImageLightbox";
-import { fontDisplay } from "@/lib/fonts";
 import {
   getCaseStudyKey,
   isProjectArea,
@@ -48,7 +48,16 @@ export default async function ProjectCasePage({ params }: Props) {
   const cs = projectCaseStudies[key];
   const cat = projectCategories[area];
 
+  const heroImage = cs.gallery[0];
+
   return (
+    <>
+      <PageHero
+        eyebrow="Progetto"
+        title={cs.heading}
+        image={heroImage.src}
+        alt={heroImage.alt}
+      />
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
@@ -68,10 +77,6 @@ export default async function ProjectCasePage({ params }: Props) {
             <span className="text-[var(--foreground)]/80">{cs.metaTitle}</span>
           </nav>
 
-          <p className={ui.pageEyebrow}>Progetto</p>
-          <h1 className={`${fontDisplay.className} reveal-title ${ui.caseStudyTitle} mb-4 sm:mb-5`}>{cs.heading}</h1>
-          <div className={ui.pageTitleRule} aria-hidden />
-
           <div className="lazy-section">
             <article className={ui.innerCard}>
               <div className="reading-measure mx-auto">
@@ -84,5 +89,6 @@ export default async function ProjectCasePage({ params }: Props) {
         </div>
       </div>
     </main>
+    </>
   );
 }

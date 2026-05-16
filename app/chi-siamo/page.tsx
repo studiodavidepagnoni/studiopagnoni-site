@@ -1,29 +1,22 @@
 import Image from "next/image";
-import type { Metadata } from "next";
-import { fontDisplay } from "@/lib/fonts";
 import { chiSiamoPage } from "@/lib/content";
 import { chiSiamoPageImage } from "@/lib/images";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { buildPageMetadata } from "@/lib/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
-export const metadata: Metadata = {
-  title: "Chi siamo",
+export const metadata = buildPageMetadata({
+  title: "Chi siamo — geometra e architetto a Franciacorta",
   description:
-    "Geometra e architetto a Cazzago San Martino (BS), Franciacorta e provincia di Brescia: Studio Tecnico Pagnoni, topografia, laser SLAM e progettazione del territorio. Operatività in Lombardia e Nord Italia.",
-  alternates: { canonical: `${site.url}/chi-siamo` },
-};
+    "Dal 1988 a Cazzago San Martino (BS): Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Rilievi laser SLAM, topografia e progettazione per Franciacorta, provincia di Brescia e Nord Italia.",
+  path: "/chi-siamo",
+});
 
 export default function ChiSiamoPage() {
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} overflow-x-hidden`}>
-          <header className="mb-10 max-w-[72ch] sm:mb-12">
-            <p className={ui.pageEyebrow}>Lo studio</p>
-            <h1 className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>{chiSiamoPage.title}</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
-          </header>
-
           <div className="grid items-start gap-10 md:grid-cols-12 md:gap-12 lg:gap-14">
             <div className={`md:col-span-7 ${ui.body} space-y-5 sm:space-y-6`}>
               {chiSiamoPage.paragraphs.map((p, i) => (

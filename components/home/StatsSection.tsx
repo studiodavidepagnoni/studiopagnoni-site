@@ -85,12 +85,12 @@ export function StatsSection() {
   return (
     <section
       ref={ref}
-      className="lazy-section border-y border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-12 text-[var(--foreground)] sm:px-5 sm:py-16 md:px-10"
+      className="surface-inverted lazy-section overflow-x-hidden border-y border-[var(--green-border-muted)] px-4 py-12 sm:px-5 sm:py-16 md:px-10"
       aria-labelledby="stats-heading"
     >
       <div className="mx-auto max-w-[1140px]">
         <div className="home-section-intro mb-8 sm:mb-12">
-          <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Perché noi</p>
+          <p className={`${fontSans.className} section-kicker`}>Perché noi</p>
           <h2 id="stats-heading" className={`${fontDisplay.className} section-title home-section-title reveal-title`}>
             Metodo e presenza sul campo
           </h2>

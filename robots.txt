@@ -1,34 +1,21 @@
-# Googlebot
-User-agent: Googlebot
-Allow: /
-Crawl-delay: 0
+# Studio Tecnico Pagnoni — https://www.studiotecnicopagnoni.it
+# Rilievi laser scanner SLAM e topografia — Franciacorta, provincia di Brescia
 
-# Googlebot Image
-User-agent: Googlebot-Image
-Allow: /
-Crawl-delay: 0
-
-# All other crawlers
 User-agent: *
 Allow: /
-
-# Disallow private/internal directories
 Disallow: /firme/
 
-# AI/LLM Crawlers
+# LLM / AI crawlers (contesto sito: /llms.txt)
 User-agent: GPTBot
 Allow: /
 
 User-agent: ChatGPT-User
 Allow: /
 
-User-agent: CCBot
+User-agent: Claude-Web
 Allow: /
 
 User-agent: anthropic-ai
-Allow: /
-
-User-agent: Claude-Web
 Allow: /
 
 User-agent: Google-Extended
@@ -40,5 +27,13 @@ Allow: /
 User-agent: Applebot-Extended
 Allow: /
 
-# Sitemap
+User-agent: CCBot
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+User-agent: Googlebot-Image
+Allow: /
+
 Sitemap: https://www.studiotecnicopagnoni.it/sitemap.xml

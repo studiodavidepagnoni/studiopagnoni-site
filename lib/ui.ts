@@ -1,5 +1,10 @@
 const btnBase =
-  "inline-flex min-h-[44px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap rounded-full px-7 text-sm font-medium transition-colors duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none";
+  "touch-no-hover-lift inline-flex min-h-[48px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap rounded-full px-7 text-base font-semibold tracking-[0.01em] transition-[color,background-color,border-color,box-shadow,transform,filter] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:transform-none sm:min-h-[44px] sm:text-sm";
+
+const ctaPrimaryFill =
+  "border border-[color-mix(in_srgb,var(--cta-primary-border)_72%,transparent)] bg-[linear-gradient(135deg,var(--cta-primary-from)_0%,var(--cta-primary-mid)_50%,var(--cta-primary-to)_100%)] text-[var(--cta-primary-text)] shadow-[0_1px_0_rgba(255,255,255,0.2)_inset,0_10px_28px_var(--cta-primary-glow),0_3px_10px_rgba(0,0,0,0.22)] [@media(hover:hover)]:hover:brightness-[1.05] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.28)_inset,0_14px_36px_var(--cta-primary-glow-strong),0_5px_12px_rgba(0,0,0,0.26)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-[var(--cta-primary-mid)]/50";
+
+const btnPrimaryMint = `${btnBase} bg-[var(--cta-primary-bg)] text-[var(--cta-primary-text)] shadow-[0_8px_24px_var(--accent-glow-16)] hover:bg-[var(--cta-primary-bg-hover)] [@media(hover:hover)]:hover:shadow-[0_12px_32px_var(--accent-glow-25)] focus-visible:outline-[var(--cta-primary-mid)]/55`;
 
 export const ui = {
   pageBg: "bg-[var(--background)]",
@@ -8,7 +13,7 @@ export const ui = {
   sectionSurfaceMuted: "bg-[var(--muted)]",
 
   cardMedia:
-    "overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] transition-colors duration-200 hover:border-[var(--green-border)] hover:bg-[var(--elevated)]",
+    "interactive-card overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]",
 
   pageEyebrow: "section-kicker mb-3",
   pageTitleRule: "home-section-rule mb-8 sm:mb-10",
@@ -27,38 +32,34 @@ export const ui = {
   cardHeading: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
   headingBodyGap: "mb-4 sm:mb-5",
 
-  btnPrimary:
-    `${btnBase} bg-[var(--primary)] text-[var(--on-primary)] hover:bg-[var(--primary-strong)] focus-visible:outline-[var(--primary-mid)]/45`,
+  btnPrimary: btnPrimaryMint,
 
-  btnFooterCta:
-    `${btnBase} bg-[var(--primary-mid)] text-[#05110f] hover:bg-[var(--primary-mid-strong)] focus-visible:outline-[var(--primary-mid)]/55`,
+  /** @deprecated Usa btnPrimary — stesso stile mint */
+  btnFooterCta: btnPrimaryMint,
 
   btnOutline:
     `${btnBase} border border-[var(--green-border)] bg-transparent text-[var(--foreground)] hover:border-[var(--primary-mid)] hover:bg-[var(--card)] focus-visible:outline-[var(--primary)]/45`,
 
-  btnAccent:
-    `${btnBase} bg-[var(--accent-warm)] text-[#0a0a0a] hover:bg-[var(--accent-warm-strong)] focus-visible:outline-[var(--accent-warm)]/45`,
+  /** @deprecated Usa btnPrimary */
+  btnAccent: btnPrimaryMint,
 
-  btnHeroPrimary:
-    `${btnBase} min-h-[48px] w-full bg-[var(--accent-warm)] px-8 text-[#0a0a0a] hover:bg-[var(--accent-warm-strong)] focus-visible:outline-[var(--accent-warm)]/45 sm:w-auto`,
+  btnHeroPrimary: `${btnBase} min-h-[52px] w-full px-9 text-[0.9375rem] font-bold sm:w-auto ${ctaPrimaryFill}`,
 
-  btnHeroGhost:
-    `${btnBase} min-h-[48px] w-full border border-white/18 bg-white/[0.03] px-8 text-white hover:border-white/30 hover:bg-white/[0.06] focus-visible:outline-white/35 sm:w-auto`,
+  btnHeroGhost: `${btnBase} min-h-[52px] w-full border border-[var(--cta-ghost-border)] bg-[linear-gradient(180deg,var(--cta-ghost-bg-top)_0%,var(--cta-ghost-bg-bottom)_100%)] px-9 text-[0.9375rem] text-white shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-md [@media(hover:hover)]:hover:border-[color-mix(in_srgb,white_58%,transparent)] [@media(hover:hover)]:hover:bg-[linear-gradient(180deg,color-mix(in_srgb,white_22%,transparent)_0%,color-mix(in_srgb,white_11%,transparent)_100%)] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_14px_32px_rgba(0,0,0,0.34)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-white/50 sm:w-auto`,
 
   btnGhostOnDark:
     `${btnBase} border border-white/18 bg-transparent text-white hover:bg-white/[0.06] focus-visible:outline-white/35`,
 
-  btnOnDark: `${btnBase} bg-white text-[#0a0a0a] hover:bg-stone-200 focus-visible:outline-white/50`,
+  btnOnDark: `${btnBase} bg-white text-[var(--on-primary-hover)] hover:bg-[color-mix(in_srgb,white_88%,var(--primary-mid))] focus-visible:outline-white/50`,
 
-  cookieAccept:
-    `${btnBase} min-h-[48px] flex-1 bg-[var(--primary)] px-6 text-[var(--on-primary)] hover:bg-[var(--primary-strong)] focus-visible:outline-[var(--primary-mid)]/45 sm:flex-none sm:px-8`,
+  cookieAccept: `${btnPrimaryMint} min-h-[48px] flex-1 px-6 sm:flex-none sm:px-8`,
 
   cookieReject:
     `${btnBase} min-h-[48px] flex-1 border border-white/18 bg-transparent px-5 text-white hover:bg-white/[0.08] focus-visible:outline-white/35 sm:flex-none`,
 
   inputField:
-    "w-full rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18",
+    "w-full min-h-[48px] rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18 max-md:text-base sm:min-h-0",
 
   footerLink:
-    "inline-block py-2 text-[0.92rem] text-[var(--footer-link)] transition-colors duration-200 hover:text-[var(--footer-link-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/45",
+    "inline-flex min-h-[48px] touch-manipulation items-center py-2 text-base text-[var(--footer-link)] transition-colors duration-200 hover:text-[var(--footer-link-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/45 sm:inline-block sm:min-h-0 sm:text-[0.92rem]",
 } as const;

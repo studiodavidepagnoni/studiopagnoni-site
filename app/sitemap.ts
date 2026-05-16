@@ -14,7 +14,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "", changeFrequency: "weekly", priority: 1 },
     { path: "/servizi", changeFrequency: "monthly", priority: 0.9 },
     { path: "/topografia", changeFrequency: "monthly", priority: 0.95 },
-    { path: "/laser-scanner-slam", changeFrequency: "monthly", priority: 0.95 },
+    { path: "/laser-scanner-slam", changeFrequency: "weekly", priority: 1 },
     { path: "/contatti", changeFrequency: "monthly", priority: 0.9 },
     { path: "/chi-siamo", changeFrequency: "monthly", priority: 0.8 },
     { path: "/progetti", changeFrequency: "monthly", priority: 0.8 },

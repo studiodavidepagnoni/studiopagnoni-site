@@ -4,12 +4,16 @@ import Link from "next/link";
 /** Anno di fondazione dello studio. Cambiare qui se mai dovesse variare la data ufficiale. */
 export const STUDIO_FOUNDED_YEAR = 1988;
 
+/** Collaborazioni paesaggistiche in ambito viticolo — copy condiviso su servizi, verde e progetti. */
+export const franciacortaPaesaggioViticole =
+  "In Franciacorta, importanti collaborazioni di progettazione paesaggistica con realtà vinicole.";
+
 export const homeAiSummary = {
-  title: "Studio Tecnico Pagnoni — Topografia, laser SLAM, progettazione",
+  title: "Rilievi laser scanner SLAM e topografia — Franciacorta, Brescia",
   paragraphs: [
-    "Studio tecnico a Cazzago San Martino (BS), frazione Bornato: geometra e architetto. Servizi di topografia e rilievi planoaltimetrici con GPS GNSS e stazione totale, laser scanner SLAM e nuvole di punti, progettazione e modellazione del verde (vigneti, parchi, percorsi), urbanistica, progettazione architettonica completa, sanatorie e pratiche edilizie, coordinamento sicurezza cantieri CSP e CSE, assistenza immobiliare e perizie. Copertura Lombardia, Franciacorta, provincia di Brescia e Nord Italia.",
-    "Parole chiave: rilievo topografico Brescia, geometra topografo Franciacorta, laser scanner 3D Lombardia, SLAM rilievo architettonico Nord Italia, progettazione verde vigneti Franciacorta, pratiche edilizie Cazzago San Martino.",
-    "Contatti: studio@pagnoni-s.com, Via Vittorio Emanuele III 16, Cazzago San Martino (BS).",
+    "Studio Tecnico Pagnoni a Cazzago San Martino (BS), frazione Bornato: rilievi con laser scanner SLAM mobile e nuvole di punti georiferite per capannoni, edifici, impianti e cantieri, affiancati da topografia GNSS RTK e stazione totale. Interventi in Franciacorta, provincia di Brescia, Lombardia e Nord Italia per imprese, studi tecnici e committenti strutturati.",
+    "Oltre ai rilievi digitali: progettazione del verde (vigneti e territorio collinare), urbanistica e pratiche edilizie, architettura, coordinamento sicurezza cantieri (CSP/CSE) e perizie. Attivi dal 1988.",
+    "Per preventivi e sopralluoghi: studio@pagnoni-s.com — Via Vittorio Emanuele III 16, 25046 Cazzago San Martino (BS).",
   ],
 } as const;
 
@@ -31,8 +35,9 @@ export const homeChiSiamo: {
     <>
       Attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> su <strong>topografia e rilievi geomatici</strong> (GNSS RTK, stazione totale, laser scanner
       SLAM), <strong>progettazione</strong> del verde e architettonica, <strong>urbanistica</strong> e <strong>pratiche edilizie</strong>. Sede nella{" "}
-      <strong>frazione Bornato</strong> di <strong>Cazzago San Martino</strong> (provincia di <strong>Brescia</strong>). Il{" "}
-      <strong>Geometra Sergio Pagnoni</strong> e l&apos;<strong>Architetto Davide Pagnoni</strong> seguono ogni commessa con continuità — dalla campagna
+      <strong>frazione Bornato</strong> di <strong>Cazzago San Martino</strong> (provincia di <strong>Brescia</strong>).
+      <br />
+      Il <strong>Geometra Sergio Pagnoni</strong> e l&apos;<strong>Architetto Davide Pagnoni</strong> seguono ogni commessa con continuità — dalla campagna
       agli elaborati finiti. <strong>In ambito edilizio e urbanistico</strong>:{" "}
       <strong>coordinamento della sicurezza in cantiere</strong> (CSP/CSE), <strong>assistenza immobiliare</strong> e <strong>perizie</strong>.
     </>
@@ -106,36 +111,42 @@ export const homeStrumentazione: {
 
 export const homeServiceCards = [
   {
+    kicker: "GNSS · Stazione totale",
     title: "Topografia e rilievi",
     description:
       "Rilievi planoaltimetrici, GNSS RTK, stazione totale, quotature per frazionamenti e cantieri. Precisione e tracciabilità dei dati.",
     href: "/topografia",
   },
   {
+    kicker: "Nuvole di punti · RS10",
     title: "Laser scanner SLAM",
     description:
       "Acquisizione rapida di nuvole di punti e documentazione 3D per edifici, complessi industriali e siti estesi.",
     href: "/laser-scanner-slam",
   },
   {
+    kicker: "Paesaggio · Vigneti",
     title: "Progettazione del verde",
     description:
-      "Vigneti, parchi, strade di montagna, sentieri e boschi, con supporto agronomico. In Franciacorta collaborazioni di progettazione paesaggistica (es. Ca' del Bosco).",
+      `Vigneti, parchi, strade di montagna, sentieri e boschi, con supporto agronomico. ${franciacortaPaesaggioViticole}`,
     href: "/servizi#verde-paesaggio",
   },
   {
+    kicker: "Piani regolatori · Iter",
     title: "Urbanistica e pratiche edilizie",
     description:
       "Sanatorie, interpretazione dei piani regolatori, iter autorizzativi e assistenza nelle pratiche presso gli enti.",
     href: "/servizi#urbanistica-pratiche",
   },
   {
+    kicker: "Concept · Consegna",
     title: "Progettazione architettonica",
     description:
       "Progettazione completa dal concept alla consegna, coordinando le discipline e le fasi del processo edilizio.",
     href: "/servizi#architettura",
   },
   {
+    kicker: "CSP · CSE · Perizie",
     title: "Sicurezza cantieri e assistenza immobiliare",
     description:
       "Coordinamento della sicurezza in fase di progettazione ed esecuzione (CSP e CSE). Assistenza immobiliare, perizie e consulenze tecniche collegate.",
@@ -190,7 +201,7 @@ export const zoneFooter = (
     Per verificare tempi e disponibilità sul vostro territorio{" "}
     <Link
       href="/contatti"
-      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--accent-warm)]/35 underline-offset-2 transition hover:text-[var(--accent-warm)]"
+      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
     >
       contattateci
     </Link>
@@ -239,9 +250,9 @@ export const chiSiamoPage = {
       grafica.
     </>,
     <>
-      Nel settore del <strong>verde</strong> collaboriamo con agronomi di fiducia per interventi su vigneti, parchi e percorsi, inclusi progetti in
-      ambito viticolo di eccellenza (ad esempio collaborazioni con realtà prestigiose come <strong>Ca&apos; del Bosco</strong> nella Franciacorta), nel rispetto delle
-      esigenze paesaggistiche e produttive.
+      Nel settore del <strong>verde</strong> collaboriamo con agronomi di fiducia per interventi su vigneti, parchi e percorsi. In{" "}
+      <strong>Franciacorta</strong>, importanti collaborazioni di progettazione paesaggistica con realtà vinicole, nel rispetto delle esigenze
+      paesaggistiche e produttive.
     </>,
   ],
 };

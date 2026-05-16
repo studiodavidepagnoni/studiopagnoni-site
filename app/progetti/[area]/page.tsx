@@ -2,6 +2,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import Image from "next/image";
 import { notFound } from "next/navigation";
+import { PageHero } from "@/components/PageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { isProjectArea, projectCategories, projectAreas } from "@/lib/projects";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
@@ -30,7 +31,16 @@ export default async function ProjectAreaPage({ params }: Props) {
 
   const c = projectCategories[area];
 
+  const heroCase = c.cases[0];
+
   return (
+    <>
+      <PageHero
+        eyebrow="Ambito"
+        title={c.heading}
+        image={heroCase.cover}
+        alt={heroCase.alt}
+      />
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
@@ -43,12 +53,6 @@ export default async function ProjectAreaPage({ params }: Props) {
             </span>
             <span className="text-[var(--foreground)]/80">{c.heading}</span>
           </nav>
-
-          <header className="mb-8 max-w-[72ch] sm:mb-10">
-            <p className={ui.pageEyebrow}>Ambito</p>
-            <h1 className={`${fontDisplay.className} reveal-title ${ui.pageTitle} mb-4 sm:mb-5`}>{c.heading}</h1>
-            <div className={ui.pageTitleRule} aria-hidden />
-          </header>
 
           <div className="reveal-block mb-12">
             <div className={`${ui.innerCard} !py-6 sm:!py-8`}>
@@ -84,5 +88,6 @@ export default async function ProjectAreaPage({ params }: Props) {
         </div>
       </div>
     </main>
+    </>
   );
 }
