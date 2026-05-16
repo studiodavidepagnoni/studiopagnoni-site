@@ -13,5 +13,5 @@ export async function PageHeroFromPath() {
   const config = resolveStaticPageHero(pathname);
   if (!config) return null;
 
-  return <PageHero {...config} />;
+  return <PageHero key={pathname} {...config} />;
 }

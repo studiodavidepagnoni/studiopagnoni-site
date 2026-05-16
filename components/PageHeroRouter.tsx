@@ -1,22 +1,22 @@
-import { Suspense } from "react";
 import { PageHeroFromPath } from "@/components/PageHeroFromPath";
-import { PageHeroRouterClient } from "@/components/PageHeroRouterClient";
+import { PageHeroRouterShell } from "@/components/PageHeroRouterShell";
 
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 
 /**
  * Hero bandiera pagine interne.
- * - Dev / Node: SSR via `PageHeroFromPath` (immagine nel HTML, menu overlay subito).
- * - Export statico: client (`usePathname`).
+ * Shell client: su home smonta subito (evita foto pagina precedente sopra al video).
+ * - Dev / Node: SSR via `PageHeroFromPath` nel children.
+ * - Export statico: risoluzione client.
  */
 export function PageHeroRouter() {
   if (isStaticExport) {
-    return <PageHeroRouterClient />;
+    return <PageHeroRouterShell mode="client" />;
   }
 
   return (
-    <Suspense fallback={null}>
+    <PageHeroRouterShell mode="server">
       <PageHeroFromPath />
-    </Suspense>
+    </PageHeroRouterShell>
   );
 }

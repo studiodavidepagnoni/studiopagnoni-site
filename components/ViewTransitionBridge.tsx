@@ -2,6 +2,8 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { isHomePath } from "@/lib/isHomePath";
+import { normalizePathname } from "@/lib/normalizePathname";
 
 /**
  * Intercetta i click su link interni e usa document.startViewTransition
@@ -50,8 +52,10 @@ export function ViewTransitionBridge() {
       const go = () => nav(dest);
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
       const doc = document as Document & { startViewTransition?: (cb: () => void) => { finished: Promise<void> } };
+      /** Verso home: niente VT — evita che la bandiera della pagina precedente resti sopra al video. */
+      const skipViewTransition = isHomePath(normalizePathname(url.pathname));
 
-      if (!reduced && typeof doc.startViewTransition === "function") {
+      if (!reduced && !skipViewTransition && typeof doc.startViewTransition === "function") {
         doc.startViewTransition(go);
       } else {
         go();
