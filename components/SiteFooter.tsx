@@ -104,9 +104,9 @@ export function SiteFooter() {
       <div className="border-t border-[var(--footer-edge)] bg-[var(--footer-bg-sub)]">
         <div className={layoutGutterXClass}>
           <div
-            className={`${layoutContentMaxClass} flex flex-col items-center justify-between gap-3 py-6 text-center text-[0.7rem] uppercase tracking-[0.12em] text-[var(--footer-faint)] sm:flex-row sm:text-left`}
+            className={`${layoutContentMaxClass} flex flex-col items-center justify-between gap-3 py-6 text-center sm:flex-row sm:text-left`}
           >
-            <p>
+            <p className="site-brand-tagline text-[0.7rem] uppercase tracking-[0.12em]">
               &copy; {new Date().getFullYear()} {site.legalName}
               {site.piva ? ` · P.IVA ${site.piva}` : null}
             </p>

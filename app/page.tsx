@@ -1,7 +1,12 @@
-import { HeroHome } from "@/components/HeroHome";
+import dynamic from "next/dynamic";
+import { HeroHomePlaceholder } from "@/components/HeroHomePlaceholder";
 import { HomeSections } from "@/components/home/HomeSections";
 import { homeAiSummary } from "@/lib/content";
 import { homeMetadata } from "@/lib/seo";
+
+const HeroHome = dynamic(() => import("@/components/HeroHome").then((m) => ({ default: m.HeroHome })), {
+  loading: () => <HeroHomePlaceholder />,
+});
 
 export const metadata = homeMetadata;
 

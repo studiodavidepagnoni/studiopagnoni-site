@@ -5,7 +5,7 @@ import { SiteFooter } from "@/components/SiteFooter";
 import { PageHeroRouter } from "@/components/PageHeroRouter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { withBasePath } from "@/lib/basePath";
-import { fontBrand, fontDisplay, fontNav, fontSans } from "@/lib/fonts";
+import { fontDisplay, fontSans } from "@/lib/fonts";
 import { jsonLdGraph, rootMetadata } from "@/lib/seo";
 import "./globals.css";
 
@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${fontSans.variable} ${fontDisplay.variable} ${fontBrand.variable} ${fontNav.variable} ${fontSans.className} antialiased theme-light max-md:overflow-x-clip`}
+        className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-light max-md:overflow-x-clip`}
       >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }} />
         <AppProviders>

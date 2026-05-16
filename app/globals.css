@@ -500,7 +500,7 @@ body::before {
   background: var(--hero-media-veil);
 }
 
-/* Hero home — contenitore testi (eyebrow: reveal CSS; slide: framer-motion) */
+/* Hero home — testi animati solo con framer-motion (no ScrollReveal / reveal-faint) */
 .hero-copy {
   will-change: opacity, transform;
 }

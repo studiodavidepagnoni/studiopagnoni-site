@@ -28,6 +28,10 @@ function slideDurationMs(
   return hasVideo ? HERO_VIDEO_SLIDE_MS : HERO_IMAGE_SLIDE_MS;
 }
 
+function nextSlideIndex(current: number) {
+  return (current + 1) % heroSlides.length;
+}
+
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
@@ -85,6 +89,7 @@ export function HeroHome() {
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
   const primaryHref = slide.primaryCtaHref ?? "/contatti";
   const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
+  const nextIdx = nextSlideIndex(idx);
 
   const goToSlide = (index: number) => {
     setIdx(((index % heroSlides.length) + heroSlides.length) % heroSlides.length);
@@ -125,8 +130,10 @@ export function HeroHome() {
         {heroSlides.map((slideItem, slideIndex) => {
           const videoSrc = slideItem.video ?? HERO_VIDEO_DEFAULT;
           const posterSrc = slideItem.poster ?? HERO_POSTER_DEFAULT;
-          const showVideo = !isMobile && !failedVideos.has(videoSrc);
+          const videoFailed = failedVideos.has(videoSrc);
+          const showVideo = !isMobile && !videoFailed;
           const isActive = slideIndex === idx;
+          const isNext = slideIndex === nextIdx;
 
           return (
             <div
@@ -148,7 +155,7 @@ export function HeroHome() {
                   muted
                   playsInline
                   loop
-                  preload="auto"
+                  preload={isActive ? "auto" : isNext ? "metadata" : "none"}
                   onError={() => handleVideoError(videoSrc)}
                   aria-hidden
                 />
@@ -160,7 +167,8 @@ export function HeroHome() {
                   className="hero-media__image object-cover"
                   sizes="100vw"
                   priority={slideIndex === 0}
-                  fetchPriority={slideIndex === 0 ? "high" : "auto"}
+                  fetchPriority={slideIndex === 0 ? "high" : undefined}
+                  loading={slideIndex === 0 ? undefined : "lazy"}
                 />
               )}
             </div>
@@ -171,10 +179,10 @@ export function HeroHome() {
         <div className="hero-media__overlay hero-media__overlay--veil" aria-hidden />
       </div>
 
-      <motion.div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
-        <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left" data-hero-intro>
+      <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
+        <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left" data-hero-motion>
           <p
-            className={`${fontSans.className} hero-eyebrow reveal-faint mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
+            className={`${fontSans.className} hero-eyebrow mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
           >
             Dal 1988 · Cazzago San Martino, Brescia
           </p>
@@ -247,7 +255,7 @@ export function HeroHome() {
             </motion.div>
           </AnimatePresence>
         </div>
-      </motion.div>
+      </div>
 
       <button
         type="button"

@@ -31,3 +31,10 @@ npm start
 ```
 
 Per export statico (hosting senza Node): `npm run build:static` (variabile `STATIC_EXPORT=1`).
+
+### Asset e performance
+
+- `npm run optimize:assets` — genera WebP in `assets/stock/`, ricomprime JPEG e (con ffmpeg) i video hero oltre 14 MB.
+- `prebuild` esegue `sync:static` + `optimize:assets` automaticamente.
+- Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` per il modulo contatti.
+- Deploy GitHub Pages: secret repository `NEXT_PUBLIC_FORMSPREE_ID`; workflow `.github/workflows/deploy-github-pages.yml`.

@@ -1,6 +1,6 @@
 "use client";
 
-import { useCallback, useMemo, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import Link from "next/link";
 import {
   desiredOutputOptions,
@@ -34,6 +34,11 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
   const [gotcha, setGotcha] = useState("");
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
+
+  useEffect(() => {
+    setSubject(defaultSubject);
+    setInquiryType(defaultInquiryType);
+  }, [defaultSubject, defaultInquiryType]);
 
   const errors: FieldErrors = useMemo(() => {
     const e: FieldErrors = {};

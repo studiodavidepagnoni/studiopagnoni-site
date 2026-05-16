@@ -1,9 +1,9 @@
 import type { ReactNode } from "react";
-import { withBasePath } from "@/lib/basePath";
 import { franciacortaPaesaggioViticole } from "@/lib/content";
+import { stockImage } from "@/lib/mediaPath";
 import { ui } from "@/lib/ui";
 
-const a = (name: string) => withBasePath(`/assets/stock/${name}`);
+const a = (name: string) => stockImage(name);
 
 export const projectAreas = ["territorio-verde", "rilievi-digitalizzazione", "edilizia-urbanistica"] as const;
 export type ProjectArea = (typeof projectAreas)[number];

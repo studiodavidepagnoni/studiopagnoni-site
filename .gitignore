@@ -16,6 +16,10 @@
 # production
 /build
 
+# asset pipeline temporanei
+**/*.opt.mp4
+**/.rs10-hero.mp4.opt.mp4
+
 # misc
 .DS_Store
 *.pem

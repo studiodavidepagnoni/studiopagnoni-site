@@ -72,7 +72,7 @@ for (const job of jobs) {
   console.log(`  sorgente: ${(dur).toFixed(1)}s → clip ${clipDur.toFixed(1)}s da ${job.startSec}s`);
 
   run(
-    `ffmpeg -y -ss ${job.startSec} -i "${job.input}" -t ${clipDur} -an -vf "${coverCrop}" -c:v libx264 -preset medium -crf 23 -pix_fmt yuv420p -movflags +faststart "${outMp4}"`,
+    `ffmpeg -y -ss ${job.startSec} -i "${job.input}" -t ${clipDur} -an -vf "${coverCrop}" -c:v libx264 -preset medium -crf 28 -pix_fmt yuv420p -movflags +faststart "${outMp4}"`,
   );
 
   run(

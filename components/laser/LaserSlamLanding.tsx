@@ -2,7 +2,8 @@ import Image from "next/image";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { laserSlamLanding } from "@/lib/laserSlamLanding";
-import { withBasePath } from "@/lib/basePath";
+import { HERO_POSTER_DEFAULT } from "@/lib/images";
+import { stockImage } from "@/lib/mediaPath";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
 import { imageAlt } from "@/lib/seo";
 import { ui } from "@/lib/ui";
@@ -11,17 +12,17 @@ const L = laserSlamLanding;
 
 const caseImages = [
   {
-    src: withBasePath("/assets/stock/chi-siamo-slam-hero.jpg"),
+    src: stockImage("chi-siamo-slam-hero.jpg"),
     alt: imageAlt("Acquisizione SLAM in capannone logistico con scanner mobile", { service: "slam" }),
     step: L.caseStudyTeaser.steps[0],
   },
   {
-    src: withBasePath("/assets/stock/pointcloud-data.jpg"),
+    src: stockImage("pointcloud-data.jpg"),
     alt: imageAlt("Nuvola di punti georiferita del capannone — vista 3D", { service: "slam" }),
     step: L.caseStudyTeaser.steps[1],
   },
   {
-    src: withBasePath("/assets/stock/design-drawings.jpg"),
+    src: stockImage("design-drawings.jpg"),
     alt: imageAlt("Piante e sezioni CAD ricavate dal rilievo SLAM", { service: "slam" }),
     step: L.caseStudyTeaser.steps[2],
   },
@@ -55,7 +56,7 @@ export function LaserSlamLanding() {
             </div>
             <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] lg:aspect-[16/11]">
               <Image
-                src={withBasePath("/assets/rs10-hero-poster.jpg")}
+                src={HERO_POSTER_DEFAULT}
                 alt="Laser scanner mobile CHCNAV RS10 — rilievo SLAM indoor e outdoor"
                 fill
                 className="object-cover object-center"

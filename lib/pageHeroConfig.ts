@@ -1,9 +1,9 @@
-import { withBasePath } from "@/lib/basePath";
 import { laserSlamLanding } from "@/lib/laserSlamLanding";
+import { stockImage } from "@/lib/mediaPath";
 import { normalizePathname } from "@/lib/normalizePathname";
 import { imageAlt } from "@/lib/seo";
 
-const a = (name: string) => withBasePath(`/assets/stock/${name}`);
+const a = (name: string) => stockImage(name);
 
 export type PageHeroData = {
   eyebrow: string;

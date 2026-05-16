@@ -1,9 +1,10 @@
 /** Path pubblici: cartella `assets/` → `public/assets/` (sync-static). */
 
 import { withBasePath } from "@/lib/basePath";
+import { stockImage } from "@/lib/mediaPath";
 import { imageAlt } from "@/lib/seo";
 
-const a = (name: string) => withBasePath(`/assets/stock/${name}`);
+const a = (name: string) => stockImage(name);
 
 /**
  * Video di sfondo di default per l'hero.

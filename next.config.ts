@@ -7,10 +7,6 @@ const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 const isDev = process.env.NODE_ENV !== "production";
 
-const imageRemotePatterns = [
-  { protocol: "https" as const, hostname: "images.unsplash.com", pathname: "/**" },
-];
-
 const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
@@ -20,7 +16,6 @@ const nextConfig: NextConfig = {
     devtoolSegmentExplorer: false,
   },
   images: {
-    remotePatterns: imageRemotePatterns,
     // In dev, avoid Next image optimizer flakiness with remote hosts on Windows networks.
     ...(isDev ? { unoptimized: true } : {}),
     ...(isStaticExport ? { unoptimized: true } : {}),
@@ -56,8 +51,8 @@ if (isStaticExport) {
             "base-uri 'self'",
             "frame-ancestors 'self'",
             "form-action 'self' https://formspree.io",
-            "img-src 'self' data: https://images.unsplash.com https://*.googleapis.com https://*.gstatic.com",
-            "media-src 'self' https://videos.pexels.com",
+            "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
+            "media-src 'self'",
             "font-src 'self' data: https://fonts.gstatic.com",
             "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
             // In dev Next.js (React Refresh / HMR) richiede 'unsafe-eval' per ricompilare i moduli al volo.
