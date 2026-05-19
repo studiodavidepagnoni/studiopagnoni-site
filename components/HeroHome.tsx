@@ -43,6 +43,8 @@ export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
+  const [laserDone, setLaserDone] = useState(false);
+  const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const reducedMotion = useReducedMotion();
   const motionVariants = heroMotionVariants(!!reducedMotion);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
@@ -62,6 +64,19 @@ export function HeroHome() {
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
   }, []);
+
+  /** Sweep laser: una volta (~2.4s). Ken Burns intro: durata prima slide. */
+  useEffect(() => {
+    if (reducedMotion) return;
+    const timers: number[] = [];
+    if (!laserDone) {
+      timers.push(window.setTimeout(() => setLaserDone(true), 2600));
+    }
+    if (!introKenburnDone) {
+      timers.push(window.setTimeout(() => setIntroKenburnDone(true), HERO_FIRST_SLIDE_MS));
+    }
+    return () => timers.forEach((id) => window.clearTimeout(id));
+  }, [reducedMotion, laserDone, introKenburnDone]);
 
   useEffect(() => {
     const delayMs = slideDurationMs(idx, isMobile, failedVideos);
@@ -143,14 +158,18 @@ export function HeroHome() {
           const showVideo = !isMobile && !videoFailed && !reducedMotion;
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
+          const isIntroSlide = slideIndex === 0;
+          const layerClass = [
+            "hero-media__layer",
+            isActive && "hero-media__layer--active",
+            isIntroSlide && "hero-media__layer--intro",
+            isIntroSlide && introKenburnDone && "hero-media__layer--intro-done",
+            isIntroSlide && isActive && !introKenburnDone && !reducedMotion && "hero-media__layer--intro-enter",
+          ]
+            .filter(Boolean)
+            .join(" ");
 
-          return (
-            <div
-              key={slideIndex}
-              className={`hero-media__layer${isActive ? " hero-media__layer--active" : ""}`}
-              aria-hidden={!isActive}
-            >
-              {showVideo ? (
+          const media = showVideo ? (
                 <video
                   ref={registerVideo(key)}
                   className="hero-media__video absolute inset-0 h-full w-full"
@@ -185,10 +204,24 @@ export function HeroHome() {
                   fetchPriority={slideIndex === 0 ? "high" : undefined}
                   loading={slideIndex === 0 ? undefined : "lazy"}
                 />
+          );
+
+          return (
+            <div key={slideIndex} className={layerClass} aria-hidden={!isActive}>
+              {isIntroSlide && !reducedMotion ? (
+                <div className="hero-media__kenburns">{media}</div>
+              ) : (
+                media
               )}
             </div>
           );
         })}
+        {idx === 0 && !reducedMotion ? (
+          <div className="hero-media__overlay hero-media__overlay--grain" aria-hidden />
+        ) : null}
+        {idx === 0 && !laserDone && !reducedMotion ? (
+          <div className="hero-media__overlay hero-media__overlay--laser" aria-hidden />
+        ) : null}
         <div className="hero-media__overlay hero-media__overlay--shade" aria-hidden />
         <div className="hero-media__overlay hero-media__overlay--vignette" aria-hidden />
       </div>

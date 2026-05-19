@@ -566,6 +566,139 @@ body::before {
   background: var(--hero-media-veil);
 }
 
+/* Slide 0 — Ken Burns + entrata cinematic (durata allineata a HERO_FIRST_SLIDE_MS) */
+.hero-media__kenburns {
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.hero-media__layer--intro.hero-media__layer--active .hero-media__kenburns {
+  animation: hero-kenburns 24s linear forwards;
+}
+
+.hero-media__layer--intro.hero-media__layer--intro-enter.hero-media__layer--active .hero-media__kenburns {
+  animation: hero-kenburns-intro 24s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@keyframes hero-kenburns-intro {
+  0% {
+    transform: scale(1.08);
+  }
+  5.83% {
+    transform: scale(1.06);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes hero-kenburns {
+  from {
+    transform: scale(1.06);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+
+/* Grain sottile — solo slide intro attiva */
+.hero-media__overlay--grain {
+  z-index: 2;
+  opacity: 0.42;
+  mix-blend-mode: overlay;
+}
+
+.hero-media__overlay--grain::before {
+  content: "";
+  position: absolute;
+  inset: -40%;
+  width: 180%;
+  height: 180%;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size: 180px 180px;
+  animation: hero-grain-drift 7s steps(6) infinite;
+  pointer-events: none;
+}
+
+@keyframes hero-grain-drift {
+  0% {
+    transform: translate(0, 0);
+  }
+  25% {
+    transform: translate(-1.5%, 1%);
+  }
+  50% {
+    transform: translate(1%, -1.5%);
+  }
+  75% {
+    transform: translate(-0.5%, -0.5%);
+  }
+  100% {
+    transform: translate(0, 0);
+  }
+}
+
+/* Sweep laser mint — una volta all’ingresso */
+.hero-media__overlay--laser {
+  z-index: 3;
+  overflow: hidden;
+}
+
+.hero-media__overlay--laser::after {
+  content: "";
+  position: absolute;
+  left: -15%;
+  top: 0;
+  width: 130%;
+  height: 2px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--primary-mid) 18%, transparent) 18%,
+    var(--primary-mid) 50%,
+    color-mix(in srgb, var(--primary-mid) 18%, transparent) 82%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 18px color-mix(in srgb, var(--primary-mid) 45%, transparent),
+    0 0 4px color-mix(in srgb, var(--primary-mid) 70%, transparent);
+  opacity: 0;
+  animation: hero-laser-sweep 2.4s cubic-bezier(0.33, 1, 0.45, 1) forwards;
+}
+
+@keyframes hero-laser-sweep {
+  0% {
+    transform: translateY(-55vh);
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.55;
+  }
+  88% {
+    opacity: 0.35;
+  }
+  100% {
+    transform: translateY(55vh);
+    opacity: 0;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media__layer--intro .hero-media__kenburns,
+  .hero-media__overlay--grain::before,
+  .hero-media__overlay--laser::after {
+    animation: none !important;
+  }
+
+  .hero-media__overlay--grain {
+    opacity: 0.28;
+  }
+}
+
 /* Sezioni home sotto la piega: rendering differito (mai su page-hero) */
 .lazy-section:not(.page-hero) {
   content-visibility: auto;
