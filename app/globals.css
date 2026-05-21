@@ -74,12 +74,18 @@
   --hero-fallback-from: var(--surface-chrome-deep);
   --hero-fallback-via: color-mix(in srgb, var(--surface-chrome) 88%, var(--surface-chrome-mid));
   --hero-fallback-to: var(--surface-chrome-mid);
-  /* Hero video — ombre tipo Revolution Slider / dronesurveying.co.uk */
-  --hero-media-shadow-l: rgba(4, 10, 9, 0.44);
-  --hero-media-shadow-m: rgba(4, 10, 9, 0.22);
-  --hero-media-shadow-r: rgba(4, 10, 9, 0.06);
-  --hero-media-vignette: rgba(2, 8, 7, 0.28);
-  --hero-media-veil: color-mix(in srgb, var(--surface-chrome-deep) 14%, transparent);
+  /* Hero video — scrim asimmetrico (mhira3d: sinistra + bordi, centro più luminoso) */
+  --hero-media-edge-left: rgba(4, 10, 9, 0.82);
+  --hero-media-edge-right: rgba(4, 10, 9, 0.36);
+  --hero-media-scrim-strong: rgba(4, 10, 9, 0.78);
+  --hero-media-scrim-mid: rgba(4, 10, 9, 0.52);
+  --hero-media-scrim-soft: rgba(4, 10, 9, 0.16);
+  --hero-media-scrim-edge: rgba(4, 10, 9, 0.34);
+  --hero-media-vignette-top: rgba(4, 10, 9, 0.08);
+  --hero-media-vignette-bottom: rgba(4, 10, 9, 0.42);
+  --hero-media-glow-mint: color-mix(in srgb, var(--primary-mid) 12%, transparent);
+  --hero-media-glow-warm: color-mix(in srgb, var(--accent-brand-strong) 8%, transparent);
+  --hero-media-video-opacity: 0.84;
   /* Accent unico brand (mint) — link, CTA, hover */
   --accent-brand: var(--primary-mid);
   --accent-brand-strong: var(--primary-mid-strong);
@@ -496,7 +502,7 @@ body::before {
   color: color-mix(in srgb, white 84%, transparent);
 }
 
-/* Hero home — media + ombre (riferimento dronesurveying.co.uk) */
+/* Hero home — media + scrim cinematico (riferimento mhira3d.com) */
 .hero-media__video,
 .hero-media__image {
   object-fit: cover;
@@ -522,8 +528,8 @@ body::before {
 }
 
 .hero-media__video {
-  opacity: 1;
-  filter: brightness(0.94) contrast(1.02) saturate(0.98);
+  opacity: var(--hero-media-video-opacity);
+  filter: brightness(0.96) contrast(1.03) saturate(0.95);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
@@ -539,31 +545,56 @@ body::before {
   pointer-events: none;
 }
 
-/* Ombra laterale sinistra — testo leggibile come DS */
+/* Scrim laterale + diagonale — non uniforme (mhira3d .hero-media::before) */
 .hero-media__overlay--shade {
-  background: linear-gradient(
-    90deg,
-    var(--hero-media-shadow-l) 0%,
-    var(--hero-media-shadow-m) 38%,
-    var(--hero-media-shadow-r) 68%,
-    transparent 100%
-  );
+  background:
+    linear-gradient(
+      90deg,
+      var(--hero-media-edge-left) 0%,
+      transparent 34%,
+      transparent 66%,
+      var(--hero-media-edge-right) 100%
+    ),
+    linear-gradient(
+      112deg,
+      var(--hero-media-scrim-strong) 0%,
+      var(--hero-media-scrim-mid) 36%,
+      var(--hero-media-scrim-soft) 72%,
+      var(--hero-media-scrim-edge) 100%
+    );
 }
 
-/* Vignetta alto/basso */
+/* Solo alto/basso + glow leggero a destra (mhira3d .hero-media::after) */
 .hero-media__overlay--vignette {
-  background: linear-gradient(
-    180deg,
-    var(--hero-media-vignette) 0%,
-    transparent 28%,
-    transparent 62%,
-    color-mix(in srgb, var(--hero-media-vignette) 88%, black) 100%
-  );
+  background:
+    linear-gradient(
+      180deg,
+      var(--hero-media-vignette-top) 0%,
+      transparent 24%,
+      transparent 58%,
+      var(--hero-media-vignette-bottom) 100%
+    ),
+    radial-gradient(circle at 84% 24%, var(--hero-media-glow-mint), transparent 22%),
+    radial-gradient(circle at 78% 68%, var(--hero-media-glow-warm), transparent 24%);
 }
 
-/* Velo verde scuro uniforme — evita video “lavato”/troppo chiaro */
-.hero-media__overlay--veil {
-  background: var(--hero-media-veil);
+/* Prima slide — sinistra e bordi più scuri, centro destra ancora aperto */
+.hero-media__stage--intro {
+  --hero-media-edge-left: rgba(4, 10, 9, 0.92);
+  --hero-media-edge-right: rgba(4, 10, 9, 0.48);
+  --hero-media-scrim-strong: rgba(4, 10, 9, 0.88);
+  --hero-media-scrim-mid: rgba(4, 10, 9, 0.58);
+  --hero-media-scrim-soft: rgba(4, 10, 9, 0.14);
+  --hero-media-scrim-edge: rgba(4, 10, 9, 0.46);
+  --hero-media-vignette-top: rgba(4, 10, 9, 0.14);
+  --hero-media-vignette-bottom: rgba(4, 10, 9, 0.5);
+  --hero-media-video-opacity: 0.8;
+  --hero-media-glow-mint: color-mix(in srgb, var(--primary-mid) 7%, transparent);
+  --hero-media-glow-warm: color-mix(in srgb, var(--accent-brand-strong) 4%, transparent);
+}
+
+.hero-media__stage--intro .hero-media__layer--intro .hero-media__video {
+  filter: brightness(0.9) contrast(1.03) saturate(0.92);
 }
 
 /* Slide 0 — Ken Burns + entrata cinematic (durata allineata a HERO_FIRST_SLIDE_MS) */
@@ -605,97 +636,13 @@ body::before {
   }
 }
 
-/* Grain sottile — solo slide intro attiva */
-.hero-media__overlay--grain {
-  z-index: 2;
-  opacity: 0.42;
-  mix-blend-mode: overlay;
-}
-
-.hero-media__overlay--grain::before {
-  content: "";
-  position: absolute;
-  inset: -40%;
-  width: 180%;
-  height: 180%;
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.78' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  background-size: 180px 180px;
-  animation: hero-grain-drift 7s steps(6) infinite;
-  pointer-events: none;
-}
-
-@keyframes hero-grain-drift {
-  0% {
-    transform: translate(0, 0);
-  }
-  25% {
-    transform: translate(-1.5%, 1%);
-  }
-  50% {
-    transform: translate(1%, -1.5%);
-  }
-  75% {
-    transform: translate(-0.5%, -0.5%);
-  }
-  100% {
-    transform: translate(0, 0);
-  }
-}
-
-/* Sweep laser mint — una volta all’ingresso */
-.hero-media__overlay--laser {
-  z-index: 3;
-  overflow: hidden;
-}
-
-.hero-media__overlay--laser::after {
-  content: "";
-  position: absolute;
-  left: -15%;
-  top: 0;
-  width: 130%;
-  height: 2px;
-  background: linear-gradient(
-    90deg,
-    transparent 0%,
-    color-mix(in srgb, var(--primary-mid) 18%, transparent) 18%,
-    var(--primary-mid) 50%,
-    color-mix(in srgb, var(--primary-mid) 18%, transparent) 82%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 18px color-mix(in srgb, var(--primary-mid) 45%, transparent),
-    0 0 4px color-mix(in srgb, var(--primary-mid) 70%, transparent);
-  opacity: 0;
-  animation: hero-laser-sweep 2.4s cubic-bezier(0.33, 1, 0.45, 1) forwards;
-}
-
-@keyframes hero-laser-sweep {
-  0% {
-    transform: translateY(-55vh);
-    opacity: 0;
-  }
-  12% {
-    opacity: 0.55;
-  }
-  88% {
-    opacity: 0.35;
-  }
-  100% {
-    transform: translateY(55vh);
-    opacity: 0;
-  }
-}
-
 @media (prefers-reduced-motion: reduce) {
-  .hero-media__layer--intro .hero-media__kenburns,
-  .hero-media__overlay--grain::before,
-  .hero-media__overlay--laser::after {
-    animation: none !important;
+  .hero-media__video {
+    opacity: 1;
   }
 
-  .hero-media__overlay--grain {
-    opacity: 0.28;
+  .hero-media__layer--intro .hero-media__kenburns {
+    animation: none !important;
   }
 }
 

@@ -43,7 +43,6 @@ export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
-  const [laserDone, setLaserDone] = useState(false);
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const reducedMotion = useReducedMotion();
   const motionVariants = heroMotionVariants(!!reducedMotion);
@@ -65,18 +64,12 @@ export function HeroHome() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  /** Sweep laser: una volta (~2.4s). Ken Burns intro: durata prima slide. */
+  /** Ken Burns intro: durata prima slide. */
   useEffect(() => {
-    if (reducedMotion) return;
-    const timers: number[] = [];
-    if (!laserDone) {
-      timers.push(window.setTimeout(() => setLaserDone(true), 2600));
-    }
-    if (!introKenburnDone) {
-      timers.push(window.setTimeout(() => setIntroKenburnDone(true), HERO_FIRST_SLIDE_MS));
-    }
-    return () => timers.forEach((id) => window.clearTimeout(id));
-  }, [reducedMotion, laserDone, introKenburnDone]);
+    if (reducedMotion || introKenburnDone) return;
+    const id = window.setTimeout(() => setIntroKenburnDone(true), HERO_FIRST_SLIDE_MS);
+    return () => window.clearTimeout(id);
+  }, [reducedMotion, introKenburnDone]);
 
   useEffect(() => {
     const delayMs = slideDurationMs(idx, isMobile, failedVideos);
@@ -149,7 +142,14 @@ export function HeroHome() {
         aria-hidden
       />
 
-      <div className="pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
+      <div
+        className={[
+          "hero-media__stage pointer-events-none absolute inset-0 z-[-10] overflow-hidden",
+          idx === 0 && "hero-media__stage--intro",
+        ]
+          .filter(Boolean)
+          .join(" ")}
+      >
         {heroSlides.map((slideItem, slideIndex) => {
           const sources = slideItem.video ?? DEFAULT_VIDEO;
           const key = videoKey(sources);
@@ -216,12 +216,6 @@ export function HeroHome() {
             </div>
           );
         })}
-        {idx === 0 && !reducedMotion ? (
-          <div className="hero-media__overlay hero-media__overlay--grain" aria-hidden />
-        ) : null}
-        {idx === 0 && !laserDone && !reducedMotion ? (
-          <div className="hero-media__overlay hero-media__overlay--laser" aria-hidden />
-        ) : null}
         <div className="hero-media__overlay hero-media__overlay--shade" aria-hidden />
         <div className="hero-media__overlay hero-media__overlay--vignette" aria-hidden />
       </div>
