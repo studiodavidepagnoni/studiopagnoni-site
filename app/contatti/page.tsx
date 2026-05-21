@@ -1,4 +1,4 @@
-import { ContactForm } from "@/components/ContactForm";
+import { ContattiFormSection, ContattiIntro } from "@/components/contatti/ContattiSlamLead";
 import { MapEmbed } from "@/components/MapEmbed";
 import { fontDisplay } from "@/lib/fonts";
 import { buildPageMetadata, seoKeywords } from "@/lib/seo";
@@ -14,34 +14,12 @@ export const metadata = buildPageMetadata({
   priority: "high",
 });
 
-type ContattiPageProps = {
-  searchParams: Promise<{ oggetto?: string }>;
-};
-
-export default async function ContattiPage({ searchParams }: ContattiPageProps) {
-  const { oggetto } = await searchParams;
-  const isSlamLead = oggetto === "slam";
-
+export default function ContattiPage() {
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={layoutContentMaxClass}>
-          <div className="mb-10 max-w-[780px] sm:mb-12">
-            <p className={ui.body}>
-              {isSlamLead ? (
-                <>
-                  Stai richiedendo informazioni su un <strong>rilievo laser scanner SLAM</strong>. Compila il modulo con superficie indicativa e
-                  formato di consegna desiderato: ti risponderemo con tempi e preventivo su misura.
-                </>
-              ) : (
-                <>
-                  Siamo disponibili per preventivi su <strong>rilievi topografici</strong>, <strong>laser scanner SLAM</strong>,{" "}
-                  <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e <strong>coordinamento sicurezza</strong>. Indica la
-                  località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
-                </>
-              )}
-            </p>
-          </div>
+          <ContattiIntro />
 
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.02fr_1.28fr] lg:items-stretch">
             <section aria-labelledby="recapiti-block" className={ui.innerCard}>
@@ -80,15 +58,7 @@ export default async function ContattiPage({ searchParams }: ContattiPageProps) 
             </section>
           </div>
 
-          <section id="form-contatti" className="mt-12 scroll-mt-[120px] sm:mt-16">
-            <div className={ui.innerCard}>
-              <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
-              <ContactForm
-                defaultSubject={isSlamLead ? "Preventivo rilievo laser SLAM" : ""}
-                defaultInquiryType={isSlamLead ? "slam" : ""}
-              />
-            </div>
-          </section>
+          <ContattiFormSection />
         </div>
       </div>
     </main>
