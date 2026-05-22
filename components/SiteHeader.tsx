@@ -159,19 +159,6 @@ export function SiteHeader() {
   }, [hideProgress, open]);
 
   useEffect(() => {
-    const root = document.documentElement;
-    if (headerHidden) {
-      root.setAttribute("data-header-mode", "hidden");
-      return () => root.removeAttribute("data-header-mode");
-    }
-    if (isOverlay) {
-      root.setAttribute("data-header-mode", "overlay");
-      return () => root.removeAttribute("data-header-mode");
-    }
-    root.removeAttribute("data-header-mode");
-  }, [headerHidden, isOverlay]);
-
-  useEffect(() => {
     document.body.classList.toggle("overflow-hidden", open);
     return () => document.body.classList.remove("overflow-hidden");
   }, [open]);

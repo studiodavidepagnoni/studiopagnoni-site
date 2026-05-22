@@ -44,7 +44,9 @@ export function HeroHome() {
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
+  const [autoPaused, setAutoPaused] = useState(false);
   const reducedMotion = useReducedMotion();
+  const autoAdvance = !reducedMotion && !autoPaused;
   const motionVariants = heroMotionVariants(!!reducedMotion);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
@@ -64,20 +66,21 @@ export function HeroHome() {
     return () => mq.removeEventListener("change", apply);
   }, []);
 
-  /** Ken Burns intro: durata prima slide. */
+  /** Ken Burns intro: durata prima slide (solo desktop, no PRM). */
   useEffect(() => {
-    if (reducedMotion || introKenburnDone) return;
+    if (reducedMotion || isMobile || introKenburnDone) return;
     const id = window.setTimeout(() => setIntroKenburnDone(true), HERO_FIRST_SLIDE_MS);
     return () => window.clearTimeout(id);
-  }, [reducedMotion, introKenburnDone]);
+  }, [reducedMotion, isMobile, introKenburnDone]);
 
   useEffect(() => {
+    if (!autoAdvance) return;
     const delayMs = slideDurationMs(idx, isMobile, failedVideos);
     const timeoutId = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
     }, delayMs);
     return () => window.clearTimeout(timeoutId);
-  }, [idx, isMobile, failedVideos]);
+  }, [idx, isMobile, failedVideos, autoAdvance]);
 
   /** Play solo la slide attiva; le altre restano in pausa (playback riprende al ritorno). */
   useEffect(() => {
@@ -108,6 +111,7 @@ export function HeroHome() {
   const nextIdx = nextSlideIndex(idx);
 
   const goToSlide = (index: number) => {
+    setAutoPaused(true);
     setIdx(((index % heroSlides.length) + heroSlides.length) % heroSlides.length);
   };
 
@@ -158,6 +162,7 @@ export function HeroHome() {
           const showVideo = !isMobile && !videoFailed && !reducedMotion;
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
+          if (!isActive && !isNext) return null;
           const isIntroSlide = slideIndex === 0;
           const layerClass = [
             "hero-media__layer",
@@ -182,7 +187,7 @@ export function HeroHome() {
                   muted
                   playsInline
                   loop
-                  preload={isActive ? "metadata" : "none"}
+                  preload={slideIndex === 0 && isActive ? "auto" : isActive ? "metadata" : "none"}
                   onError={() => handleVideoError(key)}
                   aria-hidden
                 >
@@ -222,7 +227,12 @@ export function HeroHome() {
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
         <LazyMotion features={domAnimation} strict>
-        <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left" data-hero-motion>
+        <div
+          className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left"
+          data-hero-motion
+          aria-live="polite"
+          aria-atomic="true"
+        >
           <p
             className={`${fontSans.className} hero-eyebrow mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
           >
@@ -300,10 +310,33 @@ export function HeroHome() {
         </LazyMotion>
       </div>
 
+      <div
+        className={`${fontSans.className} absolute bottom-[max(1.25rem,env(safe-area-inset-bottom))] left-1/2 z-30 flex -translate-x-1/2 items-center gap-2 sm:bottom-8`}
+        role="group"
+        aria-label="Selezione slide"
+      >
+        {heroSlides.map((_, slideIndex) => (
+          <button
+            key={slideIndex}
+            type="button"
+            onClick={() => goToSlide(slideIndex)}
+            className="hero-carousel-btn flex h-11 w-11 items-center justify-center rounded-full"
+            aria-label={`Vai alla slide ${slideIndex + 1} di ${heroSlides.length}`}
+            aria-current={slideIndex === idx ? "true" : undefined}
+          >
+            <span
+              className={`block rounded-full transition-[width,background-color] duration-300 ${
+                slideIndex === idx ? "h-2.5 w-7 bg-[var(--primary-mid)]" : "h-2.5 w-2.5 bg-white/45"
+              }`}
+            />
+          </button>
+        ))}
+      </div>
+
       <button
         type="button"
         onClick={() => goToSlide(idx - 1)}
-        className={`${fontSans.className} absolute left-2 top-1/2 z-30 flex min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:left-4 md:left-6`}
+        className={`${fontSans.className} hero-carousel-btn absolute left-2 top-1/2 z-30 hidden min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:left-4 sm:flex md:left-6`}
         aria-label="Slide precedente"
       >
         <ChevronIcon direction="left" />
@@ -311,7 +344,7 @@ export function HeroHome() {
       <button
         type="button"
         onClick={() => goToSlide(idx + 1)}
-        className={`${fontSans.className} absolute right-2 top-1/2 z-30 flex min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:right-4 md:right-6`}
+        className={`${fontSans.className} hero-carousel-btn absolute right-2 top-1/2 z-30 hidden min-h-[48px] min-w-[48px] -translate-y-1/2 cursor-pointer touch-manipulation items-center justify-center rounded-md text-white/85 transition-[color,transform] duration-300 [@media(hover:hover)]:hover:scale-110 [@media(hover:hover)]:hover:text-white motion-reduce:transition-none motion-reduce:hover:scale-100 sm:right-4 sm:flex md:right-6`}
         aria-label="Slide successiva"
       >
         <ChevronIcon direction="right" />

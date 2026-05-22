@@ -49,14 +49,14 @@ export function CookieBanner() {
       role="dialog"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-desc"
-      aria-modal="false"
+      aria-modal="true"
       className="fixed inset-x-0 bottom-0 z-[10000] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pt-2 sm:px-4 sm:pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] sm:pt-3"
     >
       <div
         className={`pointer-events-auto mx-auto max-w-[960px] overflow-hidden rounded-2xl border border-white/[0.12] bg-[color-mix(in_srgb,var(--surface-chrome)_92%,transparent)] shadow-[0_-24px_80px_rgba(0,0,0,0.55),0_0_0_1px_var(--accent-glow-8)_inset] backdrop-blur-2xl sm:rounded-3xl`}
       >
         <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,var(--accent-glow-14),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_100%,rgba(234,88,12,0.08),transparent_50%)]"
+          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,var(--accent-glow-14),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_100%,var(--accent-glow-8),transparent_50%)]"
           aria-hidden
         />
         <div className={`relative ${layoutGutterXClass} py-5 sm:py-6`}>

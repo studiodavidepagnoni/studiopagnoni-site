@@ -33,7 +33,7 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <h2
       id={id}
-      className={`${fontDisplay.className} scroll-mt-[calc(var(--header-h,80px)+16px)] text-2xl font-medium tracking-tight text-[var(--foreground)] sm:text-[1.65rem]`}
+      className={`${fontDisplay.className} scroll-anchor text-2xl font-medium tracking-tight text-[var(--foreground)] sm:text-[1.65rem]`}
     >
       {children}
     </h2>
@@ -309,7 +309,7 @@ export default function PrivacyPolicyPage() {
                 </p>
               </section>
 
-              <section id="cookie" className="scroll-mt-[calc(var(--header-h,80px)+16px)] space-y-8">
+              <section id="cookie" className="scroll-anchor space-y-8">
                 <div>
                   <SectionTitle id="cookie-heading">Cookie e tecnologie simili</SectionTitle>
                   <div className="home-section-rule mt-4" aria-hidden />

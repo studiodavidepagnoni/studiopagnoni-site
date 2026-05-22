@@ -54,10 +54,15 @@ export function LaserSlamLanding() {
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
-          {/* Hero */}
           <header className="grid gap-8 sm:gap-10 lg:grid-cols-12 lg:items-center lg:gap-10 xl:gap-12">
             <div className="flex flex-col justify-center lg:col-span-7">
-              <div className="max-w-[52ch] space-y-4">
+              <p className={`${fontSans.className} page-hero__kicker mb-3 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}>
+                {L.eyebrow}
+              </p>
+              <h1 className={`${fontDisplay.className} page-hero__title text-[clamp(1.75rem,5vw,3rem)] font-medium leading-[1.08] text-[var(--foreground)]`}>
+                {L.h1}
+              </h1>
+              <div className="mt-6 max-w-[52ch] space-y-4 sm:mt-8">
                 <p className={introCopyClass}>{L.introLead}</p>
                 <p className={introCopyClass}>{L.instrumentNote}</p>
               </div>

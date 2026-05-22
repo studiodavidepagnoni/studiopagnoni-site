@@ -40,3 +40,4 @@ Per export statico (hosting senza Node): `npm run build:static` (variabile `STAT
 - `build:static` esegue `optimize:assets` prima dell'export; `prebuild` solo `sync:static`.
 - Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` per il modulo contatti.
 - Deploy GitHub Pages: secret repository `NEXT_PUBLIC_FORMSPREE_ID`; workflow `.github/workflows/deploy-github-pages.yml`.
+- **Header di sicurezza (CSP, HSTS):** con `build:static` Next non invia gli header di `next.config.ts`. Il file `public/_headers` vale su Netlify/Cloudflare Pages; su GitHub Pages configurare header su CDN o reverse proxy. In locale con `npm start` (build non static) gli header Next sono attivi.

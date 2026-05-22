@@ -1,4 +1,3 @@
-import { laserSlamLanding } from "@/lib/laserSlamLanding";
 import { stockImage } from "@/lib/mediaPath";
 import { normalizePathname } from "@/lib/normalizePathname";
 import { imageAlt } from "@/lib/seo";
@@ -11,6 +10,8 @@ export type PageHeroData = {
   image: string;
   alt: string;
   lede?: string;
+  /** LCP: true solo su landing principali; false su privacy ecc. */
+  priorityImage?: boolean;
 };
 
 const staticPageHeroes: Record<string, PageHeroData> = {
@@ -32,12 +33,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Topografia e rilievi",
     image: a("gnss-rtk-quarry.jpg"),
     alt: imageAlt("GNSS RTK in area estrattiva per rilievo planoaltimetrico", { service: "topografia" }),
-  },
-  "/laser-scanner-slam": {
-    eyebrow: laserSlamLanding.eyebrow,
-    title: laserSlamLanding.h1,
-    image: a("gnss-rover-worker.jpg"),
-    alt: imageAlt("Rilievo geodetico GNSS RTK in cantiere per georeferenziazione del modello SLAM", { service: "slam" }),
+    priorityImage: true,
   },
   "/progetti": {
     eyebrow: "Portfolio",
@@ -58,6 +54,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Privacy policy e cookie",
     image: a("technical-docs.jpg"),
     alt: imageAlt("Documentazione tecnica e informativa privacy", { service: "studio" }),
+    priorityImage: false,
   },
 };
 

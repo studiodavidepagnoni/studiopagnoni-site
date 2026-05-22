@@ -52,7 +52,7 @@ export function HomeSections() {
   return (
     <>
       {/* ── Chi siamo — SOTA editorial: 5/7 split, immagine unica forte, testo compatto ── */}
-      <section id="chi-siamo" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="chi-siamo" className="lazy-section section-shell scroll-anchor overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Profilo</p>
@@ -130,7 +130,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Servizi ── */}
-      <section id="servizi" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section id="servizi" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Ambiti</p>
@@ -199,7 +199,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Progetti (feed) ── */}
-      <section id="progetti" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="progetti" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Lavori</p>
@@ -247,7 +247,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Processo ── */}
-      <section id="processo" className="surface-inverted lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 px-4 sm:px-5 md:px-10">
+      <section id="processo" className="surface-inverted lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Metodo</p>
@@ -273,7 +273,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Abilitazioni professionali ── */}
-      <section id="certificazioni" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="certificazioni" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Titoli</p>
@@ -293,7 +293,7 @@ export function HomeSections() {
       </section>
 
       {/* ── Dove operiamo ── */}
-      <section id="zone-servite" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section id="zone-servite" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Territorio</p>
@@ -327,7 +327,7 @@ export function HomeSections() {
       <StatsSection />
 
       {/* ── Contatti ── */}
-      <section id="contatti" className="lazy-section section-shell scroll-mt-[100px] overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section id="contatti" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
             <p className="section-kicker">Contatto</p>

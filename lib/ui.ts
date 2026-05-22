@@ -5,6 +5,8 @@ const btnBase =
 const btnPrimaryFill = `${btnBase} btn-cta-primary focus-visible:outline-none`;
 
 export const ui = {
+  /** Compensa header sticky (usa --site-header-offset da SiteHeader). */
+  scrollAnchor: "scroll-anchor",
   pageBg: "bg-[var(--background)]",
 
   sectionSurfaceBase: "bg-[var(--background)]",

@@ -71,7 +71,7 @@ export default function ServiziPage() {
               Elenco per ambito
             </h2>
 
-            <h3 id="topografia-rilievi" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-2 scroll-mt-[120px]`}>
+            <h3 id="topografia-rilievi" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-2 ${ui.scrollAnchor}`}>
               Topografia e rilievi
             </h3>
             <p className={`${ui.body} mb-4`}>
@@ -93,7 +93,7 @@ export default function ServiziPage() {
               </Link>
             </p>
 
-            <h3 id="laser-slam" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 scroll-mt-[120px]`}>
+            <h3 id="laser-slam" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 ${ui.scrollAnchor}`}>
               Laser scanner SLAM e nuvole di punti
             </h3>
             <p className={`${ui.body} mb-4`}>
@@ -106,7 +106,7 @@ export default function ServiziPage() {
               </Link>
             </p>
 
-            <h3 id="verde-paesaggio" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 scroll-mt-[120px]`}>
+            <h3 id="verde-paesaggio" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 ${ui.scrollAnchor}`}>
               Progettazione e modellazione del verde
             </h3>
             <ul className="list-none space-y-3 pl-0">
@@ -118,7 +118,7 @@ export default function ServiziPage() {
               </li>
             </ul>
 
-            <h3 id="urbanistica-pratiche" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 scroll-mt-[120px]`}>
+            <h3 id="urbanistica-pratiche" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 ${ui.scrollAnchor}`}>
               Urbanistica, sanatorie e pratiche edilizie
             </h3>
             <ul className="list-none space-y-3 pl-0">
@@ -133,7 +133,7 @@ export default function ServiziPage() {
               </li>
             </ul>
 
-            <h3 id="architettura" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 scroll-mt-[120px]`}>
+            <h3 id="architettura" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 ${ui.scrollAnchor}`}>
               Progettazione architettonica
             </h3>
             <p className={ui.body}>
@@ -141,7 +141,7 @@ export default function ServiziPage() {
               strutturale è affidata a professionisti esterni di fiducia.
             </p>
 
-            <h3 id="sicurezza-assistenza" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 scroll-mt-[120px]`}>
+            <h3 id="sicurezza-assistenza" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-14 ${ui.scrollAnchor}`}>
               Sicurezza cantieri e assistenza tecnica
             </h3>
             <ul className="list-none space-y-3 pl-0">

@@ -110,6 +110,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             name,
             _replyto: email,
             email,
+            _gotcha: gotcha,
             _subject: `[Sito] ${subjectLine}`,
             subject: subjectLine,
             inquiryType: inquiryType ? labelForInquiryType(inquiryType) : "",
@@ -117,6 +118,8 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             desiredOutput: desiredOutput ? labelForDesiredOutput(desiredOutput) : "",
             city: city || "",
             message: `${extra}${message}`,
+            privacyConsent: "Sì, accettata",
+            privacyConsentAt: new Date().toISOString(),
           }),
         });
         if (res.ok) {
@@ -328,6 +331,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           onBlur={onBlur("privacy")}
           className="mt-1.5 h-5 w-5 min-h-[20px] min-w-[20px] shrink-0 accent-[var(--primary-mid)]"
           aria-invalid={!!errors.privacy}
+          aria-describedby={errors.privacy ? "err-privacy" : undefined}
         />
         <label
           htmlFor="privacy"
@@ -337,7 +341,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             Ho letto e accetto la{" "}
             <Link
               href="/privacy-policy"
-              className="font-semibold text-[var(--primary-mid)] underline underline-offset-2 hover:text-[var(--primary)]"
+              className="font-semibold text-[var(--accent-brand)] underline underline-offset-2 hover:text-[var(--foreground)]"
             >
               privacy policy
             </Link>
@@ -346,7 +350,11 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
         </label>
       </div>
 
-      {errors.privacy ? <p className="text-sm text-red-700 md:col-span-2">{errors.privacy}</p> : null}
+      {errors.privacy ? (
+        <p id="err-privacy" className="text-sm text-red-700 md:col-span-2" role="alert">
+          {errors.privacy}
+        </p>
+      ) : null}
 
       {status === "error" ? (
         <p className="text-sm text-red-700 md:col-span-2" role="alert">

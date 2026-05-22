@@ -26,7 +26,7 @@ export default function TopografiaPage() {
             </p>
           <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
             <section className={ui.innerCard} aria-labelledby="topo-rilievo">
-              <h2 id="topo-rilievo" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} scroll-mt-[120px]`}>
+              <h2 id="topo-rilievo" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
                 Cosa intendiamo per rilievo topografico
               </h2>
               <p className={ui.body}>
@@ -38,7 +38,7 @@ export default function TopografiaPage() {
             </section>
 
             <section className={ui.innerCard} aria-labelledby="topo-strumenti">
-              <h2 id="topo-strumenti" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} scroll-mt-[120px]`}>
+              <h2 id="topo-strumenti" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
                 Strumenti: GNSS e stazione totale
               </h2>
               <p className={ui.body}>
@@ -50,7 +50,7 @@ export default function TopografiaPage() {
             </section>
 
             <section className={ui.innerCard} aria-labelledby="topo-zone">
-              <h2 id="topo-zone" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} scroll-mt-[120px]`}>
+              <h2 id="topo-zone" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
                 Territorio e zone di intervento
               </h2>
               <p className={ui.body}>
@@ -62,7 +62,7 @@ export default function TopografiaPage() {
             </section>
 
             <section className={ui.innerCard} aria-labelledby="topo-slam">
-              <h2 id="topo-slam" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} scroll-mt-[120px]`}>
+              <h2 id="topo-slam" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
                 Passaggio al laser scanner SLAM
               </h2>
               <p className={`${ui.body} mb-6`}>

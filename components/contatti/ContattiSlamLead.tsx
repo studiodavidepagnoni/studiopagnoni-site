@@ -38,7 +38,7 @@ function ContattiFormInner() {
   const isSlamLead = useIsSlamLead();
 
   return (
-    <section id="form-contatti" className="mt-12 scroll-mt-[120px] sm:mt-16">
+    <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
       <div className={ui.innerCard}>
         <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
         <ContactForm
@@ -61,7 +61,7 @@ const introFallback = (
 );
 
 const formFallback = (
-  <section id="form-contatti" className="mt-12 scroll-mt-[120px] sm:mt-16">
+  <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
     <div className={ui.innerCard}>
       <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
       <ContactForm />

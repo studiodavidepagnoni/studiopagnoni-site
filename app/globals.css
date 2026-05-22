@@ -125,7 +125,7 @@
   --footer-edge: var(--green-border);
   --footer-text: #e4ebe8;
   --footer-muted: #8fa39a;
-  --footer-faint: #5c6f66;
+  --footer-faint: #6d8078;
   --footer-link: #b4d1c8;
   --footer-link-hover: #f4f7f5;
   --footer-highlight: var(--header-accent);
@@ -140,10 +140,15 @@
 }
 
 html {
+  color-scheme: light;
   scroll-behavior: smooth;
   /* Anchor + focus: compensa header sticky (valorizzato da SiteHeader). */
   scroll-padding-top: var(--site-header-offset, 5.5rem);
   -webkit-tap-highlight-color: color-mix(in srgb, var(--header-accent) 22%, transparent);
+}
+
+.scroll-anchor {
+  scroll-margin-top: var(--site-header-offset, 5.5rem);
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -545,37 +550,41 @@ body::before {
   pointer-events: none;
 }
 
-/* Scrim laterale + diagonale — non uniforme (mhira3d .hero-media::before) */
+/* Scrim sfumato — radiali + diagonale morbida (niente “card” rettangolare) */
 .hero-media__overlay--shade {
   background:
-    linear-gradient(
-      90deg,
+    radial-gradient(
+      ellipse 130% 115% at 0% 48%,
       var(--hero-media-edge-left) 0%,
-      transparent 34%,
-      transparent 66%,
-      var(--hero-media-edge-right) 100%
+      color-mix(in srgb, var(--hero-media-scrim-mid) 55%, transparent) 38%,
+      transparent 68%
+    ),
+    radial-gradient(
+      ellipse 60% 85% at 100% 42%,
+      var(--hero-media-edge-right) 0%,
+      transparent 62%
     ),
     linear-gradient(
       112deg,
       var(--hero-media-scrim-strong) 0%,
-      var(--hero-media-scrim-mid) 36%,
-      var(--hero-media-scrim-soft) 72%,
-      var(--hero-media-scrim-edge) 100%
+      color-mix(in srgb, var(--hero-media-scrim-mid) 70%, transparent) 32%,
+      var(--hero-media-scrim-soft) 58%,
+      color-mix(in srgb, var(--hero-media-scrim-edge) 75%, transparent) 100%
     );
 }
 
-/* Solo alto/basso + glow leggero a destra (mhira3d .hero-media::after) */
+/* Vignetta morbida alto/basso + glow leggero */
 .hero-media__overlay--vignette {
   background:
     linear-gradient(
       180deg,
       var(--hero-media-vignette-top) 0%,
-      transparent 24%,
-      transparent 58%,
-      var(--hero-media-vignette-bottom) 100%
+      transparent 18%,
+      transparent 62%,
+      color-mix(in srgb, var(--hero-media-vignette-bottom) 85%, transparent) 100%
     ),
-    radial-gradient(circle at 84% 24%, var(--hero-media-glow-mint), transparent 22%),
-    radial-gradient(circle at 78% 68%, var(--hero-media-glow-warm), transparent 24%);
+    radial-gradient(ellipse 50% 40% at 84% 22%, var(--hero-media-glow-mint), transparent 70%),
+    radial-gradient(ellipse 45% 38% at 78% 72%, var(--hero-media-glow-warm), transparent 72%);
 }
 
 /* Prima slide — sinistra e bordi più scuri, centro destra ancora aperto */
@@ -646,19 +655,21 @@ body::before {
   }
 }
 
-/* Sezioni home sotto la piega: rendering differito (mai su page-hero) */
-.lazy-section:not(.page-hero) {
-  content-visibility: auto;
-  contain-intrinsic-size: auto 720px;
-}
-
-#chi-siamo.lazy-section {
-  contain-intrinsic-size: auto 880px;
-}
-
 /* Hero home — testi animati solo con framer-motion (no ScrollReveal / reveal-faint) */
 .hero-copy {
   contain: layout style;
+}
+
+.hero-carousel-btn:focus-visible {
+  outline: 2px solid var(--primary-mid);
+  outline-offset: 3px;
+}
+
+[data-page-hero] .reveal-faint,
+[data-page-hero] .reveal-title,
+[data-page-hero] .reveal-block {
+  opacity: 1;
+  transform: none;
 }
 
 [data-hero-intro] .reveal-faint.is-revealed {
@@ -1335,7 +1346,7 @@ a:focus-visible .site-brand-mark {
   --green-soft: var(--muted);
   --green-border: #b8c2bc;
   --green-border-muted: #dfe3de;
-  --green-ink-muted: #5d6962;
+  --green-ink-muted: #4f5c56;
   --accent-brand: var(--primary-mid);
   --accent-warm: var(--accent-brand);
   --accent-warm-strong: var(--primary-mid-strong);

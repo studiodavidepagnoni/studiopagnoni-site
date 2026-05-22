@@ -2,7 +2,7 @@ import Image from "next/image";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import type { PageHeroData } from "@/lib/pageHeroConfig";
 
-export function PageHero({ eyebrow, title, image, alt, lede }: PageHeroData) {
+export function PageHero({ eyebrow, title, image, alt, lede, priorityImage = true }: PageHeroData) {
   return (
     <section
       data-page-hero
@@ -17,8 +17,9 @@ export function PageHero({ eyebrow, title, image, alt, lede }: PageHeroData) {
           fill
           className="object-cover brightness-[0.94] saturate-[0.98]"
           sizes="100vw"
-          priority
-          fetchPriority="high"
+          priority={priorityImage}
+          fetchPriority={priorityImage ? "high" : undefined}
+          loading={priorityImage ? undefined : "lazy"}
         />
       </div>
       <div

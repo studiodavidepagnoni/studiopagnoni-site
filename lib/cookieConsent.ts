@@ -3,7 +3,14 @@
  * Solo `embeds` è configurabile dall'utente; il resto è strettamente necessario al sito.
  */
 
+import { basePath } from "@/lib/basePath";
+
 const LEGACY_STORAGE_KEY = "cookie_consent_studio_pagnoni";
+
+/** Path cookie: rispetta sottocartella GitHub Pages, non tutto l'origin github.io. */
+function cookiePath(): string {
+  return basePath ? `${basePath.replace(/\/$/, "")}/` : "/";
+}
 
 export const COOKIE_PREFS_STORAGE_KEY = "studio_pagnoni_cookie_prefs_v2";
 
@@ -46,12 +53,12 @@ export function saveCookiePrefs(prefs: CookiePrefs): void {
   d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
   const secure = window.location.protocol === "https:" ? ";Secure" : "";
   const val = prefs.embeds ? "1" : "0";
-  document.cookie = `${COOKIE_MIRROR_NAME}=${val};expires=${d.toUTCString()};path=/;SameSite=Lax${secure}`;
+  document.cookie = `${COOKIE_MIRROR_NAME}=${val};expires=${d.toUTCString()};path=${cookiePath()};SameSite=Lax${secure}`;
 }
 
 export function clearCookiePrefs(): void {
   localStorage.removeItem(COOKIE_PREFS_STORAGE_KEY);
   localStorage.removeItem(LEGACY_STORAGE_KEY);
   const secure = window.location.protocol === "https:" ? ";Secure" : "";
-  document.cookie = `${COOKIE_MIRROR_NAME}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=/;SameSite=Lax${secure}`;
+  document.cookie = `${COOKIE_MIRROR_NAME}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=${cookiePath()};SameSite=Lax${secure}`;
 }
