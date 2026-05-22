@@ -20,6 +20,7 @@
     "prestart": "node scripts/check-next-build.cjs",
     "start": "next start",
     "lint": "eslint",
+    "typecheck": "tsc --noEmit",
     "lighthouse": "node scripts/lighthouse-audit.cjs"
   },
   "dependencies": {

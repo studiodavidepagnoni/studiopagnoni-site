@@ -1,5 +1,6 @@
 ﻿import Link from "next/link";
 import { SiteBrandLockup } from "@/components/SiteBrandLockup";
+import { formatCopyrightYearRange } from "@/lib/copyright";
 import { fontNav, fontSans } from "@/lib/fonts";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
@@ -103,15 +104,13 @@ export function SiteFooter() {
 
       <div className="border-t border-[var(--footer-edge)] bg-[var(--footer-bg-sub)]">
         <div className={layoutGutterXClass}>
-          <div
-            className={`${layoutContentMaxClass} flex flex-col items-center justify-between gap-3 py-6 text-center sm:flex-row sm:text-left`}
-          >
-            <p className="text-[0.7rem] text-[var(--footer-faint)]">
-              &copy; {new Date().getFullYear()} {site.legalName}
+          <div className={`${layoutContentMaxClass} site-footer-bar`}>
+            <p className={`${fontSans.className} site-footer-copyright site-footer-bar__copyright`}>
+              &copy; {formatCopyrightYearRange()} {site.legalName}
               {site.piva ? ` · P.IVA ${site.piva}` : null}
             </p>
             <p
-              className={`${fontNav.className} site-brand-tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 text-[0.55rem] font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2 sm:text-[0.6rem]`}
+              className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
             >
               <span>Topografia</span>
               <span className="site-brand-tagline__sep" aria-hidden>

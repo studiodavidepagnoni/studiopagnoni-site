@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
 import { projectAreas, projectCategories } from "@/lib/projects";
+import {
+  lastModifiedForProjectArea,
+  lastModifiedForProjectCase,
+  lastModifiedForStaticPath,
+} from "@/lib/sitemapDates";
 import { site } from "@/lib/site";
 
 /** Obbligatorio con `output: export` (GitHub Pages / hosting statico). */
@@ -23,7 +28,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   const entries: MetadataRoute.Sitemap = staticPaths.map(({ path, changeFrequency, priority }) => ({
     url: path === "" ? `${base}/` : `${base}${path}`,
-    lastModified: new Date(),
+    lastModified: lastModifiedForStaticPath(path),
     changeFrequency,
     priority,
   }));
@@ -31,14 +36,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
   for (const area of projectAreas) {
     entries.push({
       url: `${base}/progetti/${area}`,
-      lastModified: new Date(),
+      lastModified: lastModifiedForProjectArea(area),
       changeFrequency: "monthly",
       priority: 0.75,
     });
     for (const c of projectCategories[area].cases) {
       entries.push({
         url: `${base}/progetti/${area}/${c.slug}`,
-        lastModified: new Date(),
+        lastModified: lastModifiedForProjectCase(area, c.slug),
         changeFrequency: "monthly",
         priority: 0.72,
       });

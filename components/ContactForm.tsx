@@ -65,6 +65,20 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
     return lines.length ? `${lines.join("\n")}\n\n` : "";
   }, [inquiryType, surfaceArea, desiredOutput]);
 
+  const resetForm = useCallback(() => {
+    setStatus("idle");
+    setName("");
+    setEmail("");
+    setSubject(defaultSubject);
+    setInquiryType(defaultInquiryType);
+    setSurfaceArea("");
+    setDesiredOutput("");
+    setCity("");
+    setMessage("");
+    setPrivacy(false);
+    setTouched({});
+  }, [defaultSubject, defaultInquiryType]);
+
   const onSubmit = useCallback(
     async (ev: React.FormEvent) => {
       ev.preventDefault();
@@ -93,8 +107,8 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           setStatus("success");
           setName("");
           setEmail("");
-          setSubject("");
-          setInquiryType("");
+          setSubject(defaultSubject);
+          setInquiryType(defaultInquiryType);
           setSurfaceArea("");
           setDesiredOutput("");
           setCity("");
@@ -126,8 +140,8 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           setStatus("success");
           setName("");
           setEmail("");
-          setSubject("");
-          setInquiryType("");
+          setSubject(defaultSubject);
+          setInquiryType(defaultInquiryType);
           setSurfaceArea("");
           setDesiredOutput("");
           setCity("");
@@ -139,22 +153,76 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
         setStatus("error");
       }
     },
-    [valid, gotcha, name, email, subject, inquiryType, city, message, buildExtraFieldsText, surfaceArea, desiredOutput]
+    [
+      valid,
+      gotcha,
+      name,
+      email,
+      subject,
+      inquiryType,
+      city,
+      message,
+      buildExtraFieldsText,
+      surfaceArea,
+      desiredOutput,
+      defaultSubject,
+      defaultInquiryType,
+    ]
   );
 
-  if (status === "success") {
-    return (
-      <p
-        className="w-full rounded-lg border border-[var(--primary-mid)]/30 bg-[var(--muted)] px-4 py-6 text-[var(--primary-mid)]"
-        role="status"
-      >
-        Messaggio inviato. Ti risponderemo al più presto.
-      </p>
-    );
-  }
+  const statusMessage =
+    status === "submitting"
+      ? "Invio del messaggio in corso…"
+      : status === "success"
+        ? "Messaggio inviato. Ti risponderemo al più presto."
+        : status === "error"
+          ? `Invio non riuscito. Riprova o scrivi a ${site.email}.`
+          : "";
 
   return (
-    <form onSubmit={onSubmit} className="grid w-full gap-3 sm:gap-4 md:grid-cols-2" noValidate>
+    <div className="w-full">
+      <div
+        className="sr-only"
+        aria-live="polite"
+        aria-atomic="true"
+        role="status"
+      >
+        {statusMessage}
+      </div>
+
+      {status === "success" ? (
+        <div
+          className="contact-form-feedback contact-form-feedback--success mb-5 sm:mb-6"
+          role="status"
+          aria-labelledby="contact-form-success-title"
+        >
+          <p id="contact-form-success-title" className="contact-form-feedback__title">
+            Messaggio inviato
+          </p>
+          <p className="contact-form-feedback__body">
+            Grazie per averci scritto. Ti risponderemo al più presto all&apos;indirizzo indicato.
+          </p>
+          <button type="button" className={`${ui.btnOutline} mt-4 min-h-[44px]`} onClick={resetForm}>
+            Invia un altro messaggio
+          </button>
+        </div>
+      ) : null}
+
+      {status === "error" ? (
+        <div className="contact-form-feedback contact-form-feedback--error mb-5 sm:mb-6" role="alert">
+          <p className="contact-form-feedback__title">Invio non riuscito</p>
+          <p className="contact-form-feedback__body">
+            Controlla la connessione e riprova. In alternativa scrivi a{" "}
+            <a href={`mailto:${site.email}`} className="font-semibold underline underline-offset-2">
+              {site.email}
+            </a>
+            .
+          </p>
+        </div>
+      ) : null}
+
+    {status !== "success" ? (
+    <form onSubmit={onSubmit} className="grid w-full gap-3 sm:gap-4 md:grid-cols-2" noValidate aria-busy={status === "submitting"}>
       <div aria-hidden className="hidden" style={{ position: "absolute", left: "-10000px", top: "auto", width: 1, height: 1, overflow: "hidden" }}>
         <label htmlFor="_gotcha">Non compilare se sei umano</label>
         <input
@@ -356,12 +424,6 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
         </p>
       ) : null}
 
-      {status === "error" ? (
-        <p className="text-sm text-red-700 md:col-span-2" role="alert">
-          Invio non riuscito. Riprova o scrivi a {site.email}.
-        </p>
-      ) : null}
-
       <button
         type="submit"
         disabled={status === "submitting"}
@@ -370,5 +432,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
         {status === "submitting" ? "Invio in corso…" : "Invia messaggio"}
       </button>
     </form>
+    ) : null}
+    </div>
   );
 }

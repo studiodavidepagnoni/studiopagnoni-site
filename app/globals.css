@@ -723,6 +723,96 @@ body::before {
   transition: color 0.2s ease, text-shadow 0.2s ease;
 }
 
+.site-footer-copyright {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
+}
+
+.site-footer-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  padding-block: 1.25rem;
+  text-align: center;
+}
+
+.site-footer-bar__copyright {
+  font-size: 0.52rem;
+  line-height: 1.45;
+  max-width: 36rem;
+}
+
+.site-footer-bar__tagline {
+  font-size: 0.55rem;
+}
+
+@media (min-width: 640px) {
+  .site-footer-bar {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    text-align: left;
+  }
+
+  .site-footer-bar__copyright {
+    font-size: 0.55rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-footer-bar__tagline {
+    flex: 0 0 auto;
+    font-size: 0.6rem;
+    text-align: right;
+  }
+}
+
+.contact-form-feedback {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem 1.125rem;
+}
+
+.contact-form-feedback--success {
+  border-color: color-mix(in srgb, var(--primary-mid) 45%, transparent);
+  background: color-mix(in srgb, var(--primary-mid) 12%, var(--muted));
+}
+
+.contact-form-feedback--error {
+  border-color: color-mix(in srgb, #b91c1c 55%, transparent);
+  background: color-mix(in srgb, #fef2f2 88%, var(--muted));
+}
+
+.contact-form-feedback__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--foreground);
+}
+
+.contact-form-feedback--success .contact-form-feedback__title {
+  color: var(--primary-mid);
+}
+
+.contact-form-feedback--error .contact-form-feedback__title {
+  color: #991b1b;
+}
+
+.contact-form-feedback__body {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--copy-body);
+}
+
+.contact-form-feedback--error .contact-form-feedback__body a {
+  color: #991b1b;
+}
+
 /* Etichette ambiti — stesso mint della tagline logo (Topografia · Architettura · SLAM) */
 .progetti-area-label {
   color: var(--brand-mark-tint);
