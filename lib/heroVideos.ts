@@ -14,6 +14,10 @@ type HeroVideoManifestEntry = {
   webmBytes: number;
 };
 
+export function heroVideoKey(sources: { mp4: string }) {
+  return sources.mp4;
+}
+
 /** Ordine sorgenti generato da `npm run optimize:assets` (solo formati più leggeri del MP4). */
 export function heroVideoSourceOrder(mp4Url: string): HeroVideoFormat[] {
   const file = mp4Url.split("/").pop() ?? "";
@@ -39,8 +43,3 @@ export const HERO_POSTER_INDOOR = poster("hero-video-3");
 
 /** Poster ~960px per LCP (placeholder + preload); il <video> usa il poster full. */
 export const HERO_POSTER_INDOOR_LCP = withBasePath("/assets/hero-video-3-poster-lcp.webp");
-
-/** Compat: path MP4 per preload e riferimenti legacy. */
-export const HERO_VIDEO_DEFAULT = HERO_VIDEO_DEFAULT_SOURCES.mp4;
-export const HERO_VIDEO_POINTCLOUD = HERO_VIDEO_POINTCLOUD_SOURCES.mp4;
-export const HERO_VIDEO_INDOOR = HERO_VIDEO_INDOOR_SOURCES.mp4;

@@ -1,7 +1,8 @@
 "use client";
 
 import Link from "next/link";
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { clearCookiePrefs, loadCookiePrefs, saveCookiePrefs, type CookiePrefs } from "@/lib/cookieConsent";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
@@ -17,9 +18,24 @@ const btnCookiePrimary = `${ui.cookieAccept} text-sm`;
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [embeds, setEmbeds] = useState(false);
+  const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
+  const dialogRef = useRef<HTMLDivElement | null>(null);
+  const lastFocusedRef = useRef<HTMLElement | null>(null);
 
   useEffect(() => {
     setVisible(loadCookiePrefs() === null);
+  }, []);
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const node = document.createElement("div");
+    node.setAttribute("data-cookie-banner-root", "");
+    document.body.appendChild(node);
+    setPortalNode(node);
+    return () => {
+      setPortalNode(null);
+      node.remove();
+    };
   }, []);
 
   const persist = useCallback((prefs: CookiePrefs) => {
@@ -42,14 +58,80 @@ export function CookieBanner() {
     persist({ embeds });
   }, [embeds, persist]);
 
-  if (!visible) return null;
+  useEffect(() => {
+    if (!visible || !portalNode) return;
 
-  return (
+    lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        handleNecessaryOnly();
+        return;
+      }
+      if (e.key !== "Tab") return;
+
+      const root = dialogRef.current;
+      if (!root) return;
+
+      const focusable = Array.from(
+        root.querySelectorAll<HTMLElement>(
+          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
+        ),
+      ).filter((el) => !el.hasAttribute("inert") && el.getClientRects().length > 0);
+
+      if (focusable.length === 0) {
+        e.preventDefault();
+        root.focus();
+        return;
+      }
+
+      const first = focusable[0];
+      const last = focusable[focusable.length - 1];
+      const active = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+
+      if (!e.shiftKey && active === last) {
+        e.preventDefault();
+        first.focus();
+      } else if (e.shiftKey && (active === first || active === root)) {
+        e.preventDefault();
+        last.focus();
+      }
+    };
+
+    document.addEventListener("keydown", onKey);
+
+    const inerted: HTMLElement[] = [];
+    for (const child of document.body.children) {
+      if (child instanceof HTMLElement && child !== portalNode && !child.contains(portalNode)) {
+        child.inert = true;
+        inerted.push(child);
+      }
+    }
+
+    const focusTimer = window.setTimeout(() => {
+      dialogRef.current?.querySelector<HTMLElement>("button")?.focus();
+    }, 0);
+
+    return () => {
+      window.clearTimeout(focusTimer);
+      document.removeEventListener("keydown", onKey);
+      for (const el of inerted) {
+        el.inert = false;
+      }
+      lastFocusedRef.current?.focus({ preventScroll: true });
+    };
+  }, [visible, portalNode, handleNecessaryOnly]);
+
+  if (!visible || !portalNode) return null;
+
+  return createPortal(
     <div
+      ref={dialogRef}
       role="dialog"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-desc"
       aria-modal="true"
+      tabIndex={-1}
       className="fixed inset-x-0 bottom-0 z-[10000] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pt-2 sm:px-4 sm:pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] sm:pt-3"
     >
       <div
@@ -144,7 +226,8 @@ export function CookieBanner() {
           </div>
         </div>
       </div>
-    </div>
+    </div>,
+    portalNode,
   );
 }
 

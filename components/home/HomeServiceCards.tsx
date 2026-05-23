@@ -77,11 +77,11 @@ export function HomeServiceCards() {
           <p className="copy-rhythm mb-5 flex-1 text-[0.92rem] text-[var(--copy-body)] sm:text-[0.98rem]">{card.description}</p>
           <Link
             href={card.href}
-            className={`${fontSans.className} service-card__cta mt-auto inline-flex min-h-[48px] touch-manipulation items-center gap-2 text-base font-semibold text-[var(--primary-mid)] transition [@media(hover:hover)]:group-hover:text-[var(--foreground)] sm:min-h-[44px] sm:text-sm`}
+            className={`${fontSans.className} service-card__cta mt-auto inline-flex min-h-[48px] touch-manipulation items-center gap-2 text-base font-semibold text-[var(--primary-mid)] transition-[color,transform] duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:text-[var(--foreground)] sm:min-h-[44px] sm:text-sm`}
           >
             Approfondisci
             <span
-              className="service-card__cta-arrow text-[1.1em] leading-none transition-transform duration-200 [@media(hover:hover)]:group-hover:translate-x-0.5"
+              className="service-card__cta-arrow text-[1.1em] leading-none transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:translate-x-1"
               aria-hidden
             >
               →

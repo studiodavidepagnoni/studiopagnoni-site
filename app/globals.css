@@ -257,10 +257,11 @@ body::before {
   overflow: hidden;
   border-top: 2px solid color-mix(in srgb, var(--primary-mid) 42%, var(--green-border-muted));
   transition:
-    border-color 0.22s ease,
-    border-top-color 0.22s ease,
-    background-color 0.22s ease,
-    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    border-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-top-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 /* Entrata card servizi home — linea mint che si disegna in cima */
@@ -293,7 +294,19 @@ body::before {
   width: 2px;
   border-radius: 0 1px 1px 0;
   background: transparent;
-  transition: background 0.22s ease;
+  transition: background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Card progetti — hover allineato a service-card / view transitions */
+.project-preview-card {
+  transition:
+    border-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-preview-card__image {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
@@ -558,11 +571,12 @@ body::before {
 .hero-media__overlay {
   position: absolute;
   inset: 0;
+  z-index: 4;
   pointer-events: none;
 }
 
-/* Scrim sfumato — radiali + diagonale morbida (niente “card” rettangolare) */
-.hero-media__overlay--shade {
+/* Slide 2–3: scrim bilanciato (shade + vignette unificati) */
+.hero-media__overlay--standard {
   background:
     radial-gradient(
       ellipse 130% 115% at 0% 48%,
@@ -581,12 +595,7 @@ body::before {
       color-mix(in srgb, var(--hero-media-scrim-mid) 70%, transparent) 32%,
       var(--hero-media-scrim-soft) 58%,
       color-mix(in srgb, var(--hero-media-scrim-edge) 75%, transparent) 100%
-    );
-}
-
-/* Vignetta morbida alto/basso + glow leggero */
-.hero-media__overlay--vignette {
-  background:
+    ),
     linear-gradient(
       180deg,
       var(--hero-media-vignette-top) 0%,
@@ -598,46 +607,37 @@ body::before {
     radial-gradient(ellipse 45% 38% at 78% 72%, var(--hero-media-glow-warm), transparent 72%);
 }
 
-/* Prima slide — scrim marcato: sinistra scura, sfuma verso destra (testo a sinistra) */
-.hero-media__stage--intro {
-  --hero-media-video-opacity: 0.78;
-}
-
-.hero-media__stage--intro .hero-media__overlay--shade {
+/* Slide 1: scrim asimmetrico sinistra → destra */
+.hero-media__overlay--intro {
   background:
     linear-gradient(
       to right,
-      rgba(1, 5, 5, 0.97) 0%,
-      rgba(1, 5, 5, 0.97) 18%,
-      rgba(2, 7, 6, 0.92) 32%,
-      rgba(2, 7, 6, 0.84) 45%,
-      rgba(2, 7, 6, 0.72) 55%,
-      rgba(2, 7, 6, 0.48) 68%,
-      rgba(2, 7, 6, 0.24) 80%,
-      rgba(2, 7, 6, 0.08) 92%,
+      rgb(0 0 0 / 0.24) 0%,
+      rgb(0 0 0 / 0.24) 14%,
+      rgb(0 2 2 / 0.24) 24%,
+      rgb(1 4 4 / 0.24) 36%,
+      rgb(2 6 5 / 0.23) 50%,
+      rgb(2 6 5 / 0.19) 64%,
+      rgb(2 6 5 / 0.12) 78%,
+      rgb(2 6 5 / 0.06) 90%,
       transparent 100%
     ),
-    radial-gradient(
-      ellipse 95% 120% at -14% 50%,
-      rgba(0, 3, 3, 0.92) 0%,
-      rgba(2, 7, 6, 0.55) 52%,
-      transparent 74%
+    linear-gradient(
+      180deg,
+      rgb(0 2 2 / 0.13) 0%,
+      transparent 16%,
+      transparent 68%,
+      rgb(2 6 5 / 0.14) 100%
     );
 }
 
-/* Niente glow chiaro a destra sulla intro — non compete con lo scrim */
-.hero-media__stage--intro .hero-media__overlay--vignette {
-  background: linear-gradient(
-    180deg,
-    rgba(2, 7, 6, 0.28) 0%,
-    transparent 22%,
-    transparent 68%,
-    rgba(2, 7, 6, 0.42) 100%
-  );
+.hero-media__stage--intro {
+  --hero-media-video-opacity: 0.77;
 }
 
-.hero-media__stage--intro .hero-media__layer--intro .hero-media__video {
-  filter: brightness(0.86) contrast(1.04) saturate(0.9);
+.hero-media__stage--intro .hero-media__layer--intro .hero-media__video,
+.hero-media__stage--intro .hero-media__image {
+  filter: brightness(0.88) contrast(1.05) saturate(0.91);
 }
 
 /* Slide 0 — Ken Burns + entrata cinematic (durata allineata a HERO_FIRST_SLIDE_MS) */
@@ -712,12 +712,17 @@ body::before {
 
 .hero-eyebrow {
   color: var(--hero-eyebrow);
-  text-shadow: 0 0 20px color-mix(in srgb, var(--hero-line2-glow) 55%, transparent), 0 1px 10px rgba(0, 0, 0, 0.42);
+  text-shadow:
+    0 0 20px color-mix(in srgb, var(--hero-line2-glow) 55%, transparent),
+    0 1px 12px rgba(0, 0, 0, 0.48),
+    0 0 1px rgba(0, 0, 0, 0.35);
 }
 
 .hero-title {
   color: var(--hero-title);
-  text-shadow: 0 2px 24px rgba(0, 0, 0, 0.38);
+  text-shadow:
+    0 2px 28px rgba(0, 0, 0, 0.48),
+    0 1px 4px rgba(0, 0, 0, 0.38);
 }
 
 /* Seconda riga: accent mint (equivalente al cyan DS), sotto il titolo */
@@ -725,7 +730,8 @@ body::before {
   color: var(--hero-line2);
   text-shadow:
     0 0 32px var(--hero-line2-glow),
-    0 2px 14px rgba(0, 0, 0, 0.36);
+    0 2px 18px rgba(0, 0, 0, 0.44),
+    0 0 1px rgba(0, 0, 0, 0.32);
 }
 
 .hero-line2__sep {
@@ -738,7 +744,9 @@ body::before {
 
 .hero-body {
   color: var(--hero-body);
-  text-shadow: 0 1px 12px rgba(0, 0, 0, 0.32);
+  text-shadow:
+    0 1px 16px rgba(0, 0, 0, 0.42),
+    0 0 1px rgba(0, 0, 0, 0.28);
 }
 
 /* Marchio header — più luminoso e leggibile su hero / page band */
@@ -1195,10 +1203,10 @@ a:focus-visible .site-brand-mark {
 @media (prefers-reduced-motion: no-preference) {
   @supports (view-transition-name: none) {
     ::view-transition-old(root) {
-      animation: vt-root-out 0.38s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: vt-root-out 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
     ::view-transition-new(root) {
-      animation: vt-root-in 0.42s cubic-bezier(0.22, 1, 0.36, 1) both;
+      animation: vt-root-in 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
     }
   }
 }
@@ -1244,6 +1252,17 @@ a:focus-visible .site-brand-mark {
     border-color: var(--interactive-hover-border);
     background: var(--interactive-hover-bg);
     box-shadow: var(--interactive-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .project-preview-card:hover {
+    border-color: var(--interactive-hover-border);
+    box-shadow: var(--interactive-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .project-preview-card:hover .project-preview-card__image {
+    transform: scale(1.02);
   }
 
   .service-card:hover::before {
@@ -1373,12 +1392,20 @@ a:focus-visible .site-brand-mark {
     font-size: clamp(1.55rem, 7.2vw, 2.3rem) !important;
     line-height: 1.08;
     text-wrap: balance;
+    text-shadow:
+      0 2px 32px rgba(0, 0, 0, 0.55),
+      0 1px 5px rgba(0, 0, 0, 0.45),
+      0 0 1px rgba(0, 0, 0, 0.4);
   }
 
   .hero-line2 {
     font-size: clamp(1.05rem, 4.6vw, 1.35rem) !important;
     line-height: 1.2;
     white-space: normal;
+    text-shadow:
+      0 0 28px var(--hero-line2-glow),
+      0 2px 20px rgba(0, 0, 0, 0.48),
+      0 0 1px rgba(0, 0, 0, 0.35);
   }
 
   .hero-line2 .whitespace-nowrap {
@@ -1388,11 +1415,18 @@ a:focus-visible .site-brand-mark {
   .hero-eyebrow {
     font-size: clamp(0.62rem, 2.6vw, 0.68rem);
     letter-spacing: 0.22em;
+    text-shadow:
+      0 0 18px color-mix(in srgb, var(--hero-line2-glow) 55%, transparent),
+      0 1px 14px rgba(0, 0, 0, 0.52),
+      0 0 1px rgba(0, 0, 0, 0.38);
   }
 
   .hero-body {
     font-size: clamp(0.94rem, 3.6vw, 1rem);
     line-height: 1.72;
+    text-shadow:
+      0 1px 18px rgba(0, 0, 0, 0.48),
+      0 0 1px rgba(0, 0, 0, 0.32);
   }
 
   /* iOS: niente zoom su focus (min 16px) */

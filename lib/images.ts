@@ -16,9 +16,6 @@ export {
   HERO_POSTER_DEFAULT,
   HERO_POSTER_INDOOR,
   HERO_POSTER_POINTCLOUD,
-  HERO_VIDEO_DEFAULT,
-  HERO_VIDEO_INDOOR,
-  HERO_VIDEO_POINTCLOUD,
 } from "@/lib/heroVideos";
 
 const a = (name: string) => stockImage(name);

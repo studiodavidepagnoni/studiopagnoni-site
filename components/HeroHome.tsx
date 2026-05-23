@@ -1,12 +1,19 @@
 "use client";
 
 import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
-import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
+import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
+import { HeroSlideLayer } from "@/components/hero/HeroSlideLayer";
 import { fontDisplay, fontSans } from "@/lib/fonts";
+import {
+  HERO_FIRST_SLIDE_MS,
+  nextSlideIndex,
+  slideDurationMs,
+} from "@/lib/heroCarousel";
 import { heroMotionVariants } from "@/lib/heroMotion";
 import { heroSlides } from "@/lib/images";
+import { HERO_VIDEO_DEFAULT_SOURCES, heroVideoKey } from "@/lib/heroVideos";
 import {
   HERO_MOBILE_MEDIA_QUERY,
   HERO_VIDEO_MEDIA_QUERY,
@@ -15,62 +22,9 @@ import {
   usePrefersReducedMotion,
   usePrefersSaveData,
 } from "@/lib/useClientMedia";
-import {
-  HERO_VIDEO_DEFAULT_SOURCES,
-  heroVideoSourceOrder,
-  type HeroVideoFormat,
-  type HeroVideoSources,
-} from "@/lib/heroVideos";
 import { ui } from "@/lib/ui";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
-
-function videoKey(sources: HeroVideoSources) {
-  return sources.mp4;
-}
-
-/** Prima slide: più tempo per lettura + video RS10. */
-const HERO_FIRST_SLIDE_MS = 24_000;
-const HERO_FIRST_SLIDE_NO_VIDEO_MS = 18_000;
-/** Slide con video: proseguono da dove erano (non remount). */
-const HERO_VIDEO_SLIDE_MS = 20_000;
-const HERO_IMAGE_SLIDE_MS = 14_000;
-
-function slideDurationMs(
-  slideIndex: number,
-  heroUsesVideo: boolean,
-  failedVideos: ReadonlySet<string>,
-): number {
-  const slide = heroSlides[slideIndex];
-  const sources = slide.video ?? DEFAULT_VIDEO;
-  const hasVideo = heroUsesVideo && !failedVideos.has(sources.mp4);
-  if (slideIndex === 0) return hasVideo ? HERO_FIRST_SLIDE_MS : HERO_FIRST_SLIDE_NO_VIDEO_MS;
-  return hasVideo ? HERO_VIDEO_SLIDE_MS : HERO_IMAGE_SLIDE_MS;
-}
-
-function nextSlideIndex(current: number) {
-  return (current + 1) % heroSlides.length;
-}
-
-function HeroVideoSourcesMarkup({
-  sources,
-  order,
-}: {
-  sources: HeroVideoSources;
-  order: HeroVideoFormat[];
-}) {
-  return (
-    <>
-      {order.map((format) =>
-        format === "webm" ? (
-          <source key="webm" src={sources.webm} type="video/webm" />
-        ) : (
-          <source key="mp4" src={sources.mp4} type="video/mp4" />
-        ),
-      )}
-    </>
-  );
-}
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
@@ -111,8 +65,8 @@ export function HeroHome() {
 
   const showVideoBackground = heroUsesVideo && !saveData && !reducedMotion;
   const tabHidden = !pageVisible;
+  const isIntroActive = idx === 0;
 
-  /** Scarica la slide successiva solo negli ultimi secondi (risparmio ~20 MB al first paint). */
   useEffect(() => {
     setPrefetchNextVideo(false);
     if (!showVideoBackground) return;
@@ -123,7 +77,6 @@ export function HeroHome() {
     return () => window.clearTimeout(id);
   }, [idx, showVideoBackground, failedVideos]);
 
-  /** Ken Burns intro: durata prima slide (solo desktop, no PRM). */
   useEffect(() => {
     if (reducedMotion || isMobile || introKenburnDone) return;
     const id = window.setTimeout(() => setIntroKenburnDone(true), HERO_FIRST_SLIDE_MS);
@@ -139,7 +92,6 @@ export function HeroHome() {
     return () => window.clearTimeout(timeoutId);
   }, [idx, showVideoBackground, failedVideos, autoAdvance]);
 
-  /** Play solo la slide attiva; pausa con tab in background. */
   useEffect(() => {
     if (!showVideoBackground || tabHidden) {
       videoRefs.current.forEach((video) => video.pause());
@@ -148,7 +100,7 @@ export function HeroHome() {
 
     heroSlides.forEach((slide, slideIndex) => {
       const sources = slide.video ?? DEFAULT_VIDEO;
-      const key = videoKey(sources);
+      const key = heroVideoKey(sources);
       if (failedVideos.has(key)) return;
       const video = videoRefs.current.get(key);
       if (!video) return;
@@ -206,87 +158,37 @@ export function HeroHome() {
       <div
         className={[
           "hero-media__stage pointer-events-none absolute inset-0 z-[-10] overflow-hidden",
-          idx === 0 && "hero-media__stage--intro",
+          isIntroActive && "hero-media__stage--intro",
         ]
           .filter(Boolean)
           .join(" ")}
       >
         {heroSlides.map((slideItem, slideIndex) => {
           const sources = slideItem.video ?? DEFAULT_VIDEO;
-          const key = videoKey(sources);
-          const posterSrc = slideItem.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp");
-          const videoFailed = failedVideos.has(key);
+          const key = heroVideoKey(sources);
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
           const mountLayer = isActive || (isNext && (!showVideoBackground || prefetchNextVideo));
           if (!mountLayer) return null;
-          const showVideo = showVideoBackground && !videoFailed;
-          const sourceOrder = heroVideoSourceOrder(sources.mp4);
-          const loadSources = isActive || (isNext && prefetchNextVideo);
-          const isIntroSlide = slideIndex === 0;
-          const layerClass = [
-            "hero-media__layer",
-            isActive && "hero-media__layer--active",
-            isIntroSlide && "hero-media__layer--intro",
-            isIntroSlide && introKenburnDone && "hero-media__layer--intro-done",
-            isIntroSlide && isActive && !introKenburnDone && !reducedMotion && "hero-media__layer--intro-enter",
-          ]
-            .filter(Boolean)
-            .join(" ");
-
-          const media = showVideo ? (
-                <video
-                  ref={registerVideo(key)}
-                  className={[
-                    "hero-media__video absolute inset-0 h-full w-full",
-                    videoReady.has(key) && "hero-media__video--ready",
-                  ]
-                    .filter(Boolean)
-                    .join(" ")}
-                  style={
-                    slideItem.videoObjectPosition
-                      ? { objectPosition: slideItem.videoObjectPosition }
-                      : undefined
-                  }
-                  poster={posterSrc}
-                  muted
-                  playsInline
-                  loop
-                  preload={isActive ? "metadata" : "none"}
-                  onCanPlay={() => markVideoReady(key)}
-                  onLoadedData={() => markVideoReady(key)}
-                  onError={() => handleVideoError(key)}
-                  aria-hidden
-                >
-                  {loadSources ? (
-                    <HeroVideoSourcesMarkup sources={sources} order={sourceOrder} />
-                  ) : null}
-                </video>
-              ) : (
-                <Image
-                  src={slideItem.src}
-                  alt=""
-                  fill
-                  className="hero-media__image object-cover"
-                  sizes="100vw"
-                  priority={slideIndex === 0}
-                  fetchPriority={slideIndex === 0 ? "high" : undefined}
-                  loading={slideIndex === 0 ? undefined : "lazy"}
-                />
-          );
 
           return (
-            <div key={slideIndex} className={layerClass} aria-hidden={!isActive}>
-              {isIntroSlide && !reducedMotion ? (
-                <div className="hero-media__kenburns">{media}</div>
-              ) : (
-                media
-              )}
-            </div>
+            <HeroSlideLayer
+              key={slideIndex}
+              slide={slideItem}
+              slideIndex={slideIndex}
+              isActive={isActive}
+              showVideo={showVideoBackground && !failedVideos.has(key)}
+              loadSources={isActive || (isNext && prefetchNextVideo)}
+              videoReady={videoReady.has(key)}
+              introKenburnDone={introKenburnDone}
+              reducedMotion={reducedMotion}
+              registerVideo={registerVideo}
+              onVideoReady={markVideoReady}
+              onVideoError={handleVideoError}
+            />
           );
         })}
-        <div className="hero-media__overlay hero-media__overlay--shade" aria-hidden />
-        <div className="hero-media__overlay hero-media__overlay--vignette" aria-hidden />
+        <HeroMediaOverlay intro={isIntroActive} />
       </div>
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
@@ -304,13 +206,7 @@ export function HeroHome() {
           </p>
 
           <AnimatePresence mode="wait">
-            <m.div
-              key={idx}
-              variants={motionVariants.container}
-              initial={false}
-              animate="show"
-              exit="exit"
-            >
+            <m.div key={idx} variants={motionVariants.container} initial={false} animate="show" exit="exit">
               <div className="min-h-[2.35em] overflow-hidden sm:min-h-[2.2em]">
                 <m.h1
                   variants={motionVariants.item}
@@ -340,11 +236,7 @@ export function HeroHome() {
                 </p>
               </m.div>
 
-              <m.div
-                variants={motionVariants.line}
-                className="hero-rule mt-6 h-px max-w-[5.5rem] origin-left"
-                aria-hidden
-              />
+              <m.div variants={motionVariants.line} className="hero-rule mt-6 h-px max-w-[5.5rem] origin-left" aria-hidden />
 
               <m.div
                 variants={motionVariants.item}

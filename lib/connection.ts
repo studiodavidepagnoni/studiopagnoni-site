@@ -19,9 +19,3 @@ export function prefersSaveData(): boolean {
   const type = conn.effectiveType;
   return type === "slow-2g" || type === "2g" || type === "3g" || type === "slow-4g";
 }
-
-/** Desktop wide + fine pointer: background video hero consentito. */
-export function prefersHeroVideoViewport(): boolean {
-  if (typeof window === "undefined") return false;
-  return window.matchMedia("(min-width: 1025px) and (hover: hover)").matches;
-}

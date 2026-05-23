@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/images";
 import { HERO_POSTER_INDOOR_LCP } from "@/lib/heroVideos";
@@ -21,15 +22,14 @@ export function HeroHomePlaceholder() {
       <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1]">
         <Image
           src={HERO_POSTER_INDOOR_LCP}
-          alt=""
+          alt={slide.alt}
           fill
           className="hero-media__image object-cover object-center"
           sizes="(max-width: 960px) 100vw, 960px"
           priority
           fetchPriority="high"
         />
-        <div className="hero-media__overlay hero-media__overlay--shade absolute inset-0" aria-hidden />
-        <div className="hero-media__overlay hero-media__overlay--vignette absolute inset-0" aria-hidden />
+        <HeroMediaOverlay intro />
       </div>
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">

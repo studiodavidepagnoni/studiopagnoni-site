@@ -28,7 +28,14 @@ const WEBM_CRF = 38;
 const VIDEO_MAX_DURATION_SEC = 18;
 const VIDEO_CRF_BY_NAME = {
   "rs10-hero.mp4": 32,
-  "hero-video-2.mp4": 31,
+  "hero-video-2.mp4": 35,
+};
+/** Sotto questa soglia (MB) il video viene ricodificato. */
+const VIDEO_TARGET_MB_BY_NAME = {
+  "hero-video-2.mp4": 2.5,
+};
+const VIDEO_MAX_DURATION_BY_NAME = {
+  "hero-video-2.mp4": 14,
 };
 const HERO_LITE_W = 1280;
 const HERO_LITE_H = 864;
@@ -52,11 +59,15 @@ function isNewer(src, dest) {
 
 function videoNeedsWork(filePath) {
   if (!fs.existsSync(filePath)) return false;
+  const name = path.basename(filePath);
   const mb = fs.statSync(filePath).size / (1024 * 1024);
+  const targetMb = VIDEO_TARGET_MB_BY_NAME[name];
+  if (targetMb && mb > targetMb) return true;
   if (mb > VIDEO_MAX_MB) return true;
   const webm = filePath.replace(/\.mp4$/i, ".webm");
   if (!fs.existsSync(webm)) return true;
   if (process.env.FORCE_VIDEO === "1") return true;
+  if (process.env.FORCE_VIDEO_NAME && process.env.FORCE_VIDEO_NAME === name) return true;
   return isNewer(filePath, webm);
 }
 
@@ -138,8 +149,8 @@ function extractPosterJpg(videoPath, posterPath) {
 
 function encodeMp4(input, tmpOut, fileName) {
   const crf = VIDEO_CRF_BY_NAME[fileName] ?? VIDEO_CRF;
-  const duration =
-    VIDEO_MAX_DURATION_SEC > 0 ? `-t ${VIDEO_MAX_DURATION_SEC}` : "";
+  const maxDuration = VIDEO_MAX_DURATION_BY_NAME[fileName] ?? VIDEO_MAX_DURATION_SEC;
+  const duration = maxDuration > 0 ? `-t ${maxDuration}` : "";
   const cmd = [
     "ffmpeg -y -nostdin -hide_banner",
     `-i "${input}"`,
@@ -304,6 +315,7 @@ async function optimizeVideos() {
   }
 
   for (const name of HERO_VIDEOS) {
+    if (process.env.FORCE_VIDEO_NAME && process.env.FORCE_VIDEO_NAME !== name) continue;
     const mp4 = path.join(assetsDir, name);
     if (!fs.existsSync(mp4)) continue;
     const webm = mp4.replace(/\.mp4$/i, ".webm");

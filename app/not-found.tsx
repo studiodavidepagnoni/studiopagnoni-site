@@ -1,7 +1,13 @@
+import type { Metadata } from "next";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
+
+export const metadata: Metadata = {
+  title: "Pagina non trovata",
+  robots: { index: false, follow: true },
+};
 
 export default function NotFound() {
   return (

@@ -29,3 +29,13 @@ jobs:
 
       - name: TypeScript
         run: npm run typecheck
+
+      - name: Verify ffmpeg
+        run: ffmpeg -version
+
+      - name: Static export build
+        env:
+          STATIC_EXPORT: "1"
+          SKIP_VIDEO: "1"
+          NEXT_PUBLIC_SITE_URL: https://www.studiotecnicopagnoni.it
+        run: npm run build:static
