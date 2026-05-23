@@ -23,6 +23,7 @@ const HERO_LCP_POSTER = "hero-video-3-poster.webp";
 const VIDEO_CRF = 30;
 const VIDEO_PRESET = "medium";
 const VIDEO_MAX_MB = 8;
+const WEBM_CRF = 38;
 const HERO_LITE_W = 1280;
 const HERO_LITE_H = 864;
 const liteCrop = `scale=${HERO_LITE_W}:${HERO_LITE_H}:force_original_aspect_ratio=increase,crop=${HERO_LITE_W}:${HERO_LITE_H}`;
@@ -150,12 +151,56 @@ function encodeWebm(input, webmOut) {
     `-i "${input}"`,
     `-vf "${liteCrop}"`,
     "-an",
-    "-c:v libvpx-vp9 -crf 35 -b:v 0 -row-mt 1",
+    `-c:v libvpx-vp9 -crf ${WEBM_CRF} -b:v 0 -row-mt 1 -deadline good -cpu-used 2`,
     "-pix_fmt yuv420p",
     `"${webmOut}"`,
   ].join(" ");
   console.log(`\n> ${cmd}\n`);
   execSync(cmd, { stdio: "inherit", cwd: root, shell: true });
+}
+
+/** WebM più pesante del MP4 non va servito (il browser scaricherebbe di più). */
+function pruneOversizedWebm() {
+  for (const name of HERO_VIDEOS) {
+    const mp4 = path.join(assetsDir, name);
+    const webm = mp4.replace(/\.mp4$/i, ".webm");
+    if (!fs.existsSync(mp4) || !fs.existsSync(webm)) continue;
+    if (fs.statSync(webm).size <= fs.statSync(mp4).size) continue;
+    fs.unlinkSync(webm);
+    console.log(
+      `[optimize-assets] Rimosso WebM più pesante del MP4: ${path.basename(webm)}`,
+    );
+  }
+}
+
+/** Poster serviti solo come WebP in produzione. */
+function prunePosterJpgs() {
+  for (const name of HERO_VIDEOS) {
+    const jpg = path.join(assetsDir, name.replace(/\.mp4$/i, "-poster.jpg"));
+    const webp = jpg.replace(/\.jpe?g$/i, ".webp");
+    if (!fs.existsSync(jpg) || !fs.existsSync(webp)) continue;
+    fs.unlinkSync(jpg);
+    console.log(`[optimize-assets] Rimosso poster JPG: ${path.basename(jpg)}`);
+  }
+}
+
+function writeVideoManifest() {
+  const manifest = {};
+  for (const name of HERO_VIDEOS) {
+    const base = name.replace(/\.mp4$/i, "");
+    const mp4 = path.join(assetsDir, name);
+    const webm = mp4.replace(/\.mp4$/i, ".webm");
+    const mp4Bytes = fs.existsSync(mp4) ? fs.statSync(mp4).size : 0;
+    const webmBytes = fs.existsSync(webm) ? fs.statSync(webm).size : 0;
+    const order = [];
+    if (webmBytes > 0 && webmBytes < mp4Bytes) order.push("webm");
+    if (mp4Bytes > 0) order.push("mp4");
+    if (!order.length) order.push("mp4");
+    manifest[base] = { order, mp4Bytes, webmBytes };
+  }
+  const out = path.join(root, "lib", "heroVideoManifest.json");
+  fs.writeFileSync(out, `${JSON.stringify(manifest, null, 2)}\n`);
+  console.log(`[optimize-assets] Manifest ${path.relative(root, out)}`);
 }
 
 async function optimizeImages() {
@@ -291,6 +336,9 @@ async function main() {
   await optimizeImages();
   pruneDuplicateJpegs();
   await optimizeVideos();
+  pruneOversizedWebm();
+  prunePosterJpgs();
+  writeVideoManifest();
   console.log("\n[optimize-assets] Completato. Esegui: npm run sync:static");
 }
 

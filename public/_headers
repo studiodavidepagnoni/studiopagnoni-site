@@ -1,5 +1,8 @@
-# Netlify / Cloudflare Pages — header di sicurezza (allineati a next.config.ts, branch non-static).
-# GitHub Pages non legge questo file: configurare header su CDN o reverse proxy.
+# Netlify / Cloudflare Pages — sicurezza + cache asset statici.
+# GitHub Pages non legge questo file: configurare Cache-Control su CDN o reverse proxy.
+
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
 
 /*
   X-Content-Type-Options: nosniff

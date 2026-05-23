@@ -7,7 +7,12 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroMotionVariants } from "@/lib/heroMotion";
 import { heroSlides } from "@/lib/images";
-import { HERO_VIDEO_DEFAULT_SOURCES, type HeroVideoSources } from "@/lib/heroVideos";
+import {
+  HERO_VIDEO_DEFAULT_SOURCES,
+  heroVideoSourceOrder,
+  type HeroVideoFormat,
+  type HeroVideoSources,
+} from "@/lib/heroVideos";
 import { ui } from "@/lib/ui";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
@@ -39,10 +44,51 @@ function nextSlideIndex(current: number) {
   return (current + 1) % heroSlides.length;
 }
 
+type NetworkInformationLite = {
+  saveData?: boolean;
+  effectiveType?: string;
+  addEventListener?: (type: "change", listener: () => void) => void;
+  removeEventListener?: (type: "change", listener: () => void) => void;
+};
+
+function networkInformation(): NetworkInformationLite | undefined {
+  if (typeof navigator === "undefined") return undefined;
+  return (navigator as Navigator & { connection?: NetworkInformationLite }).connection;
+}
+
+function prefersSaveData(): boolean {
+  const conn = networkInformation();
+  if (!conn) return false;
+  if (conn.saveData) return true;
+  return conn.effectiveType === "slow-2g" || conn.effectiveType === "2g";
+}
+
+function HeroVideoSourcesMarkup({
+  sources,
+  order,
+}: {
+  sources: HeroVideoSources;
+  order: HeroVideoFormat[];
+}) {
+  return (
+    <>
+      {order.map((format) =>
+        format === "webm" ? (
+          <source key="webm" src={sources.webm} type="video/webm" />
+        ) : (
+          <source key="mp4" src={sources.mp4} type="video/mp4" />
+        ),
+      )}
+    </>
+  );
+}
+
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
+  const [saveData, setSaveData] = useState(false);
+  const [prefetchNextVideo, setPrefetchNextVideo] = useState(false);
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -65,6 +111,25 @@ export function HeroHome() {
     mq.addEventListener("change", apply);
     return () => mq.removeEventListener("change", apply);
   }, []);
+
+  useEffect(() => {
+    const apply = () => setSaveData(prefersSaveData());
+    apply();
+    const conn = networkInformation();
+    conn?.addEventListener?.("change", apply);
+    return () => conn?.removeEventListener?.("change", apply);
+  }, []);
+
+  /** Scarica la slide successiva solo negli ultimi secondi (risparmio ~20 MB al first paint). */
+  useEffect(() => {
+    setPrefetchNextVideo(false);
+    if (isMobile || reducedMotion || saveData) return;
+    const totalMs = slideDurationMs(idx, isMobile, failedVideos);
+    const leadMs = Math.min(6000, Math.max(3500, Math.floor(totalMs * 0.22)));
+    const delayMs = Math.max(0, totalMs - leadMs);
+    const id = window.setTimeout(() => setPrefetchNextVideo(true), delayMs);
+    return () => window.clearTimeout(id);
+  }, [idx, isMobile, failedVideos, reducedMotion, saveData]);
 
   /** Ken Burns intro: durata prima slide (solo desktop, no PRM). */
   useEffect(() => {
@@ -159,10 +224,12 @@ export function HeroHome() {
           const key = videoKey(sources);
           const posterSrc = slideItem.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp");
           const videoFailed = failedVideos.has(key);
-          const showVideo = !isMobile && !videoFailed && !reducedMotion;
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
           if (!isActive && !isNext) return null;
+          const showVideo = !isMobile && !videoFailed && !reducedMotion && !saveData;
+          const sourceOrder = heroVideoSourceOrder(sources.mp4);
+          const loadSources = isActive || (isNext && prefetchNextVideo);
           const isIntroSlide = slideIndex === 0;
           const layerClass = [
             "hero-media__layer",
@@ -187,16 +254,13 @@ export function HeroHome() {
                   muted
                   playsInline
                   loop
-                  preload={slideIndex === 0 && isActive ? "auto" : isActive ? "metadata" : "none"}
+                  preload={isActive ? "metadata" : "none"}
                   onError={() => handleVideoError(key)}
                   aria-hidden
                 >
-                  {(isActive || isNext) && (
-                    <>
-                      <source src={sources.mp4} type="video/mp4" />
-                      <source src={sources.webm} type="video/webm" />
-                    </>
-                  )}
+                  {loadSources ? (
+                    <HeroVideoSourcesMarkup sources={sources} order={sourceOrder} />
+                  ) : null}
                 </video>
               ) : (
                 <Image
