@@ -1,13 +1,20 @@
 "use client";
 
-import { AnimatePresence, LazyMotion, domAnimation, m, useReducedMotion } from "framer-motion";
+import { AnimatePresence, LazyMotion, domAnimation, m } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroMotionVariants } from "@/lib/heroMotion";
 import { heroSlides } from "@/lib/images";
-import { networkInformation, prefersSaveData } from "@/lib/connection";
+import {
+  HERO_MOBILE_MEDIA_QUERY,
+  HERO_VIDEO_MEDIA_QUERY,
+  useMediaQuery,
+  usePageVisible,
+  usePrefersReducedMotion,
+  usePrefersSaveData,
+} from "@/lib/useClientMedia";
 import {
   HERO_VIDEO_DEFAULT_SOURCES,
   heroVideoSourceOrder,
@@ -68,15 +75,15 @@ function HeroVideoSourcesMarkup({
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
-  const [isMobile, setIsMobile] = useState(false);
-  const [heroUsesVideo, setHeroUsesVideo] = useState(false);
-  const [saveData, setSaveData] = useState(false);
-  const [tabHidden, setTabHidden] = useState(false);
+  const isMobile = useMediaQuery(HERO_MOBILE_MEDIA_QUERY, false);
+  const heroUsesVideo = useMediaQuery(HERO_VIDEO_MEDIA_QUERY, false);
+  const saveData = usePrefersSaveData();
+  const pageVisible = usePageVisible();
   const [prefetchNextVideo, setPrefetchNextVideo] = useState(false);
   const [videoReady, setVideoReady] = useState<ReadonlySet<string>>(() => new Set());
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
-  const reducedMotion = useReducedMotion();
+  const reducedMotion = usePrefersReducedMotion();
   const autoAdvance = !reducedMotion && !autoPaused;
   const motionVariants = heroMotionVariants(!!reducedMotion);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
@@ -102,38 +109,8 @@ export function HeroHome() {
     [markVideoReady],
   );
 
-  useEffect(() => {
-    const mq = window.matchMedia("(max-width: 767px)");
-    const apply = () => setIsMobile(mq.matches);
-    apply();
-    mq.addEventListener("change", apply);
-    return () => mq.removeEventListener("change", apply);
-  }, []);
-
-  useEffect(() => {
-    const mqVideo = window.matchMedia("(min-width: 1025px) and (hover: hover)");
-    const applyVideo = () => setHeroUsesVideo(mqVideo.matches);
-    applyVideo();
-    mqVideo.addEventListener("change", applyVideo);
-    return () => mqVideo.removeEventListener("change", applyVideo);
-  }, []);
-
-  useEffect(() => {
-    const apply = () => setSaveData(prefersSaveData());
-    apply();
-    const conn = networkInformation();
-    conn?.addEventListener?.("change", apply);
-    return () => conn?.removeEventListener?.("change", apply);
-  }, []);
-
-  useEffect(() => {
-    const onVisibility = () => setTabHidden(document.hidden);
-    onVisibility();
-    document.addEventListener("visibilitychange", onVisibility);
-    return () => document.removeEventListener("visibilitychange", onVisibility);
-  }, []);
-
   const showVideoBackground = heroUsesVideo && !saveData && !reducedMotion;
+  const tabHidden = !pageVisible;
 
   /** Scarica la slide successiva solo negli ultimi secondi (risparmio ~20 MB al first paint). */
   useEffect(() => {
@@ -330,7 +307,7 @@ export function HeroHome() {
             <m.div
               key={idx}
               variants={motionVariants.container}
-              initial="hidden"
+              initial={false}
               animate="show"
               exit="exit"
             >
