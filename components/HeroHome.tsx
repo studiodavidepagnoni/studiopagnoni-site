@@ -7,6 +7,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroMotionVariants } from "@/lib/heroMotion";
 import { heroSlides } from "@/lib/images";
+import { networkInformation, prefersSaveData } from "@/lib/connection";
 import {
   HERO_VIDEO_DEFAULT_SOURCES,
   heroVideoSourceOrder,
@@ -30,37 +31,18 @@ const HERO_IMAGE_SLIDE_MS = 14_000;
 
 function slideDurationMs(
   slideIndex: number,
-  isMobile: boolean,
+  heroUsesVideo: boolean,
   failedVideos: ReadonlySet<string>,
 ): number {
   const slide = heroSlides[slideIndex];
   const sources = slide.video ?? DEFAULT_VIDEO;
-  const hasVideo = !isMobile && !failedVideos.has(sources.mp4);
+  const hasVideo = heroUsesVideo && !failedVideos.has(sources.mp4);
   if (slideIndex === 0) return hasVideo ? HERO_FIRST_SLIDE_MS : HERO_FIRST_SLIDE_NO_VIDEO_MS;
   return hasVideo ? HERO_VIDEO_SLIDE_MS : HERO_IMAGE_SLIDE_MS;
 }
 
 function nextSlideIndex(current: number) {
   return (current + 1) % heroSlides.length;
-}
-
-type NetworkInformationLite = {
-  saveData?: boolean;
-  effectiveType?: string;
-  addEventListener?: (type: "change", listener: () => void) => void;
-  removeEventListener?: (type: "change", listener: () => void) => void;
-};
-
-function networkInformation(): NetworkInformationLite | undefined {
-  if (typeof navigator === "undefined") return undefined;
-  return (navigator as Navigator & { connection?: NetworkInformationLite }).connection;
-}
-
-function prefersSaveData(): boolean {
-  const conn = networkInformation();
-  if (!conn) return false;
-  if (conn.saveData) return true;
-  return conn.effectiveType === "slow-2g" || conn.effectiveType === "2g";
 }
 
 function HeroVideoSourcesMarkup({
@@ -87,8 +69,11 @@ export function HeroHome() {
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const [isMobile, setIsMobile] = useState(false);
+  const [heroUsesVideo, setHeroUsesVideo] = useState(false);
   const [saveData, setSaveData] = useState(false);
+  const [tabHidden, setTabHidden] = useState(false);
   const [prefetchNextVideo, setPrefetchNextVideo] = useState(false);
+  const [videoReady, setVideoReady] = useState<ReadonlySet<string>>(() => new Set());
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const reducedMotion = useReducedMotion();
@@ -96,12 +81,25 @@ export function HeroHome() {
   const motionVariants = heroMotionVariants(!!reducedMotion);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
+  const markVideoReady = useCallback((key: string) => {
+    setVideoReady((prev) => {
+      if (prev.has(key)) return prev;
+      const next = new Set(prev);
+      next.add(key);
+      return next;
+    });
+  }, []);
+
   const registerVideo = useCallback(
-    (src: string) => (el: HTMLVideoElement | null) => {
-      if (el) videoRefs.current.set(src, el);
-      else videoRefs.current.delete(src);
+    (key: string) => (el: HTMLVideoElement | null) => {
+      if (el) {
+        videoRefs.current.set(key, el);
+        if (el.readyState >= HTMLMediaElement.HAVE_FUTURE_DATA) markVideoReady(key);
+      } else {
+        videoRefs.current.delete(key);
+      }
     },
-    [],
+    [markVideoReady],
   );
 
   useEffect(() => {
@@ -113,6 +111,14 @@ export function HeroHome() {
   }, []);
 
   useEffect(() => {
+    const mqVideo = window.matchMedia("(min-width: 1025px) and (hover: hover)");
+    const applyVideo = () => setHeroUsesVideo(mqVideo.matches);
+    applyVideo();
+    mqVideo.addEventListener("change", applyVideo);
+    return () => mqVideo.removeEventListener("change", applyVideo);
+  }, []);
+
+  useEffect(() => {
     const apply = () => setSaveData(prefersSaveData());
     apply();
     const conn = networkInformation();
@@ -120,16 +126,25 @@ export function HeroHome() {
     return () => conn?.removeEventListener?.("change", apply);
   }, []);
 
+  useEffect(() => {
+    const onVisibility = () => setTabHidden(document.hidden);
+    onVisibility();
+    document.addEventListener("visibilitychange", onVisibility);
+    return () => document.removeEventListener("visibilitychange", onVisibility);
+  }, []);
+
+  const showVideoBackground = heroUsesVideo && !saveData && !reducedMotion;
+
   /** Scarica la slide successiva solo negli ultimi secondi (risparmio ~20 MB al first paint). */
   useEffect(() => {
     setPrefetchNextVideo(false);
-    if (isMobile || reducedMotion || saveData) return;
-    const totalMs = slideDurationMs(idx, isMobile, failedVideos);
+    if (!showVideoBackground) return;
+    const totalMs = slideDurationMs(idx, showVideoBackground, failedVideos);
     const leadMs = Math.min(6000, Math.max(3500, Math.floor(totalMs * 0.22)));
     const delayMs = Math.max(0, totalMs - leadMs);
     const id = window.setTimeout(() => setPrefetchNextVideo(true), delayMs);
     return () => window.clearTimeout(id);
-  }, [idx, isMobile, failedVideos, reducedMotion, saveData]);
+  }, [idx, showVideoBackground, failedVideos]);
 
   /** Ken Burns intro: durata prima slide (solo desktop, no PRM). */
   useEffect(() => {
@@ -140,16 +155,16 @@ export function HeroHome() {
 
   useEffect(() => {
     if (!autoAdvance) return;
-    const delayMs = slideDurationMs(idx, isMobile, failedVideos);
+    const delayMs = slideDurationMs(idx, showVideoBackground, failedVideos);
     const timeoutId = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
     }, delayMs);
     return () => window.clearTimeout(timeoutId);
-  }, [idx, isMobile, failedVideos, autoAdvance]);
+  }, [idx, showVideoBackground, failedVideos, autoAdvance]);
 
-  /** Play solo la slide attiva; le altre restano in pausa (playback riprende al ritorno). */
+  /** Play solo la slide attiva; pausa con tab in background. */
   useEffect(() => {
-    if (isMobile) {
+    if (!showVideoBackground || tabHidden) {
       videoRefs.current.forEach((video) => video.pause());
       return;
     }
@@ -167,7 +182,7 @@ export function HeroHome() {
         video.pause();
       }
     });
-  }, [idx, isMobile, failedVideos]);
+  }, [idx, showVideoBackground, failedVideos, tabHidden]);
 
   const slide = heroSlides[idx];
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
@@ -226,8 +241,9 @@ export function HeroHome() {
           const videoFailed = failedVideos.has(key);
           const isActive = slideIndex === idx;
           const isNext = slideIndex === nextIdx;
-          if (!isActive && !isNext) return null;
-          const showVideo = !isMobile && !videoFailed && !reducedMotion && !saveData;
+          const mountLayer = isActive || (isNext && (!showVideoBackground || prefetchNextVideo));
+          if (!mountLayer) return null;
+          const showVideo = showVideoBackground && !videoFailed;
           const sourceOrder = heroVideoSourceOrder(sources.mp4);
           const loadSources = isActive || (isNext && prefetchNextVideo);
           const isIntroSlide = slideIndex === 0;
@@ -244,7 +260,12 @@ export function HeroHome() {
           const media = showVideo ? (
                 <video
                   ref={registerVideo(key)}
-                  className="hero-media__video absolute inset-0 h-full w-full"
+                  className={[
+                    "hero-media__video absolute inset-0 h-full w-full",
+                    videoReady.has(key) && "hero-media__video--ready",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
                   style={
                     slideItem.videoObjectPosition
                       ? { objectPosition: slideItem.videoObjectPosition }
@@ -255,6 +276,8 @@ export function HeroHome() {
                   playsInline
                   loop
                   preload={isActive ? "metadata" : "none"}
+                  onCanPlay={() => markVideoReady(key)}
+                  onLoadedData={() => markVideoReady(key)}
                   onError={() => handleVideoError(key)}
                   aria-hidden
                 >

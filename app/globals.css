@@ -533,11 +533,22 @@ body::before {
 }
 
 .hero-media__video {
-  opacity: var(--hero-media-video-opacity);
+  opacity: 0;
   filter: brightness(0.96) contrast(1.03) saturate(0.95);
   backface-visibility: hidden;
   -webkit-backface-visibility: hidden;
   transform: translateZ(0);
+  transition: opacity 0.65s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.hero-media__video--ready {
+  opacity: var(--hero-media-video-opacity);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-media__video {
+    transition: opacity 0.15s ease;
+  }
 }
 
 .hero-media__image {

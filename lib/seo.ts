@@ -238,5 +238,16 @@ export const jsonLdGraph = {
       publisher: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
       inLanguage: "it-IT",
     },
+    {
+      "@type": "WebPage",
+      "@id": `${site.url.replace(/\/$/, "")}/#homepage`,
+      url: site.url,
+      name: `Laser scanner SLAM e topografia — ${site.brandName}`,
+      description:
+        "Homepage: rilievi laser scanner SLAM, nuvole di punti e topografia in Franciacorta e provincia di Brescia.",
+      isPartOf: { "@id": `${site.url.replace(/\/$/, "")}/#website` },
+      about: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+      inLanguage: "it-IT",
+    },
   ],
 } as const;

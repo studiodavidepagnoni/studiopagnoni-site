@@ -24,6 +24,12 @@ const VIDEO_CRF = 30;
 const VIDEO_PRESET = "medium";
 const VIDEO_MAX_MB = 8;
 const WEBM_CRF = 38;
+/** Loop hero: taglia clip oltre questa durata (secondi) — stesso effetto in carousel. */
+const VIDEO_MAX_DURATION_SEC = 18;
+const VIDEO_CRF_BY_NAME = {
+  "rs10-hero.mp4": 32,
+  "hero-video-2.mp4": 31,
+};
 const HERO_LITE_W = 1280;
 const HERO_LITE_H = 864;
 const liteCrop = `scale=${HERO_LITE_W}:${HERO_LITE_H}:force_original_aspect_ratio=increase,crop=${HERO_LITE_W}:${HERO_LITE_H}`;
@@ -130,17 +136,23 @@ function extractPosterJpg(videoPath, posterPath) {
   }
 }
 
-function encodeMp4(input, tmpOut) {
+function encodeMp4(input, tmpOut, fileName) {
+  const crf = VIDEO_CRF_BY_NAME[fileName] ?? VIDEO_CRF;
+  const duration =
+    VIDEO_MAX_DURATION_SEC > 0 ? `-t ${VIDEO_MAX_DURATION_SEC}` : "";
   const cmd = [
     "ffmpeg -y -nostdin -hide_banner",
     `-i "${input}"`,
+    duration,
     `-vf "${liteCrop}"`,
     "-an",
-    `-c:v libx264 -preset ${VIDEO_PRESET} -crf ${VIDEO_CRF}`,
+    `-c:v libx264 -preset ${VIDEO_PRESET} -crf ${crf}`,
     "-pix_fmt yuv420p",
     "-movflags +faststart",
     `"${tmpOut}"`,
-  ].join(" ");
+  ]
+    .filter(Boolean)
+    .join(" ");
   console.log(`\n> ${cmd}\n`);
   execSync(cmd, { stdio: "inherit", cwd: root, shell: true });
 }
@@ -303,7 +315,7 @@ async function optimizeVideos() {
     }
 
     try {
-      encodeMp4(mp4, tmpMp4);
+      encodeMp4(mp4, tmpMp4, name);
       fs.renameSync(tmpMp4, mp4);
       const mb = (fs.statSync(mp4).size / (1024 * 1024)).toFixed(2);
       console.log(`[optimize-assets] ${name} → ${mb} MB`);

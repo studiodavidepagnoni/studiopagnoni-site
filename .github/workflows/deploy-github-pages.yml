@@ -35,6 +35,9 @@ jobs:
       - name: TypeScript
         run: npm run typecheck
 
+      - name: Verify ffmpeg (hero video optimize)
+        run: ffmpeg -version
+
       - name: Build static export
         env:
           STATIC_EXPORT: "1"

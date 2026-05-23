@@ -3,14 +3,14 @@
     "order": [
       "mp4"
     ],
-    "mp4Bytes": 13574950,
+    "mp4Bytes": 1228211,
     "webmBytes": 0
   },
   "hero-video-2": {
     "order": [
       "mp4"
     ],
-    "mp4Bytes": 7666141,
+    "mp4Bytes": 5270524,
     "webmBytes": 0
   },
   "hero-video-3": {
@@ -18,7 +18,7 @@
       "webm",
       "mp4"
     ],
-    "mp4Bytes": 2264210,
-    "webmBytes": 2013033
+    "mp4Bytes": 1962723,
+    "webmBytes": 1382106
   }
 }
