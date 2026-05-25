@@ -117,7 +117,8 @@ export function SiteHeader() {
   }, []);
 
   const staticPageHero = !isHome ? resolveStaticPageHero(pathname) : null;
-  const hasPageHero = Boolean(staticPageHero);
+  const hasDynamicProjectHero = !isHome && Boolean(pathname?.startsWith("/progetti/"));
+  const hasPageHero = Boolean(staticPageHero) || hasDynamicProjectHero;
 
   useLayoutEffect(() => {
     if (!hasPageHero) {

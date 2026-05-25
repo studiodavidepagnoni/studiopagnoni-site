@@ -46,19 +46,35 @@ export function embedsConsentGranted(): boolean {
 
 export function saveCookiePrefs(prefs: CookiePrefs): void {
   const payload: StoredPrefsV2 = { v: 2, embeds: prefs.embeds, updatedAt: Date.now() };
-  localStorage.setItem(COOKIE_PREFS_STORAGE_KEY, JSON.stringify(payload));
-  localStorage.removeItem(LEGACY_STORAGE_KEY);
+  try {
+    localStorage.setItem(COOKIE_PREFS_STORAGE_KEY, JSON.stringify(payload));
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
 
-  const d = new Date();
-  d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
-  const secure = window.location.protocol === "https:" ? ";Secure" : "";
-  const val = prefs.embeds ? "1" : "0";
-  document.cookie = `${COOKIE_MIRROR_NAME}=${val};expires=${d.toUTCString()};path=${cookiePath()};SameSite=Lax${secure}`;
+  try {
+    const d = new Date();
+    d.setTime(d.getTime() + 365 * 24 * 60 * 60 * 1000);
+    const secure = window.location.protocol === "https:" ? ";Secure" : "";
+    const val = prefs.embeds ? "1" : "0";
+    document.cookie = `${COOKIE_MIRROR_NAME}=${val};expires=${d.toUTCString()};path=${cookiePath()};SameSite=Lax${secure}`;
+  } catch {
+    /* ignore */
+  }
 }
 
 export function clearCookiePrefs(): void {
-  localStorage.removeItem(COOKIE_PREFS_STORAGE_KEY);
-  localStorage.removeItem(LEGACY_STORAGE_KEY);
-  const secure = window.location.protocol === "https:" ? ";Secure" : "";
-  document.cookie = `${COOKIE_MIRROR_NAME}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=${cookiePath()};SameSite=Lax${secure}`;
+  try {
+    localStorage.removeItem(COOKIE_PREFS_STORAGE_KEY);
+    localStorage.removeItem(LEGACY_STORAGE_KEY);
+  } catch {
+    /* ignore */
+  }
+  try {
+    const secure = window.location.protocol === "https:" ? ";Secure" : "";
+    document.cookie = `${COOKIE_MIRROR_NAME}=;expires=Thu, 01 Jan 1970 00:00:00 GMT;path=${cookiePath()};SameSite=Lax${secure}`;
+  } catch {
+    /* ignore */
+  }
 }

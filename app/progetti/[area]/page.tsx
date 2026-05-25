@@ -9,6 +9,7 @@ import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
 import { ui } from "@/lib/ui";
 
 type Props = { params: Promise<{ area: string }> };
+const siteUrl = site.url.replace(/\/$/, "");
 
 export function generateStaticParams() {
   return projectAreas.map((area) => ({ area }));
@@ -21,7 +22,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   return {
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: { canonical: `${site.url}/progetti/${area}` },
+    alternates: { canonical: `${siteUrl}/progetti/${area}` },
   };
 }
 

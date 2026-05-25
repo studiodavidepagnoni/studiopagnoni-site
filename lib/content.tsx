@@ -8,15 +8,6 @@ export const STUDIO_FOUNDED_YEAR = 1988;
 export const franciacortaPaesaggioViticole =
   "In Franciacorta, importanti collaborazioni di progettazione paesaggistica con realtà vinicole.";
 
-export const homeAiSummary = {
-  title: "Rilievi laser scanner SLAM e topografia — Franciacorta, Brescia",
-  paragraphs: [
-    "Studio Tecnico Pagnoni a Cazzago San Martino (BS), frazione Bornato: rilievi con laser scanner SLAM mobile e nuvole di punti georiferite per capannoni, edifici, impianti e cantieri, affiancati da topografia GNSS RTK e stazione totale. Interventi in Franciacorta, provincia di Brescia, Lombardia e Nord Italia per imprese, studi tecnici e committenti strutturati.",
-    "Oltre ai rilievi digitali: progettazione del verde (vigneti e territorio collinare), urbanistica e pratiche edilizie, architettura, coordinamento sicurezza cantieri (CSP/CSE) e perizie. Attivi dal 1988.",
-    "Per preventivi e sopralluoghi: studio@pagnoni-s.com — Via Vittorio Emanuele III 16, 25046 Cazzago San Martino (BS).",
-  ],
-} as const;
-
 export type homeChiSiamoBlock = {
   text: ReactNode;
   image: "team" | "cantiere";
