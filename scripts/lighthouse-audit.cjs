@@ -156,14 +156,15 @@ async function waitForServer(maxMs = 60_000) {
   throw new Error(`Server non raggiungibile su ${url}`);
 }
 
-async function lighthouseRun(id, extraArgs) {
+async function lighthouseRun(id, extraArgs, attempt = 1) {
   const outputBase = path.join(outDir, id);
   const report = path.join(outDir, `${id}.report.html`);
   const json = path.join(outDir, `${id}.report.json`);
-  const chromeProfileDir = path.join(tmpDir, `chrome-${id}`);
-  const chromeDebugPort = String(Number(process.env.LH_CHROME_PORT || 9222) + (id === "desktop" ? 1 : 0));
+  const chromeProfileDir = path.join(tmpDir, `chrome-${id}-${attempt}`);
+  const chromeDebugPort = String(Number(process.env.LH_CHROME_PORT || 9222) + (id === "desktop" ? 1 : 0) + (attempt - 1) * 10);
   const chromePath = findChromePath();
   let chrome = null;
+  let retryNoNavStart = false;
   fs.rmSync(chromeProfileDir, { recursive: true, force: true });
   fs.mkdirSync(chromeProfileDir, { recursive: true });
   if (chromePath) {
@@ -206,10 +207,21 @@ async function lighthouseRun(id, extraArgs) {
       { env: { ...process.env, TEMP: tmpDir, TMP: tmpDir, TMPDIR: tmpDir } },
     );
   } catch (err) {
-    if (!String(err.output || "").includes("EPERM") || !fs.existsSync(json)) throw err;
-    console.warn("[lighthouse] Chrome cleanup EPERM ignorato: report JSON generato correttamente.");
+    const output = String(err.output || err.message || "");
+    if (output.includes("NO_NAVSTART") && attempt < 2) {
+      retryNoNavStart = true;
+    } else if (output.includes("EPERM") && fs.existsSync(json)) {
+      console.warn("[lighthouse] Chrome cleanup EPERM ignorato: report JSON generato correttamente.");
+    } else {
+      throw err;
+    }
   } finally {
     killProcessTree(chrome);
+  }
+  if (retryNoNavStart) {
+    console.warn(`[lighthouse] ${id}: trace NO_NAVSTART, ritento con una sessione Chrome pulita…`);
+    await new Promise((r) => setTimeout(r, 1500));
+    return lighthouseRun(id, extraArgs, attempt + 1);
   }
   console.log(`\n[lighthouse] ${id}: ${report}`);
   if (fs.existsSync(json)) {

@@ -20,20 +20,20 @@ export default function ServiziPage() {
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
-          <p className={`${ui.body} max-w-5xl`}>
-              Lo <strong>Studio Tecnico Pagnoni</strong> è in attività <strong>dal 1988</strong> e affianca privati, imprese e professionisti su{" "}
-              <strong>misura del territorio</strong>, <strong>digitalizzazione laser</strong> e <strong>iter edilizio</strong>. La progettazione
-              strutturale non è svolta in proprio: quando serve, si integrano <strong>collaboratori esterni</strong> (ingegneri strutturisti), con un
-              referente unico se la commessa lo richiede.
-          </p>
+            <p className={`${ui.body} max-w-5xl`}>
+              Misura, progetto e pratiche tecniche non sono fasi separate: per una commessa ben impostata servono dati affidabili, lettura normativa e
+              continuità tra campo, studio e cantiere. Lo <strong>Studio Tecnico Pagnoni</strong>, attivo <strong>dal 1988</strong>, affianca privati,
+              imprese e professionisti su <strong>topografia</strong>, <strong>rilievi laser SLAM</strong>, verde, urbanistica e sicurezza. La parte
+              strutturale viene coordinata con professionisti esterni quando richiesta.
+            </p>
 
           <section className="mt-10 sm:mt-12" aria-labelledby="intro-topografia-slam">
             <h2 id="intro-topografia-slam" className={`${fontDisplay.className} ${ui.cardHeading} mb-3 sm:mb-4`}>
-              Cos&apos;è la topografia · Cos&apos;è il laser SLAM
+              Due basi operative: misura e documentazione 3D
             </h2>
             <p className={`${ui.bodyMuted} mb-8 max-w-5xl`}>
-              Qui sotto, in breve, cosa si intende per queste due attività; più sotto trovi l&apos;elenco completo dei servizi per ambito, con gli stessi
-              link usati dalla home.
+              Prima di progettare, regolarizzare o intervenire su un immobile serve capire con precisione lo stato di fatto. Topografia e SLAM rispondono
+              allo stesso obiettivo con scale diverse: il territorio e le coordinate da un lato, gli spazi costruiti e la nuvola di punti dall&apos;altro.
             </p>
             <div className="grid gap-6 md:grid-cols-2 md:gap-8">
               <Link
@@ -44,10 +44,8 @@ export default function ServiziPage() {
                   Topografia e rilievi
                 </span>
                 <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-[var(--copy-body)]">
-                  La <strong>topografia</strong> applicata ai cantieri e alla progettazione è la disciplina che, partendo da misure sul campo, restituisce
-                  la forma del terreno e la posizione degli elementi in coordinate affidabili: rilievi <strong>planoaltimetrici</strong>, curve di livello,
-                  confini, volumi e tracciamenti. In studio si usano ricevitori <strong>GPS/GNSS</strong> (anche in modalità di alta precisione) e{" "}
-                  <strong>stazione totale</strong> per allineare la documentazione a catasto, progetto e cantieristica.
+                  Quando il progetto dipende da quote, confini, pendenze o tracciamenti, il rilievo topografico porta il terreno dentro elaborati leggibili:
+                  coordinate, curve di livello, volumi e punti di controllo. GNSS RTK e stazione totale vengono scelti in base al contesto, non per routine.
                 </p>
                 <span className="mt-6 text-sm font-semibold text-[var(--primary-mid)] group-hover:underline">Approfondisci la topografia →</span>
               </Link>
@@ -59,10 +57,8 @@ export default function ServiziPage() {
                   Laser scanner SLAM
                 </span>
                 <p className="mt-4 flex-1 text-[0.95rem] leading-relaxed text-[var(--copy-body)]">
-                  Il <strong>laser scanner</strong> misura migliaia di punti al secondo generando una <strong>nuvola di punti</strong> 3D dello spazio
-                  rilevato. Con la tecnologia <strong>SLAM</strong> (localizzazione e mappa in tempo reale) lo strumento ricostruisce la geometria mentre si
-                  percorre l&apos;ambiente, senza dover piantare la strumentazione come negli scanner statici: è utile per edifici complessi, impianti e
-                  grandi volumi da documentare in tempi contenuti, spesso integrando il rilievo topografico classico.
+                  Negli edifici, nei capannoni e negli impianti, lo SLAM consente di acquisire geometrie dense camminando nello spazio. La nuvola di punti
+                  diventa base per as-built, sezioni, CAD/BIM e verifiche, spesso integrata con controlli topografici dove servono coordinate di progetto.
                 </p>
                 <span className="mt-6 text-sm font-semibold text-[var(--primary-mid)] group-hover:underline">Approfondisci il laser SLAM →</span>
               </Link>

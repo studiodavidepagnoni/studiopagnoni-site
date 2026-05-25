@@ -4,9 +4,9 @@ export const laserSlamLanding = {
   eyebrow: "Laser scanner mobile",
   h1: "Rilievi laser SLAM",
   introLead:
-    "Documentazione rapida indoor e outdoor, nuvole di punti georiferite e as-built per edifici, capannoni, impianti e terreni — meno passaggi in cantiere, base metrica pronta per progetto e BIM.",
+    "Quando un edificio, un impianto o un capannone devono essere compresi prima di intervenire, il rilievo SLAM riduce i tempi in campo e restituisce una base metrica leggibile: nuvola di punti, as-built, sezioni e supporto a CAD/BIM.",
   instrumentNote:
-    "Piattaforma mobile CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale integrati per continuità tra esterni, interni e zone senza segnale satellitare.",
+    "La piattaforma mobile CHCNAV RS10 integra GNSS RTK, LiDAR e SLAM visuale: un flusso continuo tra esterni, interni e zone dove il segnale satellitare non basta.",
 
   sectors: [
     {

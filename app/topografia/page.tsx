@@ -20,35 +20,32 @@ export default function TopografiaPage() {
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
-          <p className={`${ui.body} max-w-[72ch]`}>
-              La <strong>topografia applicata</strong> è la base per progettare in sicurezza, definire confini e volumi e allineare il progetto al
-              terreno reale. Lo Studio Tecnico Pagnoni ha sede a <strong>Cazzago San Martino</strong> (frazione Bornato, provincia di{" "}
-              <strong>Brescia</strong>), con interventi in <strong>Franciacorta</strong>, <strong>Lombardia</strong> e{" "}
-              <strong>Nord Italia</strong>, con strumentazione da mercato professionale: <strong>GNSS/GPS</strong>,{" "}
-              <strong>stazione totale</strong> e integrazione con i flussi di lavoro CAD.
+            <p className={`${ui.body} max-w-[72ch]`}>
+              Un buon rilievo topografico non è solo una raccolta di punti: è il modo in cui il terreno diventa una base decisionale. Quote, confini,
+              pendenze e volumi devono essere misurati con metodo, restituiti con chiarezza e collegati al linguaggio del progetto. Da{" "}
+              <strong>Cazzago San Martino</strong>, in <strong>Franciacorta</strong>, lo studio opera con <strong>GNSS RTK</strong>,{" "}
+              <strong>stazione totale</strong> e flussi CAD integrati.
             </p>
           <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
             <section className={ui.innerCard} aria-labelledby="topo-rilievo">
               <h2 id="topo-rilievo" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
-                Cosa intendiamo per rilievo topografico
+                Dal terreno all&apos;elaborato
               </h2>
               <p className={ui.body}>
-                In ambito professionale il <strong>rilievo topografico</strong> (o <strong>rilievo planoaltimetrico</strong>) è l&apos;insieme delle
-                misure sul campo che consentono di restituire la forma del terreno, delle opere e dei punti significativi in coordinate coerenti con il
-                sistema di riferimento richiesto dal lavoro (catasto, progetto, cantieristica). A seconda dell&apos;incarico si producono mappe quotate,
-                sezioni, curve di livello, volumi e tracciamenti per impianti.
+                Ogni incarico parte dalla domanda corretta: serve definire un confine, impostare un cantiere, verificare volumi, aggiornare una planimetria
+                o dare al progettista una base quotata? Da qui si costruisce il rilievo: punti significativi, sistema di riferimento, controlli e restituzione
+                in tavole, sezioni, curve di livello o tracciamenti.
               </p>
             </section>
 
             <section className={ui.innerCard} aria-labelledby="topo-strumenti">
               <h2 id="topo-strumenti" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}>
-                Strumenti: GNSS e stazione totale
+                Strumenti scelti in base al contesto
               </h2>
               <p className={ui.body}>
-                I ricevitori <strong>GNSS in modalità RTK</strong> (Real Time Kinematic) permettono coordinate planoaltimetriche ad alta precisione in
-                tempi contenuti, ideali per grandi estensioni e punti di dettaglio. La <strong>stazione totale</strong> integra misure angolari e
-                distanze per rilievi di dettaglio, cantieri e ambienti dove il segnale satellitare è critico. La scelta della metodologia segue il tipo
-                di commessa e la precisione richiesta.
+                Il <strong>GNSS RTK</strong> è ideale per estensioni aperte e inquadramenti rapidi; la <strong>stazione totale</strong> resta centrale per
+                punti di dettaglio, cantieri, allineamenti e aree dove il segnale satellitare è critico. La metodologia non è standardizzata a priori:
+                viene definita sulla precisione richiesta, sull&apos;accessibilità e sull&apos;uso finale degli elaborati.
               </p>
             </section>
 
@@ -57,10 +54,9 @@ export default function TopografiaPage() {
                 Territorio e zone di intervento
               </h2>
               <p className={ui.body}>
-                Lavoriamo con continuità in <strong>Franciacorta</strong>, in <strong>provincia di Brescia</strong> e nelle aree limitrofe — tra cui{" "}
-                <strong>Valle Trompia</strong> e il <strong>Lago d&apos;Iseo</strong> — con incarichi anche in <strong>Lombardia</strong> e, quando serve,
-                nel <strong>Nord Italia</strong>. Per una stima di tempi e metodo è utile indicare la località precisa dell&apos;intervento e la finalità
-                (es. frazionamento, cantiere, aggiornamento planimetrico): ti rispondiamo dai recapiti in home e nella pagina contatti.
+                La sede in <strong>Franciacorta</strong> permette interventi rapidi in provincia di <strong>Brescia</strong>, Valle Trompia, Lago
+                d&apos;Iseo e aree limitrofe. Per rilievi più strutturati programmiamo commesse in <strong>Lombardia</strong> e Nord Italia, definendo
+                tempi e metodo sulla base di località, accessi e finalità dell&apos;incarico.
               </p>
             </section>
 
@@ -69,8 +65,8 @@ export default function TopografiaPage() {
                 Passaggio al laser scanner SLAM
               </h2>
               <p className={`${ui.body} mb-6`}>
-                Per edifici e siti complessi il rilievo tradizionale può essere integrato o affiancato al{" "}
-                <strong>laser scanner SLAM</strong> per ottenere nuvole di punti dense. Vedi la pagina dedicata:
+                Quando il lavoro passa dal terreno agli spazi costruiti, il rilievo topografico può essere affiancato dal{" "}
+                <strong>laser scanner SLAM</strong>: una nuvola di punti densa per edifici, capannoni e impianti, collegabile ai controlli topografici.
               </p>
               <Link href="/laser-scanner-slam" className={`${ui.btnOutline} inline-flex`}>
                 Laser scanner SLAM

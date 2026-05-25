@@ -146,7 +146,7 @@ export const homeProgettiIntro =
   "Tre ambiti rappresentativi: paesaggio viticolo, rilievi e digitalizzazione, edilizia e pratiche tecniche.";
 
 export const progettiIndexIntro =
-  "I lavori sono organizzati per ambito (verde e territorio, rilievi e digitalizzazione, edilizia) per orientare privati, aziende agricole e studi di progettazione.";
+  "Una selezione di ambiti ricorrenti: paesaggio viticolo, rilievi digitali e pratiche edilizie. Ogni scheda racconta il tipo di problema affrontato, più che un semplice elenco di immagini.";
 
 export const certificationsIntro =
   "Attività svolte da professionisti abilitati, con responsabilità tecnica e rete di specialisti quando la commessa lo richiede.";
@@ -223,19 +223,17 @@ export const chiSiamoPage = {
   title: "Chi siamo",
   paragraphs: [
     <>
-      Lo <strong>Studio Tecnico Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong>: oltre trent&apos;anni di lavoro sul territorio
-      bresciano, tra topografia, edilizia e progettazione. Una continuità di rapporti con clienti, aziende e altri studi, portata avanti oggi con un
-      aggiornamento costante di metodi e strumentazione — dalla stazione totale al GPS RTK, fino al laser scanner SLAM e alla modellazione 3D.
+      Lo <strong>Studio Tecnico Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> sul territorio bresciano, tra misura, edilizia e
+      progettazione. La continuità con clienti, imprese e altri studi è rimasta la stessa; sono cambiati gli strumenti, dalla stazione totale al GNSS RTK,
+      fino al laser scanner SLAM e alla restituzione 3D.
     </>,
     <>
-      L&apos;identità attuale dello studio si fonda sull&apos;incontro tra la competenza del geometra nella misura del territorio, delle regole
-      urbanistiche e delle pratiche edilizie, e la visione dell&apos;architetto nella progettazione integrata degli spazi e del paesaggio costruito:
-      due sguardi complementari sulla stessa commessa, dal rilievo all&apos;elaborato finale.
+      L&apos;identità attuale nasce dall&apos;incontro tra la precisione del geometra e lo sguardo dell&apos;architetto: rilievo, regole urbanistiche,
+      pratiche edilizie e progetto vengono letti come parti della stessa commessa, non come passaggi isolati.
     </>,
     <>
-      Il nostro investimento sulla <strong>strumentazione geomatica</strong> (GPS, stazione totale, <strong>laser scanner SLAM</strong>) risponde
-      alla richiesta di clienti e progettisti che cercano rilievi rapidi, misure affidabili e modelli utilizzabili in progettazione e restituzione
-      grafica.
+      L&apos;investimento sulla <strong>strumentazione geomatica</strong> risponde a una richiesta concreta: ridurre incertezza e tempi morti. GPS, stazione
+      totale e <strong>laser scanner SLAM</strong> permettono di consegnare basi metriche utilizzabili da progettisti, imprese e committenti.
     </>,
     <>
       Nel settore del <strong>verde</strong> collaboriamo con agronomi di fiducia per interventi su vigneti, parchi e percorsi. In{" "}
