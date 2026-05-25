@@ -1,4 +1,4 @@
-/** Contenuti landing commerciale `/laser-scanner-slam`. */
+/** Contenuti landing commerciale `/rilievi-laser-scanner-slam-brescia`. */
 
 export const laserSlamLanding = {
   eyebrow: "Laser scanner mobile",

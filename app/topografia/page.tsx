@@ -68,7 +68,7 @@ export default function TopografiaPage() {
                 Quando il lavoro passa dal terreno agli spazi costruiti, il rilievo topografico può essere affiancato dal{" "}
                 <strong>laser scanner SLAM</strong>: una nuvola di punti densa per edifici, capannoni e impianti, collegabile ai controlli topografici.
               </p>
-              <Link href="/laser-scanner-slam" className={`${ui.btnOutline} inline-flex`}>
+              <Link href="/rilievi-laser-scanner-slam-brescia" className={`${ui.btnOutline} inline-flex`}>
                 Laser scanner SLAM
               </Link>
             </section>

@@ -110,7 +110,7 @@ export const homeServiceCards = [
     title: "Laser scanner SLAM",
     description:
       "Acquisizione rapida di nuvole di punti e documentazione 3D per edifici, complessi industriali e siti estesi.",
-    href: "/laser-scanner-slam",
+    href: "/rilievi-laser-scanner-slam-brescia",
   },
   {
     kicker: "Paesaggio · Vigneti",

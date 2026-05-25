@@ -50,7 +50,7 @@ export default function ServiziPage() {
                 <span className="mt-6 text-sm font-semibold text-[var(--primary-mid)] group-hover:underline">Approfondisci la topografia →</span>
               </Link>
               <Link
-                href="/laser-scanner-slam"
+                href="/rilievi-laser-scanner-slam-brescia"
                 className="interactive-card group flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 sm:p-8"
               >
                 <span className={`${fontDisplay.className} text-xl font-semibold text-[var(--foreground)] group-hover:text-[var(--primary-mid)]`}>
@@ -100,7 +100,7 @@ export default function ServiziPage() {
               <strong>nuvole di punti</strong>, utili per rilievi as-built, impianti e comunicazione dello stato dei luoghi.
             </p>
             <p className="mt-4">
-              <Link href="/laser-scanner-slam" className={ui.proseLink}>
+              <Link href="/rilievi-laser-scanner-slam-brescia" className={ui.proseLink}>
                 Pagina dedicata: laser scanner SLAM
               </Link>
             </p>

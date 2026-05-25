@@ -35,8 +35,10 @@ export function HeroHome() {
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [heroInView, setHeroInView] = useState(true);
   const reducedMotion = usePrefersReducedMotion();
-  const autoAdvance = !reducedMotion && !autoPaused;
+  const autoAdvance = !reducedMotion && !autoPaused && heroInView && pageVisible;
+  const heroRootRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
 
   const registerVideo = useCallback(
@@ -51,18 +53,30 @@ export function HeroHome() {
   );
 
   const showVideoBackground = heroUsesVideo && !saveData && !reducedMotion;
-  const tabHidden = !pageVisible;
+  const mediaPaused = !pageVisible || !heroInView;
   const isIntroActive = idx === 0;
 
   useEffect(() => {
+    const root = heroRootRef.current;
+    if (!root || !("IntersectionObserver" in window)) return;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => setHeroInView(entry.isIntersecting),
+      { threshold: 0.12 },
+    );
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
+  useEffect(() => {
     setPrefetchNextVideo(false);
-    if (!showVideoBackground) return;
+    if (!showVideoBackground || !heroInView) return;
     const totalMs = slideDurationMs(idx, showVideoBackground, failedVideos);
-    const leadMs = Math.min(6000, Math.max(3500, Math.floor(totalMs * 0.22)));
+    const leadMs = 1800;
     const delayMs = Math.max(0, totalMs - leadMs);
     const id = window.setTimeout(() => setPrefetchNextVideo(true), delayMs);
     return () => window.clearTimeout(id);
-  }, [idx, showVideoBackground, failedVideos]);
+  }, [idx, showVideoBackground, failedVideos, heroInView]);
 
   useEffect(() => {
     if (reducedMotion || isMobile || introKenburnDone) return;
@@ -80,7 +94,7 @@ export function HeroHome() {
   }, [idx, showVideoBackground, failedVideos, autoAdvance]);
 
   useEffect(() => {
-    if (!showVideoBackground || tabHidden) {
+    if (!showVideoBackground || mediaPaused) {
       videoRefs.current.forEach((video) => video.pause());
       return;
     }
@@ -98,7 +112,7 @@ export function HeroHome() {
         video.pause();
       }
     });
-  }, [idx, showVideoBackground, failedVideos, tabHidden]);
+  }, [idx, showVideoBackground, failedVideos, mediaPaused]);
 
   const slide = heroSlides[idx];
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
@@ -135,6 +149,7 @@ export function HeroHome() {
 
   return (
     <section
+      ref={heroRootRef}
       className="relative isolate h-[100dvh] min-h-[100svh] max-w-full overflow-x-hidden overflow-y-hidden border-b border-[var(--green-border-muted)]"
       aria-label="Introduzione"
     >

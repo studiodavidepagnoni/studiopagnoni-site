@@ -51,8 +51,8 @@ export function SiteFooter() {
                     </Link>
                   </li>
                   <li>
-                    <Link className={footerNavLinkClass} href="/laser-scanner-slam">
-                      Laser SLAM
+                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
+                      Rilievi 3D SLAM
                     </Link>
                   </li>
                   <li>

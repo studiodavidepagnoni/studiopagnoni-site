@@ -21,7 +21,7 @@ export function HeroHomeDeferred() {
     const isMobile = window.matchMedia("(max-width: 767px)").matches;
     if (isMobile) return;
 
-    const timeout = 800;
+    const timeout = 1400;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
     let idleId: number | undefined;
     const idleWindow = window as IdleWindow;

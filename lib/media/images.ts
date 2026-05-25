@@ -46,7 +46,7 @@ export const heroSlides: readonly HeroSlide[] = [
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto e BIM.",
     primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
     primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",
-    ctaHref: "/laser-scanner-slam",
+    ctaHref: "/rilievi-laser-scanner-slam-brescia",
     ctaLabel: "Scopri il servizio SLAM",
     video: HERO_VIDEO_INDOOR_SOURCES,
     poster: HERO_POSTER_INDOOR,
