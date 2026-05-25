@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StaticPageHero } from "@/components/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
 import { buildPageMetadata, seoKeywords } from "@/lib/seo";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
@@ -14,9 +15,11 @@ export const metadata = buildPageMetadata({
 
 export default function TopografiaPage() {
   return (
-    <main id="main-content" className={`section-shell ${ui.pageBg}`}>
-      <div className={layoutGutterXClass}>
-        <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
+    <>
+      <StaticPageHero path="/topografia" />
+      <main id="main-content" className={`section-shell ${ui.pageBg}`}>
+        <div className={layoutGutterXClass}>
+          <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
           <p className={`${ui.body} max-w-[72ch]`}>
               La <strong>topografia applicata</strong> è la base per progettare in sicurezza, definire confini e volumi e allineare il progetto al
               terreno reale. Lo Studio Tecnico Pagnoni ha sede a <strong>Cazzago San Martino</strong> (frazione Bornato, provincia di{" "}
@@ -81,8 +84,9 @@ export default function TopografiaPage() {
             </Link>{" "}
             per il tuo rilievo: indicando località e finalità (es. frazionamento, cantiere, progettazione) possiamo proporre metodo e tempistiche.
           </p>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

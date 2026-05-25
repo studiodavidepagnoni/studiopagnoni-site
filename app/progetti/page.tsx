@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { StaticPageHero } from "@/components/StaticPageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { progettiIndexIntro } from "@/lib/content";
 import { projectPreview } from "@/lib/images";
@@ -16,9 +17,11 @@ export const metadata = buildPageMetadata({
 
 export default function ProgettiPage() {
   return (
-    <main id="main-content" className={`section-shell ${ui.pageBg}`}>
-      <div className={layoutGutterXClass}>
-        <div className={layoutContentMaxClass}>
+    <>
+      <StaticPageHero path="/progetti" />
+      <main id="main-content" className={`section-shell ${ui.pageBg}`}>
+        <div className={layoutGutterXClass}>
+          <div className={layoutContentMaxClass}>
           <p className={`reveal-block ${ui.bodyMuted} max-w-[72ch] text-pretty`}>{progettiIndexIntro}</p>
 
           <div className="reveal-block mb-12 mt-10 grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:mt-12 sm:grid-cols-3">
@@ -64,8 +67,9 @@ export default function ProgettiPage() {
               </Link>
             ))}
           </div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

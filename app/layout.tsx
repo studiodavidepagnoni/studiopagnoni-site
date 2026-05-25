@@ -2,7 +2,6 @@ import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/AppProviders";
 import { CookieBanner } from "@/components/CookieBanner";
 import { SiteFooter } from "@/components/SiteFooter";
-import { PageHeroRouter } from "@/components/PageHeroRouter";
 import { SiteHeader } from "@/components/SiteHeader";
 import { withBasePath } from "@/lib/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
@@ -43,7 +42,6 @@ export default function RootLayout({
           Vai al contenuto principale
         </a>
         <SiteHeader />
-        <PageHeroRouter />
         <AppProviders>
           <CookieBanner />
           {children}

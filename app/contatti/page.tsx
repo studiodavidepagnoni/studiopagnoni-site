@@ -1,5 +1,6 @@
 import { ContattiFormSection, ContattiIntro } from "@/components/contatti/ContattiSlamLead";
 import { MapEmbed } from "@/components/MapEmbed";
+import { StaticPageHero } from "@/components/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
 import { buildPageMetadata, seoKeywords } from "@/lib/seo";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
@@ -16,10 +17,12 @@ export const metadata = buildPageMetadata({
 
 export default function ContattiPage() {
   return (
-    <main id="main-content" className={`section-shell ${ui.pageBg}`}>
-      <div className={layoutGutterXClass}>
-        <div className={layoutContentMaxClass}>
-          <ContattiIntro />
+    <>
+      <StaticPageHero path="/contatti" />
+      <main id="main-content" className={`section-shell ${ui.pageBg}`}>
+        <div className={layoutGutterXClass}>
+          <div className={layoutContentMaxClass}>
+            <ContattiIntro />
 
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.02fr_1.28fr] lg:items-stretch">
             <section aria-labelledby="recapiti-block" className={ui.innerCard}>
@@ -58,9 +61,10 @@ export default function ContattiPage() {
             </section>
           </div>
 
-          <ContattiFormSection />
+            <ContattiFormSection />
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

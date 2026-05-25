@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { StaticPageHero } from "@/components/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
 import { buildPageMetadata, seoKeywords } from "@/lib/seo";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
@@ -14,9 +15,11 @@ export const metadata = buildPageMetadata({
 
 export default function ServiziPage() {
   return (
-    <main id="main-content" className={`section-shell ${ui.pageBg}`}>
-      <div className={layoutGutterXClass}>
-        <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
+    <>
+      <StaticPageHero path="/servizi" />
+      <main id="main-content" className={`section-shell ${ui.pageBg}`}>
+        <div className={layoutGutterXClass}>
+          <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
           <p className={`${ui.body} max-w-5xl`}>
               Lo <strong>Studio Tecnico Pagnoni</strong> è in attività <strong>dal 1988</strong> e affianca privati, imprese e professionisti su{" "}
               <strong>misura del territorio</strong>, <strong>digitalizzazione laser</strong> e <strong>iter edilizio</strong>. La progettazione
@@ -153,8 +156,9 @@ export default function ServiziPage() {
               </li>
             </ul>
           </article>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }

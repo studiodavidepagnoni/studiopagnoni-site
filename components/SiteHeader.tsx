@@ -110,10 +110,22 @@ export function SiteHeader() {
   }, [syncBrandMark, syncTaglineWidth]);
 
   useEffect(() => {
-    const onScroll = () => setScrollY(window.scrollY);
-    onScroll();
+    let frameId: number | null = null;
+    const updateScrollY = () => {
+      frameId = null;
+      setScrollY(window.scrollY);
+    };
+    const onScroll = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(updateScrollY);
+    };
+
+    setScrollY(window.scrollY);
     window.addEventListener("scroll", onScroll, { passive: true });
-    return () => window.removeEventListener("scroll", onScroll);
+    return () => {
+      window.removeEventListener("scroll", onScroll);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+    };
   }, []);
 
   const staticPageHero = !isHome ? resolveStaticPageHero(pathname) : null;

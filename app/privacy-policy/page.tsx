@@ -1,6 +1,7 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
 import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
+import { StaticPageHero } from "@/components/StaticPageHero";
 import { COOKIE_MIRROR_NAME, COOKIE_PREFS_STORAGE_KEY } from "@/lib/cookieConsent";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { buildPageMetadata } from "@/lib/seo";
@@ -42,9 +43,11 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
 
 export default function PrivacyPolicyPage() {
   return (
-    <main id="main-content" className={`section-shell min-h-[70vh] ${ui.pageBg}`}>
-      <div className={layoutGutterXClass}>
-        <div className={`${layoutContentMaxClass} py-10 sm:py-14`}>
+    <>
+      <StaticPageHero path="/privacy-policy" />
+      <main id="main-content" className={`section-shell min-h-[70vh] ${ui.pageBg}`}>
+        <div className={layoutGutterXClass}>
+          <div className={`${layoutContentMaxClass} py-10 sm:py-14`}>
           <header className="mb-10 max-w-[72ch] sm:mb-12">
             <p className={`${fontSans.className} ${ui.body}`}>
               Informativa resa ai sensi degli{" "}
@@ -422,8 +425,9 @@ export default function PrivacyPolicyPage() {
               </section>
             </article>
           </div>
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+    </>
   );
 }
