@@ -1,11 +1,11 @@
 import Image from "next/image";
 import Link from "next/link";
-import { StaticPageHero } from "@/components/StaticPageHero";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { progettiIndexIntro } from "@/lib/content";
-import { projectPreview } from "@/lib/images";
-import { buildPageMetadata } from "@/lib/seo";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
+import { projectPreview } from "@/lib/media/images";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({

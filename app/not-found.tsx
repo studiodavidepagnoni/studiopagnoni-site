@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata: Metadata = {

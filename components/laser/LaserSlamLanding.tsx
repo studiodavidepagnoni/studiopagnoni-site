@@ -1,10 +1,10 @@
 import Image from "next/image";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { laserSlamLanding } from "@/lib/laserSlamLanding";
-import { stockImage } from "@/lib/mediaPath";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
-import { imageAlt } from "@/lib/seo";
+import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
+import { stockImage } from "@/lib/media/mediaPath";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
+import { imageAlt } from "@/lib/config/seo";
 import { ui } from "@/lib/ui";
 
 const L = laserSlamLanding;

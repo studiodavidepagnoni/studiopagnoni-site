@@ -1,9 +1,9 @@
 import Image from "next/image";
-import { StaticPageHero } from "@/components/StaticPageHero";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { chiSiamoPage } from "@/lib/content";
-import { chiSiamoPageImage } from "@/lib/images";
-import { buildPageMetadata } from "@/lib/seo";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
+import { chiSiamoPageImage } from "@/lib/media/images";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({

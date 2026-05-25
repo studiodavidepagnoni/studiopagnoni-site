@@ -1,4 +1,4 @@
-import type { HeroVideoFormat, HeroVideoSources } from "@/lib/heroVideos";
+import type { HeroVideoFormat, HeroVideoSources } from "@/lib/media/heroVideos";
 
 type Props = {
   sources: HeroVideoSources;

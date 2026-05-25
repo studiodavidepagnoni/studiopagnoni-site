@@ -1,9 +1,9 @@
-import { ContattiFormSection, ContattiIntro } from "@/components/contatti/ContattiSlamLead";
-import { MapEmbed } from "@/components/MapEmbed";
-import { StaticPageHero } from "@/components/StaticPageHero";
+import { ContattiFormSection, ContattiIntro } from "@/components/contact/ContattiSlamLead";
+import { MapEmbed } from "@/components/contact/MapEmbed";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
-import { buildPageMetadata, seoKeywords } from "@/lib/seo";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({

@@ -1,8 +1,8 @@
 import Link from "next/link";
-import { StaticPageHero } from "@/components/StaticPageHero";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
-import { buildPageMetadata, seoKeywords } from "@/lib/seo";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/site";
+import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({

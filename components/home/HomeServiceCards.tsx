@@ -3,7 +3,7 @@
 import { motion, useReducedMotion } from "framer-motion";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { HERO_EASE_OUT } from "@/lib/heroMotion";
+import { HERO_EASE_OUT } from "@/lib/media/heroMotion";
 import { homeServiceCards } from "@/lib/content";
 
 const gridVariants = {
@@ -48,6 +48,7 @@ const accentVariants = {
 
 const still = { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" };
 const stillAccent = { scaleX: 1, opacity: 1 };
+const visibleServiceCards = homeServiceCards.slice(0, 4);
 
 export function HomeServiceCards() {
   const reduced = !!useReducedMotion();
@@ -63,7 +64,7 @@ export function HomeServiceCards() {
       viewport={{ once: true, amount: 0.08, margin: "0px 0px 18% 0px" }}
       variants={grid}
     >
-      {homeServiceCards.map((card) => (
+      {visibleServiceCards.map((card) => (
         <motion.article
           key={card.title}
           variants={item}

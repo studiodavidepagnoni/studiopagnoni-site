@@ -1,6 +1,6 @@
 import Image from "next/image";
-import type { HeroSlide } from "@/lib/images";
-import { HERO_VIDEO_DEFAULT_SOURCES, heroVideoKey, heroVideoSourceOrder } from "@/lib/heroVideos";
+import type { HeroSlide } from "@/lib/media/images";
+import { HERO_VIDEO_DEFAULT_SOURCES, heroVideoKey, heroVideoSourceOrder } from "@/lib/media/heroVideos";
 import { HeroVideoSources } from "@/components/hero/HeroVideoSources";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
@@ -11,11 +11,9 @@ type Props = {
   isActive: boolean;
   showVideo: boolean;
   loadSources: boolean;
-  videoReady: boolean;
   introKenburnDone: boolean;
   reducedMotion: boolean;
   registerVideo: (key: string) => (el: HTMLVideoElement | null) => void;
-  onVideoReady: (key: string) => void;
   onVideoError: (key: string) => void;
 };
 
@@ -25,11 +23,9 @@ export function HeroSlideLayer({
   isActive,
   showVideo,
   loadSources,
-  videoReady,
   introKenburnDone,
   reducedMotion,
   registerVideo,
-  onVideoReady,
   onVideoError,
 }: Props) {
   const sources = slide.video ?? DEFAULT_VIDEO;
@@ -50,20 +46,13 @@ export function HeroSlideLayer({
   const media = showVideo ? (
     <video
       ref={registerVideo(key)}
-      className={[
-        "hero-media__video absolute inset-0 h-full w-full",
-        videoReady && "hero-media__video--ready",
-      ]
-        .filter(Boolean)
-        .join(" ")}
+      className="hero-media__video hero-media__video--ready absolute inset-0 h-full w-full"
       style={slide.videoObjectPosition ? { objectPosition: slide.videoObjectPosition } : undefined}
       poster={posterSrc}
       muted
       playsInline
       loop
       preload={isActive ? "metadata" : "none"}
-      onCanPlay={() => onVideoReady(key)}
-      onLoadedData={() => onVideoReady(key)}
       onError={() => onVideoError(key)}
       aria-hidden
     >

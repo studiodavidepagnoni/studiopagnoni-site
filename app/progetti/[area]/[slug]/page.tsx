@@ -1,7 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
-import { PageHero } from "@/components/PageHero";
+import { PageHero } from "@/components/hero/PageHero";
 import { ProjectImageLightbox } from "@/components/projects/ProjectImageLightbox";
 import {
   getCaseStudyKey,
@@ -9,8 +9,8 @@ import {
   projectCaseStudies,
   projectCategories,
   projectAreas,
-} from "@/lib/projects";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+} from "@/lib/content/projects";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 type Props = { params: Promise<{ area: string; slug: string }> };

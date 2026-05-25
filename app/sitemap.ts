@@ -1,11 +1,11 @@
 import type { MetadataRoute } from "next";
-import { projectAreas, projectCategories } from "@/lib/projects";
+import { projectAreas, projectCategories } from "@/lib/content/projects";
 import {
   lastModifiedForProjectArea,
   lastModifiedForProjectCase,
   lastModifiedForStaticPath,
-} from "@/lib/sitemapDates";
-import { site } from "@/lib/site";
+} from "@/lib/config/sitemapDates";
+import { site } from "@/lib/config/site";
 
 /** Obbligatorio con `output: export` (GitHub Pages / hosting statico). */
 export const dynamic = "force-static";

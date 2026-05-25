@@ -1,5 +1,5 @@
 import { LaserSlamLanding } from "@/components/laser/LaserSlamLanding";
-import { buildPageMetadata, seoKeywords } from "@/lib/seo";
+import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
 
 export const metadata = buildPageMetadata({
   title: "Rilievi laser scanner SLAM mobile CHCNAV RS10 — Franciacorta e Brescia",

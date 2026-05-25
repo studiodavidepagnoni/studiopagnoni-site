@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
-import { CookiePreferencesButton } from "@/components/CookiePreferencesButton";
-import { StaticPageHero } from "@/components/StaticPageHero";
-import { COOKIE_MIRROR_NAME, COOKIE_PREFS_STORAGE_KEY } from "@/lib/cookieConsent";
+import { CookiePreferencesButton } from "@/components/layout/CookiePreferencesButton";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
+import { COOKIE_MIRROR_NAME, COOKIE_PREFS_STORAGE_KEY } from "@/lib/privacy/cookieConsent";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { buildPageMetadata } from "@/lib/seo";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/site";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const LAST_UPDATED = "9 maggio 2026";

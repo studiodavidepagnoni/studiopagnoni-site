@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
 
 const REVEAL_CHILD_SELECTOR = ".reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid";
-/** Esclude hero home (`data-hero-motion`) — animato da framer-motion, non da ScrollReveal. */
+/** Esclude hero home (`data-hero-motion`) — gestita da CSS dedicato, non da ScrollReveal. */
 const SECTION_ROOT_SELECTOR = "section.lazy-section, [data-hero-intro]:not([data-hero-motion])";
 
 const STAGGER_MS = 72;

@@ -14,11 +14,11 @@ import {
   zoneDescription,
   zoneFooter,
 } from "@/lib/content";
-import { homeChiSiamoImages } from "@/lib/images";
-import { featuredProjects } from "@/lib/projects";
-import { site } from "@/lib/site";
+import { homeChiSiamoImages } from "@/lib/media/images";
+import { featuredProjects } from "@/lib/content/projects";
+import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
-import { SiteBrandMark } from "@/components/SiteBrandMark";
+import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { StatsSection } from "./StatsSection";
 
 const HomeServiceCards = dynamic(
@@ -206,7 +206,7 @@ export function HomeSections() {
             <p className="home-section-intro__lede max-w-[52ch]">{homeProgettiIntro}</p>
           </div>
           <div className="lazy-section grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-            {featuredProjects.slice(0, 5).map((p) => (
+            {featuredProjects.slice(0, 3).map((p) => (
               <Link
                 key={p.href}
                 href={p.href}

@@ -1,11 +1,11 @@
 import type { Metadata, Viewport } from "next";
-import { AppProviders } from "@/components/AppProviders";
-import { CookieBanner } from "@/components/CookieBanner";
-import { SiteFooter } from "@/components/SiteFooter";
-import { SiteHeader } from "@/components/SiteHeader";
-import { withBasePath } from "@/lib/basePath";
+import { AppProviders } from "@/components/layout/AppProviders";
+import { CookieBanner } from "@/components/layout/CookieBanner";
+import { SiteFooter } from "@/components/layout/SiteFooter";
+import { SiteHeader } from "@/components/layout/SiteHeader";
+import { withBasePath } from "@/lib/utils/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { jsonLdGraph, rootMetadata } from "@/lib/seo";
+import { jsonLdGraph, rootMetadata } from "@/lib/config/seo";
 import "./globals.css";
 
 /** Notch / home indicator: `viewport-fit=cover` + safe-area in CSS (header, drawer, cookie bar). */
