@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { site } from "@/lib/config/site";
 
 /**
+ * Cluster keyword per copy e llms.txt (non esportati in meta `keywords`: Google li ignora).
+ *
  * Ricerca keyword (intent commerciale B2B, maggio 2026)
  * — obiettivo: committenti alto livello in Franciacorta / provincia di Brescia
  *   per rilievi topografici e scansioni laser SLAM (CHCNAV RS10).
@@ -85,7 +87,6 @@ type PageMetaInput = {
   title: string;
   description: string;
   path: string;
-  keywords?: readonly string[];
   /** Priorità indicizzazione landing SLAM / contatti */
   priority?: "high" | "default";
 };
@@ -94,17 +95,14 @@ export function buildPageMetadata({
   title,
   description,
   path,
-  keywords = [],
   priority = "default",
 }: PageMetaInput): Metadata {
   const canonical = absoluteUrl(path === "/" ? "/" : path);
   const ogImage = absoluteUrl(ogImagePath);
-  const keywordSet = [...new Set([...keywords, ...seoKeywords.primary.slice(0, 4)])];
 
   return {
     title,
     description,
-    keywords: keywordSet.length > 0 ? [...keywordSet] : undefined,
     alternates: { canonical },
     openGraph: {
       type: "website",
@@ -133,7 +131,6 @@ export const rootMetadata: Metadata = {
   },
   description:
     "Rilievi con laser scanner SLAM mobile (CHCNAV RS10) e topografia professionale: nuvole di punti georiferite, as-built e planimetrie per imprese e studi. Sede a Cazzago San Martino (BS) — Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
-  keywords: [...seoKeywords.primary, ...seoKeywords.local, ...seoKeywords.supporting],
   openGraph: {
     type: "website",
     locale: "it_IT",
@@ -159,7 +156,6 @@ export const homeMetadata = buildPageMetadata({
   description:
     "Studio tecnico a Cazzago San Martino (BS): rilievi laser scanner SLAM mobile, nuvole di punti georiferite e topografia GNSS per imprese e professionisti in Franciacorta e provincia di Brescia.",
   path: "/",
-  keywords: seoKeywords.primary,
   priority: "high",
 });
 

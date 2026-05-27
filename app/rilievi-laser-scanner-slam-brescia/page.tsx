@@ -1,6 +1,6 @@
 import { LaserSlamLanding } from "@/components/laser/LaserSlamLanding";
 import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
-import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
+import { buildPageMetadata } from "@/lib/config/seo";
 import { site } from "@/lib/config/site";
 
 const siteUrl = site.url.replace(/\/$/, "");
@@ -15,13 +15,6 @@ export const metadata = buildPageMetadata({
   description:
     "Rilievi laser scanner SLAM a Brescia e Franciacorta: nuvole di punti, as-built, DWG e BIM per capannoni, edifici, impianti e cantieri. Preventivo su misura.",
   path: "/rilievi-laser-scanner-slam-brescia",
-  keywords: [
-    "rilievi laser scanner SLAM Brescia",
-    "rilievo 3D capannone Brescia",
-    "nuvola di punti Brescia",
-    "rilievo as built capannone",
-    ...seoKeywords.primary,
-  ],
   priority: "high",
 });
 

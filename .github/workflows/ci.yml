@@ -38,4 +38,27 @@ jobs:
           STATIC_EXPORT: "1"
           SKIP_VIDEO: "1"
           NEXT_PUBLIC_SITE_URL: https://www.studiotecnicopagnoni.it
+          NEXT_PUBLIC_FORMSPREE_ID: e2e-ci-mock
         run: npm run build:static
+
+      - name: Install Playwright (Chromium)
+        run: npx playwright install --with-deps chromium
+
+      - name: E2E smoke tests
+        run: npm run test:e2e
+
+      - uses: browser-actions/setup-chrome@v1
+
+      - name: Lighthouse (soglie LCP / CLS)
+        env:
+          LH_MAX_LCP_MS: "4500"
+          LH_MAX_CLS: "0.15"
+        run: npm run lighthouse:ci
+
+      - name: Upload Lighthouse report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-ci
+          path: .lighthouse/ci-mobile.report.json
+          if-no-files-found: ignore

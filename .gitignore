@@ -23,6 +23,11 @@
 # lighthouse audit locale
 .lighthouse/
 
+# playwright
+/playwright-report/
+/blob-report/
+/test-results/
+
 # misc
 .DS_Store
 *.pem

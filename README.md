@@ -32,6 +32,17 @@ npm start
 
 Per export statico (hosting senza Node): `npm run build:static` (variabile `STATIC_EXPORT=1`).
 
+## Test e performance (CI)
+
+Dopo `npm run build:static` (per il test del form serve `NEXT_PUBLIC_FORMSPREE_ID=e2e-ci-mock` in build, come in CI):
+
+```bash
+npm run test:e2e          # smoke Playwright (home, contatti, invio form)
+npm run lighthouse:ci     # soglie LCP/CLS su export statico (mobile)
+```
+
+In CI (`/.github/workflows/ci.yml`): lint, typecheck, build statico, E2E e Lighthouse con soglie predefinite (`LH_MAX_LCP_MS=4500`, `LH_MAX_CLS=0.15`). Audit locale completo (mobile + desktop): `npm run lighthouse`.
+
 ### Asset e performance
 
 - `npm run optimize:assets` — WebP stock, poster WebP, video MP4 1280px + WebM, rimozione JPEG duplicati (richiede ffmpeg).

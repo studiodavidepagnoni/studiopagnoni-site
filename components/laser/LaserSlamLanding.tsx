@@ -1,5 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
+import { FaqSection } from "@/components/content/FaqSection";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
 import { stockImage } from "@/lib/media/mediaPath";
@@ -233,34 +234,7 @@ export function LaserSlamLanding() {
             </div>
           </section>
 
-          {/* FAQ */}
-          <section className={ui.innerCard} aria-labelledby="slam-faq">
-            <h2 id="slam-faq" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
-              Domande frequenti
-            </h2>
-            <div className="space-y-3">
-              {L.faq.map((item) => (
-                <details
-                  key={item.q}
-                  className="group rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] open:bg-[var(--card)]"
-                >
-                  <summary
-                    className={`${fontDisplay.className} cursor-pointer list-none px-5 py-4 text-base font-medium text-[var(--foreground)] marker:content-none sm:text-lg [&::-webkit-details-marker]:hidden`}
-                  >
-                    <span className="flex items-center justify-between gap-3">
-                      {item.q}
-                      <span className="shrink-0 text-[var(--primary-mid)] transition group-open:rotate-45" aria-hidden>
-                        +
-                      </span>
-                    </span>
-                  </summary>
-                  <p className={`${fontSans.className} border-t border-[var(--green-border-muted)] px-5 pb-4 pt-3 text-sm leading-relaxed text-[var(--copy-body)]`}>
-                    {item.a}
-                  </p>
-                </details>
-              ))}
-            </div>
-          </section>
+          <FaqSection id="slam-faq" items={L.faq} />
 
           {/* CTA finale */}
           <section

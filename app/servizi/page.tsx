@@ -1,21 +1,36 @@
 import Link from "next/link";
+import { FaqSection } from "@/components/content/FaqSection";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
-import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
+import { faqPageGraph } from "@/lib/config/faqJsonLd";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { serviziFaq } from "@/lib/content/pageFaqs";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
+const pagePath = "/servizi";
+const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
+const pageTitle = "Servizi — laser SLAM, topografia e progettazione";
+const pageDescription =
+  "Laser scanner SLAM e nuvole di punti, topografia GNSS, verde, urbanistica, architettura, sicurezza cantieri e perizie. Studio tecnico in Franciacorta e provincia di Brescia dal 1988.";
+
 export const metadata = buildPageMetadata({
-  title: "Servizi — laser SLAM, topografia e progettazione",
-  description:
-    "Laser scanner SLAM e nuvole di punti, topografia GNSS, verde, urbanistica, architettura, sicurezza cantieri e perizie. Studio tecnico in Franciacorta e provincia di Brescia dal 1988.",
-  path: "/servizi",
-  keywords: [...seoKeywords.primary.slice(0, 4), ...seoKeywords.supporting],
+  title: pageTitle,
+  description: pageDescription,
+  path: pagePath,
+});
+
+const serviziJsonLd = faqPageGraph({
+  pageUrl,
+  pageTitle,
+  pageDescription,
+  faqItems: serviziFaq,
 });
 
 export default function ServiziPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(serviziJsonLd) }} />
       <StaticPageHero path="/servizi" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
@@ -152,6 +167,8 @@ export default function ServiziPage() {
               </li>
             </ul>
           </article>
+
+          <FaqSection id="servizi-faq" items={serviziFaq} />
           </div>
         </div>
       </main>

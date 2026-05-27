@@ -1,21 +1,36 @@
 import Link from "next/link";
+import { FaqSection } from "@/components/content/FaqSection";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
-import { buildPageMetadata, seoKeywords } from "@/lib/config/seo";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
+import { faqPageGraph } from "@/lib/config/faqJsonLd";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { topografiaFaq } from "@/lib/content/pageFaqs";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
+const pagePath = "/topografia";
+const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
+const pageTitle = "Topografia e rilievi planoaltimetrici — Franciacorta e Brescia";
+const pageDescription =
+  "Rilievi topografici con GNSS RTK e stazione totale: planimetrie quotate, volumetrie, cantieri e frazionamenti. Integrazione con rilievi laser SLAM. Cazzago San Martino (BS), Franciacorta e provincia di Brescia.";
+
 export const metadata = buildPageMetadata({
-  title: "Topografia e rilievi planoaltimetrici — Franciacorta e Brescia",
-  description:
-    "Rilievi topografici con GNSS RTK e stazione totale: planimetrie quotate, volumetrie, cantieri e frazionamenti. Integrazione con rilievi laser SLAM. Cazzago San Martino (BS), Franciacorta e provincia di Brescia.",
-  path: "/topografia",
-  keywords: seoKeywords.local,
+  title: pageTitle,
+  description: pageDescription,
+  path: pagePath,
+});
+
+const topografiaJsonLd = faqPageGraph({
+  pageUrl,
+  pageTitle,
+  pageDescription,
+  faqItems: topografiaFaq,
 });
 
 export default function TopografiaPage() {
   return (
     <>
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(topografiaJsonLd) }} />
       <StaticPageHero path="/topografia" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
@@ -72,6 +87,8 @@ export default function TopografiaPage() {
                 Laser scanner SLAM
               </Link>
             </section>
+
+            <FaqSection id="topografia-faq" items={topografiaFaq} />
           </div>
 
           <p className={`${ui.body} max-w-[72ch]`}>

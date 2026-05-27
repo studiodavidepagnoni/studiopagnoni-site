@@ -1,0 +1,24 @@
+{
+  "rs10-hero": {
+    "order": [
+      "mp4"
+    ],
+    "mp4Bytes": 1228211,
+    "webmBytes": 0
+  },
+  "hero-video-2": {
+    "order": [
+      "mp4"
+    ],
+    "mp4Bytes": 2535320,
+    "webmBytes": 0
+  },
+  "hero-video-3": {
+    "order": [
+      "webm",
+      "mp4"
+    ],
+    "mp4Bytes": 1962723,
+    "webmBytes": 1382106
+  }
+}
