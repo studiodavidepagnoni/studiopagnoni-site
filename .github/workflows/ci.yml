@@ -57,7 +57,8 @@ jobs:
         env:
           LH_MAX_LCP_MS: "4500"
           LH_MAX_CLS: "0.15"
-        run: npm run lighthouse:ci
+        # Il runner può esporre CHROME_PATH=/usr/bin/google-chrome (non compatibile con Lighthouse).
+        run: env -u CHROME_PATH -u CHROME_BIN npm run lighthouse:ci
 
       - name: Upload Lighthouse report
         if: always()
