@@ -50,5 +50,18 @@ In CI (`/.github/workflows/ci.yml`): lint, typecheck, build statico, E2E e Light
 - `FORCE_VIDEO=1 npm run optimize:assets` — forza ricodifica video.
 - `build:static` esegue `optimize:assets` prima dell'export; `prebuild` solo `sync:static`.
 - Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` per il modulo contatti.
-- Deploy GitHub Pages: secret repository `NEXT_PUBLIC_FORMSPREE_ID`; workflow `.github/workflows/deploy-github-pages.yml`.
+- Deploy GitHub Pages: workflow `.github/workflows/deploy-github-pages.yml` (build su ogni push; deploy condizionato).
+- Secret repository `NEXT_PUBLIC_FORMSPREE_ID` per il form in produzione su Pages.
+
+### GitHub Pages (quando sei pronto)
+
+Il job **deploy** fallisce con 404 finché Pages non è attivo. Fino ad allora il workflow esegue solo il **build** (verde in Actions).
+
+1. **Settings → Pages** del repository: **Build and deployment** → Source **GitHub Actions** (non “Deploy from branch”).
+2. Repository variable **`PAGES_DEPLOY_ENABLED`** = `true` (Settings → Secrets and variables → Actions → Variables).
+3. Secret **`NEXT_PUBLIC_FORMSPREE_ID`** se usi il form contatti.
+4. Opzionale: variables `NEXT_PUBLIC_SITE_URL`, `NEXT_PUBLIC_BASE_PATH` (default: `https://<owner>.github.io/<repo>` e `/<repo>`).
+5. Push su `master` / `main` oppure **Run workflow** manuale.
+
+Sito produzione attuale: `https://www.studiotecnicopagnoni.it` — Pages può servire come anteprima/staging su `github.io`.
 - **Header di sicurezza (CSP, HSTS):** con `build:static` Next non invia gli header di `next.config.ts`. Il file `public/_headers` vale su Netlify/Cloudflare Pages; su GitHub Pages configurare header su CDN o reverse proxy. In locale con `npm start` (build non static) gli header Next sono attivi.

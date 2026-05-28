@@ -1,3 +1,4 @@
+# Build statico su ogni push; deploy Pages solo se abilitato in repo (vedi README).
 name: Deploy GitHub Pages
 
 on:
@@ -58,6 +59,8 @@ jobs:
 
   deploy:
     needs: build
+    # Imposta repository variable PAGES_DEPLOY_ENABLED=true dopo aver attivato GitHub Pages.
+    if: vars.PAGES_DEPLOY_ENABLED == 'true'
     runs-on: ubuntu-latest
     environment:
       name: github-pages
