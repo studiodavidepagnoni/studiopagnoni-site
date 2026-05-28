@@ -53,8 +53,6 @@ jobs:
       - name: E2E smoke tests
         run: npm run test:e2e
 
-      - uses: browser-actions/setup-chrome@v1
-
       - name: Lighthouse (soglie LCP / CLS)
         env:
           LH_MAX_LCP_MS: "4500"

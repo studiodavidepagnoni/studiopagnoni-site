@@ -15,13 +15,7 @@ const url = `http://127.0.0.1:${port}/`;
 const outDir = path.join(root, ".lighthouse");
 const nextBin = require.resolve("next/dist/bin/next");
 const npmExecPath = process.env.npm_execpath;
-const chromeCandidates = [
-  process.env.CHROME_PATH,
-  "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe",
-  "C:\\Program Files (x86)\\Google\\Chrome\\Application\\chrome.exe",
-  "C:\\Program Files\\Microsoft\\Edge\\Application\\msedge.exe",
-  "C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe",
-].filter(Boolean);
+const { resolveChromePath } = require("./lighthouse-chrome.cjs");
 
 function makeTmpDir() {
   const candidates = [
@@ -48,16 +42,6 @@ function npmExecCommand(args) {
     return { cmd: process.execPath, args: [npmExecPath, "exec", "--yes", "--", ...args] };
   }
   return { cmd: process.platform === "win32" ? "npx.cmd" : "npx", args };
-}
-
-function findChromePath() {
-  return chromeCandidates.find((candidate) => {
-    try {
-      return fs.existsSync(candidate);
-    } catch {
-      return false;
-    }
-  });
 }
 
 function killProcessTree(proc) {
@@ -162,7 +146,7 @@ async function lighthouseRun(id, extraArgs, attempt = 1) {
   const json = path.join(outDir, `${id}.report.json`);
   const chromeProfileDir = path.join(tmpDir, `chrome-${id}-${attempt}`);
   const chromeDebugPort = String(Number(process.env.LH_CHROME_PORT || 9222) + (id === "desktop" ? 1 : 0) + (attempt - 1) * 10);
-  const chromePath = findChromePath();
+  const chromePath = resolveChromePath();
   let chrome = null;
   let retryNoNavStart = false;
   fs.rmSync(chromeProfileDir, { recursive: true, force: true });

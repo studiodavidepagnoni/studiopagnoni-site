@@ -10,6 +10,7 @@ const { spawn, execSync } = require("child_process");
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
+const { resolveChromePath } = require("./lighthouse-chrome.cjs");
 
 const root = path.join(__dirname, "..");
 const outDir = path.join(root, "out");
@@ -99,11 +100,20 @@ async function runLighthouse() {
   fs.mkdirSync(reportDir, { recursive: true });
   const outputBase = path.join(reportDir, "ci-mobile");
   const jsonPath = path.join(reportDir, "ci-mobile.report.json");
+  const chromePath = resolveChromePath();
+
+  if (!chromePath) {
+    throw new Error(
+      "[lighthouse:ci] Chrome/Chromium non trovato. Imposta CHROME_PATH o installa Playwright (npx playwright install chromium).",
+    );
+  }
+  console.log(`[lighthouse:ci] Chrome: ${chromePath}`);
 
   const lighthouse = npmExecCommand([
     "lighthouse",
     url,
     "--quiet",
+    `--chrome-path=${chromePath}`,
     "--chrome-flags=--headless=new --no-sandbox --disable-gpu --disable-dev-shm-usage",
     `--output-path=${outputBase}`,
     "--output=json",
@@ -115,7 +125,14 @@ async function runLighthouse() {
 
   try {
     await run(lighthouse.cmd, lighthouse.args, {
-      env: { ...process.env, CI: process.env.CI ?? "1", TEMP: tmpDir, TMP: tmpDir, TMPDIR: tmpDir },
+      env: {
+        ...process.env,
+        CHROME_PATH: chromePath,
+        CI: process.env.CI ?? "1",
+        TEMP: tmpDir,
+        TMP: tmpDir,
+        TMPDIR: tmpDir,
+      },
     });
   } catch (err) {
     const output = String(err.output || err.message || "");
