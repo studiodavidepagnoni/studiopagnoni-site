@@ -45,10 +45,11 @@ In CI (`/.github/workflows/ci.yml`): lint, typecheck, build statico, E2E e Light
 
 ### Asset e performance
 
-- `npm run optimize:assets` — WebP stock, poster WebP, video MP4 1280px + WebM, rimozione JPEG duplicati (richiede ffmpeg).
+- `npm run optimize:assets` — WebP stock, poster WebP, video MP4 1280px + WebM, rimozione JPEG duplicati (richiede ffmpeg, **solo in locale**).
 - `npm run optimize:posters` — rigenera solo i poster dai video.
 - `FORCE_VIDEO=1 npm run optimize:assets` — forza ricodifica video.
 - `build:static` esegue `optimize:assets` prima dell'export; `prebuild` solo `sync:static`.
+- **CI / GitHub Pages** usano `SKIP_VIDEO=1`: i video in `assets/` vanno già ottimizzati e committati; non ricodificare su Actions (lento e costoso).
 - Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` per il modulo contatti.
 - Deploy GitHub Pages: workflow `.github/workflows/deploy-github-pages.yml` (build su ogni push; deploy condizionato).
 - Secret repository `NEXT_PUBLIC_FORMSPREE_ID` per il form in produzione su Pages.
