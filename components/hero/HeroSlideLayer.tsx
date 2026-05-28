@@ -1,6 +1,11 @@
 import Image from "next/image";
 import type { HeroSlide } from "@/lib/media/images";
-import { HERO_VIDEO_DEFAULT_SOURCES, heroVideoKey, heroVideoSourceOrder } from "@/lib/media/heroVideos";
+import {
+  HERO_POSTER_INDOOR_LCP,
+  HERO_VIDEO_DEFAULT_SOURCES,
+  heroVideoKey,
+  heroVideoSourceOrder,
+} from "@/lib/media/heroVideos";
 import { HeroVideoSources } from "@/components/hero/HeroVideoSources";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
@@ -30,8 +35,10 @@ export function HeroSlideLayer({
 }: Props) {
   const sources = slide.video ?? DEFAULT_VIDEO;
   const key = heroVideoKey(sources);
-  const posterSrc = slide.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp");
   const isIntroSlide = slideIndex === 0;
+  const posterSrc = isIntroSlide
+    ? HERO_POSTER_INDOOR_LCP
+    : (slide.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp"));
   const sourceOrder = heroVideoSourceOrder(sources.mp4);
 
   const layerClass = [
