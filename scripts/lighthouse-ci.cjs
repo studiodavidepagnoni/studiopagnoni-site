@@ -10,12 +10,7 @@ const { spawn, execSync } = require("child_process");
 const fs = require("fs");
 const http = require("http");
 const path = require("path");
-const {
-  launchChromeForLighthouse,
-  tryPlaywrightChromiumPath,
-  isCi,
-  resolveChromePath,
-} = require("./lighthouse-chrome.cjs");
+const { launchChromeForLighthouse, resolveChromePath } = require("./lighthouse-chrome.cjs");
 
 const root = path.join(__dirname, "..");
 const outDir = path.join(root, "out");
@@ -101,7 +96,7 @@ async function waitForServer(maxMs = 60_000) {
   throw new Error(`Server non raggiungibile su ${url}`);
 }
 
-async function waitForChromeDebug(debugPort, maxMs = 20_000) {
+async function waitForChromeDebug(debugPort, maxMs = 30_000) {
   const chromeReady = `http://127.0.0.1:${debugPort}/json/version`;
   const start = Date.now();
   while (Date.now() - start < maxMs) {
@@ -117,18 +112,11 @@ async function runLighthouse() {
   const jsonPath = path.join(reportDir, "ci-mobile.report.json");
   const chromeProfileDir = path.join(tmpDir, "ci-chrome-profile");
 
-  const pwPath = tryPlaywrightChromiumPath();
-  if (isCi() && pwPath) {
-    console.log(`[lighthouse:ci] Browser: Playwright Chromium (${pwPath})`);
-  } else {
-    const chromePath = resolveChromePath();
-    if (!chromePath) {
-      throw new Error(
-        "[lighthouse:ci] Chrome/Chromium non trovato. Imposta LH_CHROME_PATH o installa Playwright.",
-      );
-    }
-    console.log(`[lighthouse:ci] Chrome: ${chromePath}`);
+  const chromePath = resolveChromePath();
+  if (!chromePath) {
+    throw new Error("[lighthouse:ci] Chrome non trovato. In CI serve google-chrome-stable (vedi workflow).");
   }
+  console.log(`[lighthouse:ci] Chrome: ${chromePath}`);
 
   const browser = await launchChromeForLighthouse({ profileDir: chromeProfileDir });
   console.log(`[lighthouse:ci] CDP port: ${browser.debugPort}`);

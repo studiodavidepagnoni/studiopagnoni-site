@@ -47,11 +47,15 @@ jobs:
       - name: E2E smoke tests
         run: npm run test:e2e
 
+      - name: Install Chrome for Lighthouse
+        uses: browser-actions/setup-chrome@v1
+        id: setup-chrome
+
       - name: Lighthouse (soglie LCP / CLS)
         env:
+          LH_CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
           LH_MAX_LCP_MS: "4500"
           LH_MAX_CLS: "0.15"
-        # Il runner può esporre CHROME_PATH=/usr/bin/google-chrome (non compatibile con Lighthouse).
         run: env -u CHROME_PATH -u CHROME_BIN npm run lighthouse:ci
 
       - name: Upload Lighthouse report

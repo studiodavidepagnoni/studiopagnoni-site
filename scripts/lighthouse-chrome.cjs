@@ -1,30 +1,20 @@
 /**
- * Chrome/Chromium per Lighthouse: risoluzione path e avvio CDP.
- * In CI usa Playwright launchServer (affidabile su GitHub Actions).
+ * Chrome/Chromium per Lighthouse: path + avvio con porta CDP HTTP (/json/version).
+ * Lighthouse CLI non è compatibile con Playwright launchServer (solo WebSocket).
  */
 const { spawn } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
-function tryPlaywright() {
+function tryPlaywrightChromiumPath() {
   for (const mod of ["playwright", "@playwright/test"]) {
     try {
-      return require(mod);
+      const { chromium } = require(mod);
+      const executablePath = chromium.executablePath();
+      if (executablePath && fs.existsSync(executablePath)) return executablePath;
     } catch {
       /* ignore */
     }
-  }
-  return null;
-}
-
-function tryPlaywrightChromiumPath() {
-  const pw = tryPlaywright();
-  if (!pw) return null;
-  try {
-    const executablePath = pw.chromium.executablePath();
-    if (executablePath && fs.existsSync(executablePath)) return executablePath;
-  } catch {
-    /* ignore */
   }
   return null;
 }
@@ -54,13 +44,19 @@ function resolveChromePath() {
   const forced = process.env.LH_CHROME_PATH?.trim();
   if (forced) return firstExisting([forced]);
 
-  const playwright = tryPlaywrightChromiumPath();
-  if (isCi() && playwright) return playwright;
+  if (isCi()) {
+    return firstExisting([
+      "/usr/bin/google-chrome-stable",
+      "/usr/bin/chromium",
+      "/usr/bin/chromium-browser",
+      "/usr/bin/google-chrome",
+    ]);
+  }
 
   return firstExisting([
     process.env.CHROME_PATH,
     process.env.CHROME_BIN,
-    playwright,
+    tryPlaywrightChromiumPath(),
     "/usr/bin/google-chrome-stable",
     "/usr/bin/google-chrome",
     "/usr/bin/chromium-browser",
@@ -85,28 +81,14 @@ function chromeSpawnEnv(chromePath) {
 }
 
 /**
- * Avvia browser con CDP per Lighthouse.
- * @returns {Promise<{ debugPort: string, close: () => Promise<void> | void }>}
+ * @returns {Promise<{ debugPort: string, close: () => void }>}
  */
 async function launchChromeForLighthouse({ profileDir, debugPort = process.env.LH_CHROME_PORT || "9222" }) {
-  const pw = tryPlaywright();
-  if (isCi() && pw) {
-    const server = await pw.chromium.launchServer({
-      headless: true,
-      args: ["--no-sandbox", "--disable-gpu", "--disable-dev-shm-usage", "--disable-extensions"],
-    });
-    const port = new URL(server.wsEndpoint()).port;
-    return {
-      debugPort: port,
-      close: async () => {
-        await server.close();
-      },
-    };
-  }
-
   const chromePath = resolveChromePath();
   if (!chromePath) {
-    throw new Error("Chrome/Chromium non trovato per Lighthouse.");
+    throw new Error(
+      "Chrome/Chromium non trovato. In CI installa google-chrome-stable o imposta LH_CHROME_PATH.",
+    );
   }
 
   fs.rmSync(profileDir, { recursive: true, force: true });
