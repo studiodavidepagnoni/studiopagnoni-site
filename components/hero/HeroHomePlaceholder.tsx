@@ -1,9 +1,8 @@
-import Image from "next/image";
 import Link from "next/link";
+import { HeroLcpPicture } from "@/components/hero/HeroLcpPicture";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/media/images";
-import { HERO_POSTER_INDOOR_LCP } from "@/lib/media/heroVideos";
 import { ui } from "@/lib/ui";
 
 const slide = heroSlides[0];
@@ -21,15 +20,7 @@ export function HeroHomePlaceholder() {
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
       <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1]">
-        <Image
-          src={HERO_POSTER_INDOOR_LCP}
-          alt={slide.alt}
-          fill
-          className="hero-media__image object-cover object-center"
-          sizes="(max-width: 960px) 100vw, 960px"
-          priority
-          fetchPriority="high"
-        />
+        <HeroLcpPicture alt={slide.alt} />
         <HeroMediaOverlay intro />
       </div>
 

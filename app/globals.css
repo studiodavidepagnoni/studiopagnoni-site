@@ -610,37 +610,34 @@ body::before {
     radial-gradient(ellipse 45% 38% at 78% 72%, var(--hero-media-glow-warm), transparent 72%);
 }
 
-/* Slide 1: scrim asimmetrico sinistra → destra */
+/* Slide 1: scrim leggero (meno layer = meno lavoro paint su LCP) */
 .hero-media__overlay--intro {
   background:
     linear-gradient(
       to right,
-      rgb(0 0 0 / 0.24) 0%,
-      rgb(0 0 0 / 0.24) 14%,
-      rgb(0 2 2 / 0.24) 24%,
-      rgb(1 4 4 / 0.24) 36%,
-      rgb(2 6 5 / 0.23) 50%,
-      rgb(2 6 5 / 0.19) 64%,
-      rgb(2 6 5 / 0.12) 78%,
-      rgb(2 6 5 / 0.06) 90%,
-      transparent 100%
+      rgb(0 0 0 / 0.22) 0%,
+      rgb(2 6 5 / 0.14) 42%,
+      transparent 72%
     ),
-    linear-gradient(
-      180deg,
-      rgb(0 2 2 / 0.13) 0%,
-      transparent 16%,
-      transparent 68%,
-      rgb(2 6 5 / 0.14) 100%
-    );
+    linear-gradient(180deg, rgb(0 2 2 / 0.1) 0%, transparent 14%, transparent 72%, rgb(2 6 5 / 0.12) 100%);
 }
 
 .hero-media__stage--intro {
   --hero-media-video-opacity: 0.77;
 }
 
-.hero-media__stage--intro .hero-media__layer--intro .hero-media__video,
-.hero-media__stage--intro .hero-media__image {
+.hero-media__stage--intro .hero-media__layer--intro .hero-media__video {
   filter: brightness(0.88) contrast(1.05) saturate(0.91);
+}
+
+.hero-media__stage--intro .hero-media__image:not(.hero-media__image--lcp) {
+  filter: brightness(0.88) contrast(1.05) saturate(0.91);
+}
+
+@media (max-width: 767px) {
+  .hero-media__image--lcp {
+    filter: none;
+  }
 }
 
 /* Slide 0 — Ken Burns + entrata cinematic (durata allineata a HERO_FIRST_SLIDE_MS) */

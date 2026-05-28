@@ -17,8 +17,9 @@ const stockDir = path.join(assetsDir, "stock");
 const projectsDir = path.join(assetsDir, "projects");
 
 const WEBP_QUALITY = 80;
-const LCP_POSTER_W = 960;
-const LCP_POSTER_QUALITY = 72;
+const LCP_POSTER_W = 768;
+const LCP_POSTER_QUALITY = 68;
+const LCP_AVIF_QUALITY = 48;
 const MAX_EDGE = 1920;
 const HERO_LCP_POSTER = "hero-video-3-poster.webp";
 const VIDEO_CRF = 30;
@@ -154,12 +155,14 @@ async function posterToLcp(webpPath) {
   }
   if (!fs.existsSync(webpPath)) return;
   const lcpPath = webpPath.replace(/\.webp$/i, "-lcp.webp");
-  await sharp(webpPath)
-    .resize(LCP_POSTER_W, null, { withoutEnlargement: true, fit: "inside" })
-    .webp({ quality: LCP_POSTER_QUALITY, effort: 4 })
-    .toFile(lcpPath);
+  const pipeline = sharp(webpPath).resize(LCP_POSTER_W, null, { withoutEnlargement: true, fit: "inside" });
+  await pipeline.clone().webp({ quality: LCP_POSTER_QUALITY, effort: 4 }).toFile(lcpPath);
+  const lcpAvifPath = lcpPath.replace(/\.webp$/i, ".avif");
+  await pipeline.clone().avif({ quality: LCP_AVIF_QUALITY, effort: 4 }).toFile(lcpAvifPath);
   const kb = Math.round(fs.statSync(lcpPath).size / 1024);
+  const avifKb = Math.round(fs.statSync(lcpAvifPath).size / 1024);
   console.log(`[optimize-assets] Poster LCP ${path.relative(root, lcpPath)} (${kb} KB)`);
+  console.log(`[optimize-assets] Poster LCP AVIF ${path.relative(root, lcpAvifPath)} (${avifKb} KB)`);
 }
 
 /** Poster da video: frame sequenza + rename (ffmpeg 8 / Windows). */

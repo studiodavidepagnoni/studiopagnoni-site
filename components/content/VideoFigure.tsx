@@ -1,3 +1,7 @@
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+
 type VideoFigureProps = {
   mp4: string;
   webm?: string;
@@ -17,8 +21,34 @@ export function VideoFigure({
   controls = true,
   preload = "none",
 }: VideoFigureProps) {
+  const rootRef = useRef<HTMLDivElement>(null);
+  const [loadSources, setLoadSources] = useState(false);
+
+  useEffect(() => {
+    const root = rootRef.current;
+    if (!root) return;
+
+    if (typeof IntersectionObserver !== "function") {
+      setLoadSources(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setLoadSources(true);
+        observer.disconnect();
+      },
+      { rootMargin: "240px 0px", threshold: 0.01 },
+    );
+
+    observer.observe(root);
+    return () => observer.disconnect();
+  }, []);
+
   return (
     <div
+      ref={rootRef}
       className={
         className ??
         "relative mb-6 aspect-video overflow-hidden rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] pointer-events-auto"
@@ -31,10 +61,13 @@ export function VideoFigure({
         preload={preload}
         poster={poster}
       >
-        {webm ? <source src={webm} type="video/webm" /> : null}
-        <source src={mp4} type="video/mp4" />
+        {loadSources ? (
+          <>
+            {webm ? <source src={webm} type="video/webm" /> : null}
+            <source src={mp4} type="video/mp4" />
+          </>
+        ) : null}
       </video>
     </div>
   );
 }
-

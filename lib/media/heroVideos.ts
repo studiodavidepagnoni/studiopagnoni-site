@@ -49,5 +49,6 @@ export const HERO_POSTER_DEFAULT = poster("rs10-hero");
 export const HERO_POSTER_POINTCLOUD = poster("hero-video-2");
 export const HERO_POSTER_INDOOR = poster("hero-video-3");
 
-/** Poster ~960px per LCP (placeholder + preload); il <video> usa il poster full. */
+/** Poster ~768px per LCP (placeholder + preload); il <video> usa il poster full. */
 export const HERO_POSTER_INDOOR_LCP = withBasePath("/assets/hero-video-3-poster-lcp.webp");
+export const HERO_POSTER_INDOOR_LCP_AVIF = withBasePath("/assets/hero-video-3-poster-lcp.avif");

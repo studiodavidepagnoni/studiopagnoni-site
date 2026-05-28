@@ -1,9 +1,51 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { useInView, useReducedMotion } from "framer-motion";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { homeStats, type HomeStat } from "@/lib/content";
+
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const update = () => setReduced(mq.matches);
+    update();
+    mq.addEventListener("change", update);
+    return () => mq.removeEventListener("change", update);
+  }, []);
+
+  return reduced;
+}
+
+function useInViewOnce<T extends Element>(margin = "-80px") {
+  const ref = useRef<T | null>(null);
+  const [inView, setInView] = useState(false);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el || inView) return;
+
+    if (typeof IntersectionObserver !== "function") {
+      setInView(true);
+      return;
+    }
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (!entry?.isIntersecting) return;
+        setInView(true);
+        observer.disconnect();
+      },
+      { rootMargin: margin, threshold: 0.12 },
+    );
+
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [inView, margin]);
+
+  return { ref, inView };
+}
 
 function Counter({
   target,
@@ -78,9 +120,8 @@ function StatBlock({ stat, reduced, active }: { stat: HomeStat; reduced: boolean
 }
 
 export function StatsSection() {
-  const ref = useRef(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
-  const reduced = !!useReducedMotion();
+  const { ref, inView } = useInViewOnce<HTMLElement>();
+  const reduced = usePrefersReducedMotion();
 
   return (
     <section

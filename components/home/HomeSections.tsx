@@ -19,11 +19,20 @@ import { featuredProjects } from "@/lib/content/projects";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
-import { StatsSection } from "./StatsSection";
-
 const HomeServiceCards = dynamic(
   () => import("./HomeServiceCards").then((m) => ({ default: m.HomeServiceCards })),
-  { loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-[var(--muted)]/50" aria-hidden /> },
+  {
+    ssr: false,
+    loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-[var(--muted)]/50" aria-hidden />,
+  },
+);
+
+const StatsSection = dynamic(
+  () => import("./StatsSection").then((m) => ({ default: m.StatsSection })),
+  {
+    ssr: false,
+    loading: () => <div className="min-h-[14rem] border-y border-[var(--green-border-muted)] bg-[var(--card)]" aria-hidden />,
+  },
 );
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;

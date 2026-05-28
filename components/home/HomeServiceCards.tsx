@@ -19,15 +19,13 @@ const gridVariants = {
 const cardVariants = {
   hidden: {
     opacity: 0,
-    y: 52,
-    scale: 0.94,
-    filter: "blur(14px)",
+    y: 40,
+    scale: 0.97,
   },
   visible: {
     opacity: 1,
     y: 0,
     scale: 1,
-    filter: "blur(0px)",
     transition: {
       duration: 1.1,
       ease: HERO_EASE_OUT,
@@ -46,7 +44,7 @@ const accentVariants = {
   },
 };
 
-const still = { opacity: 1, y: 0, scale: 1, filter: "blur(0px)" };
+const still = { opacity: 1, y: 0, scale: 1 };
 const stillAccent = { scaleX: 1, opacity: 1 };
 const visibleServiceCards = homeServiceCards.slice(0, 4);
 
