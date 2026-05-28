@@ -152,7 +152,6 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={p("appianti/appiani-registrazione.mp4")}
           webm={p("appianti/appiani-registrazione.webm")}
-          poster={p("appianti/appiani.png")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
@@ -181,7 +180,6 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={p("azienda-vinicola/azienda-vinicola.cropped.mp4")}
           webm={p("azienda-vinicola/azienda-vinicola.cropped.webm")}
-          poster={p("azienda-vinicola/azienda-vinicola.png")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
           videoClassName="relative z-10 h-full w-full object-cover object-[center_60%] pointer-events-auto"
         />
@@ -212,7 +210,6 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={p("terreno/terreno.mp4")}
           webm={p("terreno/terreno.webm")}
-          poster={p("terreno/terreno.png")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
