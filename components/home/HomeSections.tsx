@@ -1,4 +1,3 @@
-import dynamic from "next/dynamic";
 import Image from "next/image";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
@@ -19,21 +18,7 @@ import { featuredProjects } from "@/lib/content/projects";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
-const HomeServiceCards = dynamic(
-  () => import("./HomeServiceCards").then((m) => ({ default: m.HomeServiceCards })),
-  {
-    ssr: false,
-    loading: () => <div className="min-h-[18rem] animate-pulse rounded-xl bg-[var(--muted)]/50" aria-hidden />,
-  },
-);
-
-const StatsSection = dynamic(
-  () => import("./StatsSection").then((m) => ({ default: m.StatsSection })),
-  {
-    ssr: false,
-    loading: () => <div className="min-h-[14rem] border-y border-[var(--green-border-muted)] bg-[var(--card)]" aria-hidden />,
-  },
-);
+import { HomeServiceCards, StatsSection } from "@/components/home/HomeClientBlocks";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
 
