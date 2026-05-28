@@ -121,7 +121,7 @@ async function runLighthouse() {
   if (isCi() && pwPath) {
     console.log(`[lighthouse:ci] Browser: Playwright Chromium (${pwPath})`);
   } else {
-    const chromePath = require("./lighthouse-chrome.cjs").resolveChromePath();
+    const chromePath = resolveChromePath();
     if (!chromePath) {
       throw new Error(
         "[lighthouse:ci] Chrome/Chromium non trovato. Imposta LH_CHROME_PATH o installa Playwright.",
