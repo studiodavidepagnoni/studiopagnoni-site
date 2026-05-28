@@ -1,11 +1,11 @@
 import type { ReactNode } from "react";
-import { franciacortaPaesaggioViticole } from "@/lib/content";
-import { stockImage } from "@/lib/media/mediaPath";
+import { VideoFigure } from "@/components/content/VideoFigure";
+import { projectAsset } from "@/lib/media/mediaPath";
 import { ui } from "@/lib/ui";
 
-const a = (name: string) => stockImage(name);
+const p = (relPath: string) => projectAsset(relPath);
 
-export const projectAreas = ["territorio-verde", "rilievi-digitalizzazione", "edilizia-urbanistica"] as const;
+export const projectAreas = ["rilievi-digitalizzazione"] as const;
 export type ProjectArea = (typeof projectAreas)[number];
 
 export function isProjectArea(s: string): s is ProjectArea {
@@ -41,32 +41,6 @@ export const projectCategories: Record<
     cases: ProjectCasePreview[];
   }
 > = {
-  "territorio-verde": {
-    metaTitle: "Progetti territorio, verde e paesaggio viticolo",
-    metaDescription:
-      "Progettazione del verde, vigneti e percorsi in Franciacorta e Lombardia — Studio Tecnico Pagnoni, Cazzago San Martino (BS). Provincia di Brescia e Nord Italia.",
-    heading: "Territorio e paesaggio",
-    intro: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Progettazione e modellazione del verde su diversi contesti: <strong>vigneti</strong>, <strong>parchi</strong>,{" "}
-          <strong>strade di montagna</strong>, <strong>sentieri</strong> e interventi di riqualificazione forestale, con il supporto di agronomi di
-          fiducia quando il progetto richiede competenze specifiche.
-        </p>
-        <p className={ui.body}>{franciacortaPaesaggioViticole}</p>
-      </>
-    ),
-    cases: [
-      {
-        slug: "vigneti-e-paesaggio-franciacorta",
-        title: "Vigneti e paesaggio — Franciacorta",
-        caption: "Vigneti e paesaggio",
-        cover: a("survey-site.jpg"),
-        alt: "Progettazione vigneti e aree verdi in Franciacorta — Studio Tecnico Pagnoni",
-        href: "/progetti/territorio-verde/vigneti-e-paesaggio-franciacorta",
-      },
-    ],
-  },
   "rilievi-digitalizzazione": {
     metaTitle: "Rilievi topografici e laser scanner SLAM",
     metaDescription:
@@ -87,72 +61,28 @@ export const projectCategories: Record<
     ),
     cases: [
       {
-        slug: "capannone-logistico-slam-rs10",
-        title: "Capannone logistico — as-built SLAM RS10",
-        caption: "Capannone logistico · SLAM",
-        cover: a("chi-siamo-slam-hero.jpg"),
-        alt: "Rilievo laser SLAM in capannone logistico — acquisizione con CHCNAV RS10",
-        href: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
+        slug: "allevamento-appianti-slam",
+        title: "Allevamento — rilievo 3D SLAM (Appianti)",
+        caption: "Allevamento · SLAM",
+        cover: p("appianti/appiani.png"),
+        alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
+        href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
       },
       {
-        slug: "rilievi-gnss-e-slam",
-        title: "Rilievi GNSS, stazione totale e SLAM",
-        caption: "Rilievi e laser SLAM",
-        cover: a("gnss-rtk-quarry.jpg"),
-        alt: "Servizi di rilievo topografico e laser scanner SLAM — Brescia e Nord Italia",
-        href: "/progetti/rilievi-digitalizzazione/rilievi-gnss-e-slam",
+        slug: "cantina-franciacorta-slam",
+        title: "Azienda vinicola — rilievo 3D SLAM",
+        caption: "Azienda vinicola · SLAM",
+        cover: p("azienda-vinicola/azienda-vinicola.png"),
+        alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
+        href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
       {
-        slug: "as-built-impianti-e-interferenze",
-        title: "As-built e controllo interferenze — impianti",
-        caption: "As-built e interferenze",
-        cover: a("survey-instrument-field.jpg"),
-        alt: "Rilievo as-built e verifica interferenze su impianti — nuvola di punti e restituzione",
-        href: "/progetti/rilievi-digitalizzazione/as-built-impianti-e-interferenze",
-      },
-      {
-        slug: "volumetrie-e-movimento-terra",
-        title: "Volumetrie e misure di cantiere",
-        caption: "Volumetrie e cantiere",
-        cover: a("analysis-dashboard.jpg"),
-        alt: "Rilievi per volumetrie, scavi e controllo avanzamento lavori",
-        href: "/progetti/rilievi-digitalizzazione/volumetrie-e-movimento-terra",
-      },
-    ],
-  },
-  "edilizia-urbanistica": {
-    metaTitle: "Urbanistica, architettura e pratiche edilizie",
-    metaDescription:
-      "Urbanistica, progettazione architettonica, sanatorie e pratiche edilizie — Studio Tecnico Pagnoni, Cazzago San Martino (BS).",
-    heading: "Edilizia e urbanistica",
-    intro: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Affianchiamo privati e imprese in <strong>progettazione architettonica</strong>, interpretazione dei <strong>piani regolatori</strong>,{" "}
-          <strong>sanatorie</strong> e pratiche presso gli enti, con attenzione alle norme locali e alle esigenze del committente.
-        </p>
-        <p className={ui.body}>
-          Coordiniamo inoltre la <strong>sicurezza di cantiere</strong> (CSP/CSE) e offriamo <strong>assistenza immobiliare</strong>, perizie e
-          consulenze tecniche correlate.
-        </p>
-      </>
-    ),
-    cases: [
-      {
-        slug: "iter-edilizio-e-sicurezza",
-        title: "Iter edilizio e coordinamento sicurezza",
-        caption: "Pratiche e sicurezza",
-        cover: a("technical-docs.jpg"),
-        alt: "Urbanistica e pratiche edilizie — geometra e architetto Cazzago San Martino",
-        href: "/progetti/edilizia-urbanistica/iter-edilizio-e-sicurezza",
-      },
-      {
-        slug: "rilievo-per-ristrutturazione",
-        title: "Rilievo e restituzione per ristrutturazione",
-        caption: "Ristrutturazioni",
-        cover: a("pointcloud-data.jpg"),
-        alt: "Rilievo e restituzione per ristrutturazione — piante e sezioni da nuvola di punti",
-        href: "/progetti/edilizia-urbanistica/rilievo-per-ristrutturazione",
+        slug: "rilievo-terreno-maddalena-brescia",
+        title: "Terreno - Rilievo SLAM",
+        caption: "Terreno · SLAM",
+        cover: p("terreno/terreno.png"),
+        alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
+        href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
       },
     ],
   },
@@ -164,57 +94,30 @@ export const projectCategories: Record<
 export const featuredProjects: FeaturedProject[] = [
   {
     area: "rilievi-digitalizzazione",
-    slug: "capannone-logistico-slam-rs10",
-    caption: "Capannone logistico — as-built SLAM",
-    cover: a("chi-siamo-slam-hero.jpg"),
-    alt: "Rilievo laser SLAM RS10 in capannone — acquisizione sul campo",
-    href: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
-    label: "Laser SLAM · RS10",
+    slug: "cantina-franciacorta-slam",
+    caption: "Azienda vinicola in Franciacorta — SLAM",
+    cover: p("azienda-vinicola/azienda-vinicola.png"),
+    alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
+    href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
+    label: "Laser SLAM",
   },
   {
     area: "rilievi-digitalizzazione",
-    slug: "rilievi-gnss-e-slam",
-    caption: "SLAM in movimento + GNSS",
-    cover: a("gnss-rtk-quarry.jpg"),
-    alt: "Rilievi SLAM in movimento e georeferenziazione GNSS — nuvola di punti",
-    href: "/progetti/rilievi-digitalizzazione/rilievi-gnss-e-slam",
-    label: "Laser SLAM · GNSS",
+    slug: "rilievo-terreno-maddalena-brescia",
+    caption: "Terreno — rilievo SLAM",
+    cover: p("terreno/terreno.png"),
+    alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
+    href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
+    label: "Territorio",
   },
   {
     area: "rilievi-digitalizzazione",
-    slug: "as-built-impianti-e-interferenze",
-    caption: "As-built e interferenze",
-    cover: a("survey-instrument-field.jpg"),
-    alt: "Rilievo as-built e controllo interferenze — impianti e spazi tecnici",
-    href: "/progetti/rilievi-digitalizzazione/as-built-impianti-e-interferenze",
-    label: "As-Built 3D",
-  },
-  {
-    area: "rilievi-digitalizzazione",
-    slug: "volumetrie-e-movimento-terra",
-    caption: "Volumetrie e cantiere",
-    cover: a("analysis-dashboard.jpg"),
-    alt: "Volumetrie e misure di cantiere — controllo avanzamento lavori",
-    href: "/progetti/rilievi-digitalizzazione/volumetrie-e-movimento-terra",
-    label: "Volumetrie",
-  },
-  {
-    area: "edilizia-urbanistica",
-    slug: "rilievo-per-ristrutturazione",
-    caption: "Ristrutturazioni",
-    cover: a("technical-docs.jpg"),
-    alt: "Rilievo e restituzione per ristrutturazione — piante e sezioni",
-    href: "/progetti/edilizia-urbanistica/rilievo-per-ristrutturazione",
-    label: "Edilizia",
-  },
-  {
-    area: "territorio-verde",
-    slug: "vigneti-e-paesaggio-franciacorta",
-    caption: "Paesaggio viticolo",
-    cover: a("survey-site.jpg"),
-    alt: "Territorio e paesaggio viticolo — Franciacorta",
-    href: "/progetti/territorio-verde/vigneti-e-paesaggio-franciacorta",
-    label: "Verde · Paesaggio",
+    slug: "allevamento-appianti-slam",
+    caption: "Allevamento — rilievo 3D SLAM",
+    cover: p("appianti/appiani.png"),
+    alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
+    href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
+    label: "Laser SLAM",
   },
 ];
 
@@ -230,190 +133,91 @@ export const projectCaseStudies: Record<
     gallery: { src: string; alt: string }[];
   }
 > = {
-  "territorio-verde/vigneti-e-paesaggio-franciacorta": {
-    metaTitle: "Vigneti e paesaggio — Franciacorta",
+  "rilievi-digitalizzazione/allevamento-appianti-slam": {
+    metaTitle: "Allevamento — rilievo 3D SLAM (Appianti)",
     metaDescription:
-      "Progettazione del verde e modellazione paesaggistica in ambito viticolo — collaborazioni in Franciacorta, Studio Tecnico Pagnoni.",
-    heading: "Vigneti, parchi e modellazione del verde",
+      "Caso studio (da validare): rilievo 3D con laser scanner SLAM in ambiente zootecnico per documentazione as-built e base metrica operativa. Provincia di Brescia.",
+    heading: "Allevamento — rilievo 3D SLAM in ambiente operativo",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
-          Progettiamo interventi sul territorio agricolo e forestale che richiedono equilibrio tra <strong>produttività</strong>,{" "}
-          <strong>paesaggio</strong> e <strong>normativa</strong>: filari, parchi, viabilità rurale e percorsi escursionistici, anche in coordinamento
-          con figure agronomiche per le scelte tecniche e vegetazionali.
+          In un contesto di allevamento, la documentazione dello stato di fatto deve essere rapida e leggibile: percorsi, ingombri, aree di servizio e
+          passaggi tecnici. Il rilievo con <strong>laser scanner SLAM</strong> consente acquisizione continua negli ambienti, riducendo tempi in campo e
+          riprese.
         </p>
-        <p className={ui.body}>{franciacortaPaesaggioViticole}</p>
+        <p className={`${ui.body} mb-6`}>
+          Output tipici: <strong>nuvola di punti</strong> per archivio e scambio, estrazione di sezioni/piante, e materiali di supporto per
+          interventi e verifiche. Il video in pagina mostra una traccia di scansione 3D acquisita in movimento.
+        </p>
+        <VideoFigure
+          mp4={p("appianti/appiani-registrazione.mp4")}
+          webm={p("appianti/appiani-registrazione.webm")}
+          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+        />
+        <p className={ui.body}>
+          Se serve collegare la scansione a coordinate di progetto o a punti di controllo, integriamo con <strong>GNSS RTK</strong> e stazione totale
+          in base al contesto.
+        </p>
+      </>
+    ),
+    gallery: [{ src: p("appianti/appiani.png"), alt: "Anteprima rilievo 3D SLAM — ambiente di allevamento" }],
+  },
+  "rilievi-digitalizzazione/cantina-franciacorta-slam": {
+    metaTitle: "Azienda vinicola — rilievo 3D SLAM in Franciacorta",
+    metaDescription:
+      "Caso studio (da validare): scansione 3D con laser scanner SLAM in azienda vinicola in Franciacorta per documentazione as-built e base metrica per impianti e layout.",
+    heading: "Azienda vinicola — scansione 3D SLAM in Franciacorta",
+    body: (
+      <>
+        <p className={`${ui.body} mb-4`}>
+          Rilievo 3D in ambito vinicolo: spazi di produzione e servizio, percorsi, ingombri e aree tecniche. L&apos;acquisizione <strong>SLAM</strong>{" "}
+          permette una scansione continua con controllo della copertura, utile quando serve una base metrica condivisa prima di modifiche a layout o
+          impianti.
+        </p>
+        <p className={`${ui.body} mb-6`}>
+          Il rilievo è stato svolto presso una delle realtà vinicole più importanti del territorio della <strong>Franciacorta</strong>.
+        </p>
+        <VideoFigure
+          mp4={p("azienda-vinicola/azienda-vinicola.cropped.mp4")}
+          webm={p("azienda-vinicola/azienda-vinicola.cropped.webm")}
+          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+          videoClassName="relative z-10 h-full w-full object-cover object-[center_60%] pointer-events-auto"
+        />
+        <p className={ui.body}>
+          Consegne possibili: nuvola in <strong>E57/LAS</strong>, estrazioni CAD (DWG/DXF) e, quando richiesto, supporto a flussi BIM.
+        </p>
       </>
     ),
     gallery: [
-      { src: a("survey-site.jpg"), alt: "Rilievi sul territorio — operazioni sul campo" },
-      { src: a("topography-tool.jpg"), alt: "Strumentazione e rilievi topografici" },
-      { src: a("analysis-dashboard.jpg"), alt: "Sintesi e restituzione dati — elaborati" },
+      { src: p("azienda-vinicola/azienda-vinicola.png"), alt: "Rilievo 3D SLAM — azienda vinicola in Franciacorta (anteprima)" },
     ],
   },
-  "rilievi-digitalizzazione/capannone-logistico-slam-rs10": {
-    metaTitle: "Capannone logistico — rilievo as-built SLAM RS10",
+  "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": {
+    metaTitle: "Terreno - Rilievo SLAM",
     metaDescription:
-      "Caso studio: documentazione as-built di capannone logistico con laser scanner SLAM mobile CHCNAV RS10 — nuvola di punti, piante e sezioni. Commessa anonimizzata, hinterland bresciano.",
-    heading: "Capannone logistico — documentazione as-built con RS10",
+      "Caso studio (da validare): scansione 3D di terreno a Brescia (zona Maddalena) per rilievo dello stato di fatto a supporto di interventi agronomici e progettazione del paesaggio.",
+    heading: "Terreno - Rilievo SLAM",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
-          <strong>Commessa anonimizzata</strong> — hinterland bresciano, 2025. Un&apos;impresa di logistica doveva aggiornare la documentazione metrica
-          di un <strong>capannone di circa 8.200 m²</strong> su due livelli (area operativa e uffici tecnici) prima di interventi su impianti e layout
-          interno. Obiettivo: base 3D affidabile per progettisti e direzione lavori, senza fermare l&apos;attività oltre le finestre concordate.
+          Scansione 3D di un terreno in area urbana (Brescia, zona Maddalena) come base per <strong>rilievo dello stato di fatto</strong> in vista di
+          interventi agronomici e di <strong>progettazione del paesaggio</strong>.
         </p>
-        <p className={`${ui.body} mb-4`}>
-          In <strong>una giornata di acquisizione</strong> con <strong>CHCNAV RS10</strong> abbiamo coperto percorsi continui tra area esterna di
-          manovra, corpo capannone e zone ufficio, con controllo in tempo reale sulla copertura della nuvola. Il rilievo topografico di supporto con{" "}
-          <strong>GNSS RTK</strong> ha ancorato il modello al sistema di riferimento del committente.
+        <p className={`${ui.body} mb-6`}>
+          Obiettivo: una rappresentazione metrica leggibile di pendenze, scarpate, vegetazione e limiti dell&apos;area, integrabile con elaborati tecnici
+          (sezioni, curve di livello, tavole di progetto) e con eventuali controlli topografici.
         </p>
-        <p className={`${ui.body} mb-4`}>
-          In elaborazione: allineamento, pulizia della nuvola e estrazione di <strong>piante quote</strong> e <strong>sezioni</strong> sui livelli
-          principali. Consegna in <strong>E57</strong> per archivio interno, <strong>DWG</strong> per lo studio di progettazione e sintesi PDF per la
-          direzione impianti.
-        </p>
+        <VideoFigure
+          mp4={p("terreno/terreno.mp4")}
+          webm={p("terreno/terreno.webm")}
+          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+        />
         <p className={ui.body}>
-          <strong>Esito:</strong> riduzione dei rilievi manuali in quota, individuazione anticipata di interferenze tra passerelle e nuovi percorsi
-          previsti, e un unico riferimento geometrico condiviso tra impresa, progettista e facility. I materiali fotografici di questa pagina sono
-          placeholder: verranno sostituiti con immagini reali della commessa.
+          In base alle esigenze, il rilievo può essere restituito come nuvola 3D oppure come elaborati CAD con quote, sezioni e sintesi.
         </p>
       </>
     ),
-    gallery: [
-      {
-        src: a("chi-siamo-slam-hero.jpg"),
-        alt: "Fase 1 — Acquisizione SLAM in capannone: operatore con scanner mobile RS10",
-      },
-      {
-        src: a("pointcloud-data.jpg"),
-        alt: "Fase 2 — Nuvola di punti georiferita del capannone logistico",
-      },
-      {
-        src: a("design-drawings.jpg"),
-        alt: "Fase 3 — Piante e sezioni da nuvola di punti per progetto impianti",
-      },
-    ],
-  },
-  "rilievi-digitalizzazione/rilievi-gnss-e-slam": {
-    metaTitle: "Rilievi GNSS e laser scanner SLAM",
-    metaDescription:
-      "Servizi di topografia professionale e rilievo laser SLAM per nuvole di punti e documentazione 3D — Cazzago San Martino (BS), Franciacorta, provincia di Brescia e Nord Italia.",
-    heading: "Rilievi geomatici e laser scanner SLAM",
-    body: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Eseguiamo rilievi <strong>planoaltimetrici</strong> con <strong>GNSS RTK</strong> e <strong>stazione totale</strong> per cantieri,
-          frazionamenti, volumetrie e redazione di mappe di sintesi. Il <strong>laser scanner SLAM</strong> integra la misura tradizionale con
-          acquisizioni dense in tempi ridotti, particolarmente utili per edifici complessi, impianti industriali e siti estesi.
-        </p>
-        <p className={ui.body}>
-          I risultati possono essere esportati per software CAD/BIM, elaborazioni fotogrammetriche e controllo delle interferenze progetto-realtà,
-          a supporto di progettisti e imprese.
-        </p>
-      </>
-    ),
-    gallery: [
-      { src: a("gnss-rtk-quarry.jpg"), alt: "GNSS RTK su treppiede — misura e controllo" },
-      { src: a("gnss-rover-worker.jpg"), alt: "GNSS RTK rover — posizionamento e misure in campo" },
-      { src: a("total-station-field.jpg"), alt: "Stazione totale — misure e tracciamenti" },
-      { src: a("pointcloud-data.jpg"), alt: "Dati 3D e nuvola di punti — elaborazione" },
-      { src: a("survey-site.jpg"), alt: "Rilievo e operazioni sul campo" },
-    ],
-  },
-  "rilievi-digitalizzazione/as-built-impianti-e-interferenze": {
-    metaTitle: "As-built e controllo interferenze",
-    metaDescription:
-      "Rilievo as-built con nuvola di punti per impianti e ambienti tecnici: base affidabile per verifiche e coordinamento progetto-realtà.",
-    heading: "As-built, impianti e verifica interferenze",
-    body: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Quando gli spazi sono densi di elementi (impianti, passaggi, strutture), un rilievo tradizionale rischia di lasciare “zone grigie”. La
-          scansione <strong>SLAM</strong> consente di acquisire rapidamente una base completa.
-        </p>
-        <p className={ui.body}>
-          La nuvola di punti viene pulita e organizzata per una restituzione che supporta <strong>verifiche di ingombro</strong>, as-built e
-          comunicazione chiara tra progettisti e impresa.
-        </p>
-      </>
-    ),
-    gallery: [
-      { src: a("handheld-slam-road.jpg"), alt: "Handheld SLAM 3D — acquisizione in movimento" },
-      { src: a("survey-site.jpg"), alt: "Rilievo as-built sul campo — acquisizione" },
-      { src: a("pointcloud-data.jpg"), alt: "Geometrie e controllo interferenze — dati 3D" },
-      { src: a("analysis-dashboard.jpg"), alt: "Coordinamento e restituzione — elaborazione" },
-    ],
-  },
-  "rilievi-digitalizzazione/volumetrie-e-movimento-terra": {
-    metaTitle: "Volumetrie e misure di cantiere",
-    metaDescription:
-      "Rilievi per volumetrie, scavi e controllo avanzamento lavori: acquisizione rapida e restituzioni utili per computi e stati di avanzamento.",
-    heading: "Volumetrie, scavi e controllo di cantiere",
-    body: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Nei cantieri servono dati rapidi e confrontabili: superfici, quote, volumi e controlli puntuali. In base al contesto integriamo{" "}
-          <strong>GNSS RTK</strong> e acquisizioni <strong>SLAM</strong> per ridurre tempi e passaggi.
-        </p>
-        <p className={ui.body}>
-          Il risultato è una base misurabile per <strong>computi volumetrici</strong>, verifiche di avanzamento e report comprensibili anche per chi
-          non lavora ogni giorno con dati 3D.
-        </p>
-      </>
-    ),
-    gallery: [
-      { src: a("survey-site.jpg"), alt: "Cantiere e movimento terra — rilievi" },
-      { src: a("topography-tool.jpg"), alt: "Misure e squadra sul campo" },
-      { src: a("analysis-dashboard.jpg"), alt: "Report e sintesi volumetrica" },
-    ],
-  },
-  "edilizia-urbanistica/iter-edilizio-e-sicurezza": {
-    metaTitle: "Urbanistica, pratiche edilizie e sicurezza cantieri",
-    metaDescription:
-      "Sanatorie, piani regolatori, progettazione architettonica, CSP e CSE — Studio Tecnico Pagnoni, Cazzago San Martino (BS).",
-    heading: "Pratiche edilizie, urbanistica e sicurezza",
-    body: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Supportiamo i clienti nelle <strong>istanze edilizie</strong> e nelle interpretazioni degli strumenti urbanistici locali, incluse le
-          <strong> sanatorie</strong> quando la normativa consente il percorso di regolarizzazione. La progettazione architettonica copre le fasi
-          necessarie al completamento dell&apos;iter autorizzativo e alla realizzazione dell&apos;opera.
-        </p>
-        <p className={ui.body}>
-          In fase di realizzazione affianchiamo committenti e imprese con il <strong>coordinamento per la sicurezza</strong> (CSP in progettazione, CSE
-          in esecuzione) e con consulenze per stime, perizie e assistenza nelle pratiche immobiliari.
-        </p>
-      </>
-    ),
-    gallery: [
-      { src: a("technical-docs.jpg"), alt: "Documentazione tecnica e tavole" },
-      { src: a("design-drawings.jpg"), alt: "Tavole e progettazione edilizia" },
-      { src: a("survey-site.jpg"), alt: "Cantiere e coordinamento lavori" },
-    ],
-  },
-  "edilizia-urbanistica/rilievo-per-ristrutturazione": {
-    metaTitle: "Rilievo per ristrutturazione",
-    metaDescription:
-      "Rilievo e restituzione per ristrutturazioni: base affidabile per piante, sezioni e decisioni progettuali, riducendo incertezze e varianti.",
-    heading: "Rilievo e restituzione per ristrutturazioni",
-    body: (
-      <>
-        <p className={`${ui.body} mb-4`}>
-          Prima di progettare serve una base solida. Il rilievo supporta decisioni su spazi, ingombri e quote, riducendo imprevisti in fase di
-          cantiere.
-        </p>
-        <p className={ui.body}>
-          In funzione del caso, la scansione <strong>SLAM</strong> integra la misura tradizionale e consente una restituzione ordinata per piante,
-          sezioni e confronto tra stato di fatto e progetto.
-        </p>
-      </>
-    ),
-    gallery: [
-      { src: a("topography-tool.jpg"), alt: "Rilievo e misure — base per ristrutturazione" },
-      { src: a("technical-docs.jpg"), alt: "Documentazione e tavole — restituzione" },
-      { src: a("pointcloud-data.jpg"), alt: "Elaborazione digitale da nuvola di punti" },
-    ],
+    gallery: [{ src: p("terreno/terreno.png"), alt: "Anteprima rilievo 3D di terreno — Brescia, Maddalena" }],
   },
 };
 

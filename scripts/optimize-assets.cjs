@@ -14,6 +14,7 @@ const path = require("path");
 const root = path.join(__dirname, "..");
 const assetsDir = path.join(root, "assets");
 const stockDir = path.join(assetsDir, "stock");
+const projectsDir = path.join(assetsDir, "projects");
 
 const WEBP_QUALITY = 80;
 const LCP_POSTER_W = 960;
@@ -42,6 +43,51 @@ const HERO_LITE_H = 864;
 const liteCrop = `scale=${HERO_LITE_W}:${HERO_LITE_H}:force_original_aspect_ratio=increase,crop=${HERO_LITE_W}:${HERO_LITE_H}`;
 
 const HERO_VIDEOS = ["rs10-hero.mp4", "hero-video-2.mp4", "hero-video-3.mp4"];
+
+function listProjectMp4s() {
+  if (!fs.existsSync(projectsDir)) return [];
+  const out = [];
+  const stack = [projectsDir];
+  while (stack.length) {
+    const dir = stack.pop();
+    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+      const full = path.join(dir, ent.name);
+      if (ent.isDirectory()) stack.push(full);
+      else if (ent.isFile() && /\.mp4$/i.test(ent.name)) out.push(full);
+    }
+  }
+  return out;
+}
+
+function encodeProjectMp4(input, tmpOut) {
+  const cmd = [
+    "ffmpeg -y -nostdin -hide_banner",
+    `-i "${input}"`,
+    // Mantieni aspect ratio, riduci a max 1280px in larghezza.
+    '-vf "scale=1280:-2:force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2"',
+    "-an",
+    `-c:v libx264 -preset ${VIDEO_PRESET} -crf ${VIDEO_CRF}`,
+    "-pix_fmt yuv420p",
+    "-movflags +faststart",
+    `"${tmpOut}"`,
+  ].join(" ");
+  console.log(`\n> ${cmd}\n`);
+  execSync(cmd, { stdio: "inherit", cwd: root, shell: true });
+}
+
+function encodeProjectWebm(input, webmOut) {
+  const cmd = [
+    "ffmpeg -y -nostdin -hide_banner",
+    `-i "${input}"`,
+    '-vf "scale=1280:-2:force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2"',
+    "-an",
+    `-c:v libvpx-vp9 -crf ${WEBM_CRF} -b:v 0 -row-mt 1 -deadline good -cpu-used 2`,
+    "-pix_fmt yuv420p",
+    `"${webmOut}"`,
+  ].join(" ");
+  console.log(`\n> ${cmd}\n`);
+  execSync(cmd, { stdio: "inherit", cwd: root, shell: true });
+}
 
 function hasFfmpeg() {
   try {
@@ -221,7 +267,7 @@ function writeVideoManifest() {
     if (!order.length) order.push("mp4");
     manifest[base] = { order, mp4Bytes, webmBytes };
   }
-  const out = path.join(root, "lib", "heroVideoManifest.json");
+  const out = path.join(root, "lib", "media", "heroVideoManifest.json");
   fs.writeFileSync(out, `${JSON.stringify(manifest, null, 2)}\n`);
   console.log(`[optimize-assets] Manifest ${path.relative(root, out)}`);
 }
@@ -346,6 +392,32 @@ async function optimizeVideos() {
     } catch (err) {
       if (fs.existsSync(tmpMp4)) fs.unlinkSync(tmpMp4);
       console.warn(`[optimize-assets] Video fallito ${name}: ${err.message}`);
+    }
+  }
+
+  // Video progetti (assets/projects/**): MP4 ridotto + WebM, senza crop.
+  for (const inputMp4 of listProjectMp4s()) {
+    const name = path.basename(inputMp4);
+    const webm = inputMp4.replace(/\.mp4$/i, ".webm");
+    const tmpMp4 = inputMp4.replace(/\.mp4$/i, ".opt.mp4");
+
+    if (!videoNeedsWork(inputMp4)) {
+      console.log(`[optimize-assets] Video OK: ${path.relative(root, inputMp4)}`);
+      continue;
+    }
+
+    try {
+      encodeProjectMp4(inputMp4, tmpMp4);
+      fs.renameSync(tmpMp4, inputMp4);
+      const mb = (fs.statSync(inputMp4).size / (1024 * 1024)).toFixed(2);
+      console.log(`[optimize-assets] ${path.relative(root, inputMp4)} → ${mb} MB`);
+
+      encodeProjectWebm(inputMp4, webm);
+      const wmb = (fs.statSync(webm).size / (1024 * 1024)).toFixed(2);
+      console.log(`[optimize-assets] ${path.relative(root, webm)} → ${wmb} MB`);
+    } catch (err) {
+      if (fs.existsSync(tmpMp4)) fs.unlinkSync(tmpMp4);
+      console.warn(`[optimize-assets] Video fallito ${path.relative(root, inputMp4)}: ${err.message}`);
     }
   }
 }

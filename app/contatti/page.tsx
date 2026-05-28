@@ -1,16 +1,12 @@
-import { FaqSection } from "@/components/content/FaqSection";
 import { ContattiFormSection, ContattiIntro } from "@/components/contact/ContattiSlamLead";
 import { MapEmbed } from "@/components/contact/MapEmbed";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
-import { faqPageGraph } from "@/lib/config/faqJsonLd";
 import { buildPageMetadata } from "@/lib/config/seo";
-import { contattiFaq } from "@/lib/content/pageFaqs";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const pagePath = "/contatti";
-const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const pageTitle = "Contatti e preventivo rilievo SLAM";
 const pageDescription =
   "Richiedi un sopralluogo o preventivo per rilievi laser scanner SLAM e topografia. Sede a Cazzago San Martino (BS), Franciacorta. Email studio@pagnoni-s.com — Geom. Sergio e Arch. Davide Pagnoni.";
@@ -22,17 +18,9 @@ export const metadata = buildPageMetadata({
   priority: "high",
 });
 
-const contattiJsonLd = faqPageGraph({
-  pageUrl,
-  pageTitle,
-  pageDescription,
-  faqItems: contattiFaq,
-});
-
 export default function ContattiPage() {
   return (
     <>
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(contattiJsonLd) }} />
       <StaticPageHero path="/contatti" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
@@ -75,10 +63,6 @@ export default function ContattiPage() {
               <MapEmbed />
             </section>
           </div>
-
-            <div className="mt-10 sm:mt-12">
-              <FaqSection id="contatti-faq" items={contattiFaq} />
-            </div>
 
             <ContattiFormSection />
           </div>

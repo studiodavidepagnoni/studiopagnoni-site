@@ -97,8 +97,8 @@ export const laserSlamLanding = {
 
   caseStudyTeaser: {
     title: "Esempio di progetto",
-    subtitle: "Capannone logistico — documentazione as-built con RS10",
-    href: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
+    subtitle: "Azienda vinicola — scansione 3D SLAM",
+    href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     steps: [
       { label: "Campo", caption: "Acquisizione SLAM su due livelli" },
       { label: "Nuvola", caption: "Geometria densa georiferita" },

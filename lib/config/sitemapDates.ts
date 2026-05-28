@@ -16,15 +16,14 @@ export const staticPageLastModified: Record<string, string> = {
 };
 
 export const projectAreaLastModified: Record<ProjectArea, string> = {
-  "territorio-verde": "2026-04-15",
   "rilievi-digitalizzazione": "2026-05-15",
-  "edilizia-urbanistica": "2026-04-15",
 };
 
 /** Chiave `area/slug` — solo casi aggiornati dopo la data dell'area. */
 export const projectCaseLastModified: Partial<Record<`${ProjectArea}/${string}`, string>> = {
-  "rilievi-digitalizzazione/capannone-logistico-slam-rs10": "2026-05-15",
-  "rilievi-digitalizzazione/rilievi-gnss-e-slam": "2026-05-10",
+  "rilievi-digitalizzazione/cantina-franciacorta-slam": "2026-05-28",
+  "rilievi-digitalizzazione/allevamento-appianti-slam": "2026-05-28",
+  "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": "2026-05-28",
 };
 
 const DEFAULT_PAGE_DATE = "2026-04-01";

@@ -1,4 +1,5 @@
 import { LaserSlamLanding } from "@/components/laser/LaserSlamLanding";
+import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
 import { buildPageMetadata } from "@/lib/config/seo";
 import { site } from "@/lib/config/site";
@@ -112,6 +113,7 @@ export default function RilieviLaserScannerSlamBresciaPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(slamLandingJsonLd) }} />
+      <StaticPageHero path="/rilievi-laser-scanner-slam-brescia" />
       <LaserSlamLanding />
     </>
   );

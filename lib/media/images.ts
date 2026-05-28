@@ -9,7 +9,7 @@ import {
   HERO_VIDEO_INDOOR_SOURCES,
   HERO_VIDEO_POINTCLOUD_SOURCES,
 } from "@/lib/media/heroVideos";
-import { stockImage } from "@/lib/media/mediaPath";
+import { projectAsset, stockImage } from "@/lib/media/mediaPath";
 import { imageAlt } from "@/lib/config/seo";
 
 export {
@@ -19,6 +19,7 @@ export {
 } from "@/lib/media/heroVideos";
 
 const a = (name: string) => stockImage(name);
+const p = (relPath: string) => projectAsset(relPath);
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */
@@ -58,20 +59,20 @@ export const heroSlides: readonly HeroSlide[] = [
     line1: "Nuvola di punti",
     line2: "dalla scansione agli elaborati",
     body: "Restituzione in formati operativi: nuvole dense, sezioni, CAD e modelli BIM. Controlli in campo sulla copertura prima di chiudere il rilievo.",
-    ctaHref: "/progetti/rilievi-digitalizzazione/capannone-logistico-slam-rs10",
+    ctaHref: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     ctaLabel: "Esempio di progetto",
     video: HERO_VIDEO_POINTCLOUD_SOURCES,
     poster: HERO_POSTER_POINTCLOUD,
     videoObjectPosition: "68% center",
   },
   {
-    src: a("gnss-rtk-quarry.jpg"),
-    alt: imageAlt("Ricevitore GNSS RTK e rilievo geodetico sul campo", { service: "topografia" }),
-    line1: "Topografia e rilievi",
-    line2: "GNSS RTK · stazione totale",
-    body: "Rilievi planoaltimetrici integrati al laser SLAM: coordinate affidabili per frazionamenti, cantieri e allineamento del modello 3D.",
-    ctaHref: "/topografia",
-    ctaLabel: "Topografia",
+    src: p("appianti/appiani.png"),
+    alt: imageAlt("Rilievo 3D con laser scanner SLAM in ambiente operativo", { service: "slam" }),
+    line1: "Rilievi SLAM in ambienti operativi",
+    line2: "as-built rapido · base metrica condivisa",
+    body: "Acquisizione in movimento in spazi complessi: una nuvola di punti utile per layout, verifiche e documentazione dello stato di fatto, con tempi in campo contenuti.",
+    ctaHref: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
+    ctaLabel: "Esempio di progetto",
     video: HERO_VIDEO_DEFAULT_SOURCES,
     poster: HERO_POSTER_DEFAULT,
   },
@@ -95,24 +96,10 @@ export const chiSiamoPageImage = {
 
 export const projectPreview = [
   {
-    href: "/progetti/territorio-verde",
-    title: "Territorio e paesaggio",
-    caption: "Territorio e paesaggio viticolo",
-    image: a("survey-site.jpg"),
-    alt: imageAlt("Rilievo topografico su territorio collinare e vigneti", { service: "verde" }),
-  },
-  {
     href: "/progetti/rilievi-digitalizzazione",
     title: "Rilievi e digitalizzazione",
     caption: "Rilievi e digitalizzazione",
     image: a("pointcloud-data.jpg"),
     alt: imageAlt("Elaborazione nuvola di punti e dati 3D da laser scanner", { service: "slam" }),
-  },
-  {
-    href: "/progetti/edilizia-urbanistica",
-    title: "Edilizia e urbanistica",
-    caption: "Edilizia e pratiche",
-    image: a("technical-docs.jpg"),
-    alt: imageAlt("Tavole tecniche e documentazione per pratiche edilizie", { service: "edilizia" }),
   },
 ] as const;

@@ -143,7 +143,7 @@ export const homeServiceCards = [
 ] as const;
 
 export const homeProgettiIntro =
-  "Tre ambiti rappresentativi: paesaggio viticolo, rilievi e digitalizzazione, edilizia e pratiche tecniche.";
+  "Tre ambiti rappresentativi dell’applicazione dei rilievi 3D effettuati dallo Studio Pagnoni: paesaggio viticolo, rilievi in ambito territorio ed edilizia.";
 
 export const progettiIndexIntro =
   "Una selezione di ambiti ricorrenti: paesaggio viticolo, rilievi digitali e pratiche edilizie. Ogni scheda racconta il tipo di problema affrontato, più che un semplice elenco di immagini.";

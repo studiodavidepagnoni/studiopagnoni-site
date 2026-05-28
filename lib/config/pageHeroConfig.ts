@@ -1,8 +1,9 @@
-import { stockImage } from "@/lib/media/mediaPath";
+import { projectAsset, stockImage } from "@/lib/media/mediaPath";
 import { normalizePathname } from "@/lib/utils/normalizePathname";
 import { imageAlt } from "@/lib/config/seo";
 
 const a = (name: string) => stockImage(name);
+const p = (relPath: string) => projectAsset(relPath);
 
 export type PageHeroData = {
   eyebrow: string;
@@ -33,6 +34,14 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Topografia e rilievi",
     image: a("gnss-rtk-quarry.jpg"),
     alt: imageAlt("GNSS RTK in area estrattiva per rilievo planoaltimetrico", { service: "topografia" }),
+    priorityImage: true,
+  },
+  "/rilievi-laser-scanner-slam-brescia": {
+    eyebrow: "Laser scanner mobile",
+    title: "Rilievi laser SLAM",
+    image: p("appianti/appiani.png"),
+    alt: imageAlt("Rilievo 3D con laser scanner SLAM in ambiente operativo", { service: "slam" }),
+    lede: "Nuvole di punti, as-built e sezioni: acquisizione mobile indoor/outdoor con CHCNAV RS10.",
     priorityImage: true,
   },
   "/progetti": {
