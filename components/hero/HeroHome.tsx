@@ -35,6 +35,7 @@ export function HeroHome() {
   const [introKenburnDone, setIntroKenburnDone] = useState(false);
   const [autoPaused, setAutoPaused] = useState(false);
   const [userInteracted, setUserInteracted] = useState(false);
+  const [videoUnlocked, setVideoUnlocked] = useState(false);
   const [heroInView, setHeroInView] = useState(true);
   const reducedMotion = usePrefersReducedMotion();
   const autoAdvance = !reducedMotion && !autoPaused && heroInView && pageVisible;
@@ -52,9 +53,30 @@ export function HeroHome() {
     [],
   );
 
-  const showVideoBackground = heroUsesVideo && !saveData && !reducedMotion;
+  const canUseVideo = heroUsesVideo && !saveData && !reducedMotion;
+  const showVideoBackground = canUseVideo && videoUnlocked;
   const mediaPaused = !pageVisible || !heroInView;
   const isIntroActive = idx === 0;
+
+  useEffect(() => {
+    if (!canUseVideo || videoUnlocked) return;
+
+    const unlock = () => setVideoUnlocked(true);
+    const root = heroRootRef.current;
+
+    root?.addEventListener("pointerdown", unlock, { once: true, passive: true });
+    root?.addEventListener("keydown", unlock, { once: true });
+    const onScroll = () => {
+      if (window.scrollY > 48) unlock();
+    };
+    window.addEventListener("scroll", onScroll, { once: true, passive: true });
+
+    return () => {
+      root?.removeEventListener("pointerdown", unlock);
+      root?.removeEventListener("keydown", unlock);
+      window.removeEventListener("scroll", onScroll);
+    };
+  }, [canUseVideo, videoUnlocked]);
 
   useEffect(() => {
     const root = heroRootRef.current;
@@ -122,6 +144,7 @@ export function HeroHome() {
 
   const goToSlide = (index: number) => {
     setUserInteracted(true);
+    setVideoUnlocked(true);
     setAutoPaused(true);
     setIdx(((index % heroSlides.length) + heroSlides.length) % heroSlides.length);
   };

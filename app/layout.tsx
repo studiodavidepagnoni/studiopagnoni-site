@@ -2,7 +2,8 @@ import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
 import { CookieBannerDeferred } from "@/components/layout/CookieBannerDeferred";
 import { SiteFooter } from "@/components/layout/SiteFooter";
-import { SiteHeader } from "@/components/layout/SiteHeader";
+import { SiteHeaderDeferred } from "@/components/layout/SiteHeaderDeferred";
+import { SiteHeaderShell } from "@/components/layout/SiteHeaderShell";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { jsonLdGraph, rootMetadata } from "@/lib/config/seo";
@@ -41,7 +42,8 @@ export default function RootLayout({
         <a href="#main-content" className="skip-link">
           Vai al contenuto principale
         </a>
-        <SiteHeader />
+        <SiteHeaderShell />
+        <SiteHeaderDeferred />
         <AppProviders>
           <CookieBannerDeferred />
           {children}

@@ -3,40 +3,52 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { HeroHomePlaceholder } from "@/components/hero/HeroHomePlaceholder";
-
-type IdleWindow = Window & {
-  requestIdleCallback?: (callback: IdleRequestCallback, options?: IdleRequestOptions) => number;
-  cancelIdleCallback?: (handle: number) => void;
-};
+import { HERO_VIDEO_MEDIA_QUERY } from "@/lib/utils/useClientMedia";
+import { scheduleIdle } from "@/lib/utils/scheduleIdle";
 
 const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => ({ default: m.HeroHome })), {
   ssr: false,
   loading: () => <HeroHomePlaceholder />,
 });
 
+/**
+ * Mobile/tablet: poster AVIF/WebP statico (zero bundle hero).
+ * Desktop: carousel+video solo dopo interazione o fallback idle tardivo.
+ */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
 
   useEffect(() => {
-    const isMobile = window.matchMedia("(max-width: 767px)").matches;
-    if (isMobile) return;
+    const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY);
+    if (!desktop.matches) return;
 
-    const timeout = 1400;
-    let timeoutId: ReturnType<typeof setTimeout> | undefined;
-    let idleId: number | undefined;
-    const idleWindow = window as IdleWindow;
+    let done = false;
+    const load = () => {
+      if (done) return;
+      done = true;
+      setEnhance(true);
+    };
 
-    if (idleWindow.requestIdleCallback) {
-      idleId = idleWindow.requestIdleCallback(() => setEnhance(true), { timeout });
-    } else {
-      timeoutId = globalThis.setTimeout(() => setEnhance(true), timeout);
-    }
+    const cancelIdle = scheduleIdle(load, 10_000);
+
+    const onPointer = () => load();
+    const onScroll = () => {
+      if (window.scrollY > 32) load();
+    };
+    const onKey = () => load();
+
+    window.addEventListener("pointerdown", onPointer, { once: true, passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("keydown", onKey, { once: true });
 
     return () => {
-      if (idleId !== undefined) idleWindow.cancelIdleCallback?.(idleId);
-      if (timeoutId !== undefined) globalThis.clearTimeout(timeoutId);
+      cancelIdle();
+      window.removeEventListener("pointerdown", onPointer);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("keydown", onKey);
     };
   }, []);
 
-  return enhance ? <HeroHome /> : <HeroHomePlaceholder />;
+  if (!enhance) return <HeroHomePlaceholder />;
+  return <HeroHome />;
 }

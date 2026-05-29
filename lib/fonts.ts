@@ -21,7 +21,7 @@ export const fontDisplay = Sora({
   variable: "--font-display",
   display: "swap",
   weight: ["500", "600", "700"],
-  preload: true,
+  preload: false,
   adjustFontFallback: true,
 });
 

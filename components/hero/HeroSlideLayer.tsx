@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { HeroLcpPicture } from "@/components/hero/HeroLcpPicture";
 import type { HeroSlide } from "@/lib/media/images";
 import {
   HERO_POSTER_INDOOR_LCP,
@@ -22,6 +23,13 @@ type Props = {
   onVideoError: (key: string) => void;
 };
 
+function posterForSlide(slide: HeroSlide, slideIndex: number): string {
+  if (slideIndex === 0) return HERO_POSTER_INDOOR_LCP;
+  if (slide.poster) return slide.poster;
+  const sources = slide.video ?? DEFAULT_VIDEO;
+  return sources.mp4.replace(/\.mp4(\?.*)?$/i, "-poster.webp");
+}
+
 export function HeroSlideLayer({
   slide,
   slideIndex,
@@ -36,9 +44,7 @@ export function HeroSlideLayer({
   const sources = slide.video ?? DEFAULT_VIDEO;
   const key = heroVideoKey(sources);
   const isIntroSlide = slideIndex === 0;
-  const posterSrc = isIntroSlide
-    ? HERO_POSTER_INDOOR_LCP
-    : (slide.poster ?? DEFAULT_VIDEO.mp4.replace(/\.mp4$/i, "-poster.webp"));
+  const posterSrc = posterForSlide(slide, slideIndex);
   const sourceOrder = heroVideoSourceOrder(sources.mp4);
 
   const layerClass = [
@@ -49,6 +55,22 @@ export function HeroSlideLayer({
   ]
     .filter(Boolean)
     .join(" ");
+
+  const staticMedia =
+    isIntroSlide ? (
+      <HeroLcpPicture alt={slide.alt} />
+    ) : (
+      // eslint-disable-next-line @next/next/no-img-element -- poster pre-generato, niente optimizer
+      <img
+        src={posterSrc}
+        alt={slide.alt}
+        className="hero-media__image hero-media__image--lcp h-full w-full object-cover"
+        style={slide.videoObjectPosition ? { objectPosition: slide.videoObjectPosition } : undefined}
+        decoding="async"
+        loading={isActive ? "eager" : "lazy"}
+        sizes="100vw"
+      />
+    );
 
   const media = showVideo ? (
     <video
@@ -65,16 +87,18 @@ export function HeroSlideLayer({
     >
       {loadSources ? <HeroVideoSources sources={sources} order={sourceOrder} /> : null}
     </video>
+  ) : isIntroSlide ? (
+    staticMedia
   ) : (
     <Image
-      src={slide.src}
+      src={posterSrc}
       alt={slide.alt}
       fill
       className="hero-media__image object-cover"
+      style={slide.videoObjectPosition ? { objectPosition: slide.videoObjectPosition } : undefined}
       sizes="100vw"
       priority={slideIndex === 0}
-      fetchPriority={slideIndex === 0 ? "high" : undefined}
-      loading={slideIndex === 0 ? undefined : "lazy"}
+      loading={isActive ? undefined : "lazy"}
     />
   );
 

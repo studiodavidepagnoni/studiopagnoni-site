@@ -17,7 +17,7 @@ const nextConfig: NextConfig = {
   experimental: {
     // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
     devtoolSegmentExplorer: false,
-    optimizePackageImports: ["framer-motion"],
+    optimizePackageImports: ["react", "react-dom"],
   },
   poweredByHeader: false,
   images: {

@@ -281,6 +281,55 @@ body::before {
   }
 }
 
+/* Lightbox progetti — entrata/uscita CSS (sostituisce framer-motion) */
+@media (prefers-reduced-motion: no-preference) {
+  .project-lightbox {
+    animation: project-lightbox-in 0.18s ease-out both;
+  }
+
+  .project-lightbox__bar {
+    animation: project-lightbox-bar-in 0.18s ease-out both;
+  }
+
+  .project-lightbox__stage {
+    animation: project-lightbox-stage-in 0.22s ease-out both;
+  }
+
+  .project-lightbox__strip {
+    animation: project-lightbox-bar-in 0.18s ease-out both;
+  }
+
+  .project-lightbox--exit {
+    animation: project-lightbox-out 0.18s ease-out both;
+  }
+}
+
+@keyframes project-lightbox-in {
+  from {
+    opacity: 0;
+  }
+}
+
+@keyframes project-lightbox-out {
+  to {
+    opacity: 0;
+  }
+}
+
+@keyframes project-lightbox-bar-in {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes project-lightbox-stage-in {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+}
+
 /* Card servizi home — editoriale, senza numeri/icone decorative */
 .service-card {
   position: relative;
