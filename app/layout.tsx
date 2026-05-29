@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
-import { CookieBanner } from "@/components/layout/CookieBanner";
+import { CookieBannerDeferred } from "@/components/layout/CookieBannerDeferred";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
 import { withBasePath } from "@/lib/utils/basePath";
@@ -43,7 +43,7 @@ export default function RootLayout({
         </a>
         <SiteHeader />
         <AppProviders>
-          <CookieBanner />
+          <CookieBannerDeferred />
           {children}
           <SiteFooter />
         </AppProviders>

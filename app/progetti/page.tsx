@@ -1,9 +1,9 @@
-import Image from "next/image";
 import Link from "next/link";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { progettiIndexIntro } from "@/lib/content";
 import { projectCategories } from "@/lib/content/projects";
+import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { buildPageMetadata } from "@/lib/config/seo";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
@@ -51,11 +51,10 @@ export default function ProgettiPage() {
                 className="group project-preview-card block overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]"
               >
                 <div className="relative aspect-[4/3]">
-                  <Image
-                    src={p.cover}
+                  <ProjectCoverImage
+                    cover={p.cover}
                     alt={p.alt}
-                    fill
-                    className="project-preview-card__image object-cover"
+                    className="project-preview-card__image"
                     sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                   />
                   <div className="image-unify-overlay" aria-hidden />

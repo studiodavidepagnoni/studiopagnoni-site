@@ -11,10 +11,15 @@ const nextConfig: NextConfig = {
   turbopack: {
     root: __dirname,
   },
+  compiler: {
+    removeConsole: isDev ? false : { exclude: ["error", "warn"] },
+  },
   experimental: {
     // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
     devtoolSegmentExplorer: false,
+    optimizePackageImports: ["framer-motion"],
   },
+  poweredByHeader: false,
   images: {
     // In dev, avoid Next image optimizer flakiness with remote hosts on Windows networks.
     ...(isDev ? { unoptimized: true } : {}),

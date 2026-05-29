@@ -16,7 +16,7 @@ export function HeroLcpPicture({ alt }: Props) {
         width={768}
         height={512}
         className="hero-media__image hero-media__image--lcp h-full w-full object-cover object-center"
-        decoding="async"
+        decoding="sync"
         fetchPriority="high"
         sizes="(max-width: 768px) 100vw, 768px"
       />

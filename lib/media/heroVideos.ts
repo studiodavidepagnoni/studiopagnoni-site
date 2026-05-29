@@ -1,3 +1,4 @@
+import { heroVideoBases } from "@/lib/media/assetPaths";
 import { withBasePath } from "@/lib/utils/basePath";
 import heroVideoManifest from "@/lib/media/heroVideoManifest.json";
 
@@ -39,16 +40,16 @@ function heroVideo(base: string): HeroVideoSources {
   return { mp4, webm };
 }
 
-export const HERO_VIDEO_DEFAULT_SOURCES = heroVideo("rs10-hero");
-export const HERO_VIDEO_POINTCLOUD_SOURCES = heroVideo("hero-video-2");
-export const HERO_VIDEO_INDOOR_SOURCES = heroVideo("hero-video-3");
+export const HERO_VIDEO_DEFAULT_SOURCES = heroVideo(heroVideoBases.operational);
+export const HERO_VIDEO_POINTCLOUD_SOURCES = heroVideo(heroVideoBases.pointcloud);
+export const HERO_VIDEO_INDOOR_SOURCES = heroVideo(heroVideoBases.indoor);
 
 const poster = (base: string) => withBasePath(`/assets/${base}-poster.webp`);
 
-export const HERO_POSTER_DEFAULT = poster("rs10-hero");
-export const HERO_POSTER_POINTCLOUD = poster("hero-video-2");
-export const HERO_POSTER_INDOOR = poster("hero-video-3");
+export const HERO_POSTER_DEFAULT = poster(heroVideoBases.operational);
+export const HERO_POSTER_POINTCLOUD = poster(heroVideoBases.pointcloud);
+export const HERO_POSTER_INDOOR = poster(heroVideoBases.indoor);
 
 /** Poster ~768px per LCP (placeholder + preload); il <video> usa il poster full. */
-export const HERO_POSTER_INDOOR_LCP = withBasePath("/assets/hero-video-3-poster-lcp.webp");
-export const HERO_POSTER_INDOOR_LCP_AVIF = withBasePath("/assets/hero-video-3-poster-lcp.avif");
+export const HERO_POSTER_INDOOR_LCP = withBasePath(`/assets/${heroVideoBases.indoor}-poster-lcp.webp`);
+export const HERO_POSTER_INDOOR_LCP_AVIF = withBasePath(`/assets/${heroVideoBases.indoor}-poster-lcp.avif`);

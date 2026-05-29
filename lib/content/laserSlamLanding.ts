@@ -94,15 +94,4 @@ export const laserSlamLanding = {
       a: "Sì. Sede a Cazzago San Martino (BS); programmiamo commesse in Lombardia e, per rilievi SLAM, anche nel Nord Italia.",
     },
   ] as const,
-
-  caseStudyTeaser: {
-    title: "Esempio di progetto",
-    subtitle: "Azienda vinicola — scansione 3D SLAM",
-    href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
-    steps: [
-      { label: "Campo", caption: "Acquisizione SLAM su due livelli" },
-      { label: "Nuvola", caption: "Geometria densa georiferita" },
-      { label: "Elaborati", caption: "Piante e sezioni per progetto" },
-    ],
-  },
 } as const;

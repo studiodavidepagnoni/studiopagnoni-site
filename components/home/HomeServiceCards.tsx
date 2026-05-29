@@ -1,74 +1,20 @@
-"use client";
-
-import { motion, useReducedMotion } from "framer-motion";
+import type { CSSProperties } from "react";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { HERO_EASE_OUT } from "@/lib/media/heroMotion";
 import { homeServiceCards } from "@/lib/content";
 
-const gridVariants = {
-  hidden: {},
-  visible: {
-    transition: {
-      staggerChildren: 0.2,
-      delayChildren: 0.18,
-    },
-  },
-};
-
-const cardVariants = {
-  hidden: {
-    opacity: 0,
-    y: 40,
-    scale: 0.97,
-  },
-  visible: {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    transition: {
-      duration: 1.1,
-      ease: HERO_EASE_OUT,
-      when: "beforeChildren",
-      staggerChildren: 0.1,
-    },
-  },
-};
-
-const accentVariants = {
-  hidden: { scaleX: 0, opacity: 0.15 },
-  visible: {
-    scaleX: 1,
-    opacity: 1,
-    transition: { duration: 0.95, ease: HERO_EASE_OUT, delay: 0.14 },
-  },
-};
-
-const still = { opacity: 1, y: 0, scale: 1 };
-const stillAccent = { scaleX: 1, opacity: 1 };
 const visibleServiceCards = homeServiceCards.slice(0, 4);
 
 export function HomeServiceCards() {
-  const reduced = !!useReducedMotion();
-  const item = reduced ? { hidden: still, visible: still } : cardVariants;
-  const accent = reduced ? { hidden: stillAccent, visible: stillAccent } : accentVariants;
-  const grid = reduced ? { hidden: {}, visible: {} } : gridVariants;
-
   return (
-    <motion.div
-      className="service-cards-grid grid gap-4 sm:gap-5 lg:grid-cols-2"
-      initial="hidden"
-      whileInView="visible"
-      viewport={{ once: true, amount: 0.08, margin: "0px 0px 18% 0px" }}
-      variants={grid}
-    >
-      {visibleServiceCards.map((card) => (
-        <motion.article
+    <div className="service-cards-grid grid gap-4 sm:gap-5 lg:grid-cols-2" aria-label="Schede servizi">
+      {visibleServiceCards.map((card, index) => (
+        <article
           key={card.title}
-          variants={item}
           className="service-card service-card--enter frost-card group flex flex-col p-5 sm:p-6"
+          style={{ "--service-card-delay": `${180 + index * 200}ms` } as CSSProperties}
         >
-          <motion.span className="service-card__accent-line" variants={accent} aria-hidden />
+          <span className="service-card__accent-line" aria-hidden />
           <p className={`${fontSans.className} section-kicker mb-3`}>{card.kicker}</p>
           <h3 className={`${fontDisplay.className} mb-2 text-[1.2rem] font-semibold leading-snug text-[var(--foreground)] sm:text-xl`}>
             {card.title}
@@ -86,8 +32,8 @@ export function HomeServiceCards() {
               →
             </span>
           </Link>
-        </motion.article>
+        </article>
       ))}
-    </motion.div>
+    </div>
   );
 }

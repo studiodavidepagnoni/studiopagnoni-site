@@ -17,11 +17,13 @@ const stockDir = path.join(assetsDir, "stock");
 const projectsDir = path.join(assetsDir, "projects");
 
 const WEBP_QUALITY = 80;
+const RESPONSIVE_WIDTHS = [480, 960];
+const RESPONSIVE_QUALITY = 78;
 const LCP_POSTER_W = 768;
 const LCP_POSTER_QUALITY = 68;
 const LCP_AVIF_QUALITY = 48;
 const MAX_EDGE = 1920;
-const HERO_LCP_POSTER = "hero-video-3-poster.webp";
+const HERO_LCP_POSTER = "rilievo-laser-slam-interni-brescia-poster.webp";
 const VIDEO_CRF = 30;
 const VIDEO_PRESET = "medium";
 const VIDEO_MAX_MB = 8;
@@ -29,21 +31,25 @@ const WEBM_CRF = 38;
 /** Loop hero: taglia clip oltre questa durata (secondi) — stesso effetto in carousel. */
 const VIDEO_MAX_DURATION_SEC = 18;
 const VIDEO_CRF_BY_NAME = {
-  "rs10-hero.mp4": 32,
-  "hero-video-2.mp4": 35,
+  "laser-slam-rs10-allevamento-brescia.mp4": 32,
+  "nuvola-punti-rilievo-slam-brescia.mp4": 35,
 };
 /** Sotto questa soglia (MB) il video viene ricodificato. */
 const VIDEO_TARGET_MB_BY_NAME = {
-  "hero-video-2.mp4": 2.5,
+  "nuvola-punti-rilievo-slam-brescia.mp4": 2.5,
 };
 const VIDEO_MAX_DURATION_BY_NAME = {
-  "hero-video-2.mp4": 14,
+  "nuvola-punti-rilievo-slam-brescia.mp4": 14,
 };
 const HERO_LITE_W = 1280;
 const HERO_LITE_H = 864;
 const liteCrop = `scale=${HERO_LITE_W}:${HERO_LITE_H}:force_original_aspect_ratio=increase,crop=${HERO_LITE_W}:${HERO_LITE_H}`;
 
-const HERO_VIDEOS = ["rs10-hero.mp4", "hero-video-2.mp4", "hero-video-3.mp4"];
+const HERO_VIDEOS = [
+  "laser-slam-rs10-allevamento-brescia.mp4",
+  "nuvola-punti-rilievo-slam-brescia.mp4",
+  "rilievo-laser-slam-interni-brescia.mp4",
+];
 
 function listProjectMp4s() {
   if (!fs.existsSync(projectsDir)) return [];
@@ -121,10 +127,22 @@ function videoNeedsWork(filePath) {
 function cleanOrphans(dir) {
   if (!fs.existsSync(dir)) return;
   for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-    if (!ent.isFile()) continue;
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      cleanOrphans(full);
+      continue;
+    }
     if (/\.opt\.mp4$/i.test(ent.name) || /\.frame-\d+\.jpg$/i.test(ent.name)) {
-      fs.unlinkSync(path.join(dir, ent.name));
-      console.log(`[optimize-assets] Rimosso ${path.relative(root, path.join(dir, ent.name))}`);
+      fs.unlinkSync(full);
+      console.log(`[optimize-assets] Rimosso ${path.relative(root, full)}`);
+    }
+    if (/^_crop-check/i.test(ent.name) && /\.webp$/i.test(ent.name)) {
+      try {
+        fs.unlinkSync(full);
+        console.log(`[optimize-assets] Rimosso debug ${path.relative(root, full)}`);
+      } catch (err) {
+        console.warn(`[optimize-assets] Skip debug ${path.relative(root, full)}: ${err.message}`);
+      }
     }
   }
 }
@@ -275,6 +293,67 @@ function writeVideoManifest() {
   console.log(`[optimize-assets] Manifest ${path.relative(root, out)}`);
 }
 
+async function writeResponsiveWebps(sharp, webpOut) {
+  if (!fs.existsSync(webpOut)) return;
+  const dir = path.dirname(webpOut);
+  const base = path.basename(webpOut, ".webp");
+  const meta = await sharp(webpOut).metadata();
+  if (!meta.width) return;
+
+  for (const w of RESPONSIVE_WIDTHS) {
+    if (meta.width <= w) continue;
+    const out = path.join(dir, `${base}-w${w}.webp`);
+    if (!isNewer(webpOut, out)) continue;
+    await sharp(webpOut)
+      .resize({ width: w, withoutEnlargement: true })
+      .webp({ quality: RESPONSIVE_QUALITY, effort: 4 })
+      .toFile(out);
+    const kb = Math.round(fs.statSync(out).size / 1024);
+    console.log(`[optimize-assets] WebP responsive ${path.relative(root, out)} (${kb} KB)`);
+  }
+}
+
+async function optimizeImageFile(input, seen, sharp) {
+  if (seen.has(input)) return;
+  seen.add(input);
+
+  const dir = path.dirname(input);
+  const base = path.basename(input).replace(/\.(jpe?g|png)$/i, "");
+  const webpOut = path.join(dir, `${base}.webp`);
+
+  try {
+    let pipeline = sharp(input).rotate();
+    const meta = await pipeline.metadata();
+    if (meta.width && meta.width > MAX_EDGE) {
+      pipeline = pipeline.resize({ width: MAX_EDGE, withoutEnlargement: true });
+    }
+    if (isNewer(input, webpOut)) {
+      await pipeline.clone().webp({ quality: WEBP_QUALITY, effort: 4 }).toFile(webpOut);
+      const kb = Math.round(fs.statSync(webpOut).size / 1024);
+      console.log(`[optimize-assets] WebP ${path.relative(root, webpOut)} (${kb} KB)`);
+    }
+    await writeResponsiveWebps(sharp, webpOut);
+  } catch (err) {
+    console.warn(`[optimize-assets] Skip ${path.relative(root, input)}: ${err.message}`);
+  }
+}
+
+async function walkOptimizeImages(dir, seen, sharp) {
+  if (!fs.existsSync(dir)) return;
+  for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, ent.name);
+    if (ent.isDirectory()) {
+      await walkOptimizeImages(full, seen, sharp);
+      continue;
+    }
+    if (!/\.(jpe?g|png)$/i.test(ent.name)) continue;
+    if (/^[_-]/.test(ent.name)) continue;
+    if (/-poster\.(jpe?g|png)$/i.test(ent.name)) continue;
+    if (/\.frame-\d+\.jpe?g$/i.test(ent.name)) continue;
+    await optimizeImageFile(full, seen, sharp);
+  }
+}
+
 async function optimizeImages() {
   let sharp;
   try {
@@ -284,36 +363,9 @@ async function optimizeImages() {
     return;
   }
 
-  const dirs = [stockDir, assetsDir].filter((d) => fs.existsSync(d));
   const seen = new Set();
-
-  for (const dir of dirs) {
-    for (const ent of fs.readdirSync(dir, { withFileTypes: true })) {
-      if (!ent.isFile()) continue;
-      if (!/\.(jpe?g|png)$/i.test(ent.name)) continue;
-      if (/-poster\.(jpe?g|png)$/i.test(ent.name)) continue;
-      const input = path.join(dir, ent.name);
-      if (seen.has(input)) continue;
-      seen.add(input);
-
-      const base = ent.name.replace(/\.(jpe?g|png)$/i, "");
-      const webpOut = path.join(dir, `${base}.webp`);
-
-      try {
-        let pipeline = sharp(input).rotate();
-        const meta = await pipeline.metadata();
-        if (meta.width && meta.width > MAX_EDGE) {
-          pipeline = pipeline.resize({ width: MAX_EDGE, withoutEnlargement: true });
-        }
-        if (isNewer(input, webpOut)) {
-          await pipeline.clone().webp({ quality: WEBP_QUALITY, effort: 4 }).toFile(webpOut);
-          const kb = Math.round(fs.statSync(webpOut).size / 1024);
-          console.log(`[optimize-assets] WebP ${path.relative(root, webpOut)} (${kb} KB)`);
-        }
-      } catch (err) {
-        console.warn(`[optimize-assets] Skip ${path.relative(root, input)}: ${err.message}`);
-      }
-    }
+  if (fs.existsSync(assetsDir)) {
+    await walkOptimizeImages(assetsDir, seen, sharp);
   }
 }
 

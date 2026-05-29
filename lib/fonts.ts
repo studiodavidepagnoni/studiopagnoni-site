@@ -20,7 +20,7 @@ export const fontDisplay = Sora({
   subsets: ["latin"],
   variable: "--font-display",
   display: "swap",
-  weight: ["400", "500", "600", "700"],
+  weight: ["500", "600", "700"],
   preload: true,
   adjustFontFallback: true,
 });

@@ -9,18 +9,15 @@ concurrency:
   group: ci-${{ github.workflow }}-${{ github.ref }}
   cancel-in-progress: true
 
-env:
-  FORCE_JAVASCRIPT_ACTIONS_TO_NODE24: true
-
 jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v6
         with:
           lfs: true
 
-      - uses: actions/setup-node@v4
+      - uses: actions/setup-node@v6
         with:
           node-version: "24"
           cache: npm
@@ -36,10 +33,10 @@ jobs:
       - name: Static export build
         env:
           STATIC_EXPORT: "1"
-          SKIP_VIDEO: "1"
           NEXT_PUBLIC_SITE_URL: https://www.studiotecnicopagnoni.it
           NEXT_PUBLIC_FORMSPREE_ID: e2e-ci-mock
-        run: npm run build:static
+        # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.
+        run: npm run build:static:fast
 
       - name: Install Playwright (Chromium)
         run: npx playwright install --with-deps chromium
@@ -60,7 +57,7 @@ jobs:
 
       - name: Upload Lighthouse report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: lighthouse-ci
           path: .lighthouse/ci-mobile.report.json

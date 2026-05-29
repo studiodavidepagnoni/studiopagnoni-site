@@ -1,6 +1,7 @@
 /** Path pubblici: cartella `assets/` → `public/assets/` (sync-static). */
 
 import type { HeroVideoSources } from "@/lib/media/heroVideos";
+import { projectMedia, stockImages } from "@/lib/media/assetPaths";
 import {
   HERO_POSTER_DEFAULT,
   HERO_POSTER_INDOOR,
@@ -18,8 +19,8 @@ export {
   HERO_POSTER_POINTCLOUD,
 } from "@/lib/media/heroVideos";
 
-const a = (name: string) => stockImage(name);
-const p = (relPath: string) => projectAsset(relPath);
+const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
+const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */
@@ -40,7 +41,7 @@ export type HeroSlide = {
 /** Slide hero: testo ciclico. Prima slide = messaggio commerciale SLAM / RS10. */
 export const heroSlides: readonly HeroSlide[] = [
   {
-    src: a("chi-siamo-slam-hero.jpg"),
+    src: s("slamHero"),
     alt: imageAlt("Operatore con laser scanner SLAM mobile CHCNAV RS10 sul campo", { service: "slam" }),
     line1: "Rilievi 3D con laser SLAM",
     line2: "CHCNAV RS10 · indoor e outdoor",
@@ -54,7 +55,7 @@ export const heroSlides: readonly HeroSlide[] = [
     videoObjectPosition: "center center",
   },
   {
-    src: a("pointcloud-data.jpg"),
+    src: s("pointcloud"),
     alt: imageAlt("Visualizzazione nuvola di punti da rilievo laser scanner", { service: "slam" }),
     line1: "Nuvola di punti",
     line2: "dalla scansione agli elaborati",
@@ -66,7 +67,7 @@ export const heroSlides: readonly HeroSlide[] = [
     videoObjectPosition: "68% center",
   },
   {
-    src: p("appianti/appiani.png"),
+    src: p(projectMedia.allevamento.dir, projectMedia.allevamento.cover),
     alt: imageAlt("Rilievo 3D con laser scanner SLAM in ambiente operativo", { service: "slam" }),
     line1: "Rilievi SLAM in ambienti operativi",
     line2: "as-built rapido · base metrica condivisa",
@@ -80,17 +81,17 @@ export const heroSlides: readonly HeroSlide[] = [
 
 export const homeChiSiamoImages = {
   team: {
-    src: a("chi-siamo-slam-hero.jpg"),
+    src: s("slamHero"),
     alt: imageAlt("Team in attività di rilievo laser SLAM con nuvola di punti", { service: "slam" }),
   },
   cantiere: {
-    src: a("total-station-field.jpg"),
+    src: s("totalStation"),
     alt: imageAlt("Stazione totale in cantiere per rilievo planoaltimetrico", { service: "topografia" }),
   },
 } as const;
 
 export const chiSiamoPageImage = {
-  src: a("handheld-slam-road.jpg"),
+  src: s("handheldSlam"),
   alt: imageAlt("Acquisizione SLAM handheld lungo strada di campagna", { service: "slam" }),
 } as const;
 
@@ -99,7 +100,7 @@ export const projectPreview = [
     href: "/progetti/rilievi-digitalizzazione",
     title: "Rilievi e digitalizzazione",
     caption: "Rilievi e digitalizzazione",
-    image: a("pointcloud-data.jpg"),
+    image: s("pointcloud"),
     alt: imageAlt("Elaborazione nuvola di punti e dati 3D da laser scanner", { service: "slam" }),
   },
 ] as const;

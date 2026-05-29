@@ -1,34 +1,14 @@
-import Image from "next/image";
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
-import { stockImage } from "@/lib/media/mediaPath";
+import { projectCategories } from "@/lib/content/projects";
+import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
-import { imageAlt } from "@/lib/config/seo";
 import { ui } from "@/lib/ui";
 
 const L = laserSlamLanding;
-
-const caseImages = [
-  {
-    src: stockImage("survey-instrument-field.jpg"),
-    alt: imageAlt("Strumentazione geodetica in campo per rilievo planoaltimetrico di supporto al SLAM", {
-      service: "topografia",
-    }),
-    step: L.caseStudyTeaser.steps[0],
-  },
-  {
-    src: stockImage("pointcloud-data.jpg"),
-    alt: imageAlt("Nuvola di punti georiferita del capannone — vista 3D", { service: "slam" }),
-    step: L.caseStudyTeaser.steps[1],
-  },
-  {
-    src: stockImage("design-drawings.jpg"),
-    alt: imageAlt("Piante e sezioni CAD ricavate dal rilievo SLAM", { service: "slam" }),
-    step: L.caseStudyTeaser.steps[2],
-  },
-] as const;
+const slamProjects = projectCategories["rilievi-digitalizzazione"].cases;
 
 const introCopyClass = `${fontSans.className} text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`;
 
@@ -145,37 +125,44 @@ export function LaserSlamLanding() {
             </ol>
           </section>
 
-          {/* Caso studio */}
-          <section className={ui.innerCard} aria-labelledby="slam-case">
+          {/* Progetti SLAM */}
+          <section aria-labelledby="slam-projects">
             <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
               <div>
-                <p className={`${fontSans.className} section-kicker`}>{L.caseStudyTeaser.title}</p>
-                <h2 id="slam-case" className={`${fontDisplay.className} mt-2 text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
-                  {L.caseStudyTeaser.subtitle}
+                <h2 id="slam-projects" className={`${fontDisplay.className} ${ui.sectionHeadingAccent}`}>
+                  Progetti in evidenza
                 </h2>
                 <p className={`${ui.bodyMuted} mt-3 max-w-[58ch]`}>
-                  Esempio rappresentativo (commessa anonimizzata) del flusso campo → nuvola → elaborati. Le immagini saranno aggiornate con
-                  materiali reali della commessa.
+                  Laser scanner SLAM e documentazione 3D: esempi reali di acquisizione in movimento e restituzione operativa.
                 </p>
               </div>
-              <Link href={L.caseStudyTeaser.href} className={`${ui.btnOutline} shrink-0`}>
-                Leggi il caso studio
+              <Link href="/progetti/rilievi-digitalizzazione" className={`${ui.btnOutline} shrink-0`}>
+                Tutti i progetti SLAM
               </Link>
             </div>
-            <div className="grid gap-4 sm:grid-cols-3 sm:gap-5">
-              {caseImages.map((img, i) => (
-                <figure key={img.step.label} className="overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)]">
+            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+              {slamProjects.map((proj) => (
+                <Link
+                  key={proj.slug}
+                  href={proj.href}
+                  className="group project-preview-card block overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]"
+                >
                   <div className="relative aspect-[4/3]">
-                    <Image src={img.src} alt={img.alt} fill className="object-cover" sizes="(min-width: 640px) 33vw, 100vw" />
-                    <div className="image-unify-overlay opacity-40" aria-hidden />
-                    <span
-                      className={`${fontSans.className} absolute left-3 top-3 rounded-md bg-[color-mix(in_srgb,var(--surface-chrome-deep)_75%,transparent)] px-2.5 py-1 text-[0.62rem] font-bold uppercase tracking-[0.2em] text-white`}
-                    >
-                      {String(i + 1).padStart(2, "0")} · {img.step.label}
-                    </span>
+                    <ProjectCoverImage
+                      cover={proj.cover}
+                      alt={proj.alt}
+                      className="project-preview-card__image"
+                      sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
+                    />
+                    <div className="image-unify-overlay" aria-hidden />
                   </div>
-                  <figcaption className={`${fontSans.className} p-3 text-sm text-[var(--copy-body)]`}>{img.step.caption}</figcaption>
-                </figure>
+                  <div className="border-t border-[var(--green-border-muted)] p-4 sm:p-5">
+                    <span className={`${fontDisplay.className} text-lg font-semibold leading-snug text-[var(--foreground)] sm:text-xl`}>
+                      {proj.caption}
+                    </span>
+                    <span className={`${fontSans.className} mt-2 block text-sm font-medium text-[var(--copy-body)]`}>Scheda →</span>
+                  </div>
+                </Link>
               ))}
             </div>
           </section>

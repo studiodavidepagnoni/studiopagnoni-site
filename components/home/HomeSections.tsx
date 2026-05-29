@@ -14,11 +14,13 @@ import {
   zoneFooter,
 } from "@/lib/content";
 import { homeChiSiamoImages } from "@/lib/media/images";
+import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { featuredProjects } from "@/lib/content/projects";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
-import { HomeServiceCards, StatsSection } from "@/components/home/HomeClientBlocks";
+import { HomeServiceCards } from "@/components/home/HomeServiceCards";
+import { StatsSection } from "@/components/home/HomeClientBlocks";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
 
@@ -207,14 +209,11 @@ export function HomeSections() {
                 className={`group block ${ui.cardMedia}`}
               >
                 <div className="relative aspect-[4/3]">
-                  <Image
-                    src={p.cover}
+                  <ProjectCoverImage
+                    cover={p.cover}
                     alt={p.alt}
-                    fill
-                    className="object-cover transition duration-500 group-hover:scale-[1.015]"
+                    className="transition duration-500 group-hover:scale-[1.015]"
                     sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
-                    loading="lazy"
-                    decoding="async"
                   />
                   <div className="image-unify-overlay opacity-56 group-hover:opacity-42" aria-hidden />
                 </div>

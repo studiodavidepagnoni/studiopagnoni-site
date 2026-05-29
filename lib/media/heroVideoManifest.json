@@ -1,19 +1,19 @@
 {
-  "rs10-hero": {
+  "laser-slam-rs10-allevamento-brescia": {
     "order": [
       "mp4"
     ],
-    "mp4Bytes": 4354512,
+    "mp4Bytes": 3815432,
     "webmBytes": 0
   },
-  "hero-video-2": {
+  "nuvola-punti-rilievo-slam-brescia": {
     "order": [
       "mp4"
     ],
-    "mp4Bytes": 1770890,
+    "mp4Bytes": 1495010,
     "webmBytes": 0
   },
-  "hero-video-3": {
+  "rilievo-laser-slam-interni-brescia": {
     "order": [
       "webm",
       "mp4"

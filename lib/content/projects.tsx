@@ -1,9 +1,12 @@
 import type { ReactNode } from "react";
 import { VideoFigure } from "@/components/content/VideoFigure";
-import { projectAsset } from "@/lib/media/mediaPath";
+import { projectMedia } from "@/lib/media/assetPaths";
+import { projectAsset, projectVideoAsset } from "@/lib/media/mediaPath";
 import { ui } from "@/lib/ui";
 
-const p = (relPath: string) => projectAsset(relPath);
+const { allevamento: all, cantina: vin, terreno: ter } = projectMedia;
+const cover = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
+const video = (dir: string, base: string, ext: "mp4" | "webm") => projectVideoAsset(dir, base, ext);
 
 export const projectAreas = ["rilievi-digitalizzazione"] as const;
 export type ProjectArea = (typeof projectAreas)[number];
@@ -64,7 +67,7 @@ export const projectCategories: Record<
         slug: "allevamento-appianti-slam",
         title: "Allevamento — rilievo 3D SLAM (Appianti)",
         caption: "Allevamento · SLAM",
-        cover: p("appianti/appiani.png"),
+        cover: cover(all.dir, all.cover),
         alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
         href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
       },
@@ -72,7 +75,7 @@ export const projectCategories: Record<
         slug: "cantina-franciacorta-slam",
         title: "Azienda vinicola — rilievo 3D SLAM",
         caption: "Azienda vinicola · SLAM",
-        cover: p("azienda-vinicola/azienda-vinicola.png"),
+        cover: cover(vin.dir, vin.cover),
         alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
         href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
@@ -80,7 +83,7 @@ export const projectCategories: Record<
         slug: "rilievo-terreno-maddalena-brescia",
         title: "Terreno - Rilievo SLAM",
         caption: "Terreno · SLAM",
-        cover: p("terreno/terreno.png"),
+        cover: cover(ter.dir, ter.cover),
         alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
         href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
       },
@@ -96,7 +99,7 @@ export const featuredProjects: FeaturedProject[] = [
     area: "rilievi-digitalizzazione",
     slug: "cantina-franciacorta-slam",
     caption: "Azienda vinicola in Franciacorta — SLAM",
-    cover: p("azienda-vinicola/azienda-vinicola.png"),
+    cover: cover(vin.dir, vin.cover),
     alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
     href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     label: "Laser SLAM",
@@ -105,7 +108,7 @@ export const featuredProjects: FeaturedProject[] = [
     area: "rilievi-digitalizzazione",
     slug: "rilievo-terreno-maddalena-brescia",
     caption: "Terreno — rilievo SLAM",
-    cover: p("terreno/terreno.png"),
+    cover: cover(ter.dir, ter.cover),
     alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
     href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
     label: "Territorio",
@@ -114,7 +117,7 @@ export const featuredProjects: FeaturedProject[] = [
     area: "rilievi-digitalizzazione",
     slug: "allevamento-appianti-slam",
     caption: "Allevamento — rilievo 3D SLAM",
-    cover: p("appianti/appiani.png"),
+    cover: cover(all.dir, all.cover),
     alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
     href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
     label: "Laser SLAM",
@@ -150,8 +153,8 @@ export const projectCaseStudies: Record<
           interventi e verifiche. Il video in pagina mostra una traccia di scansione 3D acquisita in movimento.
         </p>
         <VideoFigure
-          mp4={p("appianti/appiani-registrazione.mp4")}
-          webm={p("appianti/appiani-registrazione.webm")}
+          mp4={video(all.dir, all.video, "mp4")}
+          webm={video(all.dir, all.video, "webm")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
@@ -160,7 +163,7 @@ export const projectCaseStudies: Record<
         </p>
       </>
     ),
-    gallery: [{ src: p("appianti/appiani.png"), alt: "Anteprima rilievo 3D SLAM — ambiente di allevamento" }],
+    gallery: [{ src: cover(all.dir, all.cover), alt: "Anteprima rilievo 3D SLAM — ambiente di allevamento" }],
   },
   "rilievi-digitalizzazione/cantina-franciacorta-slam": {
     metaTitle: "Azienda vinicola — rilievo 3D SLAM in Franciacorta",
@@ -178,8 +181,8 @@ export const projectCaseStudies: Record<
           Il rilievo è stato svolto presso una delle realtà vinicole più importanti del territorio della <strong>Franciacorta</strong>.
         </p>
         <VideoFigure
-          mp4={p("azienda-vinicola/azienda-vinicola.cropped.mp4")}
-          webm={p("azienda-vinicola/azienda-vinicola.cropped.webm")}
+          mp4={video(vin.dir, vin.video, "mp4")}
+          webm={video(vin.dir, vin.video, "webm")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
           videoClassName="relative z-10 h-full w-full object-cover object-[center_60%] pointer-events-auto"
         />
@@ -189,7 +192,7 @@ export const projectCaseStudies: Record<
       </>
     ),
     gallery: [
-      { src: p("azienda-vinicola/azienda-vinicola.png"), alt: "Rilievo 3D SLAM — azienda vinicola in Franciacorta (anteprima)" },
+      { src: cover(vin.dir, vin.cover), alt: "Rilievo 3D SLAM — azienda vinicola in Franciacorta (anteprima)" },
     ],
   },
   "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": {
@@ -208,8 +211,8 @@ export const projectCaseStudies: Record<
           (sezioni, curve di livello, tavole di progetto) e con eventuali controlli topografici.
         </p>
         <VideoFigure
-          mp4={p("terreno/terreno.mp4")}
-          webm={p("terreno/terreno.webm")}
+          mp4={video(ter.dir, ter.video, "mp4")}
+          webm={video(ter.dir, ter.video, "webm")}
           className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
@@ -217,7 +220,7 @@ export const projectCaseStudies: Record<
         </p>
       </>
     ),
-    gallery: [{ src: p("terreno/terreno.png"), alt: "Anteprima rilievo 3D di terreno — Brescia, Maddalena" }],
+    gallery: [{ src: cover(ter.dir, ter.cover), alt: "Anteprima rilievo 3D di terreno — Brescia, Maddalena" }],
   },
 };
 

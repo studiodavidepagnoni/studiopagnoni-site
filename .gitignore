@@ -19,6 +19,7 @@
 # asset pipeline temporanei
 **/*.opt.mp4
 **/.rs10-hero.mp4.opt.mp4
+**/_crop-check*
 
 # lighthouse audit locale
 .lighthouse/

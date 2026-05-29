@@ -57,7 +57,7 @@ export const seoKeywords = {
 export const seoAreaServed =
   "Franciacorta, provincia di Brescia, Cazzago San Martino (BS), Lombardia e Nord Italia";
 
-const ogImagePath = "/assets/stock/pointcloud-data.webp";
+const ogImagePath = "/assets/stock/nuvola-punti-rilievo-laser-scanner.webp";
 
 function absoluteUrl(path: string): string {
   const base = site.url.replace(/\/$/, "");
