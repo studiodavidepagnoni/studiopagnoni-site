@@ -29,6 +29,7 @@
     "lighthouse:ci": "node scripts/lighthouse-ci.cjs"
   },
   "dependencies": {
+    "framer-motion": "^12.23.24",
     "next": "15.5.18",
     "react": "19.1.0",
     "react-dom": "19.1.0"

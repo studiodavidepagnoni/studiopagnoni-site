@@ -13,7 +13,7 @@ const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => 
 
 /**
  * Mobile/tablet: poster AVIF/WebP statico (zero bundle hero).
- * Desktop: carousel+video solo dopo interazione o fallback idle tardivo.
+ * Desktop: poster ~0.5s per LCP, poi carousel; interazione anticipa il caricamento.
  */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
@@ -29,7 +29,7 @@ export function HeroHomeDeferred() {
       setEnhance(true);
     };
 
-    const cancelIdle = scheduleIdle(load, 10_000);
+    const cancelIdle = scheduleIdle(load, 500);
 
     const onPointer = () => load();
     const onScroll = () => {

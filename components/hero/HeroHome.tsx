@@ -64,6 +64,9 @@ export function HeroHome() {
     const unlock = () => setVideoUnlocked(true);
     const root = heroRootRef.current;
 
+    // Poster già mostrato ~0.5s da HeroHomeDeferred; avvia subito il video.
+    const autoId = window.requestAnimationFrame(unlock);
+
     root?.addEventListener("pointerdown", unlock, { once: true, passive: true });
     root?.addEventListener("keydown", unlock, { once: true });
     const onScroll = () => {
@@ -72,6 +75,7 @@ export function HeroHome() {
     window.addEventListener("scroll", onScroll, { once: true, passive: true });
 
     return () => {
+      window.cancelAnimationFrame(autoId);
       root?.removeEventListener("pointerdown", unlock);
       root?.removeEventListener("keydown", unlock);
       window.removeEventListener("scroll", onScroll);
