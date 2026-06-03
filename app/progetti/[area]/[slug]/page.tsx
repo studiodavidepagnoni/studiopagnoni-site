@@ -85,7 +85,7 @@ export default async function ProjectCasePage({ params }: Props) {
               </div>
             </article>
 
-            {cs.gallery.length > 1 ? <ProjectImageLightbox images={cs.gallery} className="mt-10" /> : null}
+            {cs.gallery.length > 0 ? <ProjectImageLightbox images={cs.gallery} className="mt-10" /> : null}
           </div>
         </div>
       </div>

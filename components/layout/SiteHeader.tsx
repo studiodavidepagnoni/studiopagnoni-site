@@ -413,15 +413,15 @@ export function SiteHeader() {
         </div>
       </nav>
 
-      <button
-        type="button"
-        aria-label="Chiudi menu"
-        tabIndex={-1}
-        className={`fixed inset-0 z-[998] touch-manipulation bg-[rgba(2,8,7,0.54)] motion-safe:transition-opacity motion-safe:duration-200 motion-reduce:transition-none md:hidden ${
-          open ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-        onClick={() => setOpen(false)}
-      />
+      {open ? (
+        <button
+          type="button"
+          aria-label="Chiudi menu"
+          tabIndex={-1}
+          className="fixed inset-0 z-[998] touch-manipulation bg-[rgba(2,8,7,0.54)] motion-safe:transition-opacity motion-safe:duration-200 motion-reduce:transition-none md:hidden opacity-100"
+          onClick={() => setOpen(false)}
+        />
+      ) : null}
     </>
   );
 }

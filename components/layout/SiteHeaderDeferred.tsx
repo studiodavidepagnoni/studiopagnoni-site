@@ -2,8 +2,10 @@
 
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
-import { HERO_VIDEO_MEDIA_QUERY } from "@/lib/utils/useClientMedia";
 import { scheduleIdle } from "@/lib/utils/scheduleIdle";
+
+/** Header interattivo solo da tablet/desktop — non usare hover (in CI headless è sempre true). */
+const DESKTOP_HEADER_MEDIA_QUERY = "(min-width: 768px)";
 
 const SiteHeader = dynamic(
   () => import("@/components/layout/SiteHeader").then((m) => ({ default: m.SiteHeader })),
@@ -15,10 +17,13 @@ export function SiteHeaderDeferred() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
-    const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY);
+    const desktop = window.matchMedia(DESKTOP_HEADER_MEDIA_QUERY);
     if (!desktop.matches) return;
 
-    return scheduleIdle(() => setReady(true), 3500);
+    return scheduleIdle(() => {
+      if (!window.matchMedia(DESKTOP_HEADER_MEDIA_QUERY).matches) return;
+      setReady(true);
+    }, 3500);
   }, []);
 
   useEffect(() => {

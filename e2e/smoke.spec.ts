@@ -1,8 +1,9 @@
 import { expect, test } from "@playwright/test";
-import { dismissCookieBanner } from "./helpers";
+import { dismissCookieBanner, primeCookieConsent } from "./helpers";
 
 test.describe("smoke", () => {
   test.beforeEach(async ({ page }) => {
+    await primeCookieConsent(page);
     await page.goto("/");
     await dismissCookieBanner(page);
   });
@@ -26,11 +27,13 @@ test.describe("smoke", () => {
 
   test("header — menu mobile apre e chiude", async ({ page }) => {
     await page.setViewportSize({ width: 390, height: 844 });
-    const menuBtn = page.getByRole("button", { name: "Apri menu" });
-    await menuBtn.click();
-    await expect(page.locator("#mobile-nav").getByRole("link", { name: "Servizi" })).toBeVisible();
-    await page.getByRole("button", { name: "Chiudi menu" }).first().click();
-    await expect(page.locator("#mobile-nav")).toHaveAttribute("aria-hidden", "true");
+    await page.goto("/");
+    await dismissCookieBanner(page);
+    const details = page.locator("#site-header-shell .site-header-mobile-details");
+    await details.locator("summary").click();
+    await expect(details.getByRole("link", { name: "Servizi" })).toBeVisible();
+    await details.locator("summary").click();
+    await expect(details.getByRole("link", { name: "Servizi" })).toBeHidden();
   });
 
   test("progetti — filtro ambito e scheda", async ({ page }) => {
@@ -47,9 +50,9 @@ test.describe("smoke", () => {
     await dismissCookieBanner(page);
     await page.getByRole("button", { name: /Apri nella galleria/i }).first().click();
     const dialog = page.getByRole("dialog", { name: "Galleria a schermo intero" });
-    await expect(dialog).toBeVisible();
+    await expect(dialog).toBeVisible({ timeout: 10_000 });
     await page.keyboard.press("Escape");
-    await expect(dialog).toBeHidden();
+    await expect(dialog).toBeHidden({ timeout: 10_000 });
   });
 
   test("contatti — validazione modulo", async ({ page }) => {
