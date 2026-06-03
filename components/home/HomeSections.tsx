@@ -27,17 +27,17 @@ const titleCls = `${fontDisplay.className} section-title home-section-title reve
 
 const processSteps = [
   {
-    step: "01",
+    kicker: "Acquisizione",
     title: "SLAM in movimento",
     body: "Acquisizione continua in spazi complessi: corridoi, impianti, volumi densi.",
   },
   {
-    step: "02",
+    kicker: "Controllo metrico",
     title: "GNSS e rete",
     body: "Georeferenziazione RTK e controlli planoaltimetrici con tolleranze definite.",
   },
   {
-    step: "03",
+    kicker: "Consegna",
     title: "Elaborati",
     body: "Nuvola di punti, sezioni, CAD/BIM e tavole pronte per cantiere e committente.",
   },
@@ -202,30 +202,36 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{homeProgettiIntro}</p>
           </div>
-          <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-6">
-            {featuredProjects.slice(0, 3).map((p) => (
+          <div className="home-projects-mosaic">
+            {featuredProjects.slice(0, 3).map((p, index) => (
               <Link
                 key={p.href}
                 href={p.href}
-                className={`group block ${ui.cardMedia}`}
+                className={`group block w-full min-w-0 overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] ${index === 0 ? "home-projects-mosaic__lead" : "home-projects-mosaic__item"}`}
               >
-                <div className="relative aspect-[4/3]">
+                <div className="home-projects-mosaic__media">
                   <ProjectCoverImage
                     cover={p.cover}
                     alt={p.alt}
-                    className="transition duration-500 group-hover:scale-[1.015]"
-                    sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
+                    className="h-full w-full transition duration-500 group-hover:scale-[1.015]"
+                    sizes={
+                      index === 0
+                        ? "(min-width:1024px) min(760px, 66vw), (min-width:640px) min(90vw, 720px), min(100vw, 560px)"
+                        : "(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
+                    }
                   />
                   <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
                 </div>
-                <div className="border-t border-[var(--green-border-muted)] p-4 sm:p-4">
+                <div className="home-projects-mosaic__body">
                   <span className={`${fontSans.className} text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>
                     {p.label}
                   </span>
-                  <span className={`${fontDisplay.className} mt-1.5 block text-base font-semibold leading-snug text-[var(--foreground)] sm:text-lg`}>
+                  <span
+                    className={`${fontDisplay.className} home-projects-mosaic__caption mt-1 block font-semibold text-[var(--foreground)]`}
+                  >
                     {p.caption}
                   </span>
-                  <span className={`${fontSans.className} mt-1.5 block text-xs font-medium text-[var(--copy-body)]`}>Apri →</span>
+                  <span className={`${fontSans.className} mt-1 block text-[0.7rem] font-medium text-[var(--copy-body)]`}>Apri →</span>
                 </div>
               </Link>
             ))}
@@ -249,13 +255,11 @@ export function HomeSections() {
               Tre passaggi ricorrenti nei rilievi digitali: acquisizione rapida, controllo metrico, consegna in formati operativi.
             </p>
           </div>
-          <ul className="mt-8 grid list-none gap-4 sm:grid-cols-3 sm:gap-5">
+          <ul className="home-process-rail mt-8">
             {processSteps.map((s) => (
-              <li
-                key={s.step}
-                className="home-process-step reveal-block flex flex-col rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:p-6"
-              >
-                <span className={`${fontSans.className} home-process-step__num font-bold tabular-nums`}>{s.step}</span>
+              <li key={s.kicker} className="home-process-rail__item reveal-block">
+                <span className="home-process-rail__marker" aria-hidden />
+                <p className={`${fontSans.className} section-kicker`}>{s.kicker}</p>
                 <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>{s.title}</h3>
                 <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{s.body}</p>
               </li>
@@ -273,14 +277,14 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{certificationsIntro}</p>
           </div>
-          <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-2 lg:grid-cols-4">
+          <ul className="home-certs-list">
             {certifications.map((c) => (
-              <article key={c.title} className="reveal-block bg-[var(--card)] p-5 sm:p-6">
-                <h3 className={`${fontDisplay.className} mb-2 text-base font-medium text-[var(--foreground)] sm:text-lg`}>{c.title}</h3>
+              <li key={c.title} className="home-certs-list__item reveal-block">
+                <h3 className="home-certs-list__title">{c.title}</h3>
                 <p className="text-[0.88rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.92rem]">{c.text}</p>
-              </article>
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
       </section>
 
@@ -293,9 +297,9 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <div className="home-section-intro__lede max-w-[52ch]">{zoneDescription}</div>
           </div>
-          <div className="reveal-block flex flex-col gap-5 rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:flex-row sm:items-start sm:gap-6 sm:p-6">
-            <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)] sm:h-14 sm:w-14">
-              <IconMapPin className="h-6 w-6 sm:h-7 sm:w-7" />
+          <div className="home-territory-band reveal-block">
+            <div className="home-territory-band__icon" aria-hidden>
+              <IconMapPin className="h-7 w-7 sm:h-8 sm:w-8" />
             </div>
             <div className="min-w-0">
               <h3 className={`${fontDisplay.className} text-lg font-medium text-[var(--foreground)] sm:text-xl`}>{zoneContent.heading}</h3>
@@ -316,8 +320,8 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{contattiIntro}</p>
           </div>
-          <div className="grid gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-3">
-            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+          <div className="home-contact-rail">
+            <article className="home-contact-rail__item reveal-block">
               <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <IconEmail />
               </div>
@@ -329,7 +333,7 @@ export function HomeSections() {
                 {site.email}
               </a>
             </article>
-            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+            <article className="home-contact-rail__item reveal-block">
               <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <IconPhone />
               </div>
@@ -348,7 +352,7 @@ export function HomeSections() {
                 ))}
               </ul>
             </article>
-            <article className="reveal-block flex flex-col bg-[var(--card)] p-5 text-center sm:p-6">
+            <article className="home-contact-rail__item reveal-block">
               <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
                 <IconMapPin />
               </div>

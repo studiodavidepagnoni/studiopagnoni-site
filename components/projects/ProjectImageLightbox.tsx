@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { isIosSafari } from "@/lib/utils/isIosSafari";
 import { usePrefersReducedMotion } from "@/lib/utils/useClientMedia";
 
 const ProjectLightboxDialog = dynamic(
@@ -25,6 +26,9 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
   const [phase, setPhase] = useState<"opening" | "open" | "closing">("opening");
   const reducedMotion = usePrefersReducedMotion();
   const lightboxTouchX = useRef<number | null>(null);
+  const lightboxTouchY = useRef<number | null>(null);
+  const lightboxDidSwipe = useRef(false);
+  const iosSafariRef = useRef(false);
   const filmstripRef = useRef<HTMLDivElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
@@ -59,6 +63,10 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
   }, []);
 
   useEffect(() => {
+    iosSafariRef.current = isIosSafari();
+  }, []);
+
+  useEffect(() => {
     if (open === null) return;
     setRenderedOpen(open);
     setPhase(reducedMotion ? "open" : "opening");
@@ -66,7 +74,11 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
     const id = requestAnimationFrame(() => {
       requestAnimationFrame(() => setPhase("open"));
     });
-    return () => cancelAnimationFrame(id);
+    const fallback = window.setTimeout(() => setPhase((p) => (p === "opening" ? "open" : p)), 80);
+    return () => {
+      cancelAnimationFrame(id);
+      window.clearTimeout(fallback);
+    };
   }, [open, reducedMotion]);
 
   const finishClose = useCallback(() => {
@@ -88,7 +100,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
       finishClose();
       return;
     }
-    const t = window.setTimeout(finishClose, 220);
+    const t = window.setTimeout(finishClose, iosSafariRef.current ? 280 : 220);
     return () => window.clearTimeout(t);
   }, [open, phase, reducedMotion, finishClose]);
 
@@ -146,16 +158,25 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
     lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
     scrollYRef.current = window.scrollY;
 
+    const root = document.documentElement;
     const bodyStyle = document.body.style;
+    const prevScrollVar = bodyStyle.getPropertyValue("--lightbox-scroll-y");
     const prevBodyOverflow = bodyStyle.overflow;
     const prevBodyPosition = bodyStyle.position;
     const prevBodyTop = bodyStyle.top;
     const prevBodyWidth = bodyStyle.width;
+    const prevBodyTouchAction = bodyStyle.touchAction;
 
+    root.classList.add("lightbox-open");
+    bodyStyle.setProperty("--lightbox-scroll-y", `-${scrollYRef.current}px`);
     bodyStyle.overflow = "hidden";
-    bodyStyle.position = "fixed";
-    bodyStyle.top = `-${scrollYRef.current}px`;
-    bodyStyle.width = "100%";
+    bodyStyle.touchAction = "none";
+
+    if (!iosSafariRef.current) {
+      bodyStyle.position = "fixed";
+      bodyStyle.top = `-${scrollYRef.current}px`;
+      bodyStyle.width = "100%";
+    }
 
     const inerted: HTMLElement[] = [];
     if (portalNode) {
@@ -178,10 +199,14 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
         el.removeAttribute("aria-hidden");
       }
 
+      root.classList.remove("lightbox-open");
+      if (prevScrollVar) bodyStyle.setProperty("--lightbox-scroll-y", prevScrollVar);
+      else bodyStyle.removeProperty("--lightbox-scroll-y");
       bodyStyle.overflow = prevBodyOverflow;
       bodyStyle.position = prevBodyPosition;
       bodyStyle.top = prevBodyTop;
       bodyStyle.width = prevBodyWidth;
+      bodyStyle.touchAction = prevBodyTouchAction;
 
       window.scrollTo({ top: scrollYRef.current, behavior: "auto" });
       lastFocusedRef.current?.focus();
@@ -193,19 +218,41 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
     const el = filmstripRef.current;
     const activeIndex = open ?? renderedOpen;
     const thumb = el.children[activeIndex] as HTMLElement | undefined;
-    thumb?.scrollIntoView({ behavior: "smooth", inline: "center", block: "nearest" });
-  }, [renderedOpen, open]);
+    thumb?.scrollIntoView({
+      behavior: iosSafariRef.current || reducedMotion ? "auto" : "smooth",
+      inline: "center",
+      block: "nearest",
+    });
+  }, [renderedOpen, open, reducedMotion]);
 
   const onLightboxTouchStart = (e: React.TouchEvent) => {
-    lightboxTouchX.current = e.touches[0]?.clientX ?? null;
+    const t = e.touches[0];
+    lightboxTouchX.current = t?.clientX ?? null;
+    lightboxTouchY.current = t?.clientY ?? null;
+    lightboxDidSwipe.current = false;
   };
 
   const onLightboxTouchEnd = (e: React.TouchEvent) => {
-    if (lightboxTouchX.current === null || images.length < 2) return;
-    const dx = e.changedTouches[0].clientX - lightboxTouchX.current;
+    if (lightboxTouchX.current === null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - lightboxTouchX.current;
+    const dy = t.clientY - (lightboxTouchY.current ?? t.clientY);
     lightboxTouchX.current = null;
-    if (Math.abs(dx) < 48) return;
-    go(dx < 0 ? 1 : -1);
+    lightboxTouchY.current = null;
+    if (images.length < 2) return;
+    if (Math.abs(dx) >= 48 && Math.abs(dx) > Math.abs(dy) * 1.15) {
+      lightboxDidSwipe.current = true;
+      go(dx < 0 ? 1 : -1);
+    }
+  };
+
+  const onBackdropClick = (e: React.MouseEvent<HTMLDivElement>) => {
+    if (e.target !== e.currentTarget) return;
+    if (lightboxDidSwipe.current) {
+      lightboxDidSwipe.current = false;
+      return;
+    }
+    close();
   };
 
   if (images.length === 0) return null;
@@ -226,6 +273,7 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
           setOpen(i);
           setRenderedOpen(i);
         }}
+        onBackdropClick={onBackdropClick}
         onBackdropTransitionEnd={onBackdropTransitionEnd}
         onTouchStart={onLightboxTouchStart}
         onTouchEnd={onLightboxTouchEnd}

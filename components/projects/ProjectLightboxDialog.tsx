@@ -12,6 +12,7 @@ type Props = {
   dialogRef: React.RefObject<HTMLDivElement | null>;
   filmstripRef: React.RefObject<HTMLDivElement | null>;
   onClose: () => void;
+  onBackdropClick: (e: React.MouseEvent<HTMLDivElement>) => void;
   onGo: (delta: number) => void;
   onSelect: (index: number) => void;
   onBackdropTransitionEnd: (e: React.TransitionEvent<HTMLDivElement>) => void;
@@ -28,6 +29,7 @@ export function ProjectLightboxDialog({
   dialogRef,
   filmstripRef,
   onClose,
+  onBackdropClick,
   onGo,
   onSelect,
   onBackdropTransitionEnd,
@@ -40,12 +42,12 @@ export function ProjectLightboxDialog({
     <div
       ref={dialogRef}
       id="project-lightbox-dialog"
-      className={`project-lightbox-dialog fixed inset-0 z-[10050] flex h-dvh w-screen cursor-zoom-out flex-col overflow-hidden bg-[color-mix(in_srgb,var(--surface-chrome)_94%,transparent)] backdrop-blur-xl ${phaseClass}`}
+      className={`project-lightbox-dialog fixed inset-0 z-[10050] flex w-screen cursor-zoom-out flex-col overflow-hidden bg-[color-mix(in_srgb,var(--surface-chrome)_94%,transparent)] backdrop-blur-xl ${phaseClass}`}
       role="dialog"
       aria-modal="true"
       aria-label="Galleria a schermo intero"
       tabIndex={-1}
-      onClick={onClose}
+      onClick={onBackdropClick}
       onTransitionEnd={onBackdropTransitionEnd}
       onTouchStart={onTouchStart}
       onTouchEnd={onTouchEnd}
@@ -97,13 +99,7 @@ export function ProjectLightboxDialog({
               </>
             ) : null}
 
-            <div
-              className="relative mx-auto w-full max-w-[1100px] overflow-hidden rounded-xl border border-[var(--green-border-muted)] bg-black/20"
-              style={{
-                height: "min(680px, calc(100dvh - 13rem))",
-                maxHeight: "min(680px, calc(100dvh - 13rem))",
-              }}
-            >
+            <div className="project-lightbox-dialog__stage relative mx-auto w-full max-w-[1100px] overflow-hidden rounded-xl border border-[var(--green-border-muted)] bg-black/20">
               <Image
                 src={images[activeIndex].src}
                 alt={images[activeIndex].alt}

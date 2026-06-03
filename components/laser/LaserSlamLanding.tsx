@@ -140,27 +140,25 @@ export function LaserSlamLanding() {
                 Tutti i progetti SLAM
               </Link>
             </div>
-            <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3 lg:gap-8">
+            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-5">
               {slamProjects.map((proj) => (
                 <Link
                   key={proj.slug}
                   href={proj.href}
                   className="group project-preview-card block overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]"
                 >
-                  <div className="relative aspect-[4/3]">
+                  <div className="project-preview-card__media">
                     <ProjectCoverImage
                       cover={proj.cover}
                       alt={proj.alt}
                       className="project-preview-card__image"
-                      sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
+                      sizes="(min-width:1024px) min(300px, 28vw), (min-width:640px) min(45vw, 480px), min(100vw, 520px)"
                     />
                     <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
                   </div>
-                  <div className="border-t border-[var(--green-border-muted)] p-4 sm:p-5">
-                    <span className={`${fontDisplay.className} text-lg font-semibold leading-snug text-[var(--foreground)] sm:text-xl`}>
-                      {proj.caption}
-                    </span>
-                    <span className={`${fontSans.className} mt-2 block text-sm font-medium text-[var(--copy-body)]`}>Scheda →</span>
+                  <div className="project-preview-card__body">
+                    <span className="project-preview-card__title">{proj.caption}</span>
+                    <span className={`${fontSans.className} project-preview-card__cta`}>Scheda →</span>
                   </div>
                 </Link>
               ))}

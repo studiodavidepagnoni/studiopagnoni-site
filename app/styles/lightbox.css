@@ -1,7 +1,36 @@
-/* Lightbox progetti — CSS (no framer-motion) */
+/* Lightbox progetti — CSS (no framer-motion), hardened per iOS Safari */
+
+html.lightbox-open {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+html.lightbox-open body {
+  overflow: hidden;
+  overscroll-behavior: none;
+}
+
+@supports (-webkit-touch-callout: none) {
+  html.lightbox-open body {
+    position: fixed;
+    width: 100%;
+    top: var(--lightbox-scroll-y, 0);
+    touch-action: none;
+  }
+}
+
 .project-lightbox-dialog {
   opacity: 0;
+  isolation: isolate;
+  overscroll-behavior: none;
+  touch-action: manipulation;
+  -webkit-overflow-scrolling: touch;
+  transform: translateZ(0);
   transition: opacity 0.18s ease-out;
+  /* dvh + fallback iOS */
+  height: 100vh;
+  height: 100dvh;
+  min-height: -webkit-fill-available;
 }
 
 .project-lightbox-dialog.is-open {
@@ -12,11 +41,20 @@
   opacity: 0;
 }
 
+/* Su iOS: niente backdrop-blur (paint jank) — sfondo pieno */
+@supports (-webkit-touch-callout: none) {
+  .project-lightbox-dialog {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: var(--surface-chrome-deep);
+  }
+}
+
 .project-lightbox-dialog__panel,
 .project-lightbox-dialog__toolbar,
 .project-lightbox-dialog__strip {
   opacity: 0;
-  transform: translateY(8px);
+  transform: translate3d(0, 8px, 0);
   transition:
     opacity 0.18s ease-out,
     transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
@@ -26,7 +64,34 @@
 .project-lightbox-dialog.is-open .project-lightbox-dialog__panel,
 .project-lightbox-dialog.is-open .project-lightbox-dialog__strip {
   opacity: 1;
-  transform: translateY(0);
+  transform: translate3d(0, 0, 0);
+}
+
+@supports (-webkit-touch-callout: none) {
+  .project-lightbox-dialog__panel,
+  .project-lightbox-dialog__toolbar,
+  .project-lightbox-dialog__strip {
+    transform: none;
+    transition: opacity 0.14s ease-out;
+  }
+
+  .project-lightbox-dialog.is-open .project-lightbox-dialog__toolbar,
+  .project-lightbox-dialog.is-open .project-lightbox-dialog__panel,
+  .project-lightbox-dialog.is-open .project-lightbox-dialog__strip {
+    transform: none;
+  }
+}
+
+.project-lightbox-dialog__stage {
+  height: min(680px, calc(100dvh - 13rem));
+  max-height: min(680px, calc(100dvh - 13rem));
+}
+
+@supports (-webkit-touch-callout: none) {
+  .project-lightbox-dialog__stage {
+    height: min(62vh, calc(100dvh - 11.5rem));
+    max-height: min(62vh, calc(100dvh - 11.5rem));
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {

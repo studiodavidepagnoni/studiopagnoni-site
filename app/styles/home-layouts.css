@@ -1,0 +1,231 @@
+/* ─── Home: varianti layout (rompe il ritmo card-on-card) ─── */
+
+/* Progetti — hero a tutta larghezza, due card sotto (compatte) */
+.home-projects-mosaic {
+  display: grid;
+  gap: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .home-projects-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 0.875rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-projects-mosaic {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    max-width: 920px;
+    margin-inline: auto;
+  }
+
+  .home-projects-mosaic__lead {
+    grid-column: 1 / -1;
+  }
+
+  .home-projects-mosaic__lead .home-projects-mosaic__media {
+    height: 12.5rem;
+  }
+}
+
+/* Niente linea separatore sotto la sezione progetti (evita striscia scura a fine blocco) */
+#progetti.section-shell::after {
+  display: none;
+}
+
+.home-projects-mosaic__media {
+  position: relative;
+  width: 100%;
+  height: 10.5rem;
+  overflow: hidden;
+}
+
+.home-projects-mosaic__body {
+  border-top: 1px solid var(--green-border-muted);
+  padding: 0.75rem 0.875rem;
+}
+
+.home-projects-mosaic__lead .home-projects-mosaic__body {
+  padding: 0.8rem 0.95rem;
+}
+
+.home-projects-mosaic__caption {
+  font-size: 0.9375rem;
+  line-height: 1.35;
+}
+
+@media (min-width: 640px) {
+  .home-projects-mosaic__caption {
+    font-size: 1rem;
+  }
+
+  .home-projects-mosaic__lead .home-projects-mosaic__caption {
+    font-size: 1.0625rem;
+  }
+
+  .home-projects-mosaic__media {
+    height: 11rem;
+  }
+
+  .home-projects-mosaic__lead .home-projects-mosaic__media {
+    height: 12rem;
+  }
+}
+
+/* Processo — rail orizzontale, meno “card box” */
+.home-process-rail {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  border: 1px solid var(--green-border-muted);
+  border-radius: 0.75rem;
+  overflow: hidden;
+}
+
+@media (min-width: 640px) {
+  .home-process-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.home-process-rail__item {
+  position: relative;
+  padding: 1.35rem 1.25rem 1.5rem;
+  background: var(--card);
+}
+
+@media (min-width: 640px) {
+  .home-process-rail__item:not(:last-child) {
+    border-right: 1px solid var(--green-border-muted);
+  }
+
+  .home-process-rail__item::after {
+    display: none;
+  }
+}
+
+.home-process-rail__item:not(:last-child) {
+  border-bottom: 1px solid var(--green-border-muted);
+}
+
+.home-process-rail__marker {
+  display: block;
+  width: 2.25rem;
+  height: 2px;
+  margin-bottom: 0.85rem;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    var(--primary-mid) 0%,
+    color-mix(in srgb, var(--primary-mid) 35%, transparent) 100%
+  );
+}
+
+/* Certificazioni — elenco editoriale, non griglia card */
+.home-certs-list {
+  display: grid;
+  gap: 0;
+  list-style: none;
+  border-top: 1px solid var(--green-border-muted);
+}
+
+.home-certs-list__item {
+  display: grid;
+  gap: 0.5rem;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--green-border-muted);
+}
+
+@media (min-width: 768px) {
+  .home-certs-list__item {
+    grid-template-columns: minmax(10rem, 0.38fr) minmax(0, 1fr);
+    gap: 2rem;
+    align-items: baseline;
+    padding: 1.25rem 0;
+  }
+}
+
+.home-certs-list__title {
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--foreground);
+}
+
+@media (min-width: 768px) {
+  .home-certs-list__title {
+    font-size: 1.05rem;
+  }
+}
+
+/* Territorio — banda citazione */
+.home-territory-band {
+  display: grid;
+  gap: 1.25rem;
+  padding: clamp(1.5rem, 4vw, 2.25rem);
+  border-radius: 0.75rem;
+  border: 1px solid var(--green-border-muted);
+  background:
+    linear-gradient(135deg, color-mix(in srgb, var(--primary-mid) 7%, var(--card)) 0%, var(--card) 48%),
+    var(--card);
+}
+
+@media (min-width: 640px) {
+  .home-territory-band {
+    grid-template-columns: auto minmax(0, 1fr);
+    align-items: start;
+    gap: 1.75rem;
+  }
+}
+
+.home-territory-band__icon {
+  display: flex;
+  height: 3.5rem;
+  width: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  border: 1px solid color-mix(in srgb, var(--primary-mid) 35%, var(--green-border-muted));
+  background: color-mix(in srgb, var(--primary-mid) 10%, var(--muted));
+  color: var(--primary-mid);
+}
+
+@media (min-width: 640px) {
+  .home-territory-band__icon {
+    height: 4rem;
+    width: 4rem;
+  }
+}
+
+/* Contatti — rail con separatori, non tre box */
+.home-contact-rail {
+  display: grid;
+  gap: 0;
+  border: 1px solid var(--green-border-muted);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  background: var(--card);
+}
+
+@media (min-width: 640px) {
+  .home-contact-rail {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+
+.home-contact-rail__item {
+  padding: 1.35rem 1.25rem;
+  text-align: center;
+}
+
+@media (min-width: 640px) {
+  .home-contact-rail__item:not(:last-child) {
+    border-right: 1px solid var(--green-border-muted);
+  }
+}
+
+.home-contact-rail__item:not(:last-child) {
+  border-bottom: 1px solid var(--green-border-muted);
+}
