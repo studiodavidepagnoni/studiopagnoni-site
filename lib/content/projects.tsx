@@ -224,6 +224,31 @@ export const projectCaseStudies: Record<
   },
 };
 
+export type ProjectArchiveEntry = ProjectCasePreview & {
+  area: ProjectArea;
+  areaLabel: string;
+};
+
+export const projectAreaNav = [
+  { id: "all" as const, label: "Tutti" },
+  ...projectAreas.map((area) => ({
+    id: area,
+    label: projectCategories[area].heading,
+  })),
+] as const;
+
+export type ProjectAreaFilter = (typeof projectAreaNav)[number]["id"];
+
+export function listArchivedProjects(): ProjectArchiveEntry[] {
+  return projectAreas.flatMap((area) =>
+    projectCategories[area].cases.map((c) => ({
+      ...c,
+      area,
+      areaLabel: projectCategories[area].heading,
+    })),
+  );
+}
+
 export function getCaseStudyKey(area: ProjectArea, slug: string): CaseStudyKey | null {
   const k = `${area}/${slug}` as CaseStudyKey;
   return k in projectCaseStudies ? k : null;

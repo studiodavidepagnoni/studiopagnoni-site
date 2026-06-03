@@ -1,0 +1,180 @@
+.frost-card {
+  border: 1px solid var(--green-border-muted);
+  background: var(--card);
+  border-radius: 0.5rem;
+  box-shadow: 0 18px 40px rgba(0, 0, 0, 0.12);
+}
+
+
+/* Card servizi home — entrata stagger (sostituisce framer-motion, allineato a ScrollReveal) */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready #servizi.lazy-section:not(.is-revealed) .service-card--enter {
+    opacity: 0;
+    transform: translateY(40px) scale(0.97);
+  }
+
+  html.reveal-ready #servizi.lazy-section.is-revealed .service-card--enter {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 1.1s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 1.1s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--service-card-delay, 0ms);
+  }
+
+  html.reveal-ready #servizi.lazy-section.is-revealed .service-card--enter .service-card__accent-line {
+    transform: scaleX(0);
+    opacity: 0.15;
+    animation: service-card-accent-in 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    animation-delay: calc(var(--service-card-delay, 0ms) + 140ms);
+  }
+}
+
+@keyframes service-card-accent-in {
+  to {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+}
+
+/* Card servizi home — editoriale, senza numeri/icone decorative */
+.service-card {
+  position: relative;
+  overflow: hidden;
+  border-top: 2px solid color-mix(in srgb, var(--primary-mid) 42%, var(--green-border-muted));
+  transition:
+    border-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    border-top-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Entrata card servizi home — linea mint che si disegna in cima */
+.service-card--enter .service-card__accent-line {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 3px;
+  width: 100%;
+  transform-origin: left center;
+  background: linear-gradient(
+    90deg,
+    var(--primary-mid) 0%,
+    color-mix(in srgb, var(--primary-mid) 72%, transparent) 78%,
+    transparent 100%
+  );
+  box-shadow:
+    0 0 22px color-mix(in srgb, var(--primary-mid) 48%, transparent),
+    0 1px 0 color-mix(in srgb, var(--primary-mid) 28%, transparent);
+  pointer-events: none;
+}
+
+
+.service-card::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  border-radius: 0 1px 1px 0;
+  background: transparent;
+  transition: background 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* Card progetti — hover allineato a service-card / view transitions */
+.project-preview-card {
+  transition:
+    border-color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.32s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-preview-card__image {
+  transition: transform 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+.service-card__cta {
+  text-decoration: none;
+}
+
+.service-card__cta:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--primary-mid) 55%, transparent);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* microtypography rhythm system */
+.reading-measure {
+  max-width: 68ch;
+}
+
+.reading-measure-tight {
+  max-width: 56ch;
+}
+
+.copy-rhythm {
+  line-height: 1.78;
+  letter-spacing: 0.002em;
+}
+
+.eyebrow {
+  font-size: 0.74rem;
+  letter-spacing: 0.26em;
+  text-transform: uppercase;
+  font-weight: 600;
+}
+
+.section-title {
+  line-height: 1.08;
+  letter-spacing: -0.028em;
+  font-family: var(--font-display), system-ui, sans-serif;
+}
+
+/* Titolo senza descrizione affiancata (Chi siamo, Statistiche) */
+.home-section-head {
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.home-section-title {
+  font-size: clamp(1.85rem, 1.2rem + 1.6vw, 2.75rem);
+  line-height: 1.08;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  text-wrap: balance;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-feature-settings: "liga" 1, "kern" 1;
+}
+
+.home-section-rule {
+  width: 3rem;
+  height: 1px;
+  margin-top: 1rem;
+  background: color-mix(in srgb, var(--primary-mid) 42%, transparent);
+}
+
+.home-section-rule--on-dark {
+  width: 4rem;
+  background: color-mix(in srgb, var(--header-text-muted) 55%, transparent);
+}
+
+.section-kicker {
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.7rem;
+  font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-brand);
+}
+
+/* Card cliccabili — hover unificato */
+.interactive-card {
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* CTA primario — segnale mint on-brand (stesso filo di nav accent + service-card) */

@@ -3,20 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { homeStats, type HomeStat } from "@/lib/content";
-
-function usePrefersReducedMotion() {
-  const [reduced, setReduced] = useState(false);
-
-  useEffect(() => {
-    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(mq.matches);
-    update();
-    mq.addEventListener("change", update);
-    return () => mq.removeEventListener("change", update);
-  }, []);
-
-  return reduced;
-}
+import { usePrefersReducedMotion } from "@/lib/utils/useClientMedia";
 
 function useInViewOnce<T extends Element>(margin = "-80px") {
   const ref = useRef<T | null>(null);
@@ -126,7 +113,7 @@ export function StatsSection() {
   return (
     <section
       ref={ref}
-      className="surface-inverted lazy-section overflow-x-hidden border-y border-[var(--green-border-muted)] px-4 py-12 sm:px-5 sm:py-16 md:px-10"
+      className="home-section-break surface-inverted lazy-section overflow-x-hidden border-y border-[var(--green-border-muted)] px-4 py-14 sm:px-5 sm:py-20 md:px-10"
       aria-labelledby="stats-heading"
     >
       <div className="mx-auto max-w-[1140px]">

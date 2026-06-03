@@ -1,0 +1,299 @@
+.site-brand-title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: normal;
+  color: var(--brand-title);
+  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.42);
+  transition: color 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease;
+}
+
+.site-brand-tagline {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.site-footer-copyright {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
+}
+
+.site-footer-bar {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.625rem;
+  padding-block: 1.25rem;
+  text-align: center;
+}
+
+.site-footer-bar__copyright {
+  font-size: 0.75rem;
+  line-height: 1.5;
+  max-width: 36rem;
+}
+
+.site-footer-bar__tagline {
+  font-size: 0.75rem;
+}
+
+@media (min-width: 640px) {
+  .site-footer-bar {
+    flex-direction: row;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-block: 1.5rem;
+    text-align: left;
+  }
+
+  .site-footer-bar__copyright {
+    font-size: 0.78rem;
+    flex: 1 1 auto;
+    min-width: 0;
+  }
+
+  .site-footer-bar__tagline {
+    flex: 0 0 auto;
+    font-size: 0.8rem;
+    text-align: right;
+  }
+}
+
+.contact-form-feedback {
+  border-radius: 0.75rem;
+  border-width: 1px;
+  border-style: solid;
+  padding: 1rem 1.125rem;
+}
+
+.contact-form-feedback--success {
+  border-color: color-mix(in srgb, var(--primary-mid) 45%, transparent);
+  background: color-mix(in srgb, var(--primary-mid) 12%, var(--muted));
+}
+
+.contact-form-feedback--error {
+  border-color: color-mix(in srgb, #b91c1c 55%, transparent);
+  background: color-mix(in srgb, #fef2f2 88%, var(--muted));
+}
+
+.contact-form-feedback__title {
+  font-size: 1.05rem;
+  font-weight: 700;
+  line-height: 1.35;
+  color: var(--foreground);
+}
+
+.contact-form-feedback--success .contact-form-feedback__title {
+  color: var(--primary-mid);
+}
+
+.contact-form-feedback--error .contact-form-feedback__title {
+  color: #991b1b;
+}
+
+.contact-form-feedback__body {
+  margin-top: 0.35rem;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--copy-body);
+}
+
+.contact-form-feedback--error .contact-form-feedback__body a {
+  color: #991b1b;
+}
+
+/* Etichette ambiti — stesso mint della tagline logo (Topografia · Architettura · SLAM) */
+.progetti-area-label {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
+}
+
+.site-brand-tagline__sep {
+  color: var(--brand-mark-tint);
+  font-weight: 700;
+  opacity: 0.72;
+}
+
+.site-brand-mark {
+  filter: brightness(3.15) contrast(1.22) saturate(1.48)
+    drop-shadow(0 0 12px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
+    drop-shadow(0 0 26px var(--brand-glow));
+  transition: filter 0.22s ease;
+}
+
+/* Icona su sezioni chiare (es. Chi siamo home): verde più profondo, senza glow mint da header */
+.site-brand-mark--on-light {
+  filter: brightness(0.92) contrast(1.32) saturate(1.72) hue-rotate(-6deg)
+    drop-shadow(0 3px 14px color-mix(in srgb, var(--primary-mid) 26%, transparent));
+}
+
+a:focus-visible .site-brand-title {
+  color: #ffffff;
+  text-shadow: 0 0 20px var(--brand-glow-strong), 0 1px 12px rgba(0, 0, 0, 0.35);
+}
+
+a:focus-visible .site-brand-tagline,
+a:focus-visible .site-brand-tagline__sep {
+  color: var(--header-nav-hover);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--header-nav-hover) 55%, transparent);
+}
+
+a:focus-visible .site-brand-mark {
+  filter: brightness(3.35) contrast(1.26) saturate(1.55)
+    drop-shadow(0 0 16px color-mix(in srgb, var(--brand-mark-tint) 62%, transparent))
+    drop-shadow(0 0 30px var(--brand-glow-strong));
+}
+
+/* Lockup testuale (icona + titolo nav + tagline colore marchio) */
+.site-brand-lockup__title {
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: var(--foreground);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.site-brand-lockup__tagline,
+.site-brand-lockup__tagline .site-brand-lockup__sep {
+  font-weight: 700;
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 18px color-mix(in srgb, var(--brand-mark-tint) 40%, transparent);
+  transition: color 0.2s ease, text-shadow 0.2s ease;
+}
+
+.site-brand-lockup:focus-visible .site-brand-lockup__title {
+  color: var(--foreground);
+}
+
+.site-brand-lockup:focus-visible .site-brand-lockup__tagline,
+.site-brand-lockup:focus-visible .site-brand-lockup__sep {
+  color: var(--brand-mark-tint);
+  text-shadow: 0 0 22px color-mix(in srgb, var(--brand-mark-tint) 52%, transparent);
+}
+
+/* Menu header — allineato al bordo destro colonna 1140px (card home) */
+.site-header-nav {
+  margin-inline-start: auto;
+}
+
+.site-header-nav__list {
+  margin-inline-end: 0;
+  column-gap: 0.125rem;
+}
+
+@media (min-width: 768px) {
+  .site-header-nav .site-nav-link--header {
+    padding-inline: 0.7rem;
+  }
+
+  .site-header-nav .site-nav-link--last {
+    padding-inline-end: 0;
+  }
+
+  .site-header-nav .site-nav-link--last::after {
+    right: 0;
+    left: 0.7rem;
+  }
+}
+
+/* Menu principale — hover/active (pattern DS: colore mint + underline animata) */
+.site-nav-link {
+  position: relative;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  transition:
+    color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    text-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    background-color 0.22s ease,
+    border-color 0.22s ease;
+}
+
+.site-nav-link--header:hover,
+.site-nav-link--header:focus-visible {
+  transform: translateY(-1px);
+}
+
+.site-nav-link::after {
+  content: "";
+  position: absolute;
+  left: 0.75rem;
+  right: 0.75rem;
+  bottom: 0.28rem;
+  height: 2px;
+  border-radius: 999px;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--header-nav-hover) 35%, transparent),
+    var(--header-nav-line),
+    color-mix(in srgb, var(--header-nav-hover) 35%, transparent)
+  );
+  box-shadow: 0 0 14px var(--header-nav-glow);
+  transform: scaleX(0);
+  transform-origin: left center;
+  opacity: 0;
+  transition:
+    transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
+    opacity 0.28s ease,
+    box-shadow 0.28s ease;
+}
+
+.site-nav-link:focus-visible {
+  color: var(--header-nav-hover);
+  text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
+}
+
+.site-nav-link:focus-visible::after,
+.site-nav-link--active::after {
+  transform: scaleX(1);
+  opacity: 1;
+  box-shadow: 0 0 18px var(--header-nav-glow);
+}
+
+.site-nav-link--active {
+  color: var(--header-nav-active);
+  text-shadow: 0 0 10px color-mix(in srgb, var(--header-nav-glow) 45%, transparent);
+}
+
+.site-nav-link:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--header-nav-hover) 65%, transparent);
+  outline-offset: 3px;
+}
+
+.site-nav-link--mobile {
+  border-left: 3px solid transparent;
+  margin-left: -3px;
+  padding-left: calc(0.75rem + 3px);
+  border-radius: 0 0.25rem 0.25rem 0;
+}
+
+.site-nav-link--mobile::after {
+  display: none;
+}
+
+.site-nav-link--mobile:focus-visible,
+.site-nav-link--mobile.site-nav-link--active {
+  border-left-color: var(--header-nav-line);
+  background: color-mix(in srgb, var(--header-nav-hover) 7%, transparent);
+  text-shadow: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .site-nav-link--header:hover,
+  .site-nav-link--header:focus-visible {
+    transform: none;
+  }
+
+  .site-nav-link::after {
+    transition: opacity 0.15s ease;
+    transform: none;
+  }
+
+  .site-nav-link:focus-visible::after,
+  .site-nav-link--active::after {
+    transform: none;
+  }
+}
+
+/* Intro sezione: colonna unica (titolo + regola + lede), niente split tipo “agency” */

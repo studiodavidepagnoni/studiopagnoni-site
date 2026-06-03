@@ -76,7 +76,7 @@ export default async function ProjectAreaPage({ params }: Props) {
                     className="project-preview-card__image"
                     sizes="(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                   />
-                  <div className="image-unify-overlay" aria-hidden />
+                  <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
                 </div>
                 <div className="border-t border-[var(--green-border-muted)] p-4 sm:p-5">
                   <span className={`${fontDisplay.className} text-lg font-semibold leading-snug text-[var(--foreground)] sm:text-xl`}>{p.caption}</span>

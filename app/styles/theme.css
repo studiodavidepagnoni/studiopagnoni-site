@@ -1,0 +1,103 @@
+.theme-site {
+  --background: #f7f6f1;
+  --foreground: #0c100e;
+  /* Chrome scuro = stesso tono footer (non teal più chiaro). */
+  --header-surface: var(--surface-chrome);
+  --header-surface-scrolled: var(--surface-chrome-deep);
+  --header-border: #1a3d36;
+  --header-menu-surface: var(--surface-chrome-deep);
+  --header-control-bg: color-mix(in srgb, var(--header-accent) 12%, var(--surface-chrome));
+  --primary: var(--header-surface);
+  --primary-dark: var(--surface-chrome-deep);
+  --primary-mid: #0d635c;
+  --card: #ffffff;
+  --muted: #ecebe5;
+  --elevated: #ffffff;
+  --green-soft: var(--muted);
+  --green-border: #b8c2bc;
+  --green-border-muted: #dfe3de;
+  --green-ink-muted: #4f5c56;
+  --accent-brand: var(--primary-mid);
+  --accent-warm: var(--accent-brand);
+  --accent-warm-strong: var(--primary-mid-strong);
+  --accent-soft: color-mix(in srgb, var(--accent-brand) 10%, transparent);
+  --cta-primary-fill: var(--primary-mid);
+  --cta-primary-fill-hover: #0f756c;
+  --cta-primary-text: var(--on-primary);
+  --cta-primary-border: color-mix(in srgb, var(--primary-mid) 45%, var(--green-border));
+  --cta-primary-shadow:
+    0 1px 0 color-mix(in srgb, white 22%, transparent) inset,
+    0 4px 14px color-mix(in srgb, var(--primary-mid) 22%, transparent);
+  --cta-primary-shadow-hover:
+    0 1px 0 color-mix(in srgb, white 26%, transparent) inset,
+    0 10px 26px color-mix(in srgb, var(--primary-mid) 28%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--primary-mid) 18%, transparent);
+  --cta-primary-bg: var(--cta-primary-fill);
+  --cta-primary-bg-hover: var(--cta-primary-fill-hover);
+  --cta-hero-text: var(--cta-primary-text);
+  --cta-hero-edge: var(--cta-primary-border);
+  --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 5%, var(--card));
+  --copy-body: #2f3a35;
+  --green-ink-muted: #44524c;
+  --on-primary: #f4faf7;
+  --on-primary-hover: #04100e;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.theme-site ::selection {
+  background: var(--primary-soft-22);
+  color: #04100e;
+}
+
+/* Neutralizza il backdrop a gradienti scuri pensato per il :root dark */
+.theme-site::before {
+  background: none;
+}
+
+/* Isole scure nella variante chiara — stesso mint leggibile del chrome (no cyan diverso) */
+.theme-site .surface-inverted {
+  --background: var(--surface-chrome-mid);
+  --foreground: #eef2ef;
+  --card: var(--surface-chrome-raised);
+  --muted: var(--surface-chrome);
+  --elevated: var(--surface-chrome-high);
+  --green-border: #1e3f38;
+  --green-border-muted: #152e29;
+  --green-ink-muted: #8a9a93;
+  --copy-body: #b4bdb8;
+  --primary: #123a34;
+  --primary-mid: #9fc7bb;
+  --primary-mid-strong: #b8d8cf;
+  --accent-brand: var(--primary-mid);
+  --accent-warm: var(--accent-brand);
+  --accent-warm-strong: var(--accent-brand-strong);
+  --cta-primary-fill: var(--header-nav-hover);
+  --cta-primary-fill-hover: var(--header-nav-active);
+  --cta-primary-text: #04110f;
+  --cta-primary-border: color-mix(in srgb, var(--header-nav-hover) 36%, var(--green-border));
+  --cta-primary-bg: var(--cta-primary-fill);
+  --cta-primary-bg-hover: var(--cta-primary-fill-hover);
+  --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 8%, var(--card));
+  --on-primary: #f4faf7;
+  --on-primary-hover: #04100e;
+  background: var(--background);
+  color: var(--foreground);
+}
+
+.theme-site .surface-inverted .section-kicker {
+  color: color-mix(in srgb, var(--header-nav-hover) 78%, var(--primary-mid-strong));
+}
+
+.theme-site .surface-inverted .home-section-rule {
+  background: color-mix(in srgb, var(--primary-mid) 48%, transparent);
+}
+
+.theme-site .btn-cta-primary::before {
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, white 38%, transparent) 0%,
+    color-mix(in srgb, white 12%, transparent) 68%,
+    transparent 100%
+  );
+}

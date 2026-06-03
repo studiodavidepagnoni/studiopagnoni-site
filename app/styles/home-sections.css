@@ -1,0 +1,161 @@
+.home-section-intro {
+  margin-bottom: clamp(2rem, 3.5vw, 3rem);
+}
+
+.home-section-intro__lede {
+  margin-top: clamp(1rem, 2vw, 1.35rem);
+  max-width: 62ch;
+  font-size: 0.98rem;
+  line-height: 1.75;
+  letter-spacing: 0.006em;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-section-intro__lede {
+    font-size: 1.05rem;
+    line-height: 1.78;
+  }
+}
+
+.home-section-body {
+  color: var(--copy-body);
+}
+
+.home-section-prose {
+  font-size: 0.98rem;
+  line-height: 1.75;
+  letter-spacing: 0.008em;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-section-prose {
+    font-size: 1.05rem;
+    line-height: 1.78;
+  }
+}
+
+.home-section-subtitle {
+  font-size: clamp(1.12rem, 0.95rem + 0.55vw, 1.45rem);
+  line-height: 1.22;
+  letter-spacing: 0.038em;
+  color: var(--primary-mid);
+  margin-bottom: 0.65rem;
+}
+
+.home-section-title--inverted {
+  color: #f8fafc;
+}
+
+.home-section-muted {
+  font-size: 0.82rem;
+  line-height: 1.65;
+  color: var(--green-ink-muted);
+}
+
+@media (min-width: 640px) {
+  .home-section-muted {
+    font-size: 0.9rem;
+  }
+}
+
+.fine-divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--green-border) 72%, transparent), transparent);
+}
+
+.image-unify-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-to));
+  mix-blend-mode: normal;
+}
+
+.image-unify-overlay--subtle {
+  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-subtle-to));
+}
+
+.image-unify-overlay--editorial {
+  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-editorial-to));
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .group:hover .image-unify-overlay--editorial {
+    background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-hover-to));
+  }
+}
+
+/* ─── touch-target: WCAG 2.2 minimum 44×44px ─── */
+.touch-target {
+  position: relative;
+}
+.touch-target::after {
+  content: "";
+  position: absolute;
+  inset: -6px -8px;
+  min-width: 44px;
+  min-height: 44px;
+}
+
+@media (max-width: 767px) {
+  .section-shell {
+    padding-top: var(--section-space-y-mobile);
+    padding-bottom: var(--section-space-y-mobile);
+  }
+
+  .copy-rhythm {
+    line-height: 1.68;
+    font-size: clamp(0.94rem, 3.5vw, 1rem);
+  }
+
+  .section-title {
+    letter-spacing: -0.018em;
+  }
+
+  .home-section-title {
+    letter-spacing: -0.022em;
+    overflow-wrap: anywhere;
+    text-wrap: balance;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+
+  .hero-title {
+    overflow-wrap: anywhere;
+    hyphens: auto;
+    -webkit-hyphens: auto;
+  }
+}
+
+/* ─── 430px and below: tighter rhythm ─── */
+@media (max-width: 430px) {
+  :root {
+    --section-space-y-mobile: 3.25rem;
+  }
+
+  .section-shell::after {
+    width: calc(100% - 2rem);
+  }
+
+  .frost-card {
+    box-shadow: none;
+  }
+}
+
+/* ─── 360px: ultra-compact ─── */
+@media (max-width: 360px) {
+  :root {
+    --section-space-y-mobile: 2.75rem;
+  }
+
+  .eyebrow {
+    font-size: 0.68rem;
+    letter-spacing: 0.22em;
+  }
+}
+
+/* ─── View Transitions (navigazione interna; bridge JS + browser support) ─── */

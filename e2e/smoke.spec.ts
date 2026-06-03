@@ -24,6 +24,41 @@ test.describe("smoke", () => {
     await expect(page.getByRole("button", { name: "Invia messaggio" })).toBeVisible();
   });
 
+  test("header — menu mobile apre e chiude", async ({ page }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    const menuBtn = page.getByRole("button", { name: "Apri menu" });
+    await menuBtn.click();
+    await expect(page.locator("#mobile-nav").getByRole("link", { name: "Servizi" })).toBeVisible();
+    await page.getByRole("button", { name: "Chiudi menu" }).first().click();
+    await expect(page.locator("#mobile-nav")).toHaveAttribute("aria-hidden", "true");
+  });
+
+  test("progetti — filtro ambito e scheda", async ({ page }) => {
+    await page.goto("/progetti/");
+    await dismissCookieBanner(page);
+    await expect(page.getByRole("navigation", { name: /Filtra progetti per ambito/i })).toBeVisible();
+    await expect(page.getByRole("button", { name: "Tutti", pressed: true })).toBeVisible();
+    await page.getByRole("link", { name: /Azienda vinicola/i }).first().click();
+    await expect(page.locator("#main-content")).toBeVisible();
+  });
+
+  test("progetto — galleria lightbox", async ({ page }) => {
+    await page.goto("/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam/");
+    await dismissCookieBanner(page);
+    await page.getByRole("button", { name: /Apri nella galleria/i }).first().click();
+    const dialog = page.getByRole("dialog", { name: "Galleria a schermo intero" });
+    await expect(dialog).toBeVisible();
+    await page.keyboard.press("Escape");
+    await expect(dialog).toBeHidden();
+  });
+
+  test("contatti — validazione modulo", async ({ page }) => {
+    await page.goto("/contatti/");
+    await dismissCookieBanner(page);
+    await page.getByRole("button", { name: "Invia messaggio" }).click();
+    await expect(page.getByText(/Inserisci nome e cognome|Email non valida|Messaggio troppo breve|Accetta la privacy/i).first()).toBeVisible();
+  });
+
   test("contatti — invio modulo (Formspree mock)", async ({ page }) => {
     await page.route("https://formspree.io/f/**", async (route) => {
       await route.fulfill({

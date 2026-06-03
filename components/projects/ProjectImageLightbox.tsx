@@ -4,6 +4,7 @@ import dynamic from "next/dynamic";
 import Image from "next/image";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
+import { usePrefersReducedMotion } from "@/lib/utils/useClientMedia";
 
 const ProjectLightboxDialog = dynamic(
   () => import("@/components/projects/ProjectLightboxDialog").then((m) => ({ default: m.ProjectLightboxDialog })),
@@ -21,13 +22,18 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
   const [open, setOpen] = useState<number | null>(null);
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
   const [renderedOpen, setRenderedOpen] = useState<number | null>(null);
+  const [phase, setPhase] = useState<"opening" | "open" | "closing">("opening");
+  const reducedMotion = usePrefersReducedMotion();
   const lightboxTouchX = useRef<number | null>(null);
   const filmstripRef = useRef<HTMLDivElement | null>(null);
   const dialogRef = useRef<HTMLDivElement | null>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
   const scrollYRef = useRef(0);
 
-  const close = useCallback(() => setOpen(null), []);
+  const close = useCallback(() => {
+    setPhase("closing");
+    setOpen(null);
+  }, []);
 
   const go = useCallback(
     (delta: number) => {
@@ -53,8 +59,38 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
   }, []);
 
   useEffect(() => {
-    if (open !== null) setRenderedOpen(open);
-  }, [open]);
+    if (open === null) return;
+    setRenderedOpen(open);
+    setPhase(reducedMotion ? "open" : "opening");
+    if (reducedMotion) return;
+    const id = requestAnimationFrame(() => {
+      requestAnimationFrame(() => setPhase("open"));
+    });
+    return () => cancelAnimationFrame(id);
+  }, [open, reducedMotion]);
+
+  const finishClose = useCallback(() => {
+    setRenderedOpen(null);
+    setPhase("opening");
+  }, []);
+
+  const onBackdropTransitionEnd = useCallback(
+    (e: React.TransitionEvent<HTMLDivElement>) => {
+      if (phase !== "closing" || e.target !== dialogRef.current || e.propertyName !== "opacity") return;
+      finishClose();
+    },
+    [phase, finishClose],
+  );
+
+  useEffect(() => {
+    if (open !== null || phase !== "closing") return;
+    if (reducedMotion) {
+      finishClose();
+      return;
+    }
+    const t = window.setTimeout(finishClose, 220);
+    return () => window.clearTimeout(t);
+  }, [open, phase, reducedMotion, finishClose]);
 
   useEffect(() => {
     if (renderedOpen === null) return;
@@ -180,14 +216,17 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
     renderedOpen !== null && activeIndex !== null ? (
       <ProjectLightboxDialog
         images={images}
-        open={open}
         activeIndex={activeIndex}
+        phase={phase}
         dialogRef={dialogRef}
         filmstripRef={filmstripRef}
         onClose={close}
         onGo={go}
-        onSelect={setOpen}
-        onExitComplete={() => setRenderedOpen(null)}
+        onSelect={(i) => {
+          setOpen(i);
+          setRenderedOpen(i);
+        }}
+        onBackdropTransitionEnd={onBackdropTransitionEnd}
         onTouchStart={onLightboxTouchStart}
         onTouchEnd={onLightboxTouchEnd}
       />

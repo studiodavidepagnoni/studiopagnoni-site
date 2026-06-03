@@ -36,7 +36,7 @@ export default function ChiSiamoPage() {
                     sizes="(min-width:768px) min(440px, 40vw), min(100vw, 720px)"
                     priority
                   />
-                  <div className="image-unify-overlay" aria-hidden />
+                  <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 </div>
               </div>
             </div>

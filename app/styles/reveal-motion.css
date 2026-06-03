@@ -1,0 +1,227 @@
+@media (prefers-reduced-motion: no-preference) {
+  @supports (view-transition-name: none) {
+    ::view-transition-old(root) {
+      animation: vt-root-out 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+    ::view-transition-new(root) {
+      animation: vt-root-in 0.36s cubic-bezier(0.22, 1, 0.36, 1) both;
+    }
+  }
+}
+
+@keyframes vt-root-out {
+  from {
+    opacity: 1;
+  }
+  to {
+    opacity: 0.86;
+  }
+}
+
+@keyframes vt-root-in {
+  from {
+    opacity: 0.88;
+    transform: translateY(5px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation: none !important;
+  }
+}
+
+/* ─── Hover solo pointer fine (evita stato bloccato su touch) ─── */
+@media (hover: hover) and (pointer: fine) {
+  .frost-card:hover,
+  .interactive-card:hover {
+    border-color: var(--interactive-hover-border);
+    background: var(--interactive-hover-bg);
+    box-shadow: var(--interactive-hover-shadow);
+  }
+
+  .service-card:hover {
+    border-top-color: var(--interactive-hover-border);
+    border-color: var(--interactive-hover-border);
+    background: var(--interactive-hover-bg);
+    box-shadow: var(--interactive-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .project-preview-card:hover {
+    border-color: var(--interactive-hover-border);
+    box-shadow: var(--interactive-hover-shadow);
+    transform: translateY(-2px);
+  }
+
+  .project-preview-card:hover .project-preview-card__image {
+    transform: scale(1.02);
+  }
+
+  .service-card:hover::before {
+    background: linear-gradient(
+      180deg,
+      var(--primary-mid) 0%,
+      color-mix(in srgb, var(--primary-mid) 35%, transparent) 100%
+    );
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .service-card--enter:hover {
+      box-shadow:
+        0 14px 36px color-mix(in srgb, var(--primary) 14%, transparent),
+        0 0 0 1px color-mix(in srgb, var(--primary-mid) 12%, transparent);
+    }
+  }
+
+  a:hover .site-brand-title {
+    color: #ffffff;
+    text-shadow: 0 0 20px var(--brand-glow-strong), 0 1px 12px rgba(0, 0, 0, 0.35);
+  }
+
+  a:hover .site-brand-tagline,
+  a:hover .site-brand-tagline__sep {
+    color: var(--header-nav-hover);
+    text-shadow: 0 0 22px color-mix(in srgb, var(--header-nav-hover) 55%, transparent);
+  }
+
+  a:hover .site-brand-mark {
+    filter: brightness(3.35) contrast(1.26) saturate(1.55)
+      drop-shadow(0 0 16px color-mix(in srgb, var(--brand-mark-tint) 62%, transparent))
+      drop-shadow(0 0 30px var(--brand-glow-strong));
+  }
+
+  .site-brand-lockup:hover .site-brand-lockup__title {
+    color: var(--foreground);
+  }
+
+  .site-brand-lockup:hover .site-brand-lockup__tagline,
+  .site-brand-lockup:hover .site-brand-lockup__sep {
+    color: var(--brand-mark-tint);
+    text-shadow: 0 0 22px color-mix(in srgb, var(--brand-mark-tint) 52%, transparent);
+  }
+
+  .site-nav-link--header:hover {
+    color: var(--header-nav-hover);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
+  }
+
+  .site-nav-link--header:hover::after {
+    transform: scaleX(1);
+    opacity: 1;
+    box-shadow: 0 0 18px var(--header-nav-glow);
+  }
+
+  .site-nav-link--mobile:hover {
+    border-left-color: var(--header-nav-line);
+    background: color-mix(in srgb, var(--header-nav-hover) 7%, transparent);
+    text-shadow: none;
+  }
+
+  .site-footer-nav-link:hover {
+    color: var(--header-nav-hover);
+    text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
+  }
+}
+
+/* ─── Reveal al scroll (stato solo su section + is-revealed sui figli post-hydration) ─── */
+@media (prefers-reduced-motion: no-preference) {
+  html.reveal-ready section.lazy-section:not(.is-revealed) :is(.reveal-title, .reveal-block):not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) :is(.reveal-title, .reveal-block):not(.is-revealed) {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+
+  html.reveal-ready section.lazy-section:not(.is-revealed) .reveal-faint:not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) .reveal-faint:not(.is-revealed) {
+    opacity: 0.82;
+    transform: none;
+  }
+
+  html.reveal-ready section.lazy-section:not(.is-revealed) .reveal-block-solid:not(.is-revealed),
+  html.reveal-ready [data-hero-intro]:not([data-hero-motion]):not(.is-revealed) .reveal-block-solid:not(.is-revealed) {
+    opacity: 1;
+    transform: translateY(12px);
+  }
+
+  html.reveal-ready :is(.reveal-title, .reveal-block, .reveal-faint, .reveal-block-solid).is-revealed {
+    opacity: 1;
+    transform: none;
+    transition:
+      opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1),
+      transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    transition-delay: var(--reveal-delay, 0ms);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal-title,
+  .reveal-block,
+  .reveal-faint,
+  .reveal-block-solid {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+/* Sezione “break” visivo — banda numeri / metriche */
+.home-section-break {
+  position: relative;
+  isolation: isolate;
+}
+
+.home-section-break::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--primary-mid) 8%, transparent), transparent 70%),
+    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 65%);
+  opacity: 0.9;
+}
+
+.home-section-break > * {
+  position: relative;
+  z-index: 1;
+}
+
+/* Processo home — timeline orizzontale più marcata */
+.home-process-step {
+  position: relative;
+}
+
+@media (min-width: 640px) {
+  .home-process-step:not(:last-child)::after {
+    content: "";
+    position: absolute;
+    top: 1.75rem;
+    right: -0.65rem;
+    width: 1.25rem;
+    height: 1px;
+    background: color-mix(in srgb, var(--primary-mid) 38%, var(--green-border-muted));
+  }
+}
+
+.home-process-step__num {
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  line-height: 1;
+  letter-spacing: -0.04em;
+  color: color-mix(in srgb, var(--primary-mid) 72%, var(--foreground));
+}
+
+/* Pulsanti CTA: niente lift/brightness “incollati” dopo il tap */
+@media (hover: none), (pointer: coarse) {
+  .touch-no-hover-lift:hover,
+  .touch-no-hover-lift:active {
+    transform: none !important;
+    filter: none !important;
+  }
+}
+
+/* ─── Mobile SOTA (< 768px): overflow, tap, tipografia fluida ─── */

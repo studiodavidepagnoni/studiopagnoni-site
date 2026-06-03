@@ -1,0 +1,41 @@
+/* Lightbox progetti — CSS (no framer-motion) */
+.project-lightbox-dialog {
+  opacity: 0;
+  transition: opacity 0.18s ease-out;
+}
+
+.project-lightbox-dialog.is-open {
+  opacity: 1;
+}
+
+.project-lightbox-dialog.is-closing {
+  opacity: 0;
+}
+
+.project-lightbox-dialog__panel,
+.project-lightbox-dialog__toolbar,
+.project-lightbox-dialog__strip {
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 0.18s ease-out,
+    transform 0.22s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.project-lightbox-dialog.is-open .project-lightbox-dialog__toolbar,
+.project-lightbox-dialog.is-open .project-lightbox-dialog__panel,
+.project-lightbox-dialog.is-open .project-lightbox-dialog__strip {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .project-lightbox-dialog,
+  .project-lightbox-dialog__panel,
+  .project-lightbox-dialog__toolbar,
+  .project-lightbox-dialog__strip {
+    transition: none;
+    opacity: 1;
+    transform: none;
+  }
+}

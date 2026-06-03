@@ -36,7 +36,7 @@ export default function RootLayout({
   return (
     <html lang="it">
       <body
-        className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-light max-md:overflow-x-clip`}
+        className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-site max-md:overflow-x-clip`}
       >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }} />
         <a href="#main-content" className="skip-link">

@@ -1,0 +1,59 @@
+.btn-cta-primary {
+  position: relative;
+  isolation: isolate;
+  overflow: hidden;
+  border: 1px solid var(--cta-primary-border);
+  background-color: var(--cta-primary-fill);
+  color: var(--cta-primary-text);
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  box-shadow: var(--cta-primary-shadow);
+  transition:
+    border-color 0.22s ease,
+    background-color 0.22s ease,
+    box-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
+    color 0.2s ease;
+}
+
+.btn-cta-primary::before {
+  content: "";
+  position: absolute;
+  inset: 0 0 auto;
+  height: 2px;
+  border-radius: 999px 999px 0 0;
+  background: linear-gradient(
+    90deg,
+    color-mix(in srgb, var(--header-nav-active) 88%, transparent) 0%,
+    color-mix(in srgb, var(--primary-mid) 42%, transparent) 70%,
+    transparent 100%
+  );
+  pointer-events: none;
+}
+
+.btn-cta-primary:focus-visible {
+  outline: 2px solid color-mix(in srgb, var(--header-nav-hover) 62%, transparent);
+  outline-offset: 3px;
+}
+
+.btn-cta-primary:active {
+  box-shadow:
+    inset 0 1px 3px rgba(0, 0, 0, 0.14),
+    0 2px 8px rgba(0, 0, 0, 0.22);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .btn-cta-primary:hover {
+    border-color: color-mix(in srgb, var(--header-nav-active) 48%, var(--green-border));
+    background-color: var(--cta-primary-fill-hover);
+    box-shadow: var(--cta-primary-shadow-hover);
+  }
+}
+
+.btn-cta-primary--hero {
+  min-height: 3.25rem;
+  padding-inline: 2.25rem;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+}
+
+/* Bandiera titolo pagina (immagine + menu overlay come home / Drone Surveying) */
