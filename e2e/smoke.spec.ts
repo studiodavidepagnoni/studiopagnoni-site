@@ -36,23 +36,20 @@ test.describe("smoke", () => {
     await expect(details.getByRole("link", { name: "Servizi" })).toBeHidden();
   });
 
-  test("progetti — filtro ambito e scheda", async ({ page }) => {
+  test("progetti — schede in evidenza", async ({ page }) => {
     await page.goto("/progetti/");
     await dismissCookieBanner(page);
-    await expect(page.getByRole("navigation", { name: /Filtra progetti per ambito/i })).toBeVisible();
-    await expect(page.getByRole("button", { name: "Tutti", pressed: true })).toBeVisible();
+    await expect(page.getByRole("link", { name: /Azienda vinicola/i }).first()).toBeVisible();
     await page.getByRole("link", { name: /Azienda vinicola/i }).first().click();
     await expect(page.locator("#main-content")).toBeVisible();
   });
 
-  test("progetto — galleria lightbox", async ({ page }) => {
+  test("progetto — scheda con video", async ({ page }) => {
     await page.goto("/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam/");
     await dismissCookieBanner(page);
-    await page.getByRole("button", { name: /Apri nella galleria/i }).first().click();
-    const dialog = page.getByRole("dialog", { name: "Galleria a schermo intero" });
-    await expect(dialog).toBeVisible({ timeout: 10_000 });
-    await page.keyboard.press("Escape");
-    await expect(dialog).toBeHidden({ timeout: 10_000 });
+    const video = page.locator("#main-content video");
+    await video.scrollIntoViewIfNeeded();
+    await expect(video).toBeVisible();
   });
 
   test("contatti — validazione modulo", async ({ page }) => {

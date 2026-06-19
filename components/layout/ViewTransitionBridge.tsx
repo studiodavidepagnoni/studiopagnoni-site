@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import { useEffect } from "react";
+import { basePath, toInternalPath } from "@/lib/utils/basePath";
 import { isHomePath } from "@/lib/utils/isHomePath";
 import { normalizePathname } from "@/lib/utils/normalizePathname";
 
@@ -42,12 +43,15 @@ export function ViewTransitionBridge() {
 
       if (url.origin !== window.location.origin) return;
 
+      // GitHub Pages (sottocartella): navigazione nativa — evita doppio basePath con router.push.
+      if (basePath) return;
+
       const pathQuery = `${url.pathname}${url.search}`;
       const here = `${window.location.pathname}${window.location.search}`;
       if (pathQuery === here && url.hash) return;
 
       e.preventDefault();
-      const dest = `${url.pathname}${url.search}${url.hash}`;
+      const dest = `${toInternalPath(url.pathname)}${url.search}${url.hash}`;
 
       const go = () => nav(dest);
       const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;

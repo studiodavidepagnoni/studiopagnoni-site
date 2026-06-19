@@ -45,6 +45,15 @@ jobs:
         # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.
         run: npm run build:static:fast
 
+      - name: Check internal links (no double basePath)
+        env:
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || format('/{0}', github.event.repository.name) }}
+        run: node scripts/check-export-links.cjs
+
+      - name: Prepare GitHub Pages artifact
+        # Anteprima su github.io: non pubblicare il CNAME di produzione.
+        run: rm -f out/CNAME
+
       - uses: actions/upload-pages-artifact@v5
         with:
           path: out

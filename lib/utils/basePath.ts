@@ -13,3 +13,13 @@ export function withBasePath(href: string): string {
   const path = href.startsWith("/") ? href : `/${href}`;
   return basePath ? `${basePath}${path}` : path;
 }
+
+/** Path interno per `router.push` / confronti: senza prefisso GitHub Pages. */
+export function toInternalPath(pathname: string): string {
+  let normalized = pathname.replace(/\/+$/, "") || "/";
+  const base = basePath.replace(/\/+$/, "");
+  if (base.length > 0 && (normalized === base || normalized.startsWith(`${base}/`))) {
+    normalized = normalized.slice(base.length) || "/";
+  }
+  return normalized;
+}
