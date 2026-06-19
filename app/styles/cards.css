@@ -108,6 +108,7 @@
 }
 
 .project-preview-card__title {
+  display: block;
   font-family: var(--font-display), system-ui, sans-serif;
   margin-top: 0.35rem;
   font-size: 0.9375rem;
@@ -117,6 +118,7 @@
 }
 
 .project-preview-card__cta {
+  display: block;
   margin-top: 0.35rem;
   font-size: 0.7rem;
   font-weight: 500;

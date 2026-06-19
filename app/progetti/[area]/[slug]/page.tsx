@@ -2,7 +2,6 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { PageHero } from "@/components/hero/PageHero";
-import { ProjectImageLightbox } from "@/components/projects/ProjectImageLightbox";
 import {
   getCaseStudyKey,
   isProjectArea,
@@ -84,8 +83,6 @@ export default async function ProjectCasePage({ params }: Props) {
                 <div className={ui.body}>{cs.body}</div>
               </div>
             </article>
-
-            {cs.gallery.length > 0 ? <ProjectImageLightbox images={cs.gallery} className="mt-10" /> : null}
           </div>
         </div>
       </div>
