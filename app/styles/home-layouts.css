@@ -31,7 +31,7 @@
 }
 
 /* Niente linea separatore sotto la sezione progetti (evita striscia scura a fine blocco) */
-#progetti.section-shell::after {
+.home-section-progetti.section-shell::after {
   display: none;
 }
 

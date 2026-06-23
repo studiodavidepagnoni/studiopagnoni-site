@@ -38,7 +38,7 @@
 
 /* ─── Hover solo pointer fine (evita stato bloccato su touch) ─── */
 @media (hover: hover) and (pointer: fine) {
-  .frost-card:hover,
+  .frost-card:not(.frost-card--static):hover,
   .interactive-card:hover {
     border-color: var(--interactive-hover-border);
     background: var(--interactive-hover-bg);

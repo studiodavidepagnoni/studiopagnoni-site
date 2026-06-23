@@ -81,10 +81,6 @@ export default function ServiziPage() {
           </section>
 
           <article className={ui.innerCard}>
-            <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-8 border-b border-[var(--green-border-muted)] pb-4`}>
-              Elenco per ambito
-            </h2>
-
             <h3 id="topografia-rilievi" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap} mt-2 ${ui.scrollAnchor}`}>
               Topografia e rilievi
             </h3>

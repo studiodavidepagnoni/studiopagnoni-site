@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
+import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { fontDisplay } from "@/lib/fonts";
 import { faqPageGraph } from "@/lib/config/faqJsonLd";
@@ -91,12 +92,15 @@ export default function TopografiaPage() {
             <FaqSection id="topografia-faq" items={topografiaFaq} />
           </div>
 
-          <p className={`${ui.body} max-w-[72ch]`}>
-            <Link href="/contatti" className={ui.proseLink}>
-              Richiedi un preventivo
-            </Link>{" "}
-            per il tuo rilievo: indicando località e finalità (es. frazionamento, cantiere, progettazione) possiamo proporre metodo e tempistiche.
-          </p>
+          <PageClosingCta
+            id="topografia-cta"
+            title="Pianifichiamo il tuo rilievo topografico"
+            description="Indica località, finalità (frazionamento, cantiere, progettazione) e superficie indicativa: ti rispondiamo con metodo, tempi e preventivo su misura."
+            primaryHref="/contatti#form-contatti"
+            primaryLabel="Richiedi preventivo"
+            secondaryHref="/rilievi-laser-scanner-slam-brescia"
+            secondaryLabel="Laser scanner SLAM"
+          />
           </div>
         </div>
       </main>

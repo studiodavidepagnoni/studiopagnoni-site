@@ -28,7 +28,7 @@ export default function ContattiPage() {
             <ContattiIntro />
 
           <div className="grid gap-6 sm:gap-8 lg:grid-cols-[1.02fr_1.28fr] lg:items-stretch">
-            <section aria-labelledby="recapiti-block" className={ui.innerCard}>
+            <section aria-labelledby="recapiti-block" className={ui.innerCardStatic}>
               <h2 id="recapiti-block" className={`${fontDisplay.className} ${ui.cardHeading} mb-4 sm:mb-5`}>
                 Recapiti
               </h2>
@@ -56,7 +56,7 @@ export default function ContattiPage() {
               </ul>
             </section>
 
-            <section aria-labelledby="mappa-heading" className={`${ui.innerCard} !p-3 sm:!p-4 md:!p-5`}>
+            <section aria-labelledby="mappa-heading" className={`${ui.innerCardStatic} !p-3 sm:!p-4 md:!p-5`}>
               <h2 id="mappa-heading" className={`${fontDisplay.className} ${ui.cardHeading} mb-3 px-1 sm:mb-4 sm:px-2`}>
                 Dove siamo
               </h2>

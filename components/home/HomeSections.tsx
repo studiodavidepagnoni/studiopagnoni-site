@@ -47,10 +47,10 @@ export function HomeSections() {
   return (
     <>
       {/* ── Chi siamo — SOTA editorial: 5/7 split, immagine unica forte, testo compatto ── */}
-      <section id="chi-siamo" className="lazy-section section-shell scroll-anchor overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section className="lazy-section section-shell overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Profilo</p>
+            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>{homeChiSiamo.title}</h2>
             <div className="home-section-rule" aria-hidden />
           </div>
@@ -125,10 +125,10 @@ export function HomeSections() {
       </section>
 
       {/* ── Servizi ── */}
-      <section id="servizi" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
+      <section className="home-section-servizi lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Ambiti</p>
+            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Servizi</h2>
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{homeServiziIntro}</p>
@@ -194,10 +194,10 @@ export function HomeSections() {
       </section>
 
       {/* ── Progetti (feed) ── */}
-      <section id="progetti" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section className="home-section-progetti lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Lavori</p>
+            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Progetti</h2>
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{homeProgettiIntro}</p>
@@ -312,10 +312,10 @@ export function HomeSections() {
       <StatsSection />
 
       {/* ── Contatti ── */}
-      <section id="contatti" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
+      <section className="lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Contatto</p>
+            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Contatti</h2>
             <div className="home-section-rule" aria-hidden />
             <p className="home-section-intro__lede max-w-[52ch]">{contattiIntro}</p>

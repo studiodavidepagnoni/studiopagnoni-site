@@ -21,7 +21,7 @@ export const homeChiSiamo: {
   blocks: homeChiSiamoBlock[];
 } = {
   title: "Chi siamo",
-  intro: "Un team multidisciplinare per territorio, edilizia e rilievi 3D.",
+  intro: "Sintesi del profilo studio. Biografia, metodo e immagini nella pagina Chi siamo.",
   short: (
     <>
       Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a <strong>Bornato, Cazzago San Martino</strong>. Uniamo{" "}
@@ -65,9 +65,9 @@ export const homeChiSiamo: {
 };
 
 export const homeServiziIntro =
-  "Le attività chiave dello studio: misura del territorio, rilievi 3D, pratiche tecniche e supporto alla progettazione.";
+  "Anteprima degli ambiti principali. Schede, approfondimenti e FAQ nella pagina Servizi.";
 
-/** Blocco compatto in home (anchor #strumentazione): SLAM come perno operativo, RTK e stazione a supporto */
+/** Blocco compatto in home: SLAM come perno operativo, RTK e stazione a supporto */
 export const homeStrumentazione: {
   title: string;
   lede: ReactNode;
@@ -143,10 +143,7 @@ export const homeServiceCards = [
 ] as const;
 
 export const homeProgettiIntro =
-  "Tre ambiti rappresentativi dell’applicazione dei rilievi 3D effettuati dallo Studio Pagnoni: paesaggio viticolo, rilievi in ambito territorio ed edilizia.";
-
-export const progettiIndexIntro =
-  "Una selezione di ambiti ricorrenti: paesaggio viticolo, rilievi digitali e pratiche edilizie. Ogni scheda racconta il tipo di problema affrontato, più che un semplice elenco di immagini.";
+  "Anteprima di tre casi SLAM e topografia. Schede complete, video e dettagli nell’archivio Progetti.";
 
 export const certificationsIntro =
   "Attività svolte da professionisti abilitati, con responsabilità tecnica e rete di specialisti quando la commessa lo richiede.";
@@ -198,7 +195,7 @@ export const zoneFooter = (
 );
 
 export const contattiIntro =
-  "Per preventivi su rilievi, laser scanner SLAM, progettazione del verde, pratiche edilizie, sicurezza cantieri (CSP/CSE), assistenza immobiliare e perizie, scriveteci o chiamate: vi risponderà direttamente il team dello studio.";
+  "Anteprima dei recapiti. Modulo, mappa e FAQ nella pagina Contatti.";
 
 /** Statistiche home: numeri animati o blocchi descrittivi. */
 export type HomeStat =

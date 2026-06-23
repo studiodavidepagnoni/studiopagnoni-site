@@ -65,7 +65,7 @@ export const projectCategories: Record<
     cases: [
       {
         slug: "allevamento-appianti-slam",
-        title: "Allevamento — rilievo 3D SLAM (Appianti)",
+        title: "Allevamento — rilievo 3D SLAM",
         caption: "Allevamento · SLAM",
         cover: cover(all.dir, all.cover),
         alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
@@ -137,7 +137,7 @@ export const projectCaseStudies: Record<
   }
 > = {
   "rilievi-digitalizzazione/allevamento-appianti-slam": {
-    metaTitle: "Allevamento — rilievo 3D SLAM (Appianti)",
+    metaTitle: "Allevamento — rilievo 3D SLAM",
     metaDescription:
       "Caso studio (da validare): rilievo 3D con laser scanner SLAM in ambiente zootecnico per documentazione as-built e base metrica operativa. Provincia di Brescia.",
     heading: "Allevamento — rilievo 3D SLAM in ambiente operativo",
@@ -228,16 +228,6 @@ export type ProjectArchiveEntry = ProjectCasePreview & {
   area: ProjectArea;
   areaLabel: string;
 };
-
-export const projectAreaNav = [
-  { id: "all" as const, label: "Tutti" },
-  ...projectAreas.map((area) => ({
-    id: area,
-    label: projectCategories[area].heading,
-  })),
-] as const;
-
-export type ProjectAreaFilter = (typeof projectAreaNav)[number]["id"];
 
 export function listArchivedProjects(): ProjectArchiveEntry[] {
   return projectAreas.flatMap((area) =>

@@ -18,6 +18,7 @@ export const ui = {
   pageEyebrow: "section-kicker mb-3",
   pageTitleRule: "home-section-rule mb-8 sm:mb-10",
   innerCard: "frost-card p-5 sm:p-7 md:p-10",
+  innerCardStatic: "frost-card frost-card--static p-5 sm:p-7 md:p-10",
 
   proseLink:
     "font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition-colors hover:text-[var(--foreground)]",

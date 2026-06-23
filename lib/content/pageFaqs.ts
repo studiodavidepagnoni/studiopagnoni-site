@@ -47,26 +47,3 @@ export const serviziFaq = [
     a: "Sì: urbanistica, sanatorie, SCIA/CILA dove previste, oltre a CSP e CSE. Il rilievo metrico resta la base quando serve allineare progetto, regolarizzazione e cantiere.",
   },
 ] as const satisfies readonly FaqItem[];
-
-export const contattiFaq = [
-  {
-    q: "Come richiedo un preventivo?",
-    a: "Compila il modulo con nome, email, località dell’intervento e una breve descrizione (tipo di rilievo, superficie indicativa, output desiderato). Puoi anche chiamare o scrivere a studio@pagnoni-s.com: rispondiamo dal canale che preferisci.",
-  },
-  {
-    q: "Quanto costa un rilievo topografico o SLAM?",
-    a: "Non esiste un listino fisso: valutiamo estensione, accessi, piani, formati (nuvola, DWG, BIM) e distanza. Dopo la tua richiesta inviamo una proposta indicativa; per SLAM puoi usare il modulo con oggetto dedicato o la pagina rilievi laser scanner.",
-  },
-  {
-    q: "In quanto tempo rispondete e consegnate?",
-    a: "Alle richieste via modulo o email rispondiamo appena possibile nei giorni lavorativi. I tempi di consegna degli elaborati si concordano in offerta in base a metratura, output e priorità del cantiere.",
-  },
-  {
-    q: "Quale zona geografica coprite?",
-    a: "Base operativa in Franciacorta e provincia di Brescia. Per rilievi topografici e SLAM programmiamo anche Lombardia e Nord Italia quando l’incarico lo richiede.",
-  },
-  {
-    q: "Serve un sopralluogo prima del preventivo?",
-    a: "Per superfici ampie, accessi complessi o commesse SLAM spesso è utile un sopralluogo o un briefing in sede. Per richieste standard possiamo dare una prima stima da descrizione e planimetrie, poi confermare in campo.",
-  },
-] as const satisfies readonly FaqItem[];

@@ -1,6 +1,7 @@
 import Link from "next/link";
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { PageHero } from "@/components/hero/PageHero";
 import {
   getCaseStudyKey,
@@ -60,7 +61,7 @@ export default async function ProjectCasePage({ params }: Props) {
       />
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
-        <div className={layoutContentMaxClass}>
+        <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
           <nav className="reveal-faint mb-8 text-[0.82rem] text-[var(--green-ink-muted)] sm:text-sm" aria-label="Percorso di navigazione">
             <Link href="/progetti" className="font-medium text-[var(--primary-mid)] hover:underline">
               Progetti
@@ -84,6 +85,16 @@ export default async function ProjectCasePage({ params }: Props) {
               </div>
             </article>
           </div>
+
+          <PageClosingCta
+            id="project-cta"
+            title="Vuoi un rilievo simile?"
+            description="Indica zona, superficie indicativa e cosa ti serve in consegna: ti rispondiamo con tempi e preventivo su misura per un rilievo laser scanner SLAM."
+            primaryHref="/contatti?oggetto=slam#form-contatti"
+            primaryLabel="Richiedi preventivo SLAM"
+            secondaryHref="/contatti#form-contatti"
+            secondaryLabel="Contatti generali"
+          />
         </div>
       </div>
     </main>

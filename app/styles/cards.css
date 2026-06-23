@@ -8,12 +8,12 @@
 
 /* Card servizi home — entrata stagger (sostituisce framer-motion, allineato a ScrollReveal) */
 @media (prefers-reduced-motion: no-preference) {
-  html.reveal-ready #servizi.lazy-section:not(.is-revealed) .service-card--enter {
+  html.reveal-ready .home-section-servizi.lazy-section:not(.is-revealed) .service-card--enter {
     opacity: 0;
     transform: translateY(40px) scale(0.97);
   }
 
-  html.reveal-ready #servizi.lazy-section.is-revealed .service-card--enter {
+  html.reveal-ready .home-section-servizi.lazy-section.is-revealed .service-card--enter {
     opacity: 1;
     transform: none;
     transition:
@@ -22,7 +22,7 @@
     transition-delay: var(--service-card-delay, 0ms);
   }
 
-  html.reveal-ready #servizi.lazy-section.is-revealed .service-card--enter .service-card__accent-line {
+  html.reveal-ready .home-section-servizi.lazy-section.is-revealed .service-card--enter .service-card__accent-line {
     transform: scaleX(0);
     opacity: 0.15;
     animation: service-card-accent-in 0.95s cubic-bezier(0.22, 1, 0.36, 1) forwards;
