@@ -18,6 +18,7 @@ const port = process.env.LH_PORT || "3011";
 const url = `http://127.0.0.1:${port}/`;
 const reportDir = path.join(root, ".lighthouse");
 const tmpDir = path.join(reportDir, "tmp");
+const jsonPath = path.join(reportDir, "ci-mobile.report.json");
 const maxLcpMs = Number(process.env.LH_MAX_LCP_MS ?? "4500");
 const maxCls = Number(process.env.LH_MAX_CLS ?? "0.15");
 const npmExecPath = process.env.npm_execpath;
@@ -26,9 +27,18 @@ fs.mkdirSync(tmpDir, { recursive: true });
 
 function npmExecCommand(args) {
   if (npmExecPath) {
-    return { cmd: process.execPath, args: [npmExecPath, "exec", "--yes", "--", ...args] };
+    return { cmd: process.execPath, args: [npmExecPath, "exec", "--", ...args] };
   }
   return { cmd: process.platform === "win32" ? "npx.cmd" : "npx", args };
+}
+
+function lighthouseCommand(urlArg, extraArgs) {
+  try {
+    const lighthouseCli = require.resolve("lighthouse/cli/index.js");
+    return { cmd: process.execPath, args: [lighthouseCli, urlArg, ...extraArgs] };
+  } catch {
+    return npmExecCommand(["lighthouse", urlArg, ...extraArgs]);
+  }
 }
 
 function killProcessTree(proc) {
@@ -106,10 +116,20 @@ async function waitForChromeDebug(debugPort, maxMs = 30_000) {
   throw new Error(`Chrome CDP non raggiungibile su ${chromeReady}`);
 }
 
+function findReportJson() {
+  const candidates = [
+    jsonPath,
+    path.join(reportDir, "ci-mobile.json"),
+    path.join(reportDir, "ci-mobile"),
+  ];
+  for (const candidate of candidates) {
+    if (fs.existsSync(candidate)) return candidate;
+  }
+  return null;
+}
+
 async function runLighthouse() {
   fs.mkdirSync(reportDir, { recursive: true });
-  const outputBase = path.join(reportDir, "ci-mobile");
-  const jsonPath = path.join(reportDir, "ci-mobile.report.json");
   const chromeProfileDir = path.join(tmpDir, "ci-chrome-profile");
 
   const chromePath = resolveChromePath();
@@ -121,15 +141,14 @@ async function runLighthouse() {
   const browser = await launchChromeForLighthouse({ profileDir: chromeProfileDir });
   console.log(`[lighthouse:ci] CDP port: ${browser.debugPort}`);
 
+  let stdout = "";
   try {
     await waitForChromeDebug(browser.debugPort);
 
-    const lighthouse = npmExecCommand([
-      "lighthouse",
-      url,
+    const lighthouse = lighthouseCommand(url, [
       "--quiet",
       `--port=${browser.debugPort}`,
-      `--output-path=${outputBase}`,
+      `--output-path=${jsonPath}`,
       "--output=json",
       "--only-categories=performance",
       "--form-factor=mobile",
@@ -138,7 +157,7 @@ async function runLighthouse() {
     ]);
 
     try {
-      await run(lighthouse.cmd, lighthouse.args, {
+      stdout = await run(lighthouse.cmd, lighthouse.args, {
         env: {
           ...process.env,
           CI: process.env.CI ?? "1",
@@ -149,18 +168,29 @@ async function runLighthouse() {
       });
     } catch (err) {
       const output = String(err.output || err.message || "");
-      if (!(output.includes("EPERM") && fs.existsSync(jsonPath))) throw err;
+      if (!(output.includes("EPERM") && findReportJson())) throw err;
       console.warn("[lighthouse:ci] Cleanup Chrome EPERM ignorato: report JSON presente.");
     }
   } finally {
     await browser.close();
   }
 
-  if (!fs.existsSync(jsonPath)) {
+  let reportPath = findReportJson();
+  if (!reportPath && stdout.trim().startsWith("{")) {
+    fs.writeFileSync(jsonPath, stdout.trim(), "utf8");
+    reportPath = jsonPath;
+    console.log("[lighthouse:ci] Report salvato da stdout Lighthouse.");
+  }
+
+  if (!reportPath) {
     throw new Error(`Report Lighthouse mancante: ${jsonPath}`);
   }
 
-  const data = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
+  const data = JSON.parse(fs.readFileSync(reportPath, "utf8"));
+  if (reportPath !== jsonPath) {
+    fs.copyFileSync(reportPath, jsonPath);
+  }
+
   const lcpMs = data.audits?.["largest-contentful-paint"]?.numericValue;
   const cls = data.audits?.["cumulative-layout-shift"]?.numericValue;
   const perf = data.categories?.performance?.score;

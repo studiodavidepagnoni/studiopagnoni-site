@@ -41,14 +41,14 @@ jobs:
       - name: Install Playwright (Chromium)
         run: npx playwright install --with-deps chromium
 
-      - name: E2E smoke tests
+      - name: E2E smoke tests (home, contatti, progetti, SLAM)
         run: npm run test:e2e
 
       - name: Install Chrome for Lighthouse
         uses: browser-actions/setup-chrome@v1
         id: setup-chrome
 
-      - name: Lighthouse (soglie LCP / CLS)
+      - name: Lighthouse mobile (LCP / CLS)
         env:
           LH_CHROME_PATH: ${{ steps.setup-chrome.outputs.chrome-path }}
           LH_MAX_LCP_MS: "4500"
