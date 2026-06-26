@@ -354,6 +354,24 @@ async function walkOptimizeImages(dir, seen, sharp) {
   }
 }
 
+async function optimizeExistingWebps(dir, sharp) {
+  if (!fs.existsSync(dir)) return;
+  const stack = [dir];
+  while (stack.length) {
+    const current = stack.pop();
+    for (const ent of fs.readdirSync(current, { withFileTypes: true })) {
+      const full = path.join(current, ent.name);
+      if (ent.isDirectory()) {
+        stack.push(full);
+        continue;
+      }
+      if (!ent.isFile() || !/\.webp$/i.test(ent.name)) continue;
+      if (/-w\d+\.webp$/i.test(ent.name)) continue;
+      await writeResponsiveWebps(sharp, full);
+    }
+  }
+}
+
 async function optimizeImages() {
   let sharp;
   try {
@@ -367,6 +385,9 @@ async function optimizeImages() {
   if (fs.existsSync(assetsDir)) {
     await walkOptimizeImages(assetsDir, seen, sharp);
   }
+  // WebP già in repo (stock/progetti): genera varianti -w480/-w960 se mancanti.
+  await optimizeExistingWebps(stockDir, sharp);
+  await optimizeExistingWebps(projectsDir, sharp);
 }
 
 function pruneDuplicateJpegs() {

@@ -1,5 +1,6 @@
-import Image from "next/image";
+import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
+import { stockImageSrcSet } from "@/lib/media/mediaPath";
 import type { PageHeroData } from "@/lib/config/pageHeroConfig";
 
 export function PageHero({ eyebrow, title, image, alt, lede, priorityImage = true }: PageHeroData) {
@@ -11,16 +12,27 @@ export function PageHero({ eyebrow, title, image, alt, lede, priorityImage = tru
       aria-label={title}
     >
       <div className="absolute inset-0 z-0" aria-hidden>
-        <Image
-          src={image}
-          alt={alt}
-          fill
-          className="object-cover brightness-[0.94] saturate-[0.98]"
-          sizes="100vw"
-          priority={priorityImage}
-          fetchPriority={priorityImage ? "high" : undefined}
-          loading={priorityImage ? undefined : "lazy"}
-        />
+        {stockImageSrcSet(image) ? (
+          <StockCoverImage
+            src={image}
+            alt={alt}
+            className="brightness-[0.94] saturate-[0.98]"
+            sizes="100vw"
+            loading={priorityImage ? "eager" : "lazy"}
+            fetchPriority={priorityImage ? "high" : undefined}
+          />
+        ) : (
+          // eslint-disable-next-line @next/next/no-img-element -- path non stock (es. progetti)
+          <img
+            src={image}
+            alt={alt}
+            className="absolute inset-0 h-full w-full object-cover brightness-[0.94] saturate-[0.98]"
+            sizes="100vw"
+            loading={priorityImage ? "eager" : "lazy"}
+            decoding="async"
+            fetchPriority={priorityImage ? "high" : undefined}
+          />
+        )}
       </div>
       <div
         className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(4,10,9,0.58)_0%,rgba(4,10,9,0.34)_45%,rgba(4,10,9,0.16)_100%),linear-gradient(0deg,rgba(4,10,9,0.48)_0%,transparent_52%)]"

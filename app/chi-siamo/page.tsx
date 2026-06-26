@@ -1,4 +1,4 @@
-import Image from "next/image";
+import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { chiSiamoPage } from "@/lib/content";
 import { chiSiamoPageImage } from "@/lib/media/images";
@@ -28,13 +28,12 @@ export default function ChiSiamoPage() {
               </div>
               <div className="relative md:col-span-5">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] md:aspect-[3/4]">
-                  <Image
+                  <StockCoverImage
                     src={chiSiamoPageImage.src}
                     alt={chiSiamoPageImage.alt}
-                    fill
-                    className="object-cover"
                     sizes="(min-width:768px) min(440px, 40vw), min(100vw, 720px)"
-                    priority
+                    loading="eager"
+                    fetchPriority="high"
                   />
                   <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 </div>

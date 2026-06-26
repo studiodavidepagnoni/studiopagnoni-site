@@ -1,5 +1,5 @@
-import Image from "next/image";
 import Link from "next/link";
+import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import {
   certifications,
@@ -96,14 +96,12 @@ export function HomeSections() {
             {/* ── Media (destra): immagine proporzionata al testo ── */}
             <div className="order-1 lg:order-2 lg:col-span-6">
               <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] sm:aspect-[16/10] lg:aspect-[16/10]">
-                <Image
+                <StockCoverImage
                   src={homeChiSiamoImages.team.src}
                   alt={homeChiSiamoImages.team.alt}
-                  fill
-                  className="object-cover object-center"
+                  className="object-center"
                   sizes="(min-width:1024px) min(580px, 50vw), (min-width:640px) min(90vw, 720px), 100vw"
                   loading="lazy"
-                  decoding="async"
                 />
                 {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
                 <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />

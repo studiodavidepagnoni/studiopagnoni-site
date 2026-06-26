@@ -27,6 +27,13 @@ export function projectAssetSrcSet(relPath: string, widths: readonly number[] = 
   return widths.map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
 }
 
+/** Srcset da URL pubblico stock (`stockImage`). */
+export function stockImageSrcSet(coverUrl: string, widths: readonly number[] = [480, 960]): string {
+  if (!coverUrl.includes("/assets/stock/")) return "";
+  const base = coverUrl.replace(/\.webp(\?.*)?$/i, "");
+  return widths.map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
+}
+
 /** Srcset da URL pubblico già risolto con `projectAsset`. */
 export function projectCoverSrcSet(coverUrl: string, widths: readonly number[] = [480, 960]): string {
   const rel = coverUrl.split("/projects/")[1]?.split("?")[0] ?? "";
