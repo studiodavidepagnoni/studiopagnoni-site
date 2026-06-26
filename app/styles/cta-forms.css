@@ -54,6 +54,24 @@
   padding-inline: 2.25rem;
   font-weight: 700;
   letter-spacing: 0.03em;
+  background: linear-gradient(
+    180deg,
+    color-mix(in srgb, var(--cta-primary-fill) 88%, white) 0%,
+    var(--cta-primary-fill) 52%,
+    color-mix(in srgb, var(--cta-primary-fill) 92%, black) 100%
+  );
+  border-color: color-mix(in srgb, var(--header-nav-active) 50%, var(--cta-primary-border));
+  box-shadow:
+    0 1px 0 color-mix(in srgb, white 24%, transparent) inset,
+    var(--cta-primary-shadow);
+}
+
+@media (max-width: 639px) {
+  .btn-cta-primary--hero {
+    min-height: 3rem;
+    padding-inline: 1.25rem;
+    letter-spacing: 0.02em;
+  }
 }
 
 /* Bandiera titolo pagina (immagine + menu overlay come home / Drone Surveying) */

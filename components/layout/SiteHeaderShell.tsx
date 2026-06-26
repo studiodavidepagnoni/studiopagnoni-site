@@ -4,7 +4,6 @@ import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib
 import { withBasePath } from "@/lib/utils/basePath";
 
 const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header block px-3 py-2 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`;
-const mobileNavLinkClass = `${fontNav.className} site-nav-link site-nav-link--mobile flex min-h-[48px] items-center border-b border-[var(--header-border)] py-2 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] touch-manipulation`;
 
 /** Header statico (zero JS): visibile finché non idrata SiteHeader. */
 export function SiteHeaderShell() {
@@ -64,25 +63,14 @@ export function SiteHeaderShell() {
             </ul>
           </nav>
 
-          <details className="site-header-mobile-details relative md:hidden">
-            <summary className="flex min-h-[48px] min-w-[48px] list-none cursor-pointer touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border border-white/22 bg-white/[0.06] [&::-webkit-details-marker]:hidden">
-              <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
-              <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
-              <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
-              <span className="sr-only">Apri menu</span>
-            </summary>
-            <div className="absolute right-0 top-[calc(100%+0.5rem)] z-[1001] w-[min(100vw-2rem,22rem)] rounded-lg border border-[var(--header-border)] bg-[var(--header-menu-surface)] p-4 shadow-[0_16px_40px_rgba(0,0,0,0.28)]">
-              <ul className="flex flex-col gap-1">
-                {navItems.map((item) => (
-                  <li key={item.href}>
-                    <Link href={item.href} className={mobileNavLinkClass}>
-                      {item.label}
-                    </Link>
-                  </li>
-                ))}
-              </ul>
-            </div>
-          </details>
+          <div
+            className="flex min-h-[48px] min-w-[48px] shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border border-white/22 bg-white/[0.06] md:hidden"
+            aria-hidden
+          >
+            <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
+            <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
+            <span className="block h-0.5 w-6 bg-[var(--header-text)]" />
+          </div>
         </div>
       </div>
     </header>

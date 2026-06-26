@@ -172,6 +172,10 @@ export function SiteHeader() {
   }, [hideProgress, open]);
 
   useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  useEffect(() => {
     document.body.classList.toggle("overflow-hidden", open);
     return () => document.body.classList.remove("overflow-hidden");
   }, [open]);

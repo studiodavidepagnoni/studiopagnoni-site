@@ -45,7 +45,7 @@ export const ui = {
   btnAccent: btnPrimaryFill,
 
   /** Hero home: stesso CTA, variante hero */
-  btnHeroPrimary: `${btnPrimaryFill} btn-cta-primary--hero w-full text-[0.9375rem] sm:w-auto`,
+  btnHeroPrimary: `${btnPrimaryFill} btn-cta-primary--hero w-full max-md:whitespace-normal max-md:px-5 max-md:py-3 max-md:text-center max-md:leading-snug text-[0.9375rem] sm:w-auto`,
 
   btnHeroGhost: `${btnBase} min-h-[52px] w-full border border-[var(--cta-ghost-border)] bg-[linear-gradient(180deg,var(--cta-ghost-bg-top)_0%,var(--cta-ghost-bg-bottom)_100%)] px-9 text-[0.9375rem] text-white shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-md [@media(hover:hover)]:hover:border-[color-mix(in_srgb,white_58%,transparent)] [@media(hover:hover)]:hover:bg-[linear-gradient(180deg,color-mix(in_srgb,white_22%,transparent)_0%,color-mix(in_srgb,white_11%,transparent)_100%)] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_14px_32px_rgba(0,0,0,0.34)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-white/50 sm:w-auto`,
 

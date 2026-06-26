@@ -22,6 +22,15 @@ export {
 const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
 const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
+/** Immagine fissa hero home (mobile + poster slide 1): foto stock, non frame video. */
+export const HERO_INTRO_STILL = s("slamHero");
+export const HERO_INTRO_STILL_W960 = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-w960.webp");
+
+export function heroIntroStillSrcSet(): string {
+  const base = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "");
+  return [480, 960].map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
+}
+
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */
   src: string;
@@ -33,6 +42,8 @@ export type HeroSlide = {
   ctaLabel: string;
   primaryCtaHref?: string;
   primaryCtaLabel?: string;
+  /** Etichetta breve per mobile (evita overflow nel bottone hero). */
+  primaryCtaLabelMobile?: string;
   video?: HeroVideoSources;
   poster?: string;
   videoObjectPosition?: string;
@@ -48,6 +59,7 @@ export const heroSlides: readonly HeroSlide[] = [
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto e BIM.",
     primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
     primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",
+    primaryCtaLabelMobile: "Richiedi preventivo SLAM",
     ctaHref: "/rilievi-laser-scanner-slam-brescia",
     ctaLabel: "Scopri il servizio SLAM",
     video: HERO_VIDEO_INDOOR_SOURCES,

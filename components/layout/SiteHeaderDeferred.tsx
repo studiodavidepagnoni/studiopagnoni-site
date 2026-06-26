@@ -12,13 +12,16 @@ const SiteHeader = dynamic(
   { ssr: false },
 );
 
-/** Desktop: header interattivo dopo idle. Mobile: resta SiteHeaderShell (zero JS). */
+/** Mobile: header interattivo subito (menu drawer + chiusura alla navigazione). Desktop: dopo idle. */
 export function SiteHeaderDeferred() {
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const desktop = window.matchMedia(DESKTOP_HEADER_MEDIA_QUERY);
-    if (!desktop.matches) return;
+    if (!desktop.matches) {
+      const id = window.requestAnimationFrame(() => setReady(true));
+      return () => window.cancelAnimationFrame(id);
+    }
 
     return scheduleIdle(() => {
       if (!window.matchMedia(DESKTOP_HEADER_MEDIA_QUERY).matches) return;

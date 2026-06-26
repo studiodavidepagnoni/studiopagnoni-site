@@ -12,6 +12,7 @@ export function HeroHomePlaceholder() {
   const line2Parts = slide.line2.split(" · ").map((p) => p.trim()).filter(Boolean);
   const primaryHref = slide.primaryCtaHref ?? "/contatti";
   const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
+  const primaryLabelMobile = slide.primaryCtaLabelMobile ?? primaryLabel;
 
   return (
     <section
@@ -52,7 +53,8 @@ export function HeroHomePlaceholder() {
           </p>
           <div className="mt-8 flex w-full min-w-0 flex-col gap-3 sm:flex-row sm:items-stretch sm:gap-4 md:mt-9">
             <Link href={primaryHref} className={ui.btnHeroPrimary}>
-              {primaryLabel}
+              <span className="sm:hidden">{primaryLabelMobile}</span>
+              <span className="hidden sm:inline">{primaryLabel}</span>
             </Link>
             <Link href={slide.ctaHref} className={ui.btnHeroGhost}>
               {slide.ctaLabel}
