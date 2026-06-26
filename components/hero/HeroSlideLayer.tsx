@@ -1,12 +1,12 @@
 import Image from "next/image";
-import { HeroLcpPicture } from "@/components/hero/HeroLcpPicture";
+import { HeroIntroStillPicture } from "@/components/hero/HeroIntroStillPicture";
 import type { HeroSlide } from "@/lib/media/images";
 import {
+  HERO_POSTER_INDOOR_LCP,
   HERO_VIDEO_DEFAULT_SOURCES,
   heroVideoKey,
   heroVideoSourceOrder,
 } from "@/lib/media/heroVideos";
-import { HERO_INTRO_STILL_W960 } from "@/lib/media/images";
 import { HeroVideoSources } from "@/components/hero/HeroVideoSources";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
@@ -24,7 +24,7 @@ type Props = {
 };
 
 function posterForSlide(slide: HeroSlide, slideIndex: number): string {
-  if (slideIndex === 0) return HERO_INTRO_STILL_W960;
+  if (slideIndex === 0) return HERO_POSTER_INDOOR_LCP;
   if (slide.poster) return slide.poster;
   const sources = slide.video ?? DEFAULT_VIDEO;
   return sources.mp4.replace(/\.mp4(\?.*)?$/i, "-poster.webp");
@@ -58,7 +58,7 @@ export function HeroSlideLayer({
 
   const staticMedia =
     isIntroSlide ? (
-      <HeroLcpPicture />
+      <HeroIntroStillPicture />
     ) : (
       // eslint-disable-next-line @next/next/no-img-element -- poster pre-generato, niente optimizer
       <img

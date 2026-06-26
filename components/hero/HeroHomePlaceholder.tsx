@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { HeroLcpPicture } from "@/components/hero/HeroLcpPicture";
+import { HeroIntroStillPicture } from "@/components/hero/HeroIntroStillPicture";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/media/images";
@@ -21,7 +21,7 @@ export function HeroHomePlaceholder() {
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
       <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1]">
-        <HeroLcpPicture />
+        <HeroIntroStillPicture />
         <HeroMediaOverlay intro />
       </div>
 
