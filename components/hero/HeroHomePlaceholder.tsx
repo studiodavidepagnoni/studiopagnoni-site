@@ -21,7 +21,7 @@ export function HeroHomePlaceholder() {
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
       <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1]">
-        <HeroLcpPicture alt={slide.alt} />
+        <HeroLcpPicture />
         <HeroMediaOverlay intro />
       </div>
 

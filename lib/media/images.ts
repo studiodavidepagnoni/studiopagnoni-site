@@ -10,7 +10,7 @@ import {
   HERO_VIDEO_INDOOR_SOURCES,
   HERO_VIDEO_POINTCLOUD_SOURCES,
 } from "@/lib/media/heroVideos";
-import { projectAsset, stockImage } from "@/lib/media/mediaPath";
+import { projectAsset, stockImage, stockImageSrcSet } from "@/lib/media/mediaPath";
 import { imageAlt } from "@/lib/config/seo";
 
 export {
@@ -22,13 +22,13 @@ export {
 const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
 const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
-/** Immagine fissa hero home (mobile + poster slide 1): foto stock, non frame video. */
-export const HERO_INTRO_STILL = s("slamHero");
+/** Immagine fissa hero home (mobile + poster slide 1): distinta dalla sezione Chi siamo. */
+export const HERO_INTRO_STILL = s("handheldSlam");
 export const HERO_INTRO_STILL_W960 = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-w960.webp");
+export const HERO_INTRO_STILL_ALT = imageAlt("Acquisizione SLAM handheld in Franciacorta", { service: "slam" });
 
 export function heroIntroStillSrcSet(): string {
-  const base = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "");
-  return [480, 960].map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
+  return stockImageSrcSet(HERO_INTRO_STILL);
 }
 
 export type HeroSlide = {

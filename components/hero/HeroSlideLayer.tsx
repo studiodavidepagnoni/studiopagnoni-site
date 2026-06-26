@@ -58,7 +58,7 @@ export function HeroSlideLayer({
 
   const staticMedia =
     isIntroSlide ? (
-      <HeroLcpPicture alt={slide.alt} />
+      <HeroLcpPicture />
     ) : (
       // eslint-disable-next-line @next/next/no-img-element -- poster pre-generato, niente optimizer
       <img
