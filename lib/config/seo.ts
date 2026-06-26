@@ -99,9 +99,10 @@ export function buildPageMetadata({
 }: PageMetaInput): Metadata {
   const canonical = absoluteUrl(path === "/" ? "/" : path);
   const ogImage = absoluteUrl(ogImagePath);
+  const documentTitle = `${site.brandName} - ${title}`;
 
   return {
-    title,
+    title: { absolute: documentTitle },
     description,
     alternates: { canonical },
     openGraph: {
@@ -109,13 +110,13 @@ export function buildPageMetadata({
       locale: "it_IT",
       url: canonical,
       siteName: site.brandName,
-      title: `${title} — ${site.brandName}`,
+      title: documentTitle,
       description,
       images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt("Nuvola di punti da rilievo laser scanner SLAM", { service: "slam" }) }],
     },
     twitter: {
       card: "summary_large_image",
-      title: `${title} — ${site.brandName}`,
+      title: documentTitle,
       description,
       images: [ogImage],
     },
@@ -126,8 +127,8 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `Rilievi laser scanner SLAM e topografia — Franciacorta, Brescia | ${site.brandName}`,
-    template: `%s | ${site.brandName}`,
+    default: `${site.brandName} - Rilievi laser scanner SLAM e topografia — Franciacorta, Brescia`,
+    template: `${site.brandName} - %s`,
   },
   description:
     "Rilievi con laser scanner SLAM mobile (CHCNAV RS10) e topografia professionale: nuvole di punti georiferite, as-built e planimetrie per imprese e studi. Sede a Cazzago San Martino (BS) — Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
