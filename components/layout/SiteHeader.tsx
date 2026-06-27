@@ -4,7 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
 import { withBasePath } from "@/lib/utils/basePath";
-import { fontDisplay, fontNav, fontSans } from "@/lib/fonts";
+import { fontNav, fontSans } from "@/lib/fonts";
 import { isHomePath } from "@/lib/utils/isHomePath";
 import { isNavItemActive } from "@/lib/utils/navActive";
 import { resolveStaticPageHero } from "@/lib/config/pageHeroConfig";
@@ -392,8 +392,7 @@ export function SiteHeader() {
         }`}
       >
         <div className="flex flex-1 flex-col overflow-y-auto overscroll-y-contain px-[max(1rem,env(safe-area-inset-left,0px))] pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-5">
-          <p className={`${fontDisplay.className} text-base font-medium text-[var(--header-text)]`}>{site.name}</p>
-          <p className={`${fontSans.className} mb-5 mt-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--header-text-muted)]`}>
+          <p className={`${fontSans.className} mb-5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--header-text-muted)]`}>
             Menu
           </p>
           <ul className="flex flex-col gap-1">
