@@ -3,7 +3,7 @@ import { fontNav } from "@/lib/fonts";
 import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
 import { withBasePath } from "@/lib/utils/basePath";
 
-const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header inline-flex items-center px-3 py-1 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`;
+const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header inline-flex items-center px-3 py-1 text-[16px] font-bold uppercase leading-[28px] tracking-normal text-[var(--header-nav-text)]`;
 
 /** Header statico (zero JS): visibile finché non idrata SiteHeader. */
 export function SiteHeaderShell() {
