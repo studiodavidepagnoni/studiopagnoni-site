@@ -122,6 +122,19 @@
   transition: filter 0.22s ease;
 }
 
+/* Lockup completo (logo.jpeg) su header/footer scuro: già bianco+teal, solo glow leggero */
+.site-brand-lockup-img {
+  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand-mark-tint) 40%, transparent))
+    drop-shadow(0 0 22px var(--brand-glow));
+  transition: filter 0.22s ease;
+}
+
+/* Su sezioni chiare: inverte i bianchi tipografici mantenendo leggibilità */
+.site-brand-lockup-img--on-light {
+  filter: brightness(0.18) contrast(1.15)
+    drop-shadow(0 3px 14px color-mix(in srgb, var(--primary-mid) 26%, transparent));
+}
+
 /* Icona su sezioni chiare (es. Chi siamo home): verde più profondo, senza glow mint da header */
 .site-brand-mark--on-light {
   filter: brightness(0.92) contrast(1.32) saturate(1.72) hue-rotate(-6deg)
@@ -143,6 +156,11 @@ a:focus-visible .site-brand-mark {
   filter: brightness(3.35) contrast(1.26) saturate(1.55)
     drop-shadow(0 0 16px color-mix(in srgb, var(--brand-mark-tint) 62%, transparent))
     drop-shadow(0 0 30px var(--brand-glow-strong));
+}
+
+a:focus-visible .site-brand-lockup-img {
+  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
+    drop-shadow(0 0 28px var(--brand-glow-strong));
 }
 
 /* Lockup testuale (icona + titolo nav + tagline colore marchio) */

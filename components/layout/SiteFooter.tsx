@@ -16,8 +16,7 @@ export function SiteFooter() {
             <div>
               <SiteBrandLockup
                 tone="chrome"
-                title={site.brandName}
-                markSize="h-12 w-12 sm:h-14 sm:w-14"
+                heightClass="h-11 sm:h-12 md:h-14"
                 className="max-w-full"
               />
 

@@ -96,14 +96,9 @@
       drop-shadow(0 0 30px var(--brand-glow-strong));
   }
 
-  .site-brand-lockup:hover .site-brand-lockup__title {
-    color: var(--foreground);
-  }
-
-  .site-brand-lockup:hover .site-brand-lockup__tagline,
-  .site-brand-lockup:hover .site-brand-lockup__sep {
-    color: var(--brand-mark-tint);
-    text-shadow: 0 0 22px color-mix(in srgb, var(--brand-mark-tint) 52%, transparent);
+  a:hover .site-brand-lockup-img {
+    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
+      drop-shadow(0 0 28px var(--brand-glow-strong));
   }
 
   .site-nav-link--header:hover {

@@ -1,17 +1,14 @@
 /* eslint-disable no-console */
 /**
- * Processa logo_new.png → asset logo recolorati al primary teal del sito.
- * La sorgente è icon-only ma può avere lo sfondo non-trasparente
- * (es. pattern a scacchi grigio chiaro residuo di export SVG): in quel caso
- * facciamo alpha-keying per distanza dal bg.
+ * Processa logo.jpeg → asset logo con sfondo trasparente.
+ * La sorgente è un lockup orizzontale (icona + «STUDIO PAGNONI» + tagline) su bianco.
  *
  * Output:
- *   - public/logo-mark.png  raster recolorato + bg trasparente, trimmed
- *   - public/logo-mark.svg  wrapper SVG con la PNG embedded base64 (scalabile)
- *   - public/icon.svg       favicon: icon-mark centrata su quadrato dark rounded
- *
- * Approccio colore: alpha-mask per "ink density" (distanza euclidea dal bg
- * sample) + fill costante = primary teal del sito.
+ *   - public/logo-lockup.png  lockup completo, bg trasparente (scuri → bianco per chrome scuro)
+ *   - public/logo-lockup.svg  wrapper SVG aspect-ratio nativo
+ *   - public/logo-mark.png    solo icona, recolorata teal (favicon / mark su sezioni chiare)
+ *   - public/logo-mark.svg    wrapper SVG quadrato dell'icona
+ *   - public/icon.svg         favicon
  */
 const fs = require("node:fs");
 const path = require("node:path");
@@ -20,33 +17,36 @@ async function main() {
   const sharp = (await import("sharp")).default;
 
   const root = path.resolve(__dirname, "..");
-  const inputPath = path.join(root, "logo_new.png");
+  const inputPath = path.join(root, "logo.jpeg");
+  const outLockupPng = path.join(root, "public", "logo-lockup.png");
+  const outLockupSvg = path.join(root, "public", "logo-lockup.svg");
   const outMarkPng = path.join(root, "public", "logo-mark.png");
   const outMarkSvg = path.join(root, "public", "logo-mark.svg");
   const outIconSvg = path.join(root, "public", "icon.svg");
 
-  // Marchio recolor (vedi app/globals.css --primary)
   const SITE_TEAL = { r: 14, g: 63, b: 55 }; // #0e3f37
-  /** Sfondo favicon chiaro (come reference grafica); inchiostro verdone/nero leggibile a 16px. */
   const ICON_BG = "#ebeae4";
-  /** Chrome profondo del sito (`globals.css` --surface-chrome): massimo contrasto su sfondo chiaro. */
   const ICON_INK = { r: 5, g: 30, b: 27 }; // #051e1b
 
   if (!fs.existsSync(inputPath)) {
-    if (!fs.existsSync(outMarkPng)) {
-      throw new Error(
-        `Né ${path.relative(root, inputPath)} né ${path.relative(root, outMarkPng)} sono presenti. ` +
-          `Fornisci logo_new.png per rigenerare gli asset.`
-      );
-    }
-    console.log(`[process-logo] ${path.relative(root, inputPath)} non trovato → uso ${path.relative(root, outMarkPng)} esistente per i wrapper SVG.`);
-  } else {
-    await processSource({ sharp, inputPath, outMarkPng, SITE_TEAL });
+    throw new Error(`Manca ${path.relative(root, inputPath)} — necessario per rigenerare gli asset.`);
   }
+
+  const { lockupBuffer, markBuffer, lockupMeta, markMeta } = await processSource({
+    sharp,
+    inputPath,
+    outLockupPng,
+    outMarkPng,
+    SITE_TEAL,
+  });
 
   await writeSvgWrappers({
     sharp,
-    outMarkPng,
+    lockupBuffer,
+    lockupMeta,
+    markBuffer,
+    markMeta,
+    outLockupSvg,
     outMarkSvg,
     outIconSvg,
     root,
@@ -55,77 +55,44 @@ async function main() {
   });
 }
 
-async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
-  const { data, info } = await sharp(inputPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
-  const { width, height, channels } = info;
-  if (channels !== 4) throw new Error(`Atteso 4 canali RGBA, ottenuti ${channels}`);
-  console.log(`[process-logo] Source: ${width}x${height}`);
-
-  // Sample del bg dagli angoli e bordi (la sorgente può avere checker pattern,
-  // quindi prendiamo abbastanza punti da mediare i due grigi alternati).
+function sampleBackground(data, width, height) {
   const corners = [
-    [2, 2], [width - 3, 2], [2, height - 3], [width - 3, height - 3],
-    [12, 12], [width - 13, 12], [12, height - 13], [width - 13, height - 13],
-    [Math.floor(width / 2), 4], [Math.floor(width / 2), height - 5],
-    [4, Math.floor(height / 2)], [width - 5, Math.floor(height / 2)],
+    [2, 2],
+    [width - 3, 2],
+    [2, height - 3],
+    [width - 3, height - 3],
+    [12, 12],
+    [width - 13, 12],
+    [12, height - 13],
+    [width - 13, height - 13],
+    [Math.floor(width / 2), 4],
+    [Math.floor(width / 2), height - 5],
+    [4, Math.floor(height / 2)],
+    [width - 5, Math.floor(height / 2)],
   ];
-  let bgR = 0, bgG = 0, bgB = 0;
+  let bgR = 0;
+  let bgG = 0;
+  let bgB = 0;
   for (const [x, y] of corners) {
     const i = (y * width + x) * 4;
     bgR += data[i];
     bgG += data[i + 1];
     bgB += data[i + 2];
   }
-  bgR /= corners.length;
-  bgG /= corners.length;
-  bgB /= corners.length;
-  console.log(`[process-logo] BG sample: rgb(${bgR.toFixed(0)}, ${bgG.toFixed(0)}, ${bgB.toFixed(0)})`);
+  return { bgR: bgR / corners.length, bgG: bgG / corners.length, bgB: bgB / corners.length };
+}
 
-  // Soglie di alpha-keying (distanza euclidea dal bg sample).
-  // Ampie perché bg può variare (~grigio chiaro ↔ bianco) e ink è teal scuro.
-  const T_LOW = 30;
-  const T_HIGH = 110;
-
-  const out = Buffer.alloc(data.length);
-  let opaque = 0;
-  for (let i = 0; i < data.length; i += 4) {
-    const r = data[i], g = data[i + 1], b = data[i + 2];
-    const srcAlpha = data[i + 3] / 255; // se l'input ha già alpha < 1 lo rispettiamo
-    const dist = Math.sqrt((r - bgR) ** 2 + (g - bgG) ** 2 + (b - bgB) ** 2);
-
-    let keyAlpha;
-    if (dist <= T_LOW) keyAlpha = 0;
-    else if (dist >= T_HIGH) keyAlpha = 1;
-    else keyAlpha = (dist - T_LOW) / (T_HIGH - T_LOW);
-
-    const finalAlpha = keyAlpha * srcAlpha;
-    if (finalAlpha === 0) {
-      out[i] = 0;
-      out[i + 1] = 0;
-      out[i + 2] = 0;
-      out[i + 3] = 0;
-    } else {
-      out[i] = SITE_TEAL.r;
-      out[i + 1] = SITE_TEAL.g;
-      out[i + 2] = SITE_TEAL.b;
-      out[i + 3] = Math.round(finalAlpha * 255);
-      opaque++;
-    }
-  }
-  console.log(`[process-logo] Pixel ink: ${opaque} / ${data.length / 4} (${((opaque / (data.length / 4)) * 100).toFixed(1)}%)`);
-
-  // La sorgente contiene tipicamente icona + wordmark + tagline affiancati.
-  // Cerco la banda blank verticale che separa l'icona dal testo a destra,
-  // così estraggo solo l'icona (la wordmark verrà ricreata in HTML).
+function findIconCropRight(alphaBuf, width, height) {
   const colDensity = new Float32Array(width);
   for (let x = 0; x < width; x++) {
     let n = 0;
     for (let y = 0; y < height; y++) {
-      if (out[(y * width + x) * 4 + 3] > 12) n++;
+      if (alphaBuf[(y * width + x) * 4 + 3] > 12) n++;
     }
     colDensity[x] = n / height;
   }
-  let cropRight = width; // fallback: nessun crop trovato
+
+  let cropRight = Math.round(width * 0.42);
   let inInk = false;
   let inkStart = 0;
   for (let x = 0; x < width; x++) {
@@ -139,48 +106,125 @@ async function processSource({ sharp, inputPath, outMarkPng, SITE_TEAL }) {
         blankRun++;
         xx++;
       }
-      // gap "vero" se è largo ≥ 18px e siamo già dopo un buon pezzo di ink
-      if (blankRun >= 18 && x - inkStart > width * 0.08) {
+      if (blankRun >= 12 && x - inkStart > width * 0.12 && x < width * 0.55) {
         cropRight = x;
         break;
       }
       x = xx - 1;
     }
   }
+  return cropRight;
+}
+
+async function processSource({ sharp, inputPath, outLockupPng, outMarkPng, SITE_TEAL }) {
+  const { data, info } = await sharp(inputPath).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  const { width, height, channels } = info;
+  if (channels !== 4) throw new Error(`Atteso 4 canali RGBA, ottenuti ${channels}`);
+  console.log(`[process-logo] Source: ${width}x${height}`);
+
+  const { bgR, bgG, bgB } = sampleBackground(data, width, height);
+  console.log(`[process-logo] BG sample: rgb(${bgR.toFixed(0)}, ${bgG.toFixed(0)}, ${bgB.toFixed(0)})`);
+
+  const T_LOW = 28;
+  const T_HIGH = 95;
+  /** Sotto questa luminanza l'inchiostro è trattato come nero tipografico → bianco (leggibile su header scuro). */
+  const DARK_LUMA = 48;
+  /** Teal/tagline su chrome scuro: mint brand leggibile (tokens brandMarkTint #6ee7c8). */
+  const CHROME_TEAL = { r: 110, g: 231, b: 200 };
+
+  const lockup = Buffer.alloc(data.length);
+  const markInk = Buffer.alloc(data.length);
+  let opaque = 0;
+
+  for (let i = 0; i < data.length; i += 4) {
+    const r = data[i];
+    const g = data[i + 1];
+    const b = data[i + 2];
+    const srcAlpha = data[i + 3] / 255;
+    const dist = Math.sqrt((r - bgR) ** 2 + (g - bgG) ** 2 + (b - bgB) ** 2);
+
+    let keyAlpha;
+    if (dist <= T_LOW) keyAlpha = 0;
+    else if (dist >= T_HIGH) keyAlpha = 1;
+    else keyAlpha = (dist - T_LOW) / (T_HIGH - T_LOW);
+
+    const finalAlpha = keyAlpha * srcAlpha;
+    if (finalAlpha === 0) {
+      lockup[i] = 0;
+      lockup[i + 1] = 0;
+      lockup[i + 2] = 0;
+      lockup[i + 3] = 0;
+      markInk[i] = 0;
+      markInk[i + 1] = 0;
+      markInk[i + 2] = 0;
+      markInk[i + 3] = 0;
+      continue;
+    }
+
+    opaque++;
+    const a = Math.round(finalAlpha * 255);
+    const luma = 0.2126 * r + 0.7152 * g + 0.0722 * b;
+
+    // Lockup chrome: neri tipografici → bianco; teal/tagline → mint brillante.
+    if (luma <= DARK_LUMA) {
+      lockup[i] = 255;
+      lockup[i + 1] = 255;
+      lockup[i + 2] = 255;
+    } else {
+      lockup[i] = CHROME_TEAL.r;
+      lockup[i + 1] = CHROME_TEAL.g;
+      lockup[i + 2] = CHROME_TEAL.b;
+    }
+    lockup[i + 3] = a;
+
+    markInk[i] = SITE_TEAL.r;
+    markInk[i + 1] = SITE_TEAL.g;
+    markInk[i + 2] = SITE_TEAL.b;
+    markInk[i + 3] = a;
+  }
+
+  console.log(
+    `[process-logo] Pixel ink: ${opaque} / ${data.length / 4} (${((opaque / (data.length / 4)) * 100).toFixed(1)}%)`,
+  );
+
+  const cropRight = findIconCropRight(markInk, width, height);
   console.log(`[process-logo] Icon ends at col ${cropRight}/${width} (~${((cropRight / width) * 100).toFixed(0)}%)`);
 
-  // raw → PNG buffer come intermedio (sharp è inconsistente in chain dopo raw input)
-  const rawPngBuffer = await sharp(out, { raw: { width, height, channels: 4 } }).png().toBuffer();
+  const lockupRaw = await sharp(lockup, { raw: { width, height, channels: 4 } }).png().toBuffer();
+  await sharp(lockupRaw)
+    .trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 40 })
+    .png({ compressionLevel: 9, adaptiveFiltering: true })
+    .toFile(outLockupPng);
 
-  // Step 1: estraggo la fascia sinistra che contiene solo l'icona
-  const iconExtracted = await sharp(rawPngBuffer)
-    .extract({ left: 0, top: 0, width: cropRight, height })
+  const markRaw = await sharp(markInk, { raw: { width, height, channels: 4 } }).png().toBuffer();
+  const iconExtracted = await sharp(markRaw)
+    .extract({ left: 0, top: 0, width: Math.max(8, cropRight), height })
     .toBuffer();
-
-  // Step 2: trim margini trasparenti residui → PNG finale.
-  // Threshold alto perché il bg checker dell'export SVG può lasciare alpha residui
-  // sotto T_LOW; vogliamo bbox aderente all'inchiostro vero.
   await sharp(iconExtracted)
     .trim({ background: { r: 0, g: 0, b: 0, alpha: 0 }, threshold: 50 })
     .png({ compressionLevel: 9, adaptiveFiltering: true })
     .toFile(outMarkPng);
 
-  const meta = await sharp(outMarkPng).metadata();
-  console.log(`[process-logo] Wrote ${path.relative(path.dirname(outMarkPng), outMarkPng)} (${meta.width}x${meta.height})`);
+  const lockupMeta = await sharp(outLockupPng).metadata();
+  const markMeta = await sharp(outMarkPng).metadata();
+  console.log(`[process-logo] Wrote logo-lockup.png (${lockupMeta.width}x${lockupMeta.height})`);
+  console.log(`[process-logo] Wrote logo-mark.png (${markMeta.width}x${markMeta.height})`);
+
+  return {
+    lockupBuffer: await sharp(outLockupPng).toBuffer(),
+    markBuffer: await sharp(outMarkPng).toBuffer(),
+    lockupMeta,
+    markMeta,
+  };
 }
 
-/**
- * Marchio per favicon: ogni pixel “inchiostro” (alpha sopra soglia) → stesso RGB verdone/nero.
- * Così anche l’antialias non resta su tonalità chiare (il vecchio match sul solo teal puro lasciava bordi grigi).
- */
 async function recolorMarkInkForFavicon({ sharp, markBuffer, toRgb }) {
   const { data, info } = await sharp(markBuffer).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
   const { width, height, channels } = info;
   if (channels !== 4) throw new Error("Expected RGBA");
   const aMin = 28;
   for (let i = 0; i < data.length; i += 4) {
-    const a = data[i + 3];
-    if (a < aMin) continue;
+    if (data[i + 3] < aMin) continue;
     data[i] = toRgb.r;
     data[i + 1] = toRgb.g;
     data[i + 2] = toRgb.b;
@@ -188,31 +232,46 @@ async function recolorMarkInkForFavicon({ sharp, markBuffer, toRgb }) {
   return sharp(data, { raw: { width, height, channels: 4 } }).png({ compressionLevel: 9, adaptiveFiltering: true }).toBuffer();
 }
 
-async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, root, iconBg, iconInk }) {
-  const markBuffer = await sharp(outMarkPng).toBuffer();
-  const markMeta = await sharp(outMarkPng).metadata();
-  const base64 = markBuffer.toString("base64");
+async function writeSvgWrappers({
+  sharp,
+  lockupBuffer,
+  lockupMeta,
+  markBuffer,
+  markMeta,
+  outLockupSvg,
+  outMarkSvg,
+  outIconSvg,
+  root,
+  iconBg,
+  iconInk,
+}) {
+  const lockupB64 = lockupBuffer.toString("base64");
+  const lockupSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${lockupMeta.width} ${lockupMeta.height}" width="${lockupMeta.width}" height="${lockupMeta.height}" fill="none">
+  <title>Studio Pagnoni</title>
+  <image href="data:image/png;base64,${lockupB64}" x="0" y="0" width="${lockupMeta.width}" height="${lockupMeta.height}"/>
+</svg>
+`;
+  fs.writeFileSync(outLockupSvg, lockupSvg);
+  console.log(
+    `[process-logo] Wrote ${path.relative(root, outLockupSvg)} (${lockupMeta.width}x${lockupMeta.height})`,
+  );
 
-  const iconMarkBuffer = await recolorMarkInkForFavicon({ sharp, markBuffer, toRgb: iconInk });
-  const iconMarkB64 = iconMarkBuffer.toString("base64");
-
-  // logo-mark.svg: viewBox QUADRATO, immagine centrata.
-  // Side = max(w,h) → l'asset è perfettamente square e l'icona resta centrata
-  // qualunque sia l'aspect ratio nativo, così evitiamo container-side hacks.
+  const markB64 = markBuffer.toString("base64");
   const side = Math.max(markMeta.width, markMeta.height);
   const ix = Math.round((side - markMeta.width) / 2);
   const iy = Math.round((side - markMeta.height) / 2);
   const markSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side} ${side}" width="${side}" height="${side}" fill="none">
   <title>Studio Tecnico Pagnoni</title>
-  <image href="data:image/png;base64,${base64}" x="${ix}" y="${iy}" width="${markMeta.width}" height="${markMeta.height}"/>
+  <image href="data:image/png;base64,${markB64}" x="${ix}" y="${iy}" width="${markMeta.width}" height="${markMeta.height}"/>
 </svg>
 `;
   fs.writeFileSync(outMarkSvg, markSvg);
-  console.log(`[process-logo] Wrote ${path.relative(root, outMarkSvg)} (square ${side}x${side}, image ${markMeta.width}x${markMeta.height} @ ${ix},${iy})`);
+  console.log(`[process-logo] Wrote ${path.relative(root, outMarkSvg)} (square ${side}x${side})`);
 
-  // icon.svg: icon-mark centrata su quadrato 512 dark rounded (favicon source).
+  const iconMarkBuffer = await recolorMarkInkForFavicon({ sharp, markBuffer, toRgb: iconInk });
+  const iconMarkB64 = iconMarkBuffer.toString("base64");
   const CANVAS = 512;
-  const PADDING_RATIO = 0.18; // l'icona occupa ~64% del canvas
+  const PADDING_RATIO = 0.18;
   const targetMaxSide = Math.round(CANVAS * (1 - PADDING_RATIO * 2));
   const scale = targetMaxSide / Math.max(markMeta.width, markMeta.height);
   const w = Math.round(markMeta.width * scale);
@@ -228,7 +287,7 @@ async function writeSvgWrappers({ sharp, outMarkPng, outMarkSvg, outIconSvg, roo
 </svg>
 `;
   fs.writeFileSync(outIconSvg, iconSvg);
-  console.log(`[process-logo] Wrote ${path.relative(root, outIconSvg)} (icon ${w}x${h} @ ${x},${y} on ${CANVAS}px canvas)`);
+  console.log(`[process-logo] Wrote ${path.relative(root, outIconSvg)}`);
 }
 
 main().catch((err) => {

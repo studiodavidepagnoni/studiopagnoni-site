@@ -26,17 +26,12 @@ export function SiteHeader() {
   const isHome = isHomePath(pathname);
   const [open, setOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
-  const brandTextRef = useRef<HTMLDivElement>(null);
-  const brandMarkRef = useRef<HTMLDivElement>(null);
-  const brandLineRef = useRef<HTMLSpanElement>(null);
-  const taglineRef = useRef<HTMLSpanElement>(null);
   const headerRootRef = useRef<HTMLElement | null>(null);
   const menuButtonRef = useRef<HTMLButtonElement>(null);
   const firstMobileNavRef = useRef<HTMLAnchorElement>(null);
   const mobileNavRef = useRef<HTMLElement | null>(null);
   const menuTouchStartRef = useRef<{ x: number; y: number } | null>(null);
   const wasMenuOpenRef = useRef(false);
-  const [brandMarkPx, setBrandMarkPx] = useState<number>(73);
   const [pageHeroOverlayEnd, setPageHeroOverlayEnd] = useState(0);
 
   const onMobileNavTouchStart = useCallback(
@@ -60,54 +55,6 @@ export function SiteHeader() {
     },
     [open],
   );
-
-  const syncBrandMark = useCallback(() => {
-    const textEl = brandTextRef.current;
-    const markEl = brandMarkRef.current;
-    if (!textEl || !markEl) return;
-    const height = textEl.getBoundingClientRect().height;
-    if (height <= 1) return;
-    const styles = getComputedStyle(markEl);
-    const padY = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
-    const borderY = parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
-    setBrandMarkPx(Math.round((height + padY + borderY) * 1.3));
-  }, []);
-
-  const syncTaglineWidth = useCallback(() => {
-    const brandEl = brandLineRef.current;
-    const taglineEl = taglineRef.current;
-    if (!brandEl || !taglineEl) return;
-
-    const brandWidth = brandEl.getBoundingClientRect().width;
-    if (brandWidth <= 1) return;
-
-    taglineEl.style.width = `${Math.round(brandWidth)}px`;
-    taglineEl.style.letterSpacing = "0em";
-  }, []);
-
-  useLayoutEffect(() => {
-    if (typeof ResizeObserver === "undefined") return;
-    const textEl = brandTextRef.current;
-    const markEl = brandMarkRef.current;
-    if (!textEl) return;
-
-    const apply = () => {
-      syncBrandMark();
-      syncTaglineWidth();
-    };
-
-    const observer = new ResizeObserver(apply);
-    observer.observe(textEl);
-    if (markEl) observer.observe(markEl);
-    apply();
-    void document.fonts.ready.then(apply);
-
-    window.addEventListener("resize", apply);
-    return () => {
-      observer.disconnect();
-      window.removeEventListener("resize", apply);
-    };
-  }, [syncBrandMark, syncTaglineWidth]);
 
   useEffect(() => {
     let frameId: number | null = null;
@@ -295,50 +242,21 @@ export function SiteHeader() {
           <div className={`flex min-h-[68px] items-center justify-between gap-3 py-2 sm:min-h-[76px] md:min-h-[80px] ${layoutContentMaxClass}`}>
             <Link
               href="/"
-              className="group flex min-w-0 shrink items-center gap-x-2.5 sm:gap-x-4"
+              className="group flex min-w-0 max-w-[min(100%,25.3rem)] shrink items-center sm:max-w-[29.9rem] md:max-w-[34.5rem]"
               aria-label={`${site.name} — home`}
               title={`${site.name} — home`}
             >
-              <div
-                ref={brandMarkRef}
-                className="box-border flex shrink-0 items-center justify-center"
-                style={{ width: brandMarkPx, height: brandMarkPx }}
-              >
-                {/* eslint-disable-next-line @next/next/no-img-element -- SVG marchio */}
-                <img
-                  src={`${withBasePath("/logo-mark.svg")}?v=15`}
-                  alt=""
-                  width={616}
-                  height={616}
-                  fetchPriority="low"
-                  decoding="async"
-                  className="site-brand-mark h-full w-full object-contain"
-                  aria-hidden
-                />
-              </div>
-
-              <div ref={brandTextRef} className="flex min-w-0 flex-col items-start gap-y-1.5 sm:gap-y-2">
-                <span
-                  ref={brandLineRef}
-                  className={`${fontNav.className} site-brand-title whitespace-nowrap text-[1.05rem] font-bold uppercase leading-none tracking-normal sm:text-[1.25rem] md:text-[1.45rem]`}
-                >
-                  {site.brandName}
-                </span>
-                <span
-                  ref={taglineRef}
-                  className={`${fontNav.className} site-brand-tagline flex items-baseline justify-between text-[0.55rem] font-bold uppercase leading-snug sm:text-[0.6rem] md:text-[0.65rem]`}
-                >
-                  <span>Architettura</span>
-                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
-                    ·
-                  </span>
-                  <span>Topografia</span>
-                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
-                    ·
-                  </span>
-                  <span>Laser Scanning</span>
-                </span>
-              </div>
+              {/* eslint-disable-next-line @next/next/no-img-element -- lockup SVG (icona + wordmark) */}
+              <img
+                src={`${withBasePath("/logo-lockup.svg")}?v=17`}
+                alt=""
+                width={1485}
+                height={300}
+                fetchPriority="low"
+                decoding="async"
+                className="site-brand-lockup-img h-[3.91rem] w-auto max-w-full object-contain object-left sm:h-[4.6rem] md:h-[5.06rem]"
+                aria-hidden
+              />
             </Link>
 
             <nav className="site-header-nav hidden shrink-0 md:block" aria-label="Menu principale">

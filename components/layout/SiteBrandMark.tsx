@@ -18,10 +18,10 @@ export function SiteBrandMark({
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- marchio vettoriale */}
       <img
-        src={`${withBasePath("/logo-mark.svg")}?v=15`}
+        src={`${withBasePath("/logo-mark.svg")}?v=16`}
         alt=""
-        width={616}
-        height={616}
+        width={475}
+        height={475}
         loading="lazy"
         fetchPriority="low"
         decoding="async"
