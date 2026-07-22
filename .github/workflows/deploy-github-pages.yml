@@ -33,7 +33,7 @@ jobs:
       - name: Build static export
         env:
           STATIC_EXPORT: "1"
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://www.studiopagnoni.com' }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://studiopagnoni.com' }}
           # Dominio custom in root: lasciare vuoto. Solo per anteprima github.io/repo impostare vars.NEXT_PUBLIC_BASE_PATH=/nome-repo
           NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
           NEXT_PUBLIC_FORMSPREE_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ID }}

@@ -13,7 +13,7 @@ export const layoutContentMaxClass = "mx-auto w-full min-w-0 max-w-[1140px]";
  * Build locale in sottocartella: es. `NEXT_PUBLIC_SITE_URL=https://tuouser.github.io/nome-repo` e
  * `NEXT_PUBLIC_BASE_PATH=/nome-repo` (stesso nome del repo, con slash iniziale).
  */
-const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.studiopagnoni.com";
+const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://studiopagnoni.com";
 
 export const site = {
   name: "Studio Tecnico Pagnoni",
