@@ -23,7 +23,7 @@ export function SiteHeaderShell() {
           >
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
-              src={`${withBasePath("/logo-lockup.svg")}?v=17`}
+              src={`${withBasePath("/logo-lockup.svg")}?v=22`}
               alt=""
               width={1485}
               height={300}

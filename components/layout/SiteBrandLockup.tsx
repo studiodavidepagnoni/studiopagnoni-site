@@ -32,7 +32,7 @@ export function SiteBrandLockup({
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- lockup SVG */}
       <img
-        src={`${withBasePath("/logo-lockup.svg")}?v=17`}
+        src={`${withBasePath("/logo-lockup.svg")}?v=22`}
         alt=""
         width={1485}
         height={300}
