@@ -238,7 +238,7 @@ a:focus-visible .site-brand-lockup-img {
   position: absolute;
   left: 0.75rem;
   right: 0.75rem;
-  bottom: 0.28rem;
+  bottom: 0.1rem;
   height: 2px;
   border-radius: 999px;
   background: linear-gradient(

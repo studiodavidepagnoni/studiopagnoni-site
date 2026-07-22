@@ -3,7 +3,7 @@ import { fontNav } from "@/lib/fonts";
 import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
 import { withBasePath } from "@/lib/utils/basePath";
 
-const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header block px-3 py-2 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`;
+const navLinkClass = `${fontNav.className} site-nav-link site-nav-link--header inline-flex items-center px-3 py-1 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`;
 
 /** Header statico (zero JS): visibile finché non idrata SiteHeader. */
 export function SiteHeaderShell() {
@@ -15,7 +15,7 @@ export function SiteHeaderShell() {
       <div
         className={`${layoutGutterXClass} max-md:ps-[max(1rem,env(safe-area-inset-left,0px))] max-md:pe-[max(1rem,env(safe-area-inset-right,0px))]`}
       >
-        <div className={`flex min-h-[68px] items-center justify-between gap-3 py-2 sm:min-h-[76px] md:min-h-[80px] ${layoutContentMaxClass}`}>
+        <div className={`flex min-h-[72px] items-center justify-between gap-3 py-2 sm:min-h-[84px] md:min-h-[96px] ${layoutContentMaxClass}`}>
           <Link
             href="/"
             className="group flex min-w-0 max-w-[min(100%,25.3rem)] shrink items-center sm:max-w-[29.9rem] md:max-w-[34.5rem]"
@@ -33,10 +33,13 @@ export function SiteHeaderShell() {
             />
           </Link>
 
-          <nav className="site-header-nav hidden shrink-0 md:block" aria-label="Menu principale">
-            <ul className="site-header-nav__list flex flex-wrap items-center justify-end gap-y-2">
+          <nav
+            className="site-header-nav hidden h-[3.91rem] shrink-0 items-center sm:h-[4.6rem] md:flex md:h-[5.06rem]"
+            aria-label="Menu principale"
+          >
+            <ul className="site-header-nav__list flex h-full flex-wrap items-center justify-end gap-y-2">
               {navItems.map((item, index) => (
-                <li key={item.href}>
+                <li key={item.href} className="flex h-full items-center">
                   <Link href={item.href} className={`${navLinkClass}${index === navItems.length - 1 ? " site-nav-link--last" : ""}`}>
                     {item.label}
                   </Link>
