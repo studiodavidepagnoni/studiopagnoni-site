@@ -25,16 +25,17 @@ export const homeChiSiamo: {
   short: (
     <>
       Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a <strong>Bornato, Cazzago San Martino</strong>. Uniamo{" "}
-      <strong>topografia</strong>, <strong>laser scanner SLAM</strong> e pratiche tecniche per trasformare rilievi e territorio in elaborati utilizzabili.
+      <strong>architettura</strong>, <strong>topografia</strong>, <strong>laser scanner SLAM</strong> e pratiche tecniche per trasformare
+      progetto, rilievi e territorio in elaborati utilizzabili.
       <br />
-      Sergio e Davide Pagnoni seguono ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
+      Lo studio segue ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
     </>
   ),
   highlights: [
+    { label: "Architettura: concept, progetto e coordinamento delle discipline" },
     { label: "Rilievi GNSS RTK, stazione totale e laser SLAM" },
     { label: "Nuvole di punti, CAD/BIM e documentazione tecnica" },
-    { label: "Urbanistica, verde, pratiche e sicurezza cantieri" },
-    { label: "Franciacorta, Brescia, Lombardia e Nord Italia" },
+    { label: "Urbanistica, verde, pratiche e sicurezza cantieri · Franciacorta e Nord Italia" },
   ],
   blocks: [
     {
@@ -44,7 +45,7 @@ export const homeChiSiamo: {
           <strong>Brescia</strong>, <strong>Franciacorta</strong> e raggio su <strong>Lombardia</strong> e <strong>Nord Italia</strong>):{" "}
           <strong>Geometra Sergio Pagnoni</strong> e <strong>Architetto Davide Pagnoni</strong> lavorano in sinergia su progetti di territorio, edilizia e
           rilievi ad alta precisione. Non svolgiamo <strong>progettazione strutturale</strong>: quando necessario ci avvaliamo di collaboratori esterni,
-          in analogia a quanto avviene negli studi di ingegneria strutturale di riferimento, mantenendo il focus su topografia, laser scanner, verde e
+          in analogia a quanto avviene negli studi di ingegneria strutturale di riferimento, mantenendo il focus su architettura, topografia, laser scanner, verde e
           iter autorizzativi.
         </>
       ),

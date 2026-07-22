@@ -24,9 +24,9 @@ function ContattiIntroInner() {
           </>
         ) : (
           <>
-            Siamo disponibili per preventivi su <strong>rilievi topografici</strong>, <strong>laser scanner SLAM</strong>,{" "}
-            <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e <strong>coordinamento sicurezza</strong>. Indica la
-            località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
+            Siamo disponibili per preventivi su <strong>pratiche architettoniche</strong>, <strong>rilievi topografici</strong>,{" "}
+            <strong>laser scanner SLAM</strong>, <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e{" "}
+            <strong>coordinamento sicurezza</strong>. Indica la località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
           </>
         )}
       </p>
@@ -56,7 +56,9 @@ function ContattiQuerySuspense({ children, fallback }: { children: ReactNode; fa
 
 const introFallback = (
   <div className="mb-10 max-w-[780px] sm:mb-12">
-    <p className={ui.body}>Siamo disponibili per preventivi su rilievi topografici, laser scanner SLAM e progettazione.</p>
+    <p className={ui.body}>
+      Siamo disponibili per preventivi su pratiche architettoniche, rilievi topografici, laser scanner SLAM e progettazione.
+    </p>
   </div>
 );
 
