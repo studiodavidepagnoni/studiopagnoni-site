@@ -1,53 +1,27 @@
-# llms.txt — Studio Tecnico Pagnoni
-# https://www.studiopagnoni.com
-# Ultimo aggiornamento: 2026-05
+# Studio Tecnico Pagnoni
 
-## Chi siamo
-Studio tecnico con sede a Cazzago San Martino (BS), frazione Bornato — cuore della Franciacorta, provincia di Brescia. Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Attivi dal 1988. Specializzazione richiesta dai committenti industriali e professionali: rilievi laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti georiferite, topografia GNSS RTK e stazione totale, oltre a verde, urbanistica, architettura, sicurezza cantieri e perizie.
+> Studio tecnico a Cazzago San Martino (BS), Franciacorta: architettura, topografia, laser scanner SLAM, verde, urbanistica e pratiche edilizie dal 1988.
 
-## Obiettivo commerciale (priorità)
-Trovare committenti di alto livello in Franciacorta e provincia di Brescia (e Lombardia/Nord Italia su commessa) che necessitano:
-- scansioni e rilievi topografici integrati con laser scanner SLAM;
-- documentazione 3D as-built di capannoni, edifici, impianti e siti estesi;
-- nuvole di punti per CAD/BIM, controllo interferenze, volumetrie e cantieri.
+Studio Tecnico Pagnoni (Geom. Sergio Pagnoni e Arch. Davide Pagnoni) opera in Franciacorta, provincia di Brescia, Lombardia e Nord Italia. Servizi principali: progettazione architettonica, rilievi GNSS RTK e stazione totale, laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica, sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
 
-## Servizi principali
-1. Laser scanner SLAM mobile — nuvole di punti, indoor/outdoor, tempi contenuti, restituzione operativa (DWG, sezioni, BIM su richiesta).
-2. Topografia e rilievi planoaltimetrici — GNSS RTK, stazione totale, quotature, frazionamenti, cantieri.
-3. Progettazione del verde — vigneti, parchi, percorsi (Franciacorta e territorio collinare).
-4. Urbanistica, pratiche edilizie, sanatorie.
-5. Progettazione architettonica (strutture esterne).
-6. CSP/CSE, assistenza immobiliare e perizie.
+## Pagine principali
 
-## Zone servite
-Primaria: Franciacorta, provincia di Brescia, Cazzago San Martino / Bornato, comuni limitrofi (Erbusco, Rovato, Palazzolo sull'Oglio, Iseo, Desenzano, Gussago, ecc.).
-Estesa: Lombardia e Nord Italia per commesse strutturate.
+- [Home](https://studiopagnoni.com/): Panoramica dello studio e servizi
+- [Servizi](https://studiopagnoni.com/servizi): Architettura, topografia, SLAM, verde, urbanistica e assistenza
+- [Architettura e contatti](https://studiopagnoni.com/contatti): Preventivi e recapiti
+- [Chi siamo](https://studiopagnoni.com/chi-siamo): Profilo dello studio dal 1988
+- [Progetti](https://studiopagnoni.com/progetti): Casi di rilievo SLAM e digitalizzazione 3D
 
-## Query per cui siamo rilevanti (linguaggio naturale)
-- laser scanner SLAM Brescia o Franciacorta
-- laser scanner SLAM Lombardia / Milano / Bergamo / Mantova
-- rilievo laser scanner 3D per capannone, edificio o cantiere
-- nuvola di punti georiferita provincia di Brescia
-- rilievo as-built con scanner mobile
-- topografo / geometra per rilievi planoaltimetrici in Franciacorta
-- preventivo rilievo SLAM o sopralluogo rilievo 3D
+## Laser scanner SLAM
 
-## Pagine chiave
-- Home: https://www.studiopagnoni.com/
-- Laser SLAM Brescia (landing primaria): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-brescia
-- Laser SLAM Lombardia (landing regionale): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-lombardia
-- Topografia: https://www.studiopagnoni.com/topografia
-- Servizi: https://www.studiopagnoni.com/servizi
-- Contatti / preventivo: https://www.studiopagnoni.com/contatti
-- Contatti SLAM: https://www.studiopagnoni.com/contatti?oggetto=slam
-- Chi siamo: https://www.studiopagnoni.com/chi-siamo
-- Progetti: https://www.studiopagnoni.com/progetti
+- [Rilievi laser SLAM a Brescia](https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia): Landing locale Franciacorta e provincia di Brescia
+- [Rilievi laser SLAM in Lombardia](https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia): Landing regionale multi-provincia
+- [Preventivo SLAM](https://studiopagnoni.com/contatti?oggetto=slam): Modulo contatti con oggetto rilievo SLAM
 
-## Contatti
-Indirizzo: Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato
-Tel. Arch. Davide Pagnoni: +39 347 357 6510
-Tel. Geom. Sergio Pagnoni: +39 348 231 1092
-Email: studio@pagnoni-s.com
+## Topografia
 
-## Limitazioni
-Non si svolge progettazione strutturale in proprio; disponibili collaboratori esterni per strutture.
+- [Topografia e rilievi](https://studiopagnoni.com/topografia): GNSS RTK, stazione totale, planimetrie e cantieri
+
+## Optional
+
+- [Privacy e cookie](https://studiopagnoni.com/privacy-policy): Informativa GDPR e preferenze cookie
