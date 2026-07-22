@@ -1,11 +1,9 @@
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { fontDisplay, fontSans } from "@/lib/fonts";
-import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
+import type { SlamLandingContent } from "@/lib/content/laserSlamLanding";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
-
-const L = laserSlamLanding;
 
 const introCopyClass = `${fontSans.className} text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`;
 
@@ -25,14 +23,16 @@ function CtaButtons({ className = "" }: { className?: string }) {
   );
 }
 
-export function LaserSlamLanding() {
+export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
+  const L = content;
+
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
           <section className={ui.innerCard} aria-labelledby="slam-intro">
             <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
-              Prima di intervenire, serve una base metrica affidabile
+              {L.introHeading}
             </h2>
             <div className="max-w-[72ch] space-y-4">
               <p className={introCopyClass}>{L.introLead}</p>
@@ -41,15 +41,11 @@ export function LaserSlamLanding() {
             <CtaButtons className="mt-8" />
           </section>
 
-          {/* Settori */}
           <section className={ui.innerCard} aria-labelledby="slam-settori">
             <h2 id="slam-settori" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               Settori e applicazioni
             </h2>
-            <p className={`${ui.bodyMuted} mb-8 max-w-[60ch]`}>
-              Il rilievo SLAM mobile è pensato per chi deve decidere su base metrica affidabile: imprese, studi di progettazione, facility e
-              committenti con immobili complessi.
-            </p>
+            <p className={`${ui.bodyMuted} mb-8 max-w-[60ch]`}>{L.sectorsIntro}</p>
             <ul className="grid list-none gap-4 sm:grid-cols-2 lg:gap-5">
               {L.sectors.map((s) => (
                 <li key={s.title} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:p-6">
@@ -60,7 +56,23 @@ export function LaserSlamLanding() {
             </ul>
           </section>
 
-          {/* Strumentazione (sintesi tecnica) */}
+          <section className={ui.innerCard} aria-labelledby="slam-area">
+            <h2 id="slam-area" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
+              {L.areaHeading}
+            </h2>
+            <p className={`${introCopyClass} mb-6 max-w-[68ch]`}>{L.areaBody}</p>
+            <ul className="list-none space-y-3 pl-0">
+              {L.areaPlaces.map((place) => (
+                <li
+                  key={place}
+                  className="relative pl-5 text-[0.95rem] leading-relaxed text-[var(--copy-body)] before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]"
+                >
+                  {place}
+                </li>
+              ))}
+            </ul>
+          </section>
+
           <section className={ui.innerCard} aria-labelledby="slam-rs10">
             <h2 id="slam-rs10" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               La strumentazione (CHCNAV RS10)
@@ -81,7 +93,6 @@ export function LaserSlamLanding() {
             </ul>
           </section>
 
-          {/* Cosa consegniamo */}
           <section className={ui.innerCard} aria-labelledby="slam-deliverables">
             <h2 id="slam-deliverables" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               Cosa consegniamo
@@ -106,7 +117,6 @@ export function LaserSlamLanding() {
             </div>
           </section>
 
-          {/* Come lavoriamo */}
           <section aria-labelledby="slam-workflow">
             <h2 id="slam-workflow" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>
               Come lavoriamo
@@ -122,20 +132,16 @@ export function LaserSlamLanding() {
             </ol>
           </section>
 
-          {/* Progetti SLAM */}
           <section className={ui.innerCard} aria-labelledby="slam-projects">
             <h2 id="slam-projects" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               Progetti
             </h2>
-            <p className={`${ui.bodyMuted} max-w-[58ch]`}>
-              Laser scanner SLAM e documentazione 3D: esempi di acquisizione in movimento e restituzione operativa.
-            </p>
+            <p className={`${ui.bodyMuted} max-w-[58ch]`}>{L.projectsIntro}</p>
             <Link href="/progetti" className={`${ui.btnOutline} mt-8 inline-flex min-h-[48px] items-center`}>
               Vai ai progetti
             </Link>
           </section>
 
-          {/* Confronto mobile vs statico */}
           <section className={ui.innerCard} aria-labelledby="slam-compare">
             <h2 id="slam-compare" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               Perché mobile SLAM vs scanner statico
@@ -171,17 +177,24 @@ export function LaserSlamLanding() {
 
           <FaqSection id="slam-faq" items={L.faq} />
 
-          {/* CTA finale */}
+          <section className={ui.innerCard} aria-labelledby="slam-related">
+            <h2 id="slam-related" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
+              Approfondisci per area
+            </h2>
+            <p className={`${ui.bodyMuted} mb-6 max-w-[58ch]`}>{L.related.text}</p>
+            <Link href={L.related.href} className={`${ui.btnOutline} inline-flex min-h-[48px] items-center`}>
+              {L.related.label} →
+            </Link>
+          </section>
+
           <section
             className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 sm:p-10"
             aria-labelledby="slam-cta"
           >
             <h2 id="slam-cta" className={`${fontDisplay.className} text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
-              Pianifichiamo il tuo rilievo SLAM
+              {L.ctaHeading}
             </h2>
-            <p className={`${ui.body} mt-4 max-w-[52ch] text-[var(--copy-body)]`}>
-              Indica zona, superficie indicativa e cosa ti serve in consegna: ti rispondiamo con tempi e preventivo su misura.
-            </p>
+            <p className={`${ui.body} mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{L.ctaBody}</p>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
               <Link
                 href="/contatti?oggetto=slam#form-contatti"

@@ -20,6 +20,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/servizi", changeFrequency: "monthly", priority: 0.9 },
     { path: "/topografia", changeFrequency: "monthly", priority: 0.95 },
     { path: "/rilievi-laser-scanner-slam-brescia", changeFrequency: "weekly", priority: 1 },
+    { path: "/rilievi-laser-scanner-slam-lombardia", changeFrequency: "weekly", priority: 0.98 },
     { path: "/contatti", changeFrequency: "monthly", priority: 0.9 },
     { path: "/chi-siamo", changeFrequency: "monthly", priority: 0.8 },
     { path: "/progetti", changeFrequency: "monthly", priority: 0.8 },

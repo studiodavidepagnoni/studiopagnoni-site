@@ -1,10 +1,10 @@
 import { LaserSlamLanding } from "@/components/laser/LaserSlamLanding";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
-import { laserSlamLandingBrescia } from "@/lib/content/laserSlamLanding";
+import { laserSlamLandingLombardia } from "@/lib/content/laserSlamLanding";
 import { buildSlamLandingJsonLd } from "@/lib/config/slamLandingJsonLd";
 import { buildPageMetadata } from "@/lib/config/seo";
 
-const content = laserSlamLandingBrescia;
+const content = laserSlamLandingLombardia;
 
 export const metadata = buildPageMetadata({
   title: content.metaTitle,
@@ -15,7 +15,7 @@ export const metadata = buildPageMetadata({
 
 const slamLandingJsonLd = buildSlamLandingJsonLd(content);
 
-export default function RilieviLaserScannerSlamBresciaPage() {
+export default function RilieviLaserScannerSlamLombardiaPage() {
   return (
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(slamLandingJsonLd) }} />

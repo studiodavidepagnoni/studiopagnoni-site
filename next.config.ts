@@ -88,6 +88,9 @@ if (isStaticExport) {
   nextConfig.redirects = async () => [
     { source: "/index.html", destination: "/", permanent: true },
     { source: "/laser-scanner-slam", destination: "/rilievi-laser-scanner-slam-brescia", permanent: true },
+    { source: "/laser-scanner-slam-brescia", destination: "/rilievi-laser-scanner-slam-brescia", permanent: true },
+    { source: "/laser-scanner-slam-lombardia", destination: "/rilievi-laser-scanner-slam-lombardia", permanent: true },
+    { source: "/rilievi-laser-scanner-slam", destination: "/rilievi-laser-scanner-slam-brescia", permanent: true },
     { source: "/chi-siamo.html", destination: "/chi-siamo", permanent: true },
     { source: "/servizi-studio-progettazione.html", destination: "/servizi", permanent: true },
     {

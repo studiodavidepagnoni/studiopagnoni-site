@@ -15,7 +15,7 @@ export const stockImages = {
   slamHero: "rilievo-laser-slam-operatore-brescia",
   pointcloud: "nuvola-punti-rilievo-laser-scanner",
   handheldSlam: "rilievo-slam-handheld-franciacorta",
-  surveySite: "rilievo-topografico-cantiere-brescia",
+  surveySite: "progettazione-tecnica-tavolo-brescia",
   gnssRtk: "gnss-rtk-rilievo-estrattivo-brescia",
   topoPlan: "piano-topografico-curve-livello-brescia",
   technicalDocs: "documentazione-tecnica-studio-pagnoni",

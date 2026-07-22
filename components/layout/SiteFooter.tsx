@@ -45,13 +45,13 @@ export function SiteFooter() {
                     </Link>
                   </li>
                   <li>
-                    <Link className={footerNavLinkClass} href="/topografia">
-                      Topografia
+                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
+                      SLAM Brescia
                     </Link>
                   </li>
                   <li>
-                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
-                      Rilievi 3D SLAM
+                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-lombardia">
+                      SLAM Lombardia
                     </Link>
                   </li>
                   <li>

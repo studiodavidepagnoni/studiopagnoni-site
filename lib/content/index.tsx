@@ -97,50 +97,95 @@ export const homeStrumentazione: {
   ],
 };
 
-export const homeServiceCards = [
+/** Gruppi servizio: home (anteprima) e pagina Servizi (schede complete).
+ * Ordine brand: Architettura → Topografia → Laser Scanning, poi gli altri ambiti. */
+export const serviceGroups = [
   {
+    id: "architettura",
+    kicker: "Concept · Progetto · Consegna",
+    title: "Architettura",
+    description:
+      "Progettazione architettonica completa: dal concept alle tavole esecutive, con coordinamento di rilievi, urbanistica e cantiere. Arch. Davide Pagnoni segue le fasi del processo edilizio in continuità con misura e pratiche.",
+    points: [
+      "Concept, anteprogetto e progetto definitivo/esecutivo per nuove costruzioni, ampliamenti e ristrutturazioni.",
+      "Coordinamento con topografia e laser SLAM quando serve una base metrica affidabile dello stato di fatto.",
+      "Allineamento a vincoli urbanistici e pratiche edilizie; strutture affidate a professionisti esterni di fiducia.",
+    ],
+    href: "/servizi#architettura",
+    cta: null,
+  },
+  {
+    id: "topografia-rilievi",
     kicker: "GNSS · Stazione totale",
     title: "Topografia e rilievi",
     description:
-      "Rilievi planoaltimetrici, GNSS RTK, stazione totale, quotature per frazionamenti e cantieri. Precisione e tracciabilità dei dati.",
+      "Rilievi planoaltimetrici per frazionamenti, nuovi insediamenti, cantieri e verifiche di confine. GNSS RTK e stazione totale per acquisizioni tracciabili.",
+    points: [
+      "Rilievi planoaltimetrici e quotati per progettazione, cantieristica e contenziosi tecnici.",
+      "Supporto a perizie e stime quando la misura dello stato di fatto è parte dell’incarico.",
+    ],
     href: "/topografia",
+    cta: "Approfondisci la topografia",
   },
   {
+    id: "laser-slam",
     kicker: "Nuvole di punti · RS10",
     title: "Laser scanner SLAM",
     description:
-      "Acquisizione rapida di nuvole di punti e documentazione 3D per edifici, complessi industriali e siti estesi.",
+      "Documentazione 3D di edifici, capannoni e impianti con dense nuvole di punti: as-built, sezioni, CAD/BIM e verifiche in tempi contenuti.",
+    points: [
+      "Acquisizione mobile indoor/outdoor lungo percorsi continui.",
+      "Integrazione con controlli topografici dove servono coordinate di progetto.",
+    ],
     href: "/rilievi-laser-scanner-slam-brescia",
+    cta: "Approfondisci il laser SLAM",
   },
   {
+    id: "verde-paesaggio",
     kicker: "Paesaggio · Vigneti",
     title: "Progettazione del verde",
     description:
-      `Vigneti, parchi, strade di montagna, sentieri e boschi, con supporto agronomico. ${franciacortaPaesaggioViticole}`,
+      "Progettazione e modellazione del verde per vigneti, parchi, strade di montagna, sentieri e interventi di riqualificazione, anche con supporto agronomico.",
+    points: [franciacortaPaesaggioViticole],
     href: "/servizi#verde-paesaggio",
+    cta: null,
   },
   {
+    id: "urbanistica-pratiche",
     kicker: "Piani regolatori · Iter",
     title: "Urbanistica e pratiche edilizie",
     description:
-      "Sanatorie, interpretazione dei piani regolatori, iter autorizzativi e assistenza nelle pratiche presso gli enti.",
+      "Lettura degli strumenti urbanistici, sanatorie e pratiche edilizie con coordinamento documentale verso gli enti.",
+    points: [
+      "Lettura dei piani regolatori comunali e sovracomunali.",
+      "Sanatorie e regolarizzazioni quando i presupposti normativi sono rispettati.",
+      "Pratiche edilizie (SCIA, CILA, permessi dove previsti).",
+    ],
     href: "/servizi#urbanistica-pratiche",
+    cta: null,
   },
   {
-    kicker: "Concept · Consegna",
-    title: "Progettazione architettonica",
-    description:
-      "Progettazione completa dal concept alla consegna, coordinando le discipline e le fasi del processo edilizio.",
-    href: "/servizi#architettura",
-  },
-  {
+    id: "sicurezza-assistenza",
     kicker: "CSP · CSE · Perizie",
-    title: "Sicurezza cantieri e assistenza immobiliare",
+    title: "Sicurezza cantieri e assistenza tecnica",
     description:
-      "Coordinamento della sicurezza in fase di progettazione ed esecuzione (CSP e CSE). Assistenza immobiliare, perizie e consulenze tecniche collegate.",
+      "Coordinamento della sicurezza in cantiere e assistenza tecnica collegata a immobili, perizie e consulenze.",
+    points: [
+      "Coordinamento della sicurezza in fase di progettazione ed esecuzione (CSP e CSE).",
+      "Assistenza immobiliare, perizie, stime e consulenze tecniche.",
+    ],
     href: "/servizi#sicurezza-assistenza",
+    cta: null,
   },
 ] as const;
+
+/** Anteprima home: stesse schede, link alla pagina Servizi o alle landing dedicate. */
+export const homeServiceCards = serviceGroups.map((group) => ({
+  kicker: group.kicker,
+  title: group.title,
+  description: group.description,
+  href: group.href,
+}));
 
 export const homeProgettiIntro =
   "Anteprima di tre casi SLAM e topografia. Schede complete, video e dettagli nell’archivio Progetti.";

@@ -30,9 +30,12 @@ import { site } from "@/lib/config/site";
 export const seoKeywords = {
   primary: [
     "laser scanner SLAM Brescia",
+    "laser scanner SLAM Lombardia",
     "rilievo laser scanner 3D Franciacorta",
+    "rilievo laser scanner 3D Lombardia",
     "nuvola di punti laser scanner",
     "rilievo as built Brescia",
+    "rilievo as built Lombardia",
     "geometra laser scanner provincia di Brescia",
     "scansione 3D capannone industriale",
     "CHCNAV RS10 rilievo",
@@ -43,6 +46,7 @@ export const seoKeywords = {
     "rilievo topografico Franciacorta",
     "geometra topografo Cazzago San Martino",
     "rilievo planoaltimetrico Lombardia",
+    "laser scanner Milano Bergamo Mantova",
     "GNSS RTK rilievo Brescia",
     "stazione totale rilievo",
   ],
@@ -149,6 +153,9 @@ export const rootMetadata: Metadata = {
       "Rilievi 3D SLAM e topografia in Franciacorta e Brescia. Studio tecnico a Cazzago San Martino (BS).",
   },
   robots: { index: true, follow: true },
+  verification: {
+    google: "sE-raRFBNM462UFEAV_IfRfPVg9n4yTYxc8K9ys_gGI",
+  },
   other: { "theme-color": "#051e1b" },
 };
 

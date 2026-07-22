@@ -25,6 +25,7 @@ Estesa: Lombardia e Nord Italia per commesse strutturate.
 
 ## Query per cui siamo rilevanti (linguaggio naturale)
 - laser scanner SLAM Brescia o Franciacorta
+- laser scanner SLAM Lombardia / Milano / Bergamo / Mantova
 - rilievo laser scanner 3D per capannone, edificio o cantiere
 - nuvola di punti georiferita provincia di Brescia
 - rilievo as-built con scanner mobile
@@ -33,7 +34,8 @@ Estesa: Lombardia e Nord Italia per commesse strutturate.
 
 ## Pagine chiave
 - Home: https://www.studiopagnoni.com/
-- Laser SLAM (landing principale): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-brescia
+- Laser SLAM Brescia (landing primaria): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-brescia
+- Laser SLAM Lombardia (landing regionale): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-lombardia
 - Topografia: https://www.studiopagnoni.com/topografia
 - Servizi: https://www.studiopagnoni.com/servizi
 - Contatti / preventivo: https://www.studiopagnoni.com/contatti

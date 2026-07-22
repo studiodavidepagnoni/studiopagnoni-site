@@ -60,7 +60,16 @@ test.describe("smoke", () => {
     await dismissCookieBanner(page);
 
     await expect(page.locator("#main-content")).toBeVisible();
-    await expect(page.getByRole("heading", { name: /Pianifichiamo il tuo rilievo SLAM/i })).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Preventivo rilievo SLAM a Brescia/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Richiedi preventivo SLAM" }).first()).toBeVisible();
+  });
+
+  test("landing SLAM Lombardia — contenuto commerciale e CTA", async ({ page }) => {
+    await page.goto("/rilievi-laser-scanner-slam-lombardia/");
+    await dismissCookieBanner(page);
+
+    await expect(page.locator("#main-content")).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Preventivo rilievo SLAM in Lombardia/i })).toBeVisible();
     await expect(page.getByRole("link", { name: "Richiedi preventivo SLAM" }).first()).toBeVisible();
   });
 });

@@ -20,7 +20,7 @@ export const site = {
   /** Marchio in header/footer (senza «Tecnico»). */
   brandName: "Studio Pagnoni",
   legalName: "Studio Tecnico Pagnoni",
-  tagline: "Topografia, laser scanner SLAM, progettazione e territorio",
+  tagline: "Architettura, topografia e laser scanning",
   url: publicSiteUrl,
   email: "studio@pagnoni-s.com",
   /** Recapiti telefonici (due linee). */
