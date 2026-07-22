@@ -61,9 +61,9 @@ Il job **deploy** fallisce con 404 finché Pages non è attivo. Fino ad allora i
 1. **Settings → Pages** del repository: **Build and deployment** → Source **GitHub Actions** (non “Deploy from branch”).
 2. Repository variable **`PAGES_DEPLOY_ENABLED`** = `true` (Settings → Secrets and variables → Actions → Variables).
 3. Secret **`NEXT_PUBLIC_FORMSPREE_ID`** se usi il form contatti.
-4. Variables consigliate per dominio custom: `NEXT_PUBLIC_SITE_URL` = `https://www.studiopagnoni.com`, `NEXT_PUBLIC_BASE_PATH` vuoto (sito in root, non in `/repo`).
+4. Variables consigliate per dominio custom: `NEXT_PUBLIC_SITE_URL` = `https://studiopagnoni.com`, `NEXT_PUBLIC_BASE_PATH` vuoto (sito in root, non in `/repo`).
 5. Push su `master` / `main` oppure **Run workflow** manuale.
-6. In **Settings → Pages → Custom domain** inserisci `www.studiopagnoni.com` e abilita **Enforce HTTPS**.
+6. In **Settings → Pages → Custom domain** inserisci `studiopagnoni.com` e abilita **Enforce HTTPS**.
 
-Sito produzione: `https://www.studiopagnoni.com`.
+Sito produzione: `https://studiopagnoni.com`.
 - **Header di sicurezza (CSP, HSTS):** con `build:static` Next non invia gli header di `next.config.ts`. Il file `public/_headers` vale su Netlify/Cloudflare Pages; su GitHub Pages configurare header su CDN o reverse proxy. In locale con `npm start` (build non static) gli header Next sono attivi.
