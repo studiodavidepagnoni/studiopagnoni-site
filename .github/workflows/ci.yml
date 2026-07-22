@@ -33,7 +33,7 @@ jobs:
       - name: Static export build
         env:
           STATIC_EXPORT: "1"
-          NEXT_PUBLIC_SITE_URL: https://www.studiotecnicopagnoni.it
+          NEXT_PUBLIC_SITE_URL: https://www.studiopagnoni.com
           NEXT_PUBLIC_FORMSPREE_ID: e2e-ci-mock
         # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.
         run: npm run build:static:fast

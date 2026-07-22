@@ -33,20 +33,17 @@ jobs:
       - name: Build static export
         env:
           STATIC_EXPORT: "1"
-          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || format('https://{0}.github.io/{1}', github.repository_owner, github.event.repository.name) }}
-          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || format('/{0}', github.event.repository.name) }}
+          NEXT_PUBLIC_SITE_URL: ${{ vars.NEXT_PUBLIC_SITE_URL || 'https://www.studiopagnoni.com' }}
+          # Dominio custom in root: lasciare vuoto. Solo per anteprima github.io/repo impostare vars.NEXT_PUBLIC_BASE_PATH=/nome-repo
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
           NEXT_PUBLIC_FORMSPREE_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ID }}
         # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.
         run: npm run build:static:fast
 
       - name: Check internal links (no double basePath)
         env:
-          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || format('/{0}', github.event.repository.name) }}
+          NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
         run: node scripts/check-export-links.cjs
-
-      - name: Prepare GitHub Pages artifact
-        # Anteprima su github.io: non pubblicare il CNAME di produzione.
-        run: rm -f out/CNAME
 
       - uses: actions/upload-pages-artifact@v5
         with:

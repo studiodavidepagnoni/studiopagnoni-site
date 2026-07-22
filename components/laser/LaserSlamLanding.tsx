@@ -2,13 +2,10 @@ import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { laserSlamLanding } from "@/lib/content/laserSlamLanding";
-import { projectCategories } from "@/lib/content/projects";
-import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const L = laserSlamLanding;
-const slamProjects = projectCategories["rilievi-digitalizzazione"].cases;
 
 const introCopyClass = `${fontSans.className} text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`;
 
@@ -126,43 +123,16 @@ export function LaserSlamLanding() {
           </section>
 
           {/* Progetti SLAM */}
-          <section aria-labelledby="slam-projects">
-            <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-              <div>
-                <h2 id="slam-projects" className={`${fontDisplay.className} ${ui.sectionHeadingAccent}`}>
-                  Progetti in evidenza
-                </h2>
-                <p className={`${ui.bodyMuted} mt-3 max-w-[58ch]`}>
-                  Laser scanner SLAM e documentazione 3D: esempi reali di acquisizione in movimento e restituzione operativa.
-                </p>
-              </div>
-              <Link href="/progetti/rilievi-digitalizzazione" className={`${ui.btnOutline} shrink-0`}>
-                Tutti i progetti SLAM
-              </Link>
-            </div>
-            <div className="grid gap-4 sm:grid-cols-2 sm:gap-5 lg:grid-cols-3 lg:gap-5">
-              {slamProjects.map((proj) => (
-                <Link
-                  key={proj.slug}
-                  href={proj.href}
-                  className="group project-preview-card block overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]"
-                >
-                  <div className="project-preview-card__media">
-                    <ProjectCoverImage
-                      cover={proj.cover}
-                      alt={proj.alt}
-                      className="project-preview-card__image"
-                      sizes="(min-width:1024px) min(300px, 28vw), (min-width:640px) min(45vw, 480px), min(100vw, 520px)"
-                    />
-                    <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
-                  </div>
-                  <div className="project-preview-card__body">
-                    <span className="project-preview-card__title">{proj.caption}</span>
-                    <span className={`${fontSans.className} project-preview-card__cta`}>Scheda →</span>
-                  </div>
-                </Link>
-              ))}
-            </div>
+          <section className={ui.innerCard} aria-labelledby="slam-projects">
+            <h2 id="slam-projects" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
+              Progetti
+            </h2>
+            <p className={`${ui.bodyMuted} max-w-[58ch]`}>
+              Laser scanner SLAM e documentazione 3D: esempi di acquisizione in movimento e restituzione operativa.
+            </p>
+            <Link href="/progetti" className={`${ui.btnOutline} mt-8 inline-flex min-h-[48px] items-center`}>
+              Vai ai progetti
+            </Link>
           </section>
 
           {/* Confronto mobile vs statico */}

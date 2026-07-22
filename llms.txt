@@ -1,5 +1,5 @@
 # llms.txt — Studio Tecnico Pagnoni
-# https://www.studiotecnicopagnoni.it
+# https://www.studiopagnoni.com
 # Ultimo aggiornamento: 2026-05
 
 ## Chi siamo
@@ -32,14 +32,14 @@ Estesa: Lombardia e Nord Italia per commesse strutturate.
 - preventivo rilievo SLAM o sopralluogo rilievo 3D
 
 ## Pagine chiave
-- Home: https://www.studiotecnicopagnoni.it/
-- Laser SLAM (landing principale): https://www.studiotecnicopagnoni.it/rilievi-laser-scanner-slam-brescia
-- Topografia: https://www.studiotecnicopagnoni.it/topografia
-- Servizi: https://www.studiotecnicopagnoni.it/servizi
-- Contatti / preventivo: https://www.studiotecnicopagnoni.it/contatti
-- Contatti SLAM: https://www.studiotecnicopagnoni.it/contatti?oggetto=slam
-- Chi siamo: https://www.studiotecnicopagnoni.it/chi-siamo
-- Progetti: https://www.studiotecnicopagnoni.it/progetti
+- Home: https://www.studiopagnoni.com/
+- Laser SLAM (landing principale): https://www.studiopagnoni.com/rilievi-laser-scanner-slam-brescia
+- Topografia: https://www.studiopagnoni.com/topografia
+- Servizi: https://www.studiopagnoni.com/servizi
+- Contatti / preventivo: https://www.studiopagnoni.com/contatti
+- Contatti SLAM: https://www.studiopagnoni.com/contatti?oggetto=slam
+- Chi siamo: https://www.studiopagnoni.com/chi-siamo
+- Progetti: https://www.studiopagnoni.com/progetti
 
 ## Contatti
 Indirizzo: Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato
