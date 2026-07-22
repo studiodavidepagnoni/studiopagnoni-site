@@ -81,15 +81,15 @@ export function SiteBrandLockup({
           {title}
         </span>
         <span ref={taglineRef} className={taglineCls}>
-          <span>Topografia</span>
-          <span className={isChrome ? "site-brand-tagline__sep shrink-0" : "site-brand-lockup__sep shrink-0"} aria-hidden>
-            ·
-          </span>
           <span>Architettura</span>
           <span className={isChrome ? "site-brand-tagline__sep shrink-0" : "site-brand-lockup__sep shrink-0"} aria-hidden>
             ·
           </span>
-          <span>SLAM</span>
+          <span>Topografia</span>
+          <span className={isChrome ? "site-brand-tagline__sep shrink-0" : "site-brand-lockup__sep shrink-0"} aria-hidden>
+            ·
+          </span>
+          <span>Laser Scanning</span>
         </span>
       </span>
     </Link>

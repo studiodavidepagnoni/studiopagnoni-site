@@ -38,8 +38,7 @@ export const site = {
 export const navItems = [
   { href: "/chi-siamo", label: "Chi siamo" },
   { href: "/servizi", label: "Servizi" },
-  { href: "/topografia", label: "Topografia" },
-  { href: "/rilievi-laser-scanner-slam-brescia", label: "Rilievi 3D SLAM" },
+  { href: "/rilievi-laser-scanner-slam-brescia", label: "Laser Scanning" },
   { href: "/progetti", label: "Progetti" },
   { href: "/contatti", label: "Contatti" },
 ] as const;

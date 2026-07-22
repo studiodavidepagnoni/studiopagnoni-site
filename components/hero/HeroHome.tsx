@@ -227,12 +227,6 @@ export function HeroHome() {
           aria-live={userInteracted ? "polite" : "off"}
           aria-atomic="true"
         >
-          <p
-            className={`${fontSans.className} hero-eyebrow mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}
-          >
-            Dal 1988 · Cazzago San Martino, Brescia
-          </p>
-
           <div key={idx} className="hero-copy__slide">
             <div className="min-h-[2.35em] overflow-hidden sm:min-h-[2.2em]">
               <h1

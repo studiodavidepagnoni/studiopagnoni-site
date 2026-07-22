@@ -112,15 +112,15 @@ export function SiteFooter() {
             <p
               className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
             >
-              <span>Topografia</span>
-              <span className="site-brand-tagline__sep" aria-hidden>
-                ·
-              </span>
               <span>Architettura</span>
               <span className="site-brand-tagline__sep" aria-hidden>
                 ·
               </span>
-              <span>SLAM</span>
+              <span>Topografia</span>
+              <span className="site-brand-tagline__sep" aria-hidden>
+                ·
+              </span>
+              <span>Laser Scanning</span>
             </p>
           </div>
         </div>

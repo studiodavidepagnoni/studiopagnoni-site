@@ -36,7 +36,7 @@ export function SiteHeader() {
   const mobileNavRef = useRef<HTMLElement | null>(null);
   const menuTouchStartRef = useRef<{ x: number; y: number } | null>(null);
   const wasMenuOpenRef = useRef(false);
-  const [brandMarkPx, setBrandMarkPx] = useState<number>(56);
+  const [brandMarkPx, setBrandMarkPx] = useState<number>(73);
   const [pageHeroOverlayEnd, setPageHeroOverlayEnd] = useState(0);
 
   const onMobileNavTouchStart = useCallback(
@@ -70,7 +70,7 @@ export function SiteHeader() {
     const styles = getComputedStyle(markEl);
     const padY = parseFloat(styles.paddingTop) + parseFloat(styles.paddingBottom);
     const borderY = parseFloat(styles.borderTopWidth) + parseFloat(styles.borderBottomWidth);
-    setBrandMarkPx(Math.round(height + padY + borderY));
+    setBrandMarkPx(Math.round((height + padY + borderY) * 1.3));
   }, []);
 
   const syncTaglineWidth = useCallback(() => {
@@ -328,15 +328,15 @@ export function SiteHeader() {
                   ref={taglineRef}
                   className={`${fontNav.className} site-brand-tagline flex items-baseline justify-between text-[0.55rem] font-bold uppercase leading-snug sm:text-[0.6rem] md:text-[0.65rem]`}
                 >
-                  <span>Topografia</span>
-                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
-                    ·
-                  </span>
                   <span>Architettura</span>
                   <span className="site-brand-tagline__sep shrink-0" aria-hidden>
                     ·
                   </span>
-                  <span>SLAM</span>
+                  <span>Topografia</span>
+                  <span className="site-brand-tagline__sep shrink-0" aria-hidden>
+                    ·
+                  </span>
+                  <span>Laser Scanning</span>
                 </span>
               </div>
             </Link>

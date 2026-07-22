@@ -27,9 +27,6 @@ export function HeroHomePlaceholder() {
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
         <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left">
-          <p className={`${fontSans.className} hero-eyebrow mb-4 text-[0.68rem] font-semibold uppercase tracking-[0.28em] sm:text-[0.74rem]`}>
-            Dal 1988 · Cazzago San Martino, Brescia
-          </p>
           <h1 className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}>
             {slide.line1}
           </h1>

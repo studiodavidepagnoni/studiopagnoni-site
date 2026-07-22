@@ -17,7 +17,7 @@ export function SiteHeaderShell() {
       >
         <div className={`flex min-h-[68px] items-center justify-between gap-3 py-2 sm:min-h-[76px] md:min-h-[80px] ${layoutContentMaxClass}`}>
           <Link href="/" className="group flex min-w-0 shrink items-center gap-x-2.5 sm:gap-x-4" aria-label={`${site.name} — home`}>
-            <div className="box-border flex h-14 w-14 shrink-0 items-center justify-center sm:h-16 sm:w-16">
+            <div className="box-border flex h-[4.55rem] w-[4.55rem] shrink-0 items-center justify-center sm:h-[5.2rem] sm:w-[5.2rem]">
               {/* eslint-disable-next-line @next/next/no-img-element */}
               <img
                 src={`${withBasePath("/logo-mark.svg")}?v=15`}
@@ -38,15 +38,15 @@ export function SiteHeaderShell() {
               <span
                 className={`${fontNav.className} site-brand-tagline flex items-baseline justify-between text-[0.55rem] font-bold uppercase leading-snug sm:text-[0.6rem] md:text-[0.65rem]`}
               >
-                <span>Topografia</span>
-                <span className="site-brand-tagline__sep shrink-0" aria-hidden>
-                  ·
-                </span>
                 <span>Architettura</span>
                 <span className="site-brand-tagline__sep shrink-0" aria-hidden>
                   ·
                 </span>
-                <span>SLAM</span>
+                <span>Topografia</span>
+                <span className="site-brand-tagline__sep shrink-0" aria-hidden>
+                  ·
+                </span>
+                <span>Laser Scanning</span>
               </span>
             </div>
           </Link>
