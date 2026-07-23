@@ -27,10 +27,10 @@ export function projectAssetSrcSet(relPath: string, widths: readonly number[] = 
   return widths.map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
 }
 
-/** Srcset da URL pubblico stock (`stockImage`). */
+/** Srcset da URL pubblico stock (`stockImage`). Normalizza base senza suffisso `-wN`. */
 export function stockImageSrcSet(coverUrl: string, widths: readonly number[] = [480, 960]): string {
   if (!coverUrl.includes("/assets/stock/")) return "";
-  const base = coverUrl.replace(/\.webp(\?.*)?$/i, "");
+  const base = coverUrl.replace(/-w\d+(?=\.webp(?:\?.*)?)?$/i, "").replace(/\.webp(\?.*)?$/i, "");
   return widths.map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
 }
 

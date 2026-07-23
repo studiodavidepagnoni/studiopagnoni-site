@@ -41,7 +41,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    image: s("gnssRtk"),
     alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
     priorityImage: true,
@@ -49,7 +49,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/rilievi-laser-scanner-slam-lombardia": {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    image: s("gnssRtk"),
     alt: imageAlt("GNSS RTK in area estrattiva — rilievo in Lombardia", { service: "slam" }),
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
@@ -57,7 +57,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    image: s("gnssRtk"),
     alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", {
       service: "slam",
     }),
@@ -67,7 +67,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/progetti": {
     eyebrow: "Casi studio",
     title: "Progetti",
-    image: stockImage(`${stockImages.topoPlan}-w960`),
+    image: s("topoPlan"),
     alt: imageAlt("Piano topografico con curve di livello — casi studio a Brescia", {
       service: "topografia",
     }),
