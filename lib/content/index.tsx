@@ -266,13 +266,14 @@ export const chiSiamoPage = {
   title: "Chi siamo",
   paragraphs: [
     <>
-      Lo <strong>Studio Tecnico Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> sul territorio bresciano, tra misura, edilizia e
-      progettazione. La continuità con clienti, imprese e altri studi è rimasta la stessa; sono cambiati gli strumenti, dalla stazione totale al GNSS RTK,
-      fino al laser scanner SLAM e alla restituzione 3D.
+      Lo <strong>Studio Tecnico Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> in Franciacorta e in provincia di Brescia. Il
+      perimetro principale è la <strong>progettazione architettonica</strong> e le pratiche connesse: concept e anteprogetto, progetto definitivo ed
+      esecutivo, pratiche edilizie e urbanistiche, coordinamento di cantiere e supporto alle autorizzazioni.
     </>,
     <>
-      L&apos;identità attuale nasce dall&apos;incontro tra la precisione del geometra e lo sguardo dell&apos;architetto: rilievo, regole urbanistiche,
-      pratiche edilizie e progetto vengono letti come parti della stessa commessa, non come passaggi isolati.
+      Accanto al progetto, lo studio gestisce topografia, rilievi e documentazione 3D quando servono una base metrica affidabile dello stato di fatto.
+      Strumentazione e metodi si sono aggiornati nel tempo — dalla stazione totale al GNSS RTK, fino al laser scanner SLAM — mantenendo lo stesso
+      approccio: una sola lettura della commessa, dalla misura alla consegna.
     </>,
     <>
       L&apos;investimento sulla <strong>strumentazione geomatica</strong> risponde a una richiesta concreta: ridurre incertezza e tempi morti. GPS, stazione
