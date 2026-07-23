@@ -9,7 +9,7 @@ import { ui } from "@/lib/ui";
 const pagePath = "/contatti";
 const pageTitle = "Contatti — architettura, topografia e preventivi SLAM";
 const pageDescription =
-  "Richiedi sopralluogo o preventivo per architettura, topografia e rilievi laser scanner SLAM. Sede a Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Email studio@pagnoni-s.com — Sergio e Arch. Davide Pagnoni.";
+  "Richiedi sopralluogo o preventivo per architettura, topografia e rilievi laser scanner SLAM. Sede a Cazzago San Martino (BS), Franciacorta e provincia di Brescia. Email studio@pagnoni-s.com — Geometra Sergio e Arch. Davide Pagnoni.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
