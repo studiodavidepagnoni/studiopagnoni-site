@@ -6,7 +6,10 @@ import {
 import { HERO_POSTER_INDOOR_LCP, HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib/media/heroVideos";
 import { imageAlt } from "@/lib/config/seo";
 
-const DESKTOP_INTRO_ALT = imageAlt("Rilievo laser scanner SLAM in ambiente indoor", { service: "slam" });
+const DESKTOP_INTRO_ALT = imageAlt(
+  "Rilievo laser scanner SLAM indoor — base metrica per architettura",
+  { service: "slam" },
+);
 
 const stillClass =
   "hero-media__image hero-media__image--lcp absolute inset-0 h-full w-full object-cover object-center";

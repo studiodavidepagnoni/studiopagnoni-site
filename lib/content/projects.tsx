@@ -45,9 +45,9 @@ export const projectCategories: Record<
   }
 > = {
   "rilievi-digitalizzazione": {
-    metaTitle: "Rilievi topografici e laser scanner SLAM",
+    metaTitle: "Architettura, topografia e laser SLAM — casi studio",
     metaDescription:
-      "Rilievi planoaltimetrici GNSS, stazione totale e laser scanner SLAM — documentazione 3D e nuvole di punti in Lombardia.",
+      "Casi di topografia, laser scanner SLAM e base metrica per progetto architettonico in Franciacorta, provincia di Brescia e Lombardia.",
     heading: "Rilievi e digitalizzazione",
     intro: (
       <>
@@ -68,7 +68,7 @@ export const projectCategories: Record<
         title: "Allevamento — rilievo 3D SLAM",
         caption: "Allevamento · SLAM",
         cover: cover(all.dir, all.cover),
-        alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
+        alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia, base metrica per progetto",
         href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
       },
       {
@@ -76,7 +76,7 @@ export const projectCategories: Record<
         title: "Azienda vinicola — rilievo 3D SLAM",
         caption: "Azienda vinicola · SLAM",
         cover: cover(vin.dir, vin.cover),
-        alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
+        alt: "Rilievo 3D SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
         href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
       {
@@ -84,7 +84,7 @@ export const projectCategories: Record<
         title: "Terreno - Rilievo SLAM",
         caption: "Terreno · SLAM",
         cover: cover(ter.dir, ter.cover),
-        alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
+        alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto e paesaggio",
         href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
       },
     ],
@@ -100,7 +100,7 @@ export const featuredProjects: FeaturedProject[] = [
     slug: "cantina-franciacorta-slam",
     caption: "Azienda vinicola in Franciacorta — SLAM",
     cover: cover(vin.dir, vin.cover),
-    alt: "Rilievo 3D SLAM in azienda vinicola in Franciacorta — esempio di progetto",
+    alt: "Rilievo 3D SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
     href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     label: "Laser SLAM",
   },
@@ -109,7 +109,7 @@ export const featuredProjects: FeaturedProject[] = [
     slug: "rilievo-terreno-maddalena-brescia",
     caption: "Terreno — rilievo SLAM",
     cover: cover(ter.dir, ter.cover),
-    alt: "Rilievo 3D di terreno per stato di fatto — Maddalena, Brescia",
+    alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto e paesaggio",
     href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
     label: "Territorio",
   },
@@ -118,7 +118,7 @@ export const featuredProjects: FeaturedProject[] = [
     slug: "allevamento-appianti-slam",
     caption: "Allevamento — rilievo 3D SLAM",
     cover: cover(all.dir, all.cover),
-    alt: "Rilievo 3D SLAM di ambiente zootecnico — esempio di progetto",
+    alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia, base metrica per progetto",
     href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
     label: "Laser SLAM",
   },
@@ -137,9 +137,9 @@ export const projectCaseStudies: Record<
   }
 > = {
   "rilievi-digitalizzazione/allevamento-appianti-slam": {
-    metaTitle: "Allevamento — rilievo 3D SLAM",
+    metaTitle: "Allevamento — rilievo 3D SLAM in provincia di Brescia",
     metaDescription:
-      "Caso studio (da validare): rilievo 3D con laser scanner SLAM in ambiente zootecnico per documentazione as-built e base metrica operativa. Provincia di Brescia.",
+      "Caso studio: laser scanner SLAM in ambiente zootecnico per as-built e base metrica a supporto di progetto e interventi. Provincia di Brescia, Lombardia.",
     heading: "Allevamento — rilievo 3D SLAM in ambiente operativo",
     body: (
       <>
@@ -163,12 +163,12 @@ export const projectCaseStudies: Record<
         </p>
       </>
     ),
-    gallery: [{ src: cover(all.dir, all.cover), alt: "Anteprima rilievo 3D SLAM — ambiente di allevamento" }],
+    gallery: [{ src: cover(all.dir, all.cover), alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia" }],
   },
   "rilievi-digitalizzazione/cantina-franciacorta-slam": {
-    metaTitle: "Azienda vinicola — rilievo 3D SLAM in Franciacorta",
+    metaTitle: "Cantina in Franciacorta — rilievo 3D SLAM per architettura e impianti",
     metaDescription:
-      "Caso studio (da validare): scansione 3D con laser scanner SLAM in azienda vinicola in Franciacorta per documentazione as-built e base metrica per impianti e layout.",
+      "Caso studio: scansione laser SLAM in azienda vinicola in Franciacorta (Brescia) per as-built, layout e supporto a progetto architettonico e impianti.",
     heading: "Azienda vinicola — scansione 3D SLAM in Franciacorta",
     body: (
       <>
@@ -192,13 +192,13 @@ export const projectCaseStudies: Record<
       </>
     ),
     gallery: [
-      { src: cover(vin.dir, vin.cover), alt: "Rilievo 3D SLAM — azienda vinicola in Franciacorta (anteprima)" },
+      { src: cover(vin.dir, vin.cover), alt: "Rilievo 3D SLAM in cantina — Franciacorta, provincia di Brescia" },
     ],
   },
   "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": {
-    metaTitle: "Terreno - Rilievo SLAM",
+    metaTitle: "Terreno a Brescia (Maddalena) — rilievo SLAM per progetto e paesaggio",
     metaDescription:
-      "Caso studio (da validare): scansione 3D di terreno a Brescia (zona Maddalena) per rilievo dello stato di fatto a supporto di interventi agronomici e progettazione del paesaggio.",
+      "Caso studio: scansione 3D di terreno a Brescia (Maddalena) per stato di fatto, supporto agronomico e progettazione del paesaggio in Lombardia.",
     heading: "Terreno - Rilievo SLAM",
     body: (
       <>
@@ -220,7 +220,9 @@ export const projectCaseStudies: Record<
         </p>
       </>
     ),
-    gallery: [{ src: cover(ter.dir, ter.cover), alt: "Anteprima rilievo 3D di terreno — Brescia, Maddalena" }],
+    gallery: [
+      { src: cover(ter.dir, ter.cover), alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto" },
+    ],
   },
 };
 

@@ -4,31 +4,25 @@ import { site } from "@/lib/config/site";
 /**
  * Cluster keyword per copy e llms.txt (non esportati in meta `keywords`: Google li ignora).
  *
- * Ricerca keyword (intent commerciale B2B, maggio 2026)
- * — obiettivo: committenti alto livello in Franciacorta / provincia di Brescia
- *   per rilievi topografici e scansioni laser SLAM (CHCNAV RS10).
+ * Intent commerciale B2B — Franciacorta / provincia di Brescia / Lombardia:
+ * architettura e pratiche edilizie, topografia, laser scanner SLAM (CHCNAV RS10).
  *
- * Cluster primario (alta intenzione, da privilegiare in title/H1/SLAM):
- * - laser scanner SLAM Brescia / Franciacorta
- * - rilievo laser scanner 3D Brescia
- * - nuvola di punti laser scanner
- * - rilievo as built / scansione 3D capannone edificio
- * - geometra topografo laser scanner provincia di Brescia
- * - rilievo SLAM mobile indoor outdoor
+ * Cluster primario:
+ * - architetto / progettazione architettonica Brescia Franciacorta
+ * - laser scanner SLAM Brescia / Lombardia
+ * - rilievo laser scanner 3D, nuvola di punti, as-built
+ * - topografia GNSS RTK, stazione totale, rilievo planoaltimetrico
  *
- * Cluster locale (trust + map pack):
- * - topografo Brescia, geometra Cazzago San Martino, rilievo topografico Franciacorta
- * - rilievo planoaltimetrico Lombardia, GNSS RTK Brescia, stazione totale
+ * Cluster locale:
+ * - studio tecnico Cazzago San Martino, architettura Franciacorta
+ * - topografo Brescia, rilievo topografico Lombardia
  *
- * Long-tail conversione (pagine servizi / contatti):
- * - preventivo rilievo laser scanner, sopralluogo rilievo 3D
- * - documentazione BIM da nuvola di punti, controllo interferenze impianti 3D
- * - monitoraggio avanzamento lavori rilievo laser
- *
- * Differenziatori da mantenere nel copy: CHCNAV RS10, sede Bornato/Franciacorta, dal 1988.
+ * Differenziatori: CHCNAV RS10, sede Bornato/Franciacorta, dal 1988.
  */
 export const seoKeywords = {
   primary: [
+    "architettura Franciacorta Brescia",
+    "progettazione architettonica provincia di Brescia",
     "laser scanner SLAM Brescia",
     "laser scanner SLAM Lombardia",
     "rilievo laser scanner 3D Franciacorta",
@@ -36,15 +30,15 @@ export const seoKeywords = {
     "nuvola di punti laser scanner",
     "rilievo as built Brescia",
     "rilievo as built Lombardia",
-    "geometra laser scanner provincia di Brescia",
     "scansione 3D capannone industriale",
     "CHCNAV RS10 rilievo",
     "rilievo SLAM mobile",
   ],
   local: [
+    "studio tecnico Cazzago San Martino",
+    "architetto Franciacorta",
     "topografo Brescia",
     "rilievo topografico Franciacorta",
-    "geometra topografo Cazzago San Martino",
     "rilievo planoaltimetrico Lombardia",
     "laser scanner Milano Bergamo Mantova",
     "GNSS RTK rilievo Brescia",
@@ -53,7 +47,7 @@ export const seoKeywords = {
   supporting: [
     "documentazione BIM nuvola di punti",
     "rilievo architettonico laser scanner",
-    "studio tecnico geometra architetto BS",
+    "studio tecnico architettura topografia BS",
     "rilievo topografico Nord Italia",
   ],
 } as const;
@@ -68,22 +62,27 @@ function absoluteUrl(path: string): string {
   return path.startsWith("http") ? path : `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** Alt immagine: descrittivo, locale, senza keyword stuffing. */
+/** Alt immagine: soggetto + ambito + territorio locale, senza stuffing. */
 export function imageAlt(
   subject: string,
-  opts?: { service?: "slam" | "topografia" | "verde" | "edilizia" | "studio"; decorative?: boolean },
+  opts?: {
+    service?: "slam" | "topografia" | "verde" | "edilizia" | "studio" | "architettura";
+    decorative?: boolean;
+  },
 ): string {
   if (opts?.decorative) return "";
   const service =
-    opts?.service === "slam"
-      ? "rilievo laser scanner SLAM"
-      : opts?.service === "topografia"
-        ? "rilievi topografici GNSS e stazione totale"
-        : opts?.service === "verde"
-          ? "progettazione del verde e territorio"
-          : opts?.service === "edilizia"
-            ? "urbanistica e pratiche edilizie"
-            : "servizi tecnici";
+    opts?.service === "architettura"
+      ? "architettura e progettazione"
+      : opts?.service === "slam"
+        ? "rilievo laser scanner SLAM"
+        : opts?.service === "topografia"
+          ? "topografia e rilievi GNSS"
+          : opts?.service === "verde"
+            ? "progettazione del verde e territorio"
+            : opts?.service === "edilizia"
+              ? "urbanistica e pratiche edilizie"
+              : "studio tecnico";
   return `${subject} — ${service}, ${seoAreaServed} — ${site.brandName}`;
 }
 
@@ -116,7 +115,7 @@ export function buildPageMetadata({
       siteName: site.brandName,
       title: documentTitle,
       description,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt("Nuvola di punti da rilievo laser scanner SLAM", { service: "slam" }) }],
+      images: [{ url: ogImage, width: 1200, height: 630, alt: imageAlt("Documentazione 3D e base metrica per progetto architettonico", { service: "architettura" }) }],
     },
     twitter: {
       card: "summary_large_image",
@@ -131,11 +130,11 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} - Architettura, topografia e laser scanner SLAM — Franciacorta, Brescia`,
+    default: `${site.brandName} - Architettura, topografia e laser SLAM — Franciacorta, Brescia, Lombardia`,
     template: `${site.brandName} - %s`,
   },
   description:
-    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia professionale e rilievi laser scanner SLAM mobile (CHCNAV RS10). Progetto, nuvole di punti georiferite, as-built e planimetrie — Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
+    "Studio tecnico a Cazzago San Martino (BS): architettura e pratiche edilizie, topografia e rilievi laser scanner SLAM. Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
   openGraph: {
     type: "website",
     locale: "it_IT",
@@ -143,14 +142,14 @@ export const rootMetadata: Metadata = {
     siteName: site.brandName,
     title: `${site.brandName} — ${site.tagline}`,
     description:
-      "Architettura, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Sopralluoghi e preventivi per edifici, cantieri e territorio.",
+      "Architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Sopralluoghi e preventivi.",
     images: [{ url: absoluteUrl(ogImagePath), width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
     title: `${site.brandName} — architettura, topografia e laser SLAM`,
     description:
-      "Architettura, topografia e rilievi 3D SLAM in Franciacorta e Brescia. Studio tecnico a Cazzago San Martino (BS).",
+      "Architettura, topografia e rilievi 3D SLAM in Franciacorta, Brescia e Lombardia. Studio tecnico a Cazzago San Martino (BS).",
   },
   robots: { index: true, follow: true },
   verification: {
@@ -160,9 +159,9 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Architettura, topografia e laser scanner SLAM in Franciacorta",
+  title: "Architettura, topografia e laser SLAM — Franciacorta e Brescia",
   description:
-    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia GNSS e rilievi laser scanner SLAM mobile con nuvole di punti georiferite per imprese e professionisti in Franciacorta e provincia di Brescia.",
+    "Studio tecnico a Cazzago San Martino (BS): progettazione architettonica, topografia GNSS e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
   path: "/",
   priority: "high",
 });
@@ -260,9 +259,9 @@ export const jsonLdGraph = {
       "@type": "WebPage",
       "@id": `${site.url.replace(/\/$/, "")}/#homepage`,
       url: site.url,
-      name: `Architettura, topografia e laser scanner SLAM — ${site.brandName}`,
+      name: `Architettura, topografia e laser SLAM — ${site.brandName}`,
       description:
-        "Homepage: architettura, topografia e rilievi laser scanner SLAM in Franciacorta e provincia di Brescia.",
+        "Homepage: architettura, topografia e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
       isPartOf: { "@id": `${site.url.replace(/\/$/, "")}/#website` },
       about: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
       inLanguage: "it-IT",

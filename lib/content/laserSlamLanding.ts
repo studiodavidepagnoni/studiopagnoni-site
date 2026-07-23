@@ -1,4 +1,4 @@
-/** Contenuti landing commerciali laser scanner SLAM (geo Brescia / Lombardia). */
+/** Contenuti pagina servizio `/laser-scanner-slam` e landing geo Brescia / Lombardia. */
 
 export type SlamFaqItem = { readonly q: string; readonly a: string };
 
@@ -43,6 +43,10 @@ export type SlamLandingContent = {
     readonly href: string;
     readonly label: string;
     readonly text: string;
+    readonly secondary?: {
+      readonly href: string;
+      readonly label: string;
+    };
   };
   readonly jsonLd: {
     readonly serviceName: string;
@@ -98,20 +102,129 @@ const sharedWorkflow = [
   },
 ] as const satisfies readonly SlamWorkflowStep[];
 
-/** Landing primaria: provincia di Brescia / Franciacorta. */
+/** Pagina servizio generica (menu Laser Scanning): `/laser-scanner-slam`. */
+export const laserSlamLanding = {
+  path: "/laser-scanner-slam",
+  metaTitle: "Laser scanner SLAM — architettura, as-built e nuvole di punti",
+  metaDescription:
+    "Rilievi laser scanner SLAM mobile: nuvole di punti, as-built, DWG e BIM per architettura, capannoni, edifici e impianti. Franciacorta, provincia di Brescia e Lombardia. Preventivo.",
+  hero: {
+    eyebrow: "Laser scanner mobile",
+    title: "Rilievi laser SLAM",
+    lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
+  },
+  introHeading: "Laser scanner SLAM: misura 3D prima di progettare",
+  introLead:
+    "Quando un edificio, un impianto o un capannone devono essere compresi prima di intervenire, il rilievo SLAM riduce i tempi in campo e restituisce una base metrica leggibile: nuvola di punti, as-built, sezioni e supporto a CAD/BIM per architettura e cantiere.",
+  instrumentNote:
+    "La piattaforma mobile CHCNAV RS10 integra GNSS RTK, LiDAR e SLAM visuale: un flusso continuo tra esterni, interni e zone dove il segnale satellitare non basta.",
+  sectorsIntro:
+    "Il rilievo SLAM è pensato per studi di progettazione, imprese, facility e committenza che devono decidere su geometrie affidabili dello stato di fatto.",
+  sectors: [
+    {
+      title: "Edilizia e ristrutturazioni",
+      body: "Rilievi completi prima di progettare: piante, sezioni e quote da nuvola densa, utili per ridurre varianti e incomprensioni in cantiere.",
+    },
+    {
+      title: "Industria e logistica",
+      body: "Capannoni, magazzini e stabilimenti: acquisizione in movimento su grandi superfici, documentazione as-built e verifica ingombri.",
+    },
+    {
+      title: "Impianti e spazi tecnici",
+      body: "Corridoi MEP, sale macchine, passaggi e interferenze: geometria completa dove il rilievo tradizionale è lento o incompleto.",
+    },
+    {
+      title: "Patrimonio e immobili storici",
+      body: "Interni articolati e facciate: scansione continua con controlli in campo sulla copertura della nuvola.",
+    },
+    {
+      title: "Topografia integrata",
+      body: "Collegamento a GNSS RTK e stazione totale per allineare il modello 3D a coordinate di progetto, catasto e cantiere.",
+    },
+  ],
+  areaHeading: "Dove operiamo",
+  areaBody:
+    "Sede a Cazzago San Martino (BS), in Franciacorta. Interventi rapidi in provincia di Brescia; su programmazione in Lombardia e Nord Italia. Per SEO locale restano le landing dedicate Brescia e Lombardia.",
+  areaPlaces: [
+    "Franciacorta e provincia di Brescia",
+    "Lombardia (su programmazione)",
+    "Nord Italia per commesse strutturate",
+  ],
+  projectsIntro:
+    "Esempi di laser scanner SLAM e documentazione 3D: acquisizione in movimento e restituzione operativa.",
+  deliverables: sharedDeliverables,
+  workflow: sharedWorkflow,
+  comparison: sharedComparison,
+  faq: [
+    {
+      q: "Che precisione posso aspettarmi?",
+      a: "In condizioni operative dichiarate dal costruttore, la piattaforma RS10 indica fino a circa 5 cm in misura assoluta combinando RTK, laser e SLAM visuale. La precisione effettiva dipende da ambiente, estensione e obiettivo: in preventivo definiamo tolleranze e controlli.",
+    },
+    {
+      q: "Quanto tempo serve in campo su un capannone?",
+      a: "Dipende da metratura, accessibilità e dettaglio. Su un capannone logistico di circa 8.000 m², indicativamente una giornata di acquisizione può coprire il volume utile; elaborazione e restituzione seguono il calendario concordato in offerta.",
+    },
+    {
+      q: "Quanto costa un rilievo laser scanner SLAM?",
+      a: "Il preventivo è su misura: superficie, piani, formati (solo nuvola vs DWG/BIM) e distanza dalla sede. Scrivici zona e obiettivo: rispondiamo con una proposta indicativa senza impegno.",
+    },
+    {
+      q: "Posso avere solo la nuvola di punti?",
+      a: "Sì. Consegnamo E57/LAS/LAZ georiferiti, oppure affianchiamo piante DWG/DXF o modello BIM se serve al tuo progettista o alla direzione lavori.",
+    },
+    {
+      q: "Operate solo in provincia di Brescia?",
+      a: "La priorità operativa è Franciacorta e provincia di Brescia. Su programmazione eseguiamo rilievi SLAM in Lombardia e Nord Italia: usa le landing geo o il modulo contatti indicando comune e superficie.",
+    },
+  ],
+  ctaHeading: "Preventivo rilievo laser scanner SLAM",
+  ctaBody:
+    "Indica località, superficie indicativa e output desiderati (nuvola, DWG, BIM): ti rispondiamo con tempi e preventivo su misura.",
+  related: {
+    href: "/rilievi-laser-scanner-slam-brescia",
+    label: "Landing Brescia e Franciacorta",
+    text: "Le landing geo restano separate dal servizio principale: scegli l’area di interesse.",
+    secondary: {
+      href: "/rilievi-laser-scanner-slam-lombardia",
+      label: "Landing Lombardia",
+    },
+  },
+  jsonLd: {
+    serviceName: "Rilievi laser scanner SLAM",
+    alternateNames: [
+      "Laser scanner SLAM",
+      "Rilievo laser scanner 3D",
+      "Nuvole di punti e as-built",
+      "Laser scanning mobile CHCNAV RS10",
+    ],
+    serviceDescription:
+      "Rilievi laser scanner SLAM mobile: nuvole di punti georiferite, as-built, DWG, DXF e supporto BIM per architettura, capannoni, edifici e impianti.",
+    webpageDescription:
+      "Pagina servizio laser scanner SLAM: documentazione 3D, as-built e base metrica per progetto in Franciacorta, provincia di Brescia e Lombardia.",
+    breadcrumbName: "Laser scanner SLAM",
+    areaServed: [
+      { type: "Place", name: "Franciacorta" },
+      { type: "AdministrativeArea", name: "Provincia di Brescia" },
+      { type: "AdministrativeArea", name: "Lombardia" },
+      { type: "AdministrativeArea", name: "Nord Italia" },
+    ],
+  },
+} as const satisfies SlamLandingContent;
+
+/** Landing SEO: provincia di Brescia / Franciacorta. */
 export const laserSlamLandingBrescia = {
   path: "/rilievi-laser-scanner-slam-brescia",
-  metaTitle: "Laser scanner SLAM Brescia | rilievi 3D, nuvole di punti e as-built",
+  metaTitle: "Laser scanner SLAM Brescia | architettura, as-built e nuvole di punti",
   metaDescription:
-    "Rilievo laser scanner SLAM a Brescia e Franciacorta: nuvole di punti, as-built, DWG e BIM per capannoni, edifici, cantine e impianti. Studio Tecnico Pagnoni — preventivo rapido.",
+    "Rilievo laser scanner SLAM a Brescia e Franciacorta per architettura, as-built, DWG e BIM. Capannoni, edifici, cantine e impianti. Studio Tecnico Pagnoni — preventivo.",
   hero: {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    lede: "Nuvole di punti e as-built in provincia di Brescia e Franciacorta con CHCNAV RS10 mobile.",
+    lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
   },
   introHeading: "Laser scanner SLAM a Brescia: misura 3D prima di progettare",
   introLead:
-    "Cerchi un rilievo laser scanner SLAM a Brescia, in Franciacorta o nei comuni della provincia? Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per as-built, sezioni, CAD e BIM.",
+    "Cerchi un rilievo laser scanner SLAM a Brescia, in Franciacorta o nei comuni della provincia? Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
   instrumentNote:
     "Operiamo da Cazzago San Martino (fraz. Bornato) con piattaforma CHCNAV RS10 (GNSS RTK + LiDAR + SLAM visuale): un flusso continuo tra esterni, interni e zone con segnale satellitare debole, tipiche di capannoni e impianti bresciani.",
   sectorsIntro:
@@ -211,17 +324,17 @@ export const laserSlamLandingBrescia = {
 /** Landing regionale: Lombardia. */
 export const laserSlamLandingLombardia = {
   path: "/rilievi-laser-scanner-slam-lombardia",
-  metaTitle: "Laser scanner SLAM Lombardia | rilievi 3D per imprese e immobili",
+  metaTitle: "Laser scanner SLAM Lombardia | architettura, imprese e immobili",
   metaDescription:
-    "Rilievo laser scanner SLAM in Lombardia: nuvole di punti, as-built e restituzione CAD/BIM per capannoni, edifici e impianti. Da Brescia su Milano, Bergamo, Mantova e province. Preventivo.",
+    "Rilievo laser scanner SLAM in Lombardia per architettura, as-built e CAD/BIM: capannoni, edifici e impianti. Da Brescia su Milano, Bergamo, Mantova e province. Preventivo.",
   hero: {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    lede: "Scansione 3D mobile per capannoni, immobili e impianti su tutta la regione — base operativa Brescia.",
+    lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
   },
   introHeading: "Rilievo laser scanner SLAM in Lombardia: copertura regionale",
   introLead:
-    "Per commesse in Lombardia il laser scanner SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici. Documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata a progettisti, facility e imprese.",
+    "Per commesse in Lombardia il laser scanner SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici. Documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata ad architettura, facility e imprese.",
   instrumentNote:
     "Partiamo dalla sede di Cazzago San Martino (BS) con CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale nello stesso strumento, ideale per siti multi-piano, magazzini e impianti dove indoor e outdoor si alternano nella stessa giornata di rilievo.",
   sectorsIntro:
@@ -318,6 +431,3 @@ export const laserSlamLandingLombardia = {
     ],
   },
 } as const satisfies SlamLandingContent;
-
-/** Alias: landing Brescia (URL storico). */
-export const laserSlamLanding = laserSlamLandingBrescia;

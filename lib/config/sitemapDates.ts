@@ -8,6 +8,7 @@ export const staticPageLastModified: Record<string, string> = {
   "": "2026-05-21",
   "/servizi": "2026-04-10",
   "/topografia": "2026-04-10",
+  "/laser-scanner-slam": "2026-07-23",
   "/rilievi-laser-scanner-slam-brescia": "2026-07-22",
   "/rilievi-laser-scanner-slam-lombardia": "2026-07-22",
   "/contatti": "2026-05-21",

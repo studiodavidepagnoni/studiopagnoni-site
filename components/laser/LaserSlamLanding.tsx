@@ -182,9 +182,16 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
               Approfondisci per area
             </h2>
             <p className={`${ui.bodyMuted} mb-6 max-w-[58ch]`}>{L.related.text}</p>
-            <Link href={L.related.href} className={`${ui.btnOutline} inline-flex min-h-[48px] items-center`}>
-              {L.related.label} →
-            </Link>
+            <div className="flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+              <Link href={L.related.href} className={`${ui.btnOutline} inline-flex min-h-[48px] items-center`}>
+                {L.related.label} →
+              </Link>
+              {L.related.secondary ? (
+                <Link href={L.related.secondary.href} className={`${ui.btnOutline} inline-flex min-h-[48px] items-center`}>
+                  {L.related.secondary.label} →
+                </Link>
+              ) : null}
+            </div>
           </section>
 
           <section

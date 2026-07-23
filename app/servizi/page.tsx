@@ -11,9 +11,9 @@ import { ui } from "@/lib/ui";
 
 const pagePath = "/servizi";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
-const pageTitle = "Servizi — architettura, topografia e laser SLAM";
+const pageTitle = "Architettura, topografia e laser SLAM — Brescia e Lombardia";
 const pageDescription =
-  "Architettura, topografia, laser scanner SLAM, verde, urbanistica, sicurezza cantieri e assistenza tecnica. Studio tecnico in Franciacorta e provincia di Brescia dal 1988.";
+  "Progettazione architettonica, topografia, laser scanner SLAM, verde, urbanistica e sicurezza cantieri. Studio tecnico in Franciacorta, provincia di Brescia e Lombardia dal 1988.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,

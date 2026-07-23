@@ -2,7 +2,7 @@
 
 > Studio tecnico a Cazzago San Martino (BS), Franciacorta: architettura, topografia, laser scanner SLAM, verde, urbanistica e pratiche edilizie dal 1988.
 
-Studio Tecnico Pagnoni (Geom. Sergio Pagnoni e Arch. Davide Pagnoni) opera in Franciacorta, provincia di Brescia, Lombardia e Nord Italia. Servizi principali: progettazione architettonica, rilievi GNSS RTK e stazione totale, laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica, sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
+Studio Tecnico Pagnoni (Sergio Pagnoni e Arch. Davide Pagnoni) opera in Franciacorta, provincia di Brescia, Lombardia e Nord Italia. Servizi principali: progettazione architettonica, topografia con GNSS RTK e stazione totale, laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica, sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
 
 ## Pagine principali
 
@@ -14,6 +14,7 @@ Studio Tecnico Pagnoni (Geom. Sergio Pagnoni e Arch. Davide Pagnoni) opera in Fr
 
 ## Laser scanner SLAM
 
+- [Laser scanner SLAM](https://studiopagnoni.com/laser-scanner-slam): Pagina servizio (menu Laser Scanning)
 - [Rilievi laser SLAM a Brescia](https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia): Landing locale Franciacorta e provincia di Brescia
 - [Rilievi laser SLAM in Lombardia](https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia): Landing regionale multi-provincia
 - [Preventivo SLAM](https://studiopagnoni.com/contatti?oggetto=slam): Modulo contatti con oggetto rilievo SLAM

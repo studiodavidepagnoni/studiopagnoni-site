@@ -11,9 +11,9 @@ import { ui } from "@/lib/ui";
 
 const pagePath = "/topografia";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
-const pageTitle = "Topografia e rilievi planoaltimetrici — Franciacorta e Brescia";
+const pageTitle = "Topografia e rilievi — Franciacorta, Brescia e Lombardia";
 const pageDescription =
-  "Rilievi topografici con GNSS RTK e stazione totale: planimetrie quotate, volumetrie, cantieri e frazionamenti. Integrazione con rilievi laser SLAM. Cazzago San Martino (BS), Franciacorta e provincia di Brescia.";
+  "Rilievi topografici con GNSS RTK e stazione totale per progetto architettonico, cantieri e frazionamenti. Integrazione con laser SLAM. Cazzago San Martino (BS), Franciacorta, provincia di Brescia e Lombardia.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -84,7 +84,7 @@ export default function TopografiaPage() {
                 Quando il lavoro passa dal terreno agli spazi costruiti, il rilievo topografico può essere affiancato dal{" "}
                 <strong>laser scanner SLAM</strong>: una nuvola di punti densa per edifici, capannoni e impianti, collegabile ai controlli topografici.
               </p>
-              <Link href="/rilievi-laser-scanner-slam-brescia" className={`${ui.btnOutline} inline-flex`}>
+              <Link href="/laser-scanner-slam" className={`${ui.btnOutline} inline-flex`}>
                 Laser scanner SLAM
               </Link>
             </section>
@@ -98,7 +98,7 @@ export default function TopografiaPage() {
             description="Indica località, finalità (frazionamento, cantiere, progettazione) e superficie indicativa: ti rispondiamo con metodo, tempi e preventivo su misura."
             primaryHref="/contatti#form-contatti"
             primaryLabel="Richiedi preventivo"
-            secondaryHref="/rilievi-laser-scanner-slam-brescia"
+            secondaryHref="/laser-scanner-slam"
             secondaryLabel="Laser scanner SLAM"
           />
           </div>

@@ -27,9 +27,10 @@ export const HERO_INTRO_STILL = s("totalStation");
 /** Variante LCP mobile (~640px): molto più leggera del full. */
 export const HERO_INTRO_STILL_LCP = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-lcp.webp");
 export const HERO_INTRO_STILL_LCP_AVIF = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-lcp.avif");
-export const HERO_INTRO_STILL_ALT = imageAlt("Stazione totale in rilievo planoaltimetrico sul territorio", {
-  service: "topografia",
-});
+export const HERO_INTRO_STILL_ALT = imageAlt(
+  "Stazione totale in rilievo planoaltimetrico — base per progetto architettonico",
+  { service: "topografia" },
+);
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */
@@ -53,14 +54,16 @@ export type HeroSlide = {
 export const heroSlides: readonly HeroSlide[] = [
   {
     src: s("slamHero"),
-    alt: imageAlt("Operatore con laser scanner SLAM mobile CHCNAV RS10 sul campo", { service: "slam" }),
+    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — base metrica per architettura", {
+      service: "slam",
+    }),
     line1: "Rilievi 3D con laser SLAM",
     line2: "CHCNAV RS10 · indoor e outdoor",
-    body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto e BIM.",
+    body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto architettonico e BIM.",
     primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
     primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",
     primaryCtaLabelMobile: "Richiedi preventivo SLAM",
-    ctaHref: "/rilievi-laser-scanner-slam-brescia",
+    ctaHref: "/laser-scanner-slam",
     ctaLabel: "Scopri il servizio SLAM",
     video: HERO_VIDEO_INDOOR_SOURCES,
     poster: HERO_POSTER_INDOOR,
@@ -68,7 +71,9 @@ export const heroSlides: readonly HeroSlide[] = [
   },
   {
     src: s("pointcloud"),
-    alt: imageAlt("Visualizzazione nuvola di punti da rilievo laser scanner", { service: "slam" }),
+    alt: imageAlt("Nuvola di punti da laser scanner — elaborati per progetto e as-built", {
+      service: "slam",
+    }),
     line1: "Nuvola di punti",
     line2: "dalla scansione agli elaborati",
     body: "Restituzione in formati operativi: nuvole dense, sezioni, CAD e modelli BIM. Controlli in campo sulla copertura prima di chiudere il rilievo.",
@@ -80,7 +85,9 @@ export const heroSlides: readonly HeroSlide[] = [
   },
   {
     src: p(projectMedia.allevamento.dir, projectMedia.allevamento.cover),
-    alt: imageAlt("Rilievo 3D con laser scanner SLAM in ambiente operativo", { service: "slam" }),
+    alt: imageAlt("Rilievo 3D SLAM in ambiente operativo — stato di fatto per progetto", {
+      service: "slam",
+    }),
     line1: "Rilievi SLAM in ambienti operativi",
     line2: "as-built rapido · base metrica condivisa",
     body: "Acquisizione in movimento in spazi complessi: una nuvola di punti utile per layout, verifiche e documentazione dello stato di fatto, con tempi in campo contenuti.",
@@ -94,17 +101,19 @@ export const heroSlides: readonly HeroSlide[] = [
 export const homeChiSiamoImages = {
   team: {
     src: s("slamHero"),
-    alt: imageAlt("Team in attività di rilievo laser SLAM con nuvola di punti", { service: "slam" }),
+    alt: imageAlt("Rilievo laser SLAM sul campo — documentazione 3D per architettura", { service: "slam" }),
   },
   cantiere: {
     src: s("totalStation"),
-    alt: imageAlt("Stazione totale in cantiere per rilievo planoaltimetrico", { service: "topografia" }),
+    alt: imageAlt("Stazione totale in cantiere — rilievo a supporto di progetto", {
+      service: "topografia",
+    }),
   },
 } as const;
 
 export const chiSiamoPageImage = {
-  src: s("topoPlan"),
-  alt: imageAlt("Piano topografico con curve di livello e scala grafica", { service: "topografia" }),
+  src: s("handheldSlam"),
+  alt: imageAlt("Acquisizione SLAM handheld lungo strada di campagna", { service: "slam" }),
 } as const;
 
 export const projectPreview = [
@@ -113,6 +122,8 @@ export const projectPreview = [
     title: "Rilievi e digitalizzazione",
     caption: "Rilievi e digitalizzazione",
     image: s("pointcloud"),
-    alt: imageAlt("Elaborazione nuvola di punti e dati 3D da laser scanner", { service: "slam" }),
+    alt: imageAlt("Nuvola di punti da laser scanner — base per architettura e as-built", {
+      service: "slam",
+    }),
   },
 ] as const;

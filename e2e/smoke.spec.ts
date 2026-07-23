@@ -55,6 +55,15 @@ test.describe("smoke", () => {
     await expect(page.getByRole("link", { name: "Richiedi preventivo SLAM" })).toBeVisible();
   });
 
+  test("laser scanner SLAM — pagina servizio e CTA", async ({ page }) => {
+    await page.goto("/laser-scanner-slam/");
+    await dismissCookieBanner(page);
+
+    await expect(page.locator("#main-content")).toBeVisible();
+    await expect(page.getByRole("heading", { name: /Preventivo rilievo laser scanner SLAM/i })).toBeVisible();
+    await expect(page.getByRole("link", { name: "Richiedi preventivo SLAM" }).first()).toBeVisible();
+  });
+
   test("landing SLAM — contenuto commerciale e CTA", async ({ page }) => {
     await page.goto("/rilievi-laser-scanner-slam-brescia/");
     await dismissCookieBanner(page);

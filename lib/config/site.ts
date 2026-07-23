@@ -26,7 +26,7 @@ export const site = {
   /** Recapiti telefonici (due linee). */
   phones: [
     { label: "Architetto Davide Pagnoni", display: "+39 347 357 6510", tel: "+393473576510" },
-    { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
+    { label: "Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
   addressLine: "Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato",
   /** Partita IVA — sostituire con quella reale quando disponibile. */
@@ -38,7 +38,7 @@ export const site = {
 export const navItems = [
   { href: "/chi-siamo", label: "Chi siamo" },
   { href: "/servizi", label: "Servizi" },
-  { href: "/rilievi-laser-scanner-slam-brescia", label: "Laser Scanning" },
+  { href: "/laser-scanner-slam", label: "Laser Scanning" },
   { href: "/progetti", label: "Progetti" },
   { href: "/contatti", label: "Contatti" },
 ] as const;

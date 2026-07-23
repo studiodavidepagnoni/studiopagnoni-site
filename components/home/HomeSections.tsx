@@ -175,7 +175,7 @@ export function HomeSections() {
                   Topografia e rilievi
                 </Link>
                 <Link
-                  href="/rilievi-laser-scanner-slam-brescia"
+                  href="/laser-scanner-slam"
                   className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]"
                 >
                   Laser scanner SLAM
