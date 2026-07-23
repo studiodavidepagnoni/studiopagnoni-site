@@ -41,24 +41,24 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    image: s("handheldSlam"),
-    alt: imageAlt("Strumentazione laser scanner su treppiede — rilievo 3D a Brescia", { service: "slam" }),
+    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-lombardia": {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    image: s("gnssRtk"),
-    alt: imageAlt("Strumentazione di rilievo su treppiede in campo — Lombardia", { service: "slam" }),
+    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    alt: imageAlt("GNSS RTK in area estrattiva — rilievo in Lombardia", { service: "slam" }),
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
   },
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("handheldSlam"),
-    alt: imageAlt("Strumentazione laser scanner professionale su treppiede — rilievo 3D", {
+    image: stockImage(`${stockImages.gnssRtk}-w960`),
+    alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", {
       service: "slam",
     }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
@@ -67,9 +67,9 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/progetti": {
     eyebrow: "Casi studio",
     title: "Progetti",
-    image: s("pointcloud"),
-    alt: imageAlt("Nuvola di punti da laser scanner — casi studio di rilievo e digitalizzazione", {
-      service: "slam",
+    image: stockImage(`${stockImages.topoPlan}-w960`),
+    alt: imageAlt("Piano topografico con curve di livello — casi studio a Brescia", {
+      service: "topografia",
     }),
     lede: "Una selezione di commesse recenti: rilievi laser SLAM, nuvole di punti e interventi sul territorio in Franciacorta e provincia di Brescia.",
   },
