@@ -23,14 +23,14 @@ export function PageClosingCta({
 }: PageClosingCtaProps) {
   return (
     <section
-      className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 sm:p-10"
+      className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 text-center sm:p-10"
       aria-labelledby={id}
     >
       <h2 id={id} className={`${fontDisplay.className} text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
         {title}
       </h2>
-      <p className={`${ui.body} mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{description}</p>
-      <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+      <p className={`${ui.body} mx-auto mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{description}</p>
+      <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
         <Link href={primaryHref} className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
           {primaryLabel}
         </Link>

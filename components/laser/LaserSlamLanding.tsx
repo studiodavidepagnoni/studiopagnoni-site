@@ -178,14 +178,14 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
           <FaqSection id="slam-faq" items={L.faq} />
 
           <section
-            className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 sm:p-10"
+            className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 text-center sm:p-10"
             aria-labelledby="slam-cta"
           >
             <h2 id="slam-cta" className={`${fontDisplay.className} text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
               {L.ctaHeading}
             </h2>
-            <p className={`${ui.body} mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{L.ctaBody}</p>
-            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-4">
+            <p className={`${ui.body} mx-auto mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{L.ctaBody}</p>
+            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
               <Link
                 href="/contatti?oggetto=slam#form-contatti"
                 className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}
