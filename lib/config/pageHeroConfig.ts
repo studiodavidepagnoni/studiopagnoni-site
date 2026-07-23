@@ -1,10 +1,9 @@
-import { projectMedia, stockImages } from "@/lib/media/assetPaths";
-import { projectAsset, stockImage } from "@/lib/media/mediaPath";
+import { stockImages } from "@/lib/media/assetPaths";
+import { stockImage } from "@/lib/media/mediaPath";
 import { normalizePathname } from "@/lib/utils/normalizePathname";
 import { imageAlt } from "@/lib/config/seo";
 
 const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
-const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
 export type PageHeroData = {
   eyebrow: string;
@@ -42,34 +41,37 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    image: p(projectMedia.allevamento.dir, projectMedia.allevamento.cover),
-    alt: imageAlt("Rilievo 3D SLAM a Brescia — as-built per architettura e impianti", { service: "slam" }),
+    image: s("slamHero"),
+    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — rilievo 3D a Brescia", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-lombardia": {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    image: p(projectMedia.cantina.dir, projectMedia.cantina.cover),
-    alt: imageAlt("Rilievo 3D SLAM in Lombardia — immobili e base per progetto", { service: "slam" }),
+    image: s("handheldSlam"),
+    alt: imageAlt("Laser scanner SLAM handheld in acquisizione — Lombardia", { service: "slam" }),
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
   },
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("pointcloud"),
-    alt: imageAlt("Nuvola di punti da laser scanner — base metrica per architettura", { service: "slam" }),
+    image: s("slamHero"),
+    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — base metrica per architettura", {
+      service: "slam",
+    }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
     priorityImage: true,
   },
   "/progetti": {
-    eyebrow: "Portfolio",
+    eyebrow: "Casi studio",
     title: "Progetti",
-    image: s("topoPlan"),
-    alt: imageAlt("Carta topografica con curve di livello — supporto a progetto architettonico", {
-      service: "topografia",
+    image: s("pointcloud"),
+    alt: imageAlt("Nuvola di punti da laser scanner — casi studio di rilievo e digitalizzazione", {
+      service: "slam",
     }),
+    lede: "Una selezione di commesse recenti: rilievi laser SLAM, nuvole di punti e interventi sul territorio in Franciacorta e provincia di Brescia.",
   },
   "/contatti": {
     eyebrow: "Contatto",

@@ -35,7 +35,7 @@ export function PageHero({ eyebrow, title, image, alt, lede, priorityImage = tru
         )}
       </div>
       <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(4,10,9,0.58)_0%,rgba(4,10,9,0.34)_45%,rgba(4,10,9,0.16)_100%),linear-gradient(0deg,rgba(4,10,9,0.48)_0%,transparent_52%)]"
+        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(4,10,9,0.72)_0%,rgba(4,10,9,0.48)_42%,rgba(4,10,9,0.22)_100%),linear-gradient(0deg,rgba(4,10,9,0.58)_0%,transparent_55%)]"
         aria-hidden
       />
       <div className="relative z-10 mx-auto flex min-h-[inherit] w-full min-w-0 max-w-[1200px] flex-col justify-end px-4 pb-10 pt-[calc(env(safe-area-inset-top,0px)+5.75rem)] sm:px-6 sm:pb-12 md:pb-14">

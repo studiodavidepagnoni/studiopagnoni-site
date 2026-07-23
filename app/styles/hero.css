@@ -27,7 +27,10 @@
 .page-hero__lede {
   font-size: 0.98rem;
   line-height: 1.75;
-  color: color-mix(in srgb, white 84%, transparent);
+  color: color-mix(in srgb, white 90%, transparent);
+  text-shadow:
+    0 1px 8px rgba(0, 0, 0, 0.42),
+    0 2px 14px rgba(0, 0, 0, 0.28);
 }
 
 /* Hero home — media + scrim cinematico (riferimento mhira3d.com) */
