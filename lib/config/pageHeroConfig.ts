@@ -20,8 +20,8 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/chi-siamo": {
     eyebrow: "Lo studio",
     title: "Chi siamo",
-    image: s("handheldSlam"),
-    alt: imageAlt("Percorso di acquisizione SLAM handheld in ambiente esterno", { service: "slam" }),
+    image: s("technicalDocs"),
+    alt: imageAlt("Architettura contemporanea — dettaglio di prospetto", { service: "architettura" }),
   },
   "/servizi": {
     eyebrow: "Cosa facciamo",
@@ -58,8 +58,8 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("slamHero"),
-    alt: imageAlt("Rilievo laser scanner SLAM — base metrica per architettura", { service: "slam" }),
+    image: s("pointcloud"),
+    alt: imageAlt("Nuvola di punti da laser scanner — base metrica per architettura", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
     priorityImage: true,
   },
@@ -78,6 +78,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     alt: imageAlt("Stazione totale in cantiere — preventivi per architettura e rilievi", {
       service: "topografia",
     }),
+    lede: "Sopralluoghi e preventivi per architettura, topografia e laser scanner SLAM — Franciacorta e provincia di Brescia.",
   },
   "/privacy-policy": {
     eyebrow: "GDPR · Italia · 2026",
