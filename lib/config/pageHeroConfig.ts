@@ -41,24 +41,24 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    image: s("slamHero"),
-    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — rilievo 3D a Brescia", { service: "slam" }),
+    image: s("handheldSlam"),
+    alt: imageAlt("Strumentazione laser scanner su treppiede — rilievo 3D a Brescia", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-lombardia": {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    image: s("handheldSlam"),
-    alt: imageAlt("Laser scanner SLAM handheld in acquisizione — Lombardia", { service: "slam" }),
+    image: s("gnssRtk"),
+    alt: imageAlt("Strumentazione di rilievo su treppiede in campo — Lombardia", { service: "slam" }),
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
   },
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("slamHero"),
-    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — base metrica per architettura", {
+    image: s("handheldSlam"),
+    alt: imageAlt("Strumentazione laser scanner professionale su treppiede — rilievo 3D", {
       service: "slam",
     }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",

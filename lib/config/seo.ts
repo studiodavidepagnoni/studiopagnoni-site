@@ -130,7 +130,7 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} - Architettura, topografia e laser SLAM — Franciacorta, Brescia, Lombardia`,
+    default: `${site.brandName} - Architettura, topografia e laser SLAM`,
     template: `${site.brandName} - %s`,
   },
   description:
@@ -159,9 +159,9 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Architettura, topografia e laser SLAM — Franciacorta e Brescia",
+  title: "Architettura, topografia e laser SLAM",
   description:
-    "Studio tecnico a Cazzago San Martino (BS): progettazione architettonica, topografia GNSS e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
+    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia GNSS e laser SLAM in Franciacorta, Brescia e Lombardia.",
   path: "/",
   priority: "high",
 });
@@ -259,7 +259,7 @@ export const jsonLdGraph = {
       "@type": "WebPage",
       "@id": `${site.url.replace(/\/$/, "")}/#homepage`,
       url: site.url,
-      name: `Architettura, topografia e laser SLAM — ${site.brandName}`,
+      name: `${site.brandName} - Architettura, topografia e laser SLAM`,
       description:
         "Homepage: architettura, topografia e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
       isPartOf: { "@id": `${site.url.replace(/\/$/, "")}/#website` },

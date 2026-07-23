@@ -24,9 +24,9 @@ export const homeChiSiamo: {
   intro: "Sintesi del profilo studio. Biografia, metodo e immagini nella pagina Chi siamo.",
   short: (
     <>
-      Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a <strong>Bornato, Cazzago San Martino</strong>. Uniamo{" "}
-      <strong>architettura</strong>, <strong>topografia</strong>, <strong>laser scanner SLAM</strong> e pratiche tecniche per trasformare
-      progetto, rilievi e territorio in elaborati utilizzabili.
+      Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a <strong>Bornato, Cazzago San Martino</strong>. Uniamo
+      architettura, topografia e laser scanner SLAM e pratiche tecniche per trasformare progetto, rilievi e territorio in elaborati
+      utilizzabili.
       <br />
       Lo studio segue ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
     </>
@@ -77,9 +77,9 @@ export const homeStrumentazione: {
   title: "Strumentazione",
   lede: (
     <>
-      Il <strong>laser scanner SLAM</strong> mobile è oggi il perno dei nostri rilievi in campo: strumentazione di nuova acquisizione per{" "}
-      <strong>nuvole di punti</strong> e <strong>documentazione 3D</strong> rapida su edifici e siti complessi. A supporto restano{" "}
-      <strong>GNSS RTK</strong> e <strong>stazione totale</strong> quando la commessa lo richiede.
+      Il <strong>laser scanner SLAM</strong> mobile è oggi il perno dei nostri rilievi in campo: strumentazione di nuova acquisizione per
+      nuvole di punti e documentazione 3D rapida su edifici e siti complessi. A supporto restano GNSS RTK e stazione totale quando la
+      commessa lo richiede.
     </>
   ),
   items: [
@@ -224,10 +224,8 @@ export const zoneContent = {
 
 export const zoneDescription = (
   <>
-    La sede in <strong>frazione Bornato</strong> (Cazzago San Martino) è strategica per interventi in{" "}
-    <strong>Franciacorta</strong>, <strong>Valle Trompia</strong>, <strong>Lago d&apos;Iseo</strong> e provincia di{" "}
-    <strong>Brescia</strong>. Seguiamo commesse in <strong>Lombardia</strong> e, per tipologia di lavoro, in tutto il{" "}
-    <strong>Nord Italia</strong>.
+    La sede in frazione Bornato (Cazzago San Martino) è strategica per interventi in <strong>Franciacorta</strong>, Valle Trompia, Lago
+    d&apos;Iseo e provincia di <strong>Brescia</strong>. Seguiamo commesse in Lombardia e, per tipologia di lavoro, in tutto il Nord Italia.
   </>
 );
 

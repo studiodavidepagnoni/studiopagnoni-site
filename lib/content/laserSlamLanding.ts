@@ -39,15 +39,6 @@ export type SlamLandingContent = {
   readonly faq: readonly SlamFaqItem[];
   readonly ctaHeading: string;
   readonly ctaBody: string;
-  readonly related: {
-    readonly href: string;
-    readonly label: string;
-    readonly text: string;
-    readonly secondary?: {
-      readonly href: string;
-      readonly label: string;
-    };
-  };
   readonly jsonLd: {
     readonly serviceName: string;
     readonly alternateNames: readonly string[];
@@ -180,15 +171,6 @@ export const laserSlamLanding = {
   ctaHeading: "Preventivo rilievo laser scanner SLAM",
   ctaBody:
     "Indica località, superficie indicativa e output desiderati (nuvola, DWG, BIM): ti rispondiamo con tempi e preventivo su misura.",
-  related: {
-    href: "/rilievi-laser-scanner-slam-brescia",
-    label: "Landing Brescia e Franciacorta",
-    text: "Le landing geo restano separate dal servizio principale: scegli l’area di interesse.",
-    secondary: {
-      href: "/rilievi-laser-scanner-slam-lombardia",
-      label: "Landing Lombardia",
-    },
-  },
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM",
     alternateNames: [
@@ -291,11 +273,6 @@ export const laserSlamLandingBrescia = {
   ctaHeading: "Preventivo rilievo SLAM a Brescia",
   ctaBody:
     "Indica comune in provincia di Brescia, superficie indicativa e output desiderati (nuvola, DWG, BIM): ti rispondiamo con tempi e preventivo su misura.",
-  related: {
-    href: "/rilievi-laser-scanner-slam-lombardia",
-    label: "Rilievi SLAM in Lombardia",
-    text: "Serve un rilievo laser scanner SLAM fuori provincia, in Lombardia? Apri la landing regionale dedicata.",
-  },
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM a Brescia",
     alternateNames: [
@@ -402,11 +379,6 @@ export const laserSlamLandingLombardia = {
   ctaHeading: "Preventivo rilievo SLAM in Lombardia",
   ctaBody:
     "Indica provincia, comune, superficie e formati di consegna: prepariamo un’offerta con tempi di campo e restituzione, inclusa la logistica regionale.",
-  related: {
-    href: "/rilievi-laser-scanner-slam-brescia",
-    label: "Rilievi SLAM a Brescia",
-    text: "Intervento in provincia di Brescia o Franciacorta? Usa la landing locale dedicata.",
-  },
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM in Lombardia",
     alternateNames: [
