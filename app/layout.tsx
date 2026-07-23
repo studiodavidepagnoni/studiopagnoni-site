@@ -19,12 +19,15 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   ...rootMetadata,
   icons: {
+    // PNG 48+ prima: Google Search usa soprattutto raster, non SVG.
     icon: [
-      { url: `${withBasePath("/icon.svg")}?v=19`, type: "image/svg+xml" },
-      { url: `${withBasePath("/favicon.ico")}?v=19`, type: "image/x-icon" },
+      { url: `${withBasePath("/icon-48.png")}?v=23`, type: "image/png", sizes: "48x48" },
+      { url: `${withBasePath("/icon-192.png")}?v=23`, type: "image/png", sizes: "192x192" },
+      { url: `${withBasePath("/favicon.ico")}?v=23`, type: "image/x-icon", sizes: "48x48" },
+      { url: `${withBasePath("/icon.svg")}?v=23`, type: "image/svg+xml" },
     ],
-    shortcut: [{ url: `${withBasePath("/icon.svg")}?v=19`, type: "image/svg+xml" }],
-    apple: [{ url: `${withBasePath("/icon.svg")}?v=19`, type: "image/svg+xml" }],
+    shortcut: [{ url: `${withBasePath("/favicon.ico")}?v=23`, type: "image/x-icon" }],
+    apple: [{ url: `${withBasePath("/apple-touch-icon.png")}?v=23`, type: "image/png", sizes: "180x180" }],
   },
 };
 

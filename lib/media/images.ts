@@ -23,9 +23,11 @@ const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
 const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
 /** Immagine fissa hero home (mobile + poster slide 1): distinta dalla sezione Chi siamo. */
-export const HERO_INTRO_STILL = s("handheldSlam");
+export const HERO_INTRO_STILL = s("slamHero");
 export const HERO_INTRO_STILL_W960 = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-w960.webp");
-export const HERO_INTRO_STILL_ALT = imageAlt("Acquisizione SLAM handheld in Franciacorta", { service: "slam" });
+export const HERO_INTRO_STILL_ALT = imageAlt("Rilievo laser scanner SLAM con nuvola di punti in ambiente indoor", {
+  service: "slam",
+});
 
 export function heroIntroStillSrcSet(): string {
   return stockImageSrcSet(HERO_INTRO_STILL);
@@ -103,8 +105,8 @@ export const homeChiSiamoImages = {
 } as const;
 
 export const chiSiamoPageImage = {
-  src: s("handheldSlam"),
-  alt: imageAlt("Acquisizione SLAM handheld lungo strada di campagna", { service: "slam" }),
+  src: s("topoPlan"),
+  alt: imageAlt("Piano topografico con curve di livello e scala grafica", { service: "topografia" }),
 } as const;
 
 export const projectPreview = [

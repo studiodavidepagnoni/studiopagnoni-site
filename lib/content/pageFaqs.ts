@@ -28,7 +28,7 @@ export const topografiaFaq = [
 export const serviziFaq = [
   {
     q: "Quali servizi offre lo Studio Tecnico Pagnoni?",
-    a: "Topografia e rilievi planoaltimetrici, laser scanner SLAM e nuvole di punti, progettazione del verde, urbanistica e pratiche edilizie, architettura, coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
+    a: "Architettura e progettazione, topografia e rilievi planoaltimetrici, laser scanner SLAM e nuvole di punti, progettazione del verde, urbanistica e pratiche edilizie, coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
   },
   {
     q: "Quanto costa un rilievo?",

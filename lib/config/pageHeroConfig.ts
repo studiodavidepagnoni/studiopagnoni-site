@@ -20,8 +20,8 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/chi-siamo": {
     eyebrow: "Lo studio",
     title: "Chi siamo",
-    image: s("handheldSlam"),
-    alt: imageAlt("Percorso di acquisizione SLAM handheld in ambiente esterno", { service: "slam" }),
+    image: s("technicalDocs"),
+    alt: imageAlt("Architettura contemporanea — dettaglio di prospetto", { service: "edilizia" }),
   },
   "/servizi": {
     eyebrow: "Cosa facciamo",

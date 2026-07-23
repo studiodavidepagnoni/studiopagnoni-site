@@ -12,7 +12,7 @@ const stillClass =
   "hero-media__image hero-media__image--lcp absolute inset-0 h-full w-full object-cover object-center";
 
 /**
- * Hero slide 1 statico: mobile = SLAM Franciacorta; desktop = poster allineato al video indoor.
+ * Hero slide 1 statico: mobile = operatore SLAM + nuvola; desktop = poster allineato al video indoor.
  * Visibilità via CSS (stesso markup SSR placeholder e carousel).
  */
 export function HeroIntroStillPicture() {

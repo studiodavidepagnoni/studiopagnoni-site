@@ -48,8 +48,8 @@ export default function ServiziPage() {
                 Ambiti di intervento
               </h2>
               <p className={`${ui.bodyMuted} mb-8 max-w-5xl`}>
-                Sei gruppi di servizio, ciascuno con il proprio perimetro operativo. Dove esiste una pagina dedicata puoi approfondire metodo e
-                strumenti; per gli altri ambiti trovi qui la sintesi operativa.
+                Dall&apos;architettura alla topografia, dal laser SLAM al verde e alle pratiche di cantiere: sotto trovi gli ambiti in cui
+                interveniamo, con sintesi operativa e link alle pagine dedicate dove servono metodo e strumenti più nel dettaglio.
               </p>
 
               <div className="grid gap-6 sm:grid-cols-2 lg:gap-8" aria-label="Schede servizi">

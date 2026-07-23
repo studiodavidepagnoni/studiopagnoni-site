@@ -2,7 +2,7 @@
 import { SiteBrandLockup } from "@/components/layout/SiteBrandLockup";
 import { formatCopyrightYearRange } from "@/lib/config/copyright";
 import { fontNav, fontSans } from "@/lib/fonts";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
+import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const footerNavLinkClass = `${fontNav.className} site-footer-nav-link flex min-h-[48px] touch-manipulation items-center text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--header-nav-hover)]/55 sm:min-h-0 sm:py-1`;
@@ -33,38 +33,20 @@ export function SiteFooter() {
             <div className="grid gap-10 sm:grid-cols-2">
               <div>
                 <nav aria-label="Link del sito">
-                <ul className="space-y-0.5">
-                  <li>
-                    <Link className={footerNavLinkClass} href="/chi-siamo">
-                      Chi siamo
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={footerNavLinkClass} href="/servizi">
-                      Servizi
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
-                      SLAM Brescia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-lombardia">
-                      SLAM Lombardia
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={footerNavLinkClass} href="/progetti">
-                      Progetti
-                    </Link>
-                  </li>
-                  <li>
-                    <Link className={footerNavLinkClass} href="/privacy-policy">
-                      Privacy
-                    </Link>
-                  </li>
-                </ul>
+                  <ul className="space-y-0.5">
+                    {navItems.map((item) => (
+                      <li key={item.href}>
+                        <Link className={footerNavLinkClass} href={item.href}>
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                    <li>
+                      <Link className={footerNavLinkClass} href="/privacy-policy">
+                        Privacy
+                      </Link>
+                    </li>
+                  </ul>
                 </nav>
               </div>
 

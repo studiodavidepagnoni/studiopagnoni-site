@@ -7,9 +7,9 @@ import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({
-  title: "Chi siamo — geometra e architetto a Franciacorta",
+  title: "Architettura e topografia in Franciacorta",
   description:
-    "Dal 1988 a Cazzago San Martino (BS): Geom. Sergio Pagnoni e Arch. Davide Pagnoni. Architettura, topografia e laser SLAM per Franciacorta, provincia di Brescia e Nord Italia.",
+    "Studio Tecnico Pagnoni a Cazzago San Martino (BS): architettura e topografia in Franciacorta e provincia di Brescia, con laser scanner SLAM e pratiche tecniche. Attivi dal 1988.",
   path: "/chi-siamo",
 });
 

@@ -9,14 +9,29 @@ async function main() {
   const root = path.resolve(__dirname, "..");
   const svgPath = path.join(root, "public", "icon.svg");
   const outIcoPath = path.join(root, "public", "favicon.ico");
+  const outPng48 = path.join(root, "public", "icon-48.png");
+  const outPng192 = path.join(root, "public", "icon-192.png");
+  const outApple = path.join(root, "public", "apple-touch-icon.png");
 
   const svg = fs.readFileSync(svgPath);
 
-  // Common favicon sizes. Keep them small to improve legibility.
-  const sizes = [16, 24, 32, 48, 64, 128];
+  async function toPng(size, outPath) {
+    await sharp(svg, { density: 384 })
+      .resize(size, size, { fit: "cover" })
+      .png({ compressionLevel: 9, adaptiveFiltering: true })
+      .toFile(outPath);
+    console.log(`[gen-favicon] Wrote ${path.relative(root, outPath)} (${size}x${size})`);
+  }
+
+  // Google Search: PNG multiplo di 48px; Organization logo ≥112px.
+  await toPng(48, outPng48);
+  await toPng(192, outPng192);
+  await toPng(180, outApple);
+
+  const icoSizes = [16, 32, 48];
   const pngBuffers = await Promise.all(
-    sizes.map((size) =>
-      sharp(svg, { density: 320 })
+    icoSizes.map((size) =>
+      sharp(svg, { density: 384 })
         .resize(size, size, { fit: "cover" })
         .png({ compressionLevel: 9, adaptiveFiltering: true })
         .toBuffer(),
@@ -25,7 +40,6 @@ async function main() {
 
   const ico = await pngToIco(pngBuffers);
   fs.writeFileSync(outIcoPath, ico);
-
   console.log(`[gen-favicon] Wrote ${path.relative(root, outIcoPath)} from ${path.relative(root, svgPath)}`);
 }
 
@@ -33,4 +47,3 @@ main().catch((err) => {
   console.error(err);
   process.exitCode = 1;
 });
-

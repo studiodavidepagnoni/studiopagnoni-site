@@ -54,10 +54,10 @@ export const homeChiSiamo: {
     {
       text: (
         <>
-          Il nostro obiettivo è essere un <strong>punto di riferimento per topografia e laser scanner SLAM</strong> in provincia di Brescia e nel Nord
-          Italia, con strumentazione allineata al mercato professionale (GNSS, stazione totale, sistema SLAM) e attenzione alla qualità della
-          documentazione tecnica. Operiamo con continuità su <strong>Franciacorta</strong>, <strong>Valle Trompia</strong>, hinterland bresciano e, su
-          commessa, in Lombardia e Nord Italia.
+          Il nostro obiettivo è essere un <strong>punto di riferimento per architettura, topografia e laser scanner SLAM</strong> in provincia di
+          Brescia e nel Nord Italia, con strumentazione allineata al mercato professionale (GNSS, stazione totale, sistema SLAM) e attenzione alla
+          qualità della documentazione tecnica. Operiamo con continuità su <strong>Franciacorta</strong>, <strong>Valle Trompia</strong>, hinterland
+          bresciano e, su commessa, in Lombardia e Nord Italia.
         </>
       ),
       image: "cantiere",
@@ -257,7 +257,7 @@ export const homeStats: HomeStat[] = [
     suffix: "+",
     label: `Anni di attività\n· dal ${STUDIO_FOUNDED_YEAR}`,
   },
-  { mode: "t", title: "Team multidisciplinare", subtitle: "Topografia · Architettura · CSP/CSE · perizie" },
+  { mode: "t", title: "Team multidisciplinare", subtitle: "Architettura · Topografia · CSP/CSE · perizie" },
   { mode: "t", title: "GNSS · Stazione totale · SLAM", subtitle: "Linea strumentale per rilievi professionali" },
   { mode: "t", title: "Franciacorta · Brescia", subtitle: "Radicamento locale e commesse nel Nord Italia" },
 ];
