@@ -2,7 +2,7 @@
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useCallback, useEffect, useLayoutEffect, useRef, useState, type CSSProperties } from "react";
+import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontNav, fontSans } from "@/lib/fonts";
 import { isHomePath } from "@/lib/utils/isHomePath";
@@ -79,13 +79,15 @@ export function SiteHeader() {
   const hasDynamicProjectHero = !isHome && Boolean(pathname?.startsWith("/progetti/"));
   const hasPageHero = Boolean(staticPageHero) || hasDynamicProjectHero;
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (!hasPageHero) {
       setPageHeroOverlayEnd(0);
       return;
     }
 
+    let frameId: number | null = null;
     const measure = () => {
+      frameId = null;
       const el = document.querySelector("[data-page-hero]");
       if (!el) {
         setPageHeroOverlayEnd(0);
@@ -94,16 +96,22 @@ export function SiteHeader() {
       const height = el.getBoundingClientRect().height;
       setPageHeroOverlayEnd(Math.max(0, Math.round(height - PAGE_HERO_OVERLAY_TAIL_PX)));
     };
+    const schedule = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(measure);
+    };
 
-    measure();
-    const delayed = window.setTimeout(measure, 150);
-    const delayed2 = window.setTimeout(measure, 500);
-    window.addEventListener("resize", measure, { passive: true });
+    schedule();
+    window.addEventListener("resize", schedule, { passive: true });
+    const heroEl = document.querySelector("[data-page-hero]");
+    const observer =
+      heroEl && typeof ResizeObserver !== "undefined" ? new ResizeObserver(schedule) : null;
+    if (heroEl && observer) observer.observe(heroEl);
 
     return () => {
-      window.clearTimeout(delayed);
-      window.clearTimeout(delayed2);
-      window.removeEventListener("resize", measure);
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
+      window.removeEventListener("resize", schedule);
+      observer?.disconnect();
     };
   }, [pathname, hasPageHero]);
 
@@ -141,9 +149,14 @@ export function SiteHeader() {
 
     const listFocusables = () => {
       if (!nav) return [] as HTMLElement[];
-      return Array.from(nav.querySelectorAll<HTMLElement>(focusableSelector)).filter(
-        (el) => !el.hasAttribute("disabled") && el.offsetWidth > 0 && el.offsetHeight > 0,
-      );
+      return Array.from(nav.querySelectorAll<HTMLElement>(focusableSelector)).filter((el) => {
+        if (el.hasAttribute("disabled")) return false;
+        // Evita offsetWidth/Height (forced reflow): checkVisibility quando c’è, altrimenti tutti i candidati.
+        if (typeof el.checkVisibility === "function") {
+          return el.checkVisibility({ checkOpacity: true, checkVisibilityCSS: true });
+        }
+        return true;
+      });
     };
 
     const onKey = (e: KeyboardEvent) => {
@@ -180,7 +193,9 @@ export function SiteHeader() {
     wasMenuOpenRef.current = open;
   }, [open]);
 
-  useLayoutEffect(() => {
+  // Altezza header → CSS var una sola volta (ResizeObserver). Non ricalcolare a ogni hideProgress/scroll:
+  // altrimenti getBoundingClientRect in useLayoutEffect forza reflow sul critical path.
+  useEffect(() => {
     const root = document.documentElement;
     const headerEl = headerRootRef.current;
     if (!headerEl || typeof ResizeObserver === "undefined") {
@@ -188,24 +203,30 @@ export function SiteHeader() {
       return;
     }
 
+    let frameId: number | null = null;
     const apply = () => {
+      frameId = null;
       const height = headerEl.getBoundingClientRect().height;
       if (height <= 0) return;
-      const visible = height * (1 - hideProgress);
-      root.style.setProperty("--site-header-offset", `${Math.max(20, Math.round(visible))}px`);
+      root.style.setProperty("--site-header-offset", `${Math.round(height)}px`);
+    };
+    const schedule = () => {
+      if (frameId !== null) return;
+      frameId = window.requestAnimationFrame(apply);
     };
 
-    apply();
-    const observer = new ResizeObserver(apply);
+    schedule();
+    const observer = new ResizeObserver(schedule);
     observer.observe(headerEl);
-    window.addEventListener("resize", apply, { passive: true });
+    window.addEventListener("resize", schedule, { passive: true });
 
     return () => {
+      if (frameId !== null) window.cancelAnimationFrame(frameId);
       observer.disconnect();
-      window.removeEventListener("resize", apply);
+      window.removeEventListener("resize", schedule);
       root.style.removeProperty("--site-header-offset");
     };
-  }, [hideProgress]);
+  }, []);
 
   const headerSurface = "bg-[var(--header-surface-scrolled)]";
   const headerPosition = "fixed inset-x-0 top-0";

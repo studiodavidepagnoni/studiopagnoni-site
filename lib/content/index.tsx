@@ -189,12 +189,16 @@ export const homeServiceCards = serviceGroups.map((group) => ({
 }));
 
 export const homeProgettiIntro =
-  "Anteprima di tre casi SLAM e topografia. Schede complete, video e dettagli nell’archivio Progetti.";
+  "Una selezione di lavori sul territorio. Schede, video e dettagli nell’archivio Progetti.";
 
 export const certificationsIntro =
   "Attività svolte da professionisti abilitati, con responsabilità tecnica e rete di specialisti quando la commessa lo richiede.";
 
 export const certifications = [
+  {
+    title: "Architettura",
+    text: "Progettazione architettonica dal concept alle tavole esecutive: anteprogetto, definitivo ed esecutivo, pratiche edilizie e coordinamento delle discipline di progetto e di cantiere.",
+  },
   {
     title: "Urbanistica",
     text: "Lettura di piani regolatori e strumenti urbanistici, pratiche edilizie e sanatorie dove applicabili, coordinamento documentale con gli enti.",

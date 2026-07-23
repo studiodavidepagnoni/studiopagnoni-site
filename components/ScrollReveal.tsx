@@ -14,10 +14,6 @@ function prefersReducedMotion() {
   return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 }
 
-function isBelowFold(el: Element) {
-  return el.getBoundingClientRect().top > window.innerHeight * 0.94;
-}
-
 function revealSection(section: HTMLElement) {
   if (section.classList.contains("is-revealed")) return;
   section.classList.add("is-revealed");
@@ -113,23 +109,15 @@ export function ScrollReveal() {
 
       document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach((section) => {
         if (section.classList.contains("is-revealed")) return;
-        if (isBelowFold(section)) {
-          sectionObserver?.observe(section);
-          return;
-        }
-        revealSection(section);
+        // Solo IntersectionObserver: niente getBoundingClientRect sync (forced reflow).
+        sectionObserver?.observe(section);
       });
 
       document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
         if (el.classList.contains("is-revealed")) return;
         if (el.closest("[data-hero-motion]")) return;
         if (el.closest(SECTION_ROOT_SELECTOR)) return;
-        if (isBelowFold(el)) {
-          itemObserver?.observe(el);
-          return;
-        }
-        el.style.setProperty("--reveal-delay", "0ms");
-        el.classList.add("is-revealed");
+        itemObserver?.observe(el);
       });
     };
 

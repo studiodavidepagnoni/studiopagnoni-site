@@ -1,11 +1,18 @@
 import type { NextConfig } from "next";
+import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
+const require = createRequire(import.meta.url);
 
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 const isDev = process.env.NODE_ENV !== "production";
+
+/** Next 15.5 injecta sempre next-polyfill-module (Array.at, flat, Object.hasOwn, …)
+ * anche con browserslist moderno. I target sotto supportano già tutto nativo → stub. */
+const nextClientPolyfillModule = require.resolve("next/dist/build/polyfills/polyfill-module");
+const emptyPolyfillModule = path.join(__dirname, "lib/empty-polyfill-module.js");
 
 const nextConfig: NextConfig = {
   turbopack: {
@@ -18,12 +25,24 @@ const nextConfig: NextConfig = {
     // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
     devtoolSegmentExplorer: false,
     optimizePackageImports: ["react", "react-dom"],
+    // Inline CSS nel HTML (prod): toglie i <link stylesheet> dal critical path → meno delay LCP/FCP mobile.
+    // Tradeoff: HTML più pesante; ok qui (~23 KiB CSS). Solo production build.
+    inlineCss: true,
   },
   poweredByHeader: false,
   images: {
     // In dev, avoid Next image optimizer flakiness with remote hosts on Windows networks.
     ...(isDev ? { unoptimized: true } : {}),
     ...(isStaticExport ? { unoptimized: true } : {}),
+  },
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias = {
+        ...config.resolve.alias,
+        [nextClientPolyfillModule]: emptyPolyfillModule,
+      };
+    }
+    return config;
   },
 };
 

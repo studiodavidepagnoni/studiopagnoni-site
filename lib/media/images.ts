@@ -10,7 +10,7 @@ import {
   HERO_VIDEO_INDOOR_SOURCES,
   HERO_VIDEO_POINTCLOUD_SOURCES,
 } from "@/lib/media/heroVideos";
-import { projectAsset, stockImage, stockImageSrcSet } from "@/lib/media/mediaPath";
+import { projectAsset, stockImage } from "@/lib/media/mediaPath";
 import { imageAlt } from "@/lib/config/seo";
 
 export {
@@ -22,16 +22,14 @@ export {
 const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
 const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
-/** Immagine fissa hero home (mobile + poster slide 1): distinta dalla sezione Chi siamo. */
-export const HERO_INTRO_STILL = s("slamHero");
-export const HERO_INTRO_STILL_W960 = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-w960.webp");
-export const HERO_INTRO_STILL_ALT = imageAlt("Rilievo laser scanner SLAM con nuvola di punti in ambiente indoor", {
-  service: "slam",
+/** Immagine fissa hero home mobile: portrait nativo (stazione totale), adatto al full-bleed verticale. */
+export const HERO_INTRO_STILL = s("totalStation");
+/** Variante LCP mobile (~640px): molto più leggera del full. */
+export const HERO_INTRO_STILL_LCP = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-lcp.webp");
+export const HERO_INTRO_STILL_LCP_AVIF = HERO_INTRO_STILL.replace(/\.webp(\?.*)?$/i, "-lcp.avif");
+export const HERO_INTRO_STILL_ALT = imageAlt("Stazione totale in rilievo planoaltimetrico sul territorio", {
+  service: "topografia",
 });
-
-export function heroIntroStillSrcSet(): string {
-  return stockImageSrcSet(HERO_INTRO_STILL);
-}
 
 export type HeroSlide = {
   /** Immagine fallback (mobile e quando il video non parte). */

@@ -132,10 +132,12 @@ export function HomeSections() {
             <p className="home-section-intro__lede max-w-[52ch]">{homeServiziIntro}</p>
           </div>
 
+          <HomeServiceCards />
+
           <div
             id="strumentazione"
             aria-labelledby="strumentazione-heading"
-            className="surface-inverted reveal-block-solid mb-8 rounded-xl border border-[var(--green-border-muted)] p-5 sm:mb-10 sm:p-6"
+            className="surface-inverted reveal-block-solid mt-8 rounded-xl border border-[var(--green-border-muted)] p-5 sm:mt-10 sm:p-6"
           >
             {/* Stessa misura per kicker + titolo + lede (evita “colonna stretta” sotto titolo largo). */}
             <div className="max-w-[min(62ch,100%)]">
@@ -182,7 +184,6 @@ export function HomeSections() {
             </nav>
           </div>
 
-          <HomeServiceCards />
           <p className="mt-8 sm:mt-10">
             <Link href="/servizi" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
               Elenco completo dei servizi

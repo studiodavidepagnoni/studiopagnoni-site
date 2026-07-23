@@ -22,8 +22,13 @@ const RESPONSIVE_QUALITY = 78;
 const LCP_POSTER_W = 768;
 const LCP_POSTER_QUALITY = 68;
 const LCP_AVIF_QUALITY = 48;
+const LCP_STILL_W = 480;
+const LCP_STILL_H = 640;
+const LCP_STILL_QUALITY = 55;
+const LCP_STILL_AVIF_QUALITY = 32;
 const MAX_EDGE = 1920;
 const HERO_LCP_POSTER = "rilievo-laser-slam-interni-brescia-poster.webp";
+const HERO_LCP_STILL = "stazione-totale-rilievo-cantiere-brescia.webp";
 const VIDEO_CRF = 30;
 const VIDEO_PRESET = "medium";
 const VIDEO_MAX_MB = 8;
@@ -181,6 +186,30 @@ async function posterToLcp(webpPath) {
   const avifKb = Math.round(fs.statSync(lcpAvifPath).size / 1024);
   console.log(`[optimize-assets] Poster LCP ${path.relative(root, lcpPath)} (${kb} KB)`);
   console.log(`[optimize-assets] Poster LCP AVIF ${path.relative(root, lcpAvifPath)} (${avifKb} KB)`);
+}
+
+/** Still mobile LCP (hero intro sotto 1025px). */
+async function stillToLcp(webpPath) {
+  if (path.basename(webpPath) !== HERO_LCP_STILL) return;
+  let sharp;
+  try {
+    sharp = require("sharp");
+  } catch {
+    return;
+  }
+  if (!fs.existsSync(webpPath)) return;
+  const lcpPath = webpPath.replace(/\.webp$/i, "-lcp.webp");
+  // Cover 480×640: ritaglio verticale pensato per hero mobile full-bleed.
+  const pipeline = sharp(webpPath).resize(LCP_STILL_W, LCP_STILL_H, { fit: "cover", position: "centre" });
+  await pipeline.clone().webp({ quality: LCP_STILL_QUALITY, effort: 5 }).toFile(lcpPath);
+  const lcpAvifPath = lcpPath.replace(/\.webp$/i, ".avif");
+  await pipeline.clone().avif({ quality: LCP_STILL_AVIF_QUALITY, effort: 5 }).toFile(lcpAvifPath);
+  console.log(
+    `[optimize-assets] Still LCP ${path.relative(root, lcpPath)} (${Math.round(fs.statSync(lcpPath).size / 1024)} KB)`,
+  );
+  console.log(
+    `[optimize-assets] Still LCP AVIF ${path.relative(root, lcpAvifPath)} (${Math.round(fs.statSync(lcpAvifPath).size / 1024)} KB)`,
+  );
 }
 
 /** Poster da video: frame sequenza + rename (ffmpeg 8 / Windows). */
@@ -367,7 +396,9 @@ async function optimizeExistingWebps(dir, sharp) {
       }
       if (!ent.isFile() || !/\.webp$/i.test(ent.name)) continue;
       if (/-w\d+\.webp$/i.test(ent.name)) continue;
+      if (/-lcp\.webp$/i.test(ent.name)) continue;
       await writeResponsiveWebps(sharp, full);
+      await stillToLcp(full);
     }
   }
 }
