@@ -37,6 +37,7 @@ jobs:
           # Dominio custom in root: lasciare vuoto. Solo per anteprima github.io/repo impostare vars.NEXT_PUBLIC_BASE_PATH=/nome-repo
           NEXT_PUBLIC_BASE_PATH: ${{ vars.NEXT_PUBLIC_BASE_PATH || '' }}
           NEXT_PUBLIC_FORMSPREE_ID: ${{ secrets.NEXT_PUBLIC_FORMSPREE_ID }}
+          NEXT_PUBLIC_RECAPTCHA_SITE_KEY: ${{ secrets.NEXT_PUBLIC_RECAPTCHA_SITE_KEY }}
         # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.
         run: npm run build:static:fast
 

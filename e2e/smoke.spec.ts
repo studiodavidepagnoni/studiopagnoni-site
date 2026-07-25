@@ -38,6 +38,8 @@ test.describe("smoke", () => {
     await page.getByLabel("Email").fill("mario.rossi@example.com");
     await page.getByLabel("Messaggio").fill("Richiesta di preventivo per rilievo SLAM in provincia di Brescia.");
     await page.getByLabel(/Ho letto e accetto la/i).check();
+    // Anti-bot: il form rifiuta invii troppo rapidi con success finto; attendiamo il delay minimo.
+    await page.waitForTimeout(3000);
     await page.getByRole("button", { name: "Invia messaggio" }).click();
 
     await expect(page.getByRole("status", { name: "Messaggio inviato" })).toBeVisible({

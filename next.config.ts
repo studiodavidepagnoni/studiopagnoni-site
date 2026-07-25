@@ -6,6 +6,26 @@ import { fileURLToPath } from "node:url";
 const __dirname = path.dirname(fileURLToPath(import.meta.url));
 const require = createRequire(import.meta.url);
 
+// CSP: evita import ESM di .ts in next.config (CJS/interop). Duplica la stringa prod da lib/security/csp.ts.
+function buildCsp(dev: boolean): string {
+  return [
+    "frame-ancestors 'self'",
+    "default-src 'self'",
+    "base-uri 'self'",
+    "form-action 'self' https://formspree.io",
+    "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
+    "media-src 'self'",
+    "font-src 'self' data: https://fonts.gstatic.com",
+    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    dev
+      ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/"
+      : "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/",
+    dev ? "connect-src 'self' ws: wss: https://formspree.io" : "connect-src 'self' https://formspree.io",
+    "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com",
+    "upgrade-insecure-requests",
+  ].join("; ");
+}
+
 const isStaticExport = process.env.STATIC_EXPORT === "1";
 const isDev = process.env.NODE_ENV !== "production";
 
@@ -74,27 +94,7 @@ if (isStaticExport) {
         { key: "Cross-Origin-Resource-Policy", value: "same-site" },
         {
           key: "Content-Security-Policy",
-          value: [
-            "default-src 'self'",
-            "base-uri 'self'",
-            "frame-ancestors 'self'",
-            "form-action 'self' https://formspree.io",
-            "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
-            "media-src 'self'",
-            "font-src 'self' data: https://fonts.gstatic.com",
-            "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
-            // In dev Next.js (React Refresh / HMR) richiede 'unsafe-eval' per ricompilare i moduli al volo.
-            // In produzione resta rigido a 'self' + 'unsafe-inline'.
-            isDev
-              ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'"
-              : "script-src 'self' 'unsafe-inline'",
-            // In dev consentiamo il websocket HMR di Next.
-            isDev
-              ? "connect-src 'self' ws: wss: https://formspree.io"
-              : "connect-src 'self' https://formspree.io",
-            "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com",
-            "upgrade-insecure-requests",
-          ].join("; "),
+          value: buildCsp(isDev),
         },
       ],
     },

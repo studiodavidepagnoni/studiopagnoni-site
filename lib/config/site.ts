@@ -31,8 +31,13 @@ export const site = {
   addressLine: "Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato",
   /** Partita IVA — sostituire con quella reale quando disponibile. */
   piva: "03012340987",
-  /** Formspree: override con NEXT_PUBLIC_FORMSPREE_ID. Se vuoto, il form usa fallback mailto. */
-  formspreeId: process.env.NEXT_PUBLIC_FORMSPREE_ID ?? "xeeylajd",
+  /**
+   * Formspree form ID — solo da env (niente ID di default nel bundle).
+   * Senza ID il form usa fallback mailto.
+   */
+  formspreeId: process.env.NEXT_PUBLIC_FORMSPREE_ID?.trim() ?? "",
+  /** reCAPTCHA v2 site key — obbligatorio in prod per anti-spam Formspree. */
+  recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "",
 } as const;
 
 export const navItems = [

@@ -204,7 +204,8 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per i servizi di mappe incorporate previo consenso.{" "}
+                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per i servizi di mappe incorporate previo consenso e, quando attivo, per{" "}
+                      <strong className="text-[var(--foreground)]">reCAPTCHA</strong> sul modulo di contatto (protezione anti-spam).{" "}
                       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Google
                       </a>

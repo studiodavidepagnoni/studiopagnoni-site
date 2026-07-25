@@ -4,6 +4,7 @@ import { CookieBannerDeferred } from "@/components/layout/CookieBannerDeferred";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeaderDeferred } from "@/components/layout/SiteHeaderDeferred";
 import { SiteHeaderShell } from "@/components/layout/SiteHeaderShell";
+import { CspMeta } from "@/components/security/CspMeta";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { jsonLdGraph, rootMetadata } from "@/lib/config/seo";
@@ -38,6 +39,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="it">
+      <head>
+        <CspMeta />
+      </head>
       <body
         className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-site max-md:overflow-x-clip`}
       >
