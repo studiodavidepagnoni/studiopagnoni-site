@@ -18,47 +18,53 @@ export type PageHeroData = {
 const staticPageHeroes: Record<string, PageHeroData> = {
   "/chi-siamo": {
     eyebrow: "Lo studio",
-    title: "Chi siamo",
+    title: "Studio Tecnico Pagnoni — Franciacorta",
     image: s("technicalDocs"),
-    alt: imageAlt("Architettura contemporanea — dettaglio di prospetto", { service: "architettura" }),
+    alt: imageAlt("Documentazione tecnica e tavole di progetto in studio", { service: "studio" }),
+  },
+  "/architettura": {
+    eyebrow: "Progettazione · Franciacorta",
+    title: "Architettura in Franciacorta",
+    image: s("surveySite"),
+    alt: imageAlt("Tavole di progettazione architettonica in studio", { service: "architettura" }),
+    lede: "Dal concept alle pratiche edilizie — Studio Tecnico Pagnoni, Bornato (Frazione di Cazzago San Martino).",
+    priorityImage: true,
   },
   "/servizi": {
     eyebrow: "Cosa facciamo",
-    title: "Servizi",
+    title: "Servizi di architettura e topografia",
     image: s("surveySite"),
     alt: imageAlt("Tavole di progettazione architettonica e tecnica in studio", { service: "architettura" }),
     lede: "Architettura, topografia, laser SLAM, verde, urbanistica e assistenza tecnica dal 1988.",
   },
   "/topografia": {
     eyebrow: "Servizi",
-    title: "Topografia e rilievi",
+    title: "Topografia e rilievi a Brescia",
     image: s("gnssRtk"),
-    alt: imageAlt("GNSS RTK in area estrattiva — base metrica per progetto architettonico", {
-      service: "topografia",
-    }),
+    alt: imageAlt("GNSS RTK in area estrattiva — base metrica per progetto", { service: "topografia" }),
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
-    image: s("gnssRtk"),
-    alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", { service: "slam" }),
+    image: s("slamHero"),
+    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 sul campo a Brescia", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico in provincia di Brescia e Franciacorta.",
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-lombardia": {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    image: s("gnssRtk"),
-    alt: imageAlt("GNSS RTK in area estrattiva — rilievo in Lombardia", { service: "slam" }),
+    image: s("handheldSlam"),
+    alt: imageAlt("Acquisizione SLAM handheld — rilievo 3D in Lombardia", { service: "slam" }),
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
   },
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("gnssRtk"),
-    alt: imageAlt("GNSS RTK in area estrattiva — rilievo topografico a Brescia", {
+    image: s("slamHero"),
+    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — nuvola di punti per architettura", {
       service: "slam",
     }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
@@ -66,7 +72,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   },
   "/progetti": {
     eyebrow: "Casi studio",
-    title: "Progetti",
+    title: "Progetti e casi studio",
     image: s("topoPlan"),
     alt: imageAlt("Piano topografico con curve di livello — casi studio a Brescia", {
       service: "topografia",
@@ -75,9 +81,9 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   },
   "/contatti": {
     eyebrow: "Contatto",
-    title: "Contatti",
+    title: "Contatti e preventivi",
     image: s("totalStation"),
-    alt: imageAlt("Stazione totale in cantiere — preventivi per architettura e rilievi", {
+    alt: imageAlt("Stazione totale in cantiere — sopralluoghi e preventivi", {
       service: "topografia",
     }),
     lede: "Sopralluoghi e preventivi per architettura, topografia e laser scanner SLAM — Franciacorta e provincia di Brescia.",

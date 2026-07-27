@@ -71,6 +71,19 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
                 </li>
               ))}
             </ul>
+            {L.relatedLandings && L.relatedLandings.length > 0 ? (
+              <nav className="mt-6 flex flex-col gap-2 sm:flex-row sm:flex-wrap sm:gap-x-5 sm:gap-y-2" aria-label="Pagine correlate">
+                {L.relatedLandings.map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    className={`${fontSans.className} text-[0.9rem] font-semibold text-[var(--primary-mid)] underline underline-offset-2 transition hover:text-[var(--foreground)]`}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
+              </nav>
+            ) : null}
           </section>
 
           <section className={ui.innerCard} aria-labelledby="slam-rs10">

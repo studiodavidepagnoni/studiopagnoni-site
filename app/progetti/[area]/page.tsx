@@ -4,12 +4,12 @@ import { notFound } from "next/navigation";
 import { PageHero } from "@/components/hero/PageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { isProjectArea, projectCategories, projectAreas } from "@/lib/content/projects";
+import { buildPageMetadata } from "@/lib/config/seo";
 import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 type Props = { params: Promise<{ area: string }> };
-const siteUrl = site.url.replace(/\/$/, "");
 
 export function generateStaticParams() {
   return projectAreas.map((area) => ({ area }));
@@ -19,11 +19,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { area } = await params;
   if (!isProjectArea(area)) return {};
   const c = projectCategories[area];
-  return {
+  return buildPageMetadata({
     title: c.metaTitle,
     description: c.metaDescription,
-    alternates: { canonical: `${siteUrl}/progetti/${area}` },
-  };
+    path: `/progetti/${area}`,
+  });
 }
 
 export default async function ProjectAreaPage({ params }: Props) {

@@ -29,6 +29,8 @@ export type SlamLandingContent = {
   readonly areaHeading: string;
   readonly areaBody: string;
   readonly areaPlaces: readonly string[];
+  /** Link interni a landing correlate (SEO locale). */
+  readonly relatedLandings?: readonly { readonly label: string; readonly href: string }[];
   readonly projectsIntro: string;
   readonly deliverables: readonly SlamDeliverable[];
   readonly workflow: readonly SlamWorkflowStep[];
@@ -96,9 +98,9 @@ const sharedWorkflow = [
 /** Pagina servizio generica (menu Laser Scanning): `/laser-scanner-slam`. */
 export const laserSlamLanding = {
   path: "/laser-scanner-slam",
-  metaTitle: "Laser scanner SLAM — architettura, as-built e nuvole di punti",
+  metaTitle: "Laser scanner SLAM — as-built e nuvole di punti",
   metaDescription:
-    "Rilievi laser scanner SLAM mobile: nuvole di punti, as-built, DWG e BIM per architettura, capannoni, edifici e impianti. Franciacorta, provincia di Brescia e Lombardia. Preventivo.",
+    "Rilievi laser scanner SLAM: nuvole di punti, as-built e CAD/BIM per architettura e capannoni. Franciacorta e Brescia. Preventivo.",
   hero: {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
@@ -135,11 +137,15 @@ export const laserSlamLanding = {
   ],
   areaHeading: "Dove operiamo",
   areaBody:
-    "Sede a Cazzago San Martino (BS), in Franciacorta. Interventi rapidi in provincia di Brescia; su programmazione in Lombardia e Nord Italia. Per SEO locale restano le landing dedicate Brescia e Lombardia.",
+    "Sede a Cazzago San Martino (BS), in Franciacorta. Interventi rapidi in provincia di Brescia; su programmazione in Lombardia e Nord Italia. Per ricerche locali consulta anche le pagine dedicate.",
   areaPlaces: [
     "Franciacorta e provincia di Brescia",
     "Lombardia (su programmazione)",
     "Nord Italia per commesse strutturate",
+  ],
+  relatedLandings: [
+    { label: "Rilievi laser SLAM a Brescia", href: "/rilievi-laser-scanner-slam-brescia" },
+    { label: "Rilievi laser SLAM in Lombardia", href: "/rilievi-laser-scanner-slam-lombardia" },
   ],
   projectsIntro:
     "Esempi di laser scanner SLAM e documentazione 3D: acquisizione in movimento e restituzione operativa.",
@@ -165,7 +171,7 @@ export const laserSlamLanding = {
     },
     {
       q: "Operate solo in provincia di Brescia?",
-      a: "La priorità operativa è Franciacorta e provincia di Brescia. Su programmazione eseguiamo rilievi SLAM in Lombardia e Nord Italia: usa le landing geo o il modulo contatti indicando comune e superficie.",
+      a: "La priorità operativa è Franciacorta e provincia di Brescia. Su programmazione eseguiamo rilievi SLAM in Lombardia e Nord Italia: consulta le pagine dedicate o indica comune e superficie nel modulo contatti.",
     },
   ],
   ctaHeading: "Preventivo rilievo laser scanner SLAM",
@@ -196,9 +202,9 @@ export const laserSlamLanding = {
 /** Landing SEO: provincia di Brescia / Franciacorta. */
 export const laserSlamLandingBrescia = {
   path: "/rilievi-laser-scanner-slam-brescia",
-  metaTitle: "Laser scanner SLAM Brescia | architettura, as-built e nuvole di punti",
+  metaTitle: "Laser scanner SLAM Brescia — as-built e nuvole di punti",
   metaDescription:
-    "Rilievo laser scanner SLAM a Brescia e Franciacorta per architettura, as-built, DWG e BIM. Capannoni, edifici, cantine e impianti. Studio Tecnico Pagnoni — preventivo.",
+    "Rilievo laser SLAM a Brescia e Franciacorta: as-built, DWG e BIM per capannoni, edifici e cantine. Preventivo dallo Studio Pagnoni.",
   hero: {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",
@@ -242,6 +248,10 @@ export const laserSlamLandingBrescia = {
     "Valle Trompia e comuni limitrofi",
     "Lago d’Iseo e sponda bresciana",
     "Comuni industriali della Bassa Bresciana",
+  ],
+  relatedLandings: [
+    { label: "Servizio laser scanner SLAM", href: "/laser-scanner-slam" },
+    { label: "Rilievi laser SLAM in Lombardia", href: "/rilievi-laser-scanner-slam-lombardia" },
   ],
   projectsIntro:
     "Esempi di laser scanner SLAM e documentazione 3D su siti in ambito bresciano e Franciacorta: acquisizione in movimento e restituzione operativa.",
@@ -301,9 +311,9 @@ export const laserSlamLandingBrescia = {
 /** Landing regionale: Lombardia. */
 export const laserSlamLandingLombardia = {
   path: "/rilievi-laser-scanner-slam-lombardia",
-  metaTitle: "Laser scanner SLAM Lombardia | architettura, imprese e immobili",
+  metaTitle: "Laser scanner SLAM Lombardia — imprese e immobili",
   metaDescription:
-    "Rilievo laser scanner SLAM in Lombardia per architettura, as-built e CAD/BIM: capannoni, edifici e impianti. Da Brescia su Milano, Bergamo, Mantova e province. Preventivo.",
+    "Rilievo laser SLAM in Lombardia: as-built e CAD/BIM per capannoni e impianti. Da Brescia su Milano, Bergamo e Mantova. Preventivo.",
   hero: {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
@@ -348,6 +358,10 @@ export const laserSlamLandingLombardia = {
     "Milano e hinterland (su programmazione)",
     "Como, Lecco, Varese e area prealpina",
     "Pavia, Lodi e Monza Brianza (su commessa)",
+  ],
+  relatedLandings: [
+    { label: "Servizio laser scanner SLAM", href: "/laser-scanner-slam" },
+    { label: "Rilievi laser SLAM a Brescia", href: "/rilievi-laser-scanner-slam-brescia" },
   ],
   projectsIntro:
     "Casi di rilievo laser SLAM e digitalizzazione 3D: metodo trasferibile su siti lombardi di scala analoga. Apri l’archivio progetti per schede e video.",

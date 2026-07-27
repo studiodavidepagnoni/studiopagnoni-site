@@ -24,7 +24,8 @@ export const homeChiSiamo: {
   intro: "Sintesi del profilo studio. Biografia, metodo e immagini nella pagina Chi siamo.",
   short: (
     <>
-      Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a <strong>Bornato, Cazzago San Martino</strong>. Uniamo
+      Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a{" "}
+      <strong>Bornato, Frazione di Cazzago San Martino</strong>. Uniamo
       architettura, topografia e laser scanner SLAM e pratiche tecniche per trasformare progetto, rilievi e territorio in elaborati
       utilizzabili.
       <br />
@@ -41,11 +42,12 @@ export const homeChiSiamo: {
     {
       text: (
         <>
-          Lo <strong>Studio Tecnico Pagnoni</strong> è uno studio di ingegneria con sede a <strong>Cazzago San Martino</strong> (provincia di{" "}
+          Lo <strong>Studio Tecnico Pagnoni</strong> è uno studio tecnico con sede a{" "}
+          <strong>Bornato, Frazione di Cazzago San Martino</strong> (provincia di{" "}
           <strong>Brescia</strong>, <strong>Franciacorta</strong> e raggio su <strong>Lombardia</strong> e <strong>Nord Italia</strong>):{" "}
           <strong>Geometra Sergio Pagnoni</strong> e <strong>Architetto Davide Pagnoni</strong> lavorano in sinergia su progetti di territorio, edilizia e
           rilievi ad alta precisione. Non svolgiamo <strong>progettazione strutturale</strong>: quando necessario ci avvaliamo di collaboratori esterni,
-          in analogia a quanto avviene negli studi di ingegneria strutturale di riferimento, mantenendo il focus su architettura, topografia, laser scanner, verde e
+          mantenendo il focus su architettura, topografia, laser scanner, verde e
           iter autorizzativi.
         </>
       ),
@@ -112,8 +114,8 @@ export const serviceGroups = [
       "Coordinamento con topografia e laser SLAM quando serve una base metrica affidabile dello stato di fatto.",
       "Allineamento a vincoli urbanistici e pratiche edilizie; strutture affidate a professionisti esterni di fiducia.",
     ],
-    href: "/servizi#architettura",
-    cta: null,
+    href: "/architettura",
+    cta: "Approfondisci l'architettura",
   },
   {
     id: "topografia-rilievi",
@@ -224,21 +226,42 @@ export const zoneContent = {
 
 export const zoneDescription = (
   <>
-    La sede in frazione Bornato (Cazzago San Martino) è strategica per interventi in <strong>Franciacorta</strong>, Valle Trompia, Lago
+    La sede a <strong>Bornato, Frazione di Cazzago San Martino</strong> è strategica per interventi in <strong>Franciacorta</strong>, Valle Trompia, Lago
     d&apos;Iseo e provincia di <strong>Brescia</strong>. Seguiamo commesse in Lombardia e, per tipologia di lavoro, in tutto il Nord Italia.
   </>
 );
 
 export const zoneFooter = (
   <>
-    Per verificare tempi e disponibilità sul vostro territorio{" "}
+    Per tempi e disponibilità sul vostro territorio{" "}
     <Link
       href="/contatti"
       className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
     >
       contattateci
     </Link>
-    : il servizio di topografia e laser scanner può essere programmato anche fuori provincia.
+    . Approfondisci i rilievi laser scanner SLAM in{" "}
+    <Link
+      href="/rilievi-laser-scanner-slam-brescia"
+      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+    >
+      provincia di Brescia
+    </Link>{" "}
+    e in{" "}
+    <Link
+      href="/rilievi-laser-scanner-slam-lombardia"
+      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+    >
+      Lombardia
+    </Link>
+    , oppure la pagina{" "}
+    <Link
+      href="/topografia"
+      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+    >
+      topografia e rilievi
+    </Link>
+    .
   </>
 );
 

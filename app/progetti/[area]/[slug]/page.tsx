@@ -10,11 +10,11 @@ import {
   projectCategories,
   projectAreas,
 } from "@/lib/content/projects";
-import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
+import { buildPageMetadata } from "@/lib/config/seo";
+import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 type Props = { params: Promise<{ area: string; slug: string }> };
-const siteUrl = site.url.replace(/\/$/, "");
 
 export async function generateStaticParams() {
   const out: { area: string; slug: string }[] = [];
@@ -32,11 +32,11 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const key = getCaseStudyKey(area, slug);
   if (!key || !projectCaseStudies[key]) return {};
   const cs = projectCaseStudies[key];
-  return {
+  return buildPageMetadata({
     title: cs.metaTitle,
     description: cs.metaDescription,
-    alternates: { canonical: `${siteUrl}/progetti/${area}/${slug}` },
-  };
+    path: `/progetti/${area}/${slug}`,
+  });
 }
 
 export default async function ProjectCasePage({ params }: Props) {

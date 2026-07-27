@@ -28,7 +28,7 @@ export const site = {
     { label: "Architetto Davide Pagnoni", display: "+39 347 357 6510", tel: "+393473576510" },
     { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
-  addressLine: "Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato",
+  addressLine: "Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS)",
   /** Partita IVA. */
   piva: "04061310985",
   /**

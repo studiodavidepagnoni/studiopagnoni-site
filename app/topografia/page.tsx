@@ -11,9 +11,9 @@ import { ui } from "@/lib/ui";
 
 const pagePath = "/topografia";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
-const pageTitle = "Topografia e rilievi — Franciacorta, Brescia e Lombardia";
+const pageTitle = "Topografia e rilievi — Brescia e Franciacorta";
 const pageDescription =
-  "Rilievi topografici con GNSS RTK e stazione totale per progetto architettonico, cantieri e frazionamenti. Integrazione con laser SLAM. Cazzago San Martino (BS), Franciacorta, provincia di Brescia e Lombardia.";
+  "Rilievi topografici con GNSS RTK e stazione totale per progetto e cantieri. Integrazione laser SLAM. Cazzago San Martino (BS).";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,

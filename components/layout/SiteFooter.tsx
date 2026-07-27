@@ -42,6 +42,21 @@ export function SiteFooter() {
                       </li>
                     ))}
                     <li>
+                      <Link className={footerNavLinkClass} href="/topografia">
+                        Topografia
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
+                        SLAM Brescia
+                      </Link>
+                    </li>
+                    <li>
+                      <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-lombardia">
+                        SLAM Lombardia
+                      </Link>
+                    </li>
+                    <li>
                       <Link className={footerNavLinkClass} href="/privacy-policy">
                         Privacy
                       </Link>

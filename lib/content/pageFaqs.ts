@@ -47,3 +47,26 @@ export const serviziFaq = [
     a: "Sì: urbanistica, sanatorie, SCIA/CILA dove previste, oltre a CSP e CSE. Il rilievo metrico resta la base quando serve allineare progetto, regolarizzazione e cantiere.",
   },
 ] as const satisfies readonly FaqItem[];
+
+export const architetturaFaq = [
+  {
+    q: "Che servizi di architettura offrite in Franciacorta?",
+    a: "Progettazione architettonica dal concept alle tavole esecutive: nuove costruzioni, ampliamenti, ristrutturazioni e interventi su patrimonio esistente. Arch. Davide Pagnoni coordina il processo edilizio in continuità con rilievi, urbanistica e pratiche.",
+  },
+  {
+    q: "Operate solo a Bornato / Cazzago San Martino?",
+    a: "La sede è a Bornato, Frazione di Cazzago San Martino, in Franciacorta. Seguiamo incarichi nei comuni della Franciacorta e in provincia di Brescia; per progetti più strutturati valutiamo anche Lombardia.",
+  },
+  {
+    q: "Come integrate rilievo e progetto?",
+    a: "Quando serve una base metrica dello stato di fatto affianchiamo topografia (GNSS RTK, stazione totale) e, su edifici o impianti, laser scanner SLAM. Il progetto parte da geometrie affidabili, non da ipotesi.",
+  },
+  {
+    q: "Gestite anche le pratiche edilizie?",
+    a: "Sì: lettura degli strumenti urbanistici, pratiche (SCIA, CILA, permessi dove previsti) e supporto documentale verso gli enti. Le strutture, se necessarie, sono coordinate con professionisti esterni di fiducia.",
+  },
+  {
+    q: "Come si richiede un sopralluogo?",
+    a: "Tramite il modulo contatti indicando comune, tipo di intervento (nuova costruzione, ristrutturazione, ampliamento) e obiettivo. Rispondiamo con tempi e modalità di sopralluogo senza impegno.",
+  },
+] as const satisfies readonly FaqItem[];

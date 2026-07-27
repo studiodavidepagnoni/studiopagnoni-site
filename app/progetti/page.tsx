@@ -5,9 +5,9 @@ import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({
-  title: "Progetti — architettura, topografia e rilievi SLAM",
+  title: "Progetti — rilievi SLAM e territorio",
   description:
-    "Casi studio di architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Studio Tecnico Pagnoni.",
+    "Casi studio di rilievi laser SLAM e interventi sul territorio in Franciacorta e provincia di Brescia.",
   path: "/progetti",
 });
 

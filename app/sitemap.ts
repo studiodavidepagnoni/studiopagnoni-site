@@ -18,6 +18,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   const staticPaths: { path: string; changeFrequency: ChangeFreq; priority: number }[] = [
     { path: "", changeFrequency: "weekly", priority: 1 },
     { path: "/servizi", changeFrequency: "monthly", priority: 0.9 },
+    { path: "/architettura", changeFrequency: "monthly", priority: 0.95 },
     { path: "/topografia", changeFrequency: "monthly", priority: 0.95 },
     { path: "/laser-scanner-slam", changeFrequency: "weekly", priority: 1 },
     { path: "/rilievi-laser-scanner-slam-brescia", changeFrequency: "weekly", priority: 0.95 },

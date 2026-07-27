@@ -8,7 +8,8 @@ Studio Tecnico Pagnoni (Geom. Sergio Pagnoni e Arch. Davide Pagnoni) opera in Fr
 
 - [Home](https://studiopagnoni.com/): Panoramica dello studio e servizi
 - [Servizi](https://studiopagnoni.com/servizi): Architettura, topografia, SLAM, verde, urbanistica e assistenza
-- [Architettura e contatti](https://studiopagnoni.com/contatti): Preventivi e recapiti
+- [Architettura in Franciacorta](https://studiopagnoni.com/architettura): Landing progettazione architettonica (non in menu)
+- [Contatti](https://studiopagnoni.com/contatti): Preventivi e recapiti
 - [Chi siamo](https://studiopagnoni.com/chi-siamo): Profilo dello studio dal 1988
 - [Progetti](https://studiopagnoni.com/progetti): Casi di rilievo SLAM e digitalizzazione 3D
 
@@ -19,9 +20,10 @@ Studio Tecnico Pagnoni (Geom. Sergio Pagnoni e Arch. Davide Pagnoni) opera in Fr
 - [Rilievi laser SLAM in Lombardia](https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia): Landing regionale multi-provincia
 - [Preventivo SLAM](https://studiopagnoni.com/contatti?oggetto=slam): Modulo contatti con oggetto rilievo SLAM
 
-## Topografia
+## Topografia e architettura
 
 - [Topografia e rilievi](https://studiopagnoni.com/topografia): GNSS RTK, stazione totale, planimetrie e cantieri
+- [Architettura in Franciacorta](https://studiopagnoni.com/architettura): Concept, esecutivo e pratiche edilizie
 
 ## Optional
 

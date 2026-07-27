@@ -7,9 +7,9 @@ import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export const metadata = buildPageMetadata({
-  title: "Architettura e topografia — Franciacorta, Brescia e Lombardia",
+  title: "Architettura e topografia in Franciacorta",
   description:
-    "Studio Tecnico Pagnoni a Cazzago San Martino (BS): architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Attivi dal 1988.",
+    "Studio Tecnico Pagnoni a Cazzago San Martino (BS): architettura, topografia e laser SLAM in Franciacorta e provincia di Brescia dal 1988.",
   path: "/chi-siamo",
 });
 

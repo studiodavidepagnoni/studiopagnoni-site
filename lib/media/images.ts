@@ -57,9 +57,9 @@ export const heroSlides: readonly HeroSlide[] = [
     alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — base metrica per architettura", {
       service: "slam",
     }),
-    line1: "Rilievi 3D con laser SLAM",
-    line2: "CHCNAV RS10 · indoor e outdoor",
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto architettonico e BIM.",
+    line1: "Architettura e rilievi in Franciacorta",
+    line2: "Studio tecnico · topografia e laser SLAM",
     primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
     primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",
     primaryCtaLabelMobile: "Richiedi preventivo SLAM",

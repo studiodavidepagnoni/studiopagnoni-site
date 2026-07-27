@@ -62,7 +62,7 @@ function absoluteUrl(path: string): string {
   return path.startsWith("http") ? path : `${base}${path.startsWith("/") ? path : `/${path}`}`;
 }
 
-/** Alt immagine: soggetto + ambito + territorio locale, senza stuffing. */
+/** Alt immagine: soggetto chiaro e breve (accessibilità + SEO senza stuffing). */
 export function imageAlt(
   subject: string,
   opts?: {
@@ -71,19 +71,7 @@ export function imageAlt(
   },
 ): string {
   if (opts?.decorative) return "";
-  const service =
-    opts?.service === "architettura"
-      ? "architettura e progettazione"
-      : opts?.service === "slam"
-        ? "rilievo laser scanner SLAM"
-        : opts?.service === "topografia"
-          ? "topografia e rilievi GNSS"
-          : opts?.service === "verde"
-            ? "progettazione del verde e territorio"
-            : opts?.service === "edilizia"
-              ? "urbanistica e pratiche edilizie"
-              : "studio tecnico";
-  return `${subject} — ${service}, ${seoAreaServed} — ${site.brandName}`;
+  return subject;
 }
 
 type PageMetaInput = {
@@ -161,7 +149,7 @@ export const rootMetadata: Metadata = {
 export const homeMetadata = buildPageMetadata({
   title: "Architettura, topografia e laser SLAM",
   description:
-    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia GNSS e laser SLAM in Franciacorta, Brescia e Lombardia.",
+    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia e laser SLAM in Franciacorta e provincia di Brescia.",
   path: "/",
   priority: "high",
 });
@@ -175,7 +163,7 @@ export const jsonLdGraph = {
       name: site.legalName,
       alternateName: site.brandName,
       description:
-        "Architettura, topografia GNSS RTK e stazione totale, rilievi laser scanner SLAM mobile e nuvole di punti. Progettazione del verde, urbanistica e pratiche edilizie. Sede a Cazzago San Martino (BS), frazione Bornato.",
+        "Architettura, topografia GNSS RTK e stazione totale, rilievi laser scanner SLAM mobile e nuvole di punti. Progettazione del verde, urbanistica e pratiche edilizie. Sede a Bornato, Frazione di Cazzago San Martino (BS).",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),

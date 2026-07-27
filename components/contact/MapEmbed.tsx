@@ -78,7 +78,7 @@ export function MapEmbed() {
       loading="lazy"
       allowFullScreen
       referrerPolicy="no-referrer-when-downgrade"
-      title="Studio Tecnico Pagnoni — Via Vittorio Emanuele III 16, Cazzago San Martino (BS)"
+      title="Studio Tecnico Pagnoni — Via Vittorio Emanuele III 16, Bornato, Frazione di Cazzago San Martino (BS)"
       src={src}
     />
   );
