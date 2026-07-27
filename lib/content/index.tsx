@@ -25,7 +25,7 @@ export const homeChiSiamo: {
   short: (
     <>
       Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a{" "}
-      <strong>Bornato, Frazione di Cazzago San Martino</strong>. Uniamo
+      <strong>Bornato, Frazione di Cazzago San Martino (BS)</strong>. Uniamo
       architettura, topografia e laser scanner SLAM e pratiche tecniche per trasformare progetto, rilievi e territorio in elaborati
       utilizzabili.
       <br />
