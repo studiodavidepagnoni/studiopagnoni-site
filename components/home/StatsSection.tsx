@@ -119,14 +119,14 @@ export function StatsSection() {
       <div className="mx-auto max-w-[1140px]">
         <div className="home-section-intro mb-8 sm:mb-12">
           <p className={`${fontSans.className} section-kicker`}>Perché noi</p>
-          <h2 id="stats-heading" className={`${fontDisplay.className} section-title home-section-title reveal-title`}>
+          <h2 id="stats-heading" className={`${fontDisplay.className} section-title home-section-title`}>
             Metodo e presenza sul campo
           </h2>
           <div className="home-section-rule mt-4" aria-hidden />
         </div>
         <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-2 lg:grid-cols-4">
           {homeStats.map((stat, idx) => (
-            <div key={idx} className="reveal-block bg-[var(--card)] px-4 py-8 text-center sm:px-6 sm:py-10">
+            <div key={idx} className="bg-[var(--card)] px-4 py-8 text-center sm:px-6 sm:py-10">
               <StatBlock stat={stat} reduced={reduced} active={inView} />
             </div>
           ))}

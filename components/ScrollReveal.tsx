@@ -63,6 +63,7 @@ export function ScrollReveal() {
     let cancelled = false;
     let sectionObserver: IntersectionObserver | null = null;
     let itemObserver: IntersectionObserver | null = null;
+    let mutationObserver: MutationObserver | null = null;
 
     const start = () => {
       if (cancelled) return;
@@ -107,11 +108,24 @@ export function ScrollReveal() {
         { rootMargin: "0px 0px -8% 0px", threshold: 0.12 },
       );
 
-      document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach((section) => {
+      const observeSection = (section: HTMLElement) => {
         if (section.classList.contains("is-revealed")) return;
-        // Solo IntersectionObserver: niente getBoundingClientRect sync (forced reflow).
         sectionObserver?.observe(section);
+      };
+
+      document.querySelectorAll<HTMLElement>(SECTION_ROOT_SELECTOR).forEach(observeSection);
+
+      // Sezioni montate dopo (es. StatsSection dynamic ssr:false): altrimenti restano opacity:0.
+      mutationObserver = new MutationObserver((mutations) => {
+        for (const mutation of mutations) {
+          for (const node of mutation.addedNodes) {
+            if (!(node instanceof HTMLElement)) continue;
+            if (node.matches?.(SECTION_ROOT_SELECTOR)) observeSection(node);
+            node.querySelectorAll?.(SECTION_ROOT_SELECTOR).forEach((el) => observeSection(el as HTMLElement));
+          }
+        }
       });
+      mutationObserver.observe(document.body, { childList: true, subtree: true });
 
       document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
         if (el.classList.contains("is-revealed")) return;
@@ -119,6 +133,12 @@ export function ScrollReveal() {
         if (el.closest(SECTION_ROOT_SELECTOR)) return;
         itemObserver?.observe(el);
       });
+
+      for (const entry of sectionObserver.takeRecords()) {
+        if (!entry.isIntersecting) continue;
+        revealSection(entry.target as HTMLElement);
+        sectionObserver.unobserve(entry.target);
+      }
     };
 
     afterFullHydration(start);
@@ -128,6 +148,7 @@ export function ScrollReveal() {
       if (!reducedMq.matches) return;
       sectionObserver?.disconnect();
       itemObserver?.disconnect();
+      mutationObserver?.disconnect();
       document.querySelectorAll<HTMLElement>(REVEAL_CHILD_SELECTOR).forEach((el) => {
         el.classList.add("is-revealed");
       });
@@ -138,6 +159,7 @@ export function ScrollReveal() {
       cancelled = true;
       sectionObserver?.disconnect();
       itemObserver?.disconnect();
+      mutationObserver?.disconnect();
       reducedMq.removeEventListener("change", onReduced);
       resetRevealClasses();
     };
