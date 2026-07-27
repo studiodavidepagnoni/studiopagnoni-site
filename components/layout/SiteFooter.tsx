@@ -41,26 +41,6 @@ export function SiteFooter() {
                         </Link>
                       </li>
                     ))}
-                    <li>
-                      <Link className={footerNavLinkClass} href="/topografia">
-                        Topografia
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-brescia">
-                        SLAM Brescia
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className={footerNavLinkClass} href="/rilievi-laser-scanner-slam-lombardia">
-                        SLAM Lombardia
-                      </Link>
-                    </li>
-                    <li>
-                      <Link className={footerNavLinkClass} href="/privacy-policy">
-                        Privacy
-                      </Link>
-                    </li>
                   </ul>
                 </nav>
               </div>
@@ -104,6 +84,13 @@ export function SiteFooter() {
             <p className={`${fontSans.className} site-footer-copyright site-footer-bar__copyright`}>
               &copy; {formatCopyrightYearRange()} {site.legalName}
               {site.piva ? ` · P.IVA ${site.piva}` : null}
+              {" · "}
+              <Link
+                href="/privacy-policy"
+                className="underline-offset-2 transition-colors hover:text-[var(--foreground)] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40"
+              >
+                Privacy
+              </Link>
             </p>
             <p
               className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
