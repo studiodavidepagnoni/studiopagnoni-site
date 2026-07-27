@@ -22,7 +22,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     image: s("technicalDocs"),
     alt: imageAlt("Documentazione tecnica e tavole di progetto in studio", { service: "studio" }),
   },
-  "/architettura": {
+  "/architettura-franciacorta": {
     eyebrow: "Progettazione · Franciacorta",
     title: "Architettura in Franciacorta",
     image: s("surveySite"),

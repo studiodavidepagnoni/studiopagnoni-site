@@ -109,6 +109,8 @@ if (isStaticExport) {
     { source: "/laser-scanner-slam-brescia", destination: "/rilievi-laser-scanner-slam-brescia", permanent: true },
     { source: "/laser-scanner-slam-lombardia", destination: "/rilievi-laser-scanner-slam-lombardia", permanent: true },
     { source: "/rilievi-laser-scanner-slam", destination: "/laser-scanner-slam", permanent: true },
+    { source: "/architettura", destination: "/architettura-franciacorta", permanent: true },
+    { source: "/architettura-brescia", destination: "/architettura-franciacorta", permanent: true },
     { source: "/chi-siamo.html", destination: "/chi-siamo", permanent: true },
     { source: "/servizi-studio-progettazione.html", destination: "/servizi", permanent: true },
     {

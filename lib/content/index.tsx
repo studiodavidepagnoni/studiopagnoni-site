@@ -114,7 +114,7 @@ export const serviceGroups = [
       "Coordinamento con topografia e laser SLAM quando serve una base metrica affidabile dello stato di fatto.",
       "Allineamento a vincoli urbanistici e pratiche edilizie; strutture affidate a professionisti esterni di fiducia.",
     ],
-    href: "/architettura",
+    href: "/architettura-franciacorta",
     cta: "Approfondisci l'architettura",
   },
   {

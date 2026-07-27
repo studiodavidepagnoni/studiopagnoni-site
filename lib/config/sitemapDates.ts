@@ -7,7 +7,7 @@ import type { ProjectArea } from "@/lib/content/projects";
 export const staticPageLastModified: Record<string, string> = {
   "": "2026-05-21",
   "/servizi": "2026-04-10",
-  "/architettura": "2026-07-27",
+  "/architettura-franciacorta": "2026-07-27",
   "/topografia": "2026-04-10",
   "/laser-scanner-slam": "2026-07-23",
   "/rilievi-laser-scanner-slam-brescia": "2026-07-22",

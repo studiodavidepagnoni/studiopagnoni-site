@@ -9,12 +9,12 @@ import { architetturaFaq } from "@/lib/content/pageFaqs";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
-const pagePath = "/architettura";
+const pagePath = "/architettura-franciacorta";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const orgId = `${site.url.replace(/\/$/, "")}/#organization`;
-const pageTitle = "Architettura in Franciacorta — progetto e pratiche";
+const pageTitle = "Architettura Franciacorta — progetto e pratiche";
 const pageDescription =
-  "Progettazione architettonica in Franciacorta e provincia di Brescia: concept, esecutivo, pratiche edilizie. Studio Tecnico Pagnoni, Bornato (BS).",
+  "Progettazione architettonica in Franciacorta e provincia di Brescia: concept, esecutivo, pratiche edilizie. Studio Tecnico Pagnoni, Bornato (BS).";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -51,14 +51,14 @@ const architetturaJsonLd = {
   ],
 };
 
-export default function ArchitetturaPage() {
+export default function ArchitetturaFranciacortaPage() {
   return (
     <>
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(architetturaJsonLd) }}
       />
-      <StaticPageHero path="/architettura" />
+      <StaticPageHero path="/architettura-franciacorta" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
