@@ -166,8 +166,10 @@ export function CookieBanner() {
                       id="cookie-banner-desc"
                       className={`${fontSans.className} mt-1.5 text-[0.9rem] leading-relaxed text-white/78 sm:text-[0.95rem]`}
                     >
-                      Usiamo cookie strettamente necessari. Per caricare <strong className="font-semibold text-white/92">Google Maps</strong> sulla
-                      pagina Contatti servono contenuti di terze parti: puoi accettarli, rifiutarli o decidere con l&apos;interruttore qui sotto.{" "}
+                      Usiamo cookie strettamente necessari. Per caricare contenuti Google di terze parti (
+                      <strong className="font-semibold text-white/92">Maps</strong> e, sul form Contatti,{" "}
+                      <strong className="font-semibold text-white/92">reCAPTCHA</strong>) serve il tuo consenso: puoi accettarli, rifiutarli o
+                      decidere con l&apos;interruttore qui sotto.{" "}
                       <Link
                         href="/privacy-policy#cookie"
                         className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] transition hover:text-[var(--primary)]"
@@ -185,16 +187,22 @@ export function CookieBanner() {
                       <p className={`${fontSans.className} text-[0.72rem] font-bold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>
                         Facoltativo · basato su consenso
                       </p>
-                      <p className={`${fontSans.className} mt-1 text-[0.92rem] font-medium text-white/88`}>Mappe e contenuti incorporati (Google)</p>
+                      <p className={`${fontSans.className} mt-1 text-[0.92rem] font-medium text-white/88`}>
+                        Contenuti Google (Maps e reCAPTCHA)
+                      </p>
                       <p className={`${fontSans.className} mt-0.5 text-[0.8rem] leading-snug text-white/55`}>
-                        Disattivato di default. Senza consenso resta un placeholder al posto della mappa.
+                        Disattivato di default. Senza consenso non carichiamo Maps né lo script anti-spam sul form.
                       </p>
                     </div>
                     <button
                       type="button"
                       role="switch"
                       aria-checked={embeds}
-                      aria-label={embeds ? "Disattiva incorporamenti Google Maps" : "Attiva incorporamenti Google Maps"}
+                      aria-label={
+                        embeds
+                          ? "Disattiva contenuti Google (Maps e reCAPTCHA)"
+                          : "Attiva contenuti Google (Maps e reCAPTCHA)"
+                      }
                       onClick={() => setEmbeds((v) => !v)}
                       className={`relative mx-auto h-[34px] w-[58px] shrink-0 rounded-full transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] sm:mx-0 ${
                         embeds ? "bg-[var(--primary)]" : "bg-white/15"

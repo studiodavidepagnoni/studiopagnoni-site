@@ -162,12 +162,17 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <div className={`${ui.innerCard} border-[var(--green-border-muted)] sm:col-span-2`}>
                     <p className={`${fontSans.className} section-kicker`}>Facoltativo</p>
-                    <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>Google Maps (incorporamento)</h3>
+                    <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>
+                      Google Maps e reCAPTCHA
+                    </h3>
                     <p className={`${ui.body} mt-3`}>
-                      Visualizzazione della mappa sulla pagina Contatti. Il caricamento dell&apos;iframe comporta potenziali trattamenti da parte di Google LLC / Google Ireland Limited secondo le proprie informative.
+                      Visualizzazione della mappa sulla pagina Contatti e, sul modulo, controllo anti-spam Google
+                      reCAPTCHA. Il caricamento di questi script/iframe comporta potenziali trattamenti da parte di
+                      Google LLC / Google Ireland Limited secondo le proprie informative. Nessuno dei due servizi viene
+                      caricato senza consenso.
                     </p>
                     <p className={`${fontSans.className} mt-4 text-[0.85rem] font-semibold text-[var(--foreground)]`}>Base giuridica</p>
-                    <p className={`${ui.body} mt-1`}>Art. 6, comma 1, lett. <strong>a</strong> GDPR — <strong className="text-[var(--foreground)]">consenso</strong>, raccolto tramite banner cookie con possibilità di rifiuto e revoca in qualsiasi momento.</p>
+                    <p className={`${ui.body} mt-1`}>Art. 6, comma 1, lett. <strong>a</strong> GDPR — <strong className="text-[var(--foreground)]">consenso</strong>, raccolto tramite banner cookie (e, sul form, tramite attivazione esplicita), con possibilità di rifiuto e revoca in qualsiasi momento.</p>
                   </div>
                 </div>
                 <p className={`${ui.body}`}>
@@ -194,7 +199,7 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) per l&apos;invio dei messaggi dal modulo di contatto, quando il servizio è attivo: opera tipicamente come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR.{" "}
+                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) per l&apos;invio dei messaggi dal modulo di contatto, quando il servizio è attivo: opera tipicamente come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR. Sul form è presente un avviso sul possibile trattamento anche fuori dallo SEE.{" "}
                       <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Policy Formspree
                       </a>
@@ -204,8 +209,9 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per i servizi di mappe incorporate previo consenso e, quando attivo, per{" "}
-                      <strong className="text-[var(--foreground)]">reCAPTCHA</strong> sul modulo di contatto (protezione anti-spam).{" "}
+                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per i servizi di mappe incorporate e{" "}
+                      <strong className="text-[var(--foreground)]">reCAPTCHA</strong> sul modulo di contatto (protezione anti-spam), entrambi{" "}
+                      <strong className="text-[var(--foreground)]">solo previo consenso</strong>.{" "}
                       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Google
                       </a>
@@ -318,7 +324,7 @@ export default function PrivacyPolicyPage() {
                   <SectionTitle id="cookie-heading">Cookie e tecnologie simili</SectionTitle>
                   <div className="home-section-rule mt-4" aria-hidden />
                   <p className={`${ui.body} mt-4`}>
-                    Questo sito utilizza cookie e storage locale secondo il principio di <strong className="text-[var(--foreground)]">granularità del consenso</strong>: i cookie strettamente necessari sono sempre attivi; gli incorporamenti di terze parti (Google Maps) sono attivati solo previo consenso libero, specifico e informato, revocabile in ogni momento tramite il banner o il pulsante qui sotto.
+                    Questo sito utilizza cookie e storage locale secondo il principio di <strong className="text-[var(--foreground)]">granularità del consenso</strong>: i cookie strettamente necessari sono sempre attivi; i contenuti Google di terze parti (<strong className="text-[var(--foreground)]">Maps</strong> e <strong className="text-[var(--foreground)]">reCAPTCHA</strong>) sono attivati solo previo consenso libero, specifico e informato, revocabile in ogni momento tramite il banner, il form Contatti o il pulsante qui sotto.
                   </p>
                 </div>
 
@@ -363,7 +369,7 @@ export default function PrivacyPolicyPage() {
                       <tr>
                         <td className="px-4 py-3 text-[var(--foreground)]">Cookie Google</td>
                         <td className="px-4 py-3">Terze parti</td>
-                        <td className="px-4 py-3">Possono essere installati da Google quando si carica Maps; dipendono dalla configurazione del servizio e dal browser.</td>
+                        <td className="px-4 py-3">Possono essere installati da Google quando si caricano Maps o reCAPTCHA; dipendono dalla configurazione del servizio e dal browser (es. cookie collegati a reCAPTCHA).</td>
                         <td className="px-4 py-3">Variabile (vedi policy Google)</td>
                       </tr>
                     </tbody>
@@ -394,9 +400,9 @@ export default function PrivacyPolicyPage() {
                         </p>
                       </div>
                       <div>
-                        <h4 className={`${fontSans.className} font-bold text-[var(--foreground)]`}>Terze parti — Google Maps</h4>
+                        <h4 className={`${fontSans.className} font-bold text-[var(--foreground)]`}>Terze parti — Google Maps e reCAPTCHA</h4>
                         <p className={`${ui.body} mt-2`}>
-                          Caricato solo dopo consenso. Può comportare trattamenti ulteriori da parte di Google (anche analytics o personalizzazione secondo policy Google). Si invita a consultare le informative aggiornate del fornitore.
+                          Caricati solo dopo consenso (banner o attivazione sul form Contatti). Possono comportare trattamenti ulteriori da parte di Google (anche analytics o personalizzazione secondo policy Google). Si invita a consultare le informative aggiornate del fornitore.
                         </p>
                       </div>
                       <div>

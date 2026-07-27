@@ -29,8 +29,8 @@ export const site = {
     { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
   addressLine: "Via Vittorio Emanuele III, 16 — 25046 Cazzago San Martino (BS), fraz. Bornato",
-  /** Partita IVA — sostituire con quella reale quando disponibile. */
-  piva: "03012340987",
+  /** Partita IVA. */
+  piva: "04061310985",
   /**
    * Formspree form ID — solo da env (niente ID di default nel bundle).
    * Senza ID il form usa fallback mailto.

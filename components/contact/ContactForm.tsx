@@ -13,6 +13,9 @@ import {
   type InquiryType,
 } from "@/lib/config/contactFormOptions";
 import { site } from "@/lib/config/site";
+import { fontSans } from "@/lib/fonts";
+import type { CookiePrefs } from "@/lib/privacy/cookieConsent";
+import { embedsConsentGranted, saveCookiePrefs } from "@/lib/privacy/cookieConsent";
 import {
   CONTACT_FIELD_LIMITS as LIM,
   CONTACT_MIN_ELAPSED_MS,
@@ -44,15 +47,38 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
   const [gotcha, setGotcha] = useState("");
   const [companyHp, setCompanyHp] = useState("");
   const [captchaToken, setCaptchaToken] = useState("");
+  const [googleEmbeds, setGoogleEmbeds] = useState(false);
   const [touched, setTouched] = useState<Record<string, boolean>>({});
   const [status, setStatus] = useState<"idle" | "submitting" | "success" | "error">("idle");
   const mountedAtRef = useRef(0);
 
   const recaptchaSiteKey = site.recaptchaSiteKey;
   const captchaRequired = Boolean(recaptchaSiteKey);
+  const captchaReady = !captchaRequired || (googleEmbeds && captchaToken.length > 0);
+  const usesFormspree = Boolean(site.formspreeId?.trim());
 
   useEffect(() => {
     mountedAtRef.current = Date.now();
+  }, []);
+
+  useEffect(() => {
+    setGoogleEmbeds(embedsConsentGranted());
+    const onConsent = (e: Event) => {
+      const ce = e as CustomEvent<CookiePrefs>;
+      if (ce.detail && typeof ce.detail.embeds === "boolean") {
+        setGoogleEmbeds(ce.detail.embeds);
+        if (!ce.detail.embeds) setCaptchaToken("");
+      }
+    };
+    window.addEventListener("cookie-consent", onConsent as EventListener);
+    return () => window.removeEventListener("cookie-consent", onConsent as EventListener);
+  }, []);
+
+  const grantGoogleEmbeds = useCallback(() => {
+    const prefs: CookiePrefs = { embeds: true };
+    saveCookiePrefs(prefs);
+    setGoogleEmbeds(true);
+    window.dispatchEvent(new CustomEvent<CookiePrefs>("cookie-consent", { detail: prefs }));
   }, []);
 
   useEffect(() => {
@@ -66,9 +92,13 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
     if (touched.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) e.email = "Email non valida.";
     if (touched.message && message.trim().length < 10) e.message = "Messaggio troppo breve (min. 10 caratteri).";
     if (touched.privacy && !privacy) e.privacy = "Accetta la privacy per inviare.";
-    if (touched.captcha && captchaRequired && !captchaToken) e.captcha = "Completa il controllo anti-spam.";
+    if (touched.captcha && captchaRequired && !googleEmbeds) {
+      e.captcha = "Attiva il controllo anti-spam Google per inviare.";
+    } else if (touched.captcha && captchaRequired && !captchaToken) {
+      e.captcha = "Completa il controllo anti-spam.";
+    }
     return e;
-  }, [name, email, message, privacy, captchaToken, captchaRequired, touched]);
+  }, [name, email, message, privacy, captchaToken, captchaRequired, googleEmbeds, touched]);
 
   const valid =
     name.trim().length >= 2 &&
@@ -78,7 +108,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
     message.trim().length >= 10 &&
     message.length <= LIM.message &&
     privacy &&
-    (!captchaRequired || captchaToken.length > 0);
+    captchaReady;
 
   const onBlur = (field: string) => () => setTouched((t) => ({ ...t, [field]: true }));
 
@@ -133,7 +163,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
         return;
       }
 
-      if (captchaRequired && !captchaToken) return;
+      if (captchaRequired && (!googleEmbeds || !captchaToken)) return;
 
       setStatus("submitting");
       const subjectLine = clamp(
@@ -208,6 +238,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
       gotcha,
       companyHp,
       captchaRequired,
+      googleEmbeds,
       captchaToken,
       name,
       email,
@@ -470,7 +501,9 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               onBlur={onBlur("privacy")}
               className="mt-1.5 h-5 w-5 min-h-[20px] min-w-[20px] shrink-0 accent-[var(--primary-mid)]"
               aria-invalid={!!errors.privacy}
-              aria-describedby={errors.privacy ? "err-privacy" : undefined}
+              aria-describedby={
+                errors.privacy ? "err-privacy" : usesFormspree ? "privacy-extra-note" : undefined
+              }
             />
             <label
               htmlFor="privacy"
@@ -489,6 +522,24 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             </label>
           </div>
 
+          {usesFormspree ? (
+            <p
+              id="privacy-extra-note"
+              className={`${fontSans.className} text-[0.8rem] leading-relaxed text-[var(--green-ink-muted)] md:col-span-2`}
+            >
+              I dati del modulo sono trasmessi tramite{" "}
+              <strong className="font-semibold text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.,
+              USA) e possono essere trattati anche fuori dallo Spazio Economico Europeo. Dettagli in{" "}
+              <Link
+                href="/privacy-policy#trasferimenti"
+                className="font-semibold text-[var(--accent-brand)] underline underline-offset-2 hover:text-[var(--foreground)]"
+              >
+                informativa — trasferimenti
+              </Link>
+              .
+            </p>
+          ) : null}
+
           {errors.privacy ? (
             <p id="err-privacy" className="text-sm text-red-700 md:col-span-2" role="alert">
               {errors.privacy}
@@ -497,7 +548,38 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
 
           {recaptchaSiteKey ? (
             <div className="md:col-span-2">
-              <RecaptchaField siteKey={recaptchaSiteKey} onTokenChange={setCaptchaToken} />
+              {googleEmbeds ? (
+                <RecaptchaField siteKey={recaptchaSiteKey} onTokenChange={setCaptchaToken} />
+              ) : (
+                <div
+                  className="rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] px-4 py-4 sm:px-5"
+                  role="region"
+                  aria-label="reCAPTCHA: consenso richiesto"
+                >
+                  <p className={`${fontSans.className} text-[0.85rem] leading-relaxed text-[var(--copy-body)]`}>
+                    Per proteggere il form da spam carichiamo{" "}
+                    <strong className="font-semibold text-[var(--foreground)]">Google reCAPTCHA</strong> solo dopo
+                    consenso ai contenuti Google di terze parti (stessa preferenza di Maps).
+                  </p>
+                  <button
+                    type="button"
+                    className={`${fontSans.className} ${ui.btnOutline} mt-3 min-h-[44px]`}
+                    onClick={grantGoogleEmbeds}
+                  >
+                    Attiva controllo anti-spam Google
+                  </button>
+                  <p className={`${fontSans.className} mt-2 text-[0.72rem] leading-snug text-[var(--green-ink-muted)]`}>
+                    Preferenza salvata sul dispositivo. Dettagli in{" "}
+                    <Link
+                      href="/privacy-policy#cookie"
+                      className="font-semibold text-[var(--primary-mid)] underline underline-offset-2 hover:text-[var(--primary)]"
+                    >
+                      Privacy e cookie
+                    </Link>
+                    .
+                  </p>
+                </div>
+              )}
               {errors.captcha ? (
                 <p id="err-captcha" className="mt-2 text-sm text-red-700" role="alert">
                   {errors.captcha}

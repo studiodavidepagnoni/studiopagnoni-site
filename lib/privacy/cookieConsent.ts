@@ -1,6 +1,7 @@
 /**
  * Preferenze cookie / contenuti terzi (GDPR, principio di accountability).
- * Solo `embeds` è configurabile dall'utente; il resto è strettamente necessario al sito.
+ * Solo `embeds` è configurabile dall'utente (Google Maps + reCAPTCHA);
+ * il resto è strettamente necessario al sito.
  */
 
 import { basePath } from "@/lib/utils/basePath";
