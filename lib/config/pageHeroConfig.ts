@@ -63,10 +63,8 @@ const staticPageHeroes: Record<string, PageHeroData> = {
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    image: s("slamHero"),
-    alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 — nuvola di punti per architettura", {
-      service: "slam",
-    }),
+    image: s("gnssRtk"),
+    alt: imageAlt("GNSS RTK in area estrattiva — base metrica per progetto", { service: "slam" }),
     lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
     priorityImage: true,
   },
