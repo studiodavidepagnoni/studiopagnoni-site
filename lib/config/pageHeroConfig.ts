@@ -18,7 +18,7 @@ export type PageHeroData = {
 const staticPageHeroes: Record<string, PageHeroData> = {
   "/chi-siamo": {
     eyebrow: "Lo studio",
-    title: "Studio Tecnico Pagnoni — Franciacorta",
+    title: "Studio Architettura Pagnoni — Franciacorta",
     image: s("technicalDocs"),
     alt: imageAlt("Documentazione tecnica e tavole di progetto in studio", { service: "studio" }),
   },
@@ -27,7 +27,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Architettura in Franciacorta",
     image: s("surveySite"),
     alt: imageAlt("Tavole di progettazione architettonica in studio", { service: "architettura" }),
-    lede: "Dal concept alle pratiche edilizie — Studio Tecnico Pagnoni, Bornato (Frazione di Cazzago San Martino).",
+    lede: "Dal concept alle pratiche edilizie — Studio Architettura Pagnoni, Bornato (Frazione di Cazzago San Martino).",
     priorityImage: true,
   },
   "/servizi": {

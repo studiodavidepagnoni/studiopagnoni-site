@@ -204,7 +204,7 @@ export const laserSlamLandingBrescia = {
   path: "/rilievi-laser-scanner-slam-brescia",
   metaTitle: "Laser scanner SLAM Brescia — as-built e nuvole di punti",
   metaDescription:
-    "Rilievo laser SLAM a Brescia e Franciacorta: as-built, DWG e BIM per capannoni, edifici e cantine. Preventivo dallo Studio Pagnoni.",
+    "Rilievo laser SLAM a Brescia e Franciacorta: as-built, DWG e BIM per capannoni, edifici e cantine. Preventivo dallo Studio Architettura Pagnoni.",
   hero: {
     eyebrow: "Laser scanner SLAM · Brescia",
     title: "Rilievi laser SLAM a Brescia",

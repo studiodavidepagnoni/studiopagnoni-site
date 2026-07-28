@@ -14,7 +14,7 @@ import { site } from "@/lib/config/site";
  * - topografia GNSS RTK, stazione totale, rilievo planoaltimetrico
  *
  * Cluster locale:
- * - studio tecnico Cazzago San Martino, architettura Franciacorta
+ * - studio architettura Cazzago San Martino, architettura Franciacorta
  * - topografo Brescia, rilievo topografico Lombardia
  *
  * Differenziatori: CHCNAV RS10, sede Bornato/Franciacorta, dal 1988.
@@ -35,7 +35,7 @@ export const seoKeywords = {
     "rilievo SLAM mobile",
   ],
   local: [
-    "studio tecnico Cazzago San Martino",
+    "studio architettura Cazzago San Martino",
     "architetto Franciacorta",
     "topografo Brescia",
     "rilievo topografico Franciacorta",
@@ -47,7 +47,7 @@ export const seoKeywords = {
   supporting: [
     "documentazione BIM nuvola di punti",
     "rilievo architettonico laser scanner",
-    "studio tecnico architettura topografia BS",
+    "studio architettura topografia BS",
     "rilievo topografico Nord Italia",
   ],
 } as const;
@@ -90,7 +90,7 @@ export function buildPageMetadata({
 }: PageMetaInput): Metadata {
   const canonical = absoluteUrl(path === "/" ? "/" : path);
   const ogImage = absoluteUrl(ogImagePath);
-  const documentTitle = `${site.brandName} - ${title}`;
+  const documentTitle = `${site.brandName} | ${title}`;
 
   return {
     title: { absolute: documentTitle },
@@ -118,26 +118,26 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} - Architettura, topografia e laser SLAM`,
-    template: `${site.brandName} - %s`,
+    default: `${site.brandName} | Rilievi 3D laser SLAM e progettazione — Brescia`,
+    template: `${site.brandName} | %s`,
   },
   description:
-    "Studio tecnico a Cazzago San Martino (BS): architettura e pratiche edilizie, topografia e rilievi laser scanner SLAM. Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
+    "Studio di architettura a Cazzago San Martino (BS): progettazione, topografia e rilievi laser scanner SLAM. Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
   openGraph: {
     type: "website",
     locale: "it_IT",
     url: site.url,
     siteName: site.brandName,
-    title: `${site.brandName} — ${site.tagline}`,
+    title: `${site.brandName} | ${site.tagline} — Brescia`,
     description:
       "Architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Sopralluoghi e preventivi.",
     images: [{ url: absoluteUrl(ogImagePath), width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.brandName} — architettura, topografia e laser SLAM`,
+    title: `${site.brandName} | ${site.tagline} — Brescia`,
     description:
-      "Architettura, topografia e rilievi 3D SLAM in Franciacorta, Brescia e Lombardia. Studio tecnico a Cazzago San Martino (BS).",
+      "Architettura, topografia e rilievi 3D SLAM in Franciacorta, Brescia e Lombardia. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
   },
   robots: { index: true, follow: true },
   verification: {
@@ -147,9 +147,9 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Architettura, topografia e laser SLAM",
+  title: "Rilievi 3D laser SLAM e progettazione — Brescia",
   description:
-    "Studio tecnico a Cazzago San Martino (BS): architettura, topografia e laser SLAM in Franciacorta e provincia di Brescia.",
+    "Studio Architettura Pagnoni a Cazzago San Martino (BS): progettazione architettonica, topografia e rilievi laser SLAM in Franciacorta e provincia di Brescia.",
   path: "/",
   priority: "high",
 });
@@ -247,7 +247,7 @@ export const jsonLdGraph = {
       "@type": "WebPage",
       "@id": `${site.url.replace(/\/$/, "")}/#homepage`,
       url: site.url,
-      name: `${site.brandName} - Architettura, topografia e laser SLAM`,
+      name: `${site.brandName} | Rilievi 3D laser SLAM e progettazione — Brescia`,
       description:
         "Homepage: architettura, topografia e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
       isPartOf: { "@id": `${site.url.replace(/\/$/, "")}/#website` },

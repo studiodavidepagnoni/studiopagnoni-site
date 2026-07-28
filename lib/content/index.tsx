@@ -25,7 +25,7 @@ export const homeChiSiamo: {
   intro: "Sintesi del profilo studio. Biografia, metodo e immagini nella pagina Chi siamo.",
   short: (
     <>
-      Studio tecnico attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a{" "}
+      Studio di architettura attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a{" "}
       <strong>Bornato, Frazione di Cazzago San Martino (BS)</strong>. Uniamo
       architettura, topografia e laser scanner SLAM e pratiche tecniche per trasformare progetto, rilievi e territorio in elaborati
       utilizzabili.
@@ -43,7 +43,7 @@ export const homeChiSiamo: {
     {
       text: (
         <>
-          Lo <strong>Studio Tecnico Pagnoni</strong> è uno studio tecnico con sede a{" "}
+          Lo <strong>Studio Architettura Pagnoni</strong> è uno studio di architettura con sede a{" "}
           <strong>Bornato, Frazione di Cazzago San Martino</strong> (provincia di{" "}
           <strong>Brescia</strong>, <strong>Franciacorta</strong> e raggio su <strong>Lombardia</strong> e <strong>Nord Italia</strong>):{" "}
           <strong>Geometra Sergio Pagnoni</strong> e <strong>Architetto Davide Pagnoni</strong> lavorano in sinergia su progetti di territorio, edilizia e
@@ -292,7 +292,7 @@ export const chiSiamoPage = {
   title: "Chi siamo",
   paragraphs: [
     <>
-      Lo <strong>Studio Tecnico Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> in Franciacorta e in provincia di Brescia. Il
+      Lo <strong>Studio Architettura Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> in Franciacorta e in provincia di Brescia. Il
       perimetro principale è la <strong>progettazione architettonica</strong> e le pratiche connesse: concept e anteprogetto, progetto definitivo ed
       esecutivo, pratiche edilizie e urbanistiche, coordinamento di cantiere e supporto alle autorizzazioni.
     </>,

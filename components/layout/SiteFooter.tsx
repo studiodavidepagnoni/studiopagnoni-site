@@ -21,7 +21,7 @@ export function SiteFooter() {
               />
 
               <p className={`${fontSans.className} mt-6 max-w-[56ch] text-sm leading-relaxed text-[var(--footer-muted)] sm:text-[0.97rem]`}>
-                Studio tecnico attivo tra Franciacorta, provincia di Brescia e Nord Italia per topografia, laser scanner SLAM,
+                Studio di architettura attivo tra Franciacorta, provincia di Brescia e Nord Italia per topografia, laser scanner SLAM,
                 progettazione e pratiche edilizie.
               </p>
 

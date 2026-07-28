@@ -61,7 +61,7 @@ export function HomeSections() {
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
                 <SiteBrandMark className="mx-auto shrink-0 sm:mx-0" />
                 <p className="min-w-0 text-balance text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]">
-                  <span className="sr-only">Studio Tecnico Pagnoni. </span>
+                  <span className="sr-only">Studio Architettura Pagnoni. </span>
                   {homeChiSiamo.short}
                 </p>
               </div>

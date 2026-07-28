@@ -13,7 +13,7 @@ const pagePath = "/servizi";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const pageTitle = "Architettura, topografia e SLAM a Brescia";
 const pageDescription =
-  "Progettazione architettonica, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Studio tecnico dal 1988.";
+  "Progettazione architettonica, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Studio di architettura dal 1988.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -38,7 +38,7 @@ export default function ServiziPage() {
           <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
             <p className={`${ui.body} max-w-5xl`}>
               Misura, progetto e pratiche tecniche non sono fasi separate: per una commessa ben impostata servono dati affidabili, lettura normativa e
-              continuità tra campo, studio e cantiere. Lo <strong>Studio Tecnico Pagnoni</strong>, attivo <strong>dal 1988</strong>, affianca privati,
+              continuità tra campo, studio e cantiere. Lo <strong>Studio Architettura Pagnoni</strong>, attivo <strong>dal 1988</strong>, affianca privati,
               imprese e professionisti su <strong>architettura</strong>, <strong>topografia</strong>, <strong>laser SLAM</strong>, verde, urbanistica e
               sicurezza. La parte strutturale viene coordinata con professionisti esterni quando richiesta.
             </p>

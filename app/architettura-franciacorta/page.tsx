@@ -14,7 +14,7 @@ const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const orgId = `${site.url.replace(/\/$/, "")}/#organization`;
 const pageTitle = "Architettura Franciacorta — progetto e pratiche";
 const pageDescription =
-  "Progettazione architettonica in Franciacorta e provincia di Brescia: concept, esecutivo, pratiche edilizie. Studio Tecnico Pagnoni, Bornato (BS).";
+  "Progettazione architettonica in Franciacorta e provincia di Brescia: concept, esecutivo, pratiche edilizie. Studio Architettura Pagnoni, Bornato (BS).";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -64,7 +64,7 @@ export default function ArchitetturaFranciacortaPage() {
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
             <p className={`${ui.body} max-w-[72ch]`}>
               Progettare in <strong>Franciacorta</strong> richiede attenzione al contesto: paesaggio, vincoli,
-              tessuto edilizio e esigenze della committenza. Lo <strong>Studio Tecnico Pagnoni</strong>, con sede a{" "}
+              tessuto edilizio e esigenze della committenza. Lo <strong>Studio Architettura Pagnoni</strong>, con sede a{" "}
               <strong>Bornato, Frazione di Cazzago San Martino</strong>, segue la progettazione architettonica dal concept
               alle tavole esecutive, in continuità con misura del territorio e pratiche edilizie.{" "}
               <strong>Arch. Davide Pagnoni</strong> coordina le fasi del processo edilizio quando il progetto deve

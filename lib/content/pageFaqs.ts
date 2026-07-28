@@ -27,7 +27,7 @@ export const topografiaFaq = [
 
 export const serviziFaq = [
   {
-    q: "Quali servizi offre lo Studio Tecnico Pagnoni?",
+    q: "Quali servizi offre lo Studio Architettura Pagnoni?",
     a: "Architettura e progettazione, topografia e rilievi planoaltimetrici, laser scanner SLAM e nuvole di punti, progettazione del verde, urbanistica e pratiche edilizie, coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
   },
   {

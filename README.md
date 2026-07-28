@@ -1,6 +1,6 @@
-# Studio Tecnico Pagnoni — sito web (Next.js)
+# Studio Architettura Pagnoni — sito web (Next.js)
 
-Repository del sito web di **Studio Tecnico Pagnoni** (Bornato · Cazzago San Martino, Brescia): topografia e rilievi, laser scanner SLAM, nuvola di punti, pratiche e territorio.
+Repository del sito web di **Studio Architettura Pagnoni** (Bornato · Cazzago San Martino, Brescia): topografia e rilievi, laser scanner SLAM, nuvola di punti, pratiche e territorio.
 
 Il sito fornisce informazioni sui servizi offerti, i progetti realizzati, i contatti e l'approccio tecnico-professionale dello studio.
 

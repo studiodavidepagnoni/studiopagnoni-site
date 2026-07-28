@@ -1,4 +1,4 @@
-# Studio Tecnico Pagnoni — https://studiopagnoni.com
+# Studio Architettura Pagnoni — https://studiopagnoni.com
 # Rilievi laser scanner SLAM e topografia — Franciacorta, provincia di Brescia, Nord Italia
 
 User-agent: *

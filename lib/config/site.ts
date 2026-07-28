@@ -16,10 +16,10 @@ export const layoutContentMaxClass = "mx-auto w-full min-w-0 max-w-[1140px]";
 const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://studiopagnoni.com";
 
 export const site = {
-  name: "Studio Tecnico Pagnoni",
-  /** Marchio in header/footer (senza «Tecnico»). */
-  brandName: "Studio Pagnoni",
-  legalName: "Studio Tecnico Pagnoni",
+  name: "Studio Architettura Pagnoni",
+  /** Marchio in header/footer e title SEO. */
+  brandName: "Studio Architettura Pagnoni",
+  legalName: "Studio Architettura Pagnoni",
   tagline: "Architettura, topografia e laser scanning",
   url: publicSiteUrl,
   email: "studio@pagnoni-s.com",

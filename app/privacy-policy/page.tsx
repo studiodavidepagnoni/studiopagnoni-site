@@ -13,7 +13,7 @@ const LAST_UPDATED = "9 maggio 2026";
 export const metadata = buildPageMetadata({
   title: "Privacy policy e cookie",
   description:
-    "Informativa privacy GDPR (Reg. UE 2016/679), cookie e diritti degli interessati — Studio Tecnico Pagnoni, Cazzago San Martino (BS).",
+    "Informativa privacy GDPR (Reg. UE 2016/679), cookie e diritti degli interessati — Studio Architettura Pagnoni, Cazzago San Martino (BS).",
   path: "/privacy-policy",
 });
 
