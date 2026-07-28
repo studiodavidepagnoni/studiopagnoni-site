@@ -163,10 +163,13 @@
 }
 
 .eyebrow {
-  font-size: 0.74rem;
-  letter-spacing: 0.26em;
-  text-transform: uppercase;
+  /* Alias legacy → stesso ritmo di .section-kicker */
+  font-family: var(--font-sans), system-ui, sans-serif;
+  font-size: 0.7rem;
   font-weight: 600;
+  letter-spacing: 0.28em;
+  text-transform: uppercase;
+  color: var(--accent-brand);
 }
 
 .section-title {

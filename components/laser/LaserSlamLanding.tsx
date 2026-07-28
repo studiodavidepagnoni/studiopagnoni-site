@@ -1,11 +1,12 @@
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
+import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import type { SlamLandingContent } from "@/lib/content/laserSlamLanding";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
-const introCopyClass = `${fontSans.className} text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]`;
+const introCopyClass = `${fontSans.className} ${ui.body}`;
 
 function CtaButtons({ className = "" }: { className?: string }) {
   return (
@@ -49,7 +50,7 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
             <ul className="grid list-none gap-4 sm:grid-cols-2 lg:gap-5">
               {L.sectors.map((s) => (
                 <li key={s.title} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:p-6">
-                  <h3 className={`${fontDisplay.className} text-lg font-semibold text-[var(--foreground)]`}>{s.title}</h3>
+                  <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{s.title}</h3>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{s.body}</p>
                 </li>
               ))}
@@ -77,7 +78,7 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
                   <Link
                     key={item.href}
                     href={item.href}
-                    className={`${fontSans.className} text-[0.9rem] font-semibold text-[var(--primary-mid)] underline underline-offset-2 transition hover:text-[var(--foreground)]`}
+                    className={`${fontSans.className} ${ui.textCta}`}
                   >
                     {item.label}
                   </Link>
@@ -137,8 +138,8 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
             <ol className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {L.workflow.map((w) => (
                 <li key={w.step} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:p-6">
-                  <span className={`${fontSans.className} text-[0.65rem] font-bold tabular-nums text-[var(--primary-mid)]`}>{w.step}</span>
-                  <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>{w.title}</h3>
+                  <span className={`${fontSans.className} section-kicker`}>{w.step}</span>
+                  <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{w.title}</h3>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{w.body}</p>
                 </li>
               ))}
@@ -190,26 +191,15 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
 
           <FaqSection id="slam-faq" items={L.faq} />
 
-          <section
-            className="surface-inverted rounded-2xl border border-[var(--green-border-muted)] p-6 text-center sm:p-10"
-            aria-labelledby="slam-cta"
-          >
-            <h2 id="slam-cta" className={`${fontDisplay.className} text-2xl font-semibold text-[var(--foreground)] sm:text-3xl`}>
-              {L.ctaHeading}
-            </h2>
-            <p className={`${ui.body} mx-auto mt-4 max-w-[52ch] text-[var(--copy-body)]`}>{L.ctaBody}</p>
-            <div className="mt-8 flex flex-col items-center justify-center gap-3 sm:flex-row sm:flex-wrap sm:gap-4">
-              <Link
-                href="/contatti?oggetto=slam#form-contatti"
-                className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}
-              >
-                Richiedi preventivo SLAM
-              </Link>
-              <Link href="/contatti#form-contatti" className={ui.btnGhostOnDark}>
-                Contatti generali
-              </Link>
-            </div>
-          </section>
+          <PageClosingCta
+            id="slam-cta"
+            title={L.ctaHeading}
+            description={L.ctaBody}
+            primaryHref="/contatti?oggetto=slam#form-contatti"
+            primaryLabel="Richiedi preventivo SLAM"
+            secondaryHref="/contatti#form-contatti"
+            secondaryLabel="Contatti generali"
+          />
         </div>
       </div>
     </main>

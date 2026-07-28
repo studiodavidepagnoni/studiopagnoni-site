@@ -5,7 +5,7 @@ footer {
 }
 
 html {
-  color-scheme: light dark;
+  color-scheme: light;
   scroll-behavior: smooth;
   /* Anchor + focus: compensa header sticky (valorizzato da SiteHeader). */
   scroll-padding-top: var(--site-header-offset, 5.5rem);

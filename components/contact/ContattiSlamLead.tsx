@@ -40,7 +40,7 @@ function ContattiFormInner() {
   return (
     <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
       <div className={ui.innerCardStatic}>
-        <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
+        <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>Scrivici</h2>
         <ContactForm
           defaultSubject={isSlamLead ? "Preventivo rilievo laser SLAM" : ""}
           defaultInquiryType={isSlamLead ? "slam" : ""}
@@ -65,7 +65,7 @@ const introFallback = (
 const formFallback = (
   <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
     <div className={ui.innerCardStatic}>
-      <h2 className={`${fontDisplay.className} ${ui.caseStudyTitle} mb-6 sm:mb-8`}>Scrivici</h2>
+      <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>Scrivici</h2>
       <ContactForm />
     </div>
   </section>

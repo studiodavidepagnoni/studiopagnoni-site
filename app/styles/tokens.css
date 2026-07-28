@@ -136,6 +136,13 @@
   /* Etichette su pulsanti a tinta --primary (sfondo scuro → testo chiaro; hover su mint → testo scuro). */
   --on-primary: #f4faf7;
   --on-primary-hover: #04100e;
+  /* Errori UI */
+  --error: #8f2f2a;
+  --error-soft: #f6ebe9;
+  --error-border: color-mix(in srgb, var(--error) 42%, var(--green-border));
+  --error-text: #7a2824;
+  --radius-card: 0.5rem;
+  --radius-media: 0.5rem;
 }
 
 @theme inline {

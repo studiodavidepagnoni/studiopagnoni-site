@@ -355,7 +355,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
 
           <div>
             <label htmlFor="name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-              Nome e cognome <span className="text-red-700">*</span>
+              Nome e cognome <span className={ui.fieldRequired}>*</span>
             </label>
             <input
               id="name"
@@ -370,7 +370,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               aria-describedby={errors.name ? "err-name" : undefined}
             />
             {errors.name ? (
-              <p id="err-name" className="mt-1 text-sm text-red-700">
+              <p id="err-name" className={ui.fieldError}>
                 {errors.name}
               </p>
             ) : null}
@@ -378,7 +378,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
 
           <div>
             <label htmlFor="email" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-              Email <span className="text-red-700">*</span>
+              Email <span className={ui.fieldRequired}>*</span>
             </label>
             <input
               id="email"
@@ -394,7 +394,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               aria-describedby={errors.email ? "err-email" : undefined}
             />
             {errors.email ? (
-              <p id="err-email" className="mt-1 text-sm text-red-700">
+              <p id="err-email" className={ui.fieldError}>
                 {errors.email}
               </p>
             ) : null}
@@ -469,7 +469,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
 
           <div className="md:col-span-2">
             <label htmlFor="message" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-              Messaggio <span className="text-red-700">*</span>
+              Messaggio <span className={ui.fieldRequired}>*</span>
             </label>
             <textarea
               id="message"
@@ -485,7 +485,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               aria-describedby={errors.message ? "err-msg" : undefined}
             />
             {errors.message ? (
-              <p id="err-msg" className="mt-1 text-sm text-red-700">
+              <p id="err-msg" className={ui.fieldError}>
                 {errors.message}
               </p>
             ) : null}
@@ -513,11 +513,11 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
                 Ho letto e accetto la{" "}
                 <Link
                   href="/privacy-policy"
-                  className="font-semibold text-[var(--accent-brand)] underline underline-offset-2 hover:text-[var(--foreground)]"
+                  className={ui.proseLink}
                 >
                   privacy policy
                 </Link>
-                . <span className="text-red-700">*</span>
+                . <span className={ui.fieldRequired}>*</span>
               </span>
             </label>
           </div>
@@ -532,7 +532,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               USA) e possono essere trattati anche fuori dallo Spazio Economico Europeo. Dettagli in{" "}
               <Link
                 href="/privacy-policy#trasferimenti"
-                className="font-semibold text-[var(--accent-brand)] underline underline-offset-2 hover:text-[var(--foreground)]"
+                className={ui.proseLink}
               >
                 informativa — trasferimenti
               </Link>
@@ -541,7 +541,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           ) : null}
 
           {errors.privacy ? (
-            <p id="err-privacy" className="text-sm text-red-700 md:col-span-2" role="alert">
+            <p id="err-privacy" className={`${ui.fieldError} md:col-span-2`} role="alert">
               {errors.privacy}
             </p>
           ) : null}
@@ -581,7 +581,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
                 </div>
               )}
               {errors.captcha ? (
-                <p id="err-captcha" className="mt-2 text-sm text-red-700" role="alert">
+                <p id="err-captcha" className={`mt-2 ${ui.fieldError}`} role="alert">
                   {errors.captcha}
                 </p>
               ) : null}

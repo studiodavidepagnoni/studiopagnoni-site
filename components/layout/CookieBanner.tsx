@@ -10,9 +10,6 @@ import { ui } from "@/lib/ui";
 
 export type { CookiePrefs };
 
-const btnCookieOutline =
-  "inline-flex min-h-[48px] w-full flex-1 items-center justify-center rounded-full border border-white/25 bg-white/5 px-5 text-sm font-semibold text-white backdrop-blur-sm transition hover:border-white/40 hover:bg-white/10 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] sm:w-auto sm:min-w-[9.5rem]";
-
 const btnCookiePrimary = `${ui.cookieAccept} text-sm`;
 
 export function CookieBanner() {
@@ -220,10 +217,10 @@ export function CookieBanner() {
               </div>
 
               <div className={`${fontSans.className} flex w-full shrink-0 flex-col gap-2.5 lg:w-[min(100%,20rem)]`}>
-                <button type="button" className={btnCookieOutline} onClick={handleNecessaryOnly}>
+                <button type="button" className={`${ui.cookieReject} sm:min-w-[9.5rem]`} onClick={handleNecessaryOnly}>
                   Solo necessari
                 </button>
-                <button type="button" className={btnCookieOutline} onClick={handleSaveChoices}>
+                <button type="button" className={`${ui.cookieReject} sm:min-w-[9.5rem]`} onClick={handleSaveChoices}>
                   Salva preferenze
                 </button>
                 <button type="button" className={btnCookiePrimary} onClick={handleAcceptAll}>

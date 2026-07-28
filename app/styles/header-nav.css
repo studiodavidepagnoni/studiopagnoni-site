@@ -73,8 +73,8 @@
 }
 
 .contact-form-feedback--error {
-  border-color: color-mix(in srgb, #b91c1c 55%, transparent);
-  background: color-mix(in srgb, #fef2f2 88%, var(--muted));
+  border-color: var(--error-border);
+  background: color-mix(in srgb, var(--error-soft) 88%, var(--muted));
 }
 
 .contact-form-feedback__title {
@@ -89,7 +89,7 @@
 }
 
 .contact-form-feedback--error .contact-form-feedback__title {
-  color: #991b1b;
+  color: var(--error-text);
 }
 
 .contact-form-feedback__body {
@@ -100,7 +100,7 @@
 }
 
 .contact-form-feedback--error .contact-form-feedback__body a {
-  color: #991b1b;
+  color: var(--error-text);
 }
 
 /* Etichette ambiti — stesso mint della tagline logo (Topografia · Architettura · SLAM) */

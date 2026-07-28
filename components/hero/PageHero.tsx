@@ -22,13 +22,10 @@ export function PageHero({ eyebrow, title, image, alt, lede, priorityImage = tru
           fetchPriority={priorityImage ? "high" : undefined}
         />
       </div>
-      <div
-        className="pointer-events-none absolute inset-0 z-[1] bg-[linear-gradient(90deg,rgba(4,10,9,0.72)_0%,rgba(4,10,9,0.48)_42%,rgba(4,10,9,0.22)_100%),linear-gradient(0deg,rgba(4,10,9,0.58)_0%,transparent_55%)]"
-        aria-hidden
-      />
+      <div className="page-hero__scrim" aria-hidden />
       <div className="relative z-10 mx-auto flex min-h-[inherit] w-full min-w-0 max-w-[1200px] flex-col justify-end px-4 pb-10 pt-[calc(env(safe-area-inset-top,0px)+5.75rem)] sm:px-6 sm:pb-12 md:pb-14">
         <div className="w-full min-w-0 max-w-[min(100%,44rem)]">
-          <p className={`${fontSans.className} page-hero__kicker reveal-faint mb-3 sm:mb-4`}>{eyebrow}</p>
+          <p className={`${fontSans.className} section-kicker page-hero__kicker reveal-faint mb-3 sm:mb-4`}>{eyebrow}</p>
           <h1 className={`${fontDisplay.className} page-hero__title reveal-title`}>{title}</h1>
           {lede ? (
             <p className={`${fontSans.className} page-hero__lede reveal-block mt-4 max-w-[42ch] text-pretty sm:mt-5`}>{lede}</p>

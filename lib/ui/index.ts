@@ -4,6 +4,12 @@ const btnBase =
 /** CTA primario — .btn-cta-primary in globals.css (segnale mint on-brand). */
 const btnPrimaryFill = `${btnBase} btn-cta-primary focus-visible:outline-none`;
 
+/** Titolo in-page (h2 sezione) — Sora medium, una sola scala. */
+const sectionHeading = "section-title text-2xl font-medium text-[var(--foreground)] sm:text-[1.65rem]";
+
+/** Titolo card / blocco (h2–h3) — una scala sotto le sezioni. */
+const cardHeading = "section-title text-xl font-medium text-[var(--foreground)] sm:text-2xl";
+
 export const ui = {
   /** Compensa header sticky (usa --site-header-offset da SiteHeader). */
   scrollAnchor: "scroll-anchor",
@@ -13,24 +19,31 @@ export const ui = {
   sectionSurfaceMuted: "bg-[var(--muted)]",
 
   cardMedia:
-    "interactive-card overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]",
+    "interactive-card overflow-hidden rounded-[var(--radius-card)] border border-[var(--green-border-muted)] bg-[var(--card)]",
 
   pageEyebrow: "section-kicker mb-3",
   pageTitleRule: "home-section-rule mb-8 sm:mb-10",
-  innerCard: "frost-card p-5 sm:p-7 md:p-10",
-  innerCardStatic: "frost-card frost-card--static p-5 sm:p-7 md:p-10",
+  innerCard: "frost-card rounded-[var(--radius-card)] p-5 sm:p-7 md:p-10",
+  innerCardStatic: "frost-card frost-card--static rounded-[var(--radius-card)] p-5 sm:p-7 md:p-10",
 
   proseLink:
     "font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition-colors hover:text-[var(--foreground)]",
 
+  /** CTA testuale (schede servizi, breadcrumb, “approfondisci”). */
+  textCta:
+    "inline-flex min-h-[44px] touch-manipulation items-center gap-1 text-sm font-semibold text-[var(--primary-mid)] transition-colors hover:text-[var(--foreground)] hover:underline",
+
   body: "copy-rhythm text-[0.98rem] text-[var(--copy-body)] sm:text-[1.05rem]",
   bodyMuted: "text-[0.98rem] text-[var(--green-ink-muted)] sm:text-[1.05rem]",
+  /** Microcopy secondaria (liste, note) — una sola misura. */
+  bodySm: "text-[0.92rem] leading-relaxed text-[var(--copy-body)]",
 
-  pageTitle: "section-title text-[1.85rem] text-[var(--foreground)] sm:text-4xl md:text-5xl",
-  caseStudyTitle: "section-title text-[1.65rem] text-[var(--foreground)] sm:text-3xl md:text-4xl",
-  sectionHeadingAccent: "section-title text-2xl text-[var(--foreground)]",
-  gallerySectionTitle: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
-  cardHeading: "section-title text-xl text-[var(--foreground)] sm:text-2xl",
+  pageTitle: "section-title text-[1.85rem] font-medium text-[var(--foreground)] sm:text-4xl md:text-5xl",
+  /** @deprecated alias → sectionHeadingAccent */
+  caseStudyTitle: sectionHeading,
+  sectionHeadingAccent: sectionHeading,
+  gallerySectionTitle: cardHeading,
+  cardHeading,
   headingBodyGap: "mb-4 sm:mb-5",
 
   btnPrimary: btnPrimaryFill,
@@ -61,6 +74,9 @@ export const ui = {
 
   inputField:
     "w-full min-h-[48px] rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18 max-md:text-base sm:min-h-0",
+
+  fieldError: "mt-1 text-sm text-[var(--error-text)]",
+  fieldRequired: "text-[var(--error-text)]",
 
   footerLink:
     "inline-flex min-h-[48px] touch-manipulation items-center py-2 text-base text-[var(--footer-link)] transition-colors duration-200 hover:text-[var(--footer-link-hover)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/45 sm:inline-block sm:min-h-0 sm:text-[0.92rem]",

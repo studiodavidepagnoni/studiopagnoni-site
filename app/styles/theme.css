@@ -10,6 +10,9 @@
   --primary: var(--header-surface);
   --primary-dark: var(--surface-chrome-deep);
   --primary-mid: #0d635c;
+  /* Teal più saturo su superfici chiare (hover / enfasi) — non il mint del chrome scuro. */
+  --primary-mid-strong: #0a524c;
+  --accent-brand-strong: var(--primary-mid-strong);
   --card: #ffffff;
   --muted: #ecebe5;
   --elevated: #ffffff;
@@ -19,7 +22,7 @@
   --green-ink-muted: #4f5c56;
   --accent-brand: var(--primary-mid);
   --accent-warm: var(--accent-brand);
-  --accent-warm-strong: var(--primary-mid-strong);
+  --accent-warm-strong: var(--accent-brand-strong);
   --accent-soft: color-mix(in srgb, var(--accent-brand) 10%, transparent);
   --cta-primary-fill: var(--primary-mid);
   --cta-primary-fill-hover: #0f756c;
@@ -41,6 +44,13 @@
   --green-ink-muted: #44524c;
   --on-primary: #f4faf7;
   --on-primary-hover: #04100e;
+  /* Errori form — famiglia brand, non Tailwind red. */
+  --error: #8f2f2a;
+  --error-soft: #f6ebe9;
+  --error-border: color-mix(in srgb, var(--error) 42%, var(--green-border));
+  --error-text: #7a2824;
+  --radius-card: 0.5rem; /* ~rounded-lg */
+  --radius-media: 0.5rem;
   background: var(--background);
   color: var(--foreground);
 }
@@ -70,6 +80,7 @@
   --primary-mid: #9fc7bb;
   --primary-mid-strong: #b8d8cf;
   --accent-brand: var(--primary-mid);
+  --accent-brand-strong: var(--primary-mid-strong);
   --accent-warm: var(--accent-brand);
   --accent-warm-strong: var(--accent-brand-strong);
   --cta-primary-fill: var(--header-nav-hover);
@@ -81,6 +92,10 @@
   --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 8%, var(--card));
   --on-primary: #f4faf7;
   --on-primary-hover: #04100e;
+  --error: #e8a09a;
+  --error-soft: color-mix(in srgb, #8f2f2a 22%, var(--card));
+  --error-border: color-mix(in srgb, #e8a09a 40%, var(--green-border));
+  --error-text: #f0c4c0;
   background: var(--background);
   color: var(--foreground);
 }

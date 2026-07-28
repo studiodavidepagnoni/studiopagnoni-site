@@ -51,7 +51,7 @@ export function VideoFigure({
       ref={rootRef}
       className={
         className ??
-        "relative mb-6 aspect-video overflow-hidden rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] pointer-events-auto"
+        "relative mb-6 aspect-video overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)] pointer-events-auto"
       }
     >
       <video

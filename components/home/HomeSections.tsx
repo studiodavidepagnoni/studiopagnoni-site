@@ -95,7 +95,7 @@ export function HomeSections() {
 
             {/* ── Media (destra): immagine proporzionata al testo ── */}
             <div className="order-1 lg:order-2 lg:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] sm:aspect-[16/10] lg:aspect-[16/10]">
+              <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)] sm:aspect-[16/10] lg:aspect-[16/10]">
                 <StockCoverImage
                   src={homeChiSiamoImages.team.src}
                   alt={homeChiSiamoImages.team.alt}
@@ -108,9 +108,7 @@ export function HomeSections() {
                 {/* Caption badge */}
                 <div className="absolute bottom-4 left-4">
                   <div className="rounded-md bg-[color-mix(in_srgb,var(--surface-chrome-deep)_72%,transparent)] px-3 py-1.5 backdrop-blur-sm">
-                    <p
-                      className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.24em] text-white`}
-                    >
+                    <p className={`${fontSans.className} section-kicker text-white`}>
                       Franciacorta · Provincia di Brescia
                     </p>
                   </div>
@@ -144,13 +142,11 @@ export function HomeSections() {
               <p className={`${fontSans.className} section-kicker`}>SLAM e geomatica</p>
               <h3
                 id="strumentazione-heading"
-                className={`${fontDisplay.className} mt-2 text-xl font-semibold tracking-tight text-[var(--foreground)] sm:text-2xl`}
+                className={`${fontDisplay.className} ${ui.cardHeading} mt-2 tracking-tight`}
               >
                 {homeStrumentazione.title}
               </h3>
-              <div
-                className={`${fontSans.className} mt-4 text-[0.95rem] leading-[1.65] text-[var(--copy-body)] text-pretty sm:mt-5 sm:text-[1.02rem]`}
-              >
+              <div className={`${fontSans.className} mt-4 ${ui.body} text-pretty sm:mt-5`}>
                 {homeStrumentazione.lede}
               </div>
             </div>
@@ -166,18 +162,12 @@ export function HomeSections() {
               aria-label="Approfondimenti su strumentazione e servizi"
               className={`${fontSans.className} mt-6 border-t border-[var(--green-border-muted)] pt-5 sm:mt-7 sm:pt-6`}
             >
-              <p className="mb-3 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--green-ink-muted)]">Schede servizio</p>
-              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm font-semibold">
-                <Link
-                  href="/topografia"
-                  className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]"
-                >
+              <p className={`${fontSans.className} section-kicker mb-3`}>Schede servizio</p>
+              <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
+                <Link href="/topografia" className={ui.proseLink}>
                   Topografia e rilievi
                 </Link>
-                <Link
-                  href="/laser-scanner-slam"
-                  className="text-[var(--primary-mid)] underline decoration-[var(--primary)]/35 underline-offset-4 hover:decoration-[var(--primary-mid)]"
-                >
+                <Link href="/laser-scanner-slam" className={ui.proseLink}>
                   Laser scanner SLAM
                 </Link>
               </div>
@@ -222,15 +212,11 @@ export function HomeSections() {
                   <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
                 </div>
                 <div className="home-projects-mosaic__body">
-                  <span className={`${fontSans.className} text-[0.62rem] font-semibold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>
-                    {p.label}
-                  </span>
-                  <span
-                    className={`${fontDisplay.className} home-projects-mosaic__caption mt-1 block font-semibold text-[var(--foreground)]`}
-                  >
+                  <span className={`${fontSans.className} section-kicker`}>{p.label}</span>
+                  <span className={`${fontDisplay.className} home-projects-mosaic__caption mt-1 block font-medium text-[var(--foreground)]`}>
                     {p.caption}
                   </span>
-                  <span className={`${fontSans.className} mt-1 block text-[0.7rem] font-medium text-[var(--copy-body)]`}>Apri →</span>
+                  <span className={`${fontSans.className} ${ui.textCta} mt-1`}>Apri →</span>
                 </div>
               </Link>
             ))}
@@ -259,8 +245,8 @@ export function HomeSections() {
               <li key={s.kicker} className="home-process-rail__item reveal-block">
                 <span className="home-process-rail__marker" aria-hidden />
                 <p className={`${fontSans.className} section-kicker`}>{s.kicker}</p>
-                <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>{s.title}</h3>
-                <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{s.body}</p>
+                <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{s.title}</h3>
+                <p className={`${fontSans.className} mt-2 ${ui.bodySm}`}>{s.body}</p>
               </li>
             ))}
           </ul>
@@ -280,7 +266,7 @@ export function HomeSections() {
             {certifications.map((c) => (
               <li key={c.title} className="home-certs-list__item reveal-block">
                 <h3 className="home-certs-list__title">{c.title}</h3>
-                <p className="text-[0.88rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.92rem]">{c.text}</p>
+                <p className={`${ui.bodySm}`}>{c.text}</p>
               </li>
             ))}
           </ul>
@@ -301,8 +287,8 @@ export function HomeSections() {
               <IconMapPin className="h-7 w-7 sm:h-8 sm:w-8" />
             </div>
             <div className="min-w-0">
-              <h3 className={`${fontDisplay.className} text-lg font-medium text-[var(--foreground)] sm:text-xl`}>{zoneContent.heading}</h3>
-              <p className="mt-2 text-[0.9rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.95rem]">{zoneFooter}</p>
+              <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{zoneContent.heading}</h3>
+              <p className={`mt-2 ${ui.bodySm}`}>{zoneFooter}</p>
             </div>
           </div>
         </div>

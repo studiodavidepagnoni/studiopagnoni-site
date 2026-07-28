@@ -155,7 +155,7 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={video(all.dir, all.video, "mp4")}
           webm={video(all.dir, all.video, "webm")}
-          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+          className="relative mb-6 aspect-video overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
           Se serve collegare la scansione a coordinate di progetto o a punti di controllo, integriamo con <strong>GNSS RTK</strong> e stazione totale
@@ -183,7 +183,7 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={video(vin.dir, vin.video, "mp4")}
           webm={video(vin.dir, vin.video, "webm")}
-          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+          className="relative mb-6 aspect-video overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)]"
           videoClassName="relative z-10 h-full w-full object-cover object-[center_60%] pointer-events-auto"
         />
         <p className={ui.body}>
@@ -213,7 +213,7 @@ export const projectCaseStudies: Record<
         <VideoFigure
           mp4={video(ter.dir, ter.video, "mp4")}
           webm={video(ter.dir, ter.video, "webm")}
-          className="relative mb-6 aspect-video overflow-hidden rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)]"
+          className="relative mb-6 aspect-video overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)]"
         />
         <p className={ui.body}>
           In base alle esigenze, il rilievo può essere restituito come nuvola 3D oppure come elaborati CAD con quote, sezioni e sintesi.

@@ -1,5 +1,6 @@
 import type { ReactNode } from "react";
 import Link from "next/link";
+import { ui } from "@/lib/ui";
 
 /** Anno di fondazione dello studio. Cambiare qui se mai dovesse variare la data ufficiale. */
 export const STUDIO_FOUNDED_YEAR = 1988;
@@ -236,28 +237,28 @@ export const zoneFooter = (
     Per tempi e disponibilità sul vostro territorio{" "}
     <Link
       href="/contatti"
-      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+      className={ui.proseLink}
     >
       contattateci
     </Link>
     . Approfondisci i rilievi laser scanner SLAM in{" "}
     <Link
       href="/rilievi-laser-scanner-slam-brescia"
-      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+      className={ui.proseLink}
     >
       provincia di Brescia
     </Link>{" "}
     e in{" "}
     <Link
       href="/rilievi-laser-scanner-slam-lombardia"
-      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+      className={ui.proseLink}
     >
       Lombardia
     </Link>
     , oppure la pagina{" "}
     <Link
       href="/topografia"
-      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition hover:text-[var(--foreground)]"
+      className={ui.proseLink}
     >
       topografia e rilievi
     </Link>

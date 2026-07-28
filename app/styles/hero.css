@@ -4,24 +4,21 @@
 }
 
 .page-hero__kicker {
-  font-size: 0.68rem;
-  font-weight: 600;
-  letter-spacing: 0.28em;
-  text-transform: uppercase;
+  /* Estende .section-kicker: solo colore/legibilità su media scura. */
   color: color-mix(in srgb, white 78%, var(--primary-mid-strong));
   text-shadow:
-    0 0 8px rgba(0, 0, 0, 0.24),
-    0 2px 7px rgba(0, 0, 0, 0.34);
+    0 0 8px color-mix(in srgb, var(--hero-media-scrim-strong) 40%, transparent),
+    0 2px 7px color-mix(in srgb, var(--hero-media-scrim-mid) 55%, transparent);
 }
 
 .page-hero__title {
   font-size: clamp(2rem, 4.8vw, 3.35rem);
   font-weight: 500;
   line-height: 1.05;
-  color: #f6f4ef;
+  color: var(--hero-title);
   text-shadow:
-    0 2px 10px rgba(0, 0, 0, 0.48),
-    0 0 20px rgba(0, 0, 0, 0.24);
+    0 2px 10px color-mix(in srgb, var(--hero-media-scrim-strong) 62%, transparent),
+    0 0 20px color-mix(in srgb, var(--hero-media-scrim-mid) 45%, transparent);
 }
 
 .page-hero__lede {
@@ -29,8 +26,23 @@
   line-height: 1.75;
   color: color-mix(in srgb, white 90%, transparent);
   text-shadow:
-    0 1px 8px rgba(0, 0, 0, 0.42),
-    0 2px 14px rgba(0, 0, 0, 0.28);
+    0 1px 8px color-mix(in srgb, var(--hero-media-scrim-mid) 70%, transparent),
+    0 2px 14px color-mix(in srgb, var(--hero-media-scrim-soft) 80%, transparent);
+}
+
+.page-hero__scrim {
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(
+      90deg,
+      var(--hero-media-scrim-strong) 0%,
+      var(--hero-media-scrim-mid) 42%,
+      var(--hero-media-scrim-soft) 100%
+    ),
+    linear-gradient(0deg, var(--hero-media-vignette-bottom) 0%, transparent 55%);
 }
 
 /* Hero home — media + scrim cinematico (riferimento mhira3d.com) */
@@ -125,11 +137,17 @@
   background:
     linear-gradient(
       to right,
-      rgb(0 0 0 / 0.22) 0%,
-      rgb(2 6 5 / 0.14) 42%,
+      color-mix(in srgb, var(--hero-media-scrim-mid) 42%, transparent) 0%,
+      color-mix(in srgb, var(--hero-media-scrim-soft) 70%, transparent) 42%,
       transparent 72%
     ),
-    linear-gradient(180deg, rgb(0 2 2 / 0.1) 0%, transparent 14%, transparent 72%, rgb(2 6 5 / 0.12) 100%);
+    linear-gradient(
+      180deg,
+      color-mix(in srgb, var(--hero-media-vignette-top) 85%, transparent) 0%,
+      transparent 14%,
+      transparent 72%,
+      color-mix(in srgb, var(--hero-media-vignette-bottom) 28%, transparent) 100%
+    );
 }
 
 .hero-media__stage--intro {

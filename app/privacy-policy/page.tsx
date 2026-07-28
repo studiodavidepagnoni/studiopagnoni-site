@@ -34,7 +34,7 @@ function SectionTitle({ id, children }: { id: string; children: ReactNode }) {
   return (
     <h2
       id={id}
-      className={`${fontDisplay.className} scroll-anchor text-2xl font-medium tracking-tight text-[var(--foreground)] sm:text-[1.65rem]`}
+      className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.scrollAnchor} tracking-tight`}
     >
       {children}
     </h2>
@@ -65,13 +65,13 @@ export default function PrivacyPolicyPage() {
               aria-label="Indice della privacy policy"
               className={`${fontSans.className} lg:sticky lg:top-28 lg:h-fit lg:w-[min(100%,14rem)] lg:shrink-0`}
             >
-              <p className="mb-3 text-[0.65rem] font-bold uppercase tracking-[0.22em] text-[var(--green-ink-muted)]">Indice</p>
+              <p className={`${fontSans.className} section-kicker mb-3`}>Indice</p>
               <ul className="flex flex-wrap gap-2 lg:flex-col lg:flex-nowrap lg:gap-1">
                 {toc.map((item) => (
                   <li key={item.href}>
                     <a
                       href={item.href}
-                      className="inline-flex rounded-full border border-transparent px-3 py-1.5 text-[0.82rem] font-medium text-[var(--copy-body)] transition hover:border-[var(--green-border-muted)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] lg:block lg:rounded-lg lg:px-2 lg:py-1.5"
+                      className="inline-flex rounded-[var(--radius-card)] border border-transparent px-3 py-1.5 text-[0.82rem] font-medium text-[var(--copy-body)] transition hover:border-[var(--green-border-muted)] hover:bg-[var(--muted)] hover:text-[var(--foreground)] lg:block lg:px-2 lg:py-1.5"
                     >
                       {item.label}
                     </a>
@@ -81,7 +81,7 @@ export default function PrivacyPolicyPage() {
             </nav>
 
             <article className={`${fontSans.className} min-w-0 flex-1 space-y-12 text-[var(--copy-body)]`}>
-              <section className="rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] p-6 shadow-[0_20px_50px_rgba(0,0,0,0.12)] ring-1 ring-[var(--primary)]/[0.06] sm:p-8">
+              <section className="rounded-[var(--radius-card)] border border-[var(--green-border-muted)] bg-[var(--card)] p-6 sm:p-8">
                 <SectionTitle id="titolare">Titolare del trattamento</SectionTitle>
                 <div className="home-section-rule mb-6 mt-4" aria-hidden />
                 <div className="space-y-4 text-[0.98rem] leading-relaxed sm:text-[1.02rem]">
@@ -143,8 +143,8 @@ export default function PrivacyPolicyPage() {
                 <div className="home-section-rule mt-4" aria-hidden />
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div className={ui.innerCard + " border-[var(--green-border-muted)]"}>
-                    <p className={`${fontSans.className} text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Contatti</p>
-                    <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>Rispondere alle richieste</h3>
+                    <p className={`${fontSans.className} section-kicker`}>Contatti</p>
+                    <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>Rispondere alle richieste</h3>
                     <p className={`${ui.body} mt-3`}>
                       Gestione delle richieste inviate tramite modulo email / Formspree o indirizzo di posta elettronica.
                     </p>
@@ -152,8 +152,8 @@ export default function PrivacyPolicyPage() {
                     <p className={`${ui.body} mt-1`}>Art. 6, comma 1, lett. <strong>b</strong> GDPR (misure precontrattuali su richiesta dell&apos;interessato).</p>
                   </div>
                   <div className={ui.innerCard + " border-[var(--green-border-muted)]"}>
-                    <p className={`${fontSans.className} text-[0.65rem] font-bold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>Obblighi & sicurezza</p>
-                    <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>Sito web e sicurezza</h3>
+                    <p className={`${fontSans.className} section-kicker`}>Obblighi & sicurezza</p>
+                    <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>Sito web e sicurezza</h3>
                     <p className={`${ui.body} mt-3`}>
                       Funzionamento tecnico del sito, gestione della sicurezza informatica, eventuali log strettamente necessari alla stabilità del servizio.
                     </p>
@@ -162,7 +162,7 @@ export default function PrivacyPolicyPage() {
                   </div>
                   <div className={`${ui.innerCard} border-[var(--green-border-muted)] sm:col-span-2`}>
                     <p className={`${fontSans.className} section-kicker`}>Facoltativo</p>
-                    <h3 className={`${fontDisplay.className} mt-2 text-lg font-semibold text-[var(--foreground)]`}>
+                    <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>
                       Google Maps e reCAPTCHA
                     </h3>
                     <p className={`${ui.body} mt-3`}>
@@ -280,8 +280,8 @@ export default function PrivacyPolicyPage() {
                     </li>
                   ))}
                 </ul>
-                <div className="rounded-2xl border border-[var(--primary-mid)]/30 bg-[var(--primary)]/[0.07] p-6 sm:p-8">
-                  <h3 className={`${fontDisplay.className} text-lg font-semibold text-[var(--foreground)]`}>Come esercitare i diritti</h3>
+                <div className="rounded-[var(--radius-card)] border border-[var(--primary-mid)]/30 bg-[var(--primary)]/[0.07] p-6 sm:p-8">
+                  <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>Come esercitare i diritti</h3>
                   <p className={`${ui.body} mt-3`}>
                     Può inviare una richiesta a{" "}
                     <a href={`mailto:${site.email}`} className={ui.proseLink}>
@@ -376,7 +376,7 @@ export default function PrivacyPolicyPage() {
                   </table>
                 </div>
 
-                <details className="group rounded-2xl border border-[var(--green-border-muted)] bg-[var(--card)] open:border-[var(--primary-mid)]/35 open:shadow-[0_12px_40px_rgba(0,0,0,0.08)]">
+                <details className="group rounded-[var(--radius-card)] border border-[var(--green-border-muted)] bg-[var(--card)] open:border-[var(--primary-mid)]/35">
                   <summary
                     className={`${fontDisplay.className} cursor-pointer list-none px-5 py-4 text-lg font-medium text-[var(--foreground)] transition hover:text-[var(--primary-mid)] sm:px-6 sm:py-5 [&::-webkit-details-marker]:hidden`}
                   >

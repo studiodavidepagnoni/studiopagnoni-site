@@ -62,14 +62,14 @@ export default function ServiziPage() {
                       className={`interactive-card flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 sm:p-8 ${ui.scrollAnchor}`}
                     >
                       <p className={`${fontSans.className} section-kicker mb-3`}>{group.kicker}</p>
-                      <h3 className={`${fontDisplay.className} text-xl font-semibold text-[var(--foreground)]`}>{group.title}</h3>
-                      <p className="mt-4 text-[0.95rem] leading-relaxed text-[var(--copy-body)]">{group.description}</p>
+                      <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{group.title}</h3>
+                      <p className={`mt-4 ${ui.bodySm}`}>{group.description}</p>
                       {group.points.length > 0 ? (
                         <ul className="mt-5 list-none space-y-3 pl-0">
                           {group.points.map((point) => (
                             <li
                               key={point}
-                              className="relative pl-5 text-[0.92rem] leading-relaxed text-[var(--copy-body)] before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]"
+                              className={`relative pl-5 ${ui.bodySm} before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]`}
                             >
                               {point}
                             </li>
@@ -77,10 +77,7 @@ export default function ServiziPage() {
                         </ul>
                       ) : null}
                       {hasDedicatedPage ? (
-                        <Link
-                          href={group.href}
-                          className={`${fontSans.className} mt-6 inline-flex min-h-[44px] items-center text-sm font-semibold text-[var(--primary-mid)] transition-colors hover:underline`}
-                        >
+                        <Link href={group.href} className={`${fontSans.className} ${ui.textCta} mt-6`}>
                           {group.cta} →
                         </Link>
                       ) : null}

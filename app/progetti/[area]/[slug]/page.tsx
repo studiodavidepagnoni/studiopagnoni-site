@@ -63,13 +63,13 @@ export default async function ProjectCasePage({ params }: Props) {
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
           <nav className="reveal-faint mb-8 text-[0.82rem] text-[var(--green-ink-muted)] sm:text-sm" aria-label="Percorso di navigazione">
-            <Link href="/progetti" className="font-medium text-[var(--primary-mid)] hover:underline">
+            <Link href="/progetti" className={ui.textCta}>
               Progetti
             </Link>
             <span className="mx-2 text-[var(--green-border)]" aria-hidden>
               /
             </span>
-            <Link href={`/progetti/${area}`} className="font-medium text-[var(--primary-mid)] hover:underline">
+            <Link href={`/progetti/${area}`} className={ui.textCta}>
               {cat.heading}
             </Link>
             <span className="mx-2 text-[var(--green-border)]" aria-hidden>
