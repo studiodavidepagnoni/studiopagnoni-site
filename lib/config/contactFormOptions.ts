@@ -1,7 +1,9 @@
+/** Ordine allineato al brand: Architettura → Topografia → Laser SLAM. */
 export const inquiryTypeOptions = [
-  { value: "slam", label: "Rilievo laser scanner SLAM" },
+  { value: "architettura", label: "Architettura" },
   { value: "topografia", label: "Topografia e rilievi" },
-  { value: "altro", label: "Altro (verde, pratiche, architettura…)" },
+  { value: "slam", label: "Rilievo laser scanner SLAM" },
+  { value: "altro", label: "Altro (verde, pratiche…)" },
 ] as const;
 
 export type InquiryType = (typeof inquiryTypeOptions)[number]["value"];

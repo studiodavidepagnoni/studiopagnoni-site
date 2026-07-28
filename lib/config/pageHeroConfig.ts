@@ -78,7 +78,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     lede: "Una selezione di commesse recenti: rilievi laser SLAM, nuvole di punti e interventi sul territorio in Franciacorta e provincia di Brescia.",
   },
   "/contatti": {
-    eyebrow: "Contatto",
+    eyebrow: "Contatti",
     title: "Contatti e preventivi",
     image: s("totalStation"),
     alt: imageAlt("Stazione totale in cantiere — sopralluoghi e preventivi", {
