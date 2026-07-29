@@ -73,7 +73,7 @@ export const ui = {
     `${btnBase} min-h-[48px] flex-1 border border-white/18 bg-transparent px-5 text-white hover:bg-white/[0.08] focus-visible:outline-white/35 sm:flex-none`,
 
   inputField:
-    "w-full min-h-[48px] rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18 max-md:text-base sm:min-h-0",
+    "box-border w-full min-w-0 max-w-full min-h-[48px] rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18 max-md:text-base sm:min-h-0",
 
   fieldError: "mt-1 text-sm text-[var(--error-text)]",
   fieldRequired: "text-[var(--error-text)]",

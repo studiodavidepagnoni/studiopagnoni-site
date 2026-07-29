@@ -38,8 +38,8 @@ function ContattiFormInner() {
   const isSlamLead = useIsSlamLead();
 
   return (
-    <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
-      <div className={ui.innerCardStatic}>
+    <section id="form-contatti" className={`mt-12 min-w-0 max-w-full ${ui.scrollAnchor} sm:mt-16`}>
+      <div className={`${ui.innerCardStatic} min-w-0 max-w-full`}>
         <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>Scrivici</h2>
         <ContactForm
           defaultSubject={isSlamLead ? "Preventivo rilievo laser SLAM" : ""}
@@ -63,8 +63,8 @@ const introFallback = (
 );
 
 const formFallback = (
-  <section id="form-contatti" className={`mt-12 ${ui.scrollAnchor} sm:mt-16`}>
-    <div className={ui.innerCardStatic}>
+  <section id="form-contatti" className={`mt-12 min-w-0 max-w-full ${ui.scrollAnchor} sm:mt-16`}>
+    <div className={`${ui.innerCardStatic} min-w-0 max-w-full`}>
       <h2 className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>Scrivici</h2>
       <ContactForm />
     </div>

@@ -10,6 +10,12 @@
     min-width: 0;
   }
 
+  /* Select: le option lunghe non devono allargare il form oltre il viewport */
+  select {
+    max-width: 100%;
+    min-width: 0;
+  }
+
   .lazy-section,
   .page-hero,
   .section-shell,

@@ -263,7 +263,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           : "";
 
   return (
-    <div className="w-full">
+    <div className="w-full min-w-0 max-w-full">
       <div className="sr-only" aria-live="polite" aria-atomic="true" role="status">
         {statusMessage}
       </div>
@@ -302,7 +302,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
       {status !== "success" ? (
         <form
           onSubmit={onSubmit}
-          className="grid w-full gap-3 sm:gap-4 md:grid-cols-2"
+          className="grid w-full min-w-0 max-w-full gap-3 sm:gap-4 md:grid-cols-2"
           noValidate
           aria-busy={status === "submitting"}
         >
@@ -333,7 +333,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             />
           </div>
 
-          <div className="md:col-span-2">
+          <div className="min-w-0 md:col-span-2">
             <label htmlFor="inquiryType" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Tipo di richiesta
             </label>
@@ -353,7 +353,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             </select>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="name" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Nome e cognome <span className={ui.fieldRequired}>*</span>
             </label>
@@ -376,7 +376,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             ) : null}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="email" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Email <span className={ui.fieldRequired}>*</span>
             </label>
@@ -400,7 +400,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             ) : null}
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="surfaceArea" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Superficie indicativa
             </label>
@@ -419,7 +419,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             </select>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="desiredOutput" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Output desiderato
             </label>
@@ -438,7 +438,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             </select>
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="subject" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Oggetto
             </label>
@@ -452,7 +452,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             />
           </div>
 
-          <div>
+          <div className="min-w-0">
             <label htmlFor="city" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Città / zona di interesse
             </label>
@@ -467,7 +467,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             />
           </div>
 
-          <div className="md:col-span-2">
+          <div className="min-w-0 md:col-span-2">
             <label htmlFor="message" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
               Messaggio <span className={ui.fieldRequired}>*</span>
             </label>
@@ -547,7 +547,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
           ) : null}
 
           {recaptchaSiteKey ? (
-            <div className="md:col-span-2">
+            <div className="min-w-0 max-w-full overflow-x-auto md:col-span-2">
               {googleEmbeds ? (
                 <RecaptchaField siteKey={recaptchaSiteKey} onTokenChange={setCaptchaToken} />
               ) : (

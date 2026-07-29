@@ -23,12 +23,12 @@ export default function ContattiPage() {
     <>
       <StaticPageHero path="/contatti" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
-        <div className={layoutGutterXClass}>
-          <div className={layoutContentMaxClass}>
+        <div className={`${layoutGutterXClass} min-w-0`}>
+          <div className={`${layoutContentMaxClass} min-w-0 overflow-x-clip`}>
             <ContattiIntro />
 
-            <div className="grid gap-6 sm:gap-8 lg:grid-cols-2 lg:items-start">
-              <section aria-labelledby="recapiti-block" className={ui.innerCardStatic}>
+            <div className="grid min-w-0 gap-6 sm:gap-8 lg:grid-cols-2 lg:items-start">
+              <section aria-labelledby="recapiti-block" className={`${ui.innerCardStatic} min-w-0`}>
                 <h2 id="recapiti-block" className={`${fontDisplay.className} ${ui.cardHeading} mb-4 sm:mb-5`}>
                   Recapiti
                 </h2>
@@ -56,7 +56,7 @@ export default function ContattiPage() {
                 </ul>
               </section>
 
-              <section aria-labelledby="mappa-heading" className={ui.innerCardStatic}>
+              <section aria-labelledby="mappa-heading" className={`${ui.innerCardStatic} min-w-0`}>
                 <h2 id="mappa-heading" className={`${fontDisplay.className} ${ui.cardHeading} mb-4 sm:mb-5`}>
                   Dove siamo
                 </h2>
