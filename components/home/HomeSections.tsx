@@ -354,16 +354,16 @@ export function HomeSections() {
       </section>
 
       {/* ── CTA finale — premium closing ── */}
-      <section className="home-cta-finale lazy-section overflow-x-hidden min-w-0 border-t border-[var(--green-border-muted)] px-5 py-20 text-center sm:px-6 sm:py-24 md:px-10 md:py-28">
+      <section className="home-cta-finale lazy-section overflow-x-hidden min-w-0 border-t border-[var(--green-border-muted)] px-5 py-20 text-center sm:text-left sm:px-6 sm:py-24 md:px-10 md:py-28">
         <div className="mx-auto max-w-[540px] reveal-block">
-          <div className="home-cta-finale__rule mx-auto mb-6" aria-hidden />
+          <div className="home-cta-finale__rule mx-auto mb-6 sm:mx-0" aria-hidden />
           <h2 className={`${fontDisplay.className} text-[clamp(1.65rem,7vw,2.5rem)] font-medium leading-[1.06] tracking-tight text-[var(--foreground)]`}>
             Parliamo del tuo progetto
           </h2>
           <p className={`${fontSans.className} mx-auto mt-5 max-w-[36ch] text-[0.93rem] leading-[1.7] text-[var(--foreground)]`}>
             Sopralluogo, preventivo rilievo SLAM o consulenza tecnica: contattaci per una prima valutazione.
           </p>
-          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:items-start sm:justify-start sm:gap-4">
             <Link href="/contatti#form-contatti" className={`${ui.btnPrimary} w-full sm:w-auto`}>
               Richiedi preventivo
             </Link>
