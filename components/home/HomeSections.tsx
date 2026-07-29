@@ -360,7 +360,7 @@ export function HomeSections() {
           <h2 className={`${fontDisplay.className} text-[clamp(1.65rem,7vw,2.5rem)] font-medium leading-[1.06] tracking-tight text-[var(--foreground)]`}>
             Parliamo del tuo progetto
           </h2>
-          <p className={`${fontSans.className} mx-auto mt-5 max-w-[36ch] text-[0.93rem] leading-[1.7] text-[var(--copy-body)]`}>
+          <p className={`${fontSans.className} mx-auto mt-5 max-w-[36ch] text-[0.93rem] leading-[1.7] text-[var(--foreground)]/75`}>
             Sopralluogo, preventivo rilievo SLAM o consulenza tecnica: contattaci per una prima valutazione.
           </p>
           <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
