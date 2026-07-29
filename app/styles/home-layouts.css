@@ -237,6 +237,15 @@
     var(--surface-chrome-deep);
 }
 
+.home-cta-finale h2,
+.home-cta-finale p {
+  color: #ffffff !important;
+  opacity: 1 !important;
+  text-shadow:
+    0 2px 20px rgba(0, 0, 0, 0.58),
+    0 0 30px rgba(0, 0, 0, 0.38);
+}
+
 .home-cta-finale__rule {
   width: 2.5rem;
   height: 1px;
