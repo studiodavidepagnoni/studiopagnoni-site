@@ -127,10 +127,10 @@
   }
 }
 
-/* ─── 430px and below: tighter rhythm ─── */
+/* ─── 430px and below ─── */
 @media (max-width: 430px) {
   :root {
-    --section-space-y-mobile: 3.25rem;
+    --section-space-y-mobile: 4rem;
   }
 
   .section-shell::after {
@@ -142,15 +142,29 @@
   }
 }
 
-/* ─── 360px: ultra-compact ─── */
+/* ─── 360px ─── */
 @media (max-width: 360px) {
   :root {
-    --section-space-y-mobile: 2.75rem;
+    --section-space-y-mobile: 3.5rem;
   }
 
   .eyebrow {
     font-size: 0.68rem;
     letter-spacing: 0.22em;
+  }
+}
+
+/* ─── Home section divider: refined mobile ─── */
+@media (max-width: 767px) {
+  .home-section-rule {
+    width: 2.75rem;
+    height: 1px;
+    margin-top: 1rem;
+    background: linear-gradient(
+      90deg,
+      var(--primary-mid) 0%,
+      color-mix(in srgb, var(--primary-mid) 25%, transparent) 100%
+    );
   }
 }
 

@@ -3,7 +3,7 @@
 import { useSyncExternalStore } from "react";
 import { networkInformation, prefersSaveData } from "@/lib/utils/connection";
 
-/** Desktop con puntatore fine: abilita video hero. */
+/** Desktop con puntatore fine: abilita carousel hero completo. */
 export const HERO_VIDEO_MEDIA_QUERY = "(min-width: 1025px) and (hover: hover)";
 
 /** Layout compatto (testi, timing Ken Burns). */

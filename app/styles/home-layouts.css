@@ -229,3 +229,37 @@
 .home-contact-rail__item:not(:last-child) {
   border-bottom: 1px solid var(--green-border-muted);
 }
+
+/* CTA finale — sfondo cinematografico con ambient glow */
+.home-cta-finale {
+  position: relative;
+  isolation: isolate;
+  background: var(--surface-chrome-deep);
+}
+
+.home-cta-finale::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(ellipse 70% 55% at 50% 0%, color-mix(in srgb, var(--primary-mid) 7%, transparent), transparent 65%),
+    radial-gradient(ellipse 50% 50% at 80% 100%, color-mix(in srgb, var(--primary) 10%, transparent), transparent 60%);
+  opacity: 0.85;
+}
+
+.home-cta-finale > * {
+  position: relative;
+  z-index: 1;
+}
+
+.home-cta-finale__rule {
+  width: 2.5rem;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    color-mix(in srgb, var(--primary-mid) 55%, transparent) 50%,
+    transparent 100%
+  );
+}

@@ -93,7 +93,7 @@ export function SiteFooter() {
               </Link>
             </p>
             <p
-              className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
+              className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline hidden sm:inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
             >
               <span>Architettura</span>
               <span className="site-brand-tagline__sep" aria-hidden>

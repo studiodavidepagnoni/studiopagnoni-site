@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { HeroSlideLayer } from "@/components/hero/HeroSlideLayer";
+import { HeroVideoSources } from "@/components/hero/HeroVideoSources";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import {
   HERO_FIRST_SLIDE_MS,
@@ -11,7 +12,12 @@ import {
   slideDurationMs,
 } from "@/lib/media/heroCarousel";
 import { heroSlides } from "@/lib/media/images";
-import { HERO_VIDEO_DEFAULT_SOURCES, heroVideoKey } from "@/lib/media/heroVideos";
+import {
+  HERO_POSTER_DEFAULT,
+  HERO_VIDEO_DEFAULT_SOURCES,
+  heroVideoKey,
+  heroVideoSourceOrder,
+} from "@/lib/media/heroVideos";
 import {
   HERO_MOBILE_MEDIA_QUERY,
   HERO_VIDEO_MEDIA_QUERY,
@@ -23,6 +29,9 @@ import {
 import { ui } from "@/lib/ui";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
+const MOBILE_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
+const MOBILE_POSTER = HERO_POSTER_DEFAULT;
+const MOBILE_SLIDE = heroSlides[2];
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
@@ -41,6 +50,8 @@ export function HeroHome() {
   const autoAdvance = !reducedMotion && !autoPaused && heroInView && pageVisible;
   const heroRootRef = useRef<HTMLElement | null>(null);
   const videoRefs = useRef<Map<string, HTMLVideoElement>>(new Map());
+  const mobileVideoRef = useRef<HTMLVideoElement | null>(null);
+  const [mobileVideoReady, setMobileVideoReady] = useState(false);
 
   const registerVideo = useCallback(
     (key: string) => (el: HTMLVideoElement | null) => {
@@ -53,18 +64,18 @@ export function HeroHome() {
     [],
   );
 
-  const canUseVideo = heroUsesVideo && !saveData && !reducedMotion;
-  const showVideoBackground = canUseVideo && videoUnlocked;
+  const canUseDesktopVideo = heroUsesVideo && !saveData && !reducedMotion;
+  const canUseMobileVideo = isMobile && !saveData && !reducedMotion;
+  const showVideoBackground = canUseDesktopVideo && videoUnlocked;
   const mediaPaused = !pageVisible || !heroInView;
   const isIntroActive = idx === 0;
 
   useEffect(() => {
-    if (!canUseVideo || videoUnlocked) return;
+    if (!(canUseDesktopVideo || canUseMobileVideo) || videoUnlocked) return;
 
     const unlock = () => setVideoUnlocked(true);
     const root = heroRootRef.current;
 
-    // Poster già mostrato ~0.5s da HeroHomeDeferred; avvia subito il video.
     const autoId = window.requestAnimationFrame(unlock);
 
     root?.addEventListener("pointerdown", unlock, { once: true, passive: true });
@@ -80,7 +91,7 @@ export function HeroHome() {
       root?.removeEventListener("keydown", unlock);
       window.removeEventListener("scroll", onScroll);
     };
-  }, [canUseVideo, videoUnlocked]);
+  }, [canUseDesktopVideo, canUseMobileVideo, videoUnlocked]);
 
   useEffect(() => {
     const root = heroRootRef.current;
@@ -111,15 +122,17 @@ export function HeroHome() {
   }, [reducedMotion, isMobile, introKenburnDone]);
 
   useEffect(() => {
+    if (isMobile) return;
     if (!autoAdvance) return;
     const delayMs = slideDurationMs(idx, showVideoBackground, failedVideos);
     const timeoutId = window.setTimeout(() => {
       setIdx((prev) => (prev + 1) % heroSlides.length);
     }, delayMs);
     return () => window.clearTimeout(timeoutId);
-  }, [idx, showVideoBackground, failedVideos, autoAdvance]);
+  }, [idx, showVideoBackground, failedVideos, autoAdvance, isMobile]);
 
   useEffect(() => {
+    if (isMobile) return;
     if (!showVideoBackground || mediaPaused) {
       videoRefs.current.forEach((video) => video.pause());
       return;
@@ -138,9 +151,21 @@ export function HeroHome() {
         video.pause();
       }
     });
-  }, [idx, showVideoBackground, failedVideos, mediaPaused]);
+  }, [idx, showVideoBackground, failedVideos, mediaPaused, isMobile]);
 
-  const slide = heroSlides[idx];
+  useEffect(() => {
+    if (!isMobile || !canUseMobileVideo || !videoUnlocked) return;
+    const video = mobileVideoRef.current;
+    if (!video) return;
+
+    if (mediaPaused || !heroInView) {
+      video.pause();
+      return;
+    }
+    void video.play().catch(() => {});
+  }, [isMobile, canUseMobileVideo, videoUnlocked, mediaPaused, heroInView]);
+
+  const slide = isMobile ? MOBILE_SLIDE : heroSlides[idx];
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
   const primaryHref = slide.primaryCtaHref ?? "/contatti";
   const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
@@ -163,6 +188,11 @@ export function HeroHome() {
     });
   };
 
+  const mobileVideoKey = heroVideoKey(MOBILE_VIDEO);
+  const mobileVideoFailed = failedVideos.has(mobileVideoKey);
+  const showMobileVideo = canUseMobileVideo && videoUnlocked && !mobileVideoFailed;
+  const mobileSourceOrder = heroVideoSourceOrder(MOBILE_VIDEO.mp4);
+
   const ChevronIcon = ({ direction }: { direction: "left" | "right" }) => (
     <svg className="h-8 w-8 sm:h-9 sm:w-9" viewBox="0 0 24 24" fill="none" aria-hidden>
       <path
@@ -174,6 +204,87 @@ export function HeroHome() {
       />
     </svg>
   );
+
+  if (isMobile) {
+    return (
+      <section
+        ref={heroRootRef}
+        className="hero-mobile relative isolate h-[100dvh] min-h-[100svh] max-w-full overflow-hidden border-b border-[var(--green-border-muted)]"
+        aria-label="Introduzione"
+      >
+        <div
+          className="absolute inset-0 z-[-20] bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]"
+          aria-hidden
+        />
+
+        <div className="hero-media__stage pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
+          {showMobileVideo ? (
+            <video
+              ref={mobileVideoRef}
+              className={`hero-media__video hero-mobile__video absolute inset-0 h-full w-full ${mobileVideoReady ? "hero-media__video--ready" : ""}`}
+              poster={MOBILE_POSTER}
+              muted
+              playsInline
+              loop
+              preload="metadata"
+              onCanPlay={() => setMobileVideoReady(true)}
+              onError={() => handleVideoError(mobileVideoKey)}
+              aria-hidden
+            >
+              <HeroVideoSources sources={MOBILE_VIDEO} order={mobileSourceOrder} />
+            </video>
+          ) : (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={MOBILE_POSTER}
+              alt=""
+              className="hero-media__image absolute inset-0 h-full w-full object-cover"
+              style={{ objectPosition: "center 35%" }}
+              decoding="async"
+              loading="eager"
+            />
+          )}
+          <HeroMediaOverlay intro={false} />
+          <div className="hero-mobile__vignette" aria-hidden />
+        </div>
+
+        <div className="relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))]">
+          <div className="hero-copy w-full min-w-0 text-left" data-hero-motion>
+            <div className="hero-copy__slide">
+              <h1
+                className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}
+              >
+                Architettura
+                <br />
+                e rilievi
+                <br />
+                <span className="hero-mobile__title-accent">in Franciacorta</span>
+              </h1>
+
+              <div className="hero-mobile__rule mt-5" aria-hidden />
+
+              <p className={`${fontSans.className} hero-mobile__subtitle mt-5`}>
+                Topografia · laser scanner SLAM · progettazione
+              </p>
+
+              <div className="mt-8 flex w-full flex-col gap-3">
+                <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnHeroPrimary}>
+                  Richiedi preventivo
+                </Link>
+                <Link href="/laser-scanner-slam" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
+                  Scopri il servizio SLAM
+                </Link>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div className="hero-mobile__scroll-hint" aria-hidden>
+          <div className="hero-mobile__scroll-line" />
+        </div>
+      </section>
+    );
+  }
 
   return (
     <section

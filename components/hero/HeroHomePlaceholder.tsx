@@ -3,6 +3,7 @@ import { HeroIntroStillPicture } from "@/components/hero/HeroIntroStillPicture";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/media/images";
+import { HERO_POSTER_DEFAULT } from "@/lib/media/heroVideos";
 import { ui } from "@/lib/ui";
 
 const slide = heroSlides[0];
@@ -20,12 +21,56 @@ export function HeroHomePlaceholder() {
       aria-label="Introduzione"
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
-      <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1]">
+
+      {/* Mobile: poster del 3° video (SLAM RS10) */}
+      <div className="hero-media__stage absolute inset-0 z-[1] min-[1025px]:hidden">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={HERO_POSTER_DEFAULT}
+          alt=""
+          className="hero-media__image absolute inset-0 h-full w-full object-cover"
+          style={{ objectPosition: "center 35%" }}
+          decoding="sync"
+          fetchPriority="high"
+          sizes="100vw"
+        />
+        <HeroMediaOverlay intro={false} />
+        <div className="hero-mobile__vignette" aria-hidden />
+      </div>
+
+      {/* Desktop: poster intro originale */}
+      <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1] max-[1024px]:hidden">
         <HeroIntroStillPicture />
         <HeroMediaOverlay intro />
       </div>
 
-      <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
+      {/* Mobile: copy compatto (bottom-aligned) */}
+      <div className="relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] min-[1025px]:hidden">
+        <div className="hero-copy w-full min-w-0 text-left">
+          <h1 className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}>
+            Architettura
+            <br />
+            e rilievi
+            <br />
+            <span className="hero-mobile__title-accent">in Franciacorta</span>
+          </h1>
+          <div className="hero-mobile__rule mt-5" aria-hidden />
+          <p className={`${fontSans.className} hero-mobile__subtitle mt-5`}>
+            Topografia · laser scanner SLAM · progettazione
+          </p>
+          <div className="mt-8 flex w-full flex-col gap-3">
+            <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnHeroPrimary}>
+              Richiedi preventivo
+            </Link>
+            <Link href="/laser-scanner-slam" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
+              Scopri il servizio SLAM
+            </Link>
+          </div>
+        </div>
+      </div>
+
+      {/* Desktop: copy originale (center-aligned) */}
+      <div className="relative z-20 mx-auto hidden h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32 min-[1025px]:flex">
         <div className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left">
           <h1 className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}>
             {slide.line1}

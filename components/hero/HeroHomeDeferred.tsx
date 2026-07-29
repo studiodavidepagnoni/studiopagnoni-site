@@ -3,7 +3,6 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { HeroHomePlaceholder } from "@/components/hero/HeroHomePlaceholder";
-import { HERO_VIDEO_MEDIA_QUERY } from "@/lib/utils/useClientMedia";
 import { scheduleIdle } from "@/lib/utils/scheduleIdle";
 
 const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => ({ default: m.HeroHome })), {
@@ -12,16 +11,13 @@ const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => 
 });
 
 /**
- * Mobile/tablet: poster AVIF/WebP statico (zero bundle hero).
- * Desktop: poster ~0.5s per LCP, poi carousel; interazione anticipa il caricamento.
+ * Poster AVIF/WebP statico come LCP, poi hero interattivo.
+ * Mobile: video singolo (3° slide). Desktop: carousel completo.
  */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
 
   useEffect(() => {
-    const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY);
-    if (!desktop.matches) return;
-
     let done = false;
     const load = () => {
       if (done) return;

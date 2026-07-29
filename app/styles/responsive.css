@@ -10,7 +10,6 @@
     min-width: 0;
   }
 
-  /* Select: le option lunghe non devono allargare il form oltre il viewport */
   select {
     max-width: 100%;
     min-width: 0;
@@ -41,8 +40,9 @@
   }
 
   .home-section-title {
-    font-size: clamp(1.45rem, 6.2vw, 1.95rem);
-    line-height: 1.1;
+    font-size: clamp(1.55rem, 6.8vw, 2.1rem);
+    line-height: 1.08;
+    letter-spacing: -0.025em;
   }
 
   .section-kicker,
@@ -124,6 +124,38 @@
   .overflow-table table {
     width: 100%;
     min-width: 0;
+  }
+
+  /* ─── Home sections: spacing premium mobile ─── */
+  .section-shell {
+    padding-top: 4.5rem;
+    padding-bottom: 4.5rem;
+  }
+
+  .home-section-intro {
+    margin-bottom: 2.5rem;
+  }
+
+  .home-section-intro__lede {
+    font-size: 0.96rem;
+    line-height: 1.72;
+  }
+
+  /* Projects: taller images on mobile for visual punch */
+  .home-projects-mosaic__media {
+    height: 13rem;
+  }
+
+  .home-projects-mosaic__lead .home-projects-mosaic__media {
+    height: 14.5rem;
+  }
+
+  /* Full-bleed chi-siamo image on mobile */
+  .home-chi-siamo-media--mobile {
+    margin-inline: -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
   }
 }
 

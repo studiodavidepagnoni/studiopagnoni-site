@@ -1,11 +1,9 @@
-import { FONT_DISPLAY_PRELOAD_HREF } from "@/lib/fonts";
-import { HERO_INTRO_STILL_LCP_AVIF } from "@/lib/media/images";
-import { HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib/media/heroVideos";
-import { withBasePath } from "@/lib/utils/basePath";
+import { HERO_POSTER_DEFAULT, HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib/media/heroVideos";
 
 /**
- * Critical path home: prima l’immagine LCP (un solo formato AVIF), poi il font titoli.
- * Evita doppio preload AVIF+WebP che spreca banda su mobile.
+ * Critical path home: immagine LCP.
+ * Mobile: poster del 3° video (SLAM RS10). Desktop: poster indoor AVIF.
+ * Font Sora: preload gestito da Next.js localFont (preload: true).
  */
 export function HeroLcpPreloadLinks() {
   return (
@@ -13,8 +11,8 @@ export function HeroLcpPreloadLinks() {
       <link
         rel="preload"
         as="image"
-        href={HERO_INTRO_STILL_LCP_AVIF}
-        type="image/avif"
+        href={HERO_POSTER_DEFAULT}
+        type="image/webp"
         media="(max-width: 1024px)"
         fetchPriority="high"
       />
@@ -25,13 +23,6 @@ export function HeroLcpPreloadLinks() {
         type="image/avif"
         media="(min-width: 1025px)"
         fetchPriority="high"
-      />
-      <link
-        rel="preload"
-        href={withBasePath(FONT_DISPLAY_PRELOAD_HREF)}
-        as="font"
-        type="font/woff2"
-        crossOrigin="anonymous"
       />
     </>
   );

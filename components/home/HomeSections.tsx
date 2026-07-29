@@ -93,9 +93,9 @@ export function HomeSections() {
               </div>
             </div>
 
-            {/* ── Media (destra): immagine proporzionata al testo ── */}
+            {/* ── Media (destra): full-bleed su mobile, proporzionata su desktop ── */}
             <div className="order-1 lg:order-2 lg:col-span-6">
-              <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)] sm:aspect-[16/10] lg:aspect-[16/10]">
+              <div className="home-chi-siamo-media--mobile relative aspect-[16/10] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)] max-sm:aspect-[4/3] lg:aspect-[16/10]">
                 <StockCoverImage
                   src={homeChiSiamoImages.team.src}
                   alt={homeChiSiamoImages.team.alt}
@@ -103,9 +103,7 @@ export function HomeSections() {
                   sizes="(min-width:1024px) min(580px, 50vw), (min-width:640px) min(90vw, 720px), 100vw"
                   loading="lazy"
                 />
-                {/* opacity-50 sull'unify-overlay perché sul ritratto il gradient piano (12→35% nero) lo rendeva troppo cupo. */}
                 <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
-                {/* Caption badge */}
                 <div className="absolute bottom-4 left-4">
                   <div className="rounded-md bg-[color-mix(in_srgb,var(--surface-chrome-deep)_72%,transparent)] px-3 py-1.5 backdrop-blur-sm">
                     <p className={`${fontSans.className} section-kicker text-white`}>
@@ -352,6 +350,27 @@ export function HomeSections() {
               Modulo di contatto
             </Link>
           </p>
+        </div>
+      </section>
+
+      {/* ── CTA finale — premium closing ── */}
+      <section className="home-cta-finale lazy-section overflow-x-hidden min-w-0 border-t border-[var(--green-border-muted)] px-5 py-20 text-center sm:px-6 sm:py-24 md:px-10 md:py-28">
+        <div className="mx-auto max-w-[540px] reveal-block">
+          <div className="home-cta-finale__rule mx-auto mb-6" aria-hidden />
+          <h2 className={`${fontDisplay.className} text-[clamp(1.65rem,7vw,2.5rem)] font-medium leading-[1.06] tracking-tight text-[var(--foreground)]`}>
+            Parliamo del tuo progetto
+          </h2>
+          <p className={`${fontSans.className} mx-auto mt-5 max-w-[36ch] text-[0.93rem] leading-[1.7] text-[var(--copy-body)]`}>
+            Sopralluogo, preventivo rilievo SLAM o consulenza tecnica: contattaci per una prima valutazione.
+          </p>
+          <div className="mt-10 flex flex-col items-center gap-3 sm:flex-row sm:justify-center sm:gap-4">
+            <Link href="/contatti#form-contatti" className={`${ui.btnPrimary} w-full sm:w-auto`}>
+              Richiedi preventivo
+            </Link>
+            <Link href="/contatti" className={`${ui.btnGhostOnDark} w-full sm:w-auto`}>
+              Tutti i contatti
+            </Link>
+          </div>
         </div>
       </section>
     </>
