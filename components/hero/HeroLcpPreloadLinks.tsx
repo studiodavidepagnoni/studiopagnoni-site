@@ -1,9 +1,8 @@
-import { HERO_POSTER_DEFAULT, HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib/media/heroVideos";
+import { HERO_POSTER_DEFAULT_LCP_AVIF, HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib/media/heroVideos";
 
 /**
  * Critical path home: immagine LCP.
- * Mobile: poster del 3° video (SLAM RS10). Desktop: poster indoor AVIF.
- * Font Sora: preload gestito da Next.js localFont (preload: true).
+ * Mobile: poster LCP leggero del video RS10. Desktop: poster indoor AVIF.
  */
 export function HeroLcpPreloadLinks() {
   return (
@@ -11,8 +10,8 @@ export function HeroLcpPreloadLinks() {
       <link
         rel="preload"
         as="image"
-        href={HERO_POSTER_DEFAULT}
-        type="image/webp"
+        href={HERO_POSTER_DEFAULT_LCP_AVIF}
+        type="image/avif"
         media="(max-width: 1024px)"
         fetchPriority="high"
       />

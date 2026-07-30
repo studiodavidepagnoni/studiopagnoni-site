@@ -3,6 +3,7 @@
 import dynamic from "next/dynamic";
 import { useEffect, useState } from "react";
 import { HeroHomePlaceholder } from "@/components/hero/HeroHomePlaceholder";
+import { HERO_VIDEO_MEDIA_QUERY } from "@/lib/utils/useClientMedia";
 import { scheduleIdle } from "@/lib/utils/scheduleIdle";
 
 const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => ({ default: m.HeroHome })), {
@@ -11,8 +12,9 @@ const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => 
 });
 
 /**
- * Poster AVIF/WebP statico come LCP, poi hero interattivo.
- * Mobile: video singolo (3° slide). Desktop: carousel completo.
+ * Poster LCP statico, poi hero interattivo.
+ * Desktop: idle ~0.5s o interazione.
+ * Mobile: solo interazione (o idle lungo) — evita download video nel critical path / Lighthouse.
  */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
@@ -25,7 +27,8 @@ export function HeroHomeDeferred() {
       setEnhance(true);
     };
 
-    const cancelIdle = scheduleIdle(load, 500);
+    const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY).matches;
+    const cancelIdle = scheduleIdle(load, desktop ? 500 : 8000);
 
     const onPointer = () => load();
     const onScroll = () => {

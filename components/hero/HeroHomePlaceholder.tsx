@@ -3,7 +3,10 @@ import { HeroIntroStillPicture } from "@/components/hero/HeroIntroStillPicture";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/media/images";
-import { HERO_POSTER_DEFAULT } from "@/lib/media/heroVideos";
+import {
+  HERO_POSTER_DEFAULT_LCP,
+  HERO_POSTER_DEFAULT_LCP_AVIF,
+} from "@/lib/media/heroVideos";
 import { ui } from "@/lib/ui";
 
 const slide = heroSlides[0];
@@ -22,18 +25,22 @@ export function HeroHomePlaceholder() {
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
 
-      {/* Mobile: poster del 3° video (SLAM RS10) */}
+      {/* Mobile: poster LCP del 3° video (SLAM RS10) */}
       <div className="hero-media__stage absolute inset-0 z-[1] min-[1025px]:hidden">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img
-          src={HERO_POSTER_DEFAULT}
-          alt=""
-          className="hero-media__image absolute inset-0 h-full w-full object-cover"
-          style={{ objectPosition: "center 35%" }}
-          decoding="sync"
-          fetchPriority="high"
-          sizes="100vw"
-        />
+        <picture className="hero-media__image absolute inset-0 h-full w-full">
+          <source srcSet={HERO_POSTER_DEFAULT_LCP_AVIF} type="image/avif" />
+          <source srcSet={HERO_POSTER_DEFAULT_LCP} type="image/webp" />
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img
+            src={HERO_POSTER_DEFAULT_LCP}
+            alt=""
+            className="h-full w-full object-cover"
+            style={{ objectPosition: "center 35%" }}
+            decoding="sync"
+            fetchPriority="high"
+            sizes="100vw"
+          />
+        </picture>
         <HeroMediaOverlay intro={false} />
         <div className="hero-mobile__vignette" aria-hidden />
       </div>

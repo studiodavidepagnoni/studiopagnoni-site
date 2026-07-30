@@ -8,6 +8,8 @@ export const heroVideoBases = {
   indoor: "rilievo-laser-slam-interni-brescia",
   pointcloud: "nuvola-punti-rilievo-slam-brescia",
   operational: "laser-slam-rs10-allevamento-brescia",
+  /** Variante compressa per hero mobile (720p, ~12s). */
+  operationalMobile: "laser-slam-rs10-allevamento-brescia-mobile",
 } as const;
 
 /** Immagini stock (`assets/stock/{name}.webp`). */

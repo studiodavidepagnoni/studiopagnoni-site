@@ -28,6 +28,10 @@ const LCP_STILL_QUALITY = 55;
 const LCP_STILL_AVIF_QUALITY = 32;
 const MAX_EDGE = 1920;
 const HERO_LCP_POSTER = "rilievo-laser-slam-interni-brescia-poster.webp";
+const HERO_LCP_POSTERS = new Set([
+  HERO_LCP_POSTER,
+  "laser-slam-rs10-allevamento-brescia-poster.webp",
+]);
 const HERO_LCP_STILL = "stazione-totale-rilievo-cantiere-brescia.webp";
 const VIDEO_CRF = 30;
 const VIDEO_PRESET = "medium";
@@ -49,6 +53,8 @@ const VIDEO_MAX_DURATION_BY_NAME = {
 const HERO_LITE_W = 1280;
 const HERO_LITE_H = 864;
 const liteCrop = `scale=${HERO_LITE_W}:${HERO_LITE_H}:force_original_aspect_ratio=increase,crop=${HERO_LITE_W}:${HERO_LITE_H}`;
+const HERO_MOBILE_SRC = "laser-slam-rs10-allevamento-brescia.mp4";
+const HERO_MOBILE_OUT = "laser-slam-rs10-allevamento-brescia-mobile.mp4";
 
 const HERO_VIDEOS = [
   "laser-slam-rs10-allevamento-brescia.mp4",
@@ -167,9 +173,9 @@ async function posterToWebp(jpgPath) {
   await posterToLcp(webpPath);
 }
 
-/** Poster leggero per LCP hero (prima slide). */
+/** Poster leggero per LCP hero. */
 async function posterToLcp(webpPath) {
-  if (path.basename(webpPath) !== HERO_LCP_POSTER) return;
+  if (!HERO_LCP_POSTERS.has(path.basename(webpPath))) return;
   let sharp;
   try {
     sharp = require("sharp");
@@ -177,15 +183,34 @@ async function posterToLcp(webpPath) {
     return;
   }
   if (!fs.existsSync(webpPath)) return;
+  const isMobilePoster = path.basename(webpPath).includes("laser-slam-rs10");
+  const width = isMobilePoster ? 640 : LCP_POSTER_W;
+  const quality = isMobilePoster ? 55 : LCP_POSTER_QUALITY;
+  const avifQ = isMobilePoster ? 40 : LCP_AVIF_QUALITY;
   const lcpPath = webpPath.replace(/\.webp$/i, "-lcp.webp");
-  const pipeline = sharp(webpPath).resize(LCP_POSTER_W, null, { withoutEnlargement: true, fit: "inside" });
-  await pipeline.clone().webp({ quality: LCP_POSTER_QUALITY, effort: 4 }).toFile(lcpPath);
+  const pipeline = sharp(webpPath).resize(width, null, { withoutEnlargement: true, fit: "inside" });
+  await pipeline.clone().webp({ quality, effort: 4 }).toFile(lcpPath);
   const lcpAvifPath = lcpPath.replace(/\.webp$/i, ".avif");
-  await pipeline.clone().avif({ quality: LCP_AVIF_QUALITY, effort: 4 }).toFile(lcpAvifPath);
+  await pipeline.clone().avif({ quality: avifQ, effort: 4 }).toFile(lcpAvifPath);
   const kb = Math.round(fs.statSync(lcpPath).size / 1024);
   const avifKb = Math.round(fs.statSync(lcpAvifPath).size / 1024);
   console.log(`[optimize-assets] Poster LCP ${path.relative(root, lcpPath)} (${kb} KB)`);
   console.log(`[optimize-assets] Poster LCP AVIF ${path.relative(root, lcpAvifPath)} (${avifKb} KB)`);
+}
+
+function encodeHeroMobileMp4(input, outPath) {
+  const cmd = [
+    "ffmpeg -y -nostdin -hide_banner",
+    `-ss 2 -i "${input}" -t 12`,
+    '-vf "scale=720:-2:force_original_aspect_ratio=decrease,scale=trunc(iw/2)*2:trunc(ih/2)*2"',
+    "-an",
+    `-c:v libx264 -preset ${VIDEO_PRESET} -crf 36`,
+    "-pix_fmt yuv420p",
+    "-movflags +faststart",
+    `"${outPath}"`,
+  ].join(" ");
+  console.log(`\n> ${cmd}\n`);
+  execSync(cmd, { stdio: "inherit", cwd: root, shell: true });
 }
 
 /** Still mobile LCP (hero intro sotto 1025px). */
@@ -305,7 +330,7 @@ function prunePosterJpgs() {
 
 function writeVideoManifest() {
   const manifest = {};
-  for (const name of HERO_VIDEOS) {
+  for (const name of [...HERO_VIDEOS, HERO_MOBILE_OUT]) {
     const base = name.replace(/\.mp4$/i, "");
     const mp4 = path.join(assetsDir, name);
     const webm = mp4.replace(/\.mp4$/i, ".webm");
@@ -499,6 +524,19 @@ async function optimizeVideos() {
     } catch (err) {
       if (fs.existsSync(tmpMp4)) fs.unlinkSync(tmpMp4);
       console.warn(`[optimize-assets] Video fallito ${name}: ${err.message}`);
+    }
+  }
+
+  // Variante mobile compressa del video RS10 (hero mobile).
+  const mobileSrc = path.join(assetsDir, HERO_MOBILE_SRC);
+  const mobileOut = path.join(assetsDir, HERO_MOBILE_OUT);
+  if (fs.existsSync(mobileSrc) && (process.env.FORCE_VIDEO === "1" || !fs.existsSync(mobileOut) || isNewer(mobileSrc, mobileOut))) {
+    try {
+      encodeHeroMobileMp4(mobileSrc, mobileOut);
+      const mb = (fs.statSync(mobileOut).size / (1024 * 1024)).toFixed(2);
+      console.log(`[optimize-assets] ${HERO_MOBILE_OUT} → ${mb} MB`);
+    } catch (err) {
+      console.warn(`[optimize-assets] Mobile hero fallito: ${err.message}`);
     }
   }
 

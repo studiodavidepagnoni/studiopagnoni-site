@@ -6,6 +6,13 @@
     "mp4Bytes": 3815432,
     "webmBytes": 0
   },
+  "laser-slam-rs10-allevamento-brescia-mobile": {
+    "order": [
+      "mp4"
+    ],
+    "mp4Bytes": 437891,
+    "webmBytes": 0
+  },
   "nuvola-punti-rilievo-slam-brescia": {
     "order": [
       "mp4"

@@ -15,6 +15,7 @@ import { heroSlides } from "@/lib/media/images";
 import {
   HERO_POSTER_DEFAULT,
   HERO_VIDEO_DEFAULT_SOURCES,
+  HERO_VIDEO_MOBILE_SOURCES,
   heroVideoKey,
   heroVideoSourceOrder,
 } from "@/lib/media/heroVideos";
@@ -29,11 +30,11 @@ import {
 import { ui } from "@/lib/ui";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
-const MOBILE_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
+const MOBILE_VIDEO = HERO_VIDEO_MOBILE_SOURCES;
 const MOBILE_POSTER = HERO_POSTER_DEFAULT;
 const MOBILE_SLIDE = heroSlides[2];
-/** Skip i primi secondi “fermi” del video RS10 su mobile. */
-const MOBILE_VIDEO_START_S = 2;
+/** Clip mobile già tagliata da t=2s in encode; nessun seek iniziale. */
+const MOBILE_VIDEO_START_S = 0;
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);

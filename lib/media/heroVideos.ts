@@ -41,6 +41,8 @@ function heroVideo(base: string): HeroVideoSources {
 }
 
 export const HERO_VIDEO_DEFAULT_SOURCES = heroVideo(heroVideoBases.operational);
+/** Hero mobile: stesso soggetto RS10, encode leggero (~0.4 MB). */
+export const HERO_VIDEO_MOBILE_SOURCES = heroVideo(heroVideoBases.operationalMobile);
 export const HERO_VIDEO_POINTCLOUD_SOURCES = heroVideo(heroVideoBases.pointcloud);
 export const HERO_VIDEO_INDOOR_SOURCES = heroVideo(heroVideoBases.indoor);
 
@@ -53,3 +55,6 @@ export const HERO_POSTER_INDOOR = poster(heroVideoBases.indoor);
 /** Poster ~768px per LCP (placeholder + preload); il <video> usa il poster full. */
 export const HERO_POSTER_INDOOR_LCP = withBasePath(`/assets/${heroVideoBases.indoor}-poster-lcp.webp`);
 export const HERO_POSTER_INDOOR_LCP_AVIF = withBasePath(`/assets/${heroVideoBases.indoor}-poster-lcp.avif`);
+/** Poster LCP mobile (hero RS10). */
+export const HERO_POSTER_DEFAULT_LCP = withBasePath(`/assets/${heroVideoBases.operational}-poster-lcp.webp`);
+export const HERO_POSTER_DEFAULT_LCP_AVIF = withBasePath(`/assets/${heroVideoBases.operational}-poster-lcp.avif`);
