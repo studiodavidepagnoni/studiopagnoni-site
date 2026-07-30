@@ -18,7 +18,7 @@ export type PageHeroData = {
 const staticPageHeroes: Record<string, PageHeroData> = {
   "/chi-siamo": {
     eyebrow: "Lo studio",
-    title: "Studio Architettura Pagnoni — Franciacorta",
+    title: "Chi siamo",
     image: s("technicalDocs"),
     alt: imageAlt("Documentazione tecnica e tavole di progetto in studio", { service: "studio" }),
   },
