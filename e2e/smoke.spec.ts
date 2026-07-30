@@ -28,7 +28,7 @@ test.describe("smoke", () => {
     await page.goto("/contatti/");
     await dismissCookieBanner(page);
 
-    await expect(page.getByRole("heading", { name: /Recapiti/i })).toBeVisible();
+    await expect(page.locator("#recapiti-block")).toBeVisible();
     await expect(page.getByLabel("Nome e cognome")).toBeVisible();
 
     await page.getByRole("button", { name: "Invia messaggio" }).click();

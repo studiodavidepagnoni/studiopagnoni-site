@@ -32,6 +32,8 @@ const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
 const MOBILE_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
 const MOBILE_POSTER = HERO_POSTER_DEFAULT;
 const MOBILE_SLIDE = heroSlides[2];
+/** Skip i primi secondi “fermi” del video RS10 su mobile. */
+const MOBILE_VIDEO_START_S = 2;
 
 export function HeroHome() {
   const [idx, setIdx] = useState(0);
@@ -158,11 +160,45 @@ export function HeroHome() {
     const video = mobileVideoRef.current;
     if (!video) return;
 
+    const seekToStart = () => {
+      if (video.currentTime < MOBILE_VIDEO_START_S) {
+        try {
+          video.currentTime = MOBILE_VIDEO_START_S;
+        } catch {
+          /* ignore seek errors before ready */
+        }
+      }
+    };
+
+    const onLoaded = () => {
+      seekToStart();
+      setMobileVideoReady(true);
+    };
+
+    const onEnded = () => {
+      try {
+        video.currentTime = MOBILE_VIDEO_START_S;
+      } catch {
+        /* ignore */
+      }
+      void video.play().catch(() => {});
+    };
+
+    video.addEventListener("loadedmetadata", onLoaded);
+    video.addEventListener("ended", onEnded);
+    if (video.readyState >= 1) onLoaded();
+
     if (mediaPaused || !heroInView) {
       video.pause();
-      return;
+    } else {
+      seekToStart();
+      void video.play().catch(() => {});
     }
-    void video.play().catch(() => {});
+
+    return () => {
+      video.removeEventListener("loadedmetadata", onLoaded);
+      video.removeEventListener("ended", onEnded);
+    };
   }, [isMobile, canUseMobileVideo, videoUnlocked, mediaPaused, heroInView]);
 
   const slide = isMobile ? MOBILE_SLIDE : heroSlides[idx];
@@ -225,9 +261,7 @@ export function HeroHome() {
               poster={MOBILE_POSTER}
               muted
               playsInline
-              loop
               preload="metadata"
-              onCanPlay={() => setMobileVideoReady(true)}
               onError={() => handleVideoError(mobileVideoKey)}
               aria-hidden
             >

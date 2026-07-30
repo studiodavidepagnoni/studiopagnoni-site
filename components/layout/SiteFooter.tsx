@@ -47,7 +47,7 @@ export function SiteFooter() {
 
               <div>
                 <h3 className={`${fontNav.className} mb-4 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`}>
-                  Recapiti
+                  Sede
                 </h3>
                 <p className={`${fontSans.className} text-sm leading-relaxed text-[var(--footer-muted)]`}>{site.addressLine}</p>
                 <ul className="mt-4 space-y-3 text-sm">
