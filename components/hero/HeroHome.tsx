@@ -368,7 +368,7 @@ export function HeroHome() {
 
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 max-w-[1200px] flex-col justify-center px-4 pb-[max(4rem,env(safe-area-inset-bottom))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] sm:px-6 sm:pb-20 sm:pt-28 md:pb-24 md:pt-32">
         <div
-          className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] text-left"
+          className="hero-copy w-full min-w-0 max-w-[min(100%,43rem)] min-[1025px]:max-w-full text-left"
           data-hero-motion
           aria-live={userInteracted ? "polite" : "off"}
           aria-atomic="true"
@@ -384,11 +384,13 @@ export function HeroHome() {
 
             <div className="mt-3 sm:mt-3.5">
               <p
-                className={`${fontDisplay.className} hero-line2 flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(1.05rem,4.6vw,2.05rem)] font-medium leading-[1.25] tracking-[0.02em]`}
+                className={`${fontDisplay.className} hero-line2 flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(1.05rem,4.6vw,2.05rem)] font-medium leading-[1.25] tracking-[0.02em] min-[1025px]:flex-nowrap min-[1025px]:gap-x-0 min-[1025px]:whitespace-nowrap min-[1025px]:text-[clamp(1.2rem,1.85vw,1.75rem)]`}
               >
                 {line2Parts.map((part, i) => (
-                  <span key={`${part}-${i}`} className="inline-flex max-w-full items-baseline">
-                    <span className="max-w-full text-pretty">{part}</span>
+                  <span key={`${part}-${i}`} className="inline-flex items-baseline min-[1025px]:shrink-0">
+                    <span className="max-[1024px]:max-w-full max-[1024px]:text-pretty min-[1025px]:whitespace-nowrap">
+                      {part}
+                    </span>
                     {i < line2Parts.length - 1 ? (
                       <span className="hero-line2__sep mx-2" aria-hidden>
                         ·
