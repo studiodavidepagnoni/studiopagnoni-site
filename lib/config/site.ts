@@ -15,9 +15,13 @@ export const layoutContentMaxClass = "mx-auto w-full min-w-0 max-w-[1140px]";
  */
 const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://studiopagnoni.com";
 
+/**
+ * NAP + orari allineati a Google Business Profile «Studio Architettura Pagnoni».
+ * Orari: lun–ven 8:30–12:30 e 13:30–17:30 (sab/dom chiuso).
+ */
 export const site = {
   name: "Studio Architettura Pagnoni",
-  /** Marchio in header/footer e title SEO. */
+  /** Marchio in header/footer, title SEO e scheda Google Business. */
   brandName: "Studio Architettura Pagnoni",
   legalName: "Studio Architettura Pagnoni",
   tagline: "Architettura, topografia e laser scanning",
@@ -28,7 +32,36 @@ export const site = {
     { label: "Architetto Davide Pagnoni", display: "+39 347 357 6510", tel: "+393473576510" },
     { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
+  address: {
+    streetAddress: "Via Vittorio Emanuele III, 16",
+    /** Frazione (utile in scheda Maps / NAP). */
+    addressNeighborhood: "Bornato",
+    addressLocality: "Cazzago San Martino",
+    addressRegion: "BS",
+    postalCode: "25046",
+    addressCountry: "IT",
+  },
+  /** Riga unica per footer / contatti (stesso testo della scheda Google). */
   addressLine: "Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS)",
+  /** Coordinate sede (Bornato / Cazzago San Martino) per LocalBusiness.geo */
+  geo: { latitude: 45.59368, longitude: 10.0409 },
+  maps: {
+    /** Link scheda / ricerca Maps (hasMap + CTA). */
+    placeUrl:
+      "https://www.google.com/maps/search/?api=1&query=Studio+Architettura+Pagnoni+Via+Vittorio+Emanuele+III+16+Cazzago+San+Martino",
+    embedUrl:
+      "https://maps.google.com/maps?q=Via%20Vittorio%20Emanuele%20III%2016,%20Cazzago%20San%20Martino%20BS&t=&z=15&ie=UTF8&iwloc=&output=embed",
+  },
+  openingHours: {
+    /** Schema.org DayOfWeek */
+    days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
+    slots: [
+      { opens: "08:30", closes: "12:30" },
+      { opens: "13:30", closes: "17:30" },
+    ] as const,
+    label: "Lun–Ven 8:30–12:30 · 13:30–17:30",
+    labelShort: "Lun–Ven 8:30–12:30 e 13:30–17:30",
+  },
   /** Partita IVA. */
   piva: "04061310985",
   /**

@@ -50,6 +50,9 @@ export function SiteFooter() {
                   Sede
                 </h3>
                 <p className={`${fontSans.className} text-sm leading-relaxed text-[var(--footer-muted)]`}>{site.addressLine}</p>
+                <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--footer-muted)]`}>
+                  Orari: {site.openingHours.label}
+                </p>
                 <ul className="mt-4 space-y-3 text-sm">
                   {site.phones.map((phone) => (
                     <li key={phone.tel}>

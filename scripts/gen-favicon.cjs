@@ -67,8 +67,8 @@ async function main() {
   const png512 = fs.readFileSync(outPng512);
   const b64 = png512.toString("base64");
   const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" fill="none">
-  <title>Studio Tecnico Pagnoni</title>
-  <desc>Logo mark Studio Pagnoni — favicon.</desc>
+  <title>Studio Architettura Pagnoni</title>
+  <desc>Logo mark Studio Architettura Pagnoni — favicon.</desc>
   <image href="data:image/png;base64,${b64}" width="512" height="512" x="0" y="0"/>
 </svg>
 `;

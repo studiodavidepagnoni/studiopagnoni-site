@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useCallback, useEffect, useState } from "react";
 import type { CookiePrefs } from "@/lib/privacy/cookieConsent";
 import { embedsConsentGranted, saveCookiePrefs } from "@/lib/privacy/cookieConsent";
+import { site } from "@/lib/config/site";
 import { fontSans } from "@/lib/fonts";
 import { ui } from "@/lib/ui";
 
@@ -28,9 +29,6 @@ export function MapEmbed() {
     setShowMap(true);
     window.dispatchEvent(new CustomEvent<CookiePrefs>("cookie-consent", { detail: prefs }));
   }, []);
-
-  const src =
-    "https://maps.google.com/maps?q=Via%20Vittorio%20Emanuele%20III%2016,%20Cazzago%20San%20Martino%20BS&t=&z=13&ie=UTF8&iwloc=&output=embed";
 
   if (!showMap) {
     return (
@@ -78,8 +76,8 @@ export function MapEmbed() {
       loading="lazy"
       allowFullScreen
       referrerPolicy="no-referrer-when-downgrade"
-      title="Studio Architettura Pagnoni — Via Vittorio Emanuele III 16, Bornato, Frazione di Cazzago San Martino (BS)"
-      src={src}
+      title={`${site.name} — ${site.addressLine}`}
+      src={site.maps.embedUrl}
     />
   );
 }

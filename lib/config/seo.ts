@@ -161,10 +161,11 @@ export const jsonLdGraph = {
   "@context": "https://schema.org",
   "@graph": [
     {
-      "@type": ["ProfessionalService", "LocalBusiness"],
+      "@type": ["ProfessionalService", "LocalBusiness", "Architect"],
       "@id": `${site.url.replace(/\/$/, "")}/#organization`,
-      name: site.legalName,
-      alternateName: site.brandName,
+      name: site.brandName,
+      legalName: site.legalName,
+      alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato"],
       description:
         "Architettura, topografia GNSS RTK e stazione totale, rilievi laser scanner SLAM mobile e nuvole di punti. Progettazione del verde, urbanistica e pratiche edilizie. Sede a Bornato, Frazione di Cazzago San Martino (BS).",
       url: site.url,
@@ -173,14 +174,30 @@ export const jsonLdGraph = {
       image: absoluteUrl(ogImagePath),
       logo: absoluteUrl("/icon-192.png"),
       priceRange: "$$",
+      vatID: `IT${site.piva}`,
       address: {
         "@type": "PostalAddress",
-        streetAddress: "Via Vittorio Emanuele III, 16",
-        addressLocality: "Cazzago San Martino",
-        addressRegion: "BS",
-        postalCode: "25046",
-        addressCountry: "IT",
+        streetAddress: site.address.streetAddress,
+        addressNeighborhood: site.address.addressNeighborhood,
+        addressLocality: site.address.addressLocality,
+        addressRegion: site.address.addressRegion,
+        postalCode: site.address.postalCode,
+        addressCountry: site.address.addressCountry,
       },
+      geo: {
+        "@type": "GeoCoordinates",
+        latitude: site.geo.latitude,
+        longitude: site.geo.longitude,
+      },
+      hasMap: site.maps.placeUrl,
+      openingHoursSpecification: site.openingHours.days.flatMap((day) =>
+        site.openingHours.slots.map((slot) => ({
+          "@type": "OpeningHoursSpecification",
+          dayOfWeek: day,
+          opens: slot.opens,
+          closes: slot.closes,
+        })),
+      ),
       areaServed: [
         { "@type": "Place", name: "Franciacorta" },
         { "@type": "AdministrativeArea", name: "Provincia di Brescia" },

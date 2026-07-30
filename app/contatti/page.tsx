@@ -39,6 +39,9 @@ export default function ContattiPage() {
                   <li>
                     <strong className="text-[var(--foreground)]">Indirizzo:</strong> {site.addressLine}
                   </li>
+                  <li>
+                    <strong className="text-[var(--foreground)]">Orari:</strong> {site.openingHours.labelShort}
+                  </li>
                   {site.phones.map((p) => (
                     <li key={p.tel}>
                       <strong className="text-[var(--foreground)]">{p.label}:</strong>{" "}
@@ -54,6 +57,16 @@ export default function ContattiPage() {
                     </a>
                   </li>
                 </ul>
+                <p className="mt-5">
+                  <a
+                    href={site.maps.placeUrl}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`${ui.proseLink} inline-flex min-h-[44px] items-center`}
+                  >
+                    Apri in Google Maps
+                  </a>
+                </p>
               </section>
 
               <section aria-labelledby="mappa-heading" className={`${ui.innerCardStatic} min-w-0`}>
