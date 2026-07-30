@@ -18,7 +18,9 @@ export const homeChiSiamo: {
   title: string;
   intro: string;
   short: ReactNode;
-  highlights: { label: string }[];
+  /** Copy home mobile: più corto e leggibile su 375–430px. */
+  shortMobile: ReactNode;
+  highlights: { label: string; labelMobile?: string }[];
   blocks: homeChiSiamoBlock[];
 } = {
   title: "Chi siamo",
@@ -33,11 +35,30 @@ export const homeChiSiamo: {
       Lo studio segue ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
     </>
   ),
+  shortMobile: (
+    <>
+      Studio di architettura dal {STUDIO_FOUNDED_YEAR} a Bornato, in Franciacorta.
+      <br />
+      Architettura, topografia e laser SLAM: dal rilievo sul campo agli elaborati operativi.
+    </>
+  ),
   highlights: [
-    { label: "Architettura: concept, progetto e coordinamento delle discipline" },
-    { label: "Rilievi GNSS RTK, stazione totale e laser SLAM" },
-    { label: "Nuvole di punti, CAD/BIM e documentazione tecnica" },
-    { label: "Urbanistica, verde, pratiche e sicurezza cantieri · Franciacorta e Nord Italia" },
+    {
+      label: "Architettura: concept, progetto e coordinamento delle discipline",
+      labelMobile: "Architettura e coordinamento di progetto",
+    },
+    {
+      label: "Rilievi GNSS RTK, stazione totale e laser SLAM",
+      labelMobile: "Rilievi GNSS, stazione totale e SLAM",
+    },
+    {
+      label: "Nuvole di punti, CAD/BIM e documentazione tecnica",
+      labelMobile: "Nuvole di punti, CAD e BIM",
+    },
+    {
+      label: "Urbanistica, verde, pratiche e sicurezza cantieri · Franciacorta e Nord Italia",
+      labelMobile: "Pratiche, sicurezza e territorio",
+    },
   ],
   blocks: [
     {

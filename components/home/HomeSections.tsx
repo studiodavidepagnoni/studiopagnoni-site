@@ -59,25 +59,25 @@ export function HomeSections() {
             {/* ── Testo (sinistra) ── */}
             <div className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-6">
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
-                <SiteBrandMark className="mx-auto shrink-0 sm:mx-0" />
-                <p className="min-w-0 text-balance text-[0.97rem] leading-relaxed text-[var(--copy-body)] sm:text-[1.02rem]">
-                  <span className="sr-only">Studio Architettura Pagnoni. </span>
-                  {homeChiSiamo.short}
-                </p>
+                <SiteBrandMark className="shrink-0 self-start" />
+                <div className="min-w-0">
+                  <p className={`${fontSans.className} home-chi-siamo-lede hidden text-[1.02rem] leading-[1.75] text-[var(--copy-body)] sm:block`}>
+                    <span className="sr-only">Studio Architettura Pagnoni. </span>
+                    {homeChiSiamo.short}
+                  </p>
+                  <p className={`${fontSans.className} home-chi-siamo-lede text-[1.02rem] leading-[1.7] tracking-[0.01em] text-[var(--foreground)]/80 sm:hidden`}>
+                    <span className="sr-only">Studio Architettura Pagnoni. </span>
+                    {homeChiSiamo.shortMobile}
+                  </p>
+                </div>
               </div>
-              <ul className="mt-7 space-y-3 sm:mt-8" aria-label="Ambiti principali">
+              <ul className="home-chi-siamo-list mt-8 space-y-0 sm:mt-8" aria-label="Ambiti principali">
                 {homeChiSiamo.highlights.map((h) => (
-                  <li key={h.label} className="flex items-start gap-3">
-                    <span
-                      className="mt-[3px] flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-sm bg-[var(--primary)]/15 text-[var(--primary-mid)]"
-                      aria-hidden
-                    >
-                      <svg className="h-2.5 w-2.5" viewBox="0 0 10 10" fill="currentColor">
-                        <path d="M4 8.5L0.5 5 1.56 3.94l2.44 2.43 4.44-4.43L9.5 3 4 8.5z" />
-                      </svg>
-                    </span>
-                    <span className={`${fontSans.className} text-[0.88rem] text-[var(--copy-body)] sm:text-[0.93rem]`}>
-                      {h.label}
+                  <li key={h.label} className="home-chi-siamo-list__item">
+                    <span className="home-chi-siamo-list__mark" aria-hidden />
+                    <span className={`${fontSans.className} home-chi-siamo-list__label`}>
+                      <span className="sm:hidden">{h.labelMobile ?? h.label}</span>
+                      <span className="hidden sm:inline">{h.label}</span>
                     </span>
                   </li>
                 ))}

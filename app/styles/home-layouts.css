@@ -230,6 +230,43 @@
   border-bottom: 1px solid var(--green-border-muted);
 }
 
+/* Chi siamo — lista editoriale (mobile: più ariosa, meno “checklist SaaS”) */
+.home-chi-siamo-list {
+  list-style: none;
+  border-top: 1px solid var(--green-border-muted);
+}
+
+.home-chi-siamo-list__item {
+  display: grid;
+  grid-template-columns: 0.75rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: baseline;
+  padding: 0.85rem 0;
+  border-bottom: 1px solid var(--green-border-muted);
+}
+
+.home-chi-siamo-list__mark {
+  display: block;
+  width: 0.75rem;
+  height: 1px;
+  margin-top: 0.65em;
+  background: color-mix(in srgb, var(--primary-mid) 55%, transparent);
+}
+
+.home-chi-siamo-list__label {
+  font-size: 0.94rem;
+  line-height: 1.45;
+  color: var(--foreground);
+  text-wrap: pretty;
+}
+
+@media (min-width: 640px) {
+  .home-chi-siamo-list__label {
+    font-size: 0.93rem;
+    color: var(--copy-body);
+  }
+}
+
 /* CTA finale */
 .home-cta-finale {
   background:
