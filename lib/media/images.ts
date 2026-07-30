@@ -88,7 +88,7 @@ export const heroSlides: readonly HeroSlide[] = [
     alt: imageAlt("Rilievo 3D SLAM in ambiente operativo — stato di fatto per progetto", {
       service: "slam",
     }),
-    line1: "Rilievi SLAM in ambienti operativi",
+    line1: "Rilievi SLAM\nin ambienti operativi",
     line2: "as-built rapido · base metrica condivisa",
     body: "Acquisizione in movimento in spazi complessi: una nuvola di punti utile per layout, verifiche e documentazione dello stato di fatto, con tempi in campo contenuti.",
     ctaHref: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",

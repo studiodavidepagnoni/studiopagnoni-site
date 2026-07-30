@@ -376,7 +376,7 @@ export function HeroHome() {
           <div key={idx} className="hero-copy__slide">
             <div className="min-h-[2.35em] sm:min-h-[2.2em]">
               <h1
-                className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}
+                className={`${fontDisplay.className} hero-title section-title whitespace-pre-line text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}
               >
                 {slide.line1}
               </h1>
