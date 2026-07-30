@@ -24,12 +24,11 @@ export function SiteHeaderShell() {
             {/* eslint-disable-next-line @next/next/no-img-element */}
             <img
               src={`${withBasePath("/logo-lockup.svg")}?v=22`}
-              alt=""
+              alt={site.name}
               width={1485}
               height={300}
               decoding="async"
               className="site-brand-lockup-img h-[3.91rem] w-auto max-w-full object-contain object-left sm:h-[4.6rem] md:h-[5.06rem]"
-              aria-hidden
             />
           </Link>
 

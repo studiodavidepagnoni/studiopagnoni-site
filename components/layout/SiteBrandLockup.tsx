@@ -33,13 +33,12 @@ export function SiteBrandLockup({
       {/* eslint-disable-next-line @next/next/no-img-element -- lockup SVG */}
       <img
         src={`${withBasePath("/logo-lockup.svg")}?v=22`}
-        alt=""
+        alt={site.name}
         width={1485}
         height={300}
         fetchPriority="low"
         decoding="async"
         className={`${imgClass} ${heightClass} w-auto max-w-full object-contain object-left`}
-        aria-hidden
       />
     </Link>
   );

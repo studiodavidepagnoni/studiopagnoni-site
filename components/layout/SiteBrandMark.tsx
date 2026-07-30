@@ -1,4 +1,5 @@
 import { withBasePath } from "@/lib/utils/basePath";
+import { site } from "@/lib/config/site";
 
 type SiteBrandMarkProps = {
   className?: string;
@@ -14,12 +15,11 @@ export function SiteBrandMark({
   return (
     <span
       className={`box-border flex aspect-square shrink-0 items-center justify-center ${markSize} ${className}`}
-      aria-hidden
     >
       {/* eslint-disable-next-line @next/next/no-img-element -- marchio vettoriale */}
       <img
         src={`${withBasePath("/logo-mark.svg")}?v=16`}
-        alt=""
+        alt={`Marchio ${site.name}`}
         width={475}
         height={475}
         loading="lazy"
