@@ -27,7 +27,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Architettura in Franciacorta",
     image: s("surveySite"),
     alt: imageAlt("Tavole di progettazione architettonica in studio", { service: "architettura" }),
-    lede: "Dal concept alle pratiche edilizie — Studio Architettura Pagnoni, Bornato (Frazione di Cazzago San Martino).",
+    lede: "Dal concept alle pratiche edilizie — Studio Architettura Pagnoni, Frazione di Cazzago San Martino (BS).",
     priorityImage: true,
   },
   "/servizi": {
