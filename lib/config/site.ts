@@ -17,7 +17,7 @@ const publicSiteUrl = process.env.NEXT_PUBLIC_SITE_URL ?? "https://studiopagnoni
 
 /**
  * NAP + orari allineati a Google Business Profile «Studio Architettura Pagnoni».
- * Orari: lun–ven 8:30–12:30 e 13:30–17:30 (sab/dom chiuso).
+ * Orari scheda: lun–ven 09:00–18:00 (sab/dom chiuso).
  */
 export const site = {
   name: "Studio Architettura Pagnoni",
@@ -55,12 +55,9 @@ export const site = {
   openingHours: {
     /** Schema.org DayOfWeek */
     days: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"] as const,
-    slots: [
-      { opens: "08:30", closes: "12:30" },
-      { opens: "13:30", closes: "17:30" },
-    ] as const,
-    label: "Lun–Ven 8:30–12:30 · 13:30–17:30",
-    labelShort: "Lun–Ven 8:30–12:30 e 13:30–17:30",
+    slots: [{ opens: "09:00", closes: "18:00" }] as const,
+    label: "Lun–Ven 9:00–18:00",
+    labelShort: "Lun–Ven 9:00–18:00",
   },
   /** Partita IVA. */
   piva: "04061310985",
