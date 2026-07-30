@@ -78,6 +78,8 @@ type PageMetaInput = {
   title: string;
   description: string;
   path: string;
+  /** Se valorizzato, usa questo come <title> (senza prefisso brand | …). */
+  absoluteTitle?: string;
   /** Priorità indicizzazione landing SLAM / contatti */
   priority?: "high" | "default";
 };
@@ -86,11 +88,12 @@ export function buildPageMetadata({
   title,
   description,
   path,
+  absoluteTitle,
   priority = "default",
 }: PageMetaInput): Metadata {
   const canonical = absoluteUrl(path === "/" ? "/" : path);
   const ogImage = absoluteUrl(ogImagePath);
-  const documentTitle = `${site.brandName} | ${title}`;
+  const documentTitle = absoluteTitle ?? `${site.brandName} | ${title}`;
 
   return {
     title: { absolute: documentTitle },

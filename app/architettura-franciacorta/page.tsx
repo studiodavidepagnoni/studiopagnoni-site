@@ -12,12 +12,13 @@ import { ui } from "@/lib/ui";
 const pagePath = "/architettura-franciacorta";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const orgId = `${site.url.replace(/\/$/, "")}/#organization`;
-const pageTitle = "Architettura Franciacorta — progetto e pratiche";
+const pageTitle = "Studio Architettura Pagnoni - Architettura Franciacorta - Progetti e Pratiche";
 const pageDescription =
   "Progettazione architettonica in Franciacorta e provincia di Brescia: concept, esecutivo, pratiche edilizie. Studio Architettura Pagnoni, Bornato (BS).";
 
 export const metadata = buildPageMetadata({
-  title: pageTitle,
+  title: "Architettura Franciacorta - Progetti e Pratiche",
+  absoluteTitle: pageTitle,
   description: pageDescription,
   path: pagePath,
   priority: "high",
