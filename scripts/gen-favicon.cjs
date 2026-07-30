@@ -14,6 +14,7 @@ async function main() {
   const outIconSvg = path.join(root, "public", "icon.svg");
   const outIcoPath = path.join(root, "public", "favicon.ico");
   const outPng48 = path.join(root, "public", "icon-48.png");
+  const outPng96 = path.join(root, "public", "icon-96.png");
   const outPng192 = path.join(root, "public", "icon-192.png");
   const outPng512 = path.join(root, "public", "icon-512.png");
   const outApple = path.join(root, "public", "apple-touch-icon.png");
@@ -24,9 +25,15 @@ async function main() {
 
   const mark = fs.readFileSync(markPath);
 
-  async function toSquarePng(size, outPath, paddingRatio = 0.14) {
-    const inner = Math.round(size * (1 - paddingRatio * 2));
-    const markBuf = await sharp(mark, { density: 384 })
+  // logo-mark.svg ha padding verticale nel viewBox: trim prima di compositare.
+  const markTrimmed = await sharp(mark, { density: 512 })
+    .trim({ threshold: 12 })
+    .png()
+    .toBuffer();
+
+  async function toSquarePng(size, outPath, paddingRatio = 0.1) {
+    const inner = Math.max(1, Math.round(size * (1 - paddingRatio * 2)));
+    const markBuf = await sharp(markTrimmed)
       .resize(inner, inner, {
         fit: "contain",
         background: { r: 0, g: 0, b: 0, alpha: 0 },
@@ -49,11 +56,12 @@ async function main() {
     console.log(`[gen-favicon] Wrote ${path.relative(root, outPath)} (${size}x${size})`);
   }
 
-  // Google Search: PNG multiplo di 48px; Organization logo ≥112px.
-  await toSquarePng(48, outPng48, 0.12);
-  await toSquarePng(192, outPng192, 0.14);
-  await toSquarePng(180, outApple, 0.14);
-  await toSquarePng(512, outPng512, 0.14);
+  // Google Search: PNG quadrato ≥48px (meglio 96+); Organization logo ≥112px.
+  await toSquarePng(48, outPng48, 0.08);
+  await toSquarePng(96, outPng96, 0.09);
+  await toSquarePng(192, outPng192, 0.1);
+  await toSquarePng(180, outApple, 0.1);
+  await toSquarePng(512, outPng512, 0.1);
 
   // icon.svg: stesso look rasterizzato (Google preferisce comunque i PNG in <link>).
   const png512 = fs.readFileSync(outPng512);
@@ -71,7 +79,7 @@ async function main() {
   const pngBuffers = [];
   for (const size of icoSizes) {
     const tmp = path.join(root, "public", `.favicon-${size}.png`);
-    await toSquarePng(size, tmp, size <= 16 ? 0.08 : 0.12);
+    await toSquarePng(size, tmp, size <= 16 ? 0.06 : 0.08);
     pngBuffers.push(fs.readFileSync(tmp));
     fs.unlinkSync(tmp);
   }

@@ -20,15 +20,17 @@ export const viewport: Viewport = {
 export const metadata: Metadata = {
   ...rootMetadata,
   icons: {
-    // PNG 48+ prima: Google Search usa soprattutto raster, non SVG.
+    // URL stabili (niente ?v=): Google richiede path favicon stabili.
+    // PNG ≥96 prima: Google Search usa raster e raccomanda >48px.
     icon: [
-      { url: `${withBasePath("/icon-48.png")}?v=24`, type: "image/png", sizes: "48x48" },
-      { url: `${withBasePath("/icon-192.png")}?v=24`, type: "image/png", sizes: "192x192" },
-      { url: `${withBasePath("/favicon.ico")}?v=24`, type: "image/x-icon", sizes: "48x48" },
-      { url: `${withBasePath("/icon.svg")}?v=24`, type: "image/svg+xml" },
+      { url: withBasePath("/icon-96.png"), type: "image/png", sizes: "96x96" },
+      { url: withBasePath("/icon-192.png"), type: "image/png", sizes: "192x192" },
+      { url: withBasePath("/icon-48.png"), type: "image/png", sizes: "48x48" },
+      { url: withBasePath("/favicon.ico"), type: "image/x-icon" },
+      { url: withBasePath("/icon.svg"), type: "image/svg+xml" },
     ],
-    shortcut: [{ url: `${withBasePath("/favicon.ico")}?v=24`, type: "image/x-icon" }],
-    apple: [{ url: `${withBasePath("/apple-touch-icon.png")}?v=24`, type: "image/png", sizes: "180x180" }],
+    shortcut: [{ url: withBasePath("/favicon.ico"), type: "image/x-icon" }],
+    apple: [{ url: withBasePath("/apple-touch-icon.png"), type: "image/png", sizes: "180x180" }],
   },
 };
 
