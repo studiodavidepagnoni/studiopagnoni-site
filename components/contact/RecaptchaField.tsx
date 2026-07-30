@@ -101,7 +101,8 @@ export function RecaptchaField({ siteKey, onTokenChange, className = "" }: Props
       cancelled = true;
       reset();
       widgetIdRef.current = null;
-      if (containerRef.current) containerRef.current.innerHTML = "";
+      const container = containerRef.current;
+      if (container) container.innerHTML = "";
     };
   }, [siteKey, reset]);
 

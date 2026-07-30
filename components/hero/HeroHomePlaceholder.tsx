@@ -34,6 +34,8 @@ export function HeroHomePlaceholder() {
           <img
             src={HERO_POSTER_DEFAULT_LCP}
             alt=""
+            width={640}
+            height={360}
             className="h-full w-full object-cover"
             style={{ objectPosition: "center 35%" }}
             decoding="sync"

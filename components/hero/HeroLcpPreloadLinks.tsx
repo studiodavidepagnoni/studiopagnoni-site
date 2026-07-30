@@ -2,7 +2,8 @@ import { HERO_POSTER_DEFAULT_LCP_AVIF, HERO_POSTER_INDOOR_LCP_AVIF } from "@/lib
 
 /**
  * Critical path home: immagine LCP.
- * Mobile: poster LCP leggero del video RS10. Desktop: poster indoor AVIF.
+ * Mobile: poster LCP RS10. Desktop: poster indoor.
+ * Font Sora: preload gestito da next/font localFont (preload: true).
  */
 export function HeroLcpPreloadLinks() {
   return (

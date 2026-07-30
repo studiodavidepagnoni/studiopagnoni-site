@@ -14,7 +14,7 @@ const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => 
 /**
  * Poster LCP statico, poi hero interattivo.
  * Desktop: idle ~0.5s o interazione.
- * Mobile: solo interazione (o idle lungo) — evita download video nel critical path / Lighthouse.
+ * Mobile: solo interazione — niente idle auto-load (rIC timeout ≠ delay; competerebbe con LCP).
  */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
@@ -28,7 +28,6 @@ export function HeroHomeDeferred() {
     };
 
     const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY).matches;
-    const cancelIdle = scheduleIdle(load, desktop ? 500 : 8000);
 
     const onPointer = () => load();
     const onScroll = () => {
@@ -40,8 +39,13 @@ export function HeroHomeDeferred() {
     window.addEventListener("scroll", onScroll, { passive: true });
     window.addEventListener("keydown", onKey, { once: true });
 
+    let cancelIdle: (() => void) | undefined;
+    if (desktop) {
+      cancelIdle = scheduleIdle(load, 500);
+    }
+
     return () => {
-      cancelIdle();
+      cancelIdle?.();
       window.removeEventListener("pointerdown", onPointer);
       window.removeEventListener("scroll", onScroll);
       window.removeEventListener("keydown", onKey);
