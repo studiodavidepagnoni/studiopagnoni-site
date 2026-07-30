@@ -6,8 +6,8 @@ import { networkInformation, prefersSaveData } from "@/lib/utils/connection";
 /** Desktop con puntatore fine: abilita carousel hero completo. */
 export const HERO_VIDEO_MEDIA_QUERY = "(min-width: 1025px) and (hover: hover)";
 
-/** Layout compatto (testi, timing Ken Burns). */
-export const HERO_MOBILE_MEDIA_QUERY = "(max-width: 767px)";
+/** Layout compatto — allineato a CSS/placeholder hero (`max-width: 1024px`). */
+export const HERO_MOBILE_MEDIA_QUERY = "(max-width: 1024px)";
 
 function subscribeMediaQuery(query: string, onChange: () => void) {
   const mq = window.matchMedia(query);

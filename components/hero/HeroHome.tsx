@@ -171,9 +171,14 @@ export function HeroHome() {
       }
     };
 
-    const onLoaded = () => {
+    const markReady = () => {
       seekToStart();
       setMobileVideoReady(true);
+    };
+
+    const tryPlay = () => {
+      seekToStart();
+      void video.play().then(markReady).catch(() => {});
     };
 
     const onEnded = () => {
@@ -185,19 +190,22 @@ export function HeroHome() {
       void video.play().catch(() => {});
     };
 
-    video.addEventListener("loadedmetadata", onLoaded);
+    video.addEventListener("loadedmetadata", markReady);
+    video.addEventListener("canplay", tryPlay);
+    video.addEventListener("playing", markReady);
     video.addEventListener("ended", onEnded);
-    if (video.readyState >= 1) onLoaded();
+    if (video.readyState >= 1) markReady();
 
     if (mediaPaused || !heroInView) {
       video.pause();
     } else {
-      seekToStart();
-      void video.play().catch(() => {});
+      tryPlay();
     }
 
     return () => {
-      video.removeEventListener("loadedmetadata", onLoaded);
+      video.removeEventListener("loadedmetadata", markReady);
+      video.removeEventListener("canplay", tryPlay);
+      video.removeEventListener("playing", markReady);
       video.removeEventListener("ended", onEnded);
     };
   }, [isMobile, canUseMobileVideo, videoUnlocked, mediaPaused, heroInView]);
@@ -262,7 +270,9 @@ export function HeroHome() {
               poster={MOBILE_POSTER}
               muted
               playsInline
-              preload="metadata"
+              autoPlay
+              loop
+              preload="auto"
               onError={() => handleVideoError(mobileVideoKey)}
               aria-hidden
             >
