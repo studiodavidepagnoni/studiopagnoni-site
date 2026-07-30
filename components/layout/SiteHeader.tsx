@@ -188,10 +188,23 @@ export function SiteHeader() {
 
   useEffect(() => {
     if (wasMenuOpenRef.current && !open) {
-      menuButtonRef.current?.focus({ preventScroll: true });
+      // Se lo scroll sta già nascondendo l'header, non rimettere focus sul toggle
+      // (finirebbe dentro un antenato inert/nascosto → warning assistive tech).
+      if (hideProgress <= 0.12) {
+        menuButtonRef.current?.focus({ preventScroll: true });
+      }
     }
     wasMenuOpenRef.current = open;
-  }, [open]);
+  }, [open, hideProgress]);
+
+  useEffect(() => {
+    if (!headerHidden) return;
+    const root = headerRootRef.current;
+    const active = document.activeElement;
+    if (root && active instanceof HTMLElement && root.contains(active)) {
+      active.blur();
+    }
+  }, [headerHidden]);
 
   // Altezza header → CSS var una sola volta (ResizeObserver). Non ricalcolare a ogni hideProgress/scroll:
   // altrimenti getBoundingClientRect in useLayoutEffect forza reflow sul critical path.
@@ -253,7 +266,7 @@ export function SiteHeader() {
       <header
         ref={headerRootRef}
         data-header-overlay={isOverlay ? "true" : undefined}
-        aria-hidden={headerHidden}
+        inert={headerHidden}
         style={headerHideStyle}
         className={`${headerPosition} z-[1000] flex flex-col pt-[env(safe-area-inset-top,0px)] will-change-transform transition-[background-color,border-color,box-shadow] duration-300 motion-reduce:transition-none ${headerChrome}`}
       >

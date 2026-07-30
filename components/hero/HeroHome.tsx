@@ -374,7 +374,7 @@ export function HeroHome() {
           aria-atomic="true"
         >
           <div key={idx} className="hero-copy__slide">
-            <div className="min-h-[2.35em] overflow-hidden sm:min-h-[2.2em]">
+            <div className="min-h-[2.35em] sm:min-h-[2.2em]">
               <h1
                 className={`${fontDisplay.className} hero-title section-title text-[clamp(1.65rem,7.8vw,4.4rem)] font-medium leading-[1.06] max-md:text-balance`}
               >
@@ -382,13 +382,13 @@ export function HeroHome() {
               </h1>
             </div>
 
-            <div className="mt-3 min-h-0 overflow-hidden sm:mt-3.5 sm:min-h-[2.05em] md:min-h-0">
+            <div className="mt-3 sm:mt-3.5">
               <p
-                className={`${fontDisplay.className} hero-line2 flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(1.05rem,4.6vw,2.05rem)] font-medium leading-[1.2] tracking-[0.02em] md:flex-nowrap md:gap-x-0 md:whitespace-nowrap`}
+                className={`${fontDisplay.className} hero-line2 flex max-w-full flex-wrap items-baseline gap-x-2 gap-y-1 text-[clamp(1.05rem,4.6vw,2.05rem)] font-medium leading-[1.25] tracking-[0.02em]`}
               >
                 {line2Parts.map((part, i) => (
-                  <span key={`${part}-${i}`} className="inline-flex items-baseline">
-                    <span className="max-md:whitespace-normal md:whitespace-nowrap">{part}</span>
+                  <span key={`${part}-${i}`} className="inline-flex max-w-full items-baseline">
+                    <span className="max-w-full text-pretty">{part}</span>
                     {i < line2Parts.length - 1 ? (
                       <span className="hero-line2__sep mx-2" aria-hidden>
                         ·
@@ -401,7 +401,7 @@ export function HeroHome() {
 
             <div className="hero-rule hero-rule--copy mt-6 h-px max-w-[5.5rem] origin-left" aria-hidden />
 
-            <div className="mt-6 min-h-[5.4em] overflow-hidden sm:min-h-[4.9em] md:min-h-[5.2rem]">
+            <div className="mt-6">
               <p
                 className={`${fontSans.className} hero-body reading-measure-tight text-[0.98rem] leading-[1.8] sm:text-[1.04rem] md:text-[1.1rem]`}
               >
