@@ -27,8 +27,9 @@ export const site = {
   tagline: "Architettura, topografia e laser scanning",
   url: publicSiteUrl,
   email: "studio@pagnoni-s.com",
-  /** Recapiti telefonici (due linee). */
+  /** Recapiti: fisso scheda GMB + cellulari. */
   phones: [
+    { label: "Studio", display: "030 725 5203", tel: "+39307255203" },
     { label: "Architetto Davide Pagnoni", display: "+39 347 357 6510", tel: "+393473576510" },
     { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
