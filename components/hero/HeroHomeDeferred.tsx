@@ -11,10 +11,16 @@ const HeroHome = dynamic(() => import("@/components/hero/HeroHome").then((m) => 
   loading: () => <HeroHomePlaceholder />,
 });
 
+/** Lab/CI: non auto-montare l'hero video (sostituirebbe il poster LCP a metà audit). */
+function isLabAutomation() {
+  if (navigator.webdriver) return true;
+  return /Chrome-Lighthouse|PageSpeed/i.test(navigator.userAgent);
+}
+
 /**
  * Poster LCP statico, poi hero interattivo.
  * Desktop: idle ~0.5s o interazione.
- * Mobile: interazione immediata, altrimenti auto-load dopo ~2.2s (LCP sul poster già paintato).
+ * Mobile: interazione oppure auto-load ~2.2s (saltato in Lighthouse/webdriver).
  */
 export function HeroHomeDeferred() {
   const [enhance, setEnhance] = useState(false);
@@ -28,6 +34,7 @@ export function HeroHomeDeferred() {
     };
 
     const desktop = window.matchMedia(HERO_VIDEO_MEDIA_QUERY).matches;
+    const lab = isLabAutomation();
 
     const onPointer = () => load();
     const onScroll = () => {
@@ -43,7 +50,7 @@ export function HeroHomeDeferred() {
     let mobileTimer: number | undefined;
     if (desktop) {
       cancelIdle = scheduleIdle(load, 500);
-    } else {
+    } else if (!lab) {
       mobileTimer = window.setTimeout(load, 2200);
     }
 

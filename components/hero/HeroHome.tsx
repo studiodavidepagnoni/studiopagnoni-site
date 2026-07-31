@@ -14,6 +14,8 @@ import {
 import { heroSlides } from "@/lib/media/images";
 import {
   HERO_POSTER_DEFAULT,
+  HERO_POSTER_DEFAULT_LCP,
+  HERO_POSTER_DEFAULT_LCP_AVIF,
   HERO_VIDEO_DEFAULT_SOURCES,
   HERO_VIDEO_MOBILE_SOURCES,
   heroVideoKey,
@@ -263,6 +265,25 @@ export function HeroHome() {
         />
 
         <div className="hero-media__stage pointer-events-none absolute inset-0 z-[-10] overflow-hidden">
+          {/* Poster resta LCP finché il video non è pronto (evita blank / LCP tardivo). */}
+          {!mobileVideoReady ? (
+            <picture className="hero-media__image absolute inset-0 h-full w-full">
+              <source srcSet={HERO_POSTER_DEFAULT_LCP_AVIF} type="image/avif" />
+              <source srcSet={HERO_POSTER_DEFAULT_LCP} type="image/webp" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}
+              <img
+                src={HERO_POSTER_DEFAULT_LCP}
+                alt=""
+                width={640}
+                height={360}
+                className="h-full w-full object-cover"
+                style={{ objectPosition: "center 35%" }}
+                decoding="async"
+                fetchPriority="high"
+                sizes="100vw"
+              />
+            </picture>
+          ) : null}
           {showMobileVideo ? (
             <video
               ref={mobileVideoRef}
@@ -278,17 +299,7 @@ export function HeroHome() {
             >
               <HeroVideoSources sources={MOBILE_VIDEO} order={mobileSourceOrder} />
             </video>
-          ) : (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img
-              src={MOBILE_POSTER}
-              alt=""
-              className="hero-media__image absolute inset-0 h-full w-full object-cover"
-              style={{ objectPosition: "center 35%" }}
-              decoding="async"
-              loading="eager"
-            />
-          )}
+          ) : null}
           <HeroMediaOverlay intro={false} />
           <div className="hero-mobile__vignette" aria-hidden />
         </div>
