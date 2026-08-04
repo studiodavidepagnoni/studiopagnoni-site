@@ -74,7 +74,7 @@ export const heroSlides: readonly HeroSlide[] = [
     alt: imageAlt("Nuvola di punti da laser scanner — elaborati per progetto e as-built", {
       service: "slam",
     }),
-    line1: "Nuvola di punti",
+    line1: "Rilievi 3D laser scanner",
     line2: "dalla scansione agli elaborati",
     body: "Restituzione in formati operativi: nuvole dense, sezioni, CAD e modelli BIM. Controlli in campo sulla copertura prima di chiudere il rilievo.",
     ctaHref: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
@@ -88,7 +88,7 @@ export const heroSlides: readonly HeroSlide[] = [
     alt: imageAlt("Rilievo 3D SLAM in ambiente operativo — stato di fatto per progetto", {
       service: "slam",
     }),
-    line1: "Rilievi SLAM\nin ambienti operativi",
+    line1: "Pratiche catastali",
     line2: "as-built rapido · base metrica condivisa",
     body: "Acquisizione in movimento in spazi complessi: una nuvola di punti utile per layout, verifiche e documentazione dello stato di fatto, con tempi in campo contenuti.",
     ctaHref: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
