@@ -44,11 +44,11 @@ const RENAMES = [
   ["projects/azienda-vinicola/azienda-vinicola-w960.webp", "projects/cantina-franciacorta-rilievo-slam/cantina-franciacorta-rilievo-slam-w960.webp"],
   ["projects/azienda-vinicola/azienda-vinicola.cropped.mp4", "projects/cantina-franciacorta-rilievo-slam/cantina-franciacorta-rilievo-slam-video.mp4"],
   ["projects/azienda-vinicola/azienda-vinicola.cropped.webm", "projects/cantina-franciacorta-rilievo-slam/cantina-franciacorta-rilievo-slam-video.webm"],
-  ["projects/terreno/terreno.webp", "projects/terreno-maddalena-rilievo-slam-brescia/terreno-maddalena-rilievo-slam-brescia.webp"],
-  ["projects/terreno/terreno-w480.webp", "projects/terreno-maddalena-rilievo-slam-brescia/terreno-maddalena-rilievo-slam-brescia-w480.webp"],
-  ["projects/terreno/terreno-w960.webp", "projects/terreno-maddalena-rilievo-slam-brescia/terreno-maddalena-rilievo-slam-brescia-w960.webp"],
-  ["projects/terreno/terreno.mp4", "projects/terreno-maddalena-rilievo-slam-brescia/terreno-maddalena-rilievo-slam-brescia-video.mp4"],
-  ["projects/terreno/terreno.webm", "projects/terreno-maddalena-rilievo-slam-brescia/terreno-maddalena-rilievo-slam-brescia-video.webm"],
+  ["projects/terreno/terreno.webp", "projects/terreno-erbusco-rilievo-slam-brescia/terreno-erbusco-rilievo-slam-brescia.webp"],
+  ["projects/terreno/terreno-w480.webp", "projects/terreno-erbusco-rilievo-slam-brescia/terreno-erbusco-rilievo-slam-brescia-w480.webp"],
+  ["projects/terreno/terreno-w960.webp", "projects/terreno-erbusco-rilievo-slam-brescia/terreno-erbusco-rilievo-slam-brescia-w960.webp"],
+  ["projects/terreno/terreno.mp4", "projects/terreno-erbusco-rilievo-slam-brescia/terreno-erbusco-rilievo-slam-brescia-video.mp4"],
+  ["projects/terreno/terreno.webm", "projects/terreno-erbusco-rilievo-slam-brescia/terreno-erbusco-rilievo-slam-brescia-video.webm"],
 ];
 
 const DELETE_REL = [

@@ -26,7 +26,7 @@ export const projectAreaLastModified: Record<ProjectArea, string> = {
 export const projectCaseLastModified: Partial<Record<`${ProjectArea}/${string}`, string>> = {
   "rilievi-digitalizzazione/cantina-franciacorta-slam": "2026-05-28",
   "rilievi-digitalizzazione/allevamento-appianti-slam": "2026-05-28",
-  "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": "2026-05-28",
+  "rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia": "2026-08-05",
 };
 
 const DEFAULT_PAGE_DATE = "2026-04-01";

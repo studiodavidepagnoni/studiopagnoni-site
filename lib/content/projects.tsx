@@ -80,12 +80,12 @@ export const projectCategories: Record<
         href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
       {
-        slug: "rilievo-terreno-maddalena-brescia",
-        title: "Terreno - Rilievo SLAM",
-        caption: "Terreno · SLAM",
+        slug: "rilievo-terreno-erbusco-brescia",
+        title: "Terreno a Erbusco — rilievo SLAM",
+        caption: "Terreno · Erbusco · SLAM",
         cover: cover(ter.dir, ter.cover),
-        alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto e paesaggio",
-        href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
+        alt: "Rilievo 3D di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
+        href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
       },
     ],
   },
@@ -106,11 +106,11 @@ export const featuredProjects: FeaturedProject[] = [
   },
   {
     area: "rilievi-digitalizzazione",
-    slug: "rilievo-terreno-maddalena-brescia",
-    caption: "Terreno — rilievo SLAM",
+    slug: "rilievo-terreno-erbusco-brescia",
+    caption: "Terreno a Erbusco — rilievo SLAM",
     cover: cover(ter.dir, ter.cover),
-    alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto e paesaggio",
-    href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
+    alt: "Rilievo 3D di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
+    href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
     label: "Territorio",
   },
   {
@@ -195,16 +195,17 @@ export const projectCaseStudies: Record<
       { src: cover(vin.dir, vin.cover), alt: "Rilievo 3D SLAM in cantina — Franciacorta, provincia di Brescia" },
     ],
   },
-  "rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia": {
-    metaTitle: "Terreno a Brescia (Maddalena) — rilievo SLAM per progetto e paesaggio",
+  "rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia": {
+    metaTitle: "Terreno a Erbusco (BS) — rilievo SLAM per progetto e paesaggio",
     metaDescription:
-      "Caso studio: scansione 3D di terreno a Brescia (Maddalena) per stato di fatto, supporto agronomico e progettazione del paesaggio in Lombardia.",
-    heading: "Terreno - Rilievo SLAM",
+      "Caso studio: scansione 3D di terreno a Erbusco (BS), in Franciacorta, per stato di fatto, supporto agronomico e progettazione del paesaggio.",
+    heading: "Terreno a Erbusco — rilievo SLAM",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
-          Scansione 3D di un terreno in area urbana (Brescia, zona Maddalena) come base per <strong>rilievo dello stato di fatto</strong> in vista di
-          interventi agronomici e di <strong>progettazione del paesaggio</strong>.
+          Scansione 3D di un terreno a <strong>Erbusco (BS)</strong>, in Franciacorta, come base per{" "}
+          <strong>rilievo dello stato di fatto</strong> in vista di interventi agronomici e di{" "}
+          <strong>progettazione del paesaggio</strong>.
         </p>
         <p className={`${ui.body} mb-6`}>
           Obiettivo: una rappresentazione metrica leggibile di pendenze, scarpate, vegetazione e limiti dell&apos;area, integrabile con elaborati tecnici
@@ -221,7 +222,7 @@ export const projectCaseStudies: Record<
       </>
     ),
     gallery: [
-      { src: cover(ter.dir, ter.cover), alt: "Rilievo 3D di terreno a Maddalena, Brescia — stato di fatto per progetto" },
+      { src: cover(ter.dir, ter.cover), alt: "Rilievo 3D di terreno a Erbusco (BS) — stato di fatto per progetto" },
     ],
   },
 };

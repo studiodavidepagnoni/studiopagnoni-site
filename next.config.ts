@@ -123,6 +123,16 @@ if (isStaticExport) {
     { source: "/capannone-erbusco.html", destination: "/progetti", permanent: true },
     { source: "/superstudio-village.html", destination: "/progetti", permanent: true },
     { source: "/superstudio-maxi.html", destination: "/progetti", permanent: true },
+    {
+      source: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia",
+      destination: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
+      permanent: true,
+    },
+    {
+      source: "/progetti/rilievi-digitalizzazione/rilievo-terreno-maddalena-brescia/",
+      destination: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia/",
+      permanent: true,
+    },
   ];
 }
 

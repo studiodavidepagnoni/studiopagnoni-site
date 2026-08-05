@@ -37,8 +37,8 @@ export const projectMedia = {
     video: "cantina-franciacorta-rilievo-slam-video",
   },
   terreno: {
-    dir: "terreno-maddalena-rilievo-slam-brescia",
-    cover: "terreno-maddalena-rilievo-slam-brescia",
-    video: "terreno-maddalena-rilievo-slam-brescia-video",
+    dir: "terreno-erbusco-rilievo-slam-brescia",
+    cover: "terreno-erbusco-rilievo-slam-brescia",
+    video: "terreno-erbusco-rilievo-slam-brescia-video",
   },
 } as const;
