@@ -21,6 +21,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { path: "/architettura-franciacorta", changeFrequency: "monthly", priority: 0.95 },
     { path: "/topografia", changeFrequency: "monthly", priority: 0.95 },
     { path: "/laser-scanner-slam", changeFrequency: "weekly", priority: 1 },
+    { path: "/rilievi-3d-per-studi-di-architettura", changeFrequency: "monthly", priority: 0.9 },
     { path: "/rilievi-laser-scanner-slam-brescia", changeFrequency: "weekly", priority: 0.95 },
     { path: "/rilievi-laser-scanner-slam-lombardia", changeFrequency: "weekly", priority: 0.95 },
     { path: "/contatti", changeFrequency: "monthly", priority: 0.9 },

@@ -60,6 +60,14 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
     priorityImage: true,
   },
+  "/rilievi-3d-per-studi-di-architettura": {
+    eyebrow: "Per studi e professionisti",
+    title: "Rilievi 3D per studi di architettura",
+    image: s("pointcloud"),
+    alt: imageAlt("Nuvola di punti da laser scanner — consegna per studi di architettura", { service: "slam" }),
+    lede: "Il rilievo lo facciamo noi, il progetto resta vostro: nuvole di punti, DWG e as-built consegnati pronti — Brescia e Franciacorta.",
+    priorityImage: true,
+  },
   "/laser-scanner-slam": {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",

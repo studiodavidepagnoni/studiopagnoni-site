@@ -48,6 +48,29 @@ export const serviziFaq = [
   },
 ] as const satisfies readonly FaqItem[];
 
+export const rilievi3dStudiFaq = [
+  {
+    q: "Lavorate in subappalto per altri studi tecnici?",
+    a: "Sì, è una parte importante della nostra attività: eseguiamo il rilievo 3D e consegniamo gli elaborati al vostro studio, che mantiene il rapporto con il cliente finale. Su richiesta operiamo con riservatezza sull'incarico.",
+  },
+  {
+    q: "In quali formati consegnate?",
+    a: "Nuvola di punti E57/LAS/LAZ georiferita, piante e sezioni DWG/DXF, report PDF e, quando richiesto, supporto a modelli IFC/RVT. Concordiamo formati e convenzioni (layer, quote, sistemi di riferimento) prima del rilievo.",
+  },
+  {
+    q: "Quanto costa un rilievo 3D per uno studio di architettura?",
+    a: "Dipende da superficie, piani, dettaglio e output richiesti. Per collaborazioni continuative applichiamo condizioni da partner. Inviaci metratura e comune: rispondiamo con una quotazione indicativa in giornata lavorativa.",
+  },
+  {
+    q: "Che tempi avete tra incarico e consegna?",
+    a: "In provincia di Brescia il campo si programma in genere entro pochi giorni; l'acquisizione SLAM copre volumi estesi in una giornata. La restituzione dipende dagli elaborati: la nuvola pulita arriva prima, DWG e BIM seguono il calendario concordato.",
+  },
+  {
+    q: "Come verifico la qualità prima di affidarvi un incarico?",
+    a: "Scarica la nuvola di punti di esempio in questa pagina e aprila in CloudCompare, Autodesk ReCap o nel tuo software abituale. Al primo incarico consegniamo anche un'anteprima della nuvola prima della restituzione finale.",
+  },
+] as const satisfies readonly FaqItem[];
+
 export const architetturaFaq = [
   {
     q: "Che servizi di architettura offrite in Franciacorta?",

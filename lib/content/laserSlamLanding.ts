@@ -254,6 +254,7 @@ export const laserSlamLanding = {
   relatedLandings: [
     { label: "Rilievi laser SLAM a Brescia", href: "/rilievi-laser-scanner-slam-brescia" },
     { label: "Rilievi laser SLAM in Lombardia", href: "/rilievi-laser-scanner-slam-lombardia" },
+    { label: "Rilievi 3D per studi di architettura", href: "/rilievi-3d-per-studi-di-architettura" },
   ],
   projectsIntro:
     "Esempi di laser scanner SLAM e documentazione 3D: acquisizione in movimento e restituzione operativa.",
