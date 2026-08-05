@@ -61,6 +61,46 @@ const sharedDeliverables = [
   { format: "PDF / report", use: "Sintesi metrica, sezioni estratte e materiali per committente e cantiere" },
 ] as const satisfies readonly SlamDeliverable[];
 
+/** Consegne tipiche per preventivi in provincia di Brescia / Franciacorta. */
+const bresciaDeliverables = [
+  {
+    format: "E57 / LAS / LAZ",
+    use: "Nuvola georiferita per studi locali, imprese e cantine in Franciacorta — scambio diretto con i progettisti di zona",
+  },
+  {
+    format: "DWG / DXF",
+    use: "Piante e sezioni per pratiche edilizie, ristrutturazioni e layout di capannoni bresciani",
+  },
+  {
+    format: "Quote e controlli",
+    use: "Allineamento a stazione totale / GNSS quando servono coordinate di progetto o inquadramento catastale",
+  },
+  {
+    format: "PDF / report",
+    use: "Sintesi per committenza e direzione lavori: sezioni chiave, copertura e note operative del rilievo",
+  },
+] as const satisfies readonly SlamDeliverable[];
+
+/** Consegne tipiche per campagne multi-provincia in Lombardia. */
+const lombardiaDeliverables = [
+  {
+    format: "E57 / LAS / LAZ",
+    use: "Archivio nuvola standardizzato per team multi-sede (BIM manager, GC, facility) su più province",
+  },
+  {
+    format: "DWG / DXF",
+    use: "Piante e sezioni allineate agli standard del vostro studio o general contractor lombardo",
+  },
+  {
+    format: "IFC / supporto BIM",
+    use: "Mesh o modello di riferimento quando la commessa regionale richiede coordinamento discipline",
+  },
+  {
+    format: "Report + logistica",
+    use: "Consegna con note di campagna, accessi e eventuali finestre di intervento fuori sede Brescia",
+  },
+] as const satisfies readonly SlamDeliverable[];
+
 const sharedComparison = {
   headers: ["Aspetto", "Scanner mobile SLAM (RS10)", "Scanner statico terrestre"] as const,
   rows: [
@@ -69,6 +109,28 @@ const sharedComparison = {
     ["Tempi in campo", "Ridotti su volumi estesi e layout complessi", "Più passaggi, più fermi operativi"],
     ["Copertura", "Controllo copertura in tempo reale in campo", "Dipende dalla pianificazione delle stazioni"],
     ["Quando preferirlo", "Edifici, capannoni, impianti, terreni, as-built rapidi", "Dettaglio millimetrico su piccole aree fisse"],
+  ] as const,
+};
+
+const bresciaComparison = {
+  headers: ["Aspetto", "SLAM mobile (sede BS)", "Rilievo tradizionale in provincia"] as const,
+  rows: [
+    ["Bacino", "Franciacorta e provincia di Brescia, interventi rapidi da Bornato", "Più trasferte e riprese se il sito è articolato"],
+    ["Casi tipici", "Capannoni, cantine, edifici e impianti bresciani", "Quote puntuali o piccole aree senza nuvola densa"],
+    ["Tempi in campo", "Una giornata spesso sufficiente su grandi volumi accessibili", "Più giornate su layout estesi indoor/outdoor"],
+    ["Integrazione", "RS10 + GNSS/stazione totale per catasto e progetto", "Topografia sola, senza as-built 3D completo"],
+    ["Quando sceglierlo", "As-built e base metrica prima di ristrutturare o ampliare", "Solo misurazioni sparse o frazionamenti semplici"],
+  ] as const,
+};
+
+const lombardiaComparison = {
+  headers: ["Aspetto", "Campagna SLAM regionale", "Più rilievi locali separati"] as const,
+  rows: [
+    ["Scala", "Una metodologia ripetibile su più province lombarde", "Fornitori diversi, formati e qualità disomogenei"],
+    ["Logistica", "Pianificazione da base Brescia (viaggio, accessi, finestre)", "Costi nascosti se ogni sede riparte da zero"],
+    ["Output", "E57/DWG/BIM allineati agli standard del vostro team", "Rischio di file incompatibili tra cantieri"],
+    ["Tempi", "Giornate di campo concentrate su layout estesi", "Setup ripetuti e fermi su ogni immobile"],
+    ["Quando preferirlo", "Multi-sito, magazzini, impianti e GC regionali", "Un solo piccolo intervento senza urgenza di copertura"],
   ] as const,
 };
 
@@ -92,6 +154,52 @@ const sharedWorkflow = [
     step: "04",
     title: "Restituzione",
     body: "Consegna negli formati concordati (nuvola, CAD, BIM) con documentazione comprensibile anche per chi non usa quotidianamente il 3D.",
+  },
+] as const satisfies readonly SlamWorkflowStep[];
+
+const bresciaWorkflow = [
+  {
+    step: "01",
+    title: "Brief locale",
+    body: "Comune in provincia di Brescia, obiettivo (as-built, ristrutturazione, cantina/impianto) e formati. Spesso basta una call; sopralluogo se accessi o vincoli lo richiedono.",
+  },
+  {
+    step: "02",
+    title: "Scansione da sede Franciacorta",
+    body: "Intervento rapido da Bornato/Cazzago San Martino con RS10: percorsi continui indoor/outdoor tipici di capannoni e immobili del Bresciano.",
+  },
+  {
+    step: "03",
+    title: "Controlli e topografia",
+    body: "Pulizia nuvola e, se serve, ancoraggio con GNSS RTK o stazione totale per coordinate di progetto e riferimenti catastali.",
+  },
+  {
+    step: "04",
+    title: "Consegna operativa",
+    body: "Nuvola e/o DWG pronti per studi e imprese locali, con report chiaro per committenza e cantiere in provincia.",
+  },
+] as const satisfies readonly SlamWorkflowStep[];
+
+const lombardiaWorkflow = [
+  {
+    step: "01",
+    title: "Brief multi-sito",
+    body: "Provincia, comune, superficie, accessi e standard di consegna del vostro team (BIM/GC). Definiamo se serve una o più giornate di campagna.",
+  },
+  {
+    step: "02",
+    title: "Pianificazione regionale",
+    body: "Organizziamo viaggio da Brescia, finestre di ingresso e sequenza dei percorsi — essenziale su magazzini e impianti con orari vincolati.",
+  },
+  {
+    step: "03",
+    title: "Acquisizione SLAM",
+    body: "Scansione mobile RS10 su layout estesi; copertura verificata in campo per ridurre riprese costose fuori sede.",
+  },
+  {
+    step: "04",
+    title: "Restituzione allineata",
+    body: "E57/DWG/BIM e report con note di campagna, così sede diverse in Lombardia lavorano sugli stessi formati.",
   },
 ] as const satisfies readonly SlamWorkflowStep[];
 
@@ -255,9 +363,9 @@ export const laserSlamLandingBrescia = {
   ],
   projectsIntro:
     "Esempi di laser scanner SLAM e documentazione 3D su siti in ambito bresciano e Franciacorta: acquisizione in movimento e restituzione operativa.",
-  deliverables: sharedDeliverables,
-  workflow: sharedWorkflow,
-  comparison: sharedComparison,
+  deliverables: bresciaDeliverables,
+  workflow: bresciaWorkflow,
+  comparison: bresciaComparison,
   faq: [
     {
       q: "Fate rilievi laser scanner SLAM a Brescia e in Franciacorta?",
@@ -365,9 +473,9 @@ export const laserSlamLandingLombardia = {
   ],
   projectsIntro:
     "Casi di rilievo laser SLAM e digitalizzazione 3D: metodo trasferibile su siti lombardi di scala analoga. Apri l’archivio progetti per schede e video.",
-  deliverables: sharedDeliverables,
-  workflow: sharedWorkflow,
-  comparison: sharedComparison,
+  deliverables: lombardiaDeliverables,
+  workflow: lombardiaWorkflow,
+  comparison: lombardiaComparison,
   faq: [
     {
       q: "Eseguite rilievi laser scanner SLAM in tutta la Lombardia?",

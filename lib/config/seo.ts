@@ -167,7 +167,7 @@ export const jsonLdGraph = {
       legalName: site.legalName,
       alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato"],
       description:
-        "Architettura, topografia GNSS RTK e stazione totale, rilievi laser scanner SLAM mobile e nuvole di punti. Progettazione del verde, urbanistica e pratiche edilizie. Sede a Bornato, Frazione di Cazzago San Martino (BS).",
+        "Architettura, progettazione urbana, topografia GNSS RTK e stazione totale, rilievi laser scanner 3D SLAM, rilievi architettonici e pratiche catastali. Sede a Bornato, Frazione di Cazzago San Martino (BS).",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),
@@ -207,8 +207,12 @@ export const jsonLdGraph = {
       knowsAbout: [
         "Architettura",
         "Progettazione architettonica",
+        "Progettazione urbana",
+        "Rilievi architettonici",
+        "Pratiche catastali",
         "Rilievi topografici",
         "Laser scanner SLAM",
+        "Rilievi laser scanner 3D",
         "Nuvole di punti",
         "GNSS RTK",
         "Rilievo as-built",
@@ -216,15 +220,59 @@ export const jsonLdGraph = {
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
-        name: "Servizi di architettura, topografia e laser scanner",
+        name: "Servizi Studio Architettura Pagnoni",
         itemListElement: [
           {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Architettura e progettazione",
+              name: "Servizi di progettazione architettonica",
               description:
-                "Progettazione architettonica dal concept alle tavole esecutive, con coordinamento di rilievi, urbanistica e cantiere in Franciacorta e provincia di Brescia.",
+                "Progettazione architettonica per nuove costruzioni, ristrutturazioni e ampliamenti: dal concept al progetto esecutivo, con attenzione a vincoli e pratiche edilizie. Soluzioni su misura per privati e imprese a Brescia, Franciacorta e provincia.",
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Rilievi Laser Scanner 3D",
+              description:
+                "Rilievi laser scanner 3D per architettura, topografia e cantiere: acquisizione rapida, nuvole di punti, as-built e modelli metrici precisi. Servizio a Brescia, Franciacorta e provincia.",
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Rilievi Architettonici",
+              description:
+                "Rilievi architettonici di edifici, interni ed esterni: piante, sezioni, prospetti e stato di fatto per progetto, ristrutturazione e pratiche edilizie. Operiamo a Brescia, Franciacorta e provincia.",
+              areaServed: { "@type": "Place", name: "Franciacorta" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Servizi di progettazione urbana",
+              description:
+                "Progettazione urbana e pianificazione del territorio: studi di fattibilità, piani di intervento, spazi pubblici e riqualificazione urbana. Coordinamento tra urbanistica, architettura e vincoli locali a Brescia, Franciacorta e provincia.",
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Pratiche catastali",
+              description:
+                "Supporto per pratiche catastali e aggiornamenti: DOCFA, variazioni di consistenza, tipi mappali e allineamento tra stato di fatto e documentazione. Chiarezza operativa per privati e imprese sul territorio.",
               areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
             },
@@ -235,19 +283,8 @@ export const jsonLdGraph = {
               "@type": "Service",
               name: "Topografia e rilievi planoaltimetrici",
               description:
-                "Rilievi con GNSS RTK e stazione totale, planimetrie quotate, volumetrie e supporto a frazionamenti e cantieri.",
+                "Rilievi con GNSS RTK e stazione totale, planimetrie quotate, volumetrie e supporto a frazionamenti e cantieri in Franciacorta e provincia di Brescia.",
               areaServed: { "@type": "Place", name: "Franciacorta" },
-              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
-            },
-          },
-          {
-            "@type": "Offer",
-            itemOffered: {
-              "@type": "Service",
-              name: "Rilievi laser scanner SLAM mobile",
-              description:
-                "Acquisizione mobile con laser scanner SLAM, nuvole di punti georiferite, as-built indoor e outdoor, restituzione CAD/BIM. Ideale per capannoni, edifici complessi e cantieri in Franciacorta e provincia di Brescia.",
-              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
             },
           },

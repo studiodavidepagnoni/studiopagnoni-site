@@ -34,7 +34,8 @@ export const site = {
     { label: "Geometra Sergio Pagnoni", display: "+39 348 231 1092", tel: "+393482311092" },
   ],
   address: {
-    streetAddress: "Via Vittorio Emanuele III, 16",
+    /** Allineato a addressLine / scheda GMB (via + frazione). */
+    streetAddress: "Via Vittorio Emanuele III, 16, Bornato",
     /** Frazione (utile in scheda Maps / NAP). */
     addressNeighborhood: "Bornato",
     addressLocality: "Cazzago San Martino",
@@ -47,11 +48,11 @@ export const site = {
   /** Coordinate sede (Bornato / Cazzago San Martino) per LocalBusiness.geo */
   geo: { latitude: 45.59368, longitude: 10.0409 },
   maps: {
-    /** Link scheda / ricerca Maps (hasMap + CTA). */
+    /** Link scheda / ricerca Maps (hasMap + CTA) — include Bornato come addressLine. */
     placeUrl:
-      "https://www.google.com/maps/search/?api=1&query=Studio+Architettura+Pagnoni+Via+Vittorio+Emanuele+III+16+Cazzago+San+Martino",
+      "https://www.google.com/maps/search/?api=1&query=Studio+Architettura+Pagnoni+Via+Vittorio+Emanuele+III+16+Bornato+Cazzago+San+Martino",
     embedUrl:
-      "https://maps.google.com/maps?q=Via%20Vittorio%20Emanuele%20III%2016,%20Cazzago%20San%20Martino%20BS&t=&z=15&ie=UTF8&iwloc=&output=embed",
+      "https://maps.google.com/maps?q=Via%20Vittorio%20Emanuele%20III%2016,%20Bornato,%20Cazzago%20San%20Martino%20BS&t=&z=15&ie=UTF8&iwloc=&output=embed",
   },
   openingHours: {
     /** Schema.org DayOfWeek */
