@@ -310,7 +310,9 @@ export function HeroHome() {
               <h1
                 className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}
               >
-                Rilievi 3D
+                Architettura
+                <br />
+                e rilievi
                 <br />
                 <span className="hero-mobile__title-accent">in Franciacorta</span>
               </h1>
