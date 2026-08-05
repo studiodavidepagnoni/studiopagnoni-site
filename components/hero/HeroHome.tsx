@@ -312,7 +312,7 @@ export function HeroHome() {
               >
                 Architettura
                 <br />
-                e rilievi
+                e rilievi 3D
                 <br />
                 <span className="hero-mobile__title-accent">in Franciacorta</span>
               </h1>

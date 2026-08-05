@@ -58,7 +58,7 @@ export const heroSlides: readonly HeroSlide[] = [
       service: "slam",
     }),
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto architettonico e BIM.",
-    line1: "Architettura e rilievi in Franciacorta",
+    line1: "Architettura e rilievi 3D in Franciacorta",
     line2: "Studio di architettura · topografia e laser scanning",
     primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
     primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",

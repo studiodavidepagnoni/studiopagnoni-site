@@ -59,7 +59,7 @@ export function HeroHomePlaceholder() {
           <h1 className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}>
             Architettura
             <br />
-            e rilievi
+            e rilievi 3D
             <br />
             <span className="hero-mobile__title-accent">in Franciacorta</span>
           </h1>
