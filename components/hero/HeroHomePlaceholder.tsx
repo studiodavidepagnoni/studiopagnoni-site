@@ -57,9 +57,7 @@ export function HeroHomePlaceholder() {
       <div className="relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] min-[1025px]:hidden">
         <div className="hero-copy w-full min-w-0 text-left">
           <h1 className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}>
-            Architettura
-            <br />
-            e rilievi
+            Rilievi 3D
             <br />
             <span className="hero-mobile__title-accent">in Franciacorta</span>
           </h1>
