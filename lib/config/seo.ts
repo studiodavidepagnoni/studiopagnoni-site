@@ -59,7 +59,14 @@ const ogImagePath = "/assets/stock/nuvola-punti-rilievo-laser-scanner.webp";
 
 function absoluteUrl(path: string): string {
   const base = site.url.replace(/\/$/, "");
-  return path.startsWith("http") ? path : `${base}${path.startsWith("/") ? path : `/${path}`}`;
+  if (path.startsWith("http")) return path;
+  const normalized = path.startsWith("/") ? path : `/${path}`;
+  // Allineato a `trailingSlash: true` dell'export statico (GitHub Pages).
+  if (normalized === "/") return `${base}/`;
+  const bare = normalized.replace(/\/$/, "");
+  // Asset e file con estensione: niente slash finale.
+  if (/\.[a-z0-9]{2,5}$/i.test(bare)) return `${base}${bare}`;
+  return `${base}${bare}/`;
 }
 
 /** Alt immagine: soggetto chiaro e breve (accessibilità + SEO senza stuffing). */
@@ -213,6 +220,7 @@ export const jsonLdGraph = {
         "Rilievi topografici",
         "Laser scanner SLAM",
         "Rilievi laser scanner 3D",
+        "Rilievi 3D per studi di architettura",
         "Nuvole di punti",
         "GNSS RTK",
         "Rilievo as-built",
@@ -242,6 +250,22 @@ export const jsonLdGraph = {
                 "Rilievi laser scanner 3D per architettura, topografia e cantiere: acquisizione rapida, nuvole di punti, as-built e modelli metrici precisi. Servizio a Brescia, Franciacorta e provincia.",
               areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Rilievi 3D per studi di architettura",
+              description:
+                "Rilievi 3D in outsourcing per studi di architettura e geometri: nuvole di punti, DWG e as-built consegnati pronti per il progetto. Brescia, Franciacorta e Lombardia.",
+              url: `${site.url.replace(/\/$/, "")}/rilievi-3d-per-studi-di-architettura/`,
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+              audience: {
+                "@type": "BusinessAudience",
+                name: "Studi di architettura, geometri e società di ingegneria",
+              },
             },
           },
           {

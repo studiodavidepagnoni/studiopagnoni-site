@@ -79,3 +79,10 @@ export const navItems = [
   { href: "/progetti", label: "Progetti" },
   { href: "/contatti", label: "Contatti" },
 ] as const;
+
+/** Link aggiuntivi in footer (non in header): discovery landing commerciali. */
+export const footerExtraLinks = [
+  { href: "/rilievi-3d-per-studi-di-architettura", label: "Rilievi 3D per studi" },
+  { href: "/rilievi-laser-scanner-slam-brescia", label: "SLAM a Brescia" },
+  { href: "/topografia", label: "Topografia" },
+] as const;

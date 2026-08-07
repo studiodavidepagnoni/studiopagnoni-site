@@ -168,6 +168,9 @@ export function HomeSections() {
                 <Link href="/laser-scanner-slam" className={ui.proseLink}>
                   Laser scanner SLAM
                 </Link>
+                <Link href="/rilievi-3d-per-studi-di-architettura" className={ui.proseLink}>
+                  Rilievi 3D per studi di architettura
+                </Link>
               </div>
             </nav>
           </div>

@@ -276,11 +276,15 @@ export const laserSlamLanding = {
     },
     {
       q: "Posso avere solo la nuvola di punti?",
-      a: "Sì. Consegnamo E57/LAS/LAZ georiferiti, oppure affianchiamo piante DWG/DXF o modello BIM se serve al tuo progettista o alla direzione lavori.",
+      a: "Sì. Consegnamo E57/LAS/LAZ georiferiti come prodotto autonomo. Se il flusso di lavoro del progettista richiede piante o modello, aggiungiamo DWG/DXF o supporto BIM nella stessa commessa.",
     },
     {
       q: "Operate solo in provincia di Brescia?",
       a: "La priorità operativa è Franciacorta e provincia di Brescia. Su programmazione eseguiamo rilievi SLAM in Lombardia e Nord Italia: consulta le pagine dedicate o indica comune e superficie nel modulo contatti.",
+    },
+    {
+      q: "Come si confronta lo SLAM mobile con uno scanner statico?",
+      a: "Lo SLAM mobile (RS10) riduce tempi e setup su edifici, capannoni e percorsi indoor/outdoor continui. Lo scanner statico resta preferibile per dettaglio millimetrico su piccole aree fisse. In brief scegliamo o combiniamo i metodi in base all’obiettivo.",
     },
   ],
   ctaHeading: "Preventivo rilievo laser scanner SLAM",
@@ -361,6 +365,7 @@ export const laserSlamLandingBrescia = {
   relatedLandings: [
     { label: "Servizio laser scanner SLAM", href: "/laser-scanner-slam" },
     { label: "Rilievi laser SLAM in Lombardia", href: "/rilievi-laser-scanner-slam-lombardia" },
+    { label: "Rilievi 3D per studi di architettura", href: "/rilievi-3d-per-studi-di-architettura" },
   ],
   projectsIntro:
     "Esempi di laser scanner SLAM e documentazione 3D su siti in ambito bresciano e Franciacorta: acquisizione in movimento e restituzione operativa.",
@@ -370,23 +375,23 @@ export const laserSlamLandingBrescia = {
   faq: [
     {
       q: "Fate rilievi laser scanner SLAM a Brescia e in Franciacorta?",
-      a: "Sì. È il nostro bacino operativo principale: sede a Cazzago San Martino (BS), interventi su Brescia città, Franciacorta, Valle Trompia, Lago d’Iseo e provincia. Contattaci con comune e obiettivo per tempi e preventivo.",
+      a: "Sì. È il nostro bacino operativo principale: sede a Bornato / Cazzago San Martino (BS), interventi su Brescia città, Franciacorta, Valle Trompia, Lago d’Iseo e provincia. Contattaci con comune e obiettivo per tempi e preventivo.",
     },
     {
-      q: "Che precisione posso aspettarmi su un rilievo SLAM?",
-      a: "In condizioni operative dichiarate dal costruttore, la piattaforma RS10 indica fino a circa 5 cm in misura assoluta combinando RTK, laser e SLAM visuale. La precisione effettiva dipende da ambiente, estensione e obiettivo: in preventivo definiamo tolleranze e controlli.",
+      q: "Avete esempi di rilievi SLAM in Franciacorta e provincia?",
+      a: "Sì: tra i casi pubblicati, una cantina in Franciacorta (as-built per architettura e impianti) e un terreno a Erbusco (BS) per stato di fatto e paesaggio. Nell’archivio progetti trovi schede e video di scansione.",
     },
     {
-      q: "Quanto tempo serve in campo su un capannone a Brescia?",
-      a: "Dipende da metratura, accessibilità e dettaglio. Su un capannone logistico di circa 8.000 m², indicativamente una giornata di acquisizione può coprire il volume utile; elaborazione e restituzione seguono il calendario concordato in offerta.",
+      q: "In quanto tempo partite da Bornato per un rilievo in provincia di Brescia?",
+      a: "Su siti accessibili in Franciacorta e hinterland bresciano il campo si programma spesso entro pochi giorni lavorativi. Capannoni e cantine tipici della zona si acquisiscono in una giornata; la restituzione DWG o nuvola segue il calendario concordato in offerta.",
     },
     {
-      q: "Quanto costa un rilievo laser scanner SLAM a Brescia?",
-      a: "Il preventivo è su misura: superficie, piani, formati (solo nuvola vs DWG/BIM) e distanza dalla sede. Scrivici zona e obiettivo: rispondiamo con una proposta indicativa senza impegno.",
+      q: "Lavorate anche in subappalto per studi di architettura del Bresciano?",
+      a: "Sì. Consegniamo nuvole e DWG al vostro studio, che mantiene il rapporto con il cliente. Condizioni e formati da partner sono descritti nella pagina dedicata ai rilievi 3D per studi di architettura.",
     },
     {
-      q: "Posso avere solo la nuvola di punti?",
-      a: "Sì. Consegnamo E57/LAS/LAZ georiferiti, oppure affianchiamo piante DWG/DXF o modello BIM se serve al tuo progettista o alla direzione lavori.",
+      q: "Che output usano di solito i progettisti locali?",
+      a: "In provincia di Brescia e Franciacorta chiedono spesso E57/LAS per archivio, piante DWG/DXF per ristrutturazioni e, su cantine o capannoni, sezioni e controlli di ingombro. Concordiamo layer e sistemi di riferimento prima del rilievo.",
     },
   ],
   ctaHeading: "Preventivo rilievo SLAM a Brescia",
@@ -471,6 +476,7 @@ export const laserSlamLandingLombardia = {
   relatedLandings: [
     { label: "Servizio laser scanner SLAM", href: "/laser-scanner-slam" },
     { label: "Rilievi laser SLAM a Brescia", href: "/rilievi-laser-scanner-slam-brescia" },
+    { label: "Rilievi 3D per studi di architettura", href: "/rilievi-3d-per-studi-di-architettura" },
   ],
   projectsIntro:
     "Casi di rilievo laser SLAM e digitalizzazione 3D: metodo trasferibile su siti lombardi di scala analoga. Apri l’archivio progetti per schede e video.",
@@ -491,8 +497,8 @@ export const laserSlamLandingLombardia = {
       a: "Le finestre dipendono dal carico di lavoro e dagli accessi del sito. Per urgenze in Lombardia proponiamo la prima disponibilità utile dopo il brief; per siti complessi preferiamo un sopralluogo o un call tecnico prima della scansione.",
     },
     {
-      q: "Che output consegnate per studi di progettazione lombardi?",
-      a: "Nuvola E57/LAS/LAZ, piante e sezioni DWG/DXF, report PDF e, se richiesto, supporto a modelli IFC/RVT. Allineiamo i formati agli standard del vostro BIM manager o del general contractor.",
+      q: "Gestite rilievi multi-sito per imprese o GC con sedi in più province?",
+      a: "Sì: metodo e formati ripetibili (E57, DWG) su magazzini e stabilimenti in province diverse, con pianificazione di viaggio da Brescia. Ideale quando serve una base as-built omogenea per facility o riqualificazioni coordinate.",
     },
     {
       q: "SLAM mobile o scanner statico: cosa consigliate in Lombardia?",

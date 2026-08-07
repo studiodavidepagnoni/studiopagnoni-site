@@ -283,6 +283,13 @@ export const zoneFooter = (
     >
       topografia e rilievi
     </Link>
+    . Per studi e geometri:{" "}
+    <Link
+      href="/rilievi-3d-per-studi-di-architettura"
+      className={ui.proseLink}
+    >
+      rilievi 3D in outsourcing
+    </Link>
     .
   </>
 );

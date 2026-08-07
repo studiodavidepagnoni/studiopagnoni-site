@@ -2,7 +2,7 @@
 import { SiteBrandLockup } from "@/components/layout/SiteBrandLockup";
 import { formatCopyrightYearRange } from "@/lib/config/copyright";
 import { fontNav, fontSans } from "@/lib/fonts";
-import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
+import { layoutContentMaxClass, layoutGutterXClass, footerExtraLinks, navItems, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const footerNavLinkClass = `${fontNav.className} site-footer-nav-link flex min-h-[48px] touch-manipulation items-center text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--header-nav-hover)]/55 sm:min-h-0 sm:py-1`;
@@ -35,6 +35,17 @@ export function SiteFooter() {
                 <nav aria-label="Link del sito">
                   <ul className="space-y-0.5">
                     {navItems.map((item) => (
+                      <li key={item.href}>
+                        <Link className={footerNavLinkClass} href={item.href}>
+                          {item.label}
+                        </Link>
+                      </li>
+                    ))}
+                  </ul>
+                </nav>
+                <nav aria-label="Servizi e landing" className="mt-6">
+                  <ul className="space-y-0.5">
+                    {footerExtraLinks.map((item) => (
                       <li key={item.href}>
                         <Link className={footerNavLinkClass} href={item.href}>
                           {item.label}

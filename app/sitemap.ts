@@ -31,7 +31,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
   ];
 
   const entries: MetadataRoute.Sitemap = staticPaths.map(({ path, changeFrequency, priority }) => ({
-    url: path === "" ? `${base}/` : `${base}${path}`,
+    url: path === "" ? `${base}/` : `${base}${path}/`,
     lastModified: lastModifiedForStaticPath(path),
     changeFrequency,
     priority,
@@ -39,14 +39,14 @@ export default function sitemap(): MetadataRoute.Sitemap {
 
   for (const area of projectAreas) {
     entries.push({
-      url: `${base}/progetti/${area}`,
+      url: `${base}/progetti/${area}/`,
       lastModified: lastModifiedForProjectArea(area),
       changeFrequency: "monthly",
       priority: 0.75,
     });
     for (const c of projectCategories[area].cases) {
       entries.push({
-        url: `${base}/progetti/${area}/${c.slug}`,
+        url: `${base}/progetti/${area}/${c.slug}/`,
         lastModified: lastModifiedForProjectCase(area, c.slug),
         changeFrequency: "monthly",
         priority: 0.72,
