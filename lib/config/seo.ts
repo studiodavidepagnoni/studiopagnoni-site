@@ -128,7 +128,7 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} | Rilievi SLAM — Brescia`,
+    default: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
     template: `${site.brandName} | %s`,
   },
   description:
@@ -138,14 +138,14 @@ export const rootMetadata: Metadata = {
     locale: "it_IT",
     url: site.url,
     siteName: site.brandName,
-    title: `${site.brandName} | Rilievi SLAM — Brescia`,
+    title: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
     description:
       "Architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Sopralluoghi e preventivi.",
     images: [{ url: absoluteUrl(ogImagePath), width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.brandName} | Rilievi SLAM — Brescia`,
+    title: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
     description:
       "Architettura, topografia e rilievi 3D SLAM in Franciacorta, Brescia e Lombardia. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
   },
@@ -157,7 +157,7 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Rilievi SLAM — Brescia",
+  title: "Architettura e rilievi 3D — Franciacorta / Brescia",
   description:
     "Studio Architettura Pagnoni a Cazzago San Martino (BS): progettazione architettonica, topografia e rilievi laser SLAM in Franciacorta e provincia di Brescia.",
   path: "/",
@@ -328,7 +328,7 @@ export const jsonLdGraph = {
       "@type": "WebPage",
       "@id": `${site.url.replace(/\/$/, "")}/#homepage`,
       url: site.url,
-      name: `${site.brandName} | Rilievi SLAM — Brescia`,
+      name: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
       description:
         "Homepage: architettura, topografia e rilievi laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia.",
       isPartOf: { "@id": `${site.url.replace(/\/$/, "")}/#website` },

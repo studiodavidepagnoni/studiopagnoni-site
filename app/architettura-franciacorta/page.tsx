@@ -68,8 +68,9 @@ export default function ArchitetturaFranciacortaPage() {
               tessuto edilizio e esigenze della committenza. Lo <strong>Studio di Architettura Pagnoni</strong>, con sede a{" "}
               <strong>Frazione di Cazzago San Martino (BS)</strong>, segue la progettazione architettonica dal concept
               alle tavole esecutive, in continuità con misura del territorio e pratiche edilizie.{" "}
-              <strong>Arch. Davide Pagnoni</strong> coordina le fasi del processo edilizio quando il progetto deve
-              dialogare con rilievo, urbanistica e cantiere.
+              <strong>l&apos;Architetto Davide Pagnoni</strong> coordina le fasi del processo edilizio —
+              dall&apos;anteprogetto alle tavole esecutive — quando il progetto deve dialogare con rilievo,
+              urbanistica, pratiche e cantiere, mantenendo un unico filo tra idea, misura e realizzazione.
             </p>
 
             <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
