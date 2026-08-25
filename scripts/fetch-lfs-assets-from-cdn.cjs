@@ -1,6 +1,7 @@
 /**
  * Sostituisce i pointer Git LFS sotto assets/ scaricando i file reali
- * dal sito già online (evita la quota LFS in CI).
+ * dal sito già online. Usato in CI/Pages con checkout `lfs: false`
+ * per non consumare bandwidth Git LFS a ogni push.
  *
  * Env:
  *   ASSET_CDN_BASE — es. https://studiopagnoni.com (no trailing slash)
@@ -73,7 +74,7 @@ async function main() {
   }
 
   console.log(
-    `[fetch-lfs-assets] Scarico ${targets.length} file da ${base} (bypass LFS quota)`,
+    `[fetch-lfs-assets] Scarico ${targets.length} file da ${base} (niente bandwidth LFS)`,
   );
 
   let ok = 0;

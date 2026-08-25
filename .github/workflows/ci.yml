@@ -13,9 +13,10 @@ jobs:
   quality:
     runs-on: ubuntu-latest
     steps:
+      # lfs: false — non scaricare Git LFS in Actions (brucia bandwidth). I video arrivano da studiopagnoni.com in sync:static.
       - uses: actions/checkout@v6
         with:
-          lfs: true
+          lfs: false
 
       - uses: actions/setup-node@v6
         with:
@@ -33,6 +34,7 @@ jobs:
       - name: Static export build
         env:
           STATIC_EXPORT: "1"
+          ASSET_CDN_BASE: https://studiopagnoni.com
           NEXT_PUBLIC_SITE_URL: https://studiopagnoni.com
           NEXT_PUBLIC_FORMSPREE_ID: e2e-ci-mock
         # Asset già ottimizzati in repo: sync + export, senza ricodifica ffmpeg/sharp in CI.

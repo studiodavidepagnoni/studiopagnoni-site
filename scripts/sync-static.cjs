@@ -3,10 +3,19 @@
  * - assets/ → public/assets/
  * - robots.txt, sitemap.xml, llms.txt se presenti
  */
+const { spawnSync } = require("child_process");
 const fs = require("fs");
 const path = require("path");
 
 const root = path.join(__dirname, "..");
+
+const restore = spawnSync(process.execPath, [path.join(__dirname, "fetch-lfs-assets-from-cdn.cjs")], {
+  stdio: "inherit",
+  env: process.env,
+});
+if (restore.status !== 0) {
+  process.exit(restore.status ?? 1);
+}
 
 const assetsSrc = path.join(root, "assets");
 const assetsDest = path.join(root, "public", "assets");

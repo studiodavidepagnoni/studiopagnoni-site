@@ -5,6 +5,7 @@
   "scripts": {
     "clean": "node scripts/clean-next.cjs",
     "sync:static": "node scripts/sync-static.cjs",
+    "restore:videos": "node scripts/fetch-lfs-assets-from-cdn.cjs",
     "optimize:assets": "node scripts/optimize-assets.cjs",
     "assets:rename-seo": "node scripts/rename-assets-seo.cjs",
     "optimize:posters": "cross-env POSTERS_ONLY=1 node scripts/optimize-assets.cjs",
