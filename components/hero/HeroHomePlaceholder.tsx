@@ -71,8 +71,8 @@ export function HeroHomePlaceholder() {
             <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnHeroPrimary}>
               Richiedi preventivo
             </Link>
-            <Link href="/laser-scanner-slam" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
-              Scopri il servizio SLAM
+            <Link href="/servizi" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
+              Scopri tutti i servizi
             </Link>
           </div>
         </div>
