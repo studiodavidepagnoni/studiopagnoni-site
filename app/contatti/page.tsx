@@ -27,8 +27,8 @@ export default function ContattiPage() {
           <div className={`${layoutContentMaxClass} min-w-0 overflow-x-clip`}>
             <ContattiIntro />
 
-            <div className="grid min-w-0 gap-6 sm:gap-8 lg:grid-cols-2 lg:items-start">
-              <section aria-labelledby="recapiti-block" className={`${ui.innerCardStatic} min-w-0`}>
+            <div className="grid min-w-0 gap-6 sm:gap-8 lg:grid-cols-2 lg:items-stretch">
+              <section aria-labelledby="recapiti-block" className={`${ui.innerCardStatic} h-full min-w-0`}>
                 <h2 id="recapiti-block" className={`${fontDisplay.className} ${ui.cardHeading} mb-4 sm:mb-5`}>
                   Recapiti
                 </h2>
@@ -69,11 +69,16 @@ export default function ContattiPage() {
                 </p>
               </section>
 
-              <section aria-labelledby="mappa-heading" className={`${ui.innerCardStatic} min-w-0`}>
+              <section
+                aria-labelledby="mappa-heading"
+                className={`${ui.innerCardStatic} flex h-full min-w-0 flex-col`}
+              >
                 <h2 id="mappa-heading" className={`${fontDisplay.className} ${ui.cardHeading} mb-4 sm:mb-5`}>
                   Dove siamo
                 </h2>
-                <MapEmbed />
+                <div className="min-h-0 flex-1">
+                  <MapEmbed />
+                </div>
               </section>
             </div>
 

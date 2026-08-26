@@ -33,7 +33,7 @@ export function MapEmbed() {
   if (!showMap) {
     return (
       <div
-        className="flex min-h-[220px] flex-col items-center justify-center gap-4 rounded-xl border border-[var(--green-border-muted)] bg-[var(--muted)] px-5 py-8 text-center sm:min-h-[300px] sm:gap-5 sm:px-6 md:min-h-[400px]"
+        className="flex h-full min-h-[220px] flex-col items-center justify-center gap-4 rounded-[var(--radius-card)] border border-[var(--green-border-muted)] bg-[var(--muted)] px-5 py-8 text-center sm:min-h-[300px] sm:gap-5 sm:px-6"
         role="region"
         aria-label="Mappa Google Maps: consenso richiesto"
       >
@@ -72,7 +72,7 @@ export function MapEmbed() {
 
   return (
     <iframe
-      className="h-[220px] w-full rounded-xl border border-[var(--green-border-muted)] shadow-[0_16px_40px_rgba(0,0,0,0.35)] sm:h-[300px] md:h-[420px]"
+      className="h-full min-h-[220px] w-full rounded-[var(--radius-card)] border border-[var(--green-border-muted)] sm:min-h-[300px]"
       loading="lazy"
       allowFullScreen
       referrerPolicy="no-referrer-when-downgrade"
