@@ -31,16 +31,48 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* Scroll verticale: niente barra sul bordo destro; lo scroll resta attivo. */
-html,
-body {
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+/* Scroll verticale: barra discreta on-brand (desktop); overlay nativo su mobile. */
+@media (min-width: 768px) {
+  html {
+    scrollbar-width: thin;
+    scrollbar-color: color-mix(in srgb, var(--primary-mid) 55%, transparent) var(--surface-chrome-deep);
+  }
+
+  html::-webkit-scrollbar {
+    width: 10px;
+    height: 10px;
+  }
+
+  html::-webkit-scrollbar-track {
+    background: var(--surface-chrome-deep);
+  }
+
+  html::-webkit-scrollbar-thumb {
+    background: color-mix(in srgb, var(--primary-mid) 42%, var(--surface-chrome-raised));
+    border: 2px solid var(--surface-chrome-deep);
+    border-radius: 999px;
+  }
+
+  html::-webkit-scrollbar-thumb:hover {
+    background: color-mix(in srgb, var(--primary-mid-strong) 62%, var(--surface-chrome-raised));
+  }
+
+  html::-webkit-scrollbar-corner {
+    background: var(--surface-chrome-deep);
+  }
 }
 
-html::-webkit-scrollbar,
-body::-webkit-scrollbar {
-  display: none;
+@media (max-width: 767px) {
+  html,
+  body {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  html::-webkit-scrollbar,
+  body::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 body::before {
