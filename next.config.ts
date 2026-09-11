@@ -30,7 +30,9 @@ const isStaticExport = process.env.STATIC_EXPORT === "1";
 const isDev = process.env.NODE_ENV !== "production";
 
 /** Next 15.5 injecta sempre next-polyfill-module (Array.at, flat, Object.hasOwn, …)
- * anche con browserslist moderno. I target sotto supportano già tutto nativo → stub. */
+ * anche con browserslist moderno. I target sotto supportano già tutto nativo → stub.
+ * Solo in production build: in webpack *dev* l'alias a uno stub vuoto può far
+ * crashare __webpack_require__ con "Cannot read properties of undefined (reading 'call')". */
 const nextClientPolyfillModule = require.resolve("next/dist/build/polyfills/polyfill-module");
 const emptyPolyfillModule = path.join(__dirname, "lib/empty-polyfill-module.js");
 
@@ -44,7 +46,6 @@ const nextConfig: NextConfig = {
   experimental: {
     // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
     devtoolSegmentExplorer: false,
-    optimizePackageImports: ["react", "react-dom"],
     // Inline CSS nel HTML (prod): toglie i <link stylesheet> dal critical path → meno delay LCP/FCP mobile.
     // Tradeoff: HTML più pesante; ok qui (~23 KiB CSS). Solo production build.
     inlineCss: true,
@@ -55,8 +56,8 @@ const nextConfig: NextConfig = {
     ...(isDev ? { unoptimized: true } : {}),
     ...(isStaticExport ? { unoptimized: true } : {}),
   },
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
+  webpack: (config, { isServer, dev }) => {
+    if (!isServer && !dev) {
       config.resolve.alias = {
         ...config.resolve.alias,
         [nextClientPolyfillModule]: emptyPolyfillModule,

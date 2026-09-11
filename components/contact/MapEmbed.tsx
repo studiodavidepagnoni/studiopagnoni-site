@@ -37,14 +37,13 @@ export function MapEmbed() {
         role="region"
         aria-label="Mappa Google Maps: consenso richiesto"
       >
-        <span
-          className="flex h-11 w-11 items-center justify-center rounded-full border border-[var(--green-border-muted)] bg-[var(--card)] text-[var(--primary-mid)]"
-          aria-hidden
-        >
-          <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <path d="M12 22s8-5 8-10V5l-8-3-8 3v7c0 5 8 10 8 10z" strokeLinejoin="round" />
-          </svg>
-        </span>
+        <p className={`${fontSans.className} map-consent-coords`} aria-hidden>
+          <span className="map-consent-coords__dms">{site.geoDms.lat}</span>
+          <span className="map-consent-coords__dms">{site.geoDms.lon}</span>
+          <span className="map-consent-coords__datum">
+            {site.geoDms.datum} · {site.address.addressNeighborhood}
+          </span>
+        </p>
         <div className="max-w-[36ch] space-y-2">
           <p className={`${fontSans.className} text-[0.82rem] leading-relaxed text-[var(--copy-body)] sm:text-sm`}>
             Per privacy <strong className="font-semibold text-[var(--foreground)]">non carichiamo Google Maps</strong> finché non acconsenti agli

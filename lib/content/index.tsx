@@ -295,7 +295,7 @@ export const zoneFooter = (
 );
 
 export const contattiIntro =
-  "Anteprima dei recapiti. Modulo, mappa e FAQ nella pagina Contatti.";
+  "Scriveteci o chiamateci per un primo confronto su rilievo, progetto o pratiche.";
 
 /** Statistiche home: numeri animati o blocchi descrittivi. */
 export type HomeStat =

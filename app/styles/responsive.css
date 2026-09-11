@@ -157,6 +157,17 @@
     border-left: none;
     border-right: none;
   }
+
+  .home-territory-plate {
+    margin-inline: -1rem;
+    border-radius: 0;
+    border-left: none;
+    border-right: none;
+  }
+
+  .home-kit-panel {
+    border-radius: 0.25rem;
+  }
 }
 
 /* ─── Sezioni sotto la piega: meno lavoro di layout durante lo scroll ─── */

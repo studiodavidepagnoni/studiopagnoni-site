@@ -142,40 +142,30 @@ export function CookieBanner() {
           <div className={layoutContentMaxClass}>
             <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-10">
               <div className="min-w-0 flex-1 space-y-3">
-                <div className="flex items-start gap-3">
-                  <span
-                    className="mt-0.5 flex h-10 w-10 shrink-0 items-center justify-center rounded-xl border border-[var(--primary-mid)]/35 bg-[var(--primary)]/10 text-[var(--primary-mid)]"
-                    aria-hidden
+                <div>
+                  <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Consenso</p>
+                  <p
+                    id="cookie-banner-title"
+                    className={`${fontDisplay.className} mt-1.5 text-lg font-medium tracking-tight text-white sm:text-xl`}
                   >
-                    <svg className="h-5 w-5" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-                      <path d="M12 2L4 6v6c0 5 3.5 9 8 10 4.5-1 8-5 8-10V6l-8-4z" strokeLinejoin="round" />
-                      <path d="M9 12l2 2 4-4" strokeLinecap="round" strokeLinejoin="round" />
-                    </svg>
-                  </span>
-                  <div>
-                    <p
-                      id="cookie-banner-title"
-                      className={`${fontDisplay.className} text-lg font-medium tracking-tight text-white sm:text-xl`}
+                    Privacy e cookie
+                  </p>
+                  <p
+                    id="cookie-banner-desc"
+                    className={`${fontSans.className} mt-1.5 text-[0.9rem] leading-relaxed text-white/78 sm:text-[0.95rem]`}
+                  >
+                    Usiamo cookie strettamente necessari. Per caricare contenuti Google di terze parti (
+                    <strong className="font-semibold text-white/92">Maps</strong> e, sul form Contatti,{" "}
+                    <strong className="font-semibold text-white/92">reCAPTCHA</strong>) serve il tuo consenso: puoi accettarli, rifiutarli o
+                    decidere con l&apos;interruttore qui sotto.{" "}
+                    <Link
+                      href="/privacy-policy#cookie"
+                      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] transition hover:text-[var(--primary)]"
                     >
-                      Privacy e cookie
-                    </p>
-                    <p
-                      id="cookie-banner-desc"
-                      className={`${fontSans.className} mt-1.5 text-[0.9rem] leading-relaxed text-white/78 sm:text-[0.95rem]`}
-                    >
-                      Usiamo cookie strettamente necessari. Per caricare contenuti Google di terze parti (
-                      <strong className="font-semibold text-white/92">Maps</strong> e, sul form Contatti,{" "}
-                      <strong className="font-semibold text-white/92">reCAPTCHA</strong>) serve il tuo consenso: puoi accettarli, rifiutarli o
-                      decidere con l&apos;interruttore qui sotto.{" "}
-                      <Link
-                        href="/privacy-policy#cookie"
-                        className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] transition hover:text-[var(--primary)]"
-                      >
-                        Informativa completa
-                      </Link>
-                      .
-                    </p>
-                  </div>
+                      Informativa completa
+                    </Link>
+                    .
+                  </p>
                 </div>
 
                 <div className="rounded-xl border border-white/10 bg-black/25 px-4 py-3.5 sm:px-5 sm:py-4">

@@ -74,13 +74,13 @@
   }
 }
 
-/* Processo — rail orizzontale, meno “card box” */
+/* Processo — rail orizzontale, indice da elaborato */
 .home-process-rail {
   display: grid;
   gap: 0;
   list-style: none;
   border: 1px solid var(--green-border-muted);
-  border-radius: 0.75rem;
+  border-radius: 0.25rem;
   overflow: hidden;
 }
 
@@ -99,10 +99,7 @@
 @media (min-width: 640px) {
   .home-process-rail__item:not(:last-child) {
     border-right: 1px solid var(--green-border-muted);
-  }
-
-  .home-process-rail__item::after {
-    display: none;
+    border-bottom: none;
   }
 }
 
@@ -110,17 +107,15 @@
   border-bottom: 1px solid var(--green-border-muted);
 }
 
-.home-process-rail__marker {
+.home-process-rail__index {
   display: block;
-  width: 2.25rem;
-  height: 2px;
-  margin-bottom: 0.85rem;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    var(--primary-mid) 0%,
-    color-mix(in srgb, var(--primary-mid) 35%, transparent) 100%
-  );
+  margin-bottom: 0.7rem;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  color: color-mix(in srgb, var(--primary-mid) 72%, var(--foreground));
 }
 
 /* Certificazioni — elenco editoriale, non griglia card */
@@ -160,74 +155,304 @@
   }
 }
 
-/* Territorio — banda citazione */
-.home-territory-band {
+/* Cornici da tavola (angoli di registrazione) */
+.survey-plate-frame {
+  pointer-events: none;
+  position: absolute;
+  inset: 0.55rem;
+  z-index: 2;
+}
+
+.home-territory-plate > .survey-plate-frame,
+.home-territory-plate__field > .survey-plate-frame,
+.home-contact-rail > .survey-plate-frame {
+  grid-column: 1 / -1;
+  grid-row: 1 / -1;
+}
+
+.survey-plate-frame__c {
+  position: absolute;
+  width: 0.7rem;
+  height: 0.7rem;
+  border-color: color-mix(in srgb, var(--primary-mid) 70%, var(--green-border));
+  border-style: solid;
+}
+
+.survey-plate-frame__c--tl {
+  top: 0;
+  left: 0;
+  border-width: 1px 0 0 1px;
+}
+
+.survey-plate-frame__c--tr {
+  top: 0;
+  right: 0;
+  border-width: 1px 1px 0 0;
+}
+
+.survey-plate-frame__c--bl {
+  bottom: 0;
+  left: 0;
+  border-width: 0 0 1px 1px;
+}
+
+.survey-plate-frame__c--br {
+  right: 0;
+  bottom: 0;
+  border-width: 0 1px 1px 0;
+}
+
+/* Territorio — tavola con coordinate e curve di livello */
+.home-territory-plate {
+  position: relative;
   display: grid;
-  gap: 1.25rem;
-  padding: clamp(1.5rem, 4vw, 2.25rem);
-  border-radius: 0.75rem;
-  border: 1px solid var(--green-border-muted);
-  background:
-    linear-gradient(135deg, color-mix(in srgb, var(--primary-mid) 7%, var(--card)) 0%, var(--card) 48%),
-    var(--card);
-}
-
-@media (min-width: 640px) {
-  .home-territory-band {
-    grid-template-columns: auto minmax(0, 1fr);
-    align-items: start;
-    gap: 1.75rem;
-  }
-}
-
-.home-territory-band__icon {
-  display: flex;
-  height: 3.5rem;
-  width: 3.5rem;
-  align-items: center;
-  justify-content: center;
-  border-radius: 999px;
-  border: 1px solid color-mix(in srgb, var(--primary-mid) 35%, var(--green-border-muted));
-  background: color-mix(in srgb, var(--primary-mid) 10%, var(--muted));
-  color: var(--primary-mid);
-}
-
-@media (min-width: 640px) {
-  .home-territory-band__icon {
-    height: 4rem;
-    width: 4rem;
-  }
-}
-
-/* Contatti — rail con separatori, non tre box */
-.home-contact-rail {
-  display: grid;
-  gap: 0;
-  border: 1px solid var(--green-border-muted);
-  border-radius: 0.75rem;
   overflow: hidden;
+  border: 1px solid var(--green-border-muted);
+  border-radius: 0.25rem;
   background: var(--card);
 }
 
-@media (min-width: 640px) {
-  .home-contact-rail {
+@media (min-width: 768px) {
+  .home-territory-plate {
+    grid-template-columns: minmax(15.5rem, 0.42fr) minmax(0, 1fr);
+    align-items: stretch;
+  }
+}
+
+.home-territory-plate__field {
+  position: relative;
+  isolation: isolate;
+  min-height: 11.5rem;
+  color: var(--primary-mid);
+  background: color-mix(in srgb, var(--primary-mid) 6%, var(--muted));
+}
+
+@media (min-width: 768px) {
+  .home-territory-plate__field {
+    min-height: 100%;
+    border-right: 1px solid var(--green-border-muted);
+  }
+}
+
+.home-territory-plate__topo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.home-territory-plate__coords {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  height: 100%;
+  min-height: 11.5rem;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 1.15rem 1.2rem 1.25rem;
+  background: linear-gradient(
+    180deg,
+    transparent 18%,
+    color-mix(in srgb, var(--card) 82%, transparent) 100%
+  );
+}
+
+.home-territory-plate__dms {
+  font-size: clamp(1.15rem, 4.6vw, 1.55rem);
+  font-weight: 500;
+  line-height: 1.12;
+  letter-spacing: -0.03em;
+  color: var(--foreground);
+  font-variant-numeric: tabular-nums;
+}
+
+.home-territory-plate__datum {
+  margin-top: 0.55rem;
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--green-ink-muted);
+}
+
+.home-territory-plate__copy {
+  min-width: 0;
+  padding: 1.25rem 1.2rem 1.4rem;
+}
+
+@media (min-width: 768px) {
+  .home-territory-plate__copy {
+    padding: 1.6rem 1.65rem 1.7rem;
+  }
+}
+
+/* Contatti — cartiglio recapiti, allineato a sinistra */
+.home-contact-rail {
+  position: relative;
+  overflow: hidden;
+  border: 1px solid var(--green-border-muted);
+  border-radius: 0.25rem;
+  background: var(--card);
+}
+
+.home-contact-rail__cols {
+  display: grid;
+  gap: 0;
+}
+
+@media (min-width: 768px) {
+  .home-contact-rail__cols {
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
 .home-contact-rail__item {
-  padding: 1.35rem 1.25rem;
-  text-align: center;
-}
-
-@media (min-width: 640px) {
-  .home-contact-rail__item:not(:last-child) {
-    border-right: 1px solid var(--green-border-muted);
-  }
+  padding: 1.2rem 1.2rem 1.3rem;
+  text-align: left;
 }
 
 .home-contact-rail__item:not(:last-child) {
   border-bottom: 1px solid var(--green-border-muted);
+}
+
+@media (min-width: 768px) {
+  .home-contact-rail__item {
+    padding: 1.4rem 1.35rem 1.5rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .home-contact-rail__item:not(:last-child) {
+    border-right: 1px solid var(--green-border-muted);
+    border-bottom: none;
+  }
+}
+
+.home-contact-rail__label {
+  margin-bottom: 0.45rem;
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--green-ink-muted);
+}
+
+.home-contact-rail__value {
+  font-size: 0.92rem;
+  color: var(--copy-body);
+}
+
+.home-contact-rail__phones {
+  max-width: 22rem;
+  list-style: none;
+}
+
+.home-contact-rail__phones li + li {
+  margin-top: 0.65rem;
+}
+
+.home-contact-rail__phone-label {
+  display: block;
+  font-size: 0.72rem;
+  color: var(--green-ink-muted);
+}
+
+/* Statistiche — elenco editoriale su mobile, griglia su desktop */
+.home-stats-rail {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--green-border-muted);
+}
+
+.home-stats-rail__item {
+  padding: 1.2rem 0 1.3rem;
+  border-bottom: 1px solid var(--green-border-muted);
+  text-align: left;
+}
+
+@media (min-width: 640px) {
+  .home-stats-rail {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px;
+    overflow: hidden;
+    border: 1px solid var(--green-border-muted);
+    border-radius: 0.25rem;
+    background: var(--green-border-muted);
+  }
+
+  .home-stats-rail__item {
+    padding: 1.6rem 1.4rem 1.7rem;
+    border-bottom: none;
+    background: var(--card);
+  }
+}
+
+@media (min-width: 1024px) {
+  .home-stats-rail {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
+}
+
+/* Strumentazione — lista, non card-in-card */
+.home-kit-list {
+  display: grid;
+  margin-top: 1.5rem;
+  list-style: none;
+  gap: 0;
+  border-top: 1px solid var(--green-border-muted);
+}
+
+.home-kit-list__item {
+  padding: 1rem 0;
+  border-bottom: 1px solid var(--green-border-muted);
+}
+
+@media (min-width: 640px) {
+  .home-kit-list {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: 0;
+    border-top: none;
+  }
+
+  .home-kit-list__item {
+    padding: 0 1.15rem 0 0;
+    border-bottom: none;
+  }
+
+  .home-kit-list__item:not(:first-child) {
+    padding-left: 1.25rem;
+  }
+
+  .home-kit-list__item:not(:last-child) {
+    border-right: 1px solid var(--green-border-muted);
+    padding-right: 1.25rem;
+  }
+}
+
+/* Consenso mappa — coordinate al posto dell’icona */
+.map-consent-coords {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  color: var(--foreground);
+}
+
+.map-consent-coords__dms {
+  display: block;
+  font-family: var(--font-display), system-ui, sans-serif;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  font-variant-numeric: tabular-nums;
+}
+
+.map-consent-coords__datum {
+  margin-top: 0.35rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--green-ink-muted);
 }
 
 /* Chi siamo — lista editoriale (mobile: più ariosa, meno “checklist SaaS”) */

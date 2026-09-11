@@ -124,9 +124,9 @@ export function StatsSection() {
           </h2>
           <div className="home-section-rule mt-4" aria-hidden />
         </div>
-        <div className="grid grid-cols-1 gap-px overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--green-border-muted)] sm:grid-cols-2 lg:grid-cols-4">
+        <div className="home-stats-rail">
           {homeStats.map((stat, idx) => (
-            <div key={idx} className="bg-[var(--card)] px-4 py-8 text-center sm:px-6 sm:py-10">
+            <div key={idx} className="home-stats-rail__item">
               <StatBlock stat={stat} reduced={reduced} active={inView} />
             </div>
           ))}

@@ -47,6 +47,8 @@ export const site = {
   addressLine: "Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS)",
   /** Coordinate sede (Bornato / Cazzago San Martino) per LocalBusiness.geo */
   geo: { latitude: 45.59368, longitude: 10.0409 },
+  /** Stessa posizione in notazione da elaborato (WGS 84). */
+  geoDms: { lat: "45°35′37″ N", lon: "10°02′27″ E", datum: "WGS 84" },
   maps: {
     /** Link scheda / ricerca Maps (hasMap + CTA) — include Bornato come addressLine. */
     placeUrl:

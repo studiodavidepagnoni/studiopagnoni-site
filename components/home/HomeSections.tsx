@@ -18,9 +18,9 @@ import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { featuredProjects } from "@/lib/content/projects";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
-import { IconEmail, IconMapPin, IconPhone } from "@/components/icons";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { HomeServiceCards } from "@/components/home/HomeServiceCards";
+import { PlateFrame, TopoContourField } from "@/components/home/SurveyGraphics";
 import { StatsSection } from "@/components/home/HomeClientBlocks";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
@@ -133,7 +133,7 @@ export function HomeSections() {
           <div
             id="strumentazione"
             aria-labelledby="strumentazione-heading"
-            className="surface-inverted reveal-block-solid mt-8 rounded-xl border border-[var(--green-border-muted)] p-5 sm:mt-10 sm:p-6"
+            className="home-kit-panel surface-inverted reveal-block-solid mt-8 rounded-xl border border-[var(--green-border-muted)] p-5 sm:mt-10 sm:p-6"
           >
             {/* Stessa misura per kicker + titolo + lede (evita “colonna stretta” sotto titolo largo). */}
             <div className="max-w-[min(62ch,100%)]">
@@ -148,9 +148,9 @@ export function HomeSections() {
                 {homeStrumentazione.lede}
               </div>
             </div>
-            <ul className="mt-6 grid list-none gap-4 sm:grid-cols-3 sm:gap-5">
+            <ul className="home-kit-list">
               {homeStrumentazione.items.map((item) => (
-                <li key={item.label} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-4 sm:p-5">
+                <li key={item.label} className="home-kit-list__item">
                   <p className={`${fontSans.className} section-kicker`}>{item.label}</p>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{item.text}</p>
                 </li>
@@ -242,9 +242,11 @@ export function HomeSections() {
             </p>
           </div>
           <ul className="home-process-rail mt-8">
-            {processSteps.map((s) => (
+            {processSteps.map((s, index) => (
               <li key={s.kicker} className="home-process-rail__item reveal-block">
-                <span className="home-process-rail__marker" aria-hidden />
+                <span className="home-process-rail__index" aria-hidden>
+                  {String(index + 1).padStart(2, "0")}
+                </span>
                 <p className={`${fontSans.className} section-kicker`}>{s.kicker}</p>
                 <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{s.title}</h3>
                 <p className={`${fontSans.className} mt-2 ${ui.bodySm}`}>{s.body}</p>
@@ -283,11 +285,19 @@ export function HomeSections() {
             <div className="home-section-rule" aria-hidden />
             <div className="home-section-intro__lede max-w-[52ch]">{zoneDescription}</div>
           </div>
-          <div className="home-territory-band reveal-block">
-            <div className="home-territory-band__icon" aria-hidden>
-              <IconMapPin className="h-7 w-7 sm:h-8 sm:w-8" />
+          <div className="home-territory-plate reveal-block">
+            <div className="home-territory-plate__field">
+              <PlateFrame />
+              <TopoContourField className="home-territory-plate__topo" />
+              <div className="home-territory-plate__coords">
+                <p className={`${fontDisplay.className} home-territory-plate__dms`}>{site.geoDms.lat}</p>
+                <p className={`${fontDisplay.className} home-territory-plate__dms`}>{site.geoDms.lon}</p>
+                <p className={`${fontSans.className} home-territory-plate__datum`}>
+                  {site.geoDms.datum} · {site.address.addressNeighborhood} ({site.address.addressRegion})
+                </p>
+              </div>
             </div>
-            <div className="min-w-0">
+            <div className="home-territory-plate__copy">
               <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{zoneContent.heading}</h3>
               <p className={`mt-2 ${ui.bodySm}`}>{zoneFooter}</p>
             </div>
@@ -307,46 +317,38 @@ export function HomeSections() {
             <p className="home-section-intro__lede max-w-[52ch]">{contattiIntro}</p>
           </div>
           <div className="home-contact-rail">
-            <article className="home-contact-rail__item reveal-block">
-              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
-                <IconEmail />
-              </div>
-              <h3 className={`${fontDisplay.className} mb-1.5 text-base font-medium text-[var(--foreground)]`}>Email</h3>
-              <a
-                href={`mailto:${site.email}`}
-                className="inline-block max-w-full break-words text-[0.88rem] text-[var(--copy-body)] underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline sm:text-[0.92rem]"
-              >
-                {site.email}
-              </a>
-            </article>
-            <article className="home-contact-rail__item reveal-block">
-              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
-                <IconPhone />
-              </div>
-              <h3 className={`${fontDisplay.className} mb-2 text-base font-medium text-[var(--foreground)]`}>Telefono</h3>
-              <ul className="mx-auto max-w-[22rem] space-y-2.5 text-[0.88rem] text-[var(--copy-body)] sm:text-[0.92rem]">
-                {site.phones.map((phone) => (
-                  <li key={phone.tel}>
-                    <span className="block text-[0.72rem] text-[var(--green-ink-muted)]">{phone.label}</span>
-                    <a
-                      href={`tel:${phone.tel}`}
-                      className="inline-block min-h-[40px] py-0.5 underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
-                    >
-                      {phone.display}
-                    </a>
-                  </li>
-                ))}
-              </ul>
-            </article>
-            <article className="home-contact-rail__item reveal-block">
-              <div className="mx-auto mb-3 flex h-10 w-10 items-center justify-center rounded-md border border-[var(--green-border-muted)] bg-[var(--muted)] text-[var(--primary-mid)]">
-                <IconMapPin />
-              </div>
-              <h3 className={`${fontDisplay.className} mb-1.5 text-base font-medium text-[var(--foreground)]`}>Sede</h3>
-              <p className="mx-auto max-w-[28ch] text-pretty text-[0.88rem] leading-relaxed text-[var(--copy-body)] sm:text-[0.92rem]">
-                {site.addressLine}
-              </p>
-            </article>
+            <PlateFrame />
+            <div className="home-contact-rail__cols">
+              <article className="home-contact-rail__item reveal-block">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Email</h3>
+                <a
+                  href={`mailto:${site.email}`}
+                  className="home-contact-rail__value inline-block max-w-full break-words underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
+                >
+                  {site.email}
+                </a>
+              </article>
+              <article className="home-contact-rail__item reveal-block">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Telefono</h3>
+                <ul className="home-contact-rail__phones">
+                  {site.phones.map((phone) => (
+                    <li key={phone.tel}>
+                      <span className="home-contact-rail__phone-label">{phone.label}</span>
+                      <a
+                        href={`tel:${phone.tel}`}
+                        className="home-contact-rail__value inline-block min-h-[40px] py-0.5 underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
+                      >
+                        {phone.display}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              </article>
+              <article className="home-contact-rail__item reveal-block">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Sede</h3>
+                <p className="home-contact-rail__value max-w-[36ch] text-pretty leading-relaxed">{site.addressLine}</p>
+              </article>
+            </div>
           </div>
           <p className="mt-8 sm:mt-10">
             <Link href="/contatti#form-contatti" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
