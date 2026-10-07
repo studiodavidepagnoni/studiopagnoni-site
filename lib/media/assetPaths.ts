@@ -25,7 +25,7 @@ export const stockImages = {
   /** Card servizi home — foto coerenti con progetti studio (GMB / cantiere / Franciacorta) */
   architetturaCappella: "architettura-cappella-restauro-brescia",
   topoFondazioni: "topografia-rilievo-gnss-lotto-brescia",
-  slamNuvolaCapannoni: "laser-slam-handheld-capannoni-brescia",
+  slamNuvolaCapannoni: "laser-slam-nuvola-punti-facciata-edificio-brescia",
   paesaggioTerreno: "paesaggio-vigneto-franciacorta-brescia",
 } as const;
 

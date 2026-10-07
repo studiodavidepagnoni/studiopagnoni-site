@@ -126,7 +126,7 @@ export const homeServiceCardImages = {
   },
   "laser-slam": {
     src: s("slamNuvolaCapannoni"),
-    alt: imageAlt("Laser scanner SLAM handheld lungo capannoni — rilievo 3D in campo", {
+    alt: imageAlt("Nuvola di punti 3D da laser SLAM — facciata edificio as-built", {
       service: "slam",
     }),
   },
