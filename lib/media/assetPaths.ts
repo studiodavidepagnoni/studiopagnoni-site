@@ -22,6 +22,11 @@ export const stockImages = {
   topoPlan: "piano-topografico-curve-livello-brescia",
   technicalDocs: "documentazione-tecnica-studio-pagnoni",
   totalStation: "stazione-totale-rilievo-cantiere-brescia",
+  /** Foto Google Business (owner) — card servizi home */
+  architetturaCappella: "architettura-cappella-restauro-brescia",
+  topoFondazioni: "topografia-fondazioni-cantiere-brescia",
+  slamNuvolaInterno: "laser-slam-nuvola-punti-interno-brescia",
+  paesaggioTerreno: "paesaggio-terreno-erbusco-brescia",
 } as const;
 
 /** Progetti (`assets/projects/{dir}/...`). */

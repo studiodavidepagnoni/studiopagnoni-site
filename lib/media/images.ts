@@ -113,20 +113,20 @@ export const homeChiSiamoImages = {
 
 export const homeServiceCardImages = {
   architettura: {
-    src: s("surveySite"),
-    alt: imageAlt("Tavolo di progettazione — tavole e documentazione tecnica", { service: "architettura" }),
+    src: s("architetturaCappella"),
+    alt: imageAlt("Intervento su edificio storico — cappella in restauro", { service: "architettura" }),
   },
   "topografia-rilievi": {
-    src: s("totalStation"),
-    alt: imageAlt("Stazione totale in cantiere — rilievo planoaltimetrico", { service: "topografia" }),
+    src: s("topoFondazioni"),
+    alt: imageAlt("Cantiere e fondazioni — rilievo e controllo in fase di costruzione", { service: "topografia" }),
   },
   "laser-slam": {
-    src: s("slamHero"),
-    alt: imageAlt("Operatore con laser scanner SLAM — base metrica per as-built", { service: "slam" }),
+    src: s("slamNuvolaInterno"),
+    alt: imageAlt("Nuvola di punti da laser SLAM — stato di fatto interni", { service: "slam" }),
   },
   "verde-paesaggio": {
-    src: s("handheldSlam"),
-    alt: imageAlt("Rilievo sul territorio — supporto a progettazione del verde", { service: "verde" }),
+    src: s("paesaggioTerreno"),
+    alt: imageAlt("Rilievo di terreno a Erbusco — base per progetto e paesaggio", { service: "verde" }),
   },
 } as const;
 
