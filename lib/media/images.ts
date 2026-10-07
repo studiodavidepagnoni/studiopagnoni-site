@@ -114,19 +114,27 @@ export const homeChiSiamoImages = {
 export const homeServiceCardImages = {
   architettura: {
     src: s("architetturaCappella"),
-    alt: imageAlt("Intervento su edificio storico — cappella in restauro", { service: "architettura" }),
+    alt: imageAlt("Cappella in restauro — intervento su edificio storico in Franciacorta", {
+      service: "architettura",
+    }),
   },
   "topografia-rilievi": {
     src: s("topoFondazioni"),
-    alt: imageAlt("Cantiere e fondazioni — rilievo e controllo in fase di costruzione", { service: "topografia" }),
+    alt: imageAlt("Rilievo GNSS su lotto — topografia e punti di controllo", {
+      service: "topografia",
+    }),
   },
   "laser-slam": {
     src: s("slamNuvolaCapannoni"),
-    alt: imageAlt("Nuvola di punti da laser SLAM — capannoni e impianti", { service: "slam" }),
+    alt: imageAlt("Laser scanner SLAM handheld lungo capannoni — rilievo 3D in campo", {
+      service: "slam",
+    }),
   },
   "verde-paesaggio": {
     src: s("paesaggioTerreno"),
-    alt: imageAlt("Rilievo di terreno a Erbusco — base per progetto e paesaggio", { service: "verde" }),
+    alt: imageAlt("Vigneto in Franciacorta — paesaggio e progetto degli spazi aperti", {
+      service: "verde",
+    }),
   },
 } as const;
 

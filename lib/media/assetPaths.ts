@@ -22,11 +22,11 @@ export const stockImages = {
   topoPlan: "piano-topografico-curve-livello-brescia",
   technicalDocs: "documentazione-tecnica-studio-pagnoni",
   totalStation: "stazione-totale-rilievo-cantiere-brescia",
-  /** Foto Google Business (owner) — card servizi home */
+  /** Card servizi home — foto coerenti con progetti studio (GMB / cantiere / Franciacorta) */
   architetturaCappella: "architettura-cappella-restauro-brescia",
-  topoFondazioni: "topografia-fondazioni-cantiere-brescia",
-  slamNuvolaCapannoni: "laser-slam-nuvola-punti-capannoni-brescia",
-  paesaggioTerreno: "paesaggio-terreno-erbusco-brescia",
+  topoFondazioni: "topografia-rilievo-gnss-lotto-brescia",
+  slamNuvolaCapannoni: "laser-slam-handheld-capannoni-brescia",
+  paesaggioTerreno: "paesaggio-vigneto-franciacorta-brescia",
 } as const;
 
 /** Progetti (`assets/projects/{dir}/...`). */
