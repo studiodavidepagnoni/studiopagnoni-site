@@ -78,13 +78,14 @@ export function RecaptchaField({ siteKey, onTokenChange, className = "" }: Props
 
   useEffect(() => {
     let cancelled = false;
+    const container = containerRef.current;
 
     loadRecaptchaScript()
       .then(() => {
-        if (cancelled || !containerRef.current || !window.grecaptcha) return;
+        if (cancelled || !container || !window.grecaptcha) return;
         window.grecaptcha.ready(() => {
-          if (cancelled || !containerRef.current || widgetIdRef.current !== null) return;
-          widgetIdRef.current = window.grecaptcha!.render(containerRef.current, {
+          if (cancelled || !container || widgetIdRef.current !== null) return;
+          widgetIdRef.current = window.grecaptcha!.render(container, {
             sitekey: siteKey,
             callback: (token) => onTokenChangeRef.current(token),
             "expired-callback": () => onTokenChangeRef.current(""),
@@ -101,7 +102,6 @@ export function RecaptchaField({ siteKey, onTokenChange, className = "" }: Props
       cancelled = true;
       reset();
       widgetIdRef.current = null;
-      const container = containerRef.current;
       if (container) container.innerHTML = "";
     };
   }, [siteKey, reset]);

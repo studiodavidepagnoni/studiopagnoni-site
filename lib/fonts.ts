@@ -1,17 +1,21 @@
 import localFont from "next/font/local";
-import { Manrope } from "next/font/google";
 
 /**
- * Corpo: Manrope — sans contemporanea, pulita e leggibile su UI dense.
+ * Corpo: Manrope self-hosted — evita next/font/google (URL gstatic extensionless
+ * che in CI/build fanno crashare il loader: Cannot read properties of null).
  * `optional`: non tiene il first paint in attesa del woff2 (fuori dal critical path LCP).
  */
-export const fontSans = Manrope({
-  subsets: ["latin"],
+export const fontSans = localFont({
+  src: [
+    { path: "../public/fonts/manrope-400-latin.woff2", weight: "400", style: "normal" },
+    { path: "../public/fonts/manrope-500-latin.woff2", weight: "500", style: "normal" },
+    { path: "../public/fonts/manrope-600-latin.woff2", weight: "600", style: "normal" },
+    { path: "../public/fonts/manrope-700-latin.woff2", weight: "700", style: "normal" },
+  ],
   variable: "--font-sans",
   display: "optional",
-  weight: ["400", "500", "600", "700"],
   preload: false,
-  adjustFontFallback: true,
+  adjustFontFallback: "Arial",
 });
 
 /**

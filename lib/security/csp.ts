@@ -15,8 +15,8 @@ export function buildContentSecurityPolicy(options?: { dev?: boolean; forMeta?: 
     "form-action 'self' https://formspree.io",
     "img-src 'self' data: https://*.googleapis.com https://*.gstatic.com",
     "media-src 'self'",
-    "font-src 'self' data: https://fonts.gstatic.com",
-    "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com",
+    "font-src 'self' data:",
+    "style-src 'self' 'unsafe-inline'",
     dev
       ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/"
       : "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/",
