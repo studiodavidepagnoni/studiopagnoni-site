@@ -54,7 +54,7 @@ export function HeroHomePlaceholder() {
       </div>
 
       {/* Mobile: copy compatto (bottom-aligned) */}
-      <div className="relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] min-[1025px]:hidden">
+      <div className="hero-mobile__copy-wrap relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))] min-[1025px]:hidden">
         <div className="hero-copy w-full min-w-0 text-left">
           <h1 className={`${fontDisplay.className} hero-title hero-mobile__title font-medium`}>
             Architettura
@@ -68,8 +68,8 @@ export function HeroHomePlaceholder() {
             Topografia · laser scanner SLAM · progettazione
           </p>
           <div className="mt-8 flex w-full flex-col gap-3">
-            <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnHeroPrimary}>
-              Richiedi preventivo
+            <Link href="/contatti#form-contatti" className={ui.btnHeroPrimary}>
+              Richiedi un sopralluogo
             </Link>
             <Link href="/servizi" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
               Scopri tutti i servizi

@@ -27,7 +27,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Architettura in Franciacorta",
     image: s("surveySite"),
     alt: imageAlt("Tavole di progettazione architettonica in studio", { service: "architettura" }),
-    lede: "Dal concept alle pratiche edilizie — Studio Architettura Pagnoni, Frazione di Cazzago San Martino (BS).",
+    lede: "Dal concept alle pratiche edilizie. Studio Architettura Pagnoni, Frazione di Cazzago San Martino (BS).",
     priorityImage: true,
   },
   "/servizi": {
@@ -57,7 +57,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Rilievi laser SLAM in Lombardia",
     image: s("handheldSlam"),
     alt: imageAlt("Acquisizione SLAM handheld — rilievo 3D in Lombardia", { service: "slam" }),
-    lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
+    lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia, con base operativa a Brescia.",
     priorityImage: true,
   },
   "/rilievi-3d-per-studi-di-architettura": {
@@ -65,7 +65,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Rilievi 3D per studi di architettura",
     image: s("pointcloud"),
     alt: imageAlt("Nuvola di punti da laser scanner — consegna per studi di architettura", { service: "slam" }),
-    lede: "Il rilievo lo facciamo noi, il progetto resta vostro: nuvole di punti, DWG e as-built consegnati pronti — Brescia e Franciacorta.",
+    lede: "Il rilievo lo facciamo noi, il progetto resta vostro: nuvole di punti, DWG e as-built consegnati pronti, in Brescia e Franciacorta.",
     priorityImage: true,
   },
   "/laser-scanner-slam": {
@@ -73,7 +73,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Rilievi laser SLAM",
     image: s("gnssRtk"),
     alt: imageAlt("GNSS RTK in area estrattiva — base metrica per progetto", { service: "slam" }),
-    lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
+    lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti, con CHCNAV RS10.",
     priorityImage: true,
   },
   "/progetti": {
@@ -83,7 +83,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     alt: imageAlt("Piano topografico con curve di livello — casi studio a Brescia", {
       service: "topografia",
     }),
-    lede: "Una selezione di commesse recenti: rilievi laser SLAM, nuvole di punti e interventi sul territorio in Franciacorta e provincia di Brescia.",
+    lede: "Rilievi digitali recenti in Franciacorta e in provincia di Brescia.",
   },
   "/contatti": {
     eyebrow: "Contatti",
@@ -92,7 +92,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     alt: imageAlt("Stazione totale in cantiere — sopralluoghi e preventivi", {
       service: "topografia",
     }),
-    lede: "Sopralluoghi e preventivi per architettura, topografia e laser scanner SLAM — Franciacorta e provincia di Brescia.",
+    lede: "Sopralluoghi e preventivi per architettura, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia.",
   },
   "/privacy-policy": {
     eyebrow: "GDPR · Italia · 2026",

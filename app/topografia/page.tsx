@@ -94,8 +94,8 @@ export default function TopografiaPage() {
 
           <PageClosingCta
             id="topografia-cta"
-            title="Pianifichiamo il tuo rilievo topografico"
-            description="Indica località, finalità (frazionamento, cantiere, progettazione) e superficie indicativa: ti rispondiamo con metodo, tempi e preventivo su misura."
+            title="Pianifichiamo il rilievo topografico"
+            description="Indicate località, finalità (frazionamento, cantiere, progettazione) e superficie indicativa: vi rispondiamo con metodo, tempi e preventivo su misura."
             primaryHref="/contatti#form-contatti"
             primaryLabel="Richiedi preventivo"
             secondaryHref="/laser-scanner-slam"

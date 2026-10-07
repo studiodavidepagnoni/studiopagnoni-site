@@ -65,7 +65,7 @@ const sharedDeliverables = [
 const bresciaDeliverables = [
   {
     format: "E57 / LAS / LAZ",
-    use: "Nuvola georiferita per studi locali, imprese e cantine in Franciacorta — scambio diretto con i progettisti di zona",
+    use: "Nuvola georiferita per studi locali, imprese e cantine in Franciacorta, con scambio diretto con i progettisti di zona",
   },
   {
     format: "DWG / DXF",
@@ -189,7 +189,7 @@ const lombardiaWorkflow = [
   {
     step: "02",
     title: "Pianificazione regionale",
-    body: "Organizziamo viaggio da Brescia, finestre di ingresso e sequenza dei percorsi — essenziale su magazzini e impianti con orari vincolati.",
+    body: "Organizziamo viaggio da Brescia, finestre di ingresso e sequenza dei percorsi, essenziale su magazzini e impianti con orari vincolati.",
   },
   {
     step: "03",
@@ -212,7 +212,7 @@ export const laserSlamLanding = {
   hero: {
     eyebrow: "Laser scanner mobile",
     title: "Rilievi laser SLAM",
-    lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti — CHCNAV RS10.",
+    lede: "Nuvole di punti e as-built per progetto architettonico, edifici, capannoni e impianti, con CHCNAV RS10.",
   },
   introHeading: "Laser scanner SLAM: misura 3D prima di progettare",
   introLead:
@@ -289,7 +289,7 @@ export const laserSlamLanding = {
   ],
   ctaHeading: "Preventivo rilievo laser scanner SLAM",
   ctaBody:
-    "Indica località, superficie indicativa e output desiderati (nuvola, DWG, BIM): ti rispondiamo con tempi e preventivo su misura.",
+    "Indicate località, superficie indicativa e output desiderati (nuvola, DWG, BIM): vi rispondiamo con tempi e preventivo su misura.",
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM",
     alternateNames: [
@@ -396,7 +396,7 @@ export const laserSlamLandingBrescia = {
   ],
   ctaHeading: "Preventivo rilievo SLAM a Brescia",
   ctaBody:
-    "Indica comune in provincia di Brescia, superficie indicativa e output desiderati (nuvola, DWG, BIM): ti rispondiamo con tempi e preventivo su misura.",
+    "Indicate comune in provincia di Brescia, superficie indicativa e output desiderati (nuvola, DWG, BIM): vi rispondiamo con tempi e preventivo su misura.",
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM a Brescia",
     alternateNames: [
@@ -431,7 +431,7 @@ export const laserSlamLandingLombardia = {
   hero: {
     eyebrow: "Laser scanner SLAM · Lombardia",
     title: "Rilievi laser SLAM in Lombardia",
-    lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia — base operativa Brescia.",
+    lede: "Scansione 3D mobile per architettura, capannoni e impianti in Lombardia, con base operativa a Brescia.",
   },
   introHeading: "Rilievo laser scanner SLAM in Lombardia: copertura regionale",
   introLead:
@@ -486,7 +486,7 @@ export const laserSlamLandingLombardia = {
   faq: [
     {
       q: "Eseguite rilievi laser scanner SLAM in tutta la Lombardia?",
-      a: "Sì, su programmazione. La sede è in provincia di Brescia: per Bergamo, Mantova, Cremona e hinterland milanese organizziamo campagne dedicate. Indica provincia, comune e superficie per una stima di tempi e costi.",
+      a: "Sì, su programmazione. La sede è in provincia di Brescia: per Bergamo, Mantova, Cremona e hinterland milanese organizziamo campagne dedicate. Indicate provincia, comune e superficie per una stima di tempi e costi.",
     },
     {
       q: "Quanto costa un rilievo SLAM in Lombardia rispetto a Brescia?",
@@ -507,7 +507,7 @@ export const laserSlamLandingLombardia = {
   ],
   ctaHeading: "Preventivo rilievo SLAM in Lombardia",
   ctaBody:
-    "Indica provincia, comune, superficie e formati di consegna: prepariamo un’offerta con tempi di campo e restituzione, inclusa la logistica regionale.",
+    "Indicate provincia, comune, superficie e formati di consegna: prepariamo un’offerta con tempi di campo e restituzione, inclusa la logistica regionale.",
   jsonLd: {
     serviceName: "Rilievi laser scanner SLAM in Lombardia",
     alternateNames: [

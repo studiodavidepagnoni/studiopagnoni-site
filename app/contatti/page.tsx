@@ -33,7 +33,7 @@ export default function ContattiPage() {
                   Recapiti
                 </h2>
                 <p className="mb-5 text-[0.95rem] font-semibold leading-snug text-[var(--foreground)] sm:text-[1.02rem]">
-                  {site.name} — {site.tagline}
+                  {site.name}. {site.tagline}
                 </p>
                 <ul className="space-y-3 text-[0.95rem] text-[var(--copy-body)] sm:space-y-4 sm:text-[1.03rem]">
                   <li>

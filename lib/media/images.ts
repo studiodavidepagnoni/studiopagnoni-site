@@ -60,9 +60,9 @@ export const heroSlides: readonly HeroSlide[] = [
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto architettonico e BIM.",
     line1: "Architettura e rilievi 3D in Franciacorta",
     line2: "Studio di architettura · topografia e laser scanning",
-    primaryCtaHref: "/contatti?oggetto=slam#form-contatti",
-    primaryCtaLabel: "Richiedi preventivo rilievo laser scanner SLAM",
-    primaryCtaLabelMobile: "Richiedi preventivo SLAM",
+    primaryCtaHref: "/contatti#form-contatti",
+    primaryCtaLabel: "Richiedi un sopralluogo",
+    primaryCtaLabelMobile: "Richiedi un sopralluogo",
     ctaHref: "/servizi",
     ctaLabel: "Scopri i servizi",
     video: HERO_VIDEO_INDOOR_SOURCES,
@@ -108,6 +108,25 @@ export const homeChiSiamoImages = {
     alt: imageAlt("Stazione totale in cantiere — rilievo a supporto di progetto", {
       service: "topografia",
     }),
+  },
+} as const;
+
+export const homeServiceCardImages = {
+  architettura: {
+    src: s("surveySite"),
+    alt: imageAlt("Tavolo di progettazione — tavole e documentazione tecnica", { service: "architettura" }),
+  },
+  "topografia-rilievi": {
+    src: s("totalStation"),
+    alt: imageAlt("Stazione totale in cantiere — rilievo planoaltimetrico", { service: "topografia" }),
+  },
+  "laser-slam": {
+    src: s("slamHero"),
+    alt: imageAlt("Operatore con laser scanner SLAM — base metrica per as-built", { service: "slam" }),
+  },
+  "verde-paesaggio": {
+    src: s("handheldSlam"),
+    alt: imageAlt("Rilievo sul territorio — supporto a progettazione del verde", { service: "verde" }),
   },
 } as const;
 

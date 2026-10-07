@@ -15,7 +15,7 @@ export const staticPageLastModified: Record<string, string> = {
   "/rilievi-laser-scanner-slam-lombardia": "2026-07-22",
   "/contatti": "2026-05-21",
   "/chi-siamo": "2026-04-01",
-  "/progetti": "2026-04-15",
+  "/progetti": "2026-10-07",
   "/privacy-policy": "2026-05-21",
 };
 

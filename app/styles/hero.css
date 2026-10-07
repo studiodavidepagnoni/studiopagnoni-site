@@ -448,4 +448,14 @@
   }
 }
 
+/* Banner cookie compatto: i CTA hero restano visibili e cliccabili. */
+body.cookie-banner-visible .hero-mobile__copy-wrap {
+  padding-bottom: calc(var(--cookie-banner-space, 0px) + 1.25rem);
+}
+
+body.cookie-banner-visible .hero-mobile__scroll-hint {
+  opacity: 0;
+  pointer-events: none;
+}
+
 /* Marchio header — più luminoso e leggibile su hero / page band */

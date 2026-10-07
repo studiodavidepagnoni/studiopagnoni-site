@@ -72,10 +72,10 @@ export default function Rilievi3dStudiArchitetturaPage() {
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
             <p className={`${ui.body} max-w-[72ch]`}>
-              Se il tuo studio progetta ma non possiede un laser scanner, il rilievo dello stato di fatto diventa un
+              Se il vostro studio progetta ma non possiede un laser scanner, il rilievo dello stato di fatto diventa un
               collo di bottiglia: giornate in campo, misure a mano, basi incomplete. Noi eseguiamo il{" "}
               <strong>rilievo 3D con laser scanner SLAM (CHCNAV RS10)</strong> e consegniamo elaborati pronti per il
-              vostro progetto — <strong>il rapporto con il cliente resta vostro</strong>. Sede a Bornato, in
+              vostro progetto: <strong>il rapporto con il cliente resta vostro</strong>. Sede a Bornato, in
               Franciacorta: interventi rapidi in provincia di Brescia.
             </p>
 
@@ -101,11 +101,11 @@ export default function Rilievi3dStudiArchitetturaPage() {
                   id="b2b-esempio"
                   className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap} ${ui.scrollAnchor}`}
                 >
-                  Scarica una nuvola di punti di esempio
+                  Scaricate una nuvola di punti di esempio
                 </h2>
                 <p className={`${ui.body} mb-6`}>
-                  Vuoi valutare il flusso di lavoro prima di affidarci un incarico? Scarica una nuvola di punti di un
-                  edificio reale e aprila in <strong>CloudCompare</strong> (gratuito), Autodesk ReCap o nel tuo
+                  Volete valutare il flusso di lavoro prima di affidarci un incarico? Scaricate una nuvola di punti di un
+                  edificio reale e apritela in <strong>CloudCompare</strong> (gratuito), Autodesk ReCap o nel vostro
                   software abituale. Il campione leggero si apre in pochi secondi; la versione completa è acquisita con{" "}
                   <strong>CHCNAV RS10</strong>, lo stesso laser scanner che usiamo in campo.
                 </p>

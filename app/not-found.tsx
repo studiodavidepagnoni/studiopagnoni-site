@@ -18,7 +18,7 @@ export default function NotFound() {
           <h1 className={`${fontDisplay.className} ${ui.pageTitle} mb-4 sm:mb-5`}>Pagina non trovata</h1>
           <div className={`${ui.pageTitleRule} mx-auto`} aria-hidden />
           <p className={`${fontSans.className} ${ui.body} mx-auto mt-6 max-w-[40ch]`}>
-            Il link potrebbe essere errato o la pagina è stata spostata. {site.name} — topografia e progettazione in{" "}
+            Il link potrebbe essere errato o la pagina è stata spostata. {site.name}: topografia e progettazione in{" "}
             <strong className="font-semibold text-[var(--foreground)]">Franciacorta</strong>,{" "}
             <strong className="font-semibold text-[var(--foreground)]">provincia di Brescia</strong> e{" "}
             <strong className="font-semibold text-[var(--foreground)]">Nord Italia</strong>.

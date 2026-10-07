@@ -304,7 +304,7 @@ export function HeroHome() {
           <div className="hero-mobile__vignette" aria-hidden />
         </div>
 
-        <div className="relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))]">
+        <div className="hero-mobile__copy-wrap relative z-20 mx-auto flex h-full w-full min-w-0 flex-col justify-end px-6 pb-[max(6rem,calc(env(safe-area-inset-bottom)+4.5rem))] pt-[max(6.25rem,calc(env(safe-area-inset-top)+4.75rem))]">
           <div className="hero-copy w-full min-w-0 text-left" data-hero-motion>
             <div className="hero-copy__slide">
               <h1
@@ -324,8 +324,8 @@ export function HeroHome() {
               </p>
 
               <div className="mt-8 flex w-full flex-col gap-3">
-                <Link href="/contatti?oggetto=slam#form-contatti" className={ui.btnHeroPrimary}>
-                  Richiedi preventivo
+                <Link href="/contatti#form-contatti" className={ui.btnHeroPrimary}>
+                  Richiedi un sopralluogo
                 </Link>
                 <Link href="/servizi" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
                   Scopri tutti i servizi

@@ -67,7 +67,7 @@ export const rilievi3dStudiFaq = [
   },
   {
     q: "Come verifico la qualità prima di affidarvi un incarico?",
-    a: "Scarica la nuvola di punti di esempio in questa pagina e aprila in CloudCompare, Autodesk ReCap o nel tuo software abituale. Al primo incarico consegniamo anche un'anteprima della nuvola prima della restituzione finale.",
+    a: "Scaricate la nuvola di punti di esempio in questa pagina e apritela in CloudCompare, Autodesk ReCap o nel vostro software abituale. Al primo incarico consegniamo anche un'anteprima della nuvola prima della restituzione finale.",
   },
 ] as const satisfies readonly FaqItem[];
 

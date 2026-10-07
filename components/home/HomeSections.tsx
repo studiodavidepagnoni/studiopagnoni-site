@@ -3,11 +3,7 @@ import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import {
   certifications,
-  certificationsIntro,
-  contattiIntro,
   homeChiSiamo,
-  homeProgettiIntro,
-  homeServiziIntro,
   homeStrumentazione,
   zoneContent,
   zoneDescription,
@@ -20,8 +16,8 @@ import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { HomeServiceCards } from "@/components/home/HomeServiceCards";
-import { PlateFrame, TopoContourField } from "@/components/home/SurveyGraphics";
-import { StatsSection } from "@/components/home/HomeClientBlocks";
+import { PlateFrame } from "@/components/home/SurveyGraphics";
+import { StatsSection } from "@/components/home/StatsSection";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
 
@@ -50,9 +46,7 @@ export function HomeSections() {
       <section className="lazy-section section-shell overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>{homeChiSiamo.title}</h2>
-            <div className="home-section-rule" aria-hidden />
           </div>
 
           <div className="reveal-block mt-8 grid items-stretch gap-8 sm:mt-10 sm:gap-10 lg:mt-10 lg:grid-cols-12 lg:gap-14">
@@ -83,14 +77,11 @@ export function HomeSections() {
                 ))}
               </ul>
 
-              <div className="mt-8 flex flex-col gap-3 sm:mt-10 sm:flex-row sm:items-center sm:gap-4">
-                <Link href="/chi-siamo" className={`${ui.btnOutline} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
-                  Chi siamo
+              <p className="mt-8 sm:mt-10">
+                <Link href="/chi-siamo" className={`${fontSans.className} ${ui.textCta}`}>
+                  Scheda dello studio
                 </Link>
-                <Link href="/contatti" className={`${ui.btnPrimary} inline-flex w-full min-h-[48px] justify-center sm:w-auto`}>
-                  Contatti
-                </Link>
-              </div>
+              </p>
             </div>
 
             {/* ── Media (destra): full-bleed su mobile, proporzionata su desktop ── */}
@@ -122,10 +113,7 @@ export function HomeSections() {
       <section className="home-section-servizi lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Servizi</h2>
-            <div className="home-section-rule" aria-hidden />
-            <p className="home-section-intro__lede max-w-[52ch]">{homeServiziIntro}</p>
           </div>
 
           <HomeServiceCards />
@@ -176,7 +164,7 @@ export function HomeSections() {
           </div>
 
           <p className="mt-8 sm:mt-10">
-            <Link href="/servizi" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
+            <Link href="/servizi" className={`${fontSans.className} ${ui.textCta}`}>
               Elenco completo dei servizi
             </Link>
           </p>
@@ -187,10 +175,7 @@ export function HomeSections() {
       <section className="home-section-progetti lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Progetti</h2>
-            <div className="home-section-rule" aria-hidden />
-            <p className="home-section-intro__lede max-w-[52ch]">{homeProgettiIntro}</p>
           </div>
           <div className="home-projects-mosaic">
             {featuredProjects.slice(0, 3).map((p, index) => (
@@ -217,13 +202,13 @@ export function HomeSections() {
                   <span className={`${fontDisplay.className} home-projects-mosaic__caption mt-1 block font-medium text-[var(--foreground)]`}>
                     {p.caption}
                   </span>
-                  <span className={`${fontSans.className} ${ui.textCta} mt-1`}>Apri →</span>
+                  <span className={`${fontSans.className} ${ui.textCta} mt-1`}>Vedi il progetto</span>
                 </div>
               </Link>
             ))}
           </div>
           <p className="mt-8 sm:mt-10">
-            <Link href="/progetti" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
+            <Link href="/progetti" className={`${fontSans.className} ${ui.textCta}`}>
               Archivio progetti
             </Link>
           </p>
@@ -234,19 +219,11 @@ export function HomeSections() {
       <section id="processo" className="surface-inverted lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Metodo</p>
             <h2 className={titleCls}>Dal campo agli elaborati</h2>
-            <div className="home-section-rule" aria-hidden />
-            <p className="home-section-intro__lede max-w-[48ch]">
-              Tre passaggi ricorrenti nei rilievi digitali: acquisizione rapida, controllo metrico, consegna in formati operativi.
-            </p>
           </div>
           <ul className="home-process-rail mt-8">
-            {processSteps.map((s, index) => (
+            {processSteps.map((s) => (
               <li key={s.kicker} className="home-process-rail__item reveal-block">
-                <span className="home-process-rail__index" aria-hidden>
-                  {String(index + 1).padStart(2, "0")}
-                </span>
                 <p className={`${fontSans.className} section-kicker`}>{s.kicker}</p>
                 <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{s.title}</h3>
                 <p className={`${fontSans.className} mt-2 ${ui.bodySm}`}>{s.body}</p>
@@ -260,10 +237,7 @@ export function HomeSections() {
       <section id="certificazioni" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Titoli</p>
             <h2 className={titleCls}>Abilitazioni professionali</h2>
-            <div className="home-section-rule" aria-hidden />
-            <p className="home-section-intro__lede max-w-[52ch]">{certificationsIntro}</p>
           </div>
           <ul className="home-certs-list">
             {certifications.map((c) => (
@@ -279,28 +253,14 @@ export function HomeSections() {
       {/* ── Dove operiamo ── */}
       <section id="zone-servite" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
-          <div className="home-section-intro reveal-block">
-            <p className="section-kicker">Territorio</p>
+          <div className="reveal-block max-w-[62ch]">
             <h2 className={titleCls}>{zoneContent.title}</h2>
-            <div className="home-section-rule" aria-hidden />
-            <div className="home-section-intro__lede max-w-[52ch]">{zoneDescription}</div>
-          </div>
-          <div className="home-territory-plate reveal-block">
-            <div className="home-territory-plate__field">
-              <PlateFrame />
-              <TopoContourField className="home-territory-plate__topo" />
-              <div className="home-territory-plate__coords">
-                <p className={`${fontDisplay.className} home-territory-plate__dms`}>{site.geoDms.lat}</p>
-                <p className={`${fontDisplay.className} home-territory-plate__dms`}>{site.geoDms.lon}</p>
-                <p className={`${fontSans.className} home-territory-plate__datum`}>
-                  {site.geoDms.datum} · {site.address.addressNeighborhood} ({site.address.addressRegion})
-                </p>
-              </div>
-            </div>
-            <div className="home-territory-plate__copy">
-              <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{zoneContent.heading}</h3>
-              <p className={`mt-2 ${ui.bodySm}`}>{zoneFooter}</p>
-            </div>
+            <p className={`${fontDisplay.className} mt-4 text-[1.05rem] font-medium leading-snug text-[var(--foreground)] sm:text-lg`}>
+              {zoneContent.heading}
+            </p>
+            <div className={`${fontSans.className} home-section-intro__lede mt-4`}>{zoneDescription}</div>
+            <p className={`${fontSans.className} mt-4 ${ui.bodySm}`}>{site.addressLine}</p>
+            <p className={`${fontSans.className} mt-6 ${ui.bodySm}`}>{zoneFooter}</p>
           </div>
         </div>
       </section>
@@ -311,10 +271,7 @@ export function HomeSections() {
       <section className="lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <p className="section-kicker">In sintesi</p>
             <h2 className={titleCls}>Contatti</h2>
-            <div className="home-section-rule" aria-hidden />
-            <p className="home-section-intro__lede max-w-[52ch]">{contattiIntro}</p>
           </div>
           <div className="home-contact-rail">
             <PlateFrame />
@@ -351,7 +308,7 @@ export function HomeSections() {
             </div>
           </div>
           <p className="mt-8 sm:mt-10">
-            <Link href="/contatti#form-contatti" className={`${ui.btnOutline} inline-flex w-full sm:w-auto`}>
+            <Link href="/contatti#form-contatti" className={`${fontSans.className} ${ui.textCta}`}>
               Modulo di contatto
             </Link>
           </p>
@@ -363,10 +320,10 @@ export function HomeSections() {
         <div className="mx-auto max-w-[1140px] reveal-block">
           <div className="home-cta-finale__rule mb-6" aria-hidden />
           <h2 className={`${fontDisplay.className} text-[clamp(1.65rem,7vw,2.5rem)] font-medium leading-[1.06] tracking-tight text-[var(--foreground)]`}>
-            Parliamo del tuo progetto
+            Parliamo del vostro progetto
           </h2>
           <p className={`${fontSans.className} mt-5 max-w-[42ch] text-[0.93rem] leading-[1.7] text-[var(--foreground)]`}>
-            Sopralluogo, preventivo rilievo SLAM o consulenza tecnica: contattaci per una prima valutazione.
+            Sopralluogo, preventivo o consulenza tecnica: scriveteci per una prima valutazione.
           </p>
           <div className="mt-10 flex w-full flex-col gap-3 sm:flex-row sm:items-center sm:gap-4">
             <Link href="/contatti#form-contatti" className={`${ui.btnPrimary} w-full sm:w-auto`}>

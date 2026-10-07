@@ -55,7 +55,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
   const recaptchaSiteKey = site.recaptchaSiteKey;
   const captchaRequired = Boolean(recaptchaSiteKey);
   const captchaReady = !captchaRequired || (googleEmbeds && captchaToken.length > 0);
-  const usesFormspree = Boolean(site.formspreeId?.trim());
+  const showSurveyFields = inquiryType === "slam";
 
   useEffect(() => {
     mountedAtRef.current = Date.now();
@@ -257,7 +257,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
     status === "submitting"
       ? "Invio del messaggio in corso…"
       : status === "success"
-        ? "Messaggio inviato. Ti risponderemo al più presto."
+        ? "Messaggio inviato. Vi risponderemo al più presto."
         : status === "error"
           ? `Invio non riuscito. Riprova o scrivi a ${site.email}.`
           : "";
@@ -278,7 +278,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             Messaggio inviato
           </p>
           <p className="contact-form-feedback__body">
-            Grazie per averci scritto. Ti risponderemo al più presto all&apos;indirizzo indicato.
+            Grazie per averci scritto. Vi risponderemo al più presto all&apos;indirizzo indicato.
           </p>
           <button type="button" className={`${ui.btnOutline} mt-4 min-h-[44px]`} onClick={resetForm}>
             Invia un altro messaggio
@@ -341,7 +341,14 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               id="inquiryType"
               name="inquiryType"
               value={inquiryType}
-              onChange={(e) => setInquiryType(e.target.value as InquiryType | "")}
+              onChange={(e) => {
+                const next = e.target.value as InquiryType | "";
+                setInquiryType(next);
+                if (next !== "slam") {
+                  setSurfaceArea("");
+                  setDesiredOutput("");
+                }
+              }}
               className={ui.inputField}
             >
               <option value="">Seleziona</option>
@@ -400,43 +407,47 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             ) : null}
           </div>
 
-          <div className="min-w-0">
-            <label htmlFor="surfaceArea" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-              Superficie indicativa
-            </label>
-            <select
-              id="surfaceArea"
-              name="surfaceArea"
-              value={surfaceArea}
-              onChange={(e) => setSurfaceArea(e.target.value)}
-              className={ui.inputField}
-            >
-              {surfaceAreaOptions.map((o) => (
-                <option key={o.value || "empty"} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+          {showSurveyFields ? (
+            <>
+              <div className="min-w-0">
+                <label htmlFor="surfaceArea" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                  Superficie indicativa
+                </label>
+                <select
+                  id="surfaceArea"
+                  name="surfaceArea"
+                  value={surfaceArea}
+                  onChange={(e) => setSurfaceArea(e.target.value)}
+                  className={ui.inputField}
+                >
+                  {surfaceAreaOptions.map((o) => (
+                    <option key={o.value || "empty"} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
 
-          <div className="min-w-0">
-            <label htmlFor="desiredOutput" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
-              Output desiderato
-            </label>
-            <select
-              id="desiredOutput"
-              name="desiredOutput"
-              value={desiredOutput}
-              onChange={(e) => setDesiredOutput(e.target.value)}
-              className={ui.inputField}
-            >
-              {desiredOutputOptions.map((o) => (
-                <option key={o.value || "empty"} value={o.value}>
-                  {o.label}
-                </option>
-              ))}
-            </select>
-          </div>
+              <div className="min-w-0">
+                <label htmlFor="desiredOutput" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
+                  Elaborati richiesti
+                </label>
+                <select
+                  id="desiredOutput"
+                  name="desiredOutput"
+                  value={desiredOutput}
+                  onChange={(e) => setDesiredOutput(e.target.value)}
+                  className={ui.inputField}
+                >
+                  {desiredOutputOptions.map((o) => (
+                    <option key={o.value || "empty"} value={o.value}>
+                      {o.label}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            </>
+          ) : null}
 
           <div className="min-w-0">
             <label htmlFor="subject" className="mb-1 block text-sm font-medium text-[var(--foreground)]">
@@ -479,7 +490,11 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               value={message}
               onChange={(e) => setMessage(clamp(e.target.value, LIM.message))}
               onBlur={onBlur("message")}
-              placeholder="Descrivi immobile, finalità del rilievo e tempistiche desiderate."
+              placeholder={
+                showSurveyFields
+                  ? "Indicate zona, obiettivo del rilievo e tempistiche."
+                  : "Scriveteci di cosa avete bisogno e della zona."
+              }
               className={ui.inputField}
               aria-invalid={!!errors.message}
               aria-describedby={errors.message ? "err-msg" : undefined}
@@ -501,9 +516,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               onBlur={onBlur("privacy")}
               className="mt-1.5 h-5 w-5 min-h-[20px] min-w-[20px] shrink-0 accent-[var(--primary-mid)]"
               aria-invalid={!!errors.privacy}
-              aria-describedby={
-                errors.privacy ? "err-privacy" : usesFormspree ? "privacy-extra-note" : undefined
-              }
+              aria-describedby={errors.privacy ? "err-privacy" : undefined}
             />
             <label
               htmlFor="privacy"
@@ -521,24 +534,6 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               </span>
             </label>
           </div>
-
-          {usesFormspree ? (
-            <p
-              id="privacy-extra-note"
-              className={`${fontSans.className} text-[0.8rem] leading-relaxed text-[var(--green-ink-muted)] md:col-span-2`}
-            >
-              I dati del modulo sono trasmessi tramite{" "}
-              <strong className="font-semibold text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.,
-              USA) e possono essere trattati anche fuori dallo Spazio Economico Europeo. Dettagli in{" "}
-              <Link
-                href="/privacy-policy#trasferimenti"
-                className={ui.proseLink}
-              >
-                informativa — trasferimenti
-              </Link>
-              .
-            </p>
-          ) : null}
 
           {errors.privacy ? (
             <p id="err-privacy" className={`${ui.fieldError} md:col-span-2`} role="alert">

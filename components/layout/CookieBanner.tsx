@@ -3,21 +3,18 @@
 import Link from "next/link";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { fontSans } from "@/lib/fonts";
 import { clearCookiePrefs, loadCookiePrefs, saveCookiePrefs, type CookiePrefs } from "@/lib/privacy/cookieConsent";
-import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 export type { CookiePrefs };
 
-const btnCookiePrimary = `${ui.cookieAccept} text-sm`;
-
 export function CookieBanner() {
   const [visible, setVisible] = useState(false);
   const [embeds, setEmbeds] = useState(false);
+  const [customize, setCustomize] = useState(false);
   const [portalNode, setPortalNode] = useState<HTMLElement | null>(null);
-  const dialogRef = useRef<HTMLDivElement | null>(null);
-  const lastFocusedRef = useRef<HTMLElement | null>(null);
+  const bannerRef = useRef<HTMLDivElement | null>(null);
 
   useEffect(() => {
     setVisible(loadCookiePrefs() === null);
@@ -56,169 +53,118 @@ export function CookieBanner() {
   }, [embeds, persist]);
 
   useEffect(() => {
-    if (!visible || !portalNode) return;
-
-    lastFocusedRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
+    if (!visible) return;
     const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        handleNecessaryOnly();
-        return;
-      }
-      if (e.key !== "Tab") return;
-
-      const root = dialogRef.current;
-      if (!root) return;
-
-      const focusable = Array.from(
-        root.querySelectorAll<HTMLElement>(
-          'button:not([disabled]), [href], input:not([disabled]), select:not([disabled]), textarea:not([disabled]), [tabindex]:not([tabindex="-1"])',
-        ),
-      ).filter((el) => !el.hasAttribute("inert") && el.getClientRects().length > 0);
-
-      if (focusable.length === 0) {
-        e.preventDefault();
-        root.focus();
-        return;
-      }
-
-      const first = focusable[0];
-      const last = focusable[focusable.length - 1];
-      const active = document.activeElement instanceof HTMLElement ? document.activeElement : null;
-
-      if (!e.shiftKey && active === last) {
-        e.preventDefault();
-        first.focus();
-      } else if (e.shiftKey && (active === first || active === root)) {
-        e.preventDefault();
-        last.focus();
-      }
+      if (e.key === "Escape") handleNecessaryOnly();
     };
-
     document.addEventListener("keydown", onKey);
+    return () => document.removeEventListener("keydown", onKey);
+  }, [visible, handleNecessaryOnly]);
 
-    const inerted: HTMLElement[] = [];
-    for (const child of document.body.children) {
-      if (child instanceof HTMLElement && child !== portalNode && !child.contains(portalNode)) {
-        child.inert = true;
-        inerted.push(child);
-      }
+  useEffect(() => {
+    return () => {
+      document.body.classList.remove("cookie-banner-visible");
+      document.documentElement.style.removeProperty("--cookie-banner-space");
+    };
+  }, []);
+
+  useEffect(() => {
+    if (!visible) {
+      document.body.classList.remove("cookie-banner-visible");
+      document.documentElement.style.removeProperty("--cookie-banner-space");
+      return;
     }
 
-    const focusTimer = window.setTimeout(() => {
-      dialogRef.current?.querySelector<HTMLElement>("button")?.focus();
-    }, 0);
+    document.body.classList.add("cookie-banner-visible");
+    const el = bannerRef.current;
+    if (!el) return;
 
-    return () => {
-      window.clearTimeout(focusTimer);
-      document.removeEventListener("keydown", onKey);
-      for (const el of inerted) {
-        el.inert = false;
-      }
-      lastFocusedRef.current?.focus({ preventScroll: true });
+    const apply = () => {
+      document.documentElement.style.setProperty(
+        "--cookie-banner-space",
+        `${Math.ceil(el.getBoundingClientRect().height)}px`,
+      );
     };
-  }, [visible, portalNode, handleNecessaryOnly]);
+    apply();
+    const ro = new ResizeObserver(apply);
+    ro.observe(el);
+    return () => ro.disconnect();
+  }, [visible, customize, portalNode]);
 
   if (!visible || !portalNode) return null;
 
   return createPortal(
     <div
-      ref={dialogRef}
-      role="dialog"
+      ref={bannerRef}
+      role="region"
       aria-labelledby="cookie-banner-title"
       aria-describedby="cookie-banner-desc"
-      aria-modal="true"
-      tabIndex={-1}
-      className="fixed inset-x-0 bottom-0 z-[10000] px-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] pt-2 sm:px-4 sm:pb-[max(1.25rem,env(safe-area-inset-bottom,0px))] sm:pt-3"
+      className="cookie-banner fixed inset-x-0 bottom-0 z-[10000] border-t border-white/12 bg-[color-mix(in_srgb,var(--surface-chrome)_94%,transparent)] px-4 py-3 pb-[max(0.75rem,env(safe-area-inset-bottom,0px))] shadow-[0_-12px_40px_rgba(0,0,0,0.35)] backdrop-blur-xl sm:px-5 sm:py-3.5"
     >
-      <div
-        className={`pointer-events-auto relative mx-auto max-w-[960px] overflow-hidden rounded-2xl border border-white/[0.12] bg-[color-mix(in_srgb,var(--surface-chrome)_92%,transparent)] shadow-[0_-24px_80px_rgba(0,0,0,0.55),0_0_0_1px_var(--accent-glow-8)_inset] backdrop-blur-2xl sm:rounded-3xl`}
-      >
-        <div
-          className="pointer-events-none absolute inset-0 bg-[radial-gradient(ellipse_90%_80%_at_20%_0%,var(--accent-glow-14),transparent_55%),radial-gradient(ellipse_70%_50%_at_100%_100%,var(--accent-glow-8),transparent_50%)]"
-          aria-hidden
-        />
-        <div className={`relative ${layoutGutterXClass} py-5 sm:py-6`}>
-          <div className={layoutContentMaxClass}>
-            <div className="flex flex-col gap-5 lg:flex-row lg:items-start lg:gap-10">
-              <div className="min-w-0 flex-1 space-y-3">
-                <div>
-                  <p className={`${fontSans.className} section-kicker text-[var(--primary-mid)]`}>Consenso</p>
-                  <p
-                    id="cookie-banner-title"
-                    className={`${fontDisplay.className} mt-1.5 text-lg font-medium tracking-tight text-white sm:text-xl`}
-                  >
-                    Privacy e cookie
-                  </p>
-                  <p
-                    id="cookie-banner-desc"
-                    className={`${fontSans.className} mt-1.5 text-[0.9rem] leading-relaxed text-white/78 sm:text-[0.95rem]`}
-                  >
-                    Usiamo cookie strettamente necessari. Per caricare contenuti Google di terze parti (
-                    <strong className="font-semibold text-white/92">Maps</strong> e, sul form Contatti,{" "}
-                    <strong className="font-semibold text-white/92">reCAPTCHA</strong>) serve il tuo consenso: puoi accettarli, rifiutarli o
-                    decidere con l&apos;interruttore qui sotto.{" "}
-                    <Link
-                      href="/privacy-policy#cookie"
-                      className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] transition hover:text-[var(--primary)]"
-                    >
-                      Informativa completa
-                    </Link>
-                    .
-                  </p>
-                </div>
-
-                <div className="rounded-xl border border-white/10 bg-black/25 px-4 py-3.5 sm:px-5 sm:py-4">
-                  <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-                    <div className="min-w-0">
-                      <p className={`${fontSans.className} text-[0.72rem] font-bold uppercase tracking-[0.2em] text-[var(--primary-mid)]`}>
-                        Facoltativo · basato su consenso
-                      </p>
-                      <p className={`${fontSans.className} mt-1 text-[0.92rem] font-medium text-white/88`}>
-                        Contenuti Google (Maps e reCAPTCHA)
-                      </p>
-                      <p className={`${fontSans.className} mt-0.5 text-[0.8rem] leading-snug text-white/55`}>
-                        Disattivato di default. Senza consenso non carichiamo Maps né lo script anti-spam sul form.
-                      </p>
-                    </div>
-                    <button
-                      type="button"
-                      role="switch"
-                      aria-checked={embeds}
-                      aria-label={
-                        embeds
-                          ? "Disattiva contenuti Google (Maps e reCAPTCHA)"
-                          : "Attiva contenuti Google (Maps e reCAPTCHA)"
-                      }
-                      onClick={() => setEmbeds((v) => !v)}
-                      className={`relative mx-auto h-[34px] w-[58px] shrink-0 rounded-full transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] sm:mx-0 ${
-                        embeds ? "bg-[var(--primary)]" : "bg-white/15"
-                      }`}
-                    >
-                      <span
-                        className={`absolute top-1 left-1 h-[26px] w-[26px] rounded-full bg-white shadow-md transition-transform duration-300 ${
-                          embeds ? "translate-x-6" : "translate-x-0"
-                        }`}
-                        aria-hidden
-                      />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className={`${fontSans.className} flex w-full shrink-0 flex-col gap-2.5 lg:w-[min(100%,20rem)]`}>
-                <button type="button" className={`${ui.cookieReject} sm:min-w-[9.5rem]`} onClick={handleNecessaryOnly}>
-                  Solo necessari
-                </button>
-                <button type="button" className={`${ui.cookieReject} sm:min-w-[9.5rem]`} onClick={handleSaveChoices}>
-                  Salva preferenze
-                </button>
-                <button type="button" className={btnCookiePrimary} onClick={handleAcceptAll}>
-                  Accetta tutto
-                </button>
-              </div>
+      <div className={`mx-auto flex max-w-[1140px] flex-col gap-3 sm:flex-row sm:items-center sm:gap-5 ${fontSans.className}`}>
+        <div className="min-w-0 flex-1">
+          <p id="cookie-banner-title" className="sr-only">
+            Privacy e cookie
+          </p>
+          <p id="cookie-banner-desc" className="text-[0.82rem] leading-snug text-white/80 sm:text-[0.88rem]">
+            Cookie necessari al sito. Maps e reCAPTCHA Google solo col consenso.{" "}
+            <Link
+              href="/privacy-policy#cookie"
+              className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] hover:text-[var(--primary)]"
+            >
+              Informativa
+            </Link>
+            {" · "}
+            <button
+              type="button"
+              className="font-semibold text-white/88 underline decoration-white/25 underline-offset-[3px] hover:text-white"
+              aria-expanded={customize}
+              onClick={() => setCustomize((v) => !v)}
+            >
+              {customize ? "Nascondi opzioni" : "Personalizza"}
+            </button>
+          </p>
+          {customize ? (
+            <div className="mt-2.5 flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/20 px-3 py-2">
+              <p className="text-[0.8rem] leading-snug text-white/78">Contenuti Google (Maps e reCAPTCHA)</p>
+              <button
+                type="button"
+                role="switch"
+                aria-checked={embeds}
+                aria-label={
+                  embeds
+                    ? "Disattiva contenuti Google (Maps e reCAPTCHA)"
+                    : "Attiva contenuti Google (Maps e reCAPTCHA)"
+                }
+                onClick={() => setEmbeds((v) => !v)}
+                className={`relative h-[28px] w-[48px] shrink-0 rounded-full transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] ${
+                  embeds ? "bg-[var(--primary)]" : "bg-white/15"
+                }`}
+              >
+                <span
+                  className={`absolute top-0.5 left-0.5 h-[24px] w-[24px] rounded-full bg-white shadow-md transition-transform duration-300 ${
+                    embeds ? "translate-x-5" : "translate-x-0"
+                  }`}
+                  aria-hidden
+                />
+              </button>
             </div>
-          </div>
+          ) : null}
+        </div>
+
+        <div className="flex w-full shrink-0 gap-2 sm:w-auto sm:justify-end">
+          {customize ? (
+            <button type="button" className={`${ui.cookieReject} text-sm`} onClick={handleSaveChoices}>
+              Salva
+            </button>
+          ) : (
+            <button type="button" className={`${ui.cookieReject} text-sm`} onClick={handleNecessaryOnly}>
+              Solo necessari
+            </button>
+          )}
+          <button type="button" className={`${ui.cookieAccept} text-sm`} onClick={handleAcceptAll}>
+            Accetta tutto
+          </button>
         </div>
       </div>
     </div>,

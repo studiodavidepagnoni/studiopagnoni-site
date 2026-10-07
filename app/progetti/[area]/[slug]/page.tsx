@@ -88,8 +88,8 @@ export default async function ProjectCasePage({ params }: Props) {
 
           <PageClosingCta
             id="project-cta"
-            title="Vuoi un rilievo simile?"
-            description="Indica zona, superficie indicativa e cosa ti serve in consegna: ti rispondiamo con tempi e preventivo su misura per un rilievo laser scanner SLAM."
+            title="Vi serve un rilievo simile?"
+            description="Indicate zona, superficie indicativa e cosa vi serve in consegna: vi rispondiamo con tempi e preventivo su misura per un rilievo laser scanner SLAM."
             primaryHref="/contatti?oggetto=slam#form-contatti"
             primaryLabel="Richiedi preventivo SLAM"
             secondaryHref="/contatti#form-contatti"

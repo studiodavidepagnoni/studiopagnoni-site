@@ -89,9 +89,6 @@ export const homeChiSiamo: {
   ],
 };
 
-export const homeServiziIntro =
-  "Anteprima degli ambiti principali. Schede, approfondimenti e FAQ nella pagina Servizi.";
-
 /** Blocco compatto in home: SLAM come perno operativo, RTK e stazione a supporto */
 export const homeStrumentazione: {
   title: string;
@@ -206,17 +203,11 @@ export const serviceGroups = [
 
 /** Anteprima home: stesse schede, link alla pagina Servizi o alle landing dedicate. */
 export const homeServiceCards = serviceGroups.map((group) => ({
-  kicker: group.kicker,
+  id: group.id,
   title: group.title,
   description: group.description,
   href: group.href,
 }));
-
-export const homeProgettiIntro =
-  "Una selezione di lavori sul territorio. Schede, video e dettagli nell’archivio Progetti.";
-
-export const certificationsIntro =
-  "Attività svolte da professionisti abilitati, con responsabilità tecnica e rete di specialisti quando la commessa lo richiede.";
 
 export const certifications = [
   {
@@ -294,27 +285,12 @@ export const zoneFooter = (
   </>
 );
 
-export const contattiIntro =
-  "Scriveteci o chiamateci per un primo confronto su rilievo, progetto o pratiche.";
-
-/** Statistiche home: numeri animati o blocchi descrittivi. */
-export type HomeStat =
-  | { mode: "n"; value: number; suffix: string; label: string }
-  | { mode: "t"; title: string; subtitle: string };
-
-const yearsActive = Math.max(0, new Date().getFullYear() - STUDIO_FOUNDED_YEAR);
-
-export const homeStats: HomeStat[] = [
-  {
-    mode: "n",
-    value: yearsActive,
-    suffix: "+",
-    label: `Anni di attività\n· dal ${STUDIO_FOUNDED_YEAR}`,
-  },
-  { mode: "t", title: "Team multidisciplinare", subtitle: "Architettura · Topografia · CSP/CSE · perizie" },
-  { mode: "t", title: "GNSS · Stazione totale · SLAM", subtitle: "Linea strumentale per rilievi professionali" },
-  { mode: "t", title: "Franciacorta · Brescia", subtitle: "Radicamento locale e commesse nel Nord Italia" },
-];
+export const homeFacts = [
+  { title: "Dal 1988", text: "Studio a Bornato, in Franciacorta" },
+  { title: "Architettura e topografia", text: "Dalla misura al progetto, nello stesso studio" },
+  { title: "In campo", text: "GNSS, stazione totale e laser SLAM" },
+  { title: "Territorio", text: "Franciacorta, Brescia e Nord Italia" },
+] as const;
 
 export const chiSiamoPage = {
   title: "Chi siamo",
@@ -326,7 +302,7 @@ export const chiSiamoPage = {
     </>,
     <>
       Accanto al progetto, lo studio gestisce topografia, rilievi e documentazione 3D quando servono una base metrica affidabile dello stato di fatto.
-      Strumentazione e metodi si sono aggiornati nel tempo — dalla stazione totale al GNSS RTK, fino al laser scanner SLAM — mantenendo lo stesso
+      Strumentazione e metodi si sono aggiornati nel tempo (dalla stazione totale al GNSS RTK, fino al laser scanner SLAM), mantenendo lo stesso
       approccio: una sola lettura della commessa, dalla misura alla consegna.
     </>,
     <>

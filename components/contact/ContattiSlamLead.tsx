@@ -20,13 +20,13 @@ function ContattiIntroInner() {
         {isSlamLead ? (
           <>
             Stai richiedendo informazioni su un <strong>rilievo laser scanner SLAM</strong>. Compila il modulo con superficie indicativa e
-            formato di consegna desiderato: ti risponderemo con tempi e preventivo su misura.
+            formato di consegna desiderato: vi risponderemo con tempi e preventivo su misura.
           </>
         ) : (
           <>
             Siamo disponibili per preventivi su <strong>pratiche architettoniche</strong>, <strong>rilievi topografici</strong>,{" "}
             <strong>laser scanner SLAM</strong>, <strong>progettazione del verde</strong>, <strong>pratiche edilizie</strong> e{" "}
-            <strong>coordinamento sicurezza</strong>. Indica la località dell&apos;intervento e la finalità: ti risponderemo dal canale che preferisci.
+            <strong>coordinamento sicurezza</strong>. Indicate la località dell&apos;intervento e la finalità: vi risponderemo dal canale che preferite.
           </>
         )}
       </p>

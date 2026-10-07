@@ -25,7 +25,7 @@ export function ProgettiArchive() {
           </div>
           <div className="project-preview-card__body">
             <span className="project-preview-card__title">{p.caption}</span>
-            <span className={`${fontSans.className} project-preview-card__cta`}>Scheda →</span>
+            <span className={`${fontSans.className} project-preview-card__cta`}>Vedi il progetto</span>
           </div>
         </Link>
       ))}

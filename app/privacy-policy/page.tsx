@@ -199,7 +199,7 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) per l&apos;invio dei messaggi dal modulo di contatto, quando il servizio è attivo: opera tipicamente come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR. Sul form è presente un avviso sul possibile trattamento anche fuori dallo SEE.{" "}
+                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) per l&apos;invio dei messaggi dal modulo di contatto, quando il servizio è attivo: opera tipicamente come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR. Il possibile trattamento anche fuori dallo SEE è descritto nella sezione Trasferimenti.{" "}
                       <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Policy Formspree
                       </a>
