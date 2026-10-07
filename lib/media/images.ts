@@ -121,8 +121,8 @@ export const homeServiceCardImages = {
     alt: imageAlt("Cantiere e fondazioni — rilievo e controllo in fase di costruzione", { service: "topografia" }),
   },
   "laser-slam": {
-    src: s("slamNuvolaInterno"),
-    alt: imageAlt("Nuvola di punti da laser SLAM — stato di fatto interni", { service: "slam" }),
+    src: s("slamNuvolaCapannoni"),
+    alt: imageAlt("Nuvola di punti da laser SLAM — capannoni e impianti", { service: "slam" }),
   },
   "verde-paesaggio": {
     src: s("paesaggioTerreno"),

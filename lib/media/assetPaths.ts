@@ -25,7 +25,7 @@ export const stockImages = {
   /** Foto Google Business (owner) — card servizi home */
   architetturaCappella: "architettura-cappella-restauro-brescia",
   topoFondazioni: "topografia-fondazioni-cantiere-brescia",
-  slamNuvolaInterno: "laser-slam-nuvola-punti-interno-brescia",
+  slamNuvolaCapannoni: "laser-slam-nuvola-punti-capannoni-brescia",
   paesaggioTerreno: "paesaggio-terreno-erbusco-brescia",
 } as const;
 
