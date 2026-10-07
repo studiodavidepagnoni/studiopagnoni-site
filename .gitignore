@@ -53,5 +53,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# legacy scaffold folder (optional remove)
+# cartelle di lavoro / scaffold locali (non fanno parte del sito)
 next-scaffold/
+card-grading/
