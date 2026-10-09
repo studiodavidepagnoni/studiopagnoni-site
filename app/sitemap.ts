@@ -15,7 +15,7 @@ const base = site.url.replace(/\/$/, "");
 
 type ChangeFreq = NonNullable<MetadataRoute.Sitemap[number]["changeFrequency"]>;
 
-/** Pagine statiche con mirror `/en/…` (niente case-study progetti in EN). */
+/** Pagine statiche con mirror `/en/…`. */
 const staticPaths: { path: string; changeFrequency: ChangeFreq; priority: number }[] = [
   { path: "", changeFrequency: "weekly", priority: 1 },
   { path: "/servizi", changeFrequency: "monthly", priority: 0.9 },
@@ -58,18 +58,32 @@ export default function sitemap(): MetadataRoute.Sitemap {
   }
 
   for (const area of projectAreas) {
+    const areaLastMod = lastModifiedForProjectArea(area);
     entries.push({
       url: `${base}/progetti/${area}/`,
-      lastModified: lastModifiedForProjectArea(area),
+      lastModified: areaLastMod,
       changeFrequency: "monthly",
       priority: 0.75,
     });
+    entries.push({
+      url: `${base}/en/progetti/${area}/`,
+      lastModified: areaLastMod,
+      changeFrequency: "monthly",
+      priority: 0.7,
+    });
     for (const c of projectCategories[area].cases) {
+      const caseLastMod = lastModifiedForProjectCase(area, c.slug);
       entries.push({
         url: `${base}/progetti/${area}/${c.slug}/`,
-        lastModified: lastModifiedForProjectCase(area, c.slug),
+        lastModified: caseLastMod,
         changeFrequency: "monthly",
         priority: 0.72,
+      });
+      entries.push({
+        url: `${base}/en/progetti/${area}/${c.slug}/`,
+        lastModified: caseLastMod,
+        changeFrequency: "monthly",
+        priority: 0.67,
       });
     }
   }

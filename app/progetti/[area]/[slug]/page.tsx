@@ -11,6 +11,7 @@ import {
   projectAreas,
 } from "@/lib/content/projects";
 import { buildPageMetadata } from "@/lib/config/seo";
+import { localeAlternates } from "@/lib/i18n/metadata";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
@@ -32,11 +33,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const key = getCaseStudyKey(area, slug);
   if (!key || !projectCaseStudies[key]) return {};
   const cs = projectCaseStudies[key];
-  return buildPageMetadata({
-    title: cs.metaTitle,
-    description: cs.metaDescription,
-    path: `/progetti/${area}/${slug}`,
-  });
+  return {
+    ...buildPageMetadata({
+      title: cs.metaTitle,
+      description: cs.metaDescription,
+      path: `/progetti/${area}/${slug}`,
+    }),
+    alternates: localeAlternates(`/progetti/${area}/${slug}`),
+  };
 }
 
 export default async function ProjectCasePage({ params }: Props) {

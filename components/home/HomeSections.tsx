@@ -24,6 +24,7 @@ import { t } from "@/lib/i18n/messages";
 import { homeChiSiamoImages } from "@/lib/media/images";
 import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { featuredProjects } from "@/lib/content/projects";
+import { featuredProjectsEn } from "@/lib/i18n/content/projects.en";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
@@ -243,10 +244,10 @@ export function HomeSections({ locale = "it" }: Props) {
             <h2 className={titleCls}>{progettiTitle}</h2>
           </div>
           <div className="home-projects-mosaic">
-            {featuredProjects.slice(0, 3).map((p, index) => (
+            {(locale === "en" ? featuredProjectsEn : featuredProjects).slice(0, 3).map((p, index) => (
               <Link
                 key={p.href}
-                href={p.href}
+                href={withLocalePrefix(p.href, locale)}
                 className={`group block w-full min-w-0 overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] ${index === 0 ? "home-projects-mosaic__lead" : "home-projects-mosaic__item"}`}
               >
                 <div className="home-projects-mosaic__media">

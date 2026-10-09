@@ -1,10 +1,9 @@
-import Link from "next/link";
+import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
-import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
-import { fontDisplay, fontSans } from "@/lib/fonts";
-import { featuredProjects } from "@/lib/content/projects";
+import { ProgettiArchive } from "@/components/projects/ProgettiArchive";
 import { buildPageMetadata } from "@/lib/config/seo";
 import { localeAlternates } from "@/lib/i18n/metadata";
+import { withLocalePrefix } from "@/lib/i18n/paths";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
@@ -23,34 +22,27 @@ export default function EnProgettiPage() {
       <StaticPageHero path="/en/progetti" />
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
-          <div className={`${layoutContentMaxClass} space-y-10`}>
-            <p className={`${ui.body} max-w-[62ch]`}>
-              Selected surveys and documentation work. Detailed case-study pages are currently published in Italian —
-              contact us if you need an English summary of a brief.
-            </p>
-            <ul className="grid list-none gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {featuredProjects.map((p) => (
-                <li key={p.href}>
-                  <Link
-                    href={p.href}
-                    className="project-preview-card group flex h-full flex-col overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)]"
-                  >
-                    <div className="relative aspect-[16/10] overflow-hidden bg-[var(--muted)]">
-                      <ProjectCoverImage
-                        cover={p.cover}
-                        alt={p.alt}
-                        sizes="(min-width:1024px) 33vw, (min-width:640px) 50vw, 100vw"
-                      />
-                    </div>
-                    <div className="flex flex-1 flex-col p-5">
-                      <span className={`${fontSans.className} section-kicker`}>{p.label}</span>
-                      <h2 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{p.caption}</h2>
-                      <span className={`${fontSans.className} ${ui.textCta} mt-auto pt-4`}>View project →</span>
-                    </div>
-                  </Link>
-                </li>
-              ))}
-            </ul>
+          <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
+            <div className={`${ui.body} max-w-[62ch] space-y-4`}>
+              <p>
+                Recent 3D surveys: a winery in Franciacorta, a plot in Erbusco, a livestock facility in the province of
+                Brescia. Each case includes a scan video and a short method note.
+              </p>
+              <p>
+                Architecture, procedures and surveying remain the studio’s day-to-day work. Those briefs are discussed in
+                person — write to us for a project or a site visit.
+              </p>
+            </div>
+            <ProgettiArchive locale="en" />
+            <PageClosingCta
+              id="progetti-cta"
+              title="Have a site to document?"
+              description="Survey, scan or design: tell us location and objective, and we reply with timing and a first assessment."
+              primaryHref={`${withLocalePrefix("/contatti", "en")}#form-contatti`}
+              primaryLabel="Contact us"
+              secondaryHref={withLocalePrefix("/servizi", "en")}
+              secondaryLabel="All services"
+            />
           </div>
         </div>
       </main>

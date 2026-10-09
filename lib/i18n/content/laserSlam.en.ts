@@ -59,6 +59,12 @@ export const laserSlamLandingEn = {
     "Before you design or renovate, you need to know how the building or shed really is. With SLAM laser surveying we measure spaces quickly and accurately, and deliver plans, sections and 3D data ready for designers and site teams.",
   instrumentNote:
     "We use a handheld instrument (CHCNAV RS10) that works outdoors and indoors — even where GPS is weak — so one visit can document the whole site.",
+  introImage: {
+    src: stockImage(stockImages.strumentiGeometraArchitetto),
+    alt: imageAlt("Survey and laser equipment — surveyor and architect in the office", {
+      service: "slam",
+    }),
+  },
   instrumentPoints: [
     "GNSS RTK, LiDAR and visual SLAM on one platform: a single instrument from outdoors to indoors.",
     "Outdoor / indoor continuity and areas with weak satellite signal (SFix rover).",

@@ -39,6 +39,11 @@ export const seoKeywords = {
     "architetto Franciacorta",
     "geometra Brescia",
     "geometra Franciacorta",
+    "divisione catastale Brescia",
+    "frazionamento catastale Franciacorta",
+    "geometra successioni Brescia",
+    "DOCFA geometra Brescia",
+    "verifica confini geometra",
     "topografo Brescia",
     "rilievo topografico Franciacorta",
     "rilievo planoaltimetrico Lombardia",
@@ -51,6 +56,7 @@ export const seoKeywords = {
     "rilievo architettonico laser scanner",
     "studio architettura topografia BS",
     "rilievo topografico Nord Italia",
+    "tipi mappali e pratiche catastali",
   ],
 } as const;
 
@@ -176,7 +182,7 @@ export const jsonLdGraph = {
       legalName: site.legalName,
       alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato", "Geometra Pagnoni Bornato"],
       description:
-        "Studio di architettura e geometra a Bornato, Cazzago San Martino (BS): progettazione architettonica, topografia (GNSS RTK e stazione totale), suddivisioni e confini, rilievi laser scanner 3D SLAM, rilievi architettonici e pratiche catastali. Geom. Sergio Pagnoni e Arch. Davide Pagnoni — Franciacorta e provincia di Brescia.",
+        "Studio di architettura e geometra a Bornato, Cazzago San Martino (BS): progettazione architettonica; topografia e rilievi (GNSS RTK, stazione totale); pratiche del geometra (divisioni catastali, frazionamenti, successioni, confini, DOCFA e tipi mappali); laser scanner 3D SLAM. Geom. Sergio Pagnoni e Arch. Davide Pagnoni — Franciacorta e provincia di Brescia.",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),
@@ -230,12 +236,25 @@ export const jsonLdGraph = {
       knowsAbout: [
         "Architettura",
         "Geometra",
+        "Geometra Brescia",
+        "Geometra Franciacorta",
         "Progettazione architettonica",
         "Progettazione urbana",
         "Rilievi architettonici",
         "Pratiche catastali",
+        "Divisione catastale",
+        "Frazionamento catastale",
+        "Tipi mappali",
+        "DOCFA",
+        "Variazioni catastali",
+        "Successioni immobiliari",
+        "Divisioni ereditarie",
+        "Verifica confini",
+        "Accertamento di confine",
         "Suddivisioni e confini",
         "Rilievi topografici",
+        "Rilievo planoaltimetrico",
+        "Tracciamenti di cantiere",
         "Laser scanner SLAM",
         "Rilievi laser scanner 3D",
         "Rilievi 3D per studi di architettura",
@@ -312,9 +331,9 @@ export const jsonLdGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Pratiche catastali",
+              name: "Pratiche catastali e DOCFA",
               description:
-                "Supporto per pratiche catastali e aggiornamenti: DOCFA, variazioni di consistenza, tipi mappali e allineamento tra stato di fatto e documentazione. Chiarezza operativa per privati e imprese sul territorio.",
+                "Pratiche catastali del geometra: DOCFA, variazioni di consistenza, tipi mappali e aggiornamento della documentazione rispetto allo stato di fatto. Per privati e imprese in Franciacorta e provincia di Brescia.",
               areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
             },
@@ -323,9 +342,31 @@ export const jsonLdGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Topografia e rilievi del geometra",
+              name: "Divisioni catastali e frazionamenti",
               description:
-                "Servizi da geometra: rilievi con GNSS RTK e stazione totale, planimetrie quotate, volumetrie, suddivisioni, confini e supporto a frazionamenti e cantieri in Franciacorta e provincia di Brescia.",
+                "Divisione catastale, frazionamento di terreni e fabbricati, planimetrie e atti di aggiornamento: supporto tecnico del geometra per vendite, donazioni e riorganizzazione delle proprietà.",
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Successioni e divisioni ereditarie",
+              description:
+                "Supporto tecnico per successioni immobiliari e divisioni ereditarie: rilievo, ripartizione quote, frazionamenti e aggiornamenti catastali coordinati con notaio e eredi.",
+              areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Confini e rilievi topografici",
+              description:
+                "Verifica e accertamento di confine, rilievi planoaltimetrici con GNSS RTK e stazione totale, planimetrie quotate, volumetrie e tracciamenti di cantiere in Franciacorta e provincia di Brescia.",
               areaServed: { "@type": "Place", name: "Franciacorta" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
             },

@@ -5,6 +5,7 @@ import { PageHero } from "@/components/hero/PageHero";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { isProjectArea, projectCategories, projectAreas } from "@/lib/content/projects";
 import { buildPageMetadata } from "@/lib/config/seo";
+import { localeAlternates } from "@/lib/i18n/metadata";
 import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
@@ -19,11 +20,14 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { area } = await params;
   if (!isProjectArea(area)) return {};
   const c = projectCategories[area];
-  return buildPageMetadata({
-    title: c.metaTitle,
-    description: c.metaDescription,
-    path: `/progetti/${area}`,
-  });
+  return {
+    ...buildPageMetadata({
+      title: c.metaTitle,
+      description: c.metaDescription,
+      path: `/progetti/${area}`,
+    }),
+    alternates: localeAlternates(`/progetti/${area}`),
+  };
 }
 
 export default async function ProjectAreaPage({ params }: Props) {

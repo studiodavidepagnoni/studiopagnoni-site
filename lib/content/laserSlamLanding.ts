@@ -28,6 +28,8 @@ export type SlamLandingContent = {
   readonly introHeading: string;
   readonly introLead: string;
   readonly instrumentNote: string;
+  /** Foto accanto all’intro (strumenti in studio). */
+  readonly introImage: { readonly src: string; readonly alt: string };
   /** Punti card strumentazione (subito sotto intro). */
   readonly instrumentPoints: readonly string[];
   readonly instrumentImage: { readonly src: string; readonly alt: string };
@@ -67,6 +69,13 @@ const sharedInstrumentPoints = [
   "SLAM in tempo reale: controllo copertura in campo prima di chiudere il sopralluogo.",
   "Fino a circa 320.000 punti/s, campo 360°, dispositivo compatto (~1,9 kg), IP64.",
 ] as const;
+
+const sharedIntroImage = {
+  src: stockImage(stockImages.strumentiGeometraArchitetto),
+  alt: imageAlt("Strumentazione topografica e laser — geometra e architetto in studio", {
+    service: "slam",
+  }),
+} as const;
 
 const sharedInstrumentImage = {
   src: stockImage(stockImages.chcnavRs10),
@@ -240,6 +249,7 @@ export const laserSlamLanding = {
     "Prima di progettare o ristrutturare, serve sapere com’è fatto davvero l’edificio o il capannone. Con il rilievo laser SLAM misuriamo gli spazi in modo rapido e preciso, e vi consegniamo piante, sezioni e dati 3D pronti per progettisti e cantiere.",
   instrumentNote:
     "Usiamo uno strumento portatile (CHCNAV RS10) che lavora sia all’aperto sia al chiuso, anche dove il GPS non arriva bene: un solo passaggio per documentare tutto.",
+  introImage: sharedIntroImage,
   instrumentPoints: sharedInstrumentPoints,
   instrumentImage: sharedInstrumentImage,
   sectorsIntro:
@@ -351,6 +361,7 @@ export const laserSlamLandingBrescia = {
     "Cerchi un rilievo laser scanner SLAM a Brescia, in Franciacorta o nei comuni della provincia? Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
   instrumentNote:
     "Operiamo da Cazzago San Martino (fraz. Bornato) con piattaforma CHCNAV RS10 (GNSS RTK + LiDAR + SLAM visuale): un flusso continuo tra esterni, interni e zone con segnale satellitare debole, tipiche di capannoni e impianti bresciani.",
+  introImage: sharedIntroImage,
   instrumentPoints: sharedInstrumentPoints,
   instrumentImage: sharedInstrumentImage,
   sectorsIntro:
@@ -463,6 +474,7 @@ export const laserSlamLandingLombardia = {
     "Per commesse in Lombardia il laser scanner SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici. Documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata ad architettura, facility e imprese.",
   instrumentNote:
     "Partiamo dalla sede di Cazzago San Martino (BS) con CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale nello stesso strumento, ideale per siti multi-piano, magazzini e impianti dove indoor e outdoor si alternano nella stessa giornata di rilievo.",
+  introImage: sharedIntroImage,
   instrumentPoints: sharedInstrumentPoints,
   instrumentImage: sharedInstrumentImage,
   sectorsIntro:

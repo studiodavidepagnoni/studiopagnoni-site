@@ -51,12 +51,29 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
           <section className={ui.innerCard} aria-labelledby="slam-intro">
-            <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
-              {L.introHeading}
-            </h2>
-            <div className="max-w-[72ch] space-y-4">
-              <p className={introCopyClass}>{L.introLead}</p>
-              <p className={introCopyClass}>{L.instrumentNote}</p>
+            <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-12">
+              <div className="lg:col-span-7">
+                <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
+                  {L.introHeading}
+                </h2>
+                <div className="max-w-[72ch] space-y-4">
+                  <p className={introCopyClass}>{L.introLead}</p>
+                  <p className={introCopyClass}>{L.instrumentNote}</p>
+                </div>
+              </div>
+              <figure className="m-0 lg:col-span-5">
+                <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--muted)]">
+                  <StockCoverImage
+                    src={L.introImage.src}
+                    alt={L.introImage.alt}
+                    sizes="(min-width:1024px) min(420px, 36vw), (min-width:640px) min(70vw, 480px), 100vw"
+                    loading="eager"
+                    fetchPriority="high"
+                    className="object-[center_20%]"
+                  />
+                  <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
+                </div>
+              </figure>
             </div>
 
             <div
@@ -84,8 +101,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                     src={L.instrumentImage.src}
                     alt={L.instrumentImage.alt}
                     sizes="(min-width:1024px) min(400px, 34vw), (min-width:640px) min(70vw, 480px), 100vw"
-                    loading="eager"
-                    fetchPriority="high"
+                    loading="lazy"
                     className="object-[center_30%]"
                   />
                   <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />

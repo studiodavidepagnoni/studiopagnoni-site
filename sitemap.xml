@@ -151,10 +151,22 @@
     <priority>0.75</priority>
   </url>
   <url>
+    <loc>https://studiopagnoni.com/en/progetti/rilievi-digitalizzazione/</loc>
+    <lastmod>2026-05-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+  <url>
     <loc>https://studiopagnoni.com/progetti/rilievi-digitalizzazione/allevamento-appianti-slam/</loc>
     <lastmod>2026-05-28</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://studiopagnoni.com/en/progetti/rilievi-digitalizzazione/allevamento-appianti-slam/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.67</priority>
   </url>
   <url>
     <loc>https://studiopagnoni.com/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam/</loc>
@@ -163,9 +175,21 @@
     <priority>0.72</priority>
   </url>
   <url>
+    <loc>https://studiopagnoni.com/en/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam/</loc>
+    <lastmod>2026-05-28</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.67</priority>
+  </url>
+  <url>
     <loc>https://studiopagnoni.com/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia/</loc>
     <lastmod>2026-08-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.72</priority>
+  </url>
+  <url>
+    <loc>https://studiopagnoni.com/en/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia/</loc>
+    <lastmod>2026-08-05</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.67</priority>
   </url>
 </urlset>

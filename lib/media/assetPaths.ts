@@ -27,7 +27,9 @@ export const stockImages = {
   topoFondazioni: "topografia-rilievo-gnss-lotto-brescia",
   slamNuvolaCapannoni: "laser-slam-nuvola-punti-facciata-edificio-brescia",
   paesaggioTerreno: "paesaggio-vigneto-franciacorta-brescia",
-  /** Card strumentazione pagine laser SLAM */
+  /** Intro pagina laser SLAM (foto strumenti in studio) */
+  strumentiGeometraArchitetto: "strumenti-geometra-architetto-brescia",
+  /** Card strumentazione RS10 */
   chcnavRs10: "chcnav-rs10-laser-scanner-brescia",
   /** Pagina Chi siamo */
   geometraSuddivisioni: "geometra-strumentazione-suddivisioni-brescia",

@@ -2,7 +2,7 @@
 
 > Studio di architettura a Cazzago San Martino (BS), Franciacorta: progettazione, topografia, laser scanner SLAM, verde, urbanistica e pratiche edilizie dal 1988.
 
-Studio Architettura Pagnoni opera in Franciacorta, provincia di Brescia, Lombardia e Nord Italia. Il **Geom. Sergio Pagnoni** (geometra) segue topografia, rilievi di campagna, suddivisioni e confini, GNSS RTK e stazione totale; l’**Arch. Davide Pagnoni** la progettazione architettonica e il coordinamento delle pratiche. Insieme integrano laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica e sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
+Studio Architettura Pagnoni opera in Franciacorta, provincia di Brescia, Lombardia e Nord Italia. Il **Geom. Sergio Pagnoni** (geometra) segue topografia, rilievi di campagna, divisioni e frazionamenti catastali, successioni e divisioni ereditarie, confini, DOCFA/tipi mappali, GNSS RTK e stazione totale; l’**Arch. Davide Pagnoni** la progettazione architettonica e il coordinamento delle pratiche. Insieme integrano laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica e sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
 
 ## Pagine principali
 
@@ -29,7 +29,7 @@ Studio Architettura Pagnoni opera in Franciacorta, provincia di Brescia, Lombard
 
 > Architecture and surveying practice in Cazzago San Martino (BS), Franciacorta (Italy): design, topographic surveying, SLAM laser scanning, landscape, planning and building procedures since 1988.
 
-**Surveyor (Italian geometra) Sergio Pagnoni** leads topographic surveys, land subdivisions, boundaries and field measurements with GNSS RTK and total station. **Architect Davide Pagnoni** leads architectural design and statutory coordination. The studio combines both with mobile SLAM laser scanning (CHCNAV RS10), point clouds and as-built deliverables. Structural design is not carried out in-house.
+**Surveyor (Italian geometra) Sergio Pagnoni** leads topographic surveys, cadastral divisions and land splits, inheritance/succession property divisions, boundary checks, DOCFA updates and field measurements with GNSS RTK and total station. **Architect Davide Pagnoni** leads architectural design and statutory coordination. The studio combines both with mobile SLAM laser scanning (CHCNAV RS10), point clouds and as-built deliverables. Structural design is not carried out in-house.
 
 - [Home (EN)](https://studiopagnoni.com/en/): Overview and services
 - [Services](https://studiopagnoni.com/en/servizi/): Architecture, surveying, SLAM, landscape, planning
