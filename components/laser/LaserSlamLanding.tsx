@@ -1,6 +1,7 @@
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { PageClosingCta } from "@/components/content/PageClosingCta";
+import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import type { SlamLandingContent } from "@/lib/content/laserSlamLanding";
 import { layoutContentMaxClass, layoutGutterXClass } from "@/lib/config/site";
@@ -32,15 +33,42 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
           <section className={ui.innerCard} aria-labelledby="slam-intro">
-            <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
-              {L.introHeading}
-            </h2>
-            <div className="max-w-[72ch] space-y-4">
-              <p className={introCopyClass}>{L.introLead}</p>
-              <p className={introCopyClass}>{L.instrumentNote}</p>
+            <div
+              className={
+                L.introImage
+                  ? "grid items-start gap-8 lg:grid-cols-12 lg:gap-12"
+                  : undefined
+              }
+            >
+              <div className={L.introImage ? "lg:col-span-7" : undefined}>
+                <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
+                  {L.introHeading}
+                </h2>
+                <div className="max-w-[72ch] space-y-4">
+                  <p className={introCopyClass}>{L.introLead}</p>
+                  <p className={introCopyClass}>{L.instrumentNote}</p>
+                </div>
+                <CtaButtons className="mt-8" />
+              </div>
+              {L.introImage ? (
+                <figure className="m-0 lg:col-span-5">
+                  <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--muted)]">
+                    <StockCoverImage
+                      src={L.introImage.src}
+                      alt={L.introImage.alt}
+                      sizes="(min-width:1024px) min(420px, 36vw), (min-width:640px) min(70vw, 480px), 100vw"
+                      loading="eager"
+                      fetchPriority="high"
+                      className="object-[center_20%]"
+                    />
+                    <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
+                  </div>
+                </figure>
+              ) : null}
             </div>
-            <CtaButtons className="mt-8" />
           </section>
+
+          <FaqSection id="slam-faq" items={L.faq} />
 
           <section className={ui.innerCard} aria-labelledby="slam-settori">
             <h2 id="slam-settori" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
@@ -188,8 +216,6 @@ export function LaserSlamLanding({ content }: { content: SlamLandingContent }) {
               </table>
             </div>
           </section>
-
-          <FaqSection id="slam-faq" items={L.faq} />
 
           <PageClosingCta
             id="slam-cta"

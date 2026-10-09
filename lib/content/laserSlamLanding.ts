@@ -1,5 +1,9 @@
 /** Contenuti pagina servizio `/laser-scanner-slam` e landing geo Brescia / Lombardia. */
 
+import { imageAlt } from "@/lib/config/seo";
+import { stockImages } from "@/lib/media/assetPaths";
+import { stockImage } from "@/lib/media/mediaPath";
+
 export type SlamFaqItem = { readonly q: string; readonly a: string };
 
 export type SlamSector = { readonly title: string; readonly body: string };
@@ -24,6 +28,8 @@ export type SlamLandingContent = {
   readonly introHeading: string;
   readonly introLead: string;
   readonly instrumentNote: string;
+  /** Immagine in apertura (sotto hero), opzionale. */
+  readonly introImage?: { readonly src: string; readonly alt: string };
   readonly sectorsIntro: string;
   readonly sectors: readonly SlamSector[];
   readonly areaHeading: string;
@@ -219,6 +225,12 @@ export const laserSlamLanding = {
     "Quando un edificio, un impianto o un capannone devono essere compresi prima di intervenire, il rilievo SLAM riduce i tempi in campo e restituisce una base metrica leggibile: nuvola di punti, as-built, sezioni e supporto a CAD/BIM per architettura e cantiere.",
   instrumentNote:
     "La piattaforma mobile CHCNAV RS10 integra GNSS RTK, LiDAR e SLAM visuale: un flusso continuo tra esterni, interni e zone dove il segnale satellitare non basta.",
+  introImage: {
+    src: stockImage(stockImages.strumentiGeometraArchitetto),
+    alt: imageAlt("Strumentazione topografica e laser — geometra e architetto in studio", {
+      service: "slam",
+    }),
+  },
   sectorsIntro:
     "Il rilievo SLAM è pensato per studi di progettazione, imprese, facility e committenza che devono decidere su geometrie affidabili dello stato di fatto.",
   sectors: [
@@ -263,16 +275,16 @@ export const laserSlamLanding = {
   comparison: sharedComparison,
   faq: [
     {
+      q: "Quanto costa un rilievo laser scanner SLAM?",
+      a: "Il preventivo varia di caso in caso (superficie, piani, accessibilità, distanza e formati di consegna). A titolo orientativo, per un appartamento di circa 100 m² su un unico piano, rilievo e consegna di disegni e relazione si collocano intorno ai 1.000 €. Scrivici zona e obiettivo: rispondiamo con una proposta senza impegno.",
+    },
+    {
       q: "Che precisione posso aspettarmi?",
       a: "In condizioni operative dichiarate dal costruttore, la piattaforma RS10 indica fino a circa 5 cm in misura assoluta combinando RTK, laser e SLAM visuale. La precisione effettiva dipende da ambiente, estensione e obiettivo: in preventivo definiamo tolleranze e controlli.",
     },
     {
       q: "Quanto tempo serve in campo su un capannone?",
       a: "Dipende da metratura, accessibilità e dettaglio. Su un capannone logistico di circa 8.000 m², indicativamente una giornata di acquisizione può coprire il volume utile; elaborazione e restituzione seguono il calendario concordato in offerta.",
-    },
-    {
-      q: "Quanto costa un rilievo laser scanner SLAM?",
-      a: "Il preventivo è su misura: superficie, piani, formati (solo nuvola vs DWG/BIM) e distanza dalla sede. Scrivici zona e obiettivo: rispondiamo con una proposta indicativa senza impegno.",
     },
     {
       q: "Posso avere solo la nuvola di punti?",
