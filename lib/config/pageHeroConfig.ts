@@ -1,6 +1,7 @@
 import { stockImages } from "@/lib/media/assetPaths";
 import { stockImage } from "@/lib/media/mediaPath";
-import { normalizePathname } from "@/lib/utils/normalizePathname";
+import { getLocaleFromPathname, stripLocalePrefix } from "@/lib/i18n/paths";
+import { pageHeroesEn } from "@/lib/i18n/content/pageHeroes.en";
 import { imageAlt } from "@/lib/config/seo";
 
 const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
@@ -104,6 +105,11 @@ const staticPageHeroes: Record<string, PageHeroData> = {
 };
 
 export function resolveStaticPageHero(pathname: string | null): PageHeroData | null {
-  const key = normalizePathname(pathname);
-  return staticPageHeroes[key] ?? null;
+  const key = stripLocalePrefix(pathname);
+  const base = staticPageHeroes[key];
+  if (!base) return null;
+  if (getLocaleFromPathname(pathname) !== "en") return base;
+  const en = pageHeroesEn[key];
+  if (!en) return base;
+  return { ...base, ...en };
 }

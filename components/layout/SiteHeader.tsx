@@ -3,12 +3,15 @@
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState, type CSSProperties } from "react";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontNav, fontSans } from "@/lib/fonts";
+import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
+import { navHrefs, t } from "@/lib/i18n/messages";
 import { isHomePath } from "@/lib/utils/isHomePath";
 import { isNavItemActive } from "@/lib/utils/navActive";
 import { resolveStaticPageHero } from "@/lib/config/pageHeroConfig";
-import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 
 /** Scroll: menu principale si nasconde con slide progressivo (home e pagine interne). */
 const HEADER_HIDE_RANGE_PX = 140;
@@ -23,6 +26,13 @@ function clamp01(n: number) {
 
 export function SiteHeader() {
   const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const copy = t(locale);
+  const homeHref = withLocalePrefix("/", locale);
+  const navItems = navHrefs.map((item) => ({
+    href: withLocalePrefix(item.href, locale),
+    label: copy.nav[item.key],
+  }));
   const isHome = isHomePath(pathname);
   const [open, setOpen] = useState(false);
   const [scrollY, setScrollY] = useState(0);
@@ -275,7 +285,7 @@ export function SiteHeader() {
         >
           <div className={`flex min-h-[72px] items-center justify-between gap-3 py-2 sm:min-h-[84px] md:min-h-[96px] ${layoutContentMaxClass}`}>
             <Link
-              href="/"
+              href={homeHref}
               className="group flex min-w-0 max-w-[min(100%,25.3rem)] shrink items-center sm:max-w-[29.9rem] md:max-w-[34.5rem]"
               aria-label={`${site.name} — home`}
               title={`${site.name} — home`}
@@ -292,28 +302,31 @@ export function SiteHeader() {
               />
             </Link>
 
-            <nav
-              className="site-header-nav hidden h-[3.91rem] shrink-0 items-center sm:h-[4.6rem] md:flex md:h-[5.06rem]"
-              aria-label="Menu principale"
-            >
-              <ul className="site-header-nav__list flex h-full flex-wrap items-center justify-end gap-y-2">
-                {navItems.map((item, index) => {
-                  const active = isNavItemActive(pathname, item.href);
-                  const isLast = index === navItems.length - 1;
-                  return (
-                    <li key={item.href} className="flex h-full items-center">
-                      <Link
-                        href={item.href}
-                        className={`${navLinkClass}${isLast ? " site-nav-link--last" : ""}${active ? " site-nav-link--active" : ""}`}
-                        aria-current={active ? "page" : undefined}
-                      >
-                        {item.label}
-                      </Link>
-                    </li>
-                  );
-                })}
-              </ul>
-            </nav>
+            <div className="hidden items-center gap-4 md:flex">
+              <nav
+                className="site-header-nav h-[3.91rem] shrink-0 items-center sm:h-[4.6rem] md:flex md:h-[5.06rem]"
+                aria-label={copy.navAria}
+              >
+                <ul className="site-header-nav__list flex h-full flex-wrap items-center justify-end gap-y-2">
+                  {navItems.map((item, index) => {
+                    const active = isNavItemActive(pathname, item.href);
+                    const isLast = index === navItems.length - 1;
+                    return (
+                      <li key={item.href} className="flex h-full items-center">
+                        <Link
+                          href={item.href}
+                          className={`${navLinkClass}${isLast ? " site-nav-link--last" : ""}${active ? " site-nav-link--active" : ""}`}
+                          aria-current={active ? "page" : undefined}
+                        >
+                          {item.label}
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              </nav>
+              <LanguageSwitcher />
+            </div>
 
             <button
               ref={menuButtonRef}
@@ -321,7 +334,7 @@ export function SiteHeader() {
               className={`flex min-h-[48px] min-w-[48px] shrink-0 touch-manipulation flex-col items-center justify-center gap-1.5 rounded-md border md:hidden ${menuButtonClass}`}
               aria-expanded={open}
               aria-controls="mobile-nav"
-              aria-label={open ? "Chiudi menu" : "Apri menu"}
+              aria-label={open ? copy.closeMenu : copy.openMenu}
               onClick={() => setOpen((v) => !v)}
             >
               <span className={`block h-0.5 w-6 bg-[var(--header-text)] transition ${open ? "translate-y-2 rotate-45" : ""}`} />
@@ -336,7 +349,7 @@ export function SiteHeader() {
       <nav
         ref={mobileNavRef}
         id="mobile-nav"
-        aria-label="Menu principale"
+        aria-label={copy.navAria}
         aria-hidden={!open}
         inert={!open}
         onTouchStart={onMobileNavTouchStart}
@@ -346,9 +359,12 @@ export function SiteHeader() {
         }`}
       >
         <div className="flex flex-1 flex-col overflow-y-auto overscroll-y-contain px-[max(1rem,env(safe-area-inset-left,0px))] pb-[max(2.5rem,env(safe-area-inset-bottom,0px))] pt-5">
-          <p className={`${fontSans.className} mb-5 text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--header-text-muted)]`}>
-            Menu
-          </p>
+          <div className="mb-5 flex items-center justify-between gap-3">
+            <p className={`${fontSans.className} text-[0.65rem] font-semibold uppercase tracking-[0.18em] text-[var(--header-text-muted)]`}>
+              Menu
+            </p>
+            <LanguageSwitcher />
+          </div>
           <ul className="flex flex-col gap-1">
             {navItems.map((item, index) => {
               const active = isNavItemActive(pathname, item.href);
@@ -373,7 +389,7 @@ export function SiteHeader() {
       {open ? (
         <button
           type="button"
-          aria-label="Chiudi menu"
+          aria-label={copy.closeMenu}
           tabIndex={-1}
           className="fixed inset-0 z-[998] touch-manipulation bg-[rgba(2,8,7,0.54)] motion-safe:transition-opacity motion-safe:duration-200 motion-reduce:transition-none md:hidden opacity-100"
           onClick={() => setOpen(false)}

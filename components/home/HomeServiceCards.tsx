@@ -2,16 +2,37 @@ import type { CSSProperties } from "react";
 import Link from "next/link";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { homeServiceCards } from "@/lib/content";
+import type { Locale } from "@/lib/i18n/config";
+import { serviceGroupsEn } from "@/lib/i18n/content/marketing.en";
+import { withLocalePrefix } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
 import { homeServiceCardImages } from "@/lib/media/images";
 import { StockCoverImage } from "@/components/media/StockCoverImage";
 import { ui } from "@/lib/ui";
 
-const visibleServiceCards = homeServiceCards.slice(0, 4);
+type Props = { locale?: Locale };
 
-export function HomeServiceCards() {
+export function HomeServiceCards({ locale = "it" }: Props) {
+  const copy = t(locale);
+  const cards =
+    locale === "en"
+      ? serviceGroupsEn.slice(0, 4).map((g) => ({
+          id: g.id,
+          title: g.title,
+          description: g.description,
+          href: withLocalePrefix(g.href, locale),
+        }))
+      : homeServiceCards.slice(0, 4).map((g) => ({
+          ...g,
+          href: withLocalePrefix(g.href, locale),
+        }));
+
   return (
-    <div className="service-cards-grid grid gap-4 sm:gap-5 lg:grid-cols-2" aria-label="Schede servizi">
-      {visibleServiceCards.map((card, index) => {
+    <div
+      className="service-cards-grid grid gap-4 sm:gap-5 lg:grid-cols-2"
+      aria-label={locale === "en" ? "Service cards" : "Schede servizi"}
+    >
+      {cards.map((card, index) => {
         const media = homeServiceCardImages[card.id as keyof typeof homeServiceCardImages];
 
         return (
@@ -35,7 +56,7 @@ export function HomeServiceCards() {
               <h3 className={`${fontDisplay.className} ${ui.cardHeading} mb-2 leading-snug`}>{card.title}</h3>
               <p className={`copy-rhythm mb-5 flex-1 ${ui.bodySm}`}>{card.description}</p>
               <Link href={card.href} className={`${fontSans.className} service-card__cta ${ui.textCta} mt-auto gap-2 text-base sm:text-sm`}>
-                Approfondisci
+                {copy.cta.learnMore}
                 <span
                   className="service-card__cta-arrow text-[1.1em] leading-none transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:translate-x-1"
                   aria-hidden

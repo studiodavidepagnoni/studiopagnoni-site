@@ -28,8 +28,9 @@ export type SlamLandingContent = {
   readonly introHeading: string;
   readonly introLead: string;
   readonly instrumentNote: string;
-  /** Immagine in apertura (sotto hero), opzionale. */
-  readonly introImage?: { readonly src: string; readonly alt: string };
+  /** Punti card strumentazione (subito sotto intro). */
+  readonly instrumentPoints: readonly string[];
+  readonly instrumentImage: { readonly src: string; readonly alt: string };
   readonly sectorsIntro: string;
   readonly sectors: readonly SlamSector[];
   readonly areaHeading: string;
@@ -59,6 +60,20 @@ export type SlamLandingContent = {
     }[];
   };
 };
+
+const sharedInstrumentPoints = [
+  "GNSS RTK, LiDAR e SLAM visuale nella stessa piattaforma: un solo strumento per passare da esterni a interni.",
+  "Continuità outdoor / indoor e zone con segnale satellitare debole (SFix rover).",
+  "SLAM in tempo reale: controllo copertura in campo prima di chiudere il sopralluogo.",
+  "Fino a circa 320.000 punti/s, campo 360°, dispositivo compatto (~1,9 kg), IP64.",
+] as const;
+
+const sharedInstrumentImage = {
+  src: stockImage(stockImages.chcnavRs10),
+  alt: imageAlt("Laser scanner SLAM CHCNAV RS10 su valigia di trasporto", {
+    service: "slam",
+  }),
+} as const;
 
 const sharedDeliverables = [
   { format: "E57 / LAS / LAZ", use: "Nuvola di punti georiferita, archivio e scambio con altri software" },
@@ -222,15 +237,11 @@ export const laserSlamLanding = {
   },
   introHeading: "Laser scanner SLAM: misura 3D prima di progettare",
   introLead:
-    "Quando un edificio, un impianto o un capannone devono essere compresi prima di intervenire, il rilievo SLAM riduce i tempi in campo e restituisce una base metrica leggibile: nuvola di punti, as-built, sezioni e supporto a CAD/BIM per architettura e cantiere.",
+    "Prima di progettare o ristrutturare, serve sapere com’è fatto davvero l’edificio o il capannone. Con il rilievo laser SLAM misuriamo gli spazi in modo rapido e preciso, e vi consegniamo piante, sezioni e dati 3D pronti per progettisti e cantiere.",
   instrumentNote:
-    "La piattaforma mobile CHCNAV RS10 integra GNSS RTK, LiDAR e SLAM visuale: un flusso continuo tra esterni, interni e zone dove il segnale satellitare non basta.",
-  introImage: {
-    src: stockImage(stockImages.strumentiGeometraArchitetto),
-    alt: imageAlt("Strumentazione topografica e laser — geometra e architetto in studio", {
-      service: "slam",
-    }),
-  },
+    "Usiamo uno strumento portatile (CHCNAV RS10) che lavora sia all’aperto sia al chiuso, anche dove il GPS non arriva bene: un solo passaggio per documentare tutto.",
+  instrumentPoints: sharedInstrumentPoints,
+  instrumentImage: sharedInstrumentImage,
   sectorsIntro:
     "Il rilievo SLAM è pensato per studi di progettazione, imprese, facility e committenza che devono decidere su geometrie affidabili dello stato di fatto.",
   sectors: [
@@ -340,6 +351,8 @@ export const laserSlamLandingBrescia = {
     "Cerchi un rilievo laser scanner SLAM a Brescia, in Franciacorta o nei comuni della provincia? Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
   instrumentNote:
     "Operiamo da Cazzago San Martino (fraz. Bornato) con piattaforma CHCNAV RS10 (GNSS RTK + LiDAR + SLAM visuale): un flusso continuo tra esterni, interni e zone con segnale satellitare debole, tipiche di capannoni e impianti bresciani.",
+  instrumentPoints: sharedInstrumentPoints,
+  instrumentImage: sharedInstrumentImage,
   sectorsIntro:
     "Il rilievo SLAM a Brescia è pensato per imprese manifatturiere, realtà vinicole in Franciacorta, studi di progettazione e facility che devono decidere su geometrie affidabili.",
   sectors: [
@@ -450,6 +463,8 @@ export const laserSlamLandingLombardia = {
     "Per commesse in Lombardia il laser scanner SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici. Documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata ad architettura, facility e imprese.",
   instrumentNote:
     "Partiamo dalla sede di Cazzago San Martino (BS) con CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale nello stesso strumento, ideale per siti multi-piano, magazzini e impianti dove indoor e outdoor si alternano nella stessa giornata di rilievo.",
+  instrumentPoints: sharedInstrumentPoints,
+  instrumentImage: sharedInstrumentImage,
   sectorsIntro:
     "La landing Lombardia è pensata per committenze multi-provincia: studi di progettazione, general contractor, property manager e imprese con sedi distribuite nel Nord Italia.",
   sectors: [

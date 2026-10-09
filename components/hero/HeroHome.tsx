@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { HeroSlideLayer } from "@/components/hero/HeroSlideLayer";
@@ -11,6 +12,9 @@ import {
   nextSlideIndex,
   slideDurationMs,
 } from "@/lib/media/heroCarousel";
+import { heroSlidesEn } from "@/lib/i18n/content/hero.en";
+import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
 import { heroSlides } from "@/lib/media/images";
 import {
   HERO_POSTER_DEFAULT,
@@ -34,11 +38,15 @@ import { ui } from "@/lib/ui";
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
 const MOBILE_VIDEO = HERO_VIDEO_MOBILE_SOURCES;
 const MOBILE_POSTER = HERO_POSTER_DEFAULT;
-const MOBILE_SLIDE = heroSlides[2];
 /** Clip mobile già tagliata da t=2s in encode; nessun seek iniziale. */
 const MOBILE_VIDEO_START_S = 0;
 
 export function HeroHome() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const copy = t(locale);
+  const slides = locale === "en" ? heroSlidesEn : heroSlides;
+  const mobileSlide = slides[2];
   const [idx, setIdx] = useState(0);
   const [failedVideos, setFailedVideos] = useState<ReadonlySet<string>>(() => new Set());
   const isMobile = useMediaQuery(HERO_MOBILE_MEDIA_QUERY, false);
@@ -131,10 +139,10 @@ export function HeroHome() {
     if (!autoAdvance) return;
     const delayMs = slideDurationMs(idx, showVideoBackground, failedVideos);
     const timeoutId = window.setTimeout(() => {
-      setIdx((prev) => (prev + 1) % heroSlides.length);
+      setIdx((prev) => (prev + 1) % slides.length);
     }, delayMs);
     return () => window.clearTimeout(timeoutId);
-  }, [idx, showVideoBackground, failedVideos, autoAdvance, isMobile]);
+  }, [idx, showVideoBackground, failedVideos, autoAdvance, isMobile, slides.length]);
 
   useEffect(() => {
     if (isMobile) return;
@@ -143,7 +151,7 @@ export function HeroHome() {
       return;
     }
 
-    heroSlides.forEach((slide, slideIndex) => {
+    slides.forEach((slide, slideIndex) => {
       const sources = slide.video ?? DEFAULT_VIDEO;
       const key = heroVideoKey(sources);
       if (failedVideos.has(key)) return;
@@ -156,7 +164,7 @@ export function HeroHome() {
         video.pause();
       }
     });
-  }, [idx, showVideoBackground, failedVideos, mediaPaused, isMobile]);
+  }, [idx, showVideoBackground, failedVideos, mediaPaused, isMobile, slides]);
 
   useEffect(() => {
     if (!isMobile || !canUseMobileVideo || !videoUnlocked) return;
@@ -212,18 +220,19 @@ export function HeroHome() {
     };
   }, [isMobile, canUseMobileVideo, videoUnlocked, mediaPaused, heroInView]);
 
-  const slide = isMobile ? MOBILE_SLIDE : heroSlides[idx];
+  const slide = isMobile ? mobileSlide : slides[idx];
   const line2Parts = slide.line2.split(" · ").map((part) => part.trim()).filter(Boolean);
-  const primaryHref = slide.primaryCtaHref ?? "/contatti";
-  const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
+  const primaryHref = withLocalePrefix(slide.primaryCtaHref ?? "/contatti", locale);
+  const primaryLabel = slide.primaryCtaLabel ?? copy.cta.requestSurvey;
   const primaryLabelMobile = slide.primaryCtaLabelMobile ?? primaryLabel;
+  const secondaryHref = withLocalePrefix(slide.ctaHref, locale);
   const nextIdx = nextSlideIndex(idx);
 
   const goToSlide = (index: number) => {
     setUserInteracted(true);
     setVideoUnlocked(true);
     setAutoPaused(true);
-    setIdx(((index % heroSlides.length) + heroSlides.length) % heroSlides.length);
+    setIdx(((index % slides.length) + slides.length) % slides.length);
   };
 
   const handleVideoError = (src: string) => {
@@ -361,7 +370,7 @@ export function HeroHome() {
           .filter(Boolean)
           .join(" ")}
       >
-        {heroSlides.map((slideItem, slideIndex) => {
+        {slides.map((slideItem, slideIndex) => {
           const sources = slideItem.video ?? DEFAULT_VIDEO;
           const key = heroVideoKey(sources);
           const isActive = slideIndex === idx;
@@ -437,7 +446,7 @@ export function HeroHome() {
                 <span className="sm:hidden">{primaryLabelMobile}</span>
                 <span className="hidden sm:inline">{primaryLabel}</span>
               </Link>
-              <Link href={slide.ctaHref} className={ui.btnHeroGhost}>
+              <Link href={secondaryHref} className={ui.btnHeroGhost}>
                 {slide.ctaLabel}
               </Link>
             </div>
@@ -450,13 +459,13 @@ export function HeroHome() {
         role="group"
         aria-label="Selezione slide"
       >
-        {heroSlides.map((_, slideIndex) => (
+        {slides.map((_, slideIndex) => (
           <button
             key={slideIndex}
             type="button"
             onClick={() => goToSlide(slideIndex)}
             className="hero-carousel-btn flex h-11 w-11 items-center justify-center rounded-full"
-            aria-label={`Vai alla slide ${slideIndex + 1} di ${heroSlides.length}`}
+            aria-label={`Vai alla slide ${slideIndex + 1} di ${slides.length}`}
             aria-current={slideIndex === idx ? "true" : undefined}
           >
             <span

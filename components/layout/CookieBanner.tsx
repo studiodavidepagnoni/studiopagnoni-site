@@ -1,15 +1,20 @@
 "use client";
 
 import Link from "next/link";
+import { usePathname } from "next/navigation";
 import { useCallback, useEffect, useRef, useState } from "react";
 import { createPortal } from "react-dom";
 import { fontSans } from "@/lib/fonts";
+import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
 import { clearCookiePrefs, loadCookiePrefs, saveCookiePrefs, type CookiePrefs } from "@/lib/privacy/cookieConsent";
 import { ui } from "@/lib/ui";
 
 export type { CookiePrefs };
 
 export function CookieBanner() {
+  const locale = getLocaleFromPathname(usePathname());
+  const copy = t(locale);
   const [visible, setVisible] = useState(false);
   const [embeds, setEmbeds] = useState(false);
   const [customize, setCustomize] = useState(false);
@@ -104,15 +109,15 @@ export function CookieBanner() {
       <div className={`mx-auto flex max-w-[1140px] flex-col gap-3 sm:flex-row sm:items-center sm:gap-5 ${fontSans.className}`}>
         <div className="min-w-0 flex-1">
           <p id="cookie-banner-title" className="sr-only">
-            Privacy e cookie
+            {copy.privacy}
           </p>
           <p id="cookie-banner-desc" className="text-[0.82rem] leading-snug text-white/80 sm:text-[0.88rem]">
-            Cookie necessari al sito. Maps e reCAPTCHA Google solo col consenso.{" "}
+            {copy.cookie.body}{" "}
             <Link
-              href="/privacy-policy#cookie"
+              href={`${withLocalePrefix("/privacy-policy", locale)}#cookie`}
               className="font-semibold text-[var(--primary-mid)] underline decoration-[var(--primary)]/40 underline-offset-[3px] hover:text-[var(--primary)]"
             >
-              Informativa
+              {copy.privacy}
             </Link>
             {" · "}
             <button
@@ -121,7 +126,13 @@ export function CookieBanner() {
               aria-expanded={customize}
               onClick={() => setCustomize((v) => !v)}
             >
-              {customize ? "Nascondi opzioni" : "Personalizza"}
+              {customize
+                ? locale === "en"
+                  ? "Hide options"
+                  : "Nascondi opzioni"
+                : locale === "en"
+                  ? "Customise"
+                  : "Personalizza"}
             </button>
           </p>
           {customize ? (
@@ -159,11 +170,11 @@ export function CookieBanner() {
             </button>
           ) : (
             <button type="button" className={`${ui.cookieReject} text-sm`} onClick={handleNecessaryOnly}>
-              Solo necessari
+              {copy.cookie.necessary}
             </button>
           )}
           <button type="button" className={`${ui.cookieAccept} text-sm`} onClick={handleAcceptAll}>
-            Accetta tutto
+            {copy.cookie.acceptAll}
           </button>
         </div>
       </div>

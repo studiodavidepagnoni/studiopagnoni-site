@@ -9,6 +9,18 @@ import {
   zoneDescription,
   zoneFooter,
 } from "@/lib/content";
+import type { Locale } from "@/lib/i18n/config";
+import {
+  certificationsEn,
+  homeCertsEn,
+  homeChiSiamoEn,
+  homeContactEn,
+  homeProcessEn,
+  homeStrumentazioneEn,
+  homeZoneEn,
+} from "@/lib/i18n/content/marketing.en";
+import { withLocalePrefix } from "@/lib/i18n/paths";
+import { t } from "@/lib/i18n/messages";
 import { homeChiSiamoImages } from "@/lib/media/images";
 import { ProjectCoverImage } from "@/components/media/ProjectCoverImage";
 import { featuredProjects } from "@/lib/content/projects";
@@ -21,7 +33,7 @@ import { StatsSection } from "@/components/home/StatsSection";
 
 const titleCls = `${fontDisplay.className} section-title home-section-title reveal-title`;
 
-const processSteps = [
+const processStepsIt = [
   {
     kicker: "Acquisizione",
     title: "SLAM in movimento",
@@ -39,14 +51,67 @@ const processSteps = [
   },
 ] as const;
 
-export function HomeSections() {
+type Props = { locale?: Locale };
+
+export function HomeSections({ locale = "it" }: Props) {
+  const copy = t(locale);
+  const chi = locale === "en" ? homeChiSiamoEn : homeChiSiamo;
+  const strum = locale === "en" ? homeStrumentazioneEn : homeStrumentazione;
+  const processSteps = locale === "en" ? homeProcessEn.steps : processStepsIt;
+  const certs = locale === "en" ? certificationsEn : certifications;
+  const zoneTitle = locale === "en" ? homeZoneEn.title : zoneContent.title;
+  const zoneHeading = locale === "en" ? homeZoneEn.subtitle : zoneContent.heading;
+  const zoneBody =
+    locale === "en" ? (
+      <>
+        Our office in <strong>Bornato, Cazzago San Martino</strong> is well placed for work across{" "}
+        <strong>Franciacorta</strong>, Valle Trompia, Lake Iseo and the province of <strong>Brescia</strong>. We also take
+        commissions across Lombardy and, by project type, Northern Italy.
+      </>
+    ) : (
+      zoneDescription
+    );
+  const zoneFoot =
+    locale === "en" ? (
+      <>
+        For timing and availability,{" "}
+        <Link href={withLocalePrefix("/contatti", locale)} className={ui.proseLink}>
+          contact us
+        </Link>
+        . Explore SLAM laser surveys in the{" "}
+        <Link href={withLocalePrefix("/rilievi-laser-scanner-slam-brescia", locale)} className={ui.proseLink}>
+          province of Brescia
+        </Link>{" "}
+        and{" "}
+        <Link href={withLocalePrefix("/rilievi-laser-scanner-slam-lombardia", locale)} className={ui.proseLink}>
+          Lombardy
+        </Link>
+        , or the{" "}
+        <Link href={withLocalePrefix("/topografia", locale)} className={ui.proseLink}>
+          surveying
+        </Link>{" "}
+        page. For architecture practices:{" "}
+        <Link href={withLocalePrefix("/rilievi-3d-per-studi-di-architettura", locale)} className={ui.proseLink}>
+          outsourced 3D surveys
+        </Link>
+        .
+      </>
+    ) : (
+      zoneFooter
+    );
+  const certsTitle = locale === "en" ? homeCertsEn.title : "Abilitazioni professionali";
+  const serviziTitle = locale === "en" ? "Services" : "Servizi";
+  const progettiTitle = locale === "en" ? "Projects" : "Progetti";
+  const processTitle = locale === "en" ? homeProcessEn.title : "Dal campo agli elaborati";
+  const contactTitle = locale === "en" ? homeContactEn.title : "Contatti";
+
   return (
     <>
       {/* ── Chi siamo — SOTA editorial: 5/7 split, immagine unica forte, testo compatto ── */}
       <section className="lazy-section section-shell overflow-x-hidden bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>{homeChiSiamo.title}</h2>
+            <h2 className={titleCls}>{chi.title}</h2>
           </div>
 
           <div className="reveal-block mt-8 grid items-stretch gap-8 sm:mt-10 sm:gap-10 lg:mt-10 lg:grid-cols-12 lg:gap-14">
@@ -57,16 +122,16 @@ export function HomeSections() {
                 <div className="min-w-0">
                   <p className={`${fontSans.className} home-chi-siamo-lede hidden text-[1.02rem] leading-[1.75] text-[var(--copy-body)] sm:block`}>
                     <span className="sr-only">Studio Architettura Pagnoni. </span>
-                    {homeChiSiamo.short}
+                    {chi.short}
                   </p>
                   <p className={`${fontSans.className} home-chi-siamo-lede text-[1.02rem] leading-[1.7] tracking-[0.01em] text-[var(--foreground)]/80 sm:hidden`}>
                     <span className="sr-only">Studio Architettura Pagnoni. </span>
-                    {homeChiSiamo.shortMobile}
+                    {chi.shortMobile}
                   </p>
                 </div>
               </div>
               <ul className="home-chi-siamo-list mt-8 space-y-0 sm:mt-8" aria-label="Ambiti principali">
-                {homeChiSiamo.highlights.map((h) => (
+                {chi.highlights.map((h) => (
                   <li key={h.label} className="home-chi-siamo-list__item">
                     <span className="home-chi-siamo-list__mark" aria-hidden />
                     <span className={`${fontSans.className} home-chi-siamo-list__label`}>
@@ -78,8 +143,8 @@ export function HomeSections() {
               </ul>
 
               <p className="mt-8 sm:mt-10">
-                <Link href="/chi-siamo" className={`${fontSans.className} ${ui.textCta}`}>
-                  Scheda dello studio
+                <Link href={withLocalePrefix("/chi-siamo", locale)} className={`${fontSans.className} ${ui.textCta}`}>
+                  {locale === "en" ? "About the practice" : "Scheda dello studio"}
                 </Link>
               </p>
             </div>
@@ -113,10 +178,10 @@ export function HomeSections() {
       <section className="home-section-servizi lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>Servizi</h2>
+            <h2 className={titleCls}>{serviziTitle}</h2>
           </div>
 
-          <HomeServiceCards />
+          <HomeServiceCards locale={locale} />
 
           <div
             id="strumentazione"
@@ -130,14 +195,14 @@ export function HomeSections() {
                 id="strumentazione-heading"
                 className={`${fontDisplay.className} ${ui.cardHeading} mt-2 tracking-tight`}
               >
-                {homeStrumentazione.title}
+                {strum.title}
               </h3>
               <div className={`${fontSans.className} mt-4 ${ui.body} text-pretty sm:mt-5`}>
-                {homeStrumentazione.lede}
+                {strum.lede}
               </div>
             </div>
             <ul className="home-kit-list">
-              {homeStrumentazione.items.map((item) => (
+              {strum.items.map((item) => (
                 <li key={item.label} className="home-kit-list__item">
                   <p className={`${fontSans.className} section-kicker`}>{item.label}</p>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{item.text}</p>
@@ -164,7 +229,7 @@ export function HomeSections() {
           </div>
 
           <p className="mt-8 sm:mt-10">
-            <Link href="/servizi" className={`${fontSans.className} ${ui.textCta}`}>
+            <Link href={withLocalePrefix("/servizi", locale)} className={`${fontSans.className} ${ui.textCta}`}>
               Elenco completo dei servizi
             </Link>
           </p>
@@ -175,7 +240,7 @@ export function HomeSections() {
       <section className="home-section-progetti lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>Progetti</h2>
+            <h2 className={titleCls}>{progettiTitle}</h2>
           </div>
           <div className="home-projects-mosaic">
             {featuredProjects.slice(0, 3).map((p, index) => (
@@ -202,14 +267,14 @@ export function HomeSections() {
                   <span className={`${fontDisplay.className} home-projects-mosaic__caption mt-1 block font-medium text-[var(--foreground)]`}>
                     {p.caption}
                   </span>
-                  <span className={`${fontSans.className} ${ui.textCta} mt-1`}>Vedi il progetto</span>
+                  <span className={`${fontSans.className} ${ui.textCta} mt-1`}>{copy.cta.viewProject}</span>
                 </div>
               </Link>
             ))}
           </div>
           <p className="mt-8 sm:mt-10">
-            <Link href="/progetti" className={`${fontSans.className} ${ui.textCta}`}>
-              Archivio progetti
+            <Link href={withLocalePrefix("/progetti", locale)} className={`${fontSans.className} ${ui.textCta}`}>
+              {copy.cta.archiveProjects}
             </Link>
           </p>
         </div>
@@ -219,7 +284,7 @@ export function HomeSections() {
       <section id="processo" className="surface-inverted lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>Dal campo agli elaborati</h2>
+            <h2 className={titleCls}>{processTitle}</h2>
           </div>
           <ul className="home-process-rail mt-8">
             {processSteps.map((s) => (
@@ -237,10 +302,10 @@ export function HomeSections() {
       <section id="certificazioni" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>Abilitazioni professionali</h2>
+            <h2 className={titleCls}>{certsTitle}</h2>
           </div>
           <ul className="home-certs-list">
-            {certifications.map((c) => (
+            {certs.map((c) => (
               <li key={c.title} className="home-certs-list__item reveal-block">
                 <h3 className="home-certs-list__title">{c.title}</h3>
                 <p className={`${ui.bodySm}`}>{c.text}</p>
@@ -254,13 +319,13 @@ export function HomeSections() {
       <section id="zone-servite" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--background)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="reveal-block max-w-[62ch]">
-            <h2 className={titleCls}>{zoneContent.title}</h2>
+            <h2 className={titleCls}>{zoneTitle}</h2>
             <p className={`${fontDisplay.className} mt-4 text-[1.05rem] font-medium leading-snug text-[var(--foreground)] sm:text-lg`}>
-              {zoneContent.heading}
+              {zoneHeading}
             </p>
-            <div className={`${fontSans.className} home-section-intro__lede mt-4`}>{zoneDescription}</div>
+            <div className={`${fontSans.className} home-section-intro__lede mt-4`}>{zoneBody}</div>
             <p className={`${fontSans.className} mt-4 ${ui.bodySm}`}>{site.addressLine}</p>
-            <p className={`${fontSans.className} mt-6 ${ui.bodySm}`}>{zoneFooter}</p>
+            <p className={`${fontSans.className} mt-6 ${ui.bodySm}`}>{zoneFoot}</p>
           </div>
         </div>
       </section>
@@ -271,7 +336,7 @@ export function HomeSections() {
       <section className="lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">
-            <h2 className={titleCls}>Contatti</h2>
+            <h2 className={titleCls}>{contactTitle}</h2>
           </div>
           <div className="home-contact-rail">
             <PlateFrame />
@@ -308,8 +373,8 @@ export function HomeSections() {
             </div>
           </div>
           <p className="mt-8 sm:mt-10">
-            <Link href="/contatti#form-contatti" className={`${fontSans.className} ${ui.textCta}`}>
-              Modulo di contatto
+            <Link href={`${withLocalePrefix("/contatti", locale)}#form-contatti`} className={`${fontSans.className} ${ui.textCta}`}>
+              {locale === "en" ? "Contact form" : "Modulo di contatto"}
             </Link>
           </p>
         </div>

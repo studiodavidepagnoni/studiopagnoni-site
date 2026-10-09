@@ -1,9 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { AppProviders } from "@/components/layout/AppProviders";
 import { CookieBannerDeferred } from "@/components/layout/CookieBannerDeferred";
+import { LocaleHtmlLang } from "@/components/layout/LocaleHtmlLang";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeaderDeferred } from "@/components/layout/SiteHeaderDeferred";
 import { SiteHeaderShell } from "@/components/layout/SiteHeaderShell";
+import { SkipToContent } from "@/components/layout/SkipToContent";
 import { CspMeta } from "@/components/security/CspMeta";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
@@ -48,9 +50,8 @@ export default function RootLayout({
         className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-site max-md:overflow-x-clip`}
       >
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLdGraph) }} />
-        <a href="#main-content" className="skip-link">
-          Vai al contenuto principale
-        </a>
+        <LocaleHtmlLang />
+        <SkipToContent />
         <SiteHeaderShell />
         <SiteHeaderDeferred />
         <AppProviders>

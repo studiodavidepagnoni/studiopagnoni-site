@@ -1,38 +1,56 @@
-﻿import Link from "next/link";
+﻿"use client";
+
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { SiteBrandLockup } from "@/components/layout/SiteBrandLockup";
 import { formatCopyrightYearRange } from "@/lib/config/copyright";
 import { fontNav, fontSans } from "@/lib/fonts";
-import { layoutContentMaxClass, layoutGutterXClass, navItems, site } from "@/lib/config/site";
+import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
+import { navHrefs, t } from "@/lib/i18n/messages";
+import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
 const footerNavLinkClass = `${fontNav.className} site-footer-nav-link flex min-h-[48px] touch-manipulation items-center text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--header-nav-hover)]/55 sm:min-h-0 sm:py-1`;
 
+const phoneLabelsEn: Record<string, string> = {
+  Studio: "Office",
+  "Architetto Davide Pagnoni": "Architect Davide Pagnoni",
+  "Geometra Sergio Pagnoni": "Surveyor Sergio Pagnoni",
+};
+
 export function SiteFooter() {
+  const pathname = usePathname();
+  const locale = getLocaleFromPathname(pathname);
+  const copy = t(locale);
+  const navItems = navHrefs.map((item) => ({
+    href: withLocalePrefix(item.href, locale),
+    label: copy.nav[item.key],
+  }));
+
   return (
     <footer className="border-t border-[var(--footer-edge)] bg-[var(--footer-bg)] text-[var(--footer-text)]">
       <div className={`${layoutGutterXClass} py-12 sm:py-16`}>
         <div className={layoutContentMaxClass}>
           <div className="grid gap-12 lg:grid-cols-[1.15fr_0.85fr] lg:gap-16">
             <div>
-              <SiteBrandLockup
-                tone="chrome"
-                heightClass="h-11 sm:h-12 md:h-14"
-                className="max-w-full"
-              />
+              <SiteBrandLockup tone="chrome" heightClass="h-11 sm:h-12 md:h-14" className="max-w-full" />
 
               <p className={`${fontSans.className} mt-6 max-w-[56ch] text-sm leading-relaxed text-[var(--footer-muted)] sm:text-[0.97rem]`}>
-                Studio di architettura attivo tra Franciacorta, provincia di Brescia e Nord Italia per topografia, laser scanner SLAM,
-                progettazione e pratiche edilizie.
+                {copy.footerBlurb}
               </p>
 
-              <Link href="/contatti" className={`${ui.btnFooterCta} mt-8 inline-flex min-h-[44px] items-center justify-center`}>
-                Contattaci
+              <Link
+                href={withLocalePrefix("/contatti", locale)}
+                className={`${ui.btnFooterCta} mt-8 inline-flex min-h-[44px] items-center justify-center`}
+              >
+                {copy.footerContactCta}
               </Link>
             </div>
 
             <div className="grid gap-10 sm:grid-cols-2">
               <div>
-                <nav aria-label="Link del sito">
+                <nav aria-label={copy.footerNavAria}>
                   <ul className="space-y-0.5">
                     {navItems.map((item) => (
                       <li key={item.href}>
@@ -43,20 +61,25 @@ export function SiteFooter() {
                     ))}
                   </ul>
                 </nav>
+                <div className="mt-6">
+                  <LanguageSwitcher tone="chrome" />
+                </div>
               </div>
 
               <div>
                 <h3 className={`${fontNav.className} mb-4 text-[14px] font-bold uppercase leading-[25px] tracking-normal text-[var(--header-nav-text)]`}>
-                  Sede
+                  {copy.footerOffice}
                 </h3>
                 <p className={`${fontSans.className} text-sm leading-relaxed text-[var(--footer-muted)]`}>{site.addressLine}</p>
                 <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--footer-muted)]`}>
-                  Orari: {site.openingHours.label}
+                  {copy.footerHours}: {site.openingHours.label}
                 </p>
                 <ul className="mt-4 space-y-3 text-sm">
                   {site.phones.map((phone) => (
                     <li key={phone.tel}>
-                      <span className="text-[var(--footer-faint)]">{phone.label}</span>
+                      <span className="text-[var(--footer-faint)]">
+                        {locale === "en" ? phoneLabelsEn[phone.label] ?? phone.label : phone.label}
+                      </span>
                       <br />
                       <a
                         className="font-medium text-[var(--footer-link-hover)] transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40"
@@ -89,21 +112,21 @@ export function SiteFooter() {
               {site.piva ? ` · P.IVA ${site.piva}` : null}
               {" · "}
               <Link
-                href="/privacy-policy"
+                href={withLocalePrefix("/privacy-policy", locale)}
                 className="underline-offset-2 transition-colors hover:text-[var(--foreground)] hover:underline focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40"
               >
-                Privacy
+                {copy.privacy}
               </Link>
             </p>
             <p
               className={`${fontNav.className} site-brand-tagline site-footer-bar__tagline hidden sm:inline-flex flex-wrap items-baseline justify-center gap-x-1.5 font-bold uppercase leading-snug tracking-normal sm:justify-end sm:gap-x-2`}
             >
               <span>Architettura</span>
-              <span className="site-brand-tagline__sep" aria-hidden>
+              <span className="text-[var(--footer-faint)]" aria-hidden>
                 ·
               </span>
               <span>Topografia</span>
-              <span className="site-brand-tagline__sep" aria-hidden>
+              <span className="text-[var(--footer-faint)]" aria-hidden>
                 ·
               </span>
               <span>Laser Scanning</span>

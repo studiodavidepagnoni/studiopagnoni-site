@@ -48,8 +48,8 @@ export default function ServiziPage() {
                 Ambiti di intervento
               </h2>
               <p className={`${ui.bodyMuted} mb-8 max-w-5xl`}>
-                Dall&apos;architettura alla topografia, dal laser SLAM al verde e alle pratiche di cantiere: sotto trovi gli ambiti in cui
-                interveniamo, con sintesi operativa e link alle pagine dedicate dove servono metodo e strumenti più nel dettaglio.
+                Dall&apos;architettura alla topografia, dal laser SLAM al verde e alle pratiche di cantiere: sotto gli ambiti in cui
+                interveniamo, con link alle pagine dedicate dove servono metodo e strumenti più nel dettaglio.
               </p>
 
               <div className="grid gap-6 sm:grid-cols-2 lg:gap-8" aria-label="Schede servizi">
@@ -63,19 +63,7 @@ export default function ServiziPage() {
                     >
                       <p className={`${fontSans.className} section-kicker mb-3`}>{group.kicker}</p>
                       <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{group.title}</h3>
-                      <p className={`mt-4 ${ui.bodySm}`}>{group.description}</p>
-                      {group.points.length > 0 ? (
-                        <ul className="mt-5 list-none space-y-3 pl-0">
-                          {group.points.map((point) => (
-                            <li
-                              key={point}
-                              className={`relative pl-5 ${ui.bodySm} before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]`}
-                            >
-                              {point}
-                            </li>
-                          ))}
-                        </ul>
-                      ) : null}
+                      <p className={`mt-4 flex-1 ${ui.bodySm}`}>{group.description}</p>
                       {hasDedicatedPage ? (
                         <Link href={group.href} className={`${fontSans.className} ${ui.textCta} mt-6`}>
                           {group.cta} →

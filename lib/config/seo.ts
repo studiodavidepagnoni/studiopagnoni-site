@@ -15,7 +15,7 @@ import { site } from "@/lib/config/site";
  *
  * Cluster locale:
  * - studio architettura Cazzago San Martino, architettura Franciacorta
- * - topografo Brescia, rilievo topografico Lombardia
+ * - geometra Brescia, topografia, rilievo topografico Lombardia
  *
  * Differenziatori: CHCNAV RS10, sede Bornato/Franciacorta, dal 1988.
  */
@@ -37,6 +37,8 @@ export const seoKeywords = {
   local: [
     "studio architettura Cazzago San Martino",
     "architetto Franciacorta",
+    "geometra Brescia",
+    "geometra Franciacorta",
     "topografo Brescia",
     "rilievo topografico Franciacorta",
     "rilievo planoaltimetrico Lombardia",
