@@ -12,22 +12,18 @@ const deliverables = [
 
 const workflow = [
   {
-    step: "01",
     title: "Brief and access",
     body: "We define objective, outputs and site constraints before mobilisation.",
   },
   {
-    step: "02",
     title: "Mobile capture",
     body: "SLAM paths indoor/outdoor with on-site coverage checks before closing the survey.",
   },
   {
-    step: "03",
     title: "Processing",
     body: "Registration, cleaning and georeferencing aligned to the agreed coordinate frame.",
   },
   {
-    step: "04",
     title: "Delivery",
     body: "E57/DWG/BIM and notes ready for design, facility or construction teams.",
   },

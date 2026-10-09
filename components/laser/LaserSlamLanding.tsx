@@ -189,9 +189,8 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </h2>
             <ol className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-4">
               {L.workflow.map((w) => (
-                <li key={w.step} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:p-6">
-                  <span className={`${fontSans.className} section-kicker`}>{w.step}</span>
-                  <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>{w.title}</h3>
+                <li key={w.title} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:p-6">
+                  <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{w.title}</h3>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{w.body}</p>
                 </li>
               ))}

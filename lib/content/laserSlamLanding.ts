@@ -11,7 +11,6 @@ export type SlamSector = { readonly title: string; readonly body: string };
 export type SlamDeliverable = { readonly format: string; readonly use: string };
 
 export type SlamWorkflowStep = {
-  readonly step: string;
   readonly title: string;
   readonly body: string;
 };
@@ -166,22 +165,18 @@ const lombardiaComparison = {
 
 const sharedWorkflow = [
   {
-    step: "01",
     title: "Brief e sopralluogo",
     body: "Definiamo obiettivo (as-built, ristrutturazione, interferenze), superficie indicativa e formati di consegna. Se utile, sopralluogo per pianificare percorsi e accessi.",
   },
   {
-    step: "02",
     title: "Acquisizione SLAM in campo",
     body: "Scansione mobile con RS10: controllo in tempo reale su copertura e continuità indoor/outdoor, con integrazione RTK dove serve.",
   },
   {
-    step: "03",
     title: "Elaborazione e QA",
     body: "Allineamento, pulizia nuvola, controlli metrici e confronto con eventuali rilievi topografici di supporto.",
   },
   {
-    step: "04",
     title: "Restituzione",
     body: "Consegna negli formati concordati (nuvola, CAD, BIM) con documentazione comprensibile anche per chi non usa quotidianamente il 3D.",
   },
@@ -189,22 +184,18 @@ const sharedWorkflow = [
 
 const bresciaWorkflow = [
   {
-    step: "01",
     title: "Brief locale",
     body: "Comune in provincia di Brescia, obiettivo (as-built, ristrutturazione, cantina/impianto) e formati. Spesso basta una call; sopralluogo se accessi o vincoli lo richiedono.",
   },
   {
-    step: "02",
     title: "Scansione da sede Franciacorta",
     body: "Intervento rapido da Bornato/Cazzago San Martino con RS10: percorsi continui indoor/outdoor tipici di capannoni e immobili del Bresciano.",
   },
   {
-    step: "03",
     title: "Controlli e topografia",
     body: "Pulizia nuvola e, se serve, ancoraggio con GNSS RTK o stazione totale per coordinate di progetto e riferimenti catastali.",
   },
   {
-    step: "04",
     title: "Consegna operativa",
     body: "Nuvola e/o DWG pronti per studi e imprese locali, con report chiaro per committenza e cantiere in provincia.",
   },
@@ -212,22 +203,18 @@ const bresciaWorkflow = [
 
 const lombardiaWorkflow = [
   {
-    step: "01",
     title: "Brief multi-sito",
     body: "Provincia, comune, superficie, accessi e standard di consegna del vostro team (BIM/GC). Definiamo se serve una o più giornate di campagna.",
   },
   {
-    step: "02",
     title: "Pianificazione regionale",
     body: "Organizziamo viaggio da Brescia, finestre di ingresso e sequenza dei percorsi, essenziale su magazzini e impianti con orari vincolati.",
   },
   {
-    step: "03",
     title: "Acquisizione SLAM",
     body: "Scansione mobile RS10 su layout estesi; copertura verificata in campo per ridurre riprese costose fuori sede.",
   },
   {
-    step: "04",
     title: "Restituzione allineata",
     body: "E57/DWG/BIM e report con note di campagna, così sede diverse in Lombardia lavorano sugli stessi formati.",
   },
