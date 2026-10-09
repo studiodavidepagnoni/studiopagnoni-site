@@ -139,8 +139,10 @@ export const homeServiceCardImages = {
 } as const;
 
 export const chiSiamoPageImage = {
-  src: s("handheldSlam"),
-  alt: imageAlt("Acquisizione SLAM handheld lungo strada di campagna", { service: "slam" }),
+  src: s("geometraSuddivisioni"),
+  alt: imageAlt("Strumentazione geometra in valigia — rilievo e suddivisioni", {
+    service: "topografia",
+  }),
 } as const;
 
 export const projectPreview = [

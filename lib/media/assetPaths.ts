@@ -29,6 +29,8 @@ export const stockImages = {
   paesaggioTerreno: "paesaggio-vigneto-franciacorta-brescia",
   /** Intro pagina `/laser-scanner-slam` */
   strumentiGeometraArchitetto: "strumenti-geometra-architetto-brescia",
+  /** Pagina Chi siamo */
+  geometraSuddivisioni: "geometra-strumentazione-suddivisioni-brescia",
 } as const;
 
 /** Progetti (`assets/projects/{dir}/...`). */
