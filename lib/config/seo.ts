@@ -174,9 +174,9 @@ export const jsonLdGraph = {
       "@id": `${site.url.replace(/\/$/, "")}/#organization`,
       name: site.brandName,
       legalName: site.legalName,
-      alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato"],
+      alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato", "Geometra Pagnoni Bornato"],
       description:
-        "Architettura, progettazione urbana, topografia GNSS RTK e stazione totale, rilievi laser scanner 3D SLAM, rilievi architettonici e pratiche catastali. Sede a Bornato, Frazione di Cazzago San Martino (BS).",
+        "Studio di architettura e geometra a Bornato, Cazzago San Martino (BS): progettazione architettonica, topografia (GNSS RTK e stazione totale), suddivisioni e confini, rilievi laser scanner 3D SLAM, rilievi architettonici e pratiche catastali. Geom. Sergio Pagnoni e Arch. Davide Pagnoni — Franciacorta e provincia di Brescia.",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),
@@ -207,6 +207,20 @@ export const jsonLdGraph = {
           closes: slot.closes,
         })),
       ),
+      employee: [
+        {
+          "@type": "Person",
+          name: "Sergio Pagnoni",
+          jobTitle: "Geometra",
+          telephone: "+393482311092",
+        },
+        {
+          "@type": "Person",
+          name: "Davide Pagnoni",
+          jobTitle: "Architetto",
+          telephone: "+393473576510",
+        },
+      ],
       areaServed: [
         { "@type": "Place", name: "Franciacorta" },
         { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
@@ -215,10 +229,12 @@ export const jsonLdGraph = {
       ],
       knowsAbout: [
         "Architettura",
+        "Geometra",
         "Progettazione architettonica",
         "Progettazione urbana",
         "Rilievi architettonici",
         "Pratiche catastali",
+        "Suddivisioni e confini",
         "Rilievi topografici",
         "Laser scanner SLAM",
         "Rilievi laser scanner 3D",
@@ -307,9 +323,9 @@ export const jsonLdGraph = {
             "@type": "Offer",
             itemOffered: {
               "@type": "Service",
-              name: "Topografia e rilievi planoaltimetrici",
+              name: "Topografia e rilievi del geometra",
               description:
-                "Rilievi con GNSS RTK e stazione totale, planimetrie quotate, volumetrie e supporto a frazionamenti e cantieri in Franciacorta e provincia di Brescia.",
+                "Servizi da geometra: rilievi con GNSS RTK e stazione totale, planimetrie quotate, volumetrie, suddivisioni, confini e supporto a frazionamenti e cantieri in Franciacorta e provincia di Brescia.",
               areaServed: { "@type": "Place", name: "Franciacorta" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
             },

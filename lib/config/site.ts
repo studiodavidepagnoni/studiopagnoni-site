@@ -24,7 +24,7 @@ export const site = {
   /** Marchio in header/footer, title SEO e scheda Google Business. */
   brandName: "Studio Architettura Pagnoni",
   legalName: "Studio Architettura Pagnoni",
-  tagline: "Architettura, topografia e laser scanning",
+  tagline: "Architettura, geometra, topografia e laser scanning",
   url: publicSiteUrl,
   email: "studio@pagnoni-s.com",
   /** Recapiti: fisso scheda GMB + cellulari. */
