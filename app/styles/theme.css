@@ -28,13 +28,8 @@
   --cta-primary-fill-hover: #0f756c;
   --cta-primary-text: var(--on-primary);
   --cta-primary-border: color-mix(in srgb, var(--primary-mid) 45%, var(--green-border));
-  --cta-primary-shadow:
-    0 1px 0 color-mix(in srgb, white 22%, transparent) inset,
-    0 4px 14px color-mix(in srgb, var(--primary-mid) 22%, transparent);
-  --cta-primary-shadow-hover:
-    0 1px 0 color-mix(in srgb, white 26%, transparent) inset,
-    0 10px 26px color-mix(in srgb, var(--primary-mid) 28%, transparent),
-    0 0 0 1px color-mix(in srgb, var(--primary-mid) 18%, transparent);
+  --cta-primary-shadow: 0 1px 0 color-mix(in srgb, white 22%, transparent) inset;
+  --cta-primary-shadow-hover: 0 1px 0 color-mix(in srgb, white 26%, transparent) inset;
   --cta-primary-bg: var(--cta-primary-fill);
   --cta-primary-bg-hover: var(--cta-primary-fill-hover);
   --cta-hero-text: var(--cta-primary-text);
@@ -108,11 +103,3 @@
   background: color-mix(in srgb, var(--primary-mid) 48%, transparent);
 }
 
-.theme-site .btn-cta-primary::before {
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, white 38%, transparent) 0%,
-    color-mix(in srgb, white 12%, transparent) 68%,
-    transparent 100%
-  );
-}

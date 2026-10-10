@@ -39,7 +39,6 @@ export default function EnChiSiamoPage() {
                     loading="eager"
                     fetchPriority="high"
                   />
-                  <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 </div>
               </div>
 

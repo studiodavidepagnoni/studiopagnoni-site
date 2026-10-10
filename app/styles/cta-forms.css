@@ -15,21 +15,6 @@
     color 0.2s ease;
 }
 
-.btn-cta-primary::before {
-  content: "";
-  position: absolute;
-  inset: 0 0 auto;
-  height: 2px;
-  border-radius: 999px 999px 0 0;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--header-nav-active) 88%, transparent) 0%,
-    color-mix(in srgb, var(--primary-mid) 42%, transparent) 70%,
-    transparent 100%
-  );
-  pointer-events: none;
-}
-
 .btn-cta-primary:focus-visible {
   outline: 2px solid color-mix(in srgb, var(--header-nav-hover) 62%, transparent);
   outline-offset: 3px;
@@ -54,16 +39,6 @@
   padding-inline: 2.25rem;
   font-weight: 700;
   letter-spacing: 0.03em;
-  background: linear-gradient(
-    180deg,
-    color-mix(in srgb, var(--cta-primary-fill) 88%, white) 0%,
-    var(--cta-primary-fill) 52%,
-    color-mix(in srgb, var(--cta-primary-fill) 92%, black) 100%
-  );
-  border-color: color-mix(in srgb, var(--header-nav-active) 50%, var(--cta-primary-border));
-  box-shadow:
-    0 1px 0 color-mix(in srgb, white 24%, transparent) inset,
-    var(--cta-primary-shadow);
 }
 
 @media (max-width: 639px) {

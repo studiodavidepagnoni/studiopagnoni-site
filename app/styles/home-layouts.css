@@ -340,19 +340,6 @@
   color: var(--foreground);
 }
 
-.home-contact-rail__head-datum {
-  font-size: 0.68rem;
-  font-weight: 500;
-  letter-spacing: 0.08em;
-  font-variant-numeric: tabular-nums;
-  color: var(--green-ink-muted);
-}
-
-.home-contact-rail__head-sep {
-  margin: 0 0.4em;
-  opacity: 0.55;
-}
-
 .home-contact-rail__cols {
   position: relative;
   z-index: 1;
@@ -544,31 +531,6 @@
   }
 }
 
-/* Consenso mappa — coordinate al posto dell’icona */
-.map-consent-coords {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  color: var(--foreground);
-}
-
-.map-consent-coords__dms {
-  display: block;
-  font-family: var(--font-display), system-ui, sans-serif;
-  font-size: 1.05rem;
-  letter-spacing: -0.02em;
-  font-variant-numeric: tabular-nums;
-}
-
-.map-consent-coords__datum {
-  margin-top: 0.35rem;
-  font-size: 0.65rem;
-  font-weight: 600;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: var(--green-ink-muted);
-}
-
 /* Chi siamo — lista editoriale (mobile: più ariosa, meno “checklist SaaS”) */
 .home-chi-siamo-list {
   list-style: none;
@@ -608,18 +570,13 @@
 
 /* CTA finale */
 .home-cta-finale {
-  background:
-    radial-gradient(ellipse 70% 55% at 50% 0%, color-mix(in srgb, var(--primary-mid) 6%, transparent), transparent 65%),
-    var(--surface-chrome-deep);
+  background: var(--surface-chrome-deep);
 }
 
 .home-cta-finale h2,
 .home-cta-finale p {
   color: #ffffff !important;
   opacity: 1 !important;
-  text-shadow:
-    0 2px 20px rgba(0, 0, 0, 0.58),
-    0 0 30px rgba(0, 0, 0, 0.38);
 }
 
 .home-cta-finale__rule {

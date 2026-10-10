@@ -73,54 +73,39 @@
 
   @media (prefers-reduced-motion: no-preference) {
     .service-card--enter:hover {
-      box-shadow:
-        0 14px 36px color-mix(in srgb, var(--primary) 14%, transparent),
-        0 0 0 1px color-mix(in srgb, var(--primary-mid) 12%, transparent);
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
     }
   }
 
   a:hover .site-brand-title {
     color: #ffffff;
-    text-shadow: 0 0 20px var(--brand-glow-strong), 0 1px 12px rgba(0, 0, 0, 0.35);
   }
 
   a:hover .site-brand-tagline,
   a:hover .site-brand-tagline__sep {
     color: var(--header-nav-hover);
-    text-shadow: 0 0 22px color-mix(in srgb, var(--header-nav-hover) 55%, transparent);
   }
 
   a:hover .site-brand-mark {
-    filter: brightness(3.35) contrast(1.26) saturate(1.55)
-      drop-shadow(0 0 16px color-mix(in srgb, var(--brand-mark-tint) 62%, transparent))
-      drop-shadow(0 0 30px var(--brand-glow-strong));
-  }
-
-  a:hover .site-brand-lockup-img {
-    filter: drop-shadow(0 0 14px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
-      drop-shadow(0 0 28px var(--brand-glow-strong));
+    filter: brightness(3.35) contrast(1.26) saturate(1.55);
   }
 
   .site-nav-link--header:hover {
     color: var(--header-nav-hover);
-    text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
   }
 
   .site-nav-link--header:hover::after {
     transform: scaleX(1);
     opacity: 1;
-    box-shadow: 0 0 18px var(--header-nav-glow);
   }
 
   .site-nav-link--mobile:hover {
     border-left-color: var(--header-nav-line);
     background: color-mix(in srgb, var(--header-nav-hover) 7%, transparent);
-    text-shadow: none;
   }
 
   .site-footer-nav-link:hover {
     color: var(--header-nav-hover);
-    text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
   }
 }
 
@@ -168,22 +153,6 @@
 .home-section-break {
   position: relative;
   isolation: isolate;
-}
-
-.home-section-break::before {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background:
-    radial-gradient(ellipse 80% 60% at 50% 0%, color-mix(in srgb, var(--primary-mid) 8%, transparent), transparent 70%),
-    radial-gradient(ellipse 50% 40% at 100% 100%, color-mix(in srgb, var(--primary) 12%, transparent), transparent 65%);
-  opacity: 0.9;
-}
-
-.home-section-break > * {
-  position: relative;
-  z-index: 1;
 }
 
 /* Processo home — timeline orizzontale più marcata */

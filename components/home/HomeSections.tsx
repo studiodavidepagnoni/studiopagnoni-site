@@ -156,7 +156,6 @@ export function HomeSections({ locale = "it" }: Props) {
                   sizes="(min-width:1024px) min(580px, 50vw), (min-width:640px) min(90vw, 720px), 100vw"
                   loading="lazy"
                 />
-                <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 <div className="absolute bottom-4 left-4">
                   <div className="rounded-md bg-[color-mix(in_srgb,var(--surface-chrome-deep)_72%,transparent)] px-3 py-1.5 backdrop-blur-sm">
                     <p className={`${fontSans.className} section-kicker text-white`}>
@@ -257,7 +256,6 @@ export function HomeSections({ locale = "it" }: Props) {
                         : "(min-width:1024px) min(360px, 30vw), (min-width:640px) min(50vw, 520px), min(100vw, 560px)"
                     }
                   />
-                  <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
                 </div>
                 <div className="home-projects-mosaic__body">
                   <span className={`${fontSans.className} section-kicker`}>{p.label}</span>
@@ -342,11 +340,6 @@ export function HomeSections({ locale = "it" }: Props) {
               <p className={`${fontSans.className} home-contact-rail__head-hours`}>
                 {locale === "en" ? "Mon–Fri 9:00–18:00" : site.openingHours.label}
               </p>
-              <span className={`${fontSans.className} home-contact-rail__head-datum`} aria-hidden>
-                {site.geoDms.lat}
-                <span className="home-contact-rail__head-sep">·</span>
-                {site.geoDms.lon}
-              </span>
             </div>
             <div className="home-contact-rail__cols">
               <article className="home-contact-rail__item">

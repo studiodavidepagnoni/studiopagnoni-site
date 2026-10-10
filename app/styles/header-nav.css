@@ -3,19 +3,16 @@
   text-transform: uppercase;
   letter-spacing: normal;
   color: var(--brand-title);
-  text-shadow: 0 1px 14px rgba(0, 0, 0, 0.42);
-  transition: color 0.2s ease, text-shadow 0.2s ease, filter 0.2s ease;
+  transition: color 0.2s ease, filter 0.2s ease;
 }
 
 .site-brand-tagline {
   color: var(--brand-mark-tint);
-  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .site-footer-copyright {
   color: var(--brand-mark-tint);
-  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
 }
 
 .site-footer-bar {
@@ -106,7 +103,6 @@
 /* Etichette ambiti — stesso mint della tagline logo (Topografia · Architettura · SLAM) */
 .progetti-area-label {
   color: var(--brand-mark-tint);
-  text-shadow: 0 0 16px color-mix(in srgb, var(--brand-mark-tint) 38%, transparent);
 }
 
 .site-brand-tagline__sep {
@@ -116,51 +112,35 @@
 }
 
 .site-brand-mark {
-  filter: brightness(3.15) contrast(1.22) saturate(1.48)
-    drop-shadow(0 0 12px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
-    drop-shadow(0 0 26px var(--brand-glow));
+  filter: brightness(3.15) contrast(1.22) saturate(1.48);
   transition: filter 0.22s ease;
 }
 
-/* Lockup completo (logo.jpeg) su header/footer scuro: già bianco+teal, solo glow leggero */
 .site-brand-lockup-img {
-  filter: drop-shadow(0 0 10px color-mix(in srgb, var(--brand-mark-tint) 40%, transparent))
-    drop-shadow(0 0 22px var(--brand-glow));
   transition: filter 0.22s ease;
 }
 
 /* Su sezioni chiare: inverte i bianchi tipografici mantenendo leggibilità */
 .site-brand-lockup-img--on-light {
-  filter: brightness(0.18) contrast(1.15)
-    drop-shadow(0 3px 14px color-mix(in srgb, var(--primary-mid) 26%, transparent));
+  filter: brightness(0.18) contrast(1.15);
 }
 
-/* Icona su sezioni chiare (es. Chi siamo home): verde più profondo, senza glow mint da header */
+/* Icona su sezioni chiare (es. Chi siamo home): verde più profondo */
 .site-brand-mark--on-light {
-  filter: brightness(0.92) contrast(1.32) saturate(1.72) hue-rotate(-6deg)
-    drop-shadow(0 3px 14px color-mix(in srgb, var(--primary-mid) 26%, transparent));
+  filter: brightness(0.92) contrast(1.32) saturate(1.72) hue-rotate(-6deg);
 }
 
 a:focus-visible .site-brand-title {
   color: #ffffff;
-  text-shadow: 0 0 20px var(--brand-glow-strong), 0 1px 12px rgba(0, 0, 0, 0.35);
 }
 
 a:focus-visible .site-brand-tagline,
 a:focus-visible .site-brand-tagline__sep {
   color: var(--header-nav-hover);
-  text-shadow: 0 0 22px color-mix(in srgb, var(--header-nav-hover) 55%, transparent);
 }
 
 a:focus-visible .site-brand-mark {
-  filter: brightness(3.35) contrast(1.26) saturate(1.55)
-    drop-shadow(0 0 16px color-mix(in srgb, var(--brand-mark-tint) 62%, transparent))
-    drop-shadow(0 0 30px var(--brand-glow-strong));
-}
-
-a:focus-visible .site-brand-lockup-img {
-  filter: drop-shadow(0 0 14px color-mix(in srgb, var(--brand-mark-tint) 55%, transparent))
-    drop-shadow(0 0 28px var(--brand-glow-strong));
+  filter: brightness(3.35) contrast(1.26) saturate(1.55);
 }
 
 /* Lockup testuale (icona + titolo nav + tagline colore marchio) */
@@ -169,15 +149,14 @@ a:focus-visible .site-brand-lockup-img {
   text-transform: uppercase;
   letter-spacing: 0.04em;
   color: var(--foreground);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .site-brand-lockup__tagline,
 .site-brand-lockup__tagline .site-brand-lockup__sep {
   font-weight: 700;
   color: var(--brand-mark-tint);
-  text-shadow: 0 0 18px color-mix(in srgb, var(--brand-mark-tint) 40%, transparent);
-  transition: color 0.2s ease, text-shadow 0.2s ease;
+  transition: color 0.2s ease;
 }
 
 .site-brand-lockup:focus-visible .site-brand-lockup__title {
@@ -187,7 +166,6 @@ a:focus-visible .site-brand-lockup-img {
 .site-brand-lockup:focus-visible .site-brand-lockup__tagline,
 .site-brand-lockup:focus-visible .site-brand-lockup__sep {
   color: var(--brand-mark-tint);
-  text-shadow: 0 0 22px color-mix(in srgb, var(--brand-mark-tint) 52%, transparent);
 }
 
 /* Menu header — allineato al bordo destro colonna 1140px (card home) */
@@ -222,7 +200,6 @@ a:focus-visible .site-brand-lockup-img {
   -webkit-tap-highlight-color: transparent;
   transition:
     color 0.28s cubic-bezier(0.22, 1, 0.36, 1),
-    text-shadow 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     transform 0.28s cubic-bezier(0.22, 1, 0.36, 1),
     background-color 0.22s ease,
     border-color 0.22s ease;
@@ -239,39 +216,28 @@ a:focus-visible .site-brand-lockup-img {
   left: 0.75rem;
   right: 0.75rem;
   bottom: 0.1rem;
-  height: 2px;
-  border-radius: 999px;
-  background: linear-gradient(
-    90deg,
-    color-mix(in srgb, var(--header-nav-hover) 35%, transparent),
-    var(--header-nav-line),
-    color-mix(in srgb, var(--header-nav-hover) 35%, transparent)
-  );
-  box-shadow: 0 0 14px var(--header-nav-glow);
+  height: 1px;
+  background: var(--header-nav-line);
   transform: scaleX(0);
   transform-origin: left center;
   opacity: 0;
   transition:
     transform 0.38s cubic-bezier(0.22, 1, 0.36, 1),
-    opacity 0.28s ease,
-    box-shadow 0.28s ease;
+    opacity 0.28s ease;
 }
 
 .site-nav-link:focus-visible {
   color: var(--header-nav-hover);
-  text-shadow: 0 0 12px color-mix(in srgb, var(--header-nav-glow) 55%, transparent);
 }
 
 .site-nav-link:focus-visible::after,
 .site-nav-link--active::after {
   transform: scaleX(1);
   opacity: 1;
-  box-shadow: 0 0 18px var(--header-nav-glow);
 }
 
 .site-nav-link--active {
   color: var(--header-nav-active);
-  text-shadow: 0 0 10px color-mix(in srgb, var(--header-nav-glow) 45%, transparent);
 }
 
 .site-nav-link:focus-visible {

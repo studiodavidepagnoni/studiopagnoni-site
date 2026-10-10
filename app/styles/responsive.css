@@ -64,9 +64,7 @@
     font-size: clamp(1.05rem, 4.6vw, 1.35rem) !important;
     line-height: 1.2;
     white-space: normal;
-    text-shadow:
-      0 0 10px color-mix(in srgb, var(--hero-line2-glow) 36%, transparent),
-      0 2px 8px rgba(0, 0, 0, 0.36);
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.36);
   }
 
   .hero-line2 .whitespace-nowrap {
@@ -76,9 +74,7 @@
   .hero-eyebrow {
     font-size: clamp(0.62rem, 2.6vw, 0.68rem);
     letter-spacing: 0.22em;
-    text-shadow:
-      0 0 8px color-mix(in srgb, var(--hero-line2-glow) 30%, transparent),
-      0 2px 7px rgba(0, 0, 0, 0.34);
+    text-shadow: 0 2px 7px rgba(0, 0, 0, 0.34);
   }
 
   .hero-body {

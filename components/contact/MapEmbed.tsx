@@ -37,13 +37,6 @@ export function MapEmbed() {
         role="region"
         aria-label="Mappa Google Maps: consenso richiesto"
       >
-        <p className={`${fontSans.className} map-consent-coords`} aria-hidden>
-          <span className="map-consent-coords__dms">{site.geoDms.lat}</span>
-          <span className="map-consent-coords__dms">{site.geoDms.lon}</span>
-          <span className="map-consent-coords__datum">
-            {site.geoDms.datum} · {site.address.addressNeighborhood}
-          </span>
-        </p>
         <div className="max-w-[36ch] space-y-2">
           <p className={`${fontSans.className} text-[0.82rem] leading-relaxed text-[var(--copy-body)] sm:text-sm`}>
             Per privacy <strong className="font-semibold text-[var(--foreground)]">non carichiamo Google Maps</strong> finché non acconsenti agli

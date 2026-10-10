@@ -325,10 +325,6 @@ export function ProjectImageLightbox({ images, className = "" }: Props) {
                 className="object-cover transition duration-500 ease-out group-hover:scale-[1.02]"
                 sizes="(min-width:1024px) min(360px, 28vw), (min-width:768px) min(50vw, 480px), 100vw"
               />
-              <div
-                className="pointer-events-none absolute inset-0 bg-gradient-to-t from-[var(--primary)]/25 via-transparent to-transparent opacity-0 transition group-hover:opacity-100"
-                aria-hidden
-              />
             </button>
           </li>
         ))}

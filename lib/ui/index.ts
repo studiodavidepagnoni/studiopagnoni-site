@@ -1,5 +1,5 @@
 const btnBase =
-  "touch-no-hover-lift inline-flex min-h-[48px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap rounded-full px-7 text-base font-semibold tracking-[0.01em] transition-[color,background-color,border-color,box-shadow,transform,filter] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:transform-none sm:min-h-[44px] sm:text-sm";
+  "touch-no-hover-lift inline-flex min-h-[48px] touch-manipulation items-center justify-center gap-2 whitespace-nowrap rounded-sm px-7 text-base font-semibold tracking-[0.01em] transition-[color,background-color,border-color,box-shadow,transform,filter] duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:pointer-events-none disabled:opacity-40 motion-reduce:transition-none motion-reduce:transform-none sm:min-h-[44px] sm:text-sm";
 
 /** CTA primario — .btn-cta-primary in globals.css (segnale mint on-brand). */
 const btnPrimaryFill = `${btnBase} btn-cta-primary focus-visible:outline-none`;
@@ -60,7 +60,7 @@ export const ui = {
   /** Hero home: stesso CTA, variante hero */
   btnHeroPrimary: `${btnPrimaryFill} btn-cta-primary--hero w-full max-md:whitespace-normal max-md:px-5 max-md:py-3 max-md:text-center max-md:leading-snug text-[0.9375rem] sm:w-auto`,
 
-  btnHeroGhost: `${btnBase} min-h-[52px] w-full border border-[var(--cta-ghost-border)] bg-[linear-gradient(180deg,var(--cta-ghost-bg-top)_0%,var(--cta-ghost-bg-bottom)_100%)] px-9 text-[0.9375rem] text-white shadow-[0_1px_0_rgba(255,255,255,0.12)_inset,0_10px_28px_rgba(0,0,0,0.28)] backdrop-blur-md [@media(hover:hover)]:hover:border-[color-mix(in_srgb,white_58%,transparent)] [@media(hover:hover)]:hover:bg-[linear-gradient(180deg,color-mix(in_srgb,white_22%,transparent)_0%,color-mix(in_srgb,white_11%,transparent)_100%)] [@media(hover:hover)]:hover:shadow-[0_1px_0_rgba(255,255,255,0.18)_inset,0_14px_32px_rgba(0,0,0,0.34)] [@media(hover:hover)]:hover:-translate-y-px active:translate-y-0 focus-visible:outline-white/50 sm:w-auto`,
+  btnHeroGhost: `${btnBase} min-h-[52px] w-full border border-[var(--cta-ghost-border)] bg-transparent px-9 text-[0.9375rem] text-white [@media(hover:hover)]:hover:border-white [@media(hover:hover)]:hover:bg-white/[0.06] active:translate-y-0 focus-visible:outline-white/50 sm:w-auto`,
 
   btnGhostOnDark:
     `${btnBase} border border-white/18 bg-transparent text-white hover:bg-white/[0.06] focus-visible:outline-white/35`,

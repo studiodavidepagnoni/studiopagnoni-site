@@ -71,7 +71,6 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                     fetchPriority="high"
                     className="object-[center_20%]"
                   />
-                  <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 </div>
               </figure>
             </div>
@@ -104,7 +103,6 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                     loading="lazy"
                     className="object-[center_30%]"
                   />
-                  <div className="image-unify-overlay image-unify-overlay--subtle" aria-hidden />
                 </div>
               </figure>
             </div>

@@ -25,7 +25,6 @@ export function ProgettiArchive({ locale = "it" }: { locale?: Locale }) {
               className="project-preview-card__image"
               sizes="(min-width:1024px) min(300px, 28vw), (min-width:640px) min(45vw, 480px), min(100vw, 520px)"
             />
-            <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
           </div>
           <div className="project-preview-card__body">
             <span className="project-preview-card__title">{p.caption}</span>

@@ -127,9 +127,7 @@
       transparent 18%,
       transparent 62%,
       color-mix(in srgb, var(--hero-media-vignette-bottom) 85%, transparent) 100%
-    ),
-    radial-gradient(ellipse 50% 40% at 84% 22%, var(--hero-media-glow-mint), transparent 70%),
-    radial-gradient(ellipse 45% 38% at 78% 72%, var(--hero-media-glow-warm), transparent 72%);
+    );
 }
 
 /* Slide 1: scrim leggero (meno layer = meno lavoro paint su LCP) */
@@ -277,9 +275,7 @@
 
 .hero-eyebrow {
   color: var(--hero-eyebrow);
-  text-shadow:
-    0 0 10px color-mix(in srgb, var(--hero-line2-glow) 34%, transparent),
-    0 2px 8px rgba(0, 0, 0, 0.38);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.38);
 }
 
 .hero-title {
@@ -292,9 +288,7 @@
 /* Seconda riga: accent mint (equivalente al cyan DS), sotto il titolo */
 .hero-line2 {
   color: var(--hero-line2);
-  text-shadow:
-    0 0 12px color-mix(in srgb, var(--hero-line2-glow) 40%, transparent),
-    0 2px 9px rgba(0, 0, 0, 0.36);
+  text-shadow: 0 2px 9px rgba(0, 0, 0, 0.36);
 }
 
 .hero-line2__sep {
@@ -357,9 +351,7 @@
 
   .hero-mobile__title-accent {
     color: var(--hero-line2);
-    text-shadow:
-      0 0 18px color-mix(in srgb, var(--hero-line2-glow) 48%, transparent),
-      0 2px 12px rgba(0, 0, 0, 0.42);
+    text-shadow: 0 2px 12px rgba(0, 0, 0, 0.42);
   }
 
   .hero-mobile__subtitle {
@@ -383,11 +375,9 @@
   }
 
   .hero-mobile__ghost-cta {
-    background: color-mix(in srgb, white 4%, transparent);
-    border-color: color-mix(in srgb, white 22%, transparent);
+    background: transparent;
+    border-color: color-mix(in srgb, white 42%, transparent);
     box-shadow: none;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
   }
 
   .hero-mobile__scroll-hint {

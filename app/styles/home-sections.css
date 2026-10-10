@@ -63,28 +63,6 @@
   background: linear-gradient(90deg, transparent, color-mix(in srgb, var(--green-border) 72%, transparent), transparent);
 }
 
-.image-unify-overlay {
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-to));
-  mix-blend-mode: normal;
-}
-
-.image-unify-overlay--subtle {
-  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-subtle-to));
-}
-
-.image-unify-overlay--editorial {
-  background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-editorial-to));
-}
-
-@media (hover: hover) and (pointer: fine) {
-  .group:hover .image-unify-overlay--editorial {
-    background: linear-gradient(180deg, var(--image-overlay-from), var(--image-overlay-hover-to));
-  }
-}
-
 /* ─── touch-target: WCAG 2.2 minimum 44×44px ─── */
 .touch-target {
   position: relative;

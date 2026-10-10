@@ -53,7 +53,6 @@ export function HomeServiceCards({ locale = "it" }: Props) {
                   alt={media.alt}
                   sizes="(min-width:1024px) min(540px, 46vw), (min-width:640px) min(90vw, 720px), 100vw"
                 />
-                <div className="image-unify-overlay image-unify-overlay--editorial" aria-hidden />
               </div>
             ) : null}
             <div className="flex flex-1 flex-col p-5 sm:p-6">

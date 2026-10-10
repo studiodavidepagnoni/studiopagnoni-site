@@ -71,15 +71,7 @@
   height: 3px;
   width: 100%;
   transform-origin: left center;
-  background: linear-gradient(
-    90deg,
-    var(--primary-mid) 0%,
-    color-mix(in srgb, var(--primary-mid) 72%, transparent) 78%,
-    transparent 100%
-  );
-  box-shadow:
-    0 0 22px color-mix(in srgb, var(--primary-mid) 48%, transparent),
-    0 1px 0 color-mix(in srgb, var(--primary-mid) 28%, transparent);
+  background: var(--primary-mid);
   pointer-events: none;
 }
 
