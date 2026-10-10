@@ -39,10 +39,11 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     lede: "Architettura, topografia, laser SLAM, verde, urbanistica e assistenza tecnica dal 1988.",
   },
   "/topografia": {
-    eyebrow: "Servizi",
-    title: "Topografia e rilievi a Brescia",
+    eyebrow: "Topografia · Geometra",
+    title: "Topografia e rilievi in Franciacorta",
     image: s("gnssRtk"),
     alt: imageAlt("GNSS RTK in area estrattiva — base metrica per progetto", { service: "topografia" }),
+    lede: "Geometra in Franciacorta: rilievi, frazionamenti e confini con GNSS RTK e stazione totale. Sede a Bornato, Cazzago San Martino (BS).",
     priorityImage: true,
   },
   "/rilievi-laser-scanner-slam-brescia": {

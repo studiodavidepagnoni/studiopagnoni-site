@@ -1,6 +1,7 @@
 import { ContattiFormSection, ContattiIntro } from "@/components/contact/ContattiSlamLead";
 import { MapEmbed } from "@/components/contact/MapEmbed";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
+import { LinkedInLink } from "@/components/ui/LinkedInLink";
 import { fontDisplay } from "@/lib/fonts";
 import { buildPageMetadata } from "@/lib/config/seo";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
@@ -9,7 +10,7 @@ import { ui } from "@/lib/ui";
 const pagePath = "/contatti";
 const pageTitle = "Contatti — preventivi e sopralluoghi";
 const pageDescription =
-  "Sopralluogo o preventivo per architettura, topografia e laser SLAM. Sede a Cazzago San Martino (BS), Franciacorta e provincia di Brescia.";
+  "Sopralluogo o preventivo per architettura, topografia (geometra) e laser SLAM in Franciacorta. Sede a Cazzago San Martino (BS).";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -57,7 +58,7 @@ export default function ContattiPage() {
                     </a>
                   </li>
                 </ul>
-                <p className="mt-5">
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
                   <a
                     href={site.maps.placeUrl}
                     target="_blank"
@@ -66,7 +67,8 @@ export default function ContattiPage() {
                   >
                     Apri in Google Maps
                   </a>
-                </p>
+                  <LinkedInLink label="LinkedIn dello studio" />
+                </div>
               </section>
 
               <section

@@ -19,6 +19,7 @@ import {
   homeStrumentazioneEn,
   homeZoneEn,
 } from "@/lib/i18n/content/marketing.en";
+import { LinkedInLink } from "@/components/ui/LinkedInLink";
 import { withLocalePrefix } from "@/lib/i18n/paths";
 import { t } from "@/lib/i18n/messages";
 import { homeChiSiamoImages } from "@/lib/media/images";
@@ -336,8 +337,9 @@ export function HomeSections({ locale = "it" }: Props) {
       {/* ── Contatti ── */}
       <section className="lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
-          <div className="home-section-intro reveal-block">
+          <div className="home-section-intro reveal-block flex flex-wrap items-end justify-between gap-4">
             <h2 className={titleCls}>{contactTitle}</h2>
+            <LinkedInLink variant="icon" />
           </div>
           <div className="home-contact-rail">
             <PlateFrame />

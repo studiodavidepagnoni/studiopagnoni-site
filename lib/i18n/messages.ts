@@ -70,7 +70,7 @@ export const messages: Record<Locale, UiMessages> = {
     openMenu: "Apri menu",
     closeMenu: "Chiudi menu",
     footerBlurb:
-      "Studio di architettura attivo tra Franciacorta, provincia di Brescia e Nord Italia per topografia, laser scanner SLAM, progettazione e pratiche edilizie.",
+      "Studio di architettura e geometra in Franciacorta (Bornato, BS): progettazione, topografia, pratiche catastali e laser scanner SLAM in provincia di Brescia e Nord Italia.",
     footerContactCta: "Contattaci",
     footerNavAria: "Link del sito",
     footerOffice: "Sede",
@@ -126,7 +126,7 @@ export const messages: Record<Locale, UiMessages> = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     footerBlurb:
-      "Architecture practice serving Franciacorta, the province of Brescia and Northern Italy — surveying, SLAM laser scanning, design and building procedures.",
+      "Architecture and surveying practice in Franciacorta (Bornato, BS): design, topography, cadastral work and SLAM laser scanning across the province of Brescia and Northern Italy.",
     footerContactCta: "Contact us",
     footerNavAria: "Site links",
     footerOffice: "Office",

@@ -11,9 +11,9 @@ import { ui } from "@/lib/ui";
 
 const pagePath = "/topografia";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
-const pageTitle = "Topografia e rilievi — Brescia e Franciacorta";
+const pageTitle = "Topografia e rilievi — geometra in Franciacorta";
 const pageDescription =
-  "Rilievi topografici con GNSS RTK e stazione totale per progetto e cantieri. Integrazione laser SLAM. Cazzago San Martino (BS).";
+  "Topografia e rilievi del geometra in Franciacorta: GNSS RTK, stazione totale, frazionamenti e confini. Studio Architettura Pagnoni a Cazzago San Martino (BS).";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -37,10 +37,10 @@ export default function TopografiaPage() {
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
             <p className={`${ui.body} max-w-[72ch]`}>
-              Un buon rilievo topografico non è solo una raccolta di punti: è il modo in cui il terreno diventa una base decisionale. Quote, confini,
-              pendenze e volumi devono essere misurati con metodo, restituiti con chiarezza e collegati al linguaggio del progetto. Da{" "}
-              <strong>Cazzago San Martino</strong>, in <strong>Franciacorta</strong>, lo studio opera con <strong>GNSS RTK</strong>,{" "}
-              <strong>stazione totale</strong> e flussi CAD integrati.
+              Un buon rilievo topografico non è solo una raccolta di punti: è il modo in cui il terreno diventa una base decisionale. Come{" "}
+              <strong>geometra in Franciacorta</strong>, da <strong>Bornato, Cazzago San Martino</strong>, misuriamo quote, confini, pendenze e volumi con{" "}
+              <strong>GNSS RTK</strong>, <strong>stazione totale</strong> e flussi CAD — per frazionamenti, controlli di confine e rilievi planoaltimetrici in
+              provincia di <strong>Brescia</strong>.
             </p>
           <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
             <section className={ui.innerCard} aria-labelledby="topo-rilievo">

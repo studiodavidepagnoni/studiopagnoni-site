@@ -138,10 +138,10 @@ export const serviceGroups = [
   },
   {
     id: "topografia-rilievi",
-    kicker: "GNSS · Stazione totale",
+    kicker: "Topografia · Geometra",
     title: "Topografia e rilievi",
     description:
-      "Rilievi planoaltimetrici per frazionamenti, nuovi insediamenti, cantieri e verifiche di confine. GNSS RTK e stazione totale per acquisizioni tracciabili.",
+      "Rilievi planoaltimetrici del geometra in Franciacorta: frazionamenti, cantieri e verifiche di confine. GNSS RTK e stazione totale per acquisizioni tracciabili.",
     points: [
       "Rilievi planoaltimetrici e quotati per progettazione, cantieristica e contenziosi tecnici.",
       "Supporto a perizie e stime quando la misura dello stato di fatto è parte dell’incarico.",
@@ -296,9 +296,10 @@ export const chiSiamoPage = {
   title: "Chi siamo",
   paragraphs: [
     <>
-      Lo <strong>Studio Architettura Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> in Franciacorta e in provincia di Brescia. Il
-      perimetro principale è la <strong>progettazione architettonica</strong> e le pratiche connesse: concept e anteprogetto, progetto definitivo ed
-      esecutivo, pratiche edilizie e urbanistiche, coordinamento di cantiere e supporto alle autorizzazioni.
+      Lo <strong>Studio Architettura Pagnoni</strong> opera <strong>dal {STUDIO_FOUNDED_YEAR}</strong> in Franciacorta, a Bornato (Cazzago San Martino,
+      BS). Il perimetro principale è la <strong>progettazione architettonica</strong> e le pratiche connesse, con l&apos;
+      <strong>Arch. Davide Pagnoni</strong>. Accanto al progetto, il <strong>Geom. Sergio Pagnoni</strong> rafforza lo studio come{" "}
+      <strong>geometra in Franciacorta</strong>: topografia, frazionamenti, confini e pratiche catastali.
     </>,
     <>
       Accanto al progetto, lo studio gestisce topografia, rilievi e documentazione 3D quando servono una base metrica affidabile dello stato di fatto.

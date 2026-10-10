@@ -18,8 +18,9 @@ export const pageHeroesEn: Record<
     lede: "Architecture, topography, SLAM laser scanning, landscape, planning and technical support since 1988.",
   },
   "/topografia": {
-    eyebrow: "Services",
-    title: "Surveying in Brescia",
+    eyebrow: "Surveying · Geometra",
+    title: "Surveying and topography in Franciacorta",
+    lede: "Surveyor (geometra) in Franciacorta: land splits, boundaries and field surveys with GNSS RTK and total station. Bornato, Cazzago San Martino (BS).",
   },
   "/rilievi-laser-scanner-slam-brescia": {
     eyebrow: "SLAM laser scanning · Brescia",

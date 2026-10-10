@@ -9,9 +9,9 @@ import { ui } from "@/lib/ui";
 
 export const metadata = {
   ...buildPageMetadata({
-    title: "Surveying in Brescia",
+    title: "Surveying in Franciacorta — geometra services",
     description:
-      "Plan and height surveys with GNSS RTK and total station in Franciacorta and the province of Brescia. Request a quote.",
+      "Topography and surveying from our architecture practice in Franciacorta: GNSS RTK, total station, land splits and boundaries. Bornato, Cazzago San Martino (BS).",
     path: "/en/topografia",
   }),
   alternates: localeAlternates("/topografia"),
@@ -29,9 +29,9 @@ export default function EnTopografiaPage() {
                 Surveying and field measurement
               </h2>
               <p className={`${fontSans.className} ${ui.body} max-w-[68ch]`}>
-                Plan and height surveys for subdivisions, new developments, construction sites and boundary checks. We work
-                with GNSS RTK and total station for traceable acquisitions, and integrate SLAM laser scanning when a dense
-                3D base is required.
+                Alongside architecture, our Franciacorta practice delivers plan and height surveys as Italian geometra work:
+                subdivisions, construction sites and boundary checks from Bornato (Cazzago San Martino). GNSS RTK and total
+                station for traceable acquisitions; SLAM laser scanning when a dense 3D base is required.
               </p>
               <div className="mt-8 flex flex-col gap-3 sm:flex-row">
                 <Link

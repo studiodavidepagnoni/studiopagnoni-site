@@ -81,10 +81,10 @@ export const serviceGroupsEn = [
   },
   {
     id: "topografia-rilievi",
-    kicker: "GNSS · Total station",
+    kicker: "Surveying · Geometra",
     title: "Surveying",
     description:
-      "Plan and height surveys for subdivisions, new developments, sites and boundary checks. GNSS RTK and total station for traceable acquisitions.",
+      "Geometra surveying in Franciacorta: plan and height surveys for subdivisions, sites and boundary checks. GNSS RTK and total station for traceable acquisitions.",
     points: [
       "Plan and height surveys for design, construction and technical disputes.",
       "Support for expert reports and valuations when measuring existing conditions is part of the brief.",

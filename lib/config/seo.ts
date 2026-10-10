@@ -136,26 +136,26 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
+    default: `${site.brandName} | Architettura e geometra in Franciacorta`,
     template: `${site.brandName} | %s`,
   },
   description:
-    "Studio di architettura a Cazzago San Martino (BS): progettazione, topografia e rilievi laser scanner SLAM. Franciacorta, provincia di Brescia, Lombardia e Nord Italia.",
+    "Studio di architettura e geometra in Franciacorta (Bornato, Cazzago San Martino BS): progettazione, topografia, pratiche catastali e laser scanner SLAM. Provincia di Brescia e Lombardia.",
   openGraph: {
     type: "website",
     locale: "it_IT",
     url: site.url,
     siteName: site.brandName,
-    title: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
+    title: `${site.brandName} | Architettura e geometra in Franciacorta`,
     description:
-      "Architettura, topografia e laser scanner SLAM in Franciacorta, provincia di Brescia e Lombardia. Sopralluoghi e preventivi.",
+      "Architettura, geometra, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Sopralluoghi e preventivi.",
     images: [{ url: absoluteUrl(ogImagePath), width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.brandName} | Architettura e rilievi 3D — Franciacorta / Brescia`,
+    title: `${site.brandName} | Architettura e geometra in Franciacorta`,
     description:
-      "Architettura, topografia e rilievi 3D SLAM in Franciacorta, Brescia e Lombardia. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
+      "Architettura e geometra in Franciacorta: progettazione, topografia, catasto e rilievi 3D SLAM. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
   },
   robots: { index: true, follow: true },
   verification: {
@@ -165,9 +165,9 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Architettura e rilievi 3D — Franciacorta / Brescia",
+  title: "Architettura e geometra in Franciacorta",
   description:
-    "Studio Architettura Pagnoni a Cazzago San Martino (BS): progettazione architettonica, topografia e rilievi laser SLAM in Franciacorta e provincia di Brescia.",
+    "Studio di architettura e geometra in Franciacorta a Bornato (Cazzago San Martino, BS): progettazione, topografia, pratiche catastali e laser SLAM in provincia di Brescia.",
   path: "/",
   priority: "high",
 });
@@ -180,12 +180,19 @@ export const jsonLdGraph = {
       "@id": `${site.url.replace(/\/$/, "")}/#organization`,
       name: site.brandName,
       legalName: site.legalName,
-      alternateName: ["Studio Pagnoni", "Studio Architettura Pagnoni Bornato", "Geometra Pagnoni Bornato"],
+      alternateName: [
+        "Studio Pagnoni",
+        "Studio Architettura Pagnoni Bornato",
+        "Geometra Pagnoni Bornato",
+        "Geometra Franciacorta",
+        "Geometra Cazzago San Martino",
+      ],
       description:
-        "Studio di architettura e geometra a Bornato, Cazzago San Martino (BS): progettazione architettonica; topografia e rilievi (GNSS RTK, stazione totale); pratiche del geometra (divisioni catastali, frazionamenti, successioni, confini, DOCFA e tipi mappali); laser scanner 3D SLAM. Geom. Sergio Pagnoni e Arch. Davide Pagnoni — Franciacorta e provincia di Brescia.",
+        "Studio di architettura e geometra in Franciacorta, sede a Bornato (Cazzago San Martino, BS). Progettazione architettonica; topografia e rilievi (GNSS RTK, stazione totale); pratiche del geometra (divisioni catastali, frazionamenti, successioni, confini, DOCFA e tipi mappali); laser scanner 3D SLAM. Arch. Davide Pagnoni e Geom. Sergio Pagnoni — provincia di Brescia e Lombardia.",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),
+      sameAs: [site.linkedinUrl, site.maps.placeUrl],
       image: absoluteUrl(ogImagePath),
       logo: absoluteUrl("/icon-192.png"),
       priceRange: "$$",

@@ -1,6 +1,7 @@
 import { ContattiFormSection } from "@/components/contact/ContattiSlamLead";
 import { MapEmbed } from "@/components/contact/MapEmbed";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
+import { LinkedInLink } from "@/components/ui/LinkedInLink";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { buildPageMetadata } from "@/lib/config/seo";
 import { localeAlternates } from "@/lib/i18n/metadata";
@@ -11,7 +12,7 @@ export const metadata = {
   ...buildPageMetadata({
     title: "Contact — quotes and site visits",
     description:
-      "Request a site visit or quotation for architecture, surveying and SLAM laser scanning. Office in Cazzago San Martino (BS), Franciacorta.",
+      "Request a site visit or quotation for architecture, surveying (geometra) and SLAM laser scanning in Franciacorta. Office in Cazzago San Martino (BS).",
     path: "/en/contatti",
     priority: "high",
   }),
@@ -71,7 +72,7 @@ export default function EnContattiPage() {
                     </a>
                   </li>
                 </ul>
-                <p className="mt-5">
+                <div className="mt-5 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center sm:gap-x-6 sm:gap-y-2">
                   <a
                     href={site.maps.placeUrl}
                     target="_blank"
@@ -80,7 +81,8 @@ export default function EnContattiPage() {
                   >
                     Open in Google Maps
                   </a>
-                </p>
+                  <LinkedInLink label="Studio on LinkedIn" />
+                </div>
               </section>
 
               <section aria-labelledby="mappa-heading" className={`${ui.innerCardStatic} flex h-full min-w-0 flex-col`}>

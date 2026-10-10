@@ -10,7 +10,7 @@ export const metadata = buildPageMetadata({
   title: "Chi siamo",
   absoluteTitle: "Studio Architettura Pagnoni - Chi siamo",
   description:
-    "Studio Architettura Pagnoni a Cazzago San Martino (BS): architettura, topografia e laser SLAM in Franciacorta e provincia di Brescia dal 1988.",
+    "Studio di architettura e geometra in Franciacorta a Bornato (Cazzago San Martino, BS) dal 1988: progettazione, topografia, pratiche e laser SLAM in provincia di Brescia.",
   path: "/chi-siamo",
 });
 

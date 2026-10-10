@@ -24,9 +24,11 @@ export const site = {
   /** Marchio in header/footer, title SEO e scheda Google Business. */
   brandName: "Studio Architettura Pagnoni",
   legalName: "Studio Architettura Pagnoni",
-  tagline: "Architettura, geometra, topografia e laser scanning",
+  tagline: "Architettura e geometra in Franciacorta · topografia e laser scanning",
   url: publicSiteUrl,
   email: "studio@pagnoni-s.com",
+  /** Pagina company LinkedIn. */
+  linkedinUrl: "https://www.linkedin.com/company/studio-architettura-pagnoni",
   /** Recapiti: fisso scheda GMB + cellulari. */
   phones: [
     { label: "Studio", display: "030 725 5203", tel: "+390307255203" },
