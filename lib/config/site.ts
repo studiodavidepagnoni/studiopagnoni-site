@@ -52,9 +52,11 @@ export const site = {
   /** Stessa posizione in notazione da elaborato (WGS 84). */
   geoDms: { lat: "45°35′37″ N", lon: "10°02′27″ E", datum: "WGS 84" },
   maps: {
-    /** Link scheda / ricerca Maps (hasMap + CTA) — include Bornato come addressLine. */
-    placeUrl:
-      "https://www.google.com/maps/search/?api=1&query=Studio+Architettura+Pagnoni+Via+Vittorio+Emanuele+III+16+Bornato+Cazzago+San+Martino",
+    /**
+     * Link ufficiale scheda Google (Condividi) — Knowledge Graph `/g/1hc2d5rn1`.
+     * Usato in hasMap, sameAs e CTA Maps (non una URL di ricerca generica).
+     */
+    placeUrl: "https://share.google/vgvHEwjviPP1ertTP",
     embedUrl:
       "https://maps.google.com/maps?q=Via%20Vittorio%20Emanuele%20III%2016,%20Bornato,%20Cazzago%20San%20Martino%20BS&t=&z=15&ie=UTF8&iwloc=&output=embed",
   },
