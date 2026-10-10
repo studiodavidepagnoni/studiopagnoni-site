@@ -41,10 +41,6 @@ export function SiteFooter() {
                 {copy.footerBlurb}
               </p>
 
-              <div className="mt-6">
-                <LinkedInLink variant="icon" className="text-[var(--footer-link)] hover:text-[var(--foreground)]" />
-              </div>
-
               <Link
                 href={withLocalePrefix("/contatti", locale)}
                 className={`${ui.btnFooterCta} mt-8 inline-flex min-h-[44px] items-center justify-center`}
@@ -103,6 +99,9 @@ export function SiteFooter() {
                     {site.email}
                   </a>
                 </p>
+                <div className="mt-5">
+                  <LinkedInLink variant="icon" className="text-[var(--footer-link)] hover:text-[var(--foreground)]" />
+                </div>
               </div>
             </div>
           </div>
