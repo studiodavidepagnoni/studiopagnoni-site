@@ -14,15 +14,19 @@ type Props = { locale?: Locale };
 
 export function HomeServiceCards({ locale = "it" }: Props) {
   const copy = t(locale);
+  const homePreviewIds = ["architettura", "topografia-rilievi", "laser-slam", "verde-paesaggio"] as const;
   const cards =
     locale === "en"
-      ? serviceGroupsEn.slice(0, 4).map((g) => ({
-          id: g.id,
-          title: g.title,
-          description: g.description,
-          href: withLocalePrefix(g.href, locale),
-        }))
-      : homeServiceCards.slice(0, 4).map((g) => ({
+      ? homePreviewIds.map((id) => {
+          const g = serviceGroupsEn.find((item) => item.id === id)!;
+          return {
+            id: g.id,
+            title: g.title,
+            description: g.description,
+            href: withLocalePrefix(g.href, locale),
+          };
+        })
+      : homeServiceCards.map((g) => ({
           ...g,
           href: withLocalePrefix(g.href, locale),
         }));

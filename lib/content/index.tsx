@@ -119,8 +119,8 @@ export const homeStrumentazione: {
   ],
 };
 
-/** Gruppi servizio: home (anteprima) e pagina Servizi (schede complete).
- * Ordine brand: Architettura → Topografia → Laser Scanning, poi gli altri ambiti. */
+/** Gruppi servizio: pagina Servizi (sezioni complete) e anteprima home.
+ * Ordine brand: Architettura → Topografia → Pratiche geometra → Laser → altri ambiti. */
 export const serviceGroups = [
   {
     id: "architettura",
@@ -141,13 +141,29 @@ export const serviceGroups = [
     kicker: "Topografia · Geometra",
     title: "Topografia e rilievi",
     description:
-      "Rilievi planoaltimetrici del geometra in Franciacorta: frazionamenti, cantieri e verifiche di confine. GNSS RTK e stazione totale per acquisizioni tracciabili.",
+      "Rilievi planoaltimetrici del geometra in Franciacorta: cantieri, planimetrie quotate e base metrica per progetto. GNSS RTK e stazione totale per acquisizioni tracciabili.",
     points: [
       "Rilievi planoaltimetrici e quotati per progettazione, cantieristica e contenziosi tecnici.",
+      "Tracciamenti di cantiere, quote e controlli geometrici in fase di esecuzione.",
       "Supporto a perizie e stime quando la misura dello stato di fatto è parte dell’incarico.",
     ],
     href: "/topografia",
     cta: "Approfondisci la topografia",
+  },
+  {
+    id: "pratiche-geometra",
+    kicker: "Catasto · Divisioni · Successioni",
+    title: "Pratiche del geometra",
+    description:
+      "Lavori tipici del geometra oltre al rilievo di campo: aggiornamenti catastali, divisioni, successioni e confini, coordinati con notaio, eredi e documentazione dello stato di fatto.",
+    points: [
+      "Divisioni catastali e frazionamenti di terreni e fabbricati, con planimetrie e atti di aggiornamento.",
+      "Successioni immobiliari e divisioni ereditarie: rilievo, ripartizione quote e aggiornamenti catastali.",
+      "DOCFA, variazioni di consistenza, tipi mappali e allineamento tra stato di fatto e catasto.",
+      "Verifica e accertamento di confine, suddivisioni e supporto tecnico su contenziosi di confine.",
+    ],
+    href: "/servizi#pratiche-geometra",
+    cta: null,
   },
   {
     id: "laser-slam",
@@ -158,6 +174,7 @@ export const serviceGroups = [
     points: [
       "Acquisizione mobile indoor/outdoor lungo percorsi continui.",
       "Integrazione con controlli topografici dove servono coordinate di progetto.",
+      "Elaborati per as-built, verifiche dimensionali e base metrica di progetto.",
     ],
     href: "/laser-scanner-slam",
     cta: "Approfondisci il laser SLAM",
@@ -201,13 +218,18 @@ export const serviceGroups = [
   },
 ] as const;
 
-/** Anteprima home: stesse schede, link alla pagina Servizi o alle landing dedicate. */
-export const homeServiceCards = serviceGroups.map((group) => ({
-  id: group.id,
-  title: group.title,
-  description: group.description,
-  href: group.href,
-}));
+/** Anteprima home: quattro ambiti principali (ordine brand), non l’elenco completo. */
+const homeServicePreviewIds = ["architettura", "topografia-rilievi", "laser-slam", "verde-paesaggio"] as const;
+
+export const homeServiceCards = homeServicePreviewIds.map((id) => {
+  const group = serviceGroups.find((g) => g.id === id)!;
+  return {
+    id: group.id,
+    title: group.title,
+    description: group.description,
+    href: group.href,
+  };
+});
 
 export const certifications = [
   {

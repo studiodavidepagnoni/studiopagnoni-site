@@ -10,7 +10,7 @@ function LinkedInMark({ className = "h-[1.05rem] w-[1.05rem]" }: { className?: s
 }
 
 type LinkedInLinkProps = {
-  /** Solo icona (home); oppure icona + testo (contatti). */
+  /** Solo icona (footer); oppure icona + testo (contatti). */
   variant?: "icon" | "text";
   className?: string;
   label?: string;
@@ -23,7 +23,7 @@ export function LinkedInLink({
 }: LinkedInLinkProps) {
   const base =
     variant === "icon"
-      ? `${fontSans.className} inline-flex h-11 w-11 items-center justify-center rounded-full border border-[var(--green-border-muted)] text-[var(--primary-mid)] transition-colors hover:border-[var(--primary-mid)] hover:bg-[var(--card)] hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`
+      ? `${fontSans.className} inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-[var(--primary-mid)] transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`
       : `${fontSans.className} inline-flex min-h-[44px] items-center gap-2.5 font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`;
 
   return (

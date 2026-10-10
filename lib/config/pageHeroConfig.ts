@@ -36,7 +36,7 @@ const staticPageHeroes: Record<string, PageHeroData> = {
     title: "Servizi di architettura e topografia",
     image: s("surveySite"),
     alt: imageAlt("Tavole di progettazione architettonica e tecnica in studio", { service: "architettura" }),
-    lede: "Architettura, topografia, laser SLAM, verde, urbanistica e assistenza tecnica dal 1988.",
+    lede: "Architettura, topografia, pratiche del geometra, laser SLAM, verde, urbanistica e assistenza tecnica dal 1988.",
   },
   "/topografia": {
     eyebrow: "Topografia · Geometra",

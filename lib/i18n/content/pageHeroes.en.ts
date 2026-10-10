@@ -15,7 +15,7 @@ export const pageHeroesEn: Record<
   "/servizi": {
     eyebrow: "What we do",
     title: "Architecture and surveying services",
-    lede: "Architecture, topography, SLAM laser scanning, landscape, planning and technical support since 1988.",
+    lede: "Architecture, surveying, surveyor procedures, SLAM laser scanning, landscape, planning and technical support since 1988.",
   },
   "/topografia": {
     eyebrow: "Surveying · Geometra",

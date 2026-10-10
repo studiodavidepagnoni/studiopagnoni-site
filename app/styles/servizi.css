@@ -1,0 +1,55 @@
+/* Pagina Servizi — sezioni editoriali (non griglia card) */
+.servizi-catalog {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--green-border-muted);
+}
+
+.servizi-catalog__section {
+  padding: 1.75rem 0 1.85rem;
+  border-bottom: 1px solid var(--green-border-muted);
+}
+
+@media (min-width: 640px) {
+  .servizi-catalog__section {
+    padding: 2.1rem 0 2.2rem;
+  }
+}
+
+.servizi-catalog__points {
+  list-style: none;
+  max-width: 68ch;
+}
+
+.servizi-catalog__point {
+  display: grid;
+  grid-template-columns: 0.75rem minmax(0, 1fr);
+  gap: 0.85rem;
+  align-items: baseline;
+  padding: 0.7rem 0;
+  border-top: 1px solid color-mix(in srgb, var(--green-border-muted) 88%, transparent);
+}
+
+.servizi-catalog__point:first-child {
+  border-top: none;
+  padding-top: 0;
+}
+
+.servizi-catalog__point:last-child {
+  padding-bottom: 0;
+}
+
+.servizi-catalog__mark {
+  display: block;
+  width: 0.75rem;
+  height: 1px;
+  margin-top: 0.7em;
+  background: color-mix(in srgb, var(--primary-mid) 55%, transparent);
+}
+
+.servizi-catalog__point-text {
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: var(--copy-body);
+  text-wrap: pretty;
+}

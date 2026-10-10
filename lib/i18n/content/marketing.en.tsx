@@ -84,13 +84,29 @@ export const serviceGroupsEn = [
     kicker: "Surveying · Geometra",
     title: "Surveying",
     description:
-      "Geometra surveying in Franciacorta: plan and height surveys for subdivisions, sites and boundary checks. GNSS RTK and total station for traceable acquisitions.",
+      "Geometra surveying in Franciacorta: plan and height surveys for sites, quoted plans and a metric base for design. GNSS RTK and total station for traceable acquisitions.",
     points: [
       "Plan and height surveys for design, construction and technical disputes.",
+      "Site setting-out, levels and geometric checks during construction.",
       "Support for expert reports and valuations when measuring existing conditions is part of the brief.",
     ],
     href: "/topografia",
     cta: "Explore surveying",
+  },
+  {
+    id: "pratiche-geometra",
+    kicker: "Cadastre · Subdivisions · Succession",
+    title: "Surveyor procedures",
+    description:
+      "Core geometra work beyond field survey: cadastral updates, subdivisions, inheritance splits and boundaries, coordinated with notaries, heirs and as-built documentation.",
+    points: [
+      "Cadastral subdivisions and land/building splits, with plans and update deeds.",
+      "Property succession and hereditary divisions: survey, share allocation and cadastral updates.",
+      "DOCFA, consistency variations, map types and alignment between as-built conditions and the cadastre.",
+      "Boundary verification and ascertainment, splits and technical support on boundary disputes.",
+    ],
+    href: "/servizi#pratiche-geometra",
+    cta: null as string | null,
   },
   {
     id: "laser-slam",
@@ -101,6 +117,7 @@ export const serviceGroupsEn = [
     points: [
       "Mobile indoor/outdoor capture along continuous paths.",
       "Integration with topographic controls where project coordinates are required.",
+      "Deliverables for as-built checks, dimensional verification and a design metric base.",
     ],
     href: "/laser-scanner-slam",
     cta: "Explore SLAM laser scanning",

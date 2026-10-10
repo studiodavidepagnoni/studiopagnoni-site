@@ -1,10 +1,10 @@
-import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
+import { PageClosingCta } from "@/components/content/PageClosingCta";
+import { ServiziCatalog } from "@/components/content/ServiziCatalog";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { fontDisplay } from "@/lib/fonts";
 import { faqPageGraph } from "@/lib/config/faqJsonLd";
 import { buildPageMetadata } from "@/lib/config/seo";
-import { serviceGroups } from "@/lib/content";
 import { serviziFaq } from "@/lib/content/pageFaqs";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
@@ -13,7 +13,7 @@ const pagePath = "/servizi";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const pageTitle = "Architettura, topografia e SLAM a Brescia";
 const pageDescription =
-  "Progettazione architettonica, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Studio di architettura dal 1988.";
+  "Progettazione architettonica, topografia, pratiche del geometra (divisioni, successioni, catasto) e laser scanner SLAM in Franciacorta e provincia di Brescia.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -36,46 +36,36 @@ export default function ServiziPage() {
       <main id="main-content" className={`section-shell ${ui.pageBg}`}>
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
-            <p className={`${ui.body} max-w-5xl`}>
+            <p className={`${ui.body} max-w-[68ch]`}>
               Misura, progetto e pratiche tecniche non sono fasi separate: per una commessa ben impostata servono dati affidabili, lettura normativa e
               continuità tra campo, studio e cantiere. Lo <strong>Studio Architettura Pagnoni</strong>, attivo <strong>dal 1988</strong>, affianca privati,
-              imprese e professionisti su <strong>architettura</strong>, <strong>topografia</strong>, <strong>laser SLAM</strong>, verde, urbanistica e
-              sicurezza. La parte strutturale viene coordinata con professionisti esterni quando richiesta.
+              imprese e professionisti su <strong>architettura</strong>, <strong>topografia</strong>, <strong>pratiche del geometra</strong>,{" "}
+              <strong>laser SLAM</strong>, verde, urbanistica e sicurezza. La parte strutturale viene coordinata con professionisti esterni quando richiesta.
             </p>
 
             <section aria-labelledby="servizi-elenco">
-              <h2 id="servizi-elenco" className={`${fontDisplay.className} ${ui.cardHeading} mb-3 sm:mb-4`}>
+              <h2 id="servizi-elenco" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-3 sm:mb-4`}>
                 Ambiti di intervento
               </h2>
-              <p className={`${ui.bodyMuted} mb-8 max-w-5xl`}>
-                Dall&apos;architettura alla topografia, dal laser SLAM al verde e alle pratiche di cantiere: sotto gli ambiti in cui
-                interveniamo, con link alle pagine dedicate dove servono metodo e strumenti più nel dettaglio.
+              <p className={`${ui.bodyMuted} mb-8 max-w-[68ch]`}>
+                Dall&apos;architettura alle pratiche del geometra, dal laser SLAM al verde e alle procedure di cantiere: gli ambiti in cui
+                interveniamo, con link alle pagine dedicate dove servono metodo e strumenti nel dettaglio.
               </p>
 
-              <div className="grid gap-6 sm:grid-cols-2 lg:gap-8" aria-label="Schede servizi">
-                {serviceGroups.map((group) => {
-                  const hasDedicatedPage = Boolean(group.cta);
-                  return (
-                    <article
-                      key={group.id}
-                      id={group.id}
-                      className={`interactive-card flex flex-col rounded-lg border border-[var(--green-border-muted)] border-t-4 border-t-[var(--primary-mid)] bg-[var(--card)] p-6 sm:p-8 ${ui.scrollAnchor}`}
-                    >
-                      <p className={`${fontSans.className} section-kicker mb-3`}>{group.kicker}</p>
-                      <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{group.title}</h3>
-                      <p className={`mt-4 flex-1 ${ui.bodySm}`}>{group.description}</p>
-                      {hasDedicatedPage ? (
-                        <Link href={group.href} className={`${fontSans.className} ${ui.textCta} mt-6`}>
-                          {group.cta} →
-                        </Link>
-                      ) : null}
-                    </article>
-                  );
-                })}
-              </div>
+              <ServiziCatalog locale="it" />
             </section>
 
             <FaqSection id="servizi-faq" items={serviziFaq} />
+
+            <PageClosingCta
+              id="servizi-cta"
+              title="Parliamo del vostro incarico"
+              description="Indicate località, obiettivo (rilievo, divisione, successione, progetto o cantiere) e documentazione utile: rispondiamo con metodo, tempi e preventivo."
+              primaryHref="/contatti#form-contatti"
+              primaryLabel="Richiedi preventivo"
+              secondaryHref="/contatti"
+              secondaryLabel="Tutti i contatti"
+            />
           </div>
         </div>
       </main>

@@ -28,7 +28,11 @@ export const topografiaFaq = [
 export const serviziFaq = [
   {
     q: "Quali servizi offre lo Studio Architettura Pagnoni?",
-    a: "Architettura e progettazione, topografia e rilievi planoaltimetrici, laser scanner SLAM e nuvole di punti, progettazione del verde, urbanistica e pratiche edilizie, coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
+    a: "Architettura e progettazione; topografia e rilievi; pratiche del geometra (divisioni catastali, frazionamenti, successioni, DOCFA, tipi mappali e verifica confini); laser scanner SLAM; progettazione del verde; urbanistica e pratiche edilizie; coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
+  },
+  {
+    q: "Vi occupate di divisioni, successioni e pratiche catastali?",
+    a: "Sì: come geometra seguiamo divisioni catastali e frazionamenti, successioni immobiliari e divisioni ereditarie, DOCFA e aggiornamenti catastali, oltre a verifica e accertamento di confine. Il rilievo metrico resta la base quando serve allineare documentazione e stato di fatto.",
   },
   {
     q: "Quanto costa un rilievo?",

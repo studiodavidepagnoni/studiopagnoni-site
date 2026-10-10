@@ -1,4 +1,4 @@
-﻿"use client";
+"use client";
 
 import Link from "next/link";
 import { usePathname } from "next/navigation";
@@ -42,10 +42,7 @@ export function SiteFooter() {
               </p>
 
               <div className="mt-6">
-                <LinkedInLink
-                  variant="icon"
-                  className="border-[var(--footer-edge)] text-[var(--footer-link)] hover:border-[var(--primary-mid)] hover:bg-transparent hover:text-[var(--foreground)]"
-                />
+                <LinkedInLink variant="icon" className="text-[var(--footer-link)] hover:text-[var(--foreground)]" />
               </div>
 
               <Link
