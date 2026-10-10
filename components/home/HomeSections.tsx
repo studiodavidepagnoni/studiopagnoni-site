@@ -28,7 +28,6 @@ import { featuredProjects } from "@/lib/content/projects";
 import { featuredProjectsEn } from "@/lib/i18n/content/projects.en";
 import { site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
-import { SiteBrandMark } from "@/components/layout/SiteBrandMark";
 import { HomeServiceCards } from "@/components/home/HomeServiceCards";
 import { PlateFrame } from "@/components/home/SurveyGraphics";
 import { StatsSection } from "@/components/home/StatsSection";
@@ -119,18 +118,15 @@ export function HomeSections({ locale = "it" }: Props) {
           <div className="reveal-block mt-8 grid items-stretch gap-8 sm:mt-10 sm:gap-10 lg:mt-10 lg:grid-cols-12 lg:gap-14">
             {/* ── Testo (sinistra) ── */}
             <div className="order-2 flex flex-col justify-center lg:order-1 lg:col-span-6">
-              <div className="flex flex-col gap-5 sm:flex-row sm:items-start sm:gap-6">
-                <SiteBrandMark className="shrink-0 self-start" />
-                <div className="min-w-0">
-                  <p className={`${fontSans.className} home-chi-siamo-lede hidden text-[1.02rem] leading-[1.75] text-[var(--copy-body)] sm:block`}>
-                    <span className="sr-only">Studio Architettura Pagnoni. </span>
-                    {chi.short}
-                  </p>
-                  <p className={`${fontSans.className} home-chi-siamo-lede text-[1.02rem] leading-[1.7] tracking-[0.01em] text-[var(--foreground)]/80 sm:hidden`}>
-                    <span className="sr-only">Studio Architettura Pagnoni. </span>
-                    {chi.shortMobile}
-                  </p>
-                </div>
+              <div className="min-w-0">
+                <p className={`${fontSans.className} home-chi-siamo-lede hidden text-[1.02rem] leading-[1.75] text-[var(--copy-body)] sm:block`}>
+                  <span className="sr-only">Studio Architettura Pagnoni. </span>
+                  {chi.short}
+                </p>
+                <p className={`${fontSans.className} home-chi-siamo-lede text-[1.02rem] leading-[1.7] tracking-[0.01em] text-[var(--foreground)]/80 sm:hidden`}>
+                  <span className="sr-only">Studio Architettura Pagnoni. </span>
+                  {chi.shortMobile}
+                </p>
               </div>
               <ul className="home-chi-siamo-list mt-8 space-y-0 sm:mt-8" aria-label="Ambiti principali">
                 {chi.highlights.map((h) => (
