@@ -36,8 +36,8 @@ export default function EnProgettiPage() {
             <ProgettiArchive locale="en" />
             <PageClosingCta
               id="progetti-cta"
-              title="Have a site to document?"
-              description="Survey, scan or design: tell us location and objective, and we reply with timing and a first assessment."
+              title="Let’s talk about your project"
+              description="Site visit, survey or design: tell us location and objective, and we reply with timing and a first assessment."
               primaryHref={`${withLocalePrefix("/contatti", "en")}#form-contatti`}
               primaryLabel="Contact us"
               secondaryHref={withLocalePrefix("/servizi", "en")}

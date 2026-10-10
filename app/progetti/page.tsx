@@ -32,7 +32,7 @@ export default function ProgettiPage() {
             <ProgettiArchive />
             <PageClosingCta
               id="progetti-cta"
-              title="Avete un lavoro da documentare?"
+              title="Parliamo del vostro progetto"
               description="Sopralluogo, rilievo o progetto: indicate zona e obiettivo, vi rispondiamo con tempi e una prima valutazione."
               primaryHref="/contatti#form-contatti"
               primaryLabel="Scriveteci"
