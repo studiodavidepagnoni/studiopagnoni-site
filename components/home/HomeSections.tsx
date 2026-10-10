@@ -19,7 +19,6 @@ import {
   homeStrumentazioneEn,
   homeZoneEn,
 } from "@/lib/i18n/content/marketing.en";
-import { LinkedInLink } from "@/components/ui/LinkedInLink";
 import { withLocalePrefix } from "@/lib/i18n/paths";
 import { t } from "@/lib/i18n/messages";
 import { homeChiSiamoImages } from "@/lib/media/images";
@@ -333,41 +332,74 @@ export function HomeSections({ locale = "it" }: Props) {
       {/* ── Contatti ── */}
       <section className="lazy-section section-shell overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
-          <div className="home-section-intro reveal-block flex flex-wrap items-end justify-between gap-4">
+          <div className="home-section-intro reveal-block">
             <h2 className={titleCls}>{contactTitle}</h2>
-            <LinkedInLink variant="icon" />
           </div>
-          <div className="home-contact-rail">
+          <div className="home-contact-rail reveal-block">
             <PlateFrame />
+            <div className="home-contact-rail__head">
+              <span className="home-contact-rail__head-rule" aria-hidden />
+              <p className={`${fontSans.className} home-contact-rail__head-hours`}>
+                {locale === "en" ? "Mon–Fri 9:00–18:00" : site.openingHours.label}
+              </p>
+              <span className={`${fontSans.className} home-contact-rail__head-datum`} aria-hidden>
+                {site.geoDms.lat}
+                <span className="home-contact-rail__head-sep">·</span>
+                {site.geoDms.lon}
+              </span>
+            </div>
             <div className="home-contact-rail__cols">
-              <article className="home-contact-rail__item reveal-block">
-                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Email</h3>
+              <article className="home-contact-rail__item">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>
+                  {locale === "en" ? homeContactEn.email : "Email"}
+                </h3>
                 <a
                   href={`mailto:${site.email}`}
-                  className="home-contact-rail__value inline-block max-w-full break-words underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
+                  className={`${fontDisplay.className} home-contact-rail__value home-contact-rail__link`}
                 >
                   {site.email}
                 </a>
               </article>
-              <article className="home-contact-rail__item reveal-block">
-                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Telefono</h3>
+              <article className="home-contact-rail__item">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>
+                  {locale === "en" ? homeContactEn.phone : "Telefono"}
+                </h3>
                 <ul className="home-contact-rail__phones">
-                  {site.phones.map((phone) => (
-                    <li key={phone.tel}>
-                      <span className="home-contact-rail__phone-label">{phone.label}</span>
-                      <a
-                        href={`tel:${phone.tel}`}
-                        className="home-contact-rail__value inline-block min-h-[40px] py-0.5 underline-offset-2 transition hover:text-[var(--primary-mid)] hover:underline"
-                      >
-                        {phone.display}
-                      </a>
-                    </li>
-                  ))}
+                  {site.phones.map((phone) => {
+                    const phoneLabel =
+                      locale === "en"
+                        ? ({
+                            Studio: "Office",
+                            "Architetto Davide Pagnoni": "Architect Davide Pagnoni",
+                            "Geometra Sergio Pagnoni": "Surveyor Sergio Pagnoni",
+                          }[phone.label] ?? phone.label)
+                        : phone.label;
+                    return (
+                      <li key={phone.tel}>
+                        <span className={`${fontSans.className} home-contact-rail__phone-label`}>{phoneLabel}</span>
+                        <a
+                          href={`tel:${phone.tel}`}
+                          className={`${fontDisplay.className} home-contact-rail__value home-contact-rail__link`}
+                        >
+                          {phone.display}
+                        </a>
+                      </li>
+                    );
+                  })}
                 </ul>
               </article>
-              <article className="home-contact-rail__item reveal-block">
-                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>Sede</h3>
-                <p className="home-contact-rail__value max-w-[36ch] text-pretty leading-relaxed">{site.addressLine}</p>
+              <article className="home-contact-rail__item">
+                <h3 className={`${fontDisplay.className} home-contact-rail__label`}>
+                  {locale === "en" ? homeContactEn.office : "Sede"}
+                </h3>
+                <a
+                  href={site.maps.placeUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className={`${fontSans.className} home-contact-rail__value home-contact-rail__link home-contact-rail__address`}
+                >
+                  {site.addressLine}
+                </a>
               </article>
             </div>
           </div>

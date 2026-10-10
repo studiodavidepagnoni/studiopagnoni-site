@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { LanguageSwitcher } from "@/components/layout/LanguageSwitcher";
 import { SiteBrandLockup } from "@/components/layout/SiteBrandLockup";
+import { LinkedInLink } from "@/components/ui/LinkedInLink";
 import { formatCopyrightYearRange } from "@/lib/config/copyright";
 import { fontNav, fontSans } from "@/lib/fonts";
 import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
@@ -39,6 +40,13 @@ export function SiteFooter() {
               <p className={`${fontSans.className} mt-6 max-w-[56ch] text-sm leading-relaxed text-[var(--footer-muted)] sm:text-[0.97rem]`}>
                 {copy.footerBlurb}
               </p>
+
+              <div className="mt-6">
+                <LinkedInLink
+                  variant="icon"
+                  className="border-[var(--footer-edge)] text-[var(--footer-link)] hover:border-[var(--primary-mid)] hover:bg-transparent hover:text-[var(--foreground)]"
+                />
+              </div>
 
               <Link
                 href={withLocalePrefix("/contatti", locale)}

@@ -285,16 +285,77 @@
   }
 }
 
-/* Contatti — cartiglio recapiti, allineato a sinistra */
+/* Contatti — cartiglio recapiti (tavola da elaborato) */
 .home-contact-rail {
   position: relative;
   overflow: hidden;
   border: 1px solid var(--green-border-muted);
   border-radius: 0.25rem;
-  background: var(--card);
+  background:
+    linear-gradient(
+      145deg,
+      color-mix(in srgb, var(--primary-mid) 8%, var(--card)) 0%,
+      var(--card) 38%,
+      color-mix(in srgb, var(--muted) 40%, var(--card)) 100%
+    );
+  box-shadow: inset 0 1px 0 color-mix(in srgb, white 50%, transparent);
+}
+
+.home-contact-rail > .survey-plate-frame {
+  inset: 0.65rem;
+}
+
+.home-contact-rail .survey-plate-frame__c {
+  width: 0.85rem;
+  height: 0.85rem;
+}
+
+.home-contact-rail__head {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.55rem 1.25rem;
+  padding: 0.95rem 1.25rem 0.9rem;
+  border-bottom: 1px solid var(--green-border-muted);
+  background: color-mix(in srgb, var(--card) 72%, transparent);
+}
+
+.home-contact-rail__head-rule {
+  position: absolute;
+  left: 0;
+  bottom: -1px;
+  width: min(7.5rem, 35%);
+  height: 1px;
+  background: color-mix(in srgb, var(--primary-mid) 65%, transparent);
+}
+
+.home-contact-rail__head-hours {
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--foreground);
+}
+
+.home-contact-rail__head-datum {
+  font-size: 0.68rem;
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  font-variant-numeric: tabular-nums;
+  color: var(--green-ink-muted);
+}
+
+.home-contact-rail__head-sep {
+  margin: 0 0.4em;
+  opacity: 0.55;
 }
 
 .home-contact-rail__cols {
+  position: relative;
+  z-index: 1;
   display: grid;
   gap: 0;
 }
@@ -306,7 +367,7 @@
 }
 
 .home-contact-rail__item {
-  padding: 1.2rem 1.2rem 1.3rem;
+  padding: 1.35rem 1.25rem 1.45rem;
   text-align: left;
 }
 
@@ -316,11 +377,9 @@
 
 @media (min-width: 768px) {
   .home-contact-rail__item {
-    padding: 1.4rem 1.35rem 1.5rem;
+    padding: 1.55rem 1.45rem 1.7rem;
   }
-}
 
-@media (min-width: 768px) {
   .home-contact-rail__item:not(:last-child) {
     border-right: 1px solid var(--green-border-muted);
     border-bottom: none;
@@ -328,16 +387,55 @@
 }
 
 .home-contact-rail__label {
-  margin-bottom: 0.45rem;
-  font-size: 0.72rem;
+  display: flex;
+  align-items: center;
+  gap: 0.7rem;
+  margin-bottom: 0.85rem;
+  font-size: 0.7rem;
   font-weight: 600;
   letter-spacing: 0.22em;
   text-transform: uppercase;
   color: var(--green-ink-muted);
 }
 
+.home-contact-rail__label::after {
+  content: "";
+  display: block;
+  width: 1.75rem;
+  height: 1px;
+  background: color-mix(in srgb, var(--primary-mid) 60%, transparent);
+}
+
 .home-contact-rail__value {
-  font-size: 0.92rem;
+  font-size: clamp(0.98rem, 2.1vw, 1.12rem);
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -0.02em;
+  color: var(--foreground);
+}
+
+.home-contact-rail__link {
+  display: inline-block;
+  max-width: 100%;
+  min-height: 40px;
+  text-decoration: none;
+  text-underline-offset: 0.18em;
+  transition: color 160ms ease, text-decoration-color 160ms ease;
+}
+
+.home-contact-rail__link:hover {
+  color: color-mix(in srgb, var(--primary-mid) 55%, var(--foreground));
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--primary-mid) 55%, transparent);
+}
+
+.home-contact-rail__address {
+  max-width: 34ch;
+  font-size: 0.95rem;
+  font-weight: 400;
+  line-height: 1.55;
+  letter-spacing: 0;
+  text-wrap: pretty;
   color: var(--copy-body);
 }
 
@@ -346,14 +444,32 @@
   list-style: none;
 }
 
+.home-contact-rail__phones li {
+  padding: 0.55rem 0;
+}
+
 .home-contact-rail__phones li + li {
-  margin-top: 0.65rem;
+  border-top: 1px solid color-mix(in srgb, var(--green-border-muted) 85%, transparent);
+}
+
+.home-contact-rail__phones li:first-child {
+  padding-top: 0;
+}
+
+.home-contact-rail__phones li:last-child {
+  padding-bottom: 0;
 }
 
 .home-contact-rail__phone-label {
   display: block;
-  font-size: 0.72rem;
+  margin-bottom: 0.12rem;
+  font-size: 0.7rem;
+  line-height: 1.35;
   color: var(--green-ink-muted);
+}
+
+.home-contact-rail__phones .home-contact-rail__value {
+  font-variant-numeric: tabular-nums;
 }
 
 /* Statistiche — elenco editoriale su mobile, griglia su desktop */
