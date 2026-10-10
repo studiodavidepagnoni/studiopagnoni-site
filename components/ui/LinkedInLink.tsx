@@ -23,7 +23,7 @@ export function LinkedInLink({
 }: LinkedInLinkProps) {
   const base =
     variant === "icon"
-      ? `${fontSans.className} inline-flex min-h-[44px] min-w-[44px] items-center justify-center text-[var(--primary-mid)] transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`
+      ? `${fontSans.className} inline-flex min-h-[44px] min-w-[44px] items-center justify-start text-[var(--primary-mid)] transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`
       : `${fontSans.className} inline-flex min-h-[44px] items-center gap-2.5 font-semibold text-[var(--primary-mid)] underline decoration-[var(--green-border)] underline-offset-2 transition-colors hover:text-[var(--foreground)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)]/40`;
 
   return (
