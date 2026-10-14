@@ -38,25 +38,57 @@ function isLfsPointer(filePath) {
   }
 }
 
+const RETRYABLE = new Set([429, 500, 502, 503, 504]);
+const MAX_ATTEMPTS = 5;
+
+function sleep(ms) {
+  return new Promise((r) => setTimeout(r, ms));
+}
+
 async function download(url, dest) {
-  const res = await fetch(url);
-  if (!res.ok) {
-    throw new Error(`HTTP ${res.status} for ${url}`);
+  let lastErr;
+  for (let attempt = 1; attempt <= MAX_ATTEMPTS; attempt++) {
+    try {
+      const res = await fetch(url);
+      if (!res.ok) {
+        const err = new Error(`HTTP ${res.status} for ${url}`);
+        if (RETRYABLE.has(res.status) && attempt < MAX_ATTEMPTS) {
+          const wait = Math.min(30_000, 1000 * 2 ** (attempt - 1));
+          process.stdout.write(`HTTP ${res.status}, retry ${attempt}/${MAX_ATTEMPTS} in ${wait}ms ... `);
+          await sleep(wait);
+          lastErr = err;
+          continue;
+        }
+        throw err;
+      }
+      const type = res.headers.get("content-type") || "";
+      if (type.includes("text/html")) {
+        throw new Error(`Got HTML instead of media for ${url}`);
+      }
+      const buf = Buffer.from(await res.arrayBuffer());
+      if (buf.length < 1024) {
+        throw new Error(`Suspiciously small download (${buf.length} B) for ${url}`);
+      }
+      if (buf.slice(0, 40).toString("utf8").startsWith("version https://git-lfs.github.com/spec/v1")) {
+        throw new Error(`Downloaded another LFS pointer from ${url}`);
+      }
+      fs.mkdirSync(path.dirname(dest), { recursive: true });
+      fs.writeFileSync(dest, buf);
+      return buf.length;
+    } catch (err) {
+      lastErr = err;
+      const msg = String(err && err.message ? err.message : err);
+      const transient = /HTTP (429|5\d\d)/.test(msg) || /fetch failed|ECONNRESET|ETIMEDOUT|EAI_AGAIN/i.test(msg);
+      if (transient && attempt < MAX_ATTEMPTS) {
+        const wait = Math.min(30_000, 1000 * 2 ** (attempt - 1));
+        process.stdout.write(`${msg}; retry ${attempt}/${MAX_ATTEMPTS} in ${wait}ms ... `);
+        await sleep(wait);
+        continue;
+      }
+      throw err;
+    }
   }
-  const type = res.headers.get("content-type") || "";
-  if (type.includes("text/html")) {
-    throw new Error(`Got HTML instead of media for ${url}`);
-  }
-  const buf = Buffer.from(await res.arrayBuffer());
-  if (buf.length < 1024) {
-    throw new Error(`Suspiciously small download (${buf.length} B) for ${url}`);
-  }
-  if (buf.slice(0, 40).toString("utf8").startsWith("version https://git-lfs.github.com/spec/v1")) {
-    throw new Error(`Downloaded another LFS pointer from ${url}`);
-  }
-  fs.mkdirSync(path.dirname(dest), { recursive: true });
-  fs.writeFileSync(dest, buf);
-  return buf.length;
+  throw lastErr || new Error(`Download failed for ${url}`);
 }
 
 async function main() {
