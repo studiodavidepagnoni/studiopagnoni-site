@@ -51,8 +51,8 @@ test.describe("smoke", () => {
     await page.goto("/progetti/");
     await dismissCookieBanner(page);
 
-    await expect(page.getByRole("link", { name: /Azienda vinicola/i }).first()).toBeVisible();
-    await page.getByRole("link", { name: /Azienda vinicola/i }).first().click();
+    await expect(page.getByRole("link", { name: /Cantina vinicola/i }).first()).toBeVisible();
+    await page.getByRole("link", { name: /Cantina vinicola/i }).first().click();
     await expect(page.locator("#main-content")).toBeVisible();
     await expect(page.getByRole("link", { name: "Richiedi preventivo SLAM" })).toBeVisible();
   });
