@@ -136,26 +136,26 @@ export function buildPageMetadata({
 export const rootMetadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default: `${site.brandName} | Architettura e geometra in Franciacorta`,
+    default: `${site.brandName} | Architetto e geometra in Franciacorta e Brescia`,
     template: `${site.brandName} | %s`,
   },
   description:
-    "Studio di architettura e geometra in Franciacorta (Bornato, Cazzago San Martino BS): progettazione, topografia, pratiche catastali e laser scanner SLAM. Provincia di Brescia e Lombardia.",
+    "Studio di architettura e geometra in Franciacorta e provincia di Brescia (Bornato, Cazzago San Martino): progettazione, topografia, pratiche catastali e laser scanner SLAM.",
   openGraph: {
     type: "website",
     locale: "it_IT",
     url: site.url,
     siteName: site.brandName,
-    title: `${site.brandName} | Architettura e geometra in Franciacorta`,
+    title: `${site.brandName} | Architetto e geometra in Franciacorta e Brescia`,
     description:
-      "Architettura, geometra, topografia e laser scanner SLAM in Franciacorta e provincia di Brescia. Sopralluoghi e preventivi.",
+      "Architetto e geometra in Franciacorta e provincia di Brescia: progettazione, topografia, catasto e laser scanner SLAM. Sopralluoghi e preventivi.",
     images: [{ url: absoluteUrl(ogImagePath), width: 1200, height: 630 }],
   },
   twitter: {
     card: "summary_large_image",
-    title: `${site.brandName} | Architettura e geometra in Franciacorta`,
+    title: `${site.brandName} | Architetto e geometra in Franciacorta e Brescia`,
     description:
-      "Architettura e geometra in Franciacorta: progettazione, topografia, catasto e rilievi 3D SLAM. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
+      "Architetto e geometra in Franciacorta e Brescia: progettazione, topografia, catasto e rilievi 3D SLAM. Studio Architettura Pagnoni a Cazzago San Martino (BS).",
   },
   robots: { index: true, follow: true },
   verification: {
@@ -165,9 +165,10 @@ export const rootMetadata: Metadata = {
 };
 
 export const homeMetadata = buildPageMetadata({
-  title: "Architettura e geometra in Franciacorta",
+  title: "Architetto e geometra in Franciacorta e Brescia",
+  absoluteTitle: `${site.brandName} | Architetto e geometra in Franciacorta e Brescia`,
   description:
-    "Studio di architettura e geometra in Franciacorta a Bornato (Cazzago San Martino, BS): progettazione, topografia, pratiche catastali e laser SLAM in provincia di Brescia.",
+    "Studio di architettura e geometra a Bornato (Cazzago San Martino, BS): progettazione, topografia, pratiche catastali e laser SLAM in Franciacorta e provincia di Brescia.",
   path: "/",
   priority: "high",
 });

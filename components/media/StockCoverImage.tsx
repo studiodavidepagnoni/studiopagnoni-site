@@ -12,6 +12,7 @@ type Props = {
 /** Immagine stock con srcset pre-generato (export statico, senza optimizer Next). */
 export function StockCoverImage({ src, alt, sizes, className = "", loading = "lazy", fetchPriority }: Props) {
   const srcSet = stockImageSrcSet(src);
+  const fitClass = /\bobject-(contain|cover|fill|none|scale-down)\b/.test(className) ? "" : "object-cover";
 
   return (
     // eslint-disable-next-line @next/next/no-img-element -- srcset manuale per asset statici ottimizzati
@@ -23,7 +24,7 @@ export function StockCoverImage({ src, alt, sizes, className = "", loading = "la
       loading={loading}
       decoding="async"
       fetchPriority={fetchPriority}
-      className={`absolute inset-0 h-full w-full object-cover ${className}`.trim()}
+      className={`absolute inset-0 h-full w-full ${fitClass} ${className}`.trim()}
     />
   );
 }

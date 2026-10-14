@@ -65,26 +65,26 @@ export const projectCategories: Record<
     cases: [
       {
         slug: "allevamento-appianti-slam",
-        title: "Allevamento — rilievo 3D SLAM",
-        caption: "Allevamento · SLAM",
+        title: "Allevamento in provincia di Brescia — rilievo laser SLAM",
+        caption: "Allevamento · Brescia · laser SLAM",
         cover: cover(all.dir, all.cover),
-        alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia, base metrica per progetto",
+        alt: "Rilievo laser SLAM in allevamento — provincia di Brescia, base metrica per progetto",
         href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
       },
       {
         slug: "cantina-franciacorta-slam",
-        title: "Azienda vinicola — rilievo 3D SLAM",
-        caption: "Azienda vinicola · SLAM",
+        title: "Cantina vinicola in Franciacorta — rilievo laser SLAM",
+        caption: "Cantina vinicola · Franciacorta · laser SLAM",
         cover: cover(vin.dir, vin.cover),
-        alt: "Rilievo 3D SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
+        alt: "Rilievo laser SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
         href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
       {
         slug: "rilievo-terreno-erbusco-brescia",
-        title: "Terreno a Erbusco — rilievo SLAM",
-        caption: "Terreno · Erbusco · SLAM",
+        title: "Terreno a Erbusco (BS) — rilievo laser SLAM",
+        caption: "Terreno · Erbusco (BS) · laser SLAM",
         cover: cover(ter.dir, ter.cover),
-        alt: "Rilievo 3D di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
+        alt: "Rilievo laser SLAM di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
         href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
       },
     ],
@@ -98,27 +98,27 @@ export const featuredProjects: FeaturedProject[] = [
   {
     area: "rilievi-digitalizzazione",
     slug: "cantina-franciacorta-slam",
-    caption: "Azienda vinicola in Franciacorta — SLAM",
+    caption: "Cantina vinicola in Franciacorta — laser SLAM",
     cover: cover(vin.dir, vin.cover),
-    alt: "Rilievo 3D SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
+    alt: "Rilievo laser SLAM in cantina — Franciacorta, Brescia, supporto ad architettura e impianti",
     href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     label: "Laser SLAM",
   },
   {
     area: "rilievi-digitalizzazione",
     slug: "rilievo-terreno-erbusco-brescia",
-    caption: "Terreno a Erbusco — rilievo SLAM",
+    caption: "Terreno a Erbusco (BS) — laser SLAM",
     cover: cover(ter.dir, ter.cover),
-    alt: "Rilievo 3D di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
+    alt: "Rilievo laser SLAM di terreno a Erbusco (BS) — stato di fatto per progetto e paesaggio",
     href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
     label: "Territorio",
   },
   {
     area: "rilievi-digitalizzazione",
     slug: "allevamento-appianti-slam",
-    caption: "Allevamento — rilievo 3D SLAM",
+    caption: "Allevamento in provincia di Brescia — laser SLAM",
     cover: cover(all.dir, all.cover),
-    alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia, base metrica per progetto",
+    alt: "Rilievo laser SLAM in allevamento — provincia di Brescia, base metrica per progetto",
     href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
     label: "Laser SLAM",
   },
@@ -137,10 +137,10 @@ export const projectCaseStudies: Record<
   }
 > = {
   "rilievi-digitalizzazione/allevamento-appianti-slam": {
-    metaTitle: "Allevamento — rilievo 3D SLAM in provincia di Brescia",
+    metaTitle: "Allevamento in provincia di Brescia — rilievo laser SLAM",
     metaDescription:
-      "Caso studio: laser scanner SLAM in ambiente zootecnico per as-built e base metrica a supporto di progetto e interventi. Provincia di Brescia, Lombardia.",
-    heading: "Allevamento — rilievo 3D SLAM in ambiente operativo",
+      "Caso studio: laser scanner SLAM in allevamento in provincia di Brescia per as-built e base metrica a supporto di progetto e interventi.",
+    heading: "Allevamento in provincia di Brescia — rilievo laser SLAM",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
@@ -166,10 +166,10 @@ export const projectCaseStudies: Record<
     gallery: [{ src: cover(all.dir, all.cover), alt: "Rilievo 3D SLAM in allevamento — provincia di Brescia" }],
   },
   "rilievi-digitalizzazione/cantina-franciacorta-slam": {
-    metaTitle: "Cantina in Franciacorta — rilievo 3D SLAM per architettura e impianti",
+    metaTitle: "Cantina vinicola in Franciacorta (BS) — rilievo laser SLAM",
     metaDescription:
-      "Caso studio: scansione laser SLAM in azienda vinicola in Franciacorta (Brescia) per as-built, layout e supporto a progetto architettonico e impianti.",
-    heading: "Azienda vinicola — scansione 3D SLAM in Franciacorta",
+      "Caso studio: scansione laser SLAM in cantina in Franciacorta (provincia di Brescia) per as-built, layout e supporto a progetto architettonico e impianti.",
+    heading: "Cantina vinicola in Franciacorta — rilievo laser SLAM",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
@@ -196,10 +196,10 @@ export const projectCaseStudies: Record<
     ],
   },
   "rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia": {
-    metaTitle: "Terreno a Erbusco (BS) — rilievo SLAM per progetto e paesaggio",
+    metaTitle: "Terreno a Erbusco (BS) — rilievo laser SLAM per progetto e paesaggio",
     metaDescription:
-      "Caso studio: scansione 3D di terreno a Erbusco (BS), in Franciacorta, per stato di fatto, supporto agronomico e progettazione del paesaggio.",
-    heading: "Terreno a Erbusco — rilievo SLAM",
+      "Caso studio: scansione laser SLAM di terreno a Erbusco (BS), in Franciacorta, per stato di fatto, supporto agronomico e progettazione del paesaggio.",
+    heading: "Terreno a Erbusco (BS) — rilievo laser SLAM",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>

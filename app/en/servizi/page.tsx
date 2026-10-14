@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { ServiziCatalog } from "@/components/content/ServiziCatalog";
@@ -51,9 +52,19 @@ export default function EnServiziPage() {
               Measurement, design and technical procedures are not separate stages: a well-set commission needs reliable data,
               a clear reading of regulations, and continuity between field, office and site.{" "}
               <strong>Studio Architettura Pagnoni</strong>, active <strong>since 1988</strong>, supports private clients,
-              businesses and professionals across <strong>architecture</strong>, <strong>surveying</strong>,{" "}
-              <strong>surveyor procedures</strong>, <strong>SLAM laser scanning</strong>, landscape, planning and site safety.
-              Structural design is coordinated with external professionals when required.
+              businesses and professionals as an{" "}
+              <Link href={withLocalePrefix("/architettura-franciacorta", "en")} className={ui.proseLink}>
+                architect in Franciacorta and Brescia
+              </Link>
+              ,{" "}
+              <Link href={withLocalePrefix("/topografia", "en")} className={ui.proseLink}>
+                surveyor and topography
+              </Link>
+              , cadastral procedures and{" "}
+              <Link href={withLocalePrefix("/laser-scanner-slam", "en")} className={ui.proseLink}>
+                SLAM laser scanning
+              </Link>
+              , plus landscape, planning and site safety. Structural design is coordinated with external professionals when required.
             </p>
 
             <section aria-labelledby="servizi-elenco">

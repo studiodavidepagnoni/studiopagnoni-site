@@ -77,7 +77,7 @@ export const serviceGroupsEn = [
       "Alignment with planning constraints and building procedures; structural design by trusted external engineers.",
     ],
     href: "/architettura-franciacorta",
-    cta: "Explore architecture",
+    cta: "Architect in Franciacorta and Brescia",
   },
   {
     id: "topografia-rilievi",
@@ -91,7 +91,7 @@ export const serviceGroupsEn = [
       "Support for expert reports and valuations when measuring existing conditions is part of the brief.",
     ],
     href: "/topografia",
-    cta: "Explore surveying",
+    cta: "Surveyor and topography in Brescia",
   },
   {
     id: "pratiche-geometra",
@@ -120,7 +120,7 @@ export const serviceGroupsEn = [
       "Deliverables for as-built checks, dimensional verification and a design metric base.",
     ],
     href: "/laser-scanner-slam",
-    cta: "Explore SLAM laser scanning",
+    cta: "SLAM laser scanning in Brescia",
   },
   {
     id: "verde-paesaggio",

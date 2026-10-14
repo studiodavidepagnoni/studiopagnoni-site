@@ -134,7 +134,7 @@ export const serviceGroups = [
       "Allineamento a vincoli urbanistici e pratiche edilizie; strutture affidate a professionisti esterni di fiducia.",
     ],
     href: "/architettura-franciacorta",
-    cta: "Approfondisci l'architettura",
+    cta: "Architetto in Franciacorta e Brescia",
   },
   {
     id: "topografia-rilievi",
@@ -148,7 +148,7 @@ export const serviceGroups = [
       "Supporto a perizie e stime quando la misura dello stato di fatto è parte dell’incarico.",
     ],
     href: "/topografia",
-    cta: "Approfondisci la topografia",
+    cta: "Geometra e topografia a Brescia",
   },
   {
     id: "pratiche-geometra",
@@ -177,7 +177,7 @@ export const serviceGroups = [
       "Elaborati per as-built, verifiche dimensionali e base metrica di progetto.",
     ],
     href: "/laser-scanner-slam",
-    cta: "Approfondisci il laser SLAM",
+    cta: "Laser scanner SLAM a Brescia",
   },
   {
     id: "verde-paesaggio",
@@ -228,6 +228,7 @@ export const homeServiceCards = homeServicePreviewIds.map((id) => {
     title: group.title,
     description: group.description,
     href: group.href,
+    cta: group.cta,
   };
 });
 
@@ -269,38 +270,27 @@ export const zoneDescription = (
 export const zoneFooter = (
   <>
     Per tempi e disponibilità sul vostro territorio{" "}
-    <Link
-      href="/contatti"
-      className={ui.proseLink}
-    >
+    <Link href="/contatti" className={ui.proseLink}>
       contattateci
     </Link>
-    . Approfondisci i rilievi laser scanner SLAM in{" "}
-    <Link
-      href="/rilievi-laser-scanner-slam-brescia"
-      className={ui.proseLink}
-    >
-      provincia di Brescia
+    . Servizi di{" "}
+    <Link href="/architettura-franciacorta" className={ui.proseLink}>
+      architetto in Franciacorta
+    </Link>
+    ,{" "}
+    <Link href="/topografia" className={ui.proseLink}>
+      geometra a Brescia
+    </Link>{" "}
+    e rilievi{" "}
+    <Link href="/rilievi-laser-scanner-slam-brescia" className={ui.proseLink}>
+      laser scanner SLAM in provincia di Brescia
     </Link>{" "}
     e in{" "}
-    <Link
-      href="/rilievi-laser-scanner-slam-lombardia"
-      className={ui.proseLink}
-    >
+    <Link href="/rilievi-laser-scanner-slam-lombardia" className={ui.proseLink}>
       Lombardia
     </Link>
-    , oppure la pagina{" "}
-    <Link
-      href="/topografia"
-      className={ui.proseLink}
-    >
-      topografia e rilievi
-    </Link>
     . Per studi e geometri:{" "}
-    <Link
-      href="/rilievi-3d-per-studi-di-architettura"
-      className={ui.proseLink}
-    >
+    <Link href="/rilievi-3d-per-studi-di-architettura" className={ui.proseLink}>
       rilievi 3D in outsourcing
     </Link>
     .

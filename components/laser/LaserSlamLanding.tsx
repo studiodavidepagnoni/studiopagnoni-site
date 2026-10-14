@@ -101,7 +101,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                     alt={L.instrumentImage.alt}
                     sizes="(min-width:1024px) min(400px, 34vw), (min-width:640px) min(70vw, 480px), 100vw"
                     loading="lazy"
-                    className="object-[center_30%]"
+                    className="object-center"
                   />
                 </div>
               </figure>

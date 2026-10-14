@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { PageClosingCta } from "@/components/content/PageClosingCta";
 import { ServiziCatalog } from "@/components/content/ServiziCatalog";
@@ -39,8 +40,19 @@ export default function ServiziPage() {
             <p className={`${ui.body} max-w-[68ch]`}>
               Misura, progetto e pratiche tecniche non sono fasi separate: per una commessa ben impostata servono dati affidabili, lettura normativa e
               continuità tra campo, studio e cantiere. Lo <strong>Studio Architettura Pagnoni</strong>, attivo <strong>dal 1988</strong>, affianca privati,
-              imprese e professionisti su <strong>architettura</strong>, <strong>topografia</strong>, <strong>pratiche del geometra</strong>,{" "}
-              <strong>laser SLAM</strong>, verde, urbanistica e sicurezza. La parte strutturale viene coordinata con professionisti esterni quando richiesta.
+              imprese e professionisti come{" "}
+              <Link href="/architettura-franciacorta" className={ui.proseLink}>
+                architetto in Franciacorta e Brescia
+              </Link>
+              ,{" "}
+              <Link href="/topografia" className={ui.proseLink}>
+                geometra e topografia
+              </Link>
+              , pratiche catastali e{" "}
+              <Link href="/laser-scanner-slam" className={ui.proseLink}>
+                laser scanner SLAM
+              </Link>
+              , oltre a verde, urbanistica e sicurezza. La parte strutturale viene coordinata con professionisti esterni quando richiesta.
             </p>
 
             <section aria-labelledby="servizi-elenco">

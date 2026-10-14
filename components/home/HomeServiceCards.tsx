@@ -24,11 +24,13 @@ export function HomeServiceCards({ locale = "it" }: Props) {
             title: g.title,
             description: g.description,
             href: withLocalePrefix(g.href, locale),
+            cta: g.cta ?? copy.cta.learnMore,
           };
         })
       : homeServiceCards.map((g) => ({
           ...g,
           href: withLocalePrefix(g.href, locale),
+          cta: g.cta ?? copy.cta.learnMore,
         }));
 
   return (
@@ -59,7 +61,7 @@ export function HomeServiceCards({ locale = "it" }: Props) {
               <h3 className={`${fontDisplay.className} ${ui.cardHeading} mb-2 leading-snug`}>{card.title}</h3>
               <p className={`copy-rhythm mb-5 flex-1 ${ui.bodySm}`}>{card.description}</p>
               <Link href={card.href} className={`${fontSans.className} service-card__cta ${ui.textCta} mt-auto gap-2 text-base sm:text-sm`}>
-                {copy.cta.learnMore}
+                {card.cta}
                 <span
                   className="service-card__cta-arrow text-[1.1em] leading-none transition-transform duration-300 ease-[cubic-bezier(0.22,1,0.36,1)] [@media(hover:hover)]:group-hover:translate-x-1"
                   aria-hidden

@@ -6,10 +6,10 @@ import { localeAlternates } from "@/lib/i18n/metadata";
 
 export const metadata = {
   ...buildPageMetadata({
-    title: "Architecture and 3D surveys — Franciacorta / Brescia",
-    absoluteTitle: "Studio Architettura Pagnoni | Architecture and 3D surveys — Franciacorta / Brescia",
+    title: "Architect and surveyor in Franciacorta and Brescia",
+    absoluteTitle: "Studio Architettura Pagnoni | Architect and surveyor in Franciacorta and Brescia",
     description:
-      "Architecture practice in Franciacorta since 1988: surveying, SLAM laser scanning, design and building procedures in the province of Brescia.",
+      "Architecture and surveying practice in Bornato (Cazzago San Martino, BS): design, topography, cadastral work and SLAM laser scanning across Franciacorta and the province of Brescia.",
     path: "/en",
   }),
   alternates: localeAlternates("/"),

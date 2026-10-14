@@ -78,19 +78,23 @@ export function HomeSections({ locale = "it" }: Props) {
         <Link href={withLocalePrefix("/contatti", locale)} className={ui.proseLink}>
           contact us
         </Link>
-        . Explore SLAM laser surveys in the{" "}
+        . Services as an{" "}
+        <Link href={withLocalePrefix("/architettura-franciacorta", locale)} className={ui.proseLink}>
+          architect in Franciacorta
+        </Link>
+        ,{" "}
+        <Link href={withLocalePrefix("/topografia", locale)} className={ui.proseLink}>
+          surveyor in Brescia
+        </Link>
+        , and{" "}
         <Link href={withLocalePrefix("/rilievi-laser-scanner-slam-brescia", locale)} className={ui.proseLink}>
-          province of Brescia
+          SLAM laser scanning in the province of Brescia
         </Link>{" "}
         and{" "}
         <Link href={withLocalePrefix("/rilievi-laser-scanner-slam-lombardia", locale)} className={ui.proseLink}>
           Lombardy
         </Link>
-        , or the{" "}
-        <Link href={withLocalePrefix("/topografia", locale)} className={ui.proseLink}>
-          surveying
-        </Link>{" "}
-        page. For architecture practices:{" "}
+        . For architecture practices:{" "}
         <Link href={withLocalePrefix("/rilievi-3d-per-studi-di-architettura", locale)} className={ui.proseLink}>
           outsourced 3D surveys
         </Link>
@@ -211,14 +215,17 @@ export function HomeSections({ locale = "it" }: Props) {
             >
               <p className={`${fontSans.className} section-kicker mb-3`}>Schede servizio</p>
               <div className="flex flex-wrap gap-x-5 gap-y-2 text-sm">
-                <Link href="/topografia" className={ui.proseLink}>
-                  Topografia e rilievi
+                <Link href={withLocalePrefix("/architettura-franciacorta", locale)} className={ui.proseLink}>
+                  {locale === "en" ? "Architect in Franciacorta" : "Architetto in Franciacorta"}
                 </Link>
-                <Link href="/laser-scanner-slam" className={ui.proseLink}>
-                  Laser scanner SLAM
+                <Link href={withLocalePrefix("/topografia", locale)} className={ui.proseLink}>
+                  {locale === "en" ? "Surveyor in Brescia" : "Geometra a Brescia"}
                 </Link>
-                <Link href="/rilievi-3d-per-studi-di-architettura" className={ui.proseLink}>
-                  Rilievi 3D per studi di architettura
+                <Link href={withLocalePrefix("/laser-scanner-slam", locale)} className={ui.proseLink}>
+                  {locale === "en" ? "SLAM laser scanning" : "Laser scanner SLAM"}
+                </Link>
+                <Link href={withLocalePrefix("/rilievi-3d-per-studi-di-architettura", locale)} className={ui.proseLink}>
+                  {locale === "en" ? "3D surveys for architecture studios" : "Rilievi 3D per studi di architettura"}
                 </Link>
               </div>
             </nav>

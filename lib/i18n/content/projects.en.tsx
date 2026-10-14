@@ -46,26 +46,26 @@ export const projectCategoriesEn: Record<
     cases: [
       {
         slug: "allevamento-appianti-slam",
-        title: "Livestock facility — 3D SLAM survey",
-        caption: "Livestock · SLAM",
+        title: "Livestock facility in the province of Brescia — SLAM laser survey",
+        caption: "Livestock · Brescia · SLAM laser",
         cover: cover(all.dir, all.cover),
-        alt: "3D SLAM survey in a livestock facility — province of Brescia, metric base for design",
+        alt: "SLAM laser survey in a livestock facility — province of Brescia, metric base for design",
         href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
       },
       {
         slug: "cantina-franciacorta-slam",
-        title: "Winery — 3D SLAM survey",
-        caption: "Winery · SLAM",
+        title: "Winery in Franciacorta — SLAM laser survey",
+        caption: "Winery · Franciacorta · SLAM laser",
         cover: cover(vin.dir, vin.cover),
-        alt: "3D SLAM survey in a winery — Franciacorta, Brescia, support for architecture and plant",
+        alt: "SLAM laser survey in a winery — Franciacorta, Brescia, support for architecture and plant",
         href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
       },
       {
         slug: "rilievo-terreno-erbusco-brescia",
-        title: "Plot in Erbusco — SLAM survey",
-        caption: "Plot · Erbusco · SLAM",
+        title: "Plot in Erbusco (BS) — SLAM laser survey",
+        caption: "Plot · Erbusco (BS) · SLAM laser",
         cover: cover(ter.dir, ter.cover),
-        alt: "3D survey of a plot in Erbusco (BS) — existing conditions for design and landscape",
+        alt: "SLAM laser survey of a plot in Erbusco (BS) — existing conditions for design and landscape",
         href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
       },
     ],
@@ -86,27 +86,27 @@ export const featuredProjectsEn = [
   {
     area: "rilievi-digitalizzazione" as const,
     slug: "cantina-franciacorta-slam",
-    caption: "Winery in Franciacorta — SLAM",
+    caption: "Winery in Franciacorta — SLAM laser",
     cover: cover(vin.dir, vin.cover),
-    alt: "3D SLAM survey in a winery — Franciacorta, Brescia, support for architecture and plant",
+    alt: "SLAM laser survey in a winery — Franciacorta, Brescia, support for architecture and plant",
     href: "/progetti/rilievi-digitalizzazione/cantina-franciacorta-slam",
     label: "SLAM laser",
   },
   {
     area: "rilievi-digitalizzazione" as const,
     slug: "rilievo-terreno-erbusco-brescia",
-    caption: "Plot in Erbusco — SLAM survey",
+    caption: "Plot in Erbusco (BS) — SLAM laser",
     cover: cover(ter.dir, ter.cover),
-    alt: "3D survey of a plot in Erbusco (BS) — existing conditions for design and landscape",
+    alt: "SLAM laser survey of a plot in Erbusco (BS) — existing conditions for design and landscape",
     href: "/progetti/rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia",
     label: "Territory",
   },
   {
     area: "rilievi-digitalizzazione" as const,
     slug: "allevamento-appianti-slam",
-    caption: "Livestock facility — 3D SLAM survey",
+    caption: "Livestock facility in the province of Brescia — SLAM laser",
     cover: cover(all.dir, all.cover),
-    alt: "3D SLAM survey in a livestock facility — province of Brescia, metric base for design",
+    alt: "SLAM laser survey in a livestock facility — province of Brescia, metric base for design",
     href: "/progetti/rilievi-digitalizzazione/allevamento-appianti-slam",
     label: "SLAM laser",
   },
@@ -123,10 +123,10 @@ export const projectCaseStudiesEn: Record<
   }
 > = {
   "rilievi-digitalizzazione/allevamento-appianti-slam": {
-    metaTitle: "Livestock facility — 3D SLAM survey in the province of Brescia",
+    metaTitle: "Livestock facility in the province of Brescia — SLAM laser survey",
     metaDescription:
-      "Case study: SLAM laser scanning in a livestock environment for as-built documentation and a metric base for design and works. Province of Brescia, Lombardy.",
-    heading: "Livestock facility — 3D SLAM survey in an operational setting",
+      "Case study: SLAM laser scanning in a livestock facility in the province of Brescia for as-built documentation and a metric base for design.",
+    heading: "Livestock facility in the province of Brescia — SLAM laser survey",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
@@ -150,10 +150,10 @@ export const projectCaseStudiesEn: Record<
     gallery: [{ src: cover(all.dir, all.cover), alt: "3D SLAM survey in a livestock facility — province of Brescia" }],
   },
   "rilievi-digitalizzazione/cantina-franciacorta-slam": {
-    metaTitle: "Winery in Franciacorta — 3D SLAM survey for architecture and plant",
+    metaTitle: "Winery in Franciacorta (BS) — SLAM laser survey",
     metaDescription:
-      "Case study: SLAM laser scanning in a Franciacorta winery (Brescia) for as-built, layout and support to architectural and plant design.",
-    heading: "Winery — 3D SLAM scanning in Franciacorta",
+      "Case study: SLAM laser scanning in a Franciacorta winery (province of Brescia) for as-built, layout and support to architectural and plant design.",
+    heading: "Winery in Franciacorta — SLAM laser survey",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
@@ -178,10 +178,10 @@ export const projectCaseStudiesEn: Record<
     gallery: [{ src: cover(vin.dir, vin.cover), alt: "3D SLAM survey in a winery — Franciacorta, province of Brescia" }],
   },
   "rilievi-digitalizzazione/rilievo-terreno-erbusco-brescia": {
-    metaTitle: "Plot in Erbusco (BS) — SLAM survey for design and landscape",
+    metaTitle: "Plot in Erbusco (BS) — SLAM laser survey for design and landscape",
     metaDescription:
-      "Case study: 3D scan of a plot in Erbusco (BS), Franciacorta, for existing conditions, agronomic support and landscape design.",
-    heading: "Plot in Erbusco — SLAM survey",
+      "Case study: SLAM laser scan of a plot in Erbusco (BS), Franciacorta, for existing conditions, agronomic support and landscape design.",
+    heading: "Plot in Erbusco (BS) — SLAM laser survey",
     body: (
       <>
         <p className={`${ui.body} mb-4`}>
