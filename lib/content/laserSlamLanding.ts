@@ -397,6 +397,10 @@ export const laserSlamLandingBrescia = {
   comparison: bresciaComparison,
   faq: [
     {
+      q: "Quanto costa un rilievo laser scanner SLAM a Brescia?",
+      a: "Il preventivo varia di caso in caso (superficie, piani, accessibilità, distanza e formati di consegna). A titolo orientativo, per un appartamento di circa 100 m² su un unico piano, rilievo e consegna di disegni e relazione si collocano intorno ai 1.000 €. Scrivici comune in provincia di Brescia e obiettivo: rispondiamo con una proposta senza impegno.",
+    },
+    {
       q: "Fate rilievi laser scanner SLAM a Brescia e in Franciacorta?",
       a: "Sì. È il nostro bacino operativo principale: sede a Bornato / Cazzago San Martino (BS), interventi su Brescia città, Franciacorta, Valle Trompia, Lago d’Iseo e provincia. Contattaci con comune e obiettivo per tempi e preventivo.",
     },
