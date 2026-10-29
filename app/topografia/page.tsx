@@ -37,10 +37,10 @@ export default function TopografiaPage() {
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-10 sm:space-y-12`}>
             <p className={`${ui.body} max-w-[72ch]`}>
-              Un buon rilievo topografico non è solo una raccolta di punti: è il modo in cui il terreno diventa una base decisionale. Come{" "}
-              <strong>geometra in Franciacorta</strong>, da <strong>Bornato, Cazzago San Martino</strong>, misuriamo quote, confini, pendenze e volumi con{" "}
-              <strong>GNSS RTK</strong>, <strong>stazione totale</strong> e flussi CAD — per frazionamenti, controlli di confine e rilievi planoaltimetrici in
-              provincia di <strong>Brescia</strong>.
+              Lo Studio Architettura Pagnoni offre <strong>topografia e rilievi del geometra in Franciacorta</strong> e provincia di{" "}
+              <strong>Brescia</strong>, dalla sede di <strong>Bornato, Cazzago San Martino</strong>. Un buon rilievo topografico non è solo una raccolta di
+              punti: è il modo in cui il terreno diventa una base decisionale. Misuriamo quote, confini, pendenze e volumi con <strong>GNSS RTK</strong>,{" "}
+              <strong>stazione totale</strong> e flussi CAD — per frazionamenti, controlli di confine e rilievi planoaltimetrici.
             </p>
           <div className="mt-8 space-y-8 sm:mt-10 sm:space-y-10">
             <section className={ui.innerCard} aria-labelledby="topo-rilievo">

@@ -10,7 +10,10 @@ import { CspMeta } from "@/components/security/CspMeta";
 import { withBasePath } from "@/lib/utils/basePath";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { jsonLdGraph, rootMetadata } from "@/lib/config/seo";
+import { site } from "@/lib/config/site";
 import "./globals.css";
+
+const siteOrigin = site.url.replace(/\/$/, "");
 
 /** Notch / home indicator: `viewport-fit=cover` + safe-area in CSS (header, drawer, cookie bar). */
 export const viewport: Viewport = {
@@ -45,6 +48,9 @@ export default function RootLayout({
     <html lang="it">
       <head>
         <CspMeta />
+        <link rel="describedby" href={`${siteOrigin}/llms.txt`} title="LLM site index" />
+        <link rel="alternate" type="text/plain" href={`${siteOrigin}/llms.txt`} title="llms.txt" />
+        <link rel="alternate" type="text/plain" href={`${siteOrigin}/llms-full.txt`} title="llms-full.txt" />
       </head>
       <body
         className={`${fontSans.variable} ${fontDisplay.variable} ${fontSans.className} antialiased theme-site max-md:overflow-x-clip`}

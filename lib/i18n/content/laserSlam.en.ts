@@ -52,7 +52,7 @@ export const laserSlamLandingEn = {
   },
   introHeading: "SLAM laser scanning: measure in 3D before you design",
   introLead:
-    "Before you design or renovate, you need to know how the building or shed really is. With SLAM laser surveying we measure spaces quickly and accurately, and deliver plans, sections and 3D data ready for designers and site teams.",
+    "Studio Architettura Pagnoni provides SLAM laser surveys in Franciacorta and the province of Brescia with a CHCNAV RS10: point clouds, as-built and a metric base for designers and site teams. Before you design or renovate we document buildings and sheds quickly and accurately, with plans, sections and 3D data ready to use.",
   instrumentNote:
     "We use a handheld instrument (CHCNAV RS10) that works outdoors and indoors — even where GPS is weak — so one visit can document the whole site.",
   introImage: {

@@ -1,15 +1,19 @@
 # Studio Architettura Pagnoni — https://studiopagnoni.com
 # Rilievi laser scanner SLAM e topografia — Franciacorta, provincia di Brescia, Nord Italia
+# Contesto per assistenti AI: /llms.txt e /llms-full.txt
 
 User-agent: *
 Allow: /
 Disallow: /firme/
 
-# LLM / AI crawlers (contesto sito: /llms.txt)
-User-agent: GPTBot
+# ——— Retrieval / answer engines (citazioni live) ———
+User-agent: OAI-SearchBot
 Allow: /
 
 User-agent: ChatGPT-User
+Allow: /
+
+User-agent: GPTBot
 Allow: /
 
 User-agent: Claude-Web
@@ -18,22 +22,41 @@ Allow: /
 User-agent: anthropic-ai
 Allow: /
 
-User-agent: Google-Extended
+User-agent: ClaudeBot
 Allow: /
 
 User-agent: PerplexityBot
 Allow: /
 
+User-agent: Perplexity-User
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 User-agent: Applebot-Extended
+Allow: /
+
+User-agent: Amazonbot
+Allow: /
+
+User-agent: meta-externalagent
+Allow: /
+
+User-agent: Bytespider
 Allow: /
 
 User-agent: CCBot
 Allow: /
 
+# ——— Motori di ricerca classici ———
 User-agent: Googlebot
 Allow: /
 
 User-agent: Googlebot-Image
+Allow: /
+
+User-agent: Bingbot
 Allow: /
 
 Sitemap: https://studiopagnoni.com/sitemap.xml

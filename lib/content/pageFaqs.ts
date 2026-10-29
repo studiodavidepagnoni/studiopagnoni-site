@@ -36,7 +36,7 @@ export const serviziFaq = [
   },
   {
     q: "Quanto costa un rilievo?",
-    a: "Ogni incarico è quotato su misura: metratura, strumenti (GNSS, stazione totale, SLAM), formati di consegna e distanza incidono sul costo. Per una stima rapida usa il modulo contatti indicando zona e obiettivo.",
+    a: "Ogni incarico è quotato su misura: metratura, strumenti (GNSS, stazione totale, SLAM), formati di consegna e distanza incidono sul costo. A titolo orientativo, per un rilievo laser SLAM di un appartamento di circa 100 m² su un unico piano (rilievo + disegni e relazione) si collocano intorno ai 1.000 €. Per una stima rapida usa il modulo contatti indicando zona e obiettivo.",
   },
   {
     q: "Quali tempi di consegna posso aspettarmi?",

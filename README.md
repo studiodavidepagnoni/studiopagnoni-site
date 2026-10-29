@@ -50,6 +50,7 @@ In CI (`/.github/workflows/ci.yml`): lint, typecheck, build statico, E2E e Light
 - `FORCE_VIDEO=1 npm run optimize:assets` — forza ricodifica video.
 - `build:static` esegue `optimize:assets` prima dell'export; `prebuild` solo `sync:static`.
 - **CI / GitHub Pages** usano `SKIP_VIDEO=1`: non ricodificare video su Actions. I video restano in **Git LFS**; il checkout Actions è `lfs: false` così ogni push **non scarica LFS** (non brucia bandwidth). `sync:static` sostituisce i pointer con i file già online su https://studiopagnoni.com.
+- **LLM / AI search**: `/llms.txt` e `/llms-full.txt` (NAP, servizi, costi orientativi); `robots.txt` consente OAI-SearchBot, ChatGPT-User, Perplexity, Claude, ecc. Per ChatGPT Search registra anche il sito in **Bing Webmaster Tools** (usa l’indice Bing) e importa la sitemap.
 - Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` + `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` per il modulo contatti.
 - Deploy GitHub Pages: workflow `.github/workflows/deploy-github-pages.yml` (build su ogni push; deploy condizionato).
 - Secret repository `NEXT_PUBLIC_FORMSPREE_ID` e `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` per form + CAPTCHA in produzione.

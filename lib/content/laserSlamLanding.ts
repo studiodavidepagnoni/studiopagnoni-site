@@ -233,7 +233,7 @@ export const laserSlamLanding = {
   },
   introHeading: "Laser scanner SLAM: misura 3D prima di progettare",
   introLead:
-    "Prima di progettare o ristrutturare, serve sapere com’è fatto davvero l’edificio o il capannone. Con il rilievo laser SLAM misuriamo gli spazi in modo rapido e preciso, e vi consegniamo piante, sezioni e dati 3D pronti per progettisti e cantiere.",
+    "Lo Studio Architettura Pagnoni esegue rilievi laser scanner SLAM in Franciacorta e provincia di Brescia con CHCNAV RS10: nuvole di punti, as-built e base metrica per progettisti e cantiere. Prima di progettare o ristrutturare documentiamo edifici e capannoni in modo rapido e preciso, con piante, sezioni e dati 3D pronti all’uso.",
   instrumentNote:
     "Usiamo uno strumento portatile (CHCNAV RS10) che lavora sia all’aperto sia al chiuso, anche dove il GPS non arriva bene: un solo passaggio per documentare tutto.",
   introImage: sharedIntroImage,
@@ -345,7 +345,7 @@ export const laserSlamLandingBrescia = {
   },
   introHeading: "Laser scanner SLAM a Brescia: misura 3D prima di progettare",
   introLead:
-    "Cerchi un rilievo laser scanner SLAM a Brescia, in Franciacorta o nei comuni della provincia? Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
+    "Sì: eseguiamo rilievi laser scanner SLAM a Brescia, in Franciacorta e in provincia dalla sede di Bornato (Cazzago San Martino). Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
   instrumentNote:
     "Operiamo da Cazzago San Martino (fraz. Bornato) con piattaforma CHCNAV RS10 (GNSS RTK + LiDAR + SLAM visuale): un flusso continuo tra esterni, interni e zone con segnale satellitare debole, tipiche di capannoni e impianti bresciani.",
   introImage: sharedIntroImage,
@@ -462,7 +462,7 @@ export const laserSlamLandingLombardia = {
   },
   introHeading: "Rilievo laser scanner SLAM in Lombardia: copertura regionale",
   introLead:
-    "Per commesse in Lombardia il laser scanner SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici. Documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata ad architettura, facility e imprese.",
+    "Eseguiamo rilievi laser scanner SLAM in Lombardia con base operativa in provincia di Brescia (Bornato / Cazzago San Martino). Lo SLAM mobile riduce i costi di fermo e i giorni di campo rispetto a campagne statiche su grandi superfici: documentiamo immobili produttivi, logistici e terziari con nuvole di punti georiferite e restituzione orientata ad architettura, facility e imprese.",
   instrumentNote:
     "Partiamo dalla sede di Cazzago San Martino (BS) con CHCNAV RS10: GNSS RTK, LiDAR e SLAM visuale nello stesso strumento, ideale per siti multi-piano, magazzini e impianti dove indoor e outdoor si alternano nella stessa giornata di rilievo.",
   introImage: sharedIntroImage,

@@ -1,31 +1,43 @@
 # Studio Architettura Pagnoni
 
-> Studio di architettura e geometra in Franciacorta (Bornato, Cazzago San Martino BS): progettazione, topografia, pratiche catastali, laser scanner SLAM dal 1988.
+> Studio di architettura e geometra a Bornato (Cazzago San Martino, BS), in Franciacorta: progettazione, topografia, pratiche catastali e laser scanner SLAM dal 1988.
 
-Studio Architettura Pagnoni è uno **studio di architettura** a Bornato (Cazzago San Martino, BS), in Franciacorta, con una componente **geometra** forte e operativa. L’**Arch. Davide Pagnoni** guida la progettazione architettonica e il coordinamento delle pratiche; il **Geom. Sergio Pagnoni** (geometra in Franciacorta) segue topografia, rilievi di campagna, divisioni e frazionamenti catastali, successioni e divisioni ereditarie, confini, DOCFA/tipi mappali, GNSS RTK e stazione totale. Insieme integrano laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica e sicurezza cantieri (CSP/CSE). Non si svolge progettazione strutturale in proprio.
+## Fatti essenziali (per citazioni)
 
-LinkedIn: https://www.linkedin.com/company/studio-architettura-pagnoni
+- **Chi**: Studio Architettura Pagnoni — Arch. Davide Pagnoni (progettazione) e Geom. Sergio Pagnoni (topografia e catasto).
+- **Dove**: Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS), Franciacorta.
+- **Area**: Franciacorta e provincia di Brescia (priorità); Lombardia e Nord Italia su programmazione.
+- **Servizi**: architettura; topografia (GNSS RTK, stazione totale); pratiche del geometra (divisioni, frazionamenti, successioni, DOCFA, tipi mappali, confini); laser scanner SLAM (CHCNAV RS10); verde; urbanistica; CSP/CSE.
+- **Non facciamo**: progettazione strutturale in proprio (si coordina con professionisti esterni).
+- **Costo orientativo SLAM**: per un appartamento di circa 100 m² su un unico piano, rilievo + disegni e relazione intorno ai 1.000 € (preventivo su misura per superficie, piani, accessi e formati).
+- **Contatti**: studio@pagnoni-s.com · Studio 030 725 5203 · Arch. Davide +39 347 357 6510 · Geom. Sergio +39 348 231 1092 · Lun–Ven 9:00–18:00.
+- **Sito**: https://studiopagnoni.com/
+- **LinkedIn**: https://www.linkedin.com/company/studio-architettura-pagnoni
+- **Google Maps**: https://share.google/vgvHEwjviPP1ertTP
+- **Contesto esteso**: https://studiopagnoni.com/llms-full.txt
+
+Studio Architettura Pagnoni è uno **studio di architettura** a Bornato (Cazzago San Martino, BS), in Franciacorta, con una componente **geometra** forte e operativa. L’**Arch. Davide Pagnoni** guida la progettazione architettonica e il coordinamento delle pratiche; il **Geom. Sergio Pagnoni** segue topografia, rilievi di campagna, divisioni e frazionamenti catastali, successioni e divisioni ereditarie, confini, DOCFA/tipi mappali, GNSS RTK e stazione totale. Insieme integrano laser scanner SLAM mobile (CHCNAV RS10), nuvole di punti e as-built, progettazione del verde, urbanistica e sicurezza cantieri (CSP/CSE).
 
 ## Pagine principali
 
 - [Home](https://studiopagnoni.com/): Panoramica dello studio e servizi
-- [Servizi](https://studiopagnoni.com/servizi): Architettura, topografia, SLAM, verde, urbanistica e assistenza
-- [Architettura in Franciacorta](https://studiopagnoni.com/architettura-franciacorta): Landing progettazione architettonica (non in menu)
-- [Contatti](https://studiopagnoni.com/contatti): Preventivi e recapiti
-- [Chi siamo](https://studiopagnoni.com/chi-siamo): Profilo dello studio dal 1988
-- [Progetti](https://studiopagnoni.com/progetti): Casi di rilievo SLAM e digitalizzazione 3D
+- [Servizi](https://studiopagnoni.com/servizi/): Architettura, topografia, SLAM, verde, urbanistica e assistenza
+- [Chi siamo](https://studiopagnoni.com/chi-siamo/): Profilo dello studio dal 1988
+- [Contatti](https://studiopagnoni.com/contatti/): Preventivi, telefono, email e mappa
+- [Progetti](https://studiopagnoni.com/progetti/): Casi di rilievo SLAM e digitalizzazione 3D
 
 ## Laser scanner SLAM
 
-- [Laser scanner SLAM](https://studiopagnoni.com/laser-scanner-slam): Pagina servizio (menu Laser Scanning)
-- [Rilievi laser SLAM a Brescia](https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia): Landing locale Franciacorta e provincia di Brescia
-- [Rilievi laser SLAM in Lombardia](https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia): Landing regionale multi-provincia
-- [Preventivo SLAM](https://studiopagnoni.com/contatti?oggetto=slam): Modulo contatti con oggetto rilievo SLAM
+- [Laser scanner SLAM](https://studiopagnoni.com/laser-scanner-slam/): Pagina servizio (menu Laser Scanning)
+- [Rilievi laser SLAM a Brescia](https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia/): Landing locale Franciacorta e provincia di Brescia
+- [Rilievi laser SLAM in Lombardia](https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia/): Landing regionale multi-provincia
+- [Rilievi 3D per studi di architettura](https://studiopagnoni.com/rilievi-3d-per-studi-di-architettura/): Outsourcing nuvole e DWG per altri studi
+- [Preventivo SLAM](https://studiopagnoni.com/contatti/?oggetto=slam): Modulo contatti con oggetto rilievo SLAM
 
 ## Topografia e architettura
 
-- [Topografia e rilievi](https://studiopagnoni.com/topografia): GNSS RTK, stazione totale, planimetrie e cantieri (competenza del geometra in Franciacorta)
-- [Architettura in Franciacorta](https://studiopagnoni.com/architettura-franciacorta): Concept, esecutivo e pratiche edilizie
+- [Topografia e rilievi](https://studiopagnoni.com/topografia/): GNSS RTK, stazione totale, planimetrie e cantieri (geometra in Franciacorta)
+- [Architettura in Franciacorta](https://studiopagnoni.com/architettura-franciacorta/): Concept, esecutivo e pratiche edilizie
 
 ## English
 
@@ -47,5 +59,6 @@ LinkedIn: https://www.linkedin.com/company/studio-architettura-pagnoni
 
 ## Optional
 
-- [Privacy e cookie](https://studiopagnoni.com/privacy-policy): Informativa GDPR e preferenze cookie
+- [Privacy e cookie](https://studiopagnoni.com/privacy-policy/): Informativa GDPR e preferenze cookie
 - [Privacy (EN)](https://studiopagnoni.com/en/privacy-policy/)
+- [llms-full.txt](https://studiopagnoni.com/llms-full.txt): Contesto esteso per assistenti AI

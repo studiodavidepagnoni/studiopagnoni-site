@@ -162,6 +162,14 @@ export const rootMetadata: Metadata = {
     google: "sE-raRFBNM462UFEAV_IfRfPVg9n4yTYxc8K9ys_gGI",
   },
   other: { "theme-color": "#051e1b" },
+  alternates: {
+    types: {
+      "text/plain": [
+        { url: "/llms.txt", title: "llms.txt" },
+        { url: "/llms-full.txt", title: "llms-full.txt" },
+      ],
+    },
+  },
 };
 
 export const homeMetadata = buildPageMetadata({
@@ -193,11 +201,29 @@ export const jsonLdGraph = {
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),
+      foundingDate: "1988",
+      slogan: site.tagline,
       sameAs: [site.linkedinUrl, site.maps.placeUrl],
       image: absoluteUrl(ogImagePath),
       logo: absoluteUrl("/icon-192.png"),
       priceRange: "$$",
       vatID: `IT${site.piva}`,
+      contactPoint: [
+        {
+          "@type": "ContactPoint",
+          contactType: "customer service",
+          telephone: "+390307255203",
+          email: site.email,
+          areaServed: ["IT-BS", "IT-25", "IT"],
+          availableLanguage: ["Italian", "English"],
+          hoursAvailable: {
+            "@type": "OpeningHoursSpecification",
+            dayOfWeek: [...site.openingHours.days],
+            opens: site.openingHours.slots[0].opens,
+            closes: site.openingHours.slots[0].closes,
+          },
+        },
+      ],
       address: {
         "@type": "PostalAddress",
         streetAddress: site.address.streetAddress,

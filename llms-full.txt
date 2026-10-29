@@ -1,0 +1,68 @@
+# Studio Architettura Pagnoni — contesto esteso per assistenti AI
+
+Fonte canonica del sito: https://studiopagnoni.com/
+Indice breve: https://studiopagnoni.com/llms.txt
+Ultimo aggiornamento editoriale: 2026-10-29
+
+## Identità
+
+Studio Architettura Pagnoni è uno studio professionale di architettura e geometra con sede a Bornato, Frazione di Cazzago San Martino (BS), in Franciacorta. Opera dal 1988. Partita IVA IT04061310985.
+
+Persone chiave:
+- Arch. Davide Pagnoni — progettazione architettonica, pratiche edilizie e coordinamento.
+- Geom. Sergio Pagnoni — topografia, rilievi di campagna, divisioni e frazionamenti catastali, successioni, confini, DOCFA e tipi mappali.
+
+Non si svolge progettazione strutturale in proprio: quando serve, lo studio coordina professionisti esterni.
+
+## Contatti (NAP)
+
+- Indirizzo: Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS), Italia
+- Email: studio@pagnoni-s.com
+- Telefono studio: 030 725 5203 (+390307255203)
+- Arch. Davide Pagnoni: +39 347 357 6510
+- Geom. Sergio Pagnoni: +39 348 231 1092
+- Orari: lunedì–venerdì 09:00–18:00 (sabato e domenica chiuso)
+- Scheda Google: https://share.google/vgvHEwjviPP1ertTP
+- LinkedIn: https://www.linkedin.com/company/studio-architettura-pagnoni
+- Preventivi: https://studiopagnoni.com/contatti/
+
+## Area operativa
+
+Priorità: Franciacorta e provincia di Brescia (es. Cazzago San Martino, Erbusco, Adro, Corte Franca, Iseo, Rovato, Valle Trompia, hinterland bresciano).
+Su programmazione: Lombardia e Nord Italia, in particolare per rilievi laser SLAM e topografia strutturata.
+
+## Servizi
+
+1. Architettura — concept, progetto, esecutivo, ristrutturazioni, ampliamenti, pratiche edilizie. Pagina: https://studiopagnoni.com/architettura-franciacorta/
+2. Topografia — GNSS RTK, stazione totale, planimetrie quotate, volumetrie, tracciamenti di cantiere, confini. Pagina: https://studiopagnoni.com/topografia/
+3. Pratiche del geometra — divisioni catastali, frazionamenti, successioni e divisioni ereditarie, DOCFA, tipi mappali, verifica confini. Panoramica: https://studiopagnoni.com/servizi/
+4. Laser scanner SLAM — CHCNAV RS10; nuvole di punti (E57/LAS/LAZ), as-built, DWG/DXF, supporto BIM. Pagine: https://studiopagnoni.com/laser-scanner-slam/ · https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia/ · https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia/
+5. Rilievi 3D in outsourcing per altri studi — nuvole e DWG consegnati al partner che mantiene il cliente. Pagina: https://studiopagnoni.com/rilievi-3d-per-studi-di-architettura/
+6. Verde e paesaggio, urbanistica/pratiche, sicurezza cantieri CSP/CSE — elenco completo: https://studiopagnoni.com/servizi/
+
+## Costi e preventivi (orientativi)
+
+Ogni incarico è quotato su misura (superficie, piani, accessibilità, distanza, formati di consegna).
+
+Indicazione pubblica per laser SLAM: per un appartamento di circa 100 m² su un unico piano, rilievo e consegna di disegni e relazione si collocano intorno ai 1.000 €. Scrivere comune e obiettivo a https://studiopagnoni.com/contatti/ per una proposta senza impegno.
+
+## Domande tipiche e risposte brevi
+
+D: Fate rilievi laser scanner SLAM a Brescia e in Franciacorta?
+R: Sì. È il bacino operativo principale; sede a Bornato / Cazzago San Martino (BS).
+
+D: Che precisione posso aspettarmi dallo SLAM RS10?
+R: In condizioni operative dichiarate dal costruttore, fino a circa 5 cm in misura assoluta combinando RTK, laser e SLAM visuale; la precisione effettiva dipende da ambiente ed estensione e si definisce in preventivo.
+
+D: Operate solo in provincia di Brescia?
+R: Priorità Franciacorta e provincia di Brescia; su programmazione anche Lombardia e Nord Italia.
+
+D: Lavorate in subappalto per altri studi di architettura?
+R: Sì: consegna di nuvole e DWG allo studio partner. Dettagli: https://studiopagnoni.com/rilievi-3d-per-studi-di-architettura/
+
+D: Avete esempi pubblicati?
+R: Sì, nell’archivio progetti (cantina vinicola in Franciacorta, terreno a Erbusco BS, allevamento in provincia di Brescia): https://studiopagnoni.com/progetti/
+
+## Lingua inglese
+
+Mirror EN sotto https://studiopagnoni.com/en/ (stessi servizi; canonical SEO spesso punta all’italiano come lingua primaria del mercato locale).

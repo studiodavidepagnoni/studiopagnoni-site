@@ -36,6 +36,10 @@ const serviziFaqEn = [
     a: "Primarily Franciacorta and the province of Brescia; by appointment also Lombardy and Northern Italy.",
   },
   {
+    q: "How much does a survey cost?",
+    a: "Each job is quoted to size: area, instruments (GNSS, total station, SLAM), deliverables and travel. As a guide, a SLAM laser survey of a flat of about 100 m² on one floor (survey plus drawings and report) is around €1,000. Use the contact form with location and objective for a tailored estimate.",
+  },
+  {
     q: "How do I request a quotation?",
     a: "Use the contact form with location, approximate area and required outputs. We reply with timing and a tailored proposal.",
   },
@@ -49,10 +53,10 @@ export default function EnServiziPage() {
         <div className={layoutGutterXClass}>
           <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
             <p className={`${ui.body} max-w-[68ch]`}>
-              Measurement, design and technical procedures are not separate stages: a well-set commission needs reliable data,
-              a clear reading of regulations, and continuity between field, office and site.{" "}
-              <strong>Studio Architettura Pagnoni</strong>, active <strong>since 1988</strong>, supports private clients,
-              businesses and professionals as an{" "}
+              <strong>Studio Architettura Pagnoni</strong> is an architecture and surveying (geometra) practice in Franciacorta
+              (Bornato, Cazzago San Martino, BS), active <strong>since 1988</strong>. Measurement, design and technical
+              procedures are not separate stages: a well-set commission needs reliable data, a clear reading of regulations,
+              and continuity between field, office and site. We support private clients, businesses and professionals as an{" "}
               <Link href={withLocalePrefix("/architettura-franciacorta", "en")} className={ui.proseLink}>
                 architect in Franciacorta and Brescia
               </Link>

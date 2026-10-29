@@ -1,7 +1,7 @@
 /**
  * Sincronizza contenuti statici per Next.js:
  * - assets/ → public/assets/
- * - robots.txt, sitemap.xml, llms.txt se presenti
+ * - robots.txt, sitemap.xml, llms.txt, llms-full.txt se presenti
  */
 const { spawnSync } = require("child_process");
 const fs = require("fs");
@@ -27,7 +27,7 @@ if (fs.existsSync(assetsSrc)) {
   console.warn("[sync-static] Cartella assets/ assente.");
 }
 
-for (const extra of ["favicon.ico", "robots.txt", "sitemap.xml", "llms.txt", "CNAME"]) {
+for (const extra of ["favicon.ico", "robots.txt", "sitemap.xml", "llms.txt", "llms-full.txt", "CNAME"]) {
   const p = path.join(root, extra);
   if (fs.existsSync(p)) {
     fs.copyFileSync(p, path.join(root, "public", extra));
