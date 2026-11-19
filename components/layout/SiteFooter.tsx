@@ -129,11 +129,11 @@ export function SiteFooter() {
               <span className="text-[var(--footer-faint)]" aria-hidden>
                 ·
               </span>
-              <span>Geometra</span>
+              <span>Topografia</span>
               <span className="text-[var(--footer-faint)]" aria-hidden>
                 ·
               </span>
-              <span>Franciacorta</span>
+              <span>Laser scanning</span>
             </p>
           </div>
         </div>
