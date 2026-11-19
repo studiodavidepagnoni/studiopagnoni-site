@@ -97,7 +97,7 @@ export const messages: Record<Locale, UiMessages> = {
       subject: "Oggetto",
       city: "Comune / località",
       message: "Messaggio",
-      send: "Invia messaggio",
+      send: "Invia richiesta",
       sending: "Invio in corso…",
       success: "Messaggio inviato. Vi risponderemo al più presto.",
       error: "Invio non riuscito. Riprovate o scrivete a studio@pagnoni-s.com.",

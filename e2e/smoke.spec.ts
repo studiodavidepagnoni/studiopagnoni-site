@@ -31,7 +31,7 @@ test.describe("smoke", () => {
     await expect(page.locator("#recapiti-block")).toBeVisible();
     await expect(page.getByLabel("Nome e cognome")).toBeVisible();
 
-    await page.getByRole("button", { name: "Invia messaggio" }).click();
+    await page.getByRole("button", { name: "Invia richiesta" }).click();
     await expect(page.getByText(/Inserisci nome e cognome|Email non valida|Messaggio troppo breve|Accetta la privacy/i).first()).toBeVisible();
 
     await page.getByLabel("Nome e cognome").fill("Mario Rossi");
@@ -40,7 +40,7 @@ test.describe("smoke", () => {
     await page.getByLabel(/Ho letto e accetto la/i).check();
     // Anti-bot: il form rifiuta invii troppo rapidi con success finto; attendiamo il delay minimo.
     await page.waitForTimeout(3000);
-    await page.getByRole("button", { name: "Invia messaggio" }).click();
+    await page.getByRole("button", { name: "Invia richiesta" }).click();
 
     await expect(page.getByRole("status", { name: "Messaggio inviato" })).toBeVisible({
       timeout: 15_000,
