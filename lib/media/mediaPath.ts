@@ -1,9 +1,9 @@
 import { withBasePath } from "@/lib/utils/basePath";
 
-/** Path stock in WebP — `seoBase` senza estensione (vedi assetPaths.stockImages). */
-export function stockImage(seoBase: string): string {
+/** Path immagine sito in WebP — `seoBase` senza estensione (vedi assetPaths.siteImages). */
+export function siteImage(seoBase: string): string {
   const base = seoBase.replace(/\.(jpe?g|png|webp)$/i, "");
-  return withBasePath(`/assets/stock/${base}.webp`);
+  return withBasePath(`/assets/site/${base}.webp`);
 }
 
 /**
@@ -27,9 +27,9 @@ export function projectAssetSrcSet(relPath: string, widths: readonly number[] = 
   return widths.map((w) => `${base}-w${w}.webp ${w}w`).join(", ");
 }
 
-/** Srcset da URL pubblico stock (`stockImage`). Normalizza base senza suffisso `-wN`; include il full (~1920). */
-export function stockImageSrcSet(coverUrl: string, widths: readonly number[] = [480, 960]): string {
-  if (!coverUrl.includes("/assets/stock/")) return "";
+/** Srcset da URL pubblico sito (`siteImage`). Normalizza base senza suffisso `-wN`; include il full (~1920). */
+export function siteImageSrcSet(coverUrl: string, widths: readonly number[] = [480, 960]): string {
+  if (!coverUrl.includes("/assets/site/")) return "";
   const base = coverUrl.replace(/-w\d+(?=\.webp(?:\?.*)?)?$/i, "").replace(/\.webp(\?.*)?$/i, "");
   const entries = widths.map((w) => `${base}-w${w}.webp ${w}w`);
   entries.push(`${base}.webp 1920w`);

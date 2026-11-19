@@ -1,10 +1,10 @@
-import { stockImages } from "@/lib/media/assetPaths";
-import { stockImage } from "@/lib/media/mediaPath";
+import { siteImages } from "@/lib/media/assetPaths";
+import { siteImage } from "@/lib/media/mediaPath";
 import { getLocaleFromPathname, stripLocalePrefix } from "@/lib/i18n/paths";
 import { pageHeroesEn } from "@/lib/i18n/content/pageHeroes.en";
 import { imageAlt } from "@/lib/config/seo";
 
-const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
+const s = (key: keyof typeof siteImages) => siteImage(siteImages[key]);
 
 export type PageHeroData = {
   eyebrow: string;

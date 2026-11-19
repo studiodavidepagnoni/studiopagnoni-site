@@ -163,7 +163,7 @@ export default function ArchitetturaFranciacortaPage() {
               title="Parliamo del vostro progetto in Franciacorta"
               description="Indicate comune, tipo di intervento e obiettivo: rispondiamo con modalità di sopralluogo e preventivo su misura."
               primaryHref="/contatti#form-contatti"
-              primaryLabel="Richiedi un sopralluogo"
+              primaryLabel="Richiedi sopralluogo"
               secondaryHref="/servizi"
               secondaryLabel="Tutti i servizi"
             />

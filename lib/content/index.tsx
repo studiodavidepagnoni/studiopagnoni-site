@@ -24,22 +24,21 @@ export const homeChiSiamo: {
   blocks: homeChiSiamoBlock[];
 } = {
   title: "Chi siamo",
-  intro: "Sintesi del profilo studio. Biografia, metodo e immagini nella pagina Chi siamo.",
+  intro: "Architettura, geometra e rilievi dallo stesso studio a Bornato.",
   short: (
     <>
       Studio di architettura attivo <strong>dal {STUDIO_FOUNDED_YEAR}</strong> a{" "}
       <strong>Bornato, Frazione di Cazzago San Martino (BS)</strong>. Uniamo
-      architettura, topografia e laser scanner SLAM e pratiche tecniche per trasformare progetto, rilievi e territorio in elaborati
-      utilizzabili.
+      architettura, topografia, pratiche catastali e laser scanner SLAM: progetto, misura e documentazione in un solo percorso.
       <br />
-      Lo studio segue ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
+      Seguiamo ogni commessa con continuità: campagna, controllo dati, restituzione e supporto al progetto.
     </>
   ),
   shortMobile: (
     <>
       Studio di architettura dal {STUDIO_FOUNDED_YEAR} a Bornato, in Franciacorta.
       <br />
-      Architettura, topografia e laser SLAM: dal rilievo sul campo agli elaborati operativi.
+      Architettura, geometra e rilievi 3D: dal campo agli elaborati.
     </>
   ),
   highlights: [
@@ -78,10 +77,9 @@ export const homeChiSiamo: {
     {
       text: (
         <>
-          Il nostro obiettivo è essere un <strong>punto di riferimento per architettura, topografia e laser scanner SLAM</strong> in provincia di
-          Brescia e nel Nord Italia, con strumentazione allineata al mercato professionale (GNSS, stazione totale, sistema SLAM) e attenzione alla
-          qualità della documentazione tecnica. Operiamo con continuità su <strong>Franciacorta</strong>, <strong>Valle Trompia</strong>, hinterland
-          bresciano e, su commessa, in Lombardia e Nord Italia.
+          Lavoriamo su <strong>architettura, topografia e documentazione 3D</strong> in provincia di Brescia e nel Nord Italia, con GNSS, stazione
+          totale e laser scanner SLAM quando la commessa richiede una base metrica densa. Operiamo con continuità su <strong>Franciacorta</strong>,{" "}
+          <strong>Valle Trompia</strong>, hinterland bresciano e, su incarico, in Lombardia e Nord Italia.
         </>
       ),
       image: "cantiere",
@@ -235,23 +233,19 @@ export const homeServiceCards = homeServicePreviewIds.map((id) => {
 export const certifications = [
   {
     title: "Architettura",
-    text: "Progettazione architettonica dal concept alle tavole esecutive: anteprogetto, definitivo ed esecutivo, pratiche edilizie e coordinamento delle discipline di progetto e di cantiere.",
+    text: "Dal concept alle tavole esecutive, con pratiche edilizie e coordinamento di progetto e cantiere.",
   },
   {
-    title: "Urbanistica",
-    text: "Lettura di piani regolatori e strumenti urbanistici, pratiche edilizie e sanatorie dove applicabili, coordinamento documentale con gli enti.",
+    title: "Geometra e topografia",
+    text: "Rilievi GNSS e stazione totale, frazionamenti, confini e aggiornamenti catastali.",
   },
   {
-    title: "Sicurezza cantieri",
-    text: "Coordinamento della sicurezza in fase di progettazione ed esecuzione (CSP e CSE).",
+    title: "Urbanistica e sicurezza",
+    text: "Lettura degli strumenti urbanistici, pratiche edilizie e coordinamento CSP/CSE in cantiere.",
   },
   {
-    title: "Topografia e geomatica",
-    text: "Utilizzo di strumentazione GNSS, stazione totale e laser scanner SLAM per rilievi certificabili e documentazione digitale.",
-  },
-  {
-    title: "Rete di specialisti",
-    text: "Network di professionisti qualificati: collaborazione con agronomi per gli interventi sul verde e con ingegneri per gli aspetti strutturali, in funzione delle specifiche della commessa.",
+    title: "Documentazione 3D",
+    text: "Laser scanner SLAM, nuvole di punti e base metrica per progetto e as-built.",
   },
 ] as const;
 
@@ -299,8 +293,7 @@ export const zoneFooter = (
 
 export const homeFacts = [
   { title: "Dal 1988", text: "Studio a Bornato, in Franciacorta" },
-  { title: "Architettura e topografia", text: "Dalla misura al progetto, nello stesso studio" },
-  { title: "In campo", text: "GNSS, stazione totale e laser SLAM" },
+  { title: "Architettura e geometra", text: "Dalla misura al progetto, nello stesso studio" },
   { title: "Territorio", text: "Franciacorta, Brescia e Nord Italia" },
 ] as const;
 

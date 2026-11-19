@@ -7,7 +7,7 @@ import { serviceGroupsEn } from "@/lib/i18n/content/marketing.en";
 import { withLocalePrefix } from "@/lib/i18n/paths";
 import { t } from "@/lib/i18n/messages";
 import { homeServiceCardImages } from "@/lib/media/images";
-import { StockCoverImage } from "@/components/media/StockCoverImage";
+import { CoverImage } from "@/components/media/CoverImage";
 import { ui } from "@/lib/ui";
 
 type Props = { locale?: Locale };
@@ -50,7 +50,7 @@ export function HomeServiceCards({ locale = "it" }: Props) {
             <span className="service-card__accent-line" aria-hidden />
             {media ? (
               <div className="service-card__media">
-                <StockCoverImage
+                <CoverImage
                   src={media.src}
                   alt={media.alt}
                   sizes="(min-width:1024px) min(540px, 46vw), (min-width:640px) min(90vw, 720px), 100vw"

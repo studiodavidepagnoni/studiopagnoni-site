@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { FaqSection } from "@/components/content/FaqSection";
 import { PageClosingCta } from "@/components/content/PageClosingCta";
-import { StockCoverImage } from "@/components/media/StockCoverImage";
+import { CoverImage } from "@/components/media/CoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import type { SlamLandingContent } from "@/lib/content/laserSlamLanding";
 import type { Locale } from "@/lib/i18n/config";
@@ -63,7 +63,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
               </div>
               <figure className="m-0 lg:col-span-5">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--muted)]">
-                  <StockCoverImage
+                  <CoverImage
                     src={L.introImage.src}
                     alt={L.introImage.alt}
                     sizes="(min-width:1024px) min(420px, 36vw), (min-width:640px) min(70vw, 480px), 100vw"
@@ -96,7 +96,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
               </div>
               <figure className="m-0 lg:col-span-5">
                 <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)]">
-                  <StockCoverImage
+                  <CoverImage
                     src={L.instrumentImage.src}
                     alt={L.instrumentImage.alt}
                     sizes="(min-width:1024px) min(400px, 34vw), (min-width:640px) min(70vw, 480px), 100vw"

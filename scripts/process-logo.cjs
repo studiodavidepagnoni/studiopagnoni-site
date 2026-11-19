@@ -490,7 +490,7 @@ async function writeSvgWrappers({
   const ix = Math.round((side - markMeta.width) / 2);
   const iy = Math.round((side - markMeta.height) / 2);
   const markSvg = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${side} ${side}" width="${side}" height="${side}" fill="none">
-  <title>Studio Tecnico Pagnoni</title>
+  <title>Studio Architettura Pagnoni</title>
   <image href="data:image/png;base64,${markB64}" x="${ix}" y="${iy}" width="${markMeta.width}" height="${markMeta.height}"/>
 </svg>
 `;
@@ -509,7 +509,7 @@ async function writeSvgWrappers({
   const y = Math.round((CANVAS - h) / 2);
 
   const iconSvg = `<svg xmlns="http://www.w3.org/2000/svg" width="${CANVAS}" height="${CANVAS}" viewBox="0 0 ${CANVAS} ${CANVAS}" fill="none">
-  <title>Studio Tecnico Pagnoni</title>
+  <title>Studio Architettura Pagnoni</title>
   <desc>Logo Studio Pagnoni — point cloud / wireframe.</desc>
   <rect width="${CANVAS}" height="${CANVAS}" rx="112" fill="${iconBg}"/>
   <image href="data:image/png;base64,${iconMarkB64}" x="${x}" y="${y}" width="${w}" height="${h}"/>

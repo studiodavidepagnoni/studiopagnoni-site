@@ -1,8 +1,8 @@
 /** Contenuti pagina servizio `/laser-scanner-slam` e landing geo Brescia / Lombardia. */
 
 import { imageAlt } from "@/lib/config/seo";
-import { stockImages } from "@/lib/media/assetPaths";
-import { stockImage } from "@/lib/media/mediaPath";
+import { siteImages } from "@/lib/media/assetPaths";
+import { siteImage } from "@/lib/media/mediaPath";
 
 export type SlamFaqItem = { readonly q: string; readonly a: string };
 
@@ -70,14 +70,14 @@ const sharedInstrumentPoints = [
 ] as const;
 
 const sharedIntroImage = {
-  src: stockImage(stockImages.strumentiGeometraArchitetto),
+  src: siteImage(siteImages.strumentiGeometraArchitetto),
   alt: imageAlt("Strumentazione topografica e laser — geometra e architetto in studio", {
     service: "slam",
   }),
 } as const;
 
 const sharedInstrumentImage = {
-  src: stockImage(stockImages.chcnavRs10),
+  src: siteImage(siteImages.chcnavRs10),
   alt: imageAlt("Laser scanner SLAM CHCNAV RS10 su valigia di trasporto", {
     service: "slam",
   }),

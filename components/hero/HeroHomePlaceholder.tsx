@@ -15,7 +15,7 @@ const slide = heroSlides[0];
 export function HeroHomePlaceholder() {
   const line2Parts = slide.line2.split(" · ").map((p) => p.trim()).filter(Boolean);
   const primaryHref = slide.primaryCtaHref ?? "/contatti";
-  const primaryLabel = slide.primaryCtaLabel ?? "Richiedi un sopralluogo";
+  const primaryLabel = slide.primaryCtaLabel ?? "Richiedi sopralluogo";
   const primaryLabelMobile = slide.primaryCtaLabelMobile ?? primaryLabel;
 
   return (
@@ -69,10 +69,10 @@ export function HeroHomePlaceholder() {
           </p>
           <div className="mt-8 flex w-full flex-col gap-3">
             <Link href="/contatti#form-contatti" className={ui.btnHeroPrimary}>
-              Richiedi un sopralluogo
+              Richiedi sopralluogo
             </Link>
             <Link href="/servizi" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
-              Scopri tutti i servizi
+              I servizi
             </Link>
           </div>
         </div>

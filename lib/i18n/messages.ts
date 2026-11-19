@@ -83,7 +83,7 @@ export const messages: Record<Locale, UiMessages> = {
       preferences: "Preferenze cookie",
     },
     cta: {
-      requestSurvey: "Richiedi un sopralluogo",
+      requestSurvey: "Richiedi sopralluogo",
       discoverServices: "Scopri i servizi",
       learnMore: "Approfondisci",
       viewProject: "Vedi il progetto",

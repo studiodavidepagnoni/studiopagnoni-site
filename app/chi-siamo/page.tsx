@@ -1,4 +1,4 @@
-import { StockCoverImage } from "@/components/media/StockCoverImage";
+import { CoverImage } from "@/components/media/CoverImage";
 import { StaticPageHero } from "@/components/hero/StaticPageHero";
 import { chiSiamoPage } from "@/lib/content";
 import { chiSiamoPageImage } from "@/lib/media/images";
@@ -28,7 +28,7 @@ export default function ChiSiamoPage() {
 
               <div className="relative md:col-span-5 md:col-start-8 md:row-span-6 md:row-start-1">
                 <div className="relative aspect-[4/3] overflow-hidden rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] md:aspect-[3/4]">
-                  <StockCoverImage
+                  <CoverImage
                     src={chiSiamoPageImage.src}
                     alt={chiSiamoPageImage.alt}
                     sizes="(min-width:768px) min(440px, 40vw), min(100vw, 720px)"

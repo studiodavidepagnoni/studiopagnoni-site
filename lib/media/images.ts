@@ -1,7 +1,7 @@
 /** Path pubblici: cartella `assets/` → `public/assets/` (sync-static). */
 
 import type { HeroVideoSources } from "@/lib/media/heroVideos";
-import { projectMedia, stockImages } from "@/lib/media/assetPaths";
+import { projectMedia, siteImages } from "@/lib/media/assetPaths";
 import {
   HERO_POSTER_DEFAULT,
   HERO_POSTER_INDOOR,
@@ -10,7 +10,7 @@ import {
   HERO_VIDEO_INDOOR_SOURCES,
   HERO_VIDEO_POINTCLOUD_SOURCES,
 } from "@/lib/media/heroVideos";
-import { projectAsset, stockImage } from "@/lib/media/mediaPath";
+import { projectAsset, siteImage } from "@/lib/media/mediaPath";
 import { imageAlt } from "@/lib/config/seo";
 
 export {
@@ -19,7 +19,7 @@ export {
   HERO_POSTER_POINTCLOUD,
 } from "@/lib/media/heroVideos";
 
-const s = (key: keyof typeof stockImages) => stockImage(stockImages[key]);
+const s = (key: keyof typeof siteImages) => siteImage(siteImages[key]);
 const p = (dir: string, base: string) => projectAsset(`${dir}/${base}.webp`);
 
 /** Immagine fissa hero home mobile: portrait nativo (stazione totale), adatto al full-bleed verticale. */
@@ -58,13 +58,13 @@ export const heroSlides: readonly HeroSlide[] = [
       service: "slam",
     }),
     body: "Terreni, vigneti, edifici, capannoni e impianti: acquisizione mobile, nuvole di punti georiferite e as-built in tempi contenuti. Meno passaggi in cantiere, base metrica per progetto architettonico e BIM.",
-    line1: "Architettura e rilievi 3D in Franciacorta",
-    line2: "Studio di architettura · topografia e laser scanning",
+    line1: "Architettura e rilievi 3D",
+    line2: "Franciacorta · topografia · laser scanning",
     primaryCtaHref: "/contatti#form-contatti",
-    primaryCtaLabel: "Richiedi un sopralluogo",
-    primaryCtaLabelMobile: "Richiedi un sopralluogo",
+    primaryCtaLabel: "Richiedi sopralluogo",
+    primaryCtaLabelMobile: "Sopralluogo",
     ctaHref: "/servizi",
-    ctaLabel: "Scopri i servizi",
+    ctaLabel: "I servizi",
     video: HERO_VIDEO_INDOOR_SOURCES,
     poster: HERO_POSTER_INDOOR,
     videoObjectPosition: "center center",

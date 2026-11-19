@@ -25,14 +25,14 @@ const RENAMES = [
   ["hero-video-3-poster-lcp.webp", "rilievo-laser-slam-interni-brescia-poster-lcp.webp"],
   ["hero-video-3-poster-lcp.avif", "rilievo-laser-slam-interni-brescia-poster-lcp.avif"],
   // Stock
-  ["stock/chi-siamo-slam-hero.webp", "stock/rilievo-laser-slam-operatore-brescia.webp"],
-  ["stock/pointcloud-data.webp", "stock/nuvola-punti-rilievo-laser-scanner.webp"],
-  ["stock/handheld-slam-road.webp", "stock/rilievo-slam-handheld-franciacorta.webp"],
-  ["stock/survey-site.webp", "stock/rilievo-topografico-cantiere-brescia.webp"],
-  ["stock/gnss-rtk-quarry.webp", "stock/gnss-rtk-rilievo-estrattivo-brescia.webp"],
-  ["stock/topographic-plan.webp", "stock/piano-topografico-curve-livello-brescia.webp"],
-  ["stock/technical-docs.webp", "stock/documentazione-tecnica-studio-pagnoni.webp"],
-  ["stock/total-station-field.webp", "stock/stazione-totale-rilievo-cantiere-brescia.webp"],
+  ["site/chi-siamo-slam-hero.webp", "site/rilievo-laser-slam-operatore-brescia.webp"],
+  ["site/pointcloud-data.webp", "site/nuvola-punti-rilievo-laser-scanner.webp"],
+  ["site/handheld-slam-road.webp", "site/rilievo-slam-handheld-franciacorta.webp"],
+  ["site/survey-site.webp", "site/rilievo-topografico-cantiere-brescia.webp"],
+  ["site/gnss-rtk-quarry.webp", "site/gnss-rtk-rilievo-estrattivo-brescia.webp"],
+  ["site/topographic-plan.webp", "site/piano-topografico-curve-livello-brescia.webp"],
+  ["site/technical-docs.webp", "site/documentazione-tecnica-studio-pagnoni.webp"],
+  ["site/total-station-field.webp", "site/stazione-totale-rilievo-cantiere-brescia.webp"],
   // Progetti — directory + file
   ["projects/appianti/appiani.webp", "projects/allevamento-slam-appianti-brescia/allevamento-slam-appianti-brescia.webp"],
   ["projects/appianti/appiani-w480.webp", "projects/allevamento-slam-appianti-brescia/allevamento-slam-appianti-brescia-w480.webp"],
@@ -52,11 +52,11 @@ const RENAMES = [
 ];
 
 const DELETE_REL = [
-  "stock/analysis-dashboard.webp",
-  "stock/design-drawings.webp",
-  "stock/gnss-rover-worker.webp",
-  "stock/survey-instrument-field.webp",
-  "stock/topography-tool.webp",
+  "site/analysis-dashboard.webp",
+  "site/design-drawings.webp",
+  "site/gnss-rover-worker.webp",
+  "site/survey-instrument-field.webp",
+  "site/topography-tool.webp",
   "projects/appianti/appiani.png",
   "projects/azienda-vinicola/azienda-vinicola.jpg",
   "projects/azienda-vinicola/azienda-vinicola.png",
@@ -119,12 +119,12 @@ function main() {
   }
 
   // JPEG stock orfani (se presenti)
-  const stockDir = path.join(assetsDir, "stock");
+  const stockDir = path.join(assetsDir, "site");
   if (fs.existsSync(stockDir)) {
     for (const ent of fs.readdirSync(stockDir)) {
       if (!/\.jpe?g$/i.test(ent)) continue;
       const webp = path.join(stockDir, ent.replace(/\.jpe?g$/i, ".webp"));
-      if (fs.existsSync(webp)) rm(path.join("stock", ent));
+      if (fs.existsSync(webp)) rm(path.join("site", ent));
     }
   }
 

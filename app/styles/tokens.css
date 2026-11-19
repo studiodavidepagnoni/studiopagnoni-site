@@ -91,7 +91,7 @@
   --cta-hero-edge: var(--cta-primary-border);
   --interactive-hover-border: var(--primary-mid);
   --interactive-hover-bg: color-mix(in srgb, var(--primary-mid) 6%, var(--card));
-  --interactive-hover-shadow: 0 8px 20px rgba(0, 0, 0, 0.18);
+  --interactive-hover-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
   --cta-ghost-border: color-mix(in srgb, white 42%, transparent);
   --cta-ghost-bg-top: color-mix(in srgb, white 16%, transparent);
   --cta-ghost-bg-bottom: color-mix(in srgb, white 7%, transparent);

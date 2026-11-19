@@ -63,7 +63,7 @@ export const seoKeywords = {
 export const seoAreaServed =
   "Franciacorta, provincia di Brescia, Cazzago San Martino (BS), Lombardia e Nord Italia";
 
-const ogImagePath = "/assets/stock/nuvola-punti-rilievo-laser-scanner.webp";
+const ogImagePath = "/assets/site/nuvola-punti-rilievo-laser-scanner.webp";
 
 function absoluteUrl(path: string): string {
   const base = site.url.replace(/\/$/, "");
@@ -296,6 +296,16 @@ export const jsonLdGraph = {
         "GNSS RTK",
         "Rilievo as-built",
         "Documentazione BIM",
+        "Rilievo laser scanner nave",
+        "Ship laser scanning",
+        "Vessel as-built",
+        "Rilievo laser scanner impianto industriale",
+        "Process plant as-built",
+        "Rilievo 3D oil and gas",
+        "Stazione di compressione",
+        "Scan to IFC",
+        "Modello 3D taggato",
+        "Asset tagging",
       ],
       hasOfferCatalog: {
         "@type": "OfferCatalog",
@@ -321,6 +331,66 @@ export const jsonLdGraph = {
                 "Rilievi laser scanner 3D per architettura, topografia e cantiere: acquisizione rapida, nuvole di punti, as-built e modelli metrici precisi. Servizio a Brescia, Franciacorta e provincia.",
               areaServed: { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
               provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Rilievo laser scanner navi e imbarcazioni",
+              alternateName: ["Ship laser scanning", "Vessel as-built 3D survey"],
+              description:
+                "Rilievi laser scanner SLAM / 3D per navi e imbarcazioni: as-built di ponti, locali, corridoi e sale macchine; nuvole di punti e, su richiesta, modello IFC con apparecchi taggati per refitting e retrofit. Lombardia e Nord Italia su programmazione.",
+              url: `${site.url.replace(/\/$/, "")}/laser-scanner-slam/`,
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "Lombardia" },
+                { "@type": "AdministrativeArea", name: "Nord Italia" },
+              ],
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+              audience: {
+                "@type": "BusinessAudience",
+                name: "Armatori, cantieri, società di refitting e facility navale",
+              },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Rilievo laser scanner impianti industriali e oil & gas",
+              alternateName: [
+                "Industrial plant as-built laser scanning",
+                "Oil and gas station 3D survey",
+              ],
+              description:
+                "As-built 3D di impianti industriali, process plant, piping, pipe rack, sale macchine e ambiti oil&gas (stazioni di compressione/pompaggio, terminal, skid, valve room legati a gasdotti e oleodotti). Nuvole di punti E57/LAS e supporto a revamping brownfield.",
+              url: `${site.url.replace(/\/$/, "")}/laser-scanner-slam/`,
+              areaServed: [
+                { "@type": "AdministrativeArea", name: "Provincia di Brescia" },
+                { "@type": "AdministrativeArea", name: "Lombardia" },
+              ],
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+              audience: {
+                "@type": "BusinessAudience",
+                name: "EPC, facility manager, gestori impianti e società di ingegneria",
+              },
+            },
+          },
+          {
+            "@type": "Offer",
+            itemOffered: {
+              "@type": "Service",
+              name: "Modello 3D IFC taggato (asset tagging)",
+              alternateName: ["Asset-tagged IFC model", "Scan to IFC"],
+              description:
+                "Creazione di modelli 3D IFC OpenBIM a partire dal rilievo laser, con apparecchiature identificabili e associate a targa/tag inventariale. Fasi quotabili separatamente: acquisizione 3D e modellazione taggata.",
+              url: `${site.url.replace(/\/$/, "")}/contatti/?oggetto=slam`,
+              areaServed: { "@type": "Country", name: "Italia" },
+              provider: { "@id": `${site.url.replace(/\/$/, "")}/#organization` },
+              audience: {
+                "@type": "BusinessAudience",
+                name: "Committenza industriale, navale e facility che richiede IFC e inventario asset",
+              },
             },
           },
           {

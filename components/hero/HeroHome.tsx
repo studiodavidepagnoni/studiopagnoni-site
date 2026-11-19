@@ -334,10 +334,10 @@ export function HeroHome() {
 
               <div className="mt-8 flex w-full flex-col gap-3">
                 <Link href="/contatti#form-contatti" className={ui.btnHeroPrimary}>
-                  Richiedi un sopralluogo
+                  Richiedi sopralluogo
                 </Link>
                 <Link href="/servizi" className={`${ui.btnHeroGhost} hero-mobile__ghost-cta`}>
-                  Scopri tutti i servizi
+                  I servizi
                 </Link>
               </div>
             </div>

@@ -13,7 +13,7 @@ const path = require("path");
 
 const root = path.join(__dirname, "..");
 const assetsDir = path.join(root, "assets");
-const stockDir = path.join(assetsDir, "stock");
+const stockDir = path.join(assetsDir, "site");
 const projectsDir = path.join(assetsDir, "projects");
 
 const WEBP_QUALITY = 80;

@@ -12,8 +12,8 @@ export const heroVideoBases = {
   operationalMobile: "laser-slam-rs10-allevamento-brescia-mobile",
 } as const;
 
-/** Immagini stock (`assets/stock/{name}.webp`). */
-export const stockImages = {
+/** Immagini di sito (`assets/site/{name}.webp`). */
+export const siteImages = {
   slamHero: "rilievo-laser-slam-operatore-brescia",
   pointcloud: "nuvola-punti-rilievo-laser-scanner",
   handheldSlam: "rilievo-slam-handheld-franciacorta",

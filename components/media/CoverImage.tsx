@@ -1,4 +1,4 @@
-import { stockImageSrcSet } from "@/lib/media/mediaPath";
+import { siteImageSrcSet } from "@/lib/media/mediaPath";
 
 type Props = {
   src: string;
@@ -9,9 +9,9 @@ type Props = {
   fetchPriority?: "high" | "low" | "auto";
 };
 
-/** Immagine stock con srcset pre-generato (export statico, senza optimizer Next). */
-export function StockCoverImage({ src, alt, sizes, className = "", loading = "lazy", fetchPriority }: Props) {
-  const srcSet = stockImageSrcSet(src);
+/** Cover sito con srcset pre-generato (export statico, senza optimizer Next). */
+export function CoverImage({ src, alt, sizes, className = "", loading = "lazy", fetchPriority }: Props) {
+  const srcSet = siteImageSrcSet(src);
   const fitClass = /\bobject-(contain|cover|fill|none|scale-down)\b/.test(className) ? "" : "object-cover";
 
   return (

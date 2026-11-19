@@ -166,23 +166,19 @@ export const serviceGroupsEn = [
 export const certificationsEn = [
   {
     title: "Architecture",
-    text: "Architectural design from concept to construction drawings: preliminary, detailed and construction stages, building procedures and coordination of design and site disciplines.",
+    text: "From concept to construction drawings, with building procedures and design/site coordination.",
   },
   {
-    title: "Planning",
-    text: "Reading of planning instruments, building procedures and regularisations where applicable, with document coordination with public authorities.",
+    title: "Surveying and cadastral work",
+    text: "GNSS and total-station surveys, subdivisions, boundaries and cadastral updates.",
   },
   {
-    title: "Site safety",
-    text: "Safety coordination in design and construction phases (CSP and CSE).",
+    title: "Planning and site safety",
+    text: "Reading of planning instruments, building procedures and CSP/CSE coordination on site.",
   },
   {
-    title: "Surveying and geomatics",
-    text: "Use of GNSS, total station and SLAM laser scanning for certifiable surveys and digital documentation.",
-  },
-  {
-    title: "Specialist network",
-    text: "Qualified network: collaboration with agronomists for landscape work and engineers for structural aspects, according to the brief.",
+    title: "3D documentation",
+    text: "SLAM laser scanning, point clouds and a metric base for design and as-built.",
   },
 ];
 
@@ -223,7 +219,7 @@ export const homeProcessEn = {
 };
 
 export const homeCertsEn = {
-  title: "Professional capabilities",
+  title: "Areas of work",
 };
 
 export const homeContactEn = {

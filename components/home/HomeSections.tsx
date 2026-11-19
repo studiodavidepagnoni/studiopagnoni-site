@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { StockCoverImage } from "@/components/media/StockCoverImage";
+import { CoverImage } from "@/components/media/CoverImage";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import {
   certifications,
@@ -103,7 +103,7 @@ export function HomeSections({ locale = "it" }: Props) {
     ) : (
       zoneFooter
     );
-  const certsTitle = locale === "en" ? homeCertsEn.title : "Abilitazioni professionali";
+  const certsTitle = locale === "en" ? homeCertsEn.title : "Ambiti di lavoro";
   const serviziTitle = locale === "en" ? "Services" : "Servizi";
   const progettiTitle = locale === "en" ? "Projects" : "Progetti";
   const processTitle = locale === "en" ? homeProcessEn.title : "Dal campo agli elaborati";
@@ -153,7 +153,7 @@ export function HomeSections({ locale = "it" }: Props) {
             {/* ── Media (destra): full-bleed su mobile, proporzionata su desktop ── */}
             <div className="order-1 lg:order-2 lg:col-span-6">
               <div className="home-chi-siamo-media--mobile relative aspect-[16/10] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)] max-sm:aspect-[4/3] lg:aspect-[16/10]">
-                <StockCoverImage
+                <CoverImage
                   src={homeChiSiamoImages.team.src}
                   alt={homeChiSiamoImages.team.alt}
                   className="object-center"
@@ -300,7 +300,7 @@ export function HomeSections({ locale = "it" }: Props) {
         </div>
       </section>
 
-      {/* ── Abilitazioni professionali ── */}
+      {/* ── Ambiti di lavoro ── */}
       <section id="certificazioni" className="lazy-section section-shell scroll-anchor overflow-x-hidden min-w-0 bg-[var(--muted)] px-4 sm:px-5 md:px-10">
         <div className="mx-auto max-w-[1140px]">
           <div className="home-section-intro reveal-block">

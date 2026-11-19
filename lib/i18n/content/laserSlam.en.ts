@@ -1,7 +1,7 @@
 import type { SlamLandingContent } from "@/lib/content/laserSlamLanding";
 import { imageAlt } from "@/lib/config/seo";
-import { stockImages } from "@/lib/media/assetPaths";
-import { stockImage } from "@/lib/media/mediaPath";
+import { siteImages } from "@/lib/media/assetPaths";
+import { siteImage } from "@/lib/media/mediaPath";
 
 const deliverables = [
   { format: "E57 / LAS / LAZ", use: "Georeferenced point cloud for archive, checks and Scan-to-BIM." },
@@ -56,7 +56,7 @@ export const laserSlamLandingEn = {
   instrumentNote:
     "We use a handheld instrument (CHCNAV RS10) that works outdoors and indoors — even where GPS is weak — so one visit can document the whole site.",
   introImage: {
-    src: stockImage(stockImages.strumentiGeometraArchitetto),
+    src: siteImage(siteImages.strumentiGeometraArchitetto),
     alt: imageAlt("Survey and laser equipment — surveyor and architect in the office", {
       service: "slam",
     }),
@@ -68,7 +68,7 @@ export const laserSlamLandingEn = {
     "Up to about 320,000 points/s, 360° field of view, compact unit (~1.9 kg), IP64.",
   ],
   instrumentImage: {
-    src: stockImage(stockImages.chcnavRs10),
+    src: siteImage(siteImages.chcnavRs10),
     alt: imageAlt("CHCNAV RS10 SLAM laser scanner on transport case", {
       service: "slam",
     }),

@@ -471,7 +471,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               id="city"
               name="city"
               maxLength={LIM.city}
-              placeholder="Es. Franciacorta, Brescia, Nord Italia"
+              placeholder="Es. Erbusco, Brescia, Franciacorta"
               value={city}
               onChange={(e) => setCity(clamp(e.target.value, LIM.city))}
               className={ui.inputField}
@@ -492,8 +492,8 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
               onBlur={onBlur("message")}
               placeholder={
                 showSurveyFields
-                  ? "Indicate zona, obiettivo del rilievo e tempistiche."
-                  : "Scriveteci di cosa avete bisogno e della zona."
+                  ? "Zona, obiettivo del rilievo (as-built, sezioni, nuvola) e tempistiche."
+                  : "Tipo di intervento (progetto, pratica catastale, rilievo), zona e tempistiche."
               }
               className={ui.inputField}
               aria-invalid={!!errors.message}
@@ -588,7 +588,7 @@ export function ContactForm({ defaultSubject = "", defaultInquiryType = "" }: Co
             disabled={status === "submitting"}
             className={`${ui.btnPrimary} w-full sm:w-fit md:col-span-2`}
           >
-            {status === "submitting" ? "Invio in corso…" : "Invia messaggio"}
+            {status === "submitting" ? "Invio in corso…" : "Invia richiesta"}
           </button>
         </form>
       ) : null}
