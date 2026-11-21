@@ -50,7 +50,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
       <div className={layoutGutterXClass}>
         <div className={`${layoutContentMaxClass} space-y-12 sm:space-y-16`}>
-          <section className={ui.innerCard} aria-labelledby="slam-intro">
+          <section aria-labelledby="slam-intro">
             <div className="grid items-start gap-8 lg:grid-cols-12 lg:gap-12">
               <div className="lg:col-span-7">
                 <h2 id="slam-intro" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
@@ -62,7 +62,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                 </div>
               </div>
               <figure className="m-0 lg:col-span-5">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--muted)]">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
                   <CoverImage
                     src={L.introImage.src}
                     alt={L.introImage.alt}
@@ -76,10 +76,10 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </div>
 
             <div
-              className="mt-8 grid items-start gap-8 rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:p-6 lg:mt-10 lg:grid-cols-12 lg:gap-10 lg:p-8"
+              className="mt-10 grid items-center gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
               aria-labelledby="slam-rs10"
             >
-              <div className="lg:col-span-7">
+              <div className="lg:col-span-6">
                 <h3 id="slam-rs10" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap}`}>
                   {instrumentTitle}
                 </h3>
@@ -94,14 +94,14 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                   ))}
                 </ul>
               </div>
-              <figure className="m-0 lg:col-span-5">
-                <div className="relative aspect-[3/4] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--card)]">
+              <figure className="m-0 lg:col-span-6">
+                <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
                   <CoverImage
                     src={L.instrumentImage.src}
                     alt={L.instrumentImage.alt}
-                    sizes="(min-width:1024px) min(400px, 34vw), (min-width:640px) min(70vw, 480px), 100vw"
+                    sizes="(min-width:1024px) min(520px, 42vw), (min-width:640px) min(70vw, 560px), 100vw"
                     loading="lazy"
-                    className="object-center"
+                    className="object-[center_40%]"
                   />
                 </div>
               </figure>
@@ -110,24 +110,29 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             <CtaButtons className="mt-8" locale={locale} />
           </section>
 
-          <FaqSection id="slam-faq" items={L.faq} title={faqTitle} />
+          <FaqSection
+            id="slam-faq"
+            items={L.faq}
+            title={faqTitle}
+            className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12"
+          />
 
-          <section className={ui.innerCard} aria-labelledby="slam-settori">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-settori">
             <h2 id="slam-settori" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               {sectorsTitle}
             </h2>
             <p className={`${ui.bodyMuted} mb-8 max-w-[60ch]`}>{L.sectorsIntro}</p>
-            <ul className="grid list-none gap-4 sm:grid-cols-2 lg:gap-5">
+            <ul className="grid list-none gap-0 border-t border-[var(--green-border-muted)] sm:grid-cols-2 sm:gap-x-10">
               {L.sectors.map((s) => (
-                <li key={s.title} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] p-5 sm:p-6">
-                  <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{s.title}</h3>
+                <li key={s.title} className="border-b border-[var(--green-border-muted)] py-5 sm:py-6">
+                  <h3 className={`${fontDisplay.className} text-lg font-medium text-[var(--foreground)] sm:text-xl`}>{s.title}</h3>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{s.body}</p>
                 </li>
               ))}
             </ul>
           </section>
 
-          <section className={ui.innerCard} aria-labelledby="slam-area">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-area">
             <h2 id="slam-area" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               {L.areaHeading}
             </h2>
@@ -157,7 +162,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             ) : null}
           </section>
 
-          <section className={ui.innerCard} aria-labelledby="slam-deliverables">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-deliverables">
             <h2 id="slam-deliverables" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               {deliverablesTitle}
             </h2>
@@ -181,21 +186,25 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </div>
           </section>
 
-          <section aria-labelledby="slam-workflow">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-workflow">
             <h2 id="slam-workflow" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} mb-6 sm:mb-8`}>
               {workflowTitle}
             </h2>
-            <ol className="grid list-none gap-4 sm:grid-cols-2 lg:grid-cols-4">
-              {L.workflow.map((w) => (
-                <li key={w.title} className="rounded-lg border border-[var(--green-border-muted)] bg-[var(--card)] p-5 sm:p-6">
-                  <h3 className={`${fontDisplay.className} ${ui.cardHeading}`}>{w.title}</h3>
+            <ol className="grid list-none gap-0 border-t border-[var(--green-border-muted)] sm:grid-cols-2 lg:grid-cols-4 lg:gap-x-8">
+              {L.workflow.map((w, i) => (
+                <li
+                  key={w.title}
+                  className={`border-b border-[var(--green-border-muted)] py-5 sm:py-6 ${i % 2 === 0 ? "sm:pr-6" : "sm:pl-2 lg:pl-0"} lg:border-b-0 lg:pr-0`}
+                >
+                  <p className={`${fontSans.className} section-kicker mb-2`}>{String(i + 1).padStart(2, "0")}</p>
+                  <h3 className={`${fontDisplay.className} text-lg font-medium text-[var(--foreground)]`}>{w.title}</h3>
                   <p className={`${fontSans.className} mt-2 text-sm leading-relaxed text-[var(--copy-body)]`}>{w.body}</p>
                 </li>
               ))}
             </ol>
           </section>
 
-          <section className={ui.innerCard} aria-labelledby="slam-projects">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-projects">
             <h2 id="slam-projects" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               {projectsTitle}
             </h2>
@@ -208,7 +217,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </Link>
           </section>
 
-          <section className={ui.innerCard} aria-labelledby="slam-compare">
+          <section className="border-t border-[var(--green-border-muted)] pt-10 sm:pt-12" aria-labelledby="slam-compare">
             <h2 id="slam-compare" className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}>
               {compareTitle}
             </h2>

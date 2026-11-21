@@ -19,10 +19,10 @@ export function FaqSection({ id, items, title = "Domande frequenti", className }
         {items.map((item) => (
           <details
             key={item.q}
-            className="group rounded-lg border border-[var(--green-border-muted)] bg-[var(--muted)] open:bg-[var(--card)]"
+            className="group border-b border-[var(--green-border-muted)] bg-transparent open:bg-transparent"
           >
             <summary
-              className={`${fontDisplay.className} cursor-pointer list-none px-5 py-4 text-base font-medium text-[var(--foreground)] marker:content-none sm:text-lg [&::-webkit-details-marker]:hidden`}
+              className={`${fontDisplay.className} cursor-pointer list-none py-4 pl-0 pr-2 text-base font-medium text-[var(--foreground)] marker:content-none sm:text-lg [&::-webkit-details-marker]:hidden`}
             >
               <span className="flex items-center justify-between gap-3">
                 {item.q}
@@ -32,7 +32,7 @@ export function FaqSection({ id, items, title = "Domande frequenti", className }
               </span>
             </summary>
             <p
-              className={`${fontSans.className} border-t border-[var(--green-border-muted)] px-5 pb-4 pt-3 text-sm leading-relaxed text-[var(--copy-body)]`}
+              className={`${fontSans.className} pb-4 pt-0 text-sm leading-relaxed text-[var(--copy-body)]`}
             >
               {item.a}
             </p>
