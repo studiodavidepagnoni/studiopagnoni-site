@@ -76,10 +76,21 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </div>
 
             <div
-              className="mt-10 grid items-center gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
+              className="mt-10 grid items-start gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
               aria-labelledby="slam-rs10"
             >
-              <div className="lg:col-span-6">
+              <figure className="m-0 lg:col-span-5">
+                <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
+                  <CoverImage
+                    src={L.instrumentImage.src}
+                    alt={L.instrumentImage.alt}
+                    sizes="(min-width:1024px) min(420px, 36vw), (min-width:640px) min(70vw, 480px), 100vw"
+                    loading="lazy"
+                    className="object-center"
+                  />
+                </div>
+              </figure>
+              <div className="lg:col-span-7">
                 <h3 id="slam-rs10" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap}`}>
                   {instrumentTitle}
                 </h3>
@@ -94,17 +105,6 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                   ))}
                 </ul>
               </div>
-              <figure className="m-0 lg:col-span-6">
-                <div className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
-                  <CoverImage
-                    src={L.instrumentImage.src}
-                    alt={L.instrumentImage.alt}
-                    sizes="(min-width:1024px) min(520px, 42vw), (min-width:640px) min(70vw, 560px), 100vw"
-                    loading="lazy"
-                    className="object-center"
-                  />
-                </div>
-              </figure>
             </div>
 
             <CtaButtons className="mt-8" locale={locale} />
