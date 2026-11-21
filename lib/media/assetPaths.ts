@@ -29,8 +29,8 @@ export const siteImages = {
   paesaggioTerreno: "paesaggio-vigneto-franciacorta-brescia",
   /** Intro pagina laser SLAM (foto strumenti in studio) */
   strumentiGeometraArchitetto: "strumenti-geometra-architetto-brescia",
-  /** Card strumentazione RS10 */
-  chcnavRs10: "chcnav-rs10-laser-scanner-brescia",
+  /** Card strumentazione RS10 — product shot dedicato (non riusato in home) */
+  chcnavRs10: "chcnav-rs10-slam-prodotto-studio-brescia",
   /** Pagina Chi siamo */
   geometraSuddivisioni: "geometra-strumentazione-suddivisioni-brescia",
 } as const;

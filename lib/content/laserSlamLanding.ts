@@ -77,8 +77,8 @@ const sharedIntroImage = {
 } as const;
 
 const sharedInstrumentImage = {
-  src: siteImage(siteImages.slamHero),
-  alt: imageAlt("Operatore con laser scanner SLAM CHCNAV RS10 in rilievo — Franciacorta", {
+  src: siteImage(siteImages.chcnavRs10),
+  alt: imageAlt("Laser scanner SLAM CHCNAV RS10 — strumento mobile per rilievi 3D", {
     service: "slam",
   }),
 } as const;

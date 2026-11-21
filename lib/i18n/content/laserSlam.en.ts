@@ -68,8 +68,8 @@ export const laserSlamLandingEn = {
     "Up to about 320,000 points/s, 360° field of view, compact unit (~1.9 kg), IP64.",
   ],
   instrumentImage: {
-    src: siteImage(siteImages.slamHero),
-    alt: imageAlt("Operator with CHCNAV RS10 SLAM laser scanner on survey — Franciacorta", {
+    src: siteImage(siteImages.chcnavRs10),
+    alt: imageAlt("CHCNAV RS10 SLAM laser scanner — handheld mobile 3D survey instrument", {
       service: "slam",
     }),
   },
