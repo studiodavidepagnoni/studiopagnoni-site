@@ -35,7 +35,8 @@ function CtaButtons({ className = "", locale = "it" }: { className?: string; loc
 export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLandingContent; locale?: Locale }) {
   const L = content;
   const sectorsTitle = locale === "en" ? "Sectors and applications" : "Settori e applicazioni";
-  const instrumentTitle = locale === "en" ? "Equipment (CHCNAV RS10)" : "La strumentazione (CHCNAV RS10)";
+  const instrumentKicker = "CHCNAV RS10";
+  const instrumentTitle = locale === "en" ? "The equipment" : "La strumentazione";
   const deliverablesTitle = locale === "en" ? "What we deliver" : "Cosa consegniamo";
   const workflowTitle = locale === "en" ? "How we work" : "Come lavoriamo";
   const projectsTitle = locale === "en" ? "Projects" : "Progetti";
@@ -45,6 +46,22 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
   const formatLabel = locale === "en" ? "Format" : "Formato";
   const useLabel = locale === "en" ? "Typical use" : "Utilizzo tipico";
   const faqTitle = locale === "en" ? "Frequently asked questions" : "Domande frequenti";
+  /** Ultimo punto = scheda tecnica: lo alziamo come metriche. */
+  const instrumentFeatures = L.instrumentPoints.slice(0, -1);
+  const instrumentSpecs =
+    locale === "en"
+      ? ([
+          { value: "320k", label: "points/s" },
+          { value: "360°", label: "field of view" },
+          { value: "~1.9 kg", label: "weight" },
+          { value: "IP64", label: "rating" },
+        ] as const)
+      : ([
+          { value: "320.000", label: "punti/s" },
+          { value: "360°", label: "campo" },
+          { value: "~1,9 kg", label: "peso" },
+          { value: "IP64", label: "protezione" },
+        ] as const);
 
   return (
     <main id="main-content" className={`section-shell ${ui.pageBg}`}>
@@ -76,10 +93,10 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
             </div>
 
             <div
-              className="mt-10 grid items-start gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
+              className="mt-10 grid items-stretch gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
               aria-labelledby="slam-rs10"
             >
-              <figure className="m-0 lg:col-span-5">
+              <figure className="m-0 self-start lg:col-span-5">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
                   <CoverImage
                     src={L.instrumentImage.src}
@@ -90,24 +107,40 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                   />
                 </div>
               </figure>
-              <div className="lg:col-span-7">
-                <h3 id="slam-rs10" className={`${fontDisplay.className} ${ui.cardHeading} ${ui.headingBodyGap}`}>
+              <div className="flex flex-col lg:col-span-7 lg:min-h-full">
+                <p className={`${fontSans.className} section-kicker mb-3`}>{instrumentKicker}</p>
+                <h3
+                  id="slam-rs10"
+                  className={`${fontDisplay.className} ${ui.sectionHeadingAccent} ${ui.headingBodyGap}`}
+                >
                   {instrumentTitle}
                 </h3>
-                <ul className="list-none space-y-3 pl-0">
-                  {L.instrumentPoints.map((point) => (
+                <ul className="mt-1 list-none space-y-4 pl-0 sm:space-y-5">
+                  {instrumentFeatures.map((point) => (
                     <li
                       key={point}
-                      className={`relative pl-5 ${fontSans.className} text-[0.95rem] leading-relaxed text-[var(--copy-body)] before:absolute before:left-0 before:top-[0.55em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]`}
+                      className={`relative max-w-[42ch] pl-5 ${fontSans.className} text-[0.98rem] leading-[1.7] text-[var(--copy-body)] before:absolute before:left-0 before:top-[0.65em] before:h-1.5 before:w-1.5 before:rounded-full before:bg-[var(--primary-mid)]`}
                     >
                       {point}
                     </li>
                   ))}
                 </ul>
+                <dl className="mt-8 grid grid-cols-2 gap-x-6 gap-y-5 border-t border-[var(--green-border-muted)] pt-6 sm:mt-10 sm:grid-cols-4 sm:gap-x-4 sm:pt-7">
+                  {instrumentSpecs.map((spec) => (
+                    <div key={spec.label} className="min-w-0">
+                      <dt className="sr-only">{spec.label}</dt>
+                      <dd className={`${fontDisplay.className} text-[1.35rem] font-medium leading-none tracking-[-0.03em] text-[var(--foreground)] sm:text-[1.45rem]`}>
+                        {spec.value}
+                      </dd>
+                      <p className={`${fontSans.className} mt-1.5 text-[0.72rem] font-semibold uppercase tracking-[0.14em] text-[var(--green-ink-muted)]`}>
+                        {spec.label}
+                      </p>
+                    </div>
+                  ))}
+                </dl>
+                <CtaButtons className="mt-8 sm:mt-auto sm:pt-10" locale={locale} />
               </div>
             </div>
-
-            <CtaButtons className="mt-8" locale={locale} />
           </section>
 
           <FaqSection
