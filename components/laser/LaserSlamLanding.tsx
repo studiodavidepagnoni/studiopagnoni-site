@@ -96,7 +96,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
               className="mt-10 grid items-stretch gap-8 border-t border-[var(--green-border-muted)] pt-10 lg:mt-12 lg:grid-cols-12 lg:gap-12 lg:pt-12"
               aria-labelledby="slam-rs10"
             >
-              <figure className="m-0 self-start lg:col-span-5">
+              <figure className="order-last m-0 self-start lg:order-none lg:col-span-5">
                 <div className="relative aspect-[4/5] overflow-hidden rounded-[var(--radius-media)] border border-[var(--green-border-muted)] bg-[var(--background)]">
                   <CoverImage
                     src={L.instrumentImage.src}
@@ -107,7 +107,7 @@ export function LaserSlamLanding({ content, locale = "it" }: { content: SlamLand
                   />
                 </div>
               </figure>
-              <div className="flex flex-col lg:col-span-7 lg:min-h-full">
+              <div className="order-first flex flex-col lg:order-none lg:col-span-7 lg:min-h-full">
                 <p className={`${fontSans.className} section-kicker mb-3`}>{instrumentKicker}</p>
                 <h3
                   id="slam-rs10"
