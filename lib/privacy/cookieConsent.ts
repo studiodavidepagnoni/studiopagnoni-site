@@ -1,9 +1,10 @@
 /**
  * Preferenze cookie / contenuti terzi (GDPR, principio di accountability).
- * Solo `embeds` è configurabile dall'utente (Google Maps + reCAPTCHA);
+ * Solo `embeds` è configurabile dall'utente (Google Maps);
  * il resto è strettamente necessario al sito.
  */
 
+import { PRIVACY_CONSENT_VERSION } from "@/lib/security/csp";
 import { basePath } from "@/lib/utils/basePath";
 
 const LEGACY_STORAGE_KEY = "cookie_consent_studio_pagnoni";
@@ -22,7 +23,7 @@ export type CookiePrefs = {
   embeds: boolean;
 };
 
-type StoredPrefsV2 = CookiePrefs & { v: 2; updatedAt: number };
+type StoredPrefsV2 = CookiePrefs & { v: 2; updatedAt: number; policyVersion?: string };
 
 export function loadCookiePrefs(): CookiePrefs | null {
   if (typeof window === "undefined") return null;
@@ -46,7 +47,12 @@ export function embedsConsentGranted(): boolean {
 }
 
 export function saveCookiePrefs(prefs: CookiePrefs): void {
-  const payload: StoredPrefsV2 = { v: 2, embeds: prefs.embeds, updatedAt: Date.now() };
+  const payload: StoredPrefsV2 = {
+    v: 2,
+    embeds: prefs.embeds,
+    updatedAt: Date.now(),
+    policyVersion: PRIVACY_CONSENT_VERSION,
+  };
   try {
     localStorage.setItem(COOKIE_PREFS_STORAGE_KEY, JSON.stringify(payload));
     localStorage.removeItem(LEGACY_STORAGE_KEY);

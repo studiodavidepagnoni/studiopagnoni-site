@@ -16,7 +16,7 @@ export const staticPageLastModified: Record<string, string> = {
   "/contatti": "2026-05-21",
   "/chi-siamo": "2026-10-09",
   "/progetti": "2026-10-07",
-  "/privacy-policy": "2026-05-21",
+  "/privacy-policy": "2026-11-22",
 };
 
 export const projectAreaLastModified: Record<ProjectArea, string> = {

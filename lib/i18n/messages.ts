@@ -23,6 +23,12 @@ export type UiMessages = {
     necessary: string;
     acceptAll: string;
     preferences: string;
+    customize: string;
+    hideOptions: string;
+    save: string;
+    embedsLabel: string;
+    embedsOn: string;
+    embedsOff: string;
   };
   cta: {
     requestSurvey: string;
@@ -77,10 +83,16 @@ export const messages: Record<Locale, UiMessages> = {
     footerHours: "Orari",
     privacy: "Privacy",
     cookie: {
-      body: "Cookie necessari al sito e, solo con il consenso, servizi di terze parti (mappe e protezione antispam).",
+      body: "Cookie necessari al sito e, solo con il consenso, Google Maps.",
       necessary: "Solo necessari",
       acceptAll: "Accetta tutto",
       preferences: "Preferenze cookie",
+      customize: "Personalizza",
+      hideOptions: "Nascondi opzioni",
+      save: "Salva",
+      embedsLabel: "Google Maps",
+      embedsOn: "Disattiva Google Maps",
+      embedsOff: "Attiva Google Maps",
     },
     cta: {
       requestSurvey: "Richiedi sopralluogo",
@@ -133,10 +145,16 @@ export const messages: Record<Locale, UiMessages> = {
     footerHours: "Hours",
     privacy: "Privacy",
     cookie: {
-      body: "Essential cookies keep the site working. Third-party services (maps and spam protection) load only with your consent.",
+      body: "Essential cookies keep the site working. Google Maps loads only with your consent.",
       necessary: "Essential only",
       acceptAll: "Accept all",
       preferences: "Cookie preferences",
+      customize: "Customise",
+      hideOptions: "Hide options",
+      save: "Save",
+      embedsLabel: "Google Maps",
+      embedsOn: "Turn off Google Maps",
+      embedsOff: "Turn on Google Maps",
     },
     cta: {
       requestSurvey: "Request a site visit",

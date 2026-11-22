@@ -72,8 +72,6 @@ export const site = {
    * Senza ID il form usa fallback mailto.
    */
   formspreeId: process.env.NEXT_PUBLIC_FORMSPREE_ID?.trim() ?? "",
-  /** reCAPTCHA v2 site key — obbligatorio in prod per anti-spam Formspree. */
-  recaptchaSiteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY?.trim() ?? "",
 } as const;
 
 export const navItems = [

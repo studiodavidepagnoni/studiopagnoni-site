@@ -17,11 +17,9 @@ function buildCsp(dev: boolean): string {
     "media-src 'self'",
     "font-src 'self' data:",
     "style-src 'self' 'unsafe-inline'",
-    dev
-      ? "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/"
-      : "script-src 'self' 'unsafe-inline' https://www.google.com/recaptcha/ https://www.gstatic.com/recaptcha/",
+    dev ? "script-src 'self' 'unsafe-inline' 'unsafe-eval'" : "script-src 'self' 'unsafe-inline'",
     dev ? "connect-src 'self' ws: wss: https://formspree.io" : "connect-src 'self' https://formspree.io",
-    "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com https://www.google.com/recaptcha/ https://recaptcha.google.com",
+    "frame-src 'self' https://maps.google.com https://www.google.com https://*.google.com",
     "upgrade-insecure-requests",
   ].join("; ");
 }

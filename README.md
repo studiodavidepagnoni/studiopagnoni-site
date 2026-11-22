@@ -51,10 +51,10 @@ In CI (`/.github/workflows/ci.yml`): lint, typecheck, build statico, E2E e Light
 - `build:static` esegue `optimize:assets` prima dell'export; `prebuild` solo `sync:static`.
 - **CI / GitHub Pages** usano `SKIP_VIDEO=1`: non ricodificare video su Actions. I video restano in **Git LFS**; il checkout Actions è `lfs: false` così ogni push **non scarica LFS** (non brucia bandwidth). `sync:static` sostituisce i pointer con i file già online su https://studiopagnoni.com.
 - **LLM / AI search**: `/llms.txt` e `/llms-full.txt` (NAP, servizi, costi orientativi); `robots.txt` consente OAI-SearchBot, ChatGPT-User, Perplexity, Claude, ecc. Per ChatGPT Search registra anche il sito in **Bing Webmaster Tools** (usa l’indice Bing) e importa la sitemap.
-- Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` + `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` per il modulo contatti.
+- Copia `.env.example` in `.env.local` e imposta `NEXT_PUBLIC_FORMSPREE_ID` per il modulo contatti. Senza ID il form apre la mail. reCAPTCHA non è usato.
 - Deploy GitHub Pages: workflow `.github/workflows/deploy-github-pages.yml` (build su ogni push; deploy condizionato).
-- Secret repository `NEXT_PUBLIC_FORMSPREE_ID` e `NEXT_PUBLIC_RECAPTCHA_SITE_KEY` per form + CAPTCHA in produzione.
-- Formspree dashboard: **restrict domain** a `studiopagnoni.com` e abilita **reCAPTCHA** con lo stesso secret Google (il site key è nel sito; il secret solo in Formspree).
+- Secret repository `NEXT_PUBLIC_FORMSPREE_ID` per il form in produzione.
+- Formspree dashboard: **restrict domain** a `studiopagnoni.com`.
 
 ### GitHub Pages (quando sei pronto)
 
@@ -62,7 +62,7 @@ Il job **deploy** fallisce con 404 finché Pages non è attivo. Fino ad allora i
 
 1. **Settings → Pages** del repository: **Build and deployment** → Source **GitHub Actions** (non “Deploy from branch”).
 2. Repository variable **`PAGES_DEPLOY_ENABLED`** = `true` (Settings → Secrets and variables → Actions → Variables).
-3. Secret **`NEXT_PUBLIC_FORMSPREE_ID`** e **`NEXT_PUBLIC_RECAPTCHA_SITE_KEY`** per il form contatti.
+3. Secret **`NEXT_PUBLIC_FORMSPREE_ID`** per il form contatti.
 4. Variables consigliate per dominio custom: `NEXT_PUBLIC_SITE_URL` = `https://studiopagnoni.com`, `NEXT_PUBLIC_BASE_PATH` vuoto (sito in root, non in `/repo`).
 5. Push su `master` / `main` oppure **Run workflow** manuale.
 6. In **Settings → Pages → Custom domain** inserisci `studiopagnoni.com` e abilita **Enforce HTTPS**.
@@ -71,7 +71,7 @@ Sito produzione: `https://studiopagnoni.com`.
 
 ### Sicurezza (form + header)
 
-- **Form:** honeypot doppio, delay anti-bot, `maxLength`, consenso privacy solo da UI, reCAPTCHA v2 se la site key è impostata. L’ID Formspree non è più hardcoded: solo env/secret.
+- **Form:** honeypot doppio, delay anti-bot, `maxLength`, consenso privacy solo da UI. L’ID Formspree non è hardcoded: solo env/secret. Nessun reCAPTCHA.
 - **CSP su Pages:** meta CSP in `app/layout.tsx` (GitHub Pages non supporta header HTTP custom).
 - **HSTS / X-Frame-Options / frame-ancestors:** richiedono header HTTP. Opzioni:
   1. Proxy **Cloudflare** (DNS arancione) sul dominio → Transform Rules / Configuration Rules con gli stessi header di `public/_headers`

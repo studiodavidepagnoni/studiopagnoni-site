@@ -126,27 +126,17 @@ export function CookieBanner() {
               aria-expanded={customize}
               onClick={() => setCustomize((v) => !v)}
             >
-              {customize
-                ? locale === "en"
-                  ? "Hide options"
-                  : "Nascondi opzioni"
-                : locale === "en"
-                  ? "Customise"
-                  : "Personalizza"}
+              {customize ? copy.cookie.hideOptions : copy.cookie.customize}
             </button>
           </p>
           {customize ? (
             <div className="mt-2.5 flex items-center justify-between gap-3 rounded-lg border border-white/10 bg-black/20 px-3 py-2">
-              <p className="text-[0.8rem] leading-snug text-white/78">Contenuti Google (Maps e reCAPTCHA)</p>
+              <p className="text-[0.8rem] leading-snug text-white/78">{copy.cookie.embedsLabel}</p>
               <button
                 type="button"
                 role="switch"
                 aria-checked={embeds}
-                aria-label={
-                  embeds
-                    ? "Disattiva contenuti Google (Maps e reCAPTCHA)"
-                    : "Attiva contenuti Google (Maps e reCAPTCHA)"
-                }
+                aria-label={embeds ? copy.cookie.embedsOn : copy.cookie.embedsOff}
                 onClick={() => setEmbeds((v) => !v)}
                 className={`relative h-[28px] w-[48px] shrink-0 rounded-full transition-colors duration-300 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--primary-mid)] ${
                   embeds ? "bg-[var(--primary)]" : "bg-white/15"
@@ -166,7 +156,7 @@ export function CookieBanner() {
         <div className="flex w-full shrink-0 gap-2 sm:w-auto sm:justify-end">
           {customize ? (
             <button type="button" className={`${ui.cookieReject} text-sm`} onClick={handleSaveChoices}>
-              Salva
+              {copy.cookie.save}
             </button>
           ) : (
             <button type="button" className={`${ui.cookieReject} text-sm`} onClick={handleNecessaryOnly}>

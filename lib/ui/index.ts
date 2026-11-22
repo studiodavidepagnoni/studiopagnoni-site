@@ -70,7 +70,7 @@ export const ui = {
   cookieAccept: `${btnPrimaryFill} min-h-[48px] flex-1 px-6 sm:flex-none sm:px-8`,
 
   cookieReject:
-    `${btnBase} min-h-[48px] flex-1 border border-white/18 bg-transparent px-5 text-white hover:bg-white/[0.08] focus-visible:outline-white/35 sm:flex-none`,
+    `${btnBase} min-h-[48px] flex-1 border border-white/70 bg-white/10 px-5 text-white hover:bg-white/[0.16] focus-visible:outline-white/35 sm:flex-none`,
 
   inputField:
     "box-border w-full min-w-0 max-w-full min-h-[48px] rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3 text-base text-[var(--foreground)] outline-none transition placeholder:text-[var(--green-ink-muted)] focus:border-[var(--primary-mid)] focus:ring-2 focus:ring-[var(--primary)]/18 max-md:text-base sm:min-h-0",

@@ -8,7 +8,7 @@ import { buildPageMetadata } from "@/lib/config/seo";
 import { layoutContentMaxClass, layoutGutterXClass, site } from "@/lib/config/site";
 import { ui } from "@/lib/ui";
 
-const LAST_UPDATED = "9 maggio 2026";
+const LAST_UPDATED = "22 novembre 2026";
 
 export const metadata = buildPageMetadata({
   title: "Privacy policy e cookie",
@@ -56,7 +56,7 @@ export default function PrivacyPolicyPage() {
               <strong className="font-semibold text-[var(--foreground)]">101/2018</strong>. Documento redatto per professionisti e piccole imprese in Italia.
             </p>
             <p className={`${fontSans.className} mt-4 text-sm text-[var(--green-ink-muted)]`}>
-              Ultimo aggiornamento: <time dateTime="2026-05-09">{LAST_UPDATED}</time>
+              Ultimo aggiornamento: <time dateTime="2026-11-22">{LAST_UPDATED}</time>
             </p>
           </header>
 
@@ -128,8 +128,8 @@ export default function PrivacyPolicyPage() {
                 <div className={`${ui.body} space-y-4`}>
                   <p>
                     Attraverso il sito possono essere trattati <strong className="text-[var(--foreground)]">dati identificativi e di contatto</strong>{" "}
-                    (ad es. nome e cognome, indirizzo email, numero di telefono se fornito, oggetto della richiesta, eventuali altri dati inseriti volontariamente nel testo del messaggio),{" "}
-                    <strong className="text-[var(--foreground)]">dati di navigazione tecnici</strong> (ad es. indirizzo IP, timestamp, tipo di browser, pagine visitate nei limiti dei log del server / CDN),
+                    (nome e cognome, indirizzo email, oggetto, comune o località, tipo di richiesta e, per i rilievi SLAM, superficie indicativa e output desiderato, più quanto scritto nel messaggio),{" "}
+                    <strong className="text-[var(--foreground)]">dati di navigazione tecnici</strong> (indirizzo IP, data e ora, tipo di browser, pagine richieste, nei log di GitHub Pages e della CDN Fastly),
                     nonché <strong className="text-[var(--foreground)]">dati raccolti tramite cookie e tecnologie simili</strong>, secondo quanto indicato nella sezione Cookie.
                   </p>
                   <p>
@@ -163,13 +163,13 @@ export default function PrivacyPolicyPage() {
                   <div className={`${ui.innerCard} border-[var(--green-border-muted)] sm:col-span-2`}>
                     <p className={`${fontSans.className} section-kicker`}>Facoltativo</p>
                     <h3 className={`${fontDisplay.className} ${ui.cardHeading} mt-2`}>
-                      Google Maps e reCAPTCHA
+                      Google Maps
                     </h3>
                     <p className={`${ui.body} mt-3`}>
-                      Visualizzazione della mappa sulla pagina Contatti e, sul modulo, controllo anti-spam Google
-                      reCAPTCHA. Il caricamento di questi script/iframe comporta potenziali trattamenti da parte di
-                      Google LLC / Google Ireland Limited secondo le proprie informative. Nessuno dei due servizi viene
-                      caricato senza consenso.
+                      Visualizzazione della mappa sulla pagina Contatti. L&apos;iframe carica anche risorse di Google
+                      Fonts e Google Places, usate dalla mappa e non come statistica del sito. Il caricamento comporta
+                      potenziali trattamenti da parte di Google LLC / Google Ireland Limited secondo le proprie
+                      informative. La mappa non viene caricata senza consenso.
                     </p>
                     <p className={`${fontSans.className} mt-4 text-[0.85rem] font-semibold text-[var(--foreground)]`}>Base giuridica</p>
                     <p className={`${ui.body} mt-1`}>Art. 6, comma 1, lett. <strong>a</strong> GDPR — <strong className="text-[var(--foreground)]">consenso</strong>, raccolto tramite banner cookie (e, sul form, tramite attivazione esplicita), con possibilità di rifiuto e revoca in qualsiasi momento.</p>
@@ -193,13 +193,14 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Fornitore di hosting / pubblicazione sito</strong> (infrastruttura che ospita i file del sito e gestisce la consegna dei contenuti), nella qualità di Responsabile del trattamento o Incaricato, a seconda dei contratti applicabili.
+                      <strong className="text-[var(--foreground)]">GitHub, Inc.</strong> (GitHub Pages) pubblica i file statici del sito.{" "}
+                      <strong className="text-[var(--foreground)]">Fastly, Inc.</strong> è la CDN usata da GitHub Pages: la pagina è spesso servita da un edge nello Spazio economico europeo (Francoforte). Entrambi trattano log tecnici, incluso l&apos;indirizzo IP. GitHub può trasferire quei log negli Stati Uniti.
                     </span>
                   </li>
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) per l&apos;invio dei messaggi dal modulo di contatto, quando il servizio è attivo: opera tipicamente come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR. Il possibile trattamento anche fuori dallo SEE è descritto nella sezione Trasferimenti.{" "}
+                      <strong className="text-[var(--foreground)]">Formspree</strong> (Element Labs, Inc.) solo se il modulo è collegato a quel servizio. Senza identificativo Formspree il messaggio si apre nel programma di posta di chi scrive e non transita da Formspree. Quando il servizio è attivo opera come Responsabile del trattamento ai sensi dell&apos;art. 28 GDPR.{" "}
                       <a href="https://formspree.io/legal/privacy-policy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Policy Formspree
                       </a>
@@ -209,8 +210,7 @@ export default function PrivacyPolicyPage() {
                   <li className="flex gap-3 rounded-xl border border-[var(--green-border-muted)] bg-[var(--card)] px-4 py-3">
                     <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-[var(--primary-mid)]" aria-hidden />
                     <span>
-                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per i servizi di mappe incorporate e{" "}
-                      <strong className="text-[var(--foreground)]">reCAPTCHA</strong> sul modulo di contatto (protezione anti-spam), entrambi{" "}
+                      <strong className="text-[var(--foreground)]">Google</strong> (Google Ireland Limited / Google LLC) per la mappa incorporata e le risorse che la mappa stessa richiede (Maps, Places, font dell&apos;embed),{" "}
                       <strong className="text-[var(--foreground)]">solo previo consenso</strong>.{" "}
                       <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer" className={ui.proseLink}>
                         Privacy Google
@@ -229,7 +229,7 @@ export default function PrivacyPolicyPage() {
                 <SectionTitle id="trasferimenti">Trasferimenti verso paesi terzi</SectionTitle>
                 <div className="home-section-rule mt-4" aria-hidden />
                 <p className={ui.body}>
-                  Alcuni fornitori (es. Formspree, Google) possono trattare dati anche tramite infrastrutture ubicate <strong className="text-[var(--foreground)]">fuori dallo Spazio Economico Europeo</strong>. In tali ipotesi il trasferimento avviene nel rispetto del Capo V GDPR, inclusi{" "}
+                  GitHub, Fastly, Formspree (se attivo) e Google possono trattare dati anche tramite infrastrutture ubicate <strong className="text-[var(--foreground)]">fuori dallo Spazio Economico Europeo</strong>. In tali ipotesi il trasferimento avviene nel rispetto del Capo V GDPR, inclusi{" "}
                   <strong className="text-[var(--foreground)]">decisioni di adeguatezza della Commissione UE</strong>, ove adottate, oppure{" "}
                   <strong className="text-[var(--foreground)]">garanzie appropriate</strong> (es. Clausole Contrattuali Standard — SCC — integrate da misure supplementari ove richiesto dalla giurisprudenza e dalle linee guida).
                 </p>
@@ -240,10 +240,10 @@ export default function PrivacyPolicyPage() {
                 <div className="home-section-rule mt-4" aria-hidden />
                 <ul className={`${ui.body} list-disc space-y-2 pl-6`}>
                   <li>
-                    <strong className="text-[var(--foreground)]">Richieste di contatto:</strong> per il tempo necessario a dare riscontro e, successivamente, per eventuali ulteriori periodi solo se sussiste un obbligo legittimo di conservazione documentale o tutela di diritti in sede contenziosa (limitazione nel tempo e proporzionata).
+                    <strong className="text-[var(--foreground)]">Richieste di contatto:</strong> 24 mesi dalla risposta, o dalla chiusura della pratica se ne segue una. Un termine più lungo resta solo se un obbligo di legge o un contenzioso lo richiede.
                   </li>
                   <li>
-                    <strong className="text-[var(--foreground)]">Log tecnici:</strong> secondo i cicli di rotazione applicati dal fornitore di hosting / CDN e comunque nei limiti necessari alla sicurezza.
+                    <strong className="text-[var(--foreground)]">Log tecnici:</strong> secondo i cicli di rotazione di GitHub Pages e Fastly, nei limiti necessari alla sicurezza e alla consegna del sito.
                   </li>
                   <li>
                     <strong className="text-[var(--foreground)]">Preferenze cookie:</strong> fino a <strong className="text-[var(--foreground)]">12 mesi</strong> dall&apos;ultimo aggiornamento, salvo rinnovo del consenso o cancellazione da parte dell&apos;utente.
@@ -324,7 +324,7 @@ export default function PrivacyPolicyPage() {
                   <SectionTitle id="cookie-heading">Cookie e tecnologie simili</SectionTitle>
                   <div className="home-section-rule mt-4" aria-hidden />
                   <p className={`${ui.body} mt-4`}>
-                    Questo sito utilizza cookie e storage locale secondo il principio di <strong className="text-[var(--foreground)]">granularità del consenso</strong>: i cookie strettamente necessari sono sempre attivi; i contenuti Google di terze parti (<strong className="text-[var(--foreground)]">Maps</strong> e <strong className="text-[var(--foreground)]">reCAPTCHA</strong>) sono attivati solo previo consenso libero, specifico e informato, revocabile in ogni momento tramite il banner, il form Contatti o il pulsante qui sotto.
+                    Questo sito utilizza cookie e storage locale secondo il principio di <strong className="text-[var(--foreground)]">granularità del consenso</strong>: i cookie strettamente necessari sono sempre attivi; <strong className="text-[var(--foreground)]">Google Maps</strong> è attivato solo previo consenso libero, specifico e informato, revocabile in ogni momento tramite il banner o il pulsante qui sotto. La scelta registra data e versione di questa informativa e resta sul dispositivo: il sito non ha un server applicativo e non riceve una copia di quel consenso. Se il messaggio di contatto passa da Formspree, data e versione del consenso privacy sono nel messaggio stesso.
                   </p>
                 </div>
 
@@ -366,10 +366,18 @@ export default function PrivacyPolicyPage() {
                         <td className="px-4 py-3">Chiave precedente accetta/rifiuta: viene rimossa automaticamente al salvataggio delle nuove preferenze.</td>
                         <td className="px-4 py-3">—</td>
                       </tr>
+                      <tr className="border-b border-[var(--green-border-muted)]">
+                        <td className="px-4 py-3 font-mono text-[0.78rem] text-[var(--foreground)]">NID</td>
+                        <td className="px-4 py-3">Terze parti (Google)</td>
+                        <td className="px-4 py-3">Preferenze della mappa. Impostato da Google solo dopo il consenso, sui domini maps.google.com e google.com. Il browser può bloccarlo come cookie di terza parte.</td>
+                        <td className="px-4 py-3">6 mesi</td>
+                      </tr>
                       <tr>
-                        <td className="px-4 py-3 text-[var(--foreground)]">Cookie Google</td>
-                        <td className="px-4 py-3">Terze parti</td>
-                        <td className="px-4 py-3">Possono essere installati da Google quando si caricano Maps o reCAPTCHA; dipendono dalla configurazione del servizio e dal browser (es. cookie collegati a reCAPTCHA).</td>
+                        <td className="px-4 py-3 text-[var(--foreground)]">Embed Maps</td>
+                        <td className="px-4 py-3">Terze parti (Google)</td>
+                        <td className="px-4 py-3">
+                          Host caricati con la mappa: maps.google.com, maps.gstatic.com, maps.googleapis.com, fonts.googleapis.com, fonts.gstatic.com, places.googleapis.com. Font e Places servono a disegnare la mappa, non a misurare le visite del sito. Altri cookie Google (ad es. SOCS) seguono la policy del fornitore.
+                        </td>
                         <td className="px-4 py-3">Variabile (vedi policy Google)</td>
                       </tr>
                     </tbody>
@@ -400,9 +408,9 @@ export default function PrivacyPolicyPage() {
                         </p>
                       </div>
                       <div>
-                        <h4 className={`${fontSans.className} font-bold text-[var(--foreground)]`}>Terze parti — Google Maps e reCAPTCHA</h4>
+                        <h4 className={`${fontSans.className} font-bold text-[var(--foreground)]`}>Terze parti — Google Maps</h4>
                         <p className={`${ui.body} mt-2`}>
-                          Caricati solo dopo consenso (banner o attivazione sul form Contatti). Possono comportare trattamenti ulteriori da parte di Google (anche analytics o personalizzazione secondo policy Google). Si invita a consultare le informative aggiornate del fornitore.
+                          Caricata solo dopo consenso. L&apos;iframe richiede anche font e dati luogo di Google. Possono seguire trattamenti ulteriori da parte di Google secondo la propria policy. Il sito non usa Analytics, pixel pubblicitari né reCAPTCHA.
                         </p>
                       </div>
                       <div>
