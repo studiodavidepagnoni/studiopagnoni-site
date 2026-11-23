@@ -14,7 +14,7 @@ const pagePath = "/servizi";
 const pageUrl = `${site.url.replace(/\/$/, "")}${pagePath}`;
 const pageTitle = "Architettura, topografia e SLAM a Brescia";
 const pageDescription =
-  "Progettazione architettonica, topografia, pratiche del geometra (divisioni, successioni, catasto) e laser scanner SLAM in Franciacorta e provincia di Brescia.";
+  "Progettazione architettonica, topografia, catasto e divisioni (frazionamenti, successioni, confini) e laser scanner SLAM in Franciacorta e provincia di Brescia.";
 
 export const metadata = buildPageMetadata({
   title: pageTitle,
@@ -60,7 +60,7 @@ export default function ServiziPage() {
                 Ambiti di intervento
               </h2>
               <p className={`${ui.bodyMuted} mb-8 max-w-[68ch]`}>
-                Dall&apos;architettura alle pratiche del geometra, dal laser SLAM al verde e alle procedure di cantiere: gli ambiti in cui
+                Dall&apos;architettura al catasto e alle divisioni, dal laser SLAM al verde e alle procedure di cantiere: gli ambiti in cui
                 interveniamo, con link alle pagine dedicate dove servono metodo e strumenti nel dettaglio.
               </p>
 

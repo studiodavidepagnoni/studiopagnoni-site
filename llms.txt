@@ -7,7 +7,7 @@
 - **Chi**: Studio Architettura Pagnoni — Arch. Davide Pagnoni (progettazione) e Geom. Sergio Pagnoni (topografia e catasto).
 - **Dove**: Via Vittorio Emanuele III, 16 — 25046 Bornato, Frazione di Cazzago San Martino (BS), Franciacorta.
 - **Area**: Franciacorta e provincia di Brescia (priorità); Lombardia e Nord Italia su programmazione.
-- **Servizi**: architettura; topografia (GNSS RTK, stazione totale); pratiche del geometra (divisioni, frazionamenti, successioni, DOCFA, tipi mappali, confini); laser scanner SLAM (CHCNAV RS10) anche su navi, impianti industriali e ambiti oil&gas; verde; urbanistica; CSP/CSE.
+- **Servizi**: architettura; topografia (GNSS RTK, stazione totale); catasto, divisioni e confini (frazionamenti, successioni, DOCFA, tipi mappali); laser scanner SLAM (CHCNAV RS10) anche su navi, impianti industriali e ambiti oil&gas; verde; urbanistica; CSP/CSE.
 - **Non facciamo**: progettazione strutturale in proprio (si coordina con professionisti esterni).
 - **Costo orientativo SLAM (edilizia)**: per un appartamento di circa 100 m² su un unico piano, rilievo + disegni e relazione intorno ai 1.000 € (preventivo su misura per superficie, piani, accessi e formati).
 - **Preventivi industriali/navali**: quotazione budgettaria senza impegno, spesso separando (A) acquisizione laser 3D e (B) modello IFC taggato (apparecchi/targhe). Contatti con n° locali, n° macchinari, accessi e formati richiesti.

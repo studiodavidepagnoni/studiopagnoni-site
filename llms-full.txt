@@ -35,7 +35,7 @@ Su programmazione: Lombardia e Nord Italia, in particolare per rilievi laser SLA
 
 1. Architettura — concept, progetto, esecutivo, ristrutturazioni, ampliamenti, pratiche edilizie. Pagina: https://studiopagnoni.com/architettura-franciacorta/
 2. Topografia — GNSS RTK, stazione totale, planimetrie quotate, volumetrie, tracciamenti di cantiere, confini. Pagina: https://studiopagnoni.com/topografia/
-3. Pratiche del geometra — divisioni catastali, frazionamenti, successioni e divisioni ereditarie, DOCFA, tipi mappali, verifica confini. Panoramica: https://studiopagnoni.com/servizi/
+3. Catasto, divisioni e confini — divisioni catastali, frazionamenti, successioni e divisioni ereditarie, DOCFA, tipi mappali, verifica confini. Panoramica: https://studiopagnoni.com/servizi/
 4. Laser scanner SLAM — CHCNAV RS10; nuvole di punti (E57/LAS/LAZ), as-built, DWG/DXF, supporto BIM/IFC. Ambito civile e industriale/navale (vedi sezione dedicata). Pagine: https://studiopagnoni.com/laser-scanner-slam/ · https://studiopagnoni.com/rilievi-laser-scanner-slam-brescia/ · https://studiopagnoni.com/rilievi-laser-scanner-slam-lombardia/
 5. Rilievi 3D in outsourcing per altri studi — nuvole e DWG consegnati al partner che mantiene il cliente. Pagina: https://studiopagnoni.com/rilievi-3d-per-studi-di-architettura/
 6. Verde e paesaggio, urbanistica/pratiche, sicurezza cantieri CSP/CSE — elenco completo: https://studiopagnoni.com/servizi/

@@ -28,7 +28,7 @@ export const topografiaFaq = [
 export const serviziFaq = [
   {
     q: "Quali servizi offre lo Studio Architettura Pagnoni?",
-    a: "Architettura e progettazione; topografia e rilievi; pratiche del geometra (divisioni catastali, frazionamenti, successioni, DOCFA, tipi mappali e verifica confini); laser scanner SLAM; progettazione del verde; urbanistica e pratiche edilizie; coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
+    a: "Architettura e progettazione; topografia e rilievi; catasto, divisioni e confini (frazionamenti, successioni, DOCFA, tipi mappali); laser scanner SLAM; progettazione del verde; urbanistica e pratiche edilizie; coordinamento sicurezza cantieri (CSP/CSE) e assistenza tecnica. La parte strutturale è coordinata con professionisti esterni quando serve.",
   },
   {
     q: "Vi occupate di divisioni, successioni e pratiche catastali?",

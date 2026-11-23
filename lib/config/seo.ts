@@ -197,7 +197,7 @@ export const jsonLdGraph = {
         "Geometra Cazzago San Martino",
       ],
       description:
-        "Studio di architettura e geometra in Franciacorta, sede a Bornato (Cazzago San Martino, BS). Progettazione architettonica; topografia e rilievi (GNSS RTK, stazione totale); pratiche del geometra (divisioni catastali, frazionamenti, successioni, confini, DOCFA e tipi mappali); laser scanner 3D SLAM. Arch. Davide Pagnoni e Geom. Sergio Pagnoni — provincia di Brescia e Lombardia.",
+        "Studio di architettura e geometra in Franciacorta, sede a Bornato (Cazzago San Martino, BS). Progettazione architettonica; topografia e rilievi (GNSS RTK, stazione totale); catasto, divisioni e confini (frazionamenti, successioni, DOCFA e tipi mappali); laser scanner 3D SLAM. Arch. Davide Pagnoni e Geom. Sergio Pagnoni — provincia di Brescia e Lombardia.",
       url: site.url,
       email: site.email,
       telephone: site.phones.map((p) => p.tel),

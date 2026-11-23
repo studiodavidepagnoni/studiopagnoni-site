@@ -118,7 +118,7 @@ export const homeStrumentazione: {
 };
 
 /** Gruppi servizio: pagina Servizi (sezioni complete) e anteprima home.
- * Ordine brand: Architettura → Topografia → Pratiche geometra → Laser → altri ambiti. */
+ * Ordine brand: Architettura → Topografia → Catasto/divisioni → Laser → altri ambiti. */
 export const serviceGroups = [
   {
     id: "architettura",
@@ -151,9 +151,9 @@ export const serviceGroups = [
   {
     id: "pratiche-geometra",
     kicker: "Catasto · Divisioni · Successioni",
-    title: "Pratiche del geometra",
+    title: "Catasto, divisioni e confini",
     description:
-      "Lavori tipici del geometra oltre al rilievo di campo: aggiornamenti catastali, divisioni, successioni e confini, coordinati con notaio, eredi e documentazione dello stato di fatto.",
+      "Aggiornamenti catastali, frazionamenti, successioni immobiliari e verifica dei confini: rilievo e documentazione dello stato di fatto, in coordinamento con notaio ed eredi.",
     points: [
       "Divisioni catastali e frazionamenti di terreni e fabbricati, con planimetrie e atti di aggiornamento.",
       "Successioni immobiliari e divisioni ereditarie: rilievo, ripartizione quote e aggiornamenti catastali.",

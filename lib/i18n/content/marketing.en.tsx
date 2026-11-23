@@ -96,9 +96,9 @@ export const serviceGroupsEn = [
   {
     id: "pratiche-geometra",
     kicker: "Cadastre · Subdivisions · Succession",
-    title: "Surveyor procedures",
+    title: "Cadastre, subdivisions and boundaries",
     description:
-      "Core geometra work beyond field survey: cadastral updates, subdivisions, inheritance splits and boundaries, coordinated with notaries, heirs and as-built documentation.",
+      "Cadastral updates, land and building splits, property succession and boundary verification: survey and as-built documentation, coordinated with notaries and heirs.",
     points: [
       "Cadastral subdivisions and land/building splits, with plans and update deeds.",
       "Property succession and hereditary divisions: survey, share allocation and cadastral updates.",

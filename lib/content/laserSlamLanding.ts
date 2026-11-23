@@ -345,7 +345,7 @@ export const laserSlamLandingBrescia = {
   },
   introHeading: "Laser scanner SLAM a Brescia: misura 3D prima di progettare",
   introLead:
-    "Sì: eseguiamo rilievi laser scanner SLAM a Brescia, in Franciacorta e in provincia dalla sede di Bornato (Cazzago San Martino). Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
+    "Eseguiamo rilievi laser scanner SLAM a Brescia, in Franciacorta e in provincia dalla sede di Bornato (Cazzago San Martino). Documentiamo capannoni, edifici, cantine, impianti e siti produttivi con acquisizione mobile: meno giorni in campo, nuvola di punti densa e base metrica per architettura, as-built, sezioni, CAD e BIM.",
   instrumentNote:
     "Operiamo da Cazzago San Martino (fraz. Bornato) con piattaforma CHCNAV RS10 (GNSS RTK + LiDAR + SLAM visuale): un flusso continuo tra esterni, interni e zone con segnale satellitare debole, tipiche di capannoni e impianti bresciani.",
   introImage: sharedIntroImage,
