@@ -20,13 +20,13 @@ export const fontSans = localFont({
 
 /**
  * Titoli: Sora 500 self-hosted — un solo file latino (accenti IT inclusi in U+00xx).
- * Preload esplicito in layout: con `inlineCss` i preload di next/font google spesso non compaiono.
+ * Preload esplicito in `app/layout.tsx` (href stabile `/fonts/...`), non via next/font hashed URL.
  */
 export const fontDisplay = localFont({
   src: [{ path: "../public/fonts/sora-500-latin.woff2", weight: "500", style: "normal" }],
   variable: "--font-display",
   display: "swap",
-  preload: true,
+  preload: false,
   adjustFontFallback: "Arial",
 });
 

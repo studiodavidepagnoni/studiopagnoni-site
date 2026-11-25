@@ -10,9 +10,9 @@ export default function HomePage() {
     <>
       <HeroLcpPreloadLinks />
       <main id="main-content" className="min-w-0 max-w-full overflow-x-clip">
-      <HeroHomeDeferred />
-      <HomeSections />
-    </main>
+        <HeroHomeDeferred />
+        <HomeSections />
+      </main>
     </>
   );
 }

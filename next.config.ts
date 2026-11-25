@@ -44,9 +44,10 @@ const nextConfig: NextConfig = {
   experimental: {
     // Workaround for intermittent Windows dev manifest issues in Next devtools segment explorer.
     devtoolSegmentExplorer: false,
-    // Inline CSS nel HTML (prod): toglie i <link stylesheet> dal critical path → meno delay LCP/FCP mobile.
-    // Tradeoff: HTML più pesante; ok qui (~23 KiB CSS). Solo production build.
-    inlineCss: true,
+    // CSS esterno (non inline): con ~130KB di CSS l'inline ritardava il discovery del preload LCP
+    // (il <link preload> finiva DOPO tutto lo <style> → LCP mobile ~3.5s+). Con file separato
+    // preload immagine e stylesheet partono in parallelo.
+    inlineCss: false,
   },
   poweredByHeader: false,
   images: {

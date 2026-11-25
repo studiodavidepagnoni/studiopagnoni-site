@@ -8,7 +8,7 @@ import { SiteHeaderShell } from "@/components/layout/SiteHeaderShell";
 import { SkipToContent } from "@/components/layout/SkipToContent";
 import { CspMeta } from "@/components/security/CspMeta";
 import { withBasePath } from "@/lib/utils/basePath";
-import { fontDisplay, fontSans } from "@/lib/fonts";
+import { FONT_DISPLAY_PRELOAD_HREF, fontDisplay, fontSans } from "@/lib/fonts";
 import { jsonLdGraph, rootMetadata } from "@/lib/config/seo";
 import { site } from "@/lib/config/site";
 import "./globals.css";
@@ -47,6 +47,14 @@ export default function RootLayout({
   return (
     <html lang="it">
       <head>
+        {/* Font display presto in head (href stabile). Preload LCP hero: solo in page home. */}
+        <link
+          rel="preload"
+          as="font"
+          href={withBasePath(FONT_DISPLAY_PRELOAD_HREF)}
+          type="font/woff2"
+          crossOrigin="anonymous"
+        />
         <CspMeta />
         <link rel="describedby" href={`${siteOrigin}/llms.txt`} title="LLM site index" />
         <link rel="alternate" type="text/plain" href={`${siteOrigin}/llms.txt`} title="llms.txt" />

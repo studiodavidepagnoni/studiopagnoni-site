@@ -402,25 +402,7 @@
     animation: hero-scroll-pulse 2.4s ease-in-out infinite;
   }
 
-  /* Hero copy staggered entrance */
-  .hero-mobile .hero-copy__slide > * {
-    animation: hero-mobile-fade-up 0.7s cubic-bezier(0.22, 1, 0.36, 1) both;
-  }
-  .hero-mobile .hero-copy__slide > *:nth-child(1) { animation-delay: 0.15s; }
-  .hero-mobile .hero-copy__slide > *:nth-child(2) { animation-delay: 0.3s; }
-  .hero-mobile .hero-copy__slide > *:nth-child(3) { animation-delay: 0.42s; }
-  .hero-mobile .hero-copy__slide > *:nth-child(4) { animation-delay: 0.54s; }
-}
-
-@keyframes hero-mobile-fade-up {
-  from {
-    opacity: 0;
-    transform: translateY(18px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  /* Niente fade-up sul copy mobile: opacity:0 iniziale alzava Speed Index di ~0.5–1s. */
 }
 
 @keyframes hero-scroll-pulse {
@@ -432,9 +414,6 @@
   .hero-mobile__scroll-line {
     animation: none;
     opacity: 0.5;
-  }
-  .hero-mobile .hero-copy__slide > * {
-    animation: none;
   }
 }
 
