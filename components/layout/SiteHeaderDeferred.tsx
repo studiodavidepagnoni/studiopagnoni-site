@@ -18,9 +18,20 @@ export function SiteHeaderDeferred() {
 
   useEffect(() => {
     const desktop = window.matchMedia(DESKTOP_HEADER_MEDIA_QUERY);
+    // Mobile: ritarda l'header interattivo — lo shell copre menu/logo; evita JS sul critical path LCP.
     if (!desktop.matches) {
-      const id = window.requestAnimationFrame(() => setReady(true));
-      return () => window.cancelAnimationFrame(id);
+      let cancelled = false;
+      const load = () => {
+        if (!cancelled) setReady(true);
+      };
+      const onPointer = () => load();
+      window.addEventListener("pointerdown", onPointer, { once: true, passive: true });
+      const cancelIdle = scheduleIdle(load, 2200);
+      return () => {
+        cancelled = true;
+        cancelIdle();
+        window.removeEventListener("pointerdown", onPointer);
+      };
     }
 
     return scheduleIdle(() => {

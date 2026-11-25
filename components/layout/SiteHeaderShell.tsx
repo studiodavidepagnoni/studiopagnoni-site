@@ -28,6 +28,7 @@ export function SiteHeaderShell() {
               width={1485}
               height={300}
               decoding="async"
+              fetchPriority="low"
               className="site-brand-lockup-img h-[3.91rem] w-auto max-w-full object-contain object-left sm:h-[4.6rem] md:h-[5.06rem]"
             />
           </Link>

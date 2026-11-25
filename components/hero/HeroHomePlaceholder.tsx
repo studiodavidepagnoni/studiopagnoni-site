@@ -1,11 +1,12 @@
 import Link from "next/link";
-import { HeroIntroStillPicture } from "@/components/hero/HeroIntroStillPicture";
 import { HeroMediaOverlay } from "@/components/hero/HeroMediaOverlay";
 import { fontDisplay, fontSans } from "@/lib/fonts";
 import { heroSlides } from "@/lib/media/images";
 import {
   HERO_POSTER_DEFAULT_LCP,
   HERO_POSTER_DEFAULT_LCP_AVIF,
+  HERO_POSTER_INDOOR_LCP,
+  HERO_POSTER_INDOOR_LCP_AVIF,
 } from "@/lib/media/heroVideos";
 import { ui } from "@/lib/ui";
 
@@ -25,32 +26,51 @@ export function HeroHomePlaceholder() {
     >
       <div className="absolute inset-0 z-0 bg-[linear-gradient(180deg,var(--hero-fallback-from)_0%,var(--hero-fallback-via)_38%,var(--hero-fallback-to)_100%)]" />
 
-      {/* Mobile: poster LCP del 3° video (SLAM RS10) */}
-      <div className="hero-media__stage absolute inset-0 z-[1] min-[1025px]:hidden">
+      {/*
+        Un solo <picture> con media: il browser scarica solo la variante matching
+        (evita download parallelo mobile+desktop che gonfiava LCP).
+      */}
+      <div className="hero-media__stage absolute inset-0 z-[1]">
         <picture className="hero-media__image absolute inset-0 h-full w-full">
-          <source srcSet={HERO_POSTER_DEFAULT_LCP_AVIF} type="image/avif" />
-          <source srcSet={HERO_POSTER_DEFAULT_LCP} type="image/webp" />
+          <source
+            media="(min-width: 1025px)"
+            srcSet={HERO_POSTER_INDOOR_LCP_AVIF}
+            type="image/avif"
+          />
+          <source
+            media="(min-width: 1025px)"
+            srcSet={HERO_POSTER_INDOOR_LCP}
+            type="image/webp"
+          />
+          <source
+            media="(max-width: 1024px)"
+            srcSet={HERO_POSTER_DEFAULT_LCP_AVIF}
+            type="image/avif"
+          />
+          <source
+            media="(max-width: 1024px)"
+            srcSet={HERO_POSTER_DEFAULT_LCP}
+            type="image/webp"
+          />
           {/* eslint-disable-next-line @next/next/no-img-element */}
           <img
             src={HERO_POSTER_DEFAULT_LCP}
             alt=""
             width={640}
             height={360}
-            className="h-full w-full object-cover"
-            style={{ objectPosition: "center 35%" }}
+            className="h-full w-full object-cover object-[center_35%] min-[1025px]:object-center"
             decoding="sync"
             fetchPriority="high"
             sizes="100vw"
           />
         </picture>
-        <HeroMediaOverlay intro={false} />
-        <div className="hero-mobile__vignette" aria-hidden />
-      </div>
-
-      {/* Desktop: poster intro originale */}
-      <div className="hero-media__stage hero-media__stage--intro absolute inset-0 z-[1] max-[1024px]:hidden">
-        <HeroIntroStillPicture />
-        <HeroMediaOverlay intro />
+        <div className="min-[1025px]:hidden">
+          <HeroMediaOverlay intro={false} />
+          <div className="hero-mobile__vignette" aria-hidden />
+        </div>
+        <div className="hidden min-[1025px]:contents">
+          <HeroMediaOverlay intro />
+        </div>
       </div>
 
       {/* Mobile: copy compatto (bottom-aligned) */}

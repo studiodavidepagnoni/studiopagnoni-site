@@ -17,7 +17,6 @@ import { getLocaleFromPathname, withLocalePrefix } from "@/lib/i18n/paths";
 import { t } from "@/lib/i18n/messages";
 import { heroSlides } from "@/lib/media/images";
 import {
-  HERO_POSTER_DEFAULT,
   HERO_POSTER_DEFAULT_LCP,
   HERO_POSTER_DEFAULT_LCP_AVIF,
   HERO_VIDEO_DEFAULT_SOURCES,
@@ -25,6 +24,7 @@ import {
   heroVideoKey,
   heroVideoSourceOrder,
 } from "@/lib/media/heroVideos";
+import { scheduleIdle } from "@/lib/utils/scheduleIdle";
 import {
   HERO_MOBILE_MEDIA_QUERY,
   HERO_VIDEO_MEDIA_QUERY,
@@ -37,7 +37,8 @@ import { ui } from "@/lib/ui";
 
 const DEFAULT_VIDEO = HERO_VIDEO_DEFAULT_SOURCES;
 const MOBILE_VIDEO = HERO_VIDEO_MOBILE_SOURCES;
-const MOBILE_POSTER = HERO_POSTER_DEFAULT;
+/** Poster LCP (~26 KB) — non il full (~113 KB), così non compete con il paint LCP. */
+const MOBILE_POSTER = HERO_POSTER_DEFAULT_LCP;
 /** Clip mobile già tagliata da t=2s in encode; nessun seek iniziale. */
 const MOBILE_VIDEO_START_S = 0;
 
@@ -89,7 +90,14 @@ export function HeroHome() {
     const unlock = () => setVideoUnlocked(true);
     const root = heroRootRef.current;
 
-    const autoId = window.requestAnimationFrame(unlock);
+    // Desktop: subito. Mobile: dopo idle/~1.2s così il poster LCP può paintare senza contendere il MP4.
+    let cancelAuto: (() => void) | undefined;
+    if (canUseMobileVideo && !canUseDesktopVideo) {
+      cancelAuto = scheduleIdle(unlock, 1200);
+    } else {
+      const autoId = window.requestAnimationFrame(unlock);
+      cancelAuto = () => window.cancelAnimationFrame(autoId);
+    }
 
     root?.addEventListener("pointerdown", unlock, { once: true, passive: true });
     root?.addEventListener("keydown", unlock, { once: true });
@@ -99,7 +107,7 @@ export function HeroHome() {
     window.addEventListener("scroll", onScroll, { once: true, passive: true });
 
     return () => {
-      window.cancelAnimationFrame(autoId);
+      cancelAuto?.();
       root?.removeEventListener("pointerdown", unlock);
       root?.removeEventListener("keydown", unlock);
       window.removeEventListener("scroll", onScroll);
@@ -287,7 +295,7 @@ export function HeroHome() {
                 height={360}
                 className="h-full w-full object-cover"
                 style={{ objectPosition: "center 35%" }}
-                decoding="async"
+                decoding="sync"
                 fetchPriority="high"
                 sizes="100vw"
               />
@@ -302,7 +310,7 @@ export function HeroHome() {
               playsInline
               autoPlay
               loop
-              preload="auto"
+              preload="metadata"
               onError={() => handleVideoError(mobileVideoKey)}
               aria-hidden
             >
